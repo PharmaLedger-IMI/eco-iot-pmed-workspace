@@ -1,0 +1,116 @@
+<psk-example class="mobile-example">
+    <psk-mobile class="noPadding">
+        <psk-container controller-name="DrugDetailsController">
+            <psk-layout template-columns="1fr" align-items="center" class="coloredBackground">
+                <psk-layout-item>
+                    <psk-label class="drugName" label="@product.name"></psk-label>
+                </psk-layout-item>
+                <psk-layout-item>
+
+                </psk-layout-item>
+                <psk-layout-item>
+                    <psk-label label="@product.manufName"></psk-label>
+                </psk-layout-item>
+            </psk-layout>
+
+
+            <psk-details layout="collapsable">
+                <div>
+                    <psk-echo value="Expiry: "></psk-echo>
+                    <strong>
+                        <psk-echo value="@expiryForDisplay"></psk-echo>
+                    </strong>
+                </div>
+
+                <div>
+                    <psk-echo value="Serial number: "></psk-echo>
+                    <strong>
+                        <psk-echo value="@serialNumber"></psk-echo>
+                    </strong>
+                </div>
+
+                <div>
+                    <psk-echo value="Product Code (GTIN/ NTIN): "></psk-echo>
+                    <strong>
+                        <psk-echo value="@gtin"></psk-echo>
+                    </strong>
+                </div>
+
+                <div>
+                    <psk-echo value="Batch: "></psk-echo>
+                    <strong>
+                        <psk-echo value="@batchNumber"></psk-echo>
+                    </strong>
+                </div>
+
+                <section slot="footer">
+                    <psk-layout template-columns="1fr 1fr 1fr" columns-gap="10px"
+                                class="coloredBackground smallTopPadding">
+                        <psk-layout-item class="horizontal-aligned">
+                            <psk-echo value="Serial number"></psk-echo>
+                            <psk-img src="@SNCheckIcon" width='70' height='70' class="productStatusImg">
+                            </psk-img>
+
+                            <psk-label id="serialNumberVerification" class="small-text" label=@serialNumberVerification></psk-label>
+                        </psk-layout-item>
+
+                        <psk-layout-item class="horizontal-aligned">
+                            <psk-echo value="Product status"></psk-echo>
+                            <psk-img src="@PSCheckIcon" width='70' height='70' class="productStatusImg">
+                            </psk-img>
+                            <psk-label id="productStatusVerification" class="small-text" label=@productStatus></psk-label>
+                        </psk-layout-item>
+
+                        <psk-layout-item class="horizontal-aligned">
+
+                            <psk-echo value="Package verification"></psk-echo>
+                            <psk-img src="@PVIcon" width='70' height='70' class="productStatusImg">
+                            </psk-img>
+                            <psk-label id="packageVerification" class="small-text" style="color: orange" label=@packageVerification></psk-label>
+                        </psk-layout-item>
+
+                    </psk-layout>
+                </section>
+            </psk-details>
+
+            <psk-layout template-columns="1fr 1fr" align-items="center" row-gap="30px" class="topPadding">
+                <psk-layout-item class="controlButton">
+                    <psk-button-link class="xxlIcon" name="Patient Information" icon="file-text"
+                                     event-name="view-leaflet">
+                    </psk-button-link>
+                </psk-layout-item>
+                <psk-layout-item class="controlButton">
+                    <psk-button-link class="xxlIcon smpc" name="SmPC" icon="book"
+                                     event-name="view-smpc"></psk-button-link>
+                </psk-layout-item>
+            </psk-layout>
+
+            <psk-layout template-columns="1fr 1fr 1fr" align-items="center" row-gap="30px" class="topPadding">
+                <psk-layout-item class="controlButton">
+                    <psk-button-link class="xlIcon" name="Verify package" icon="info-circle" disabled></psk-button-link>
+                </psk-layout-item>
+                <psk-layout-item class="controlButton">
+                    <psk-button-link class="xlIcon" name="Report" icon="exclamation-triangle" disabled></psk-button-link>
+                </psk-layout-item>
+                <psk-layout-item class="controlButton">
+                    <psk-button-link class="xlIcon" name="Add to cabinet" icon="archive" disabled></psk-button-link>
+                </psk-layout-item>
+            </psk-layout>
+
+        </psk-container>
+        <div slot="footer">
+            <psk-link page="scan" class='button-link alignBottom'>
+                <psk-img class="navbar-img" src="assets/images/footer/data.png" height='22'></psk-img>
+            </psk-link>
+            <psk-link page="home" class='button-link alignBottom'>
+                <psk-img class="navbar-img" src="assets/images/footer/home.png" height='22'></psk-img>
+            </psk-link>
+            <psk-link page="history" class='button-link alignBottom'>
+                <psk-img class="navbar-img" src="assets/images/footer/history.png" height='22'></psk-img>
+            </psk-link>
+            <psk-link page="help" class='button-link alignBottom'>
+                <psk-img class="navbar-img" src="assets/images/footer/about.png" height='22'></psk-img>
+            </psk-link>
+        </div>
+    </psk-mobile>
+</psk-example>
