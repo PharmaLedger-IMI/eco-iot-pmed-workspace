@@ -1,5 +1,5 @@
 {
-  "name": "ePI-workspace",
+  "name": "iot-pmed-workspace",
   "version": "1.0.1",
   "description": "",
   "scripts": {
@@ -28,14 +28,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PharmaLedger-IMI/epi-workspace.git"
+    "url": "git+https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PharmaLedger-IMI/epi-workspace/issues"
+    "url": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace/issues"
   },
-  "homepage": "https://github.com/PharmaLedger-IMI/epi-workspace#readme",
+  "homepage": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace#readme",
   "dependencies": {
     "octopus": "git+http://github.com/privatesky/octopus.git"
   }
