@@ -1,0 +1,67 @@
+.btn.btn-primary,
+.submit {
+    background-color: #3a3b41;
+    box-shadow: #3a3b41 0px 15px 30px -12px;
+    padding: 8px 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    border:1px solid #3a3b41;
+    color:white;
+}
+
+.btn.btn-primary:focus,
+.btn.btn-primary:not(:disabled):not(.disabled):active ,
+.submit{
+    background-color: #828592;
+    border-style: none;
+}
+
+.btn.btn-primary:hover,
+.submit:hover {
+    background-color: #0b5410;
+    border-style: none;
+    box-shadow: none;
+}
+.submit{
+    margin-left:-15px;
+}
+.reset-form{
+    background-color: white;
+    border:1px solid #0b5410;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    color: #0b5410;
+    padding: 8px 16px;
+}
+
+/* first page */
+
+:host-context(.actions) .btn.btn-primary {
+    background-color: transparent;
+    color: #0b5410;
+    font-weight: 700;
+    font-size: 1.3125rem;
+    width: 200px;
+    border-radius: 0;
+    border-style: none;
+}
+
+.actions .btn.btn-primary:hover {
+    background-color: #0b5410;
+    border-style: none;
+    color: #fff;
+    font-weight:600;
+    box-shadow: rgba(76, 100, 100, 0.3) 5px 0px 20px -3px;
+}
+
+@media(max-width:960px) {
+    :host-context(.actions) .btn.btn-primary {
+        font-size: 1rem;
+        padding: 5px;
+    }
+}
+
+.auto-width button{
+    width: 100%;
+}

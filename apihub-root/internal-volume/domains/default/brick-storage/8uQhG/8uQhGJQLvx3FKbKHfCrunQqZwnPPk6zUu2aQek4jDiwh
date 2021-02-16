@@ -1,0 +1,224 @@
+/* External CSS - Rules to be applied outside of shadow dom from psk-modal */
+
+psk-modal>*,
+psk-modal psk-condition>* {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+psk-modal .container>* {
+    padding: 1em;
+}
+
+psk-modal .container>psk-condition,
+psk-modal .container>.modal-buttons {
+    padding: 0;
+    margin: 0;
+}
+
+psk-modal .container>psk-label {
+    font-size: 1.2rem;
+    color: #808080;
+}
+
+psk-modal psk-label,
+psk-modal psk-input psk-label {
+    font-size: 1.1rem;
+    color: #9d9d9d;
+    line-height: 1.5rem;
+}
+
+psk-modal psk-label+input.form-control {
+    margin-top: 0.75rem;
+}
+
+psk-modal psk-for-each {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    vertical-align: middle;
+    padding: 0.5rem 0px;
+}
+
+psk-modal .content-wrapper {
+    flex-direction: column;
+}
+
+psk-modal psk-for-each.wallet-container {
+    flex-direction: column;
+}
+
+psk-modal.move-modal psk-grid psk-label,
+psk-modal.move-modal psk-for-each psk-label {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #000;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+psk-modal.asset-modal .content {
+    display: block;
+    text-align: center;
+    padding: 2rem 1rem;
+    height: 50vh;
+    width: 100%;
+}
+
+psk-modal.asset-modal video {
+    height: 100%;
+}
+
+psk-modal.asset-modal img {
+    height: -webkit-fill-available;
+}
+
+psk-modal.asset-modal object {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
+psk-modal.asset-modal[expanded="true"] .content {
+    height: 80vh;
+}
+
+psk-modal psk-live-code {
+    max-height: 100%;
+    display: flex;
+}
+
+psk-modal[expanded='true'] psk-live-code {
+    max-height: 75vh;
+}
+
+psk-modal .footer .unsaved-file {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.modal-action-menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-action-menu>* {
+    margin-left: 10px;
+}
+
+.page-title-container {
+    margin: 20px;
+    display: flow-root !important;
+}
+
+.page-title-container psk-button-group .list-group {
+    right: 0;
+    left: auto;
+}
+
+.todo-container {
+    width: 50%;
+    margin-left: 25%;
+}
+
+.todo-row {
+    display: flex;
+    width: 100%;
+    margin: 0;
+}
+
+.todo-input {
+    margin-bottom: 10px;
+}
+
+.todo-row psk-input .form-group,
+.todo-row psk-input div.form-group {
+    margin: 0;
+}
+
+.todo-row psk-input .form-group input {
+    border-radius: 0 5px 5px 0;
+    width: 360px;
+}
+
+.todo-row psk-input .form-group input.form-control[readonly] {
+    background-color: white;
+    border: 0;
+    height: calc(1.5em + 0.75rem);
+}
+
+.todo-row psk-input .form-group input.form-control {
+    height: calc(1.5em + 0.75rem - 4px);
+}
+
+.todo-input psk-input .form-group input {
+    border-radius: 5px;
+    width: 400px;
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.todo-row #check-todo-button button {
+    border: 0;
+    padding: 0;
+    font-size: calc(1.5em + 0.75rem + 8px);
+    background-color: #fff;
+    line-height: 0;
+    margin-top: 12px;
+}
+
+.todo-row #check-todo-button button span {
+    line-height: 0 !important;
+}
+
+.todo-row #check-todo-button {
+    margin: 0;
+}
+
+.todo-row psk-button .btn-primary:not(:disabled):not(.disabled):active,
+.todo-row psk-button .btn-primary:not(:disabled):not(.disabled).active,
+.todo-row psk-button .show>.btn-primary.dropdown-toggle {
+    background-color: #FFF;
+    border-color: #FFF;
+}
+
+.todo-row psk-button .btn-primary:hover {
+    background-color: #FFF;
+    border-color: #FFF;
+}
+
+.todo-row psk-input .form-group {
+    margin-bottom: 5px;
+}
+
+.todo-row psk-button {
+    margin-left: 15px;
+}
+
+.todo-row psk-checkbox .form-group,
+.todo-row psk-checkbox div.form-group,
+.todo-row psk-checkbox div.form-check-inline,
+.todo-row psk-checkbox .form-check-inline .form-check-input {
+    margin: 0;
+    padding: 0;
+}
+
+.todo-row psk-checkbox .form-check-inline .form-check-input {
+    height: calc(1.5em + 0.75rem + 2px);
+    width: calc(1.5em + 0.75rem + 2px);
+    border: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+.todo-row psk-checkbox div.form-check-inline psk-label {
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width:991px) {
+    .page-title-container {
+        margin-top: 30px;
+    }
+}

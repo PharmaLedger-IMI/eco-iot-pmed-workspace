@@ -1,0 +1,91 @@
+.btn.btn-primary,
+.submit {
+    background-color: #4C71DE;
+    box-shadow: rgba(53, 79, 155, 0.35) 0px 15px 30px -12px;
+    padding: 8px 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    border: 1px solid #4C71DE;
+    color: white;
+}
+
+.btn.btn-primary:focus,
+.btn.btn-primary:not(:disabled):not(.disabled):active,
+.submit {
+    background-color: #354F9B;
+    border-style: none;
+}
+
+.btn.btn-primary:hover,
+.submit:hover {
+    background-color: #5E7FE1;
+    border-style: none;
+    box-shadow: none;
+}
+
+.submit {
+    margin-left: -15px;
+}
+
+.reset-form {
+    background-color: white;
+    border: 1px solid #4C71DE;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    color: #4C71DE;
+    padding: 8px 16px;
+}
+
+
+/* first page */
+
+.big-button .btn.btn-primary {
+    background-color: transparent;
+    color: #354F9B;
+    font-weight: 700;
+    font-size: 1.3125rem;
+    width: 14rem;
+    border-radius: 0;
+    border-style: none;
+    line-height: 3rem;
+    padding: 0;
+}
+
+.big-button .btn.btn-primary:hover {
+    background-color: #5E7FE1;
+    border-style: none;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: rgb(76, 100, 100) 5px 0 20px -3px;
+}
+
+@media(max-width:960px) {
+    .big-button .btn.btn-primary {
+        font-size: 1rem;
+        padding: 5px;
+    }
+}
+
+psk-mobile [slot='footer'] .btn {
+    display: grid;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+psk-mobile [slot='footer'] .btn .icon {
+    padding: 0;
+    margin: 0;
+}
+
+psk-mobile [slot='footer'] .btn .icon,
+psk-mobile [slot='footer'] .btn span {
+    color: #FFFFFF;
+}
+
+psk-button.fullWidth button{
+    width: 100%;
+}

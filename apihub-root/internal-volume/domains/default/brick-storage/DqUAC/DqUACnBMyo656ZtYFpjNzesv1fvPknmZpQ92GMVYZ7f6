@@ -1,0 +1,16 @@
+psk-barcode-scanner div.card div.card-header,
+psk-barcode-scanner div.card div.card-body {
+    padding: 0;
+    margin: 0;
+}
+
+#camera-source[style="display: block;"]+#scanner_container video {
+    display: inline !important;
+}
+
+#overlayCanvas,
+#lensCanvas,
+#scanner_container video {
+    width: 80% !important;
+    left: 10% !important
+}

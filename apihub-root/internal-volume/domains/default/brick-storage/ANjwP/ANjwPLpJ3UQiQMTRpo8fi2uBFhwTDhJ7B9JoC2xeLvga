@@ -1,0 +1,1 @@
+import{E as s}from"./p-c06cc5e4.js";const t=s.PSK_BUTTON_EVT;class c extends CustomEvent{constructor(s,c,o){super(s,o),this.getEventType=function(){return t},this.data=c}}export{c as P}

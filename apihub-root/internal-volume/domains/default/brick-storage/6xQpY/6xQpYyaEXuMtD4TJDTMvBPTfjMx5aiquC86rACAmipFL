@@ -1,0 +1,377 @@
+@import url("/themes/commons/styles/styles.css");
+* {
+    outline: none !important;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    text-decoration: none;
+}
+
+::slotted(*) {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+/* Reset bootstrap style for button borders and shadows */
+
+:host button,
+:host button:focus,
+:host button:active,
+:host button.btn,
+:host button.btn:active,
+:host button.btn:focus,
+:host button.btn:visited,
+:host button.btn:active:focus {
+    border: none;
+    background: none;
+    color: inherit;
+    box-shadow: none;
+}
+
+:host button.btn,
+:host button.btn:active,
+:host button.btn:focus,
+:host button.btn:visited,
+:host button.btn:active:focus {
+    width: 100%;
+}
+
+.input-group-append psk-button {
+    padding-top: 0.5rem;
+}
+
+button.wallet-path {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+    min-height: 3rem;
+    text-align: unset;
+    padding: 0 1rem;
+}
+
+.wallet-path .items {
+    display: inline;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1;
+}
+
+.marketplace-app-card button.wallet-path {
+    margin-bottom: 20px;
+    min-height: 5rem;
+    border: 1px solid rgba(87, 42, 87, 1);
+    border-radius: 5px;
+    padding: 0 0.5rem;
+}
+
+.marketplace-app-card psk-img .image_container {
+    margin-bottom: 0;
+}
+
+.marketplace-app-card .marketplace-app-card-content {
+    width: 80%;
+    float: left;
+    display: contents;
+}
+
+.marketplace-app-card .marketplace-app-card-content psk-img img {
+    height: 84px;
+    width: 98px;
+    margin: 5px;
+}
+
+.marketplace-app-card .marketplace-app-card-controls {
+    float: right;
+    width: 20%;
+    margin-top: 0.5%;
+}
+
+.marketplace-manager {
+    position: relative;
+    margin-right: 10px;
+}
+
+.marketplace-manager-button button {
+    background-color: rgba(87, 42, 87, 1) !important;
+    color: white !important;
+}
+
+.marketplace-manager-button button:hover {
+    background-color: rgba(127, 61, 127, 1) !important;
+    color: white !important;
+}
+
+.marketplace-manager-button button {
+    margin-bottom: 10px;
+}
+
+.submit-app-button button {
+    max-width: 200px;
+    margin: 0 0 30px 30px;
+}
+
+:host button.btn:disabled {
+    color: #b1b1b1;
+}
+
+
+/** Sort buttons **/
+
+psk-button.btn-sort {
+    padding: 0;
+}
+
+button.btn-sort {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    line-height: 2rem;
+    font-weight: bold;
+    width: 100%;
+}
+
+
+/** END Sort buttons **/
+
+:host button[class*="btn-confirm"] {
+    width: 100%;
+    color: #e7ebf2;
+    padding: 0.1rem 0.5rem;
+    margin: 1rem 0;
+    border-radius: 0.25rem;
+}
+
+.scan-qr button[class*="btn-confirm"] {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+:host button[class*="btn-confirm"]:disabled,
+:host button[class*="btn-confirm"]:disabled:hover,
+:host button[class*="btn-confirm"]:disabled:focus,
+:host button[class*="btn-confirm"]:disabled:visited,
+:host button[class*="btn-confirm"]:disabled:active,
+:host button[class*="btn-confirm"]:disabled:active:focus,
+:host button[class*="btn-confirm"]:disabled:focus-within {
+    border: 1px solid rgb(177, 177, 177);
+    background: rgb(177, 177, 177);
+}
+
+:host button.btn-confirm-primary {
+    border: 1px solid rgb(129, 151, 188);
+    background: rgb(129, 151, 188);
+}
+
+:host button.btn-confirm-primary:hover,
+:host button.btn-confirm-primary:active,
+:host button.btn-confirm-primary:focus,
+:host button.btn-confirm-primary:visited,
+:host button.btn-confirm-primary:active:focus {
+    background: rgba(129, 151, 188, 0.7);
+}
+
+:host button.btn-confirm-secondary {
+    border: 1px solid rgb(87, 42, 87);
+    background: rgb(87, 42, 87);
+}
+
+:host button.btn-confirm-secondary:hover,
+:host button.btn-confirm-secondary:active,
+:host button.btn-confirm-secondary:focus,
+:host button.btn-confirm-secondary:visited,
+:host button.btn-confirm-secondary:active:focus {
+    background: rgba(87, 42, 87, 0.7);
+}
+
+
+/* Exit button from left menu */
+
+.exit-wrapper {
+    display: inline-block;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.exit-wrapper>psk-button {
+    border-top: 1px solid rgba(255, 255, 255, .25);
+    position: relative;
+    padding: 20px 0 0 0;
+    display: block;
+}
+
+.btn-exit {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, .7);
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-exit:hover {
+    color: rgba(250, 250, 250, 1);
+}
+
+
+/* End Exit button */
+
+.btn-run {
+    margin-left: 1.5rem;
+    padding: 0 0.5rem;
+    display: inline;
+}
+
+.btn-run:hover,
+.btn-run:active,
+.btn-run:focus,
+.btn-run:visited,
+.btn-run:active:focus {
+    background-color: #c1a5e2;
+    border-radius: 3px;
+}
+
+.btn-menu {
+    padding: 0.5rem 0;
+    margin: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+}
+
+.btn-menu .btn.btn-secondary,
+.btn-menu .btn.btn-secondary label {
+    padding: 0;
+    margin: 0;
+}
+
+.btn-csb-new {
+    background-color: #616e7d;
+    border-color: #4e5a69;
+    color: #ffffff;
+}
+
+.btn-csb-new:hover,
+.btn-csb-new:active,
+.btn-csb-new:visited,
+.btn-csb-new:focus {
+    color: #ffffff;
+    background-color: #566271;
+    border-color: #4e5a69;
+}
+
+.btn-csb-restore {
+    background-color: #95799e;
+    border-color: #806489;
+    color: #ffffff;
+}
+
+.btn-csb-restore:hover,
+.btn-csb-restore:active,
+.btn-csb-restore:visited,
+.btn-csb-restore:focus {
+    color: #ffffff;
+    background-color: #8d7096;
+    border-color: #806489;
+}
+
+:host(.copy-clipboard):hover span.fa-clipboard,
+:host(.copy-clipboard):active span.fa-clipboard,
+:host(.copy-clipboard):focus span.fa-clipboard,
+:host(.copy-clipboard):active:focus span.fa-clipboard {
+    color: #FFF !important;
+}
+
+.cd-link {
+    background: none;
+    border: none;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.actions>*,
+.footer>* {
+    margin: 0 2em;
+}
+
+.unsaved-files {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.options-wrapper button.btn-menu {
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bpd-organization-menu button {
+    margin-top: 5px;
+}
+
+.bpd-organization-button {
+    background-color: white;
+    border: 0;
+    color: black;
+    font-size: 12px;
+}
+
+.bpd-organization-button-remove {
+    color: red !important;
+}
+
+.bpd-qr-code-with-text {
+    background-color: white;
+    border: white;
+    color: black;
+}
+
+psk-button[data-type] {
+    display: none;
+}
+
+[data-type="file"] psk-button[data-type="file"] {
+    display: inline;
+}
+
+[data-type="folder"] psk-button[data-type="folder"] {
+    display: inline;
+}
+
+[data-type="mount"] psk-button[data-type="mount"] {
+    display: inline;
+}
+
+@media screen and (max-width:991px) {
+    .marketplace-app-card .marketplace-app-card-content {
+        width: 60%;
+    }
+    .marketplace-app-card .marketplace-app-card-controls {
+        width: 30%;
+    }
+}

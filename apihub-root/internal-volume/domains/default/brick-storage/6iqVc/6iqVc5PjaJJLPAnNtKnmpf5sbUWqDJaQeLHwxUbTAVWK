@@ -1,0 +1,55 @@
+input[type=file].form-control-sm {
+    padding-left: 0;
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    margin-bottom: 0 !important;
+}
+
+.fileDiv button {
+    width: 35px;
+    height: 35px;
+}
+
+.fileDiv {
+    margin: 0 5px 5px 0;
+}
+
+.fileDiv p {
+    margin: 0.5rem 0;
+    font-size: 12px;
+    width: 100%;
+}
+
+.leaflet-files-chooser > div {
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+.leaflet-files-chooser > div.selectedFiles {
+    height: 150px;
+}
+
+/* width */
+.leaflet-files-chooser > div::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.leaflet-files-chooser > div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.leaflet-files-chooser > div::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.leaflet-files-chooser > div::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

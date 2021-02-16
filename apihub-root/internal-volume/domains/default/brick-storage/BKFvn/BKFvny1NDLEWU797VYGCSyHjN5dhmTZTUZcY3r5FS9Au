@@ -1,0 +1,21 @@
+:host {
+    width: 100%;
+}
+
+.navbar.navbar-dark{
+    padding: 0;
+    position:static;
+}
+
+.navbar-brand {
+    display: none;
+}
+
+.navbar-toggler {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px 8px 0 0;
+    border: none;
+    color: #fff;
+}

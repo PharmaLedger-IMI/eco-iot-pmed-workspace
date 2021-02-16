@@ -1,0 +1,1 @@
+import{r,h as s,H as o}from"./p-87f0c668.js";const t=class{constructor(s){r(this,s)}render(){return s(o,null)}};export{t as psk_hoc}

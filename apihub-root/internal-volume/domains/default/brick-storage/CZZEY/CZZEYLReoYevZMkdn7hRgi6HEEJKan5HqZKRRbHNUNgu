@@ -1,0 +1,4 @@
+:host(.footer-item) div,
+:host(.footer-item) psk-icon .icon {
+    color: #4461B5 !important;
+}

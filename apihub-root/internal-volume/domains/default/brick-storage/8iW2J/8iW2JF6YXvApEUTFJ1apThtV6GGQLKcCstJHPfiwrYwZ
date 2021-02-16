@@ -1,0 +1,118 @@
+.table-of-content {
+    width: 20rem;
+    position: sticky;
+    top: 100px;
+    overflow: auto;
+}
+
+.table-of-content .psk-card .card-body,
+.table-of-content .psk-card .card-header {
+    padding-left: 0;
+    padding-right: 40px;
+}
+
+.table-of-content .psk-card {
+    padding: 0;
+}
+
+.table-of-content .psk-card .card-header h5 {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #354f9b;
+    border-bottom: 2px solid #354f9b;
+    padding-bottom: 8px;
+}
+
+.table-of-content .psk-card ul {
+    padding-left: 24px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.table-of-content .psk-card li {
+    font-size: 0.9rem;
+    color: #4c71de;
+    list-style: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding-top: 5px;
+}
+
+.table-of-content .psk-card li:hover {
+    color: #0029b4;
+}
+
+.table-of-content .psk-card li li li {
+    font-size: 0.75rem;
+}
+
+.table-of-content .psk-card li::before {
+    content: "";
+}
+
+.table-of-content .psk-card li.active::before {
+    content: "";
+    background-image: url(/themes/clear-sky-theme/images/hand-point.svg);
+    background-size: 100% 100%;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    filter: invert(31%) sepia(9%) saturate(4329%) hue-rotate(188deg) brightness(92%) contrast(93%);
+    position: relative;
+    margin-left: -24px;
+    margin-right: 4px;
+    bottom: -5px;
+}
+
+.table-of-content .psk-card li.active {
+    font-weight: bold;
+    color: #354F9B;
+}
+
+
+/* bold only on arrow */
+
+.table-of-content .psk-card li.active li {
+    font-weight: normal;
+}
+
+@media(min-width: 960px) and (max-width: 1366px) {
+    .table-of-content {
+        position: sticky;
+        margin: 0 auto;
+        padding-bottom: 0;
+        height: auto;
+        width: auto;
+    }
+    .table-of-content .card-body>ul>li:first-of-type::before,
+    .table-of-content .card-body>ul li.current_view {
+        display: none;
+    }
+}
+
+@media(max-width: 960px) {
+    .table-of-content {
+        position: relative;
+        margin: 0 auto;
+        top: 0;
+        width: auto;
+    }
+    .table-of-content .card-body>ul>li:first-of-type::before,
+    .table-of-content .card-body>ul li.current_view {
+        display: none;
+    }
+    .table-of-content .card-body span {
+        font-size: 0.875rem;
+    }
+    .table-of-content .psk-card ul {
+        margin: 0;
+        padding-bottom: 0;
+        padding-left: 2px;
+    }
+}
+
+@media (min-width: 1367px) {
+    .table-of-content {
+        width: 25rem;
+    }
+}

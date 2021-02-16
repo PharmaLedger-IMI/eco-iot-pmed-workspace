@@ -1,0 +1,20 @@
+/* Use mode="layout" for psk-mobile, if you want to style anything from component children */
+/* Use mode="default" with !important specifier if you want to override defaults from (Cardinal) styles/imports/colors.css */
+
+:host footer {
+    border-top: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+}
+
+:host(.pdfViewer) main,
+:host(.noPadding) main {
+    padding: 0 !important;
+}
+
+:host(.fullHeightWithFooter) main {
+    height: calc(100vh - 14rem) !important;
+}
+
+:host(.fullHeightWithoutFooter) main {
+    height: calc(100vh - 4rem) !important;
+}

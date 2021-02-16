@@ -1,0 +1,1 @@
+import{r,h as s}from"./p-87f0c668.js";const t=class{constructor(s){r(this,s)}render(){return s("psk-chapter",{title:this.title},s("div",{class:"sub-card"},s("slot",null)))}};export{t as psk_chapter_wrapper}

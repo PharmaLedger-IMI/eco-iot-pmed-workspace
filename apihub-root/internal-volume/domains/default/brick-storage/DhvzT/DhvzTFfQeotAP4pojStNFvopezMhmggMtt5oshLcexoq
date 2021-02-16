@@ -1,0 +1,55 @@
+* {
+    outline: none !important;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+:host {
+    display: block;
+    font-family: nunito;
+    scroll-behavior: smooth;
+}
+
+:host.bpd-ssapp {
+    height: 100% !important;
+}
+
+:host(.bpd-ssapp) {
+    height: 100% !important;
+}
+
+.page-title {
+    /*width: 100%;*/
+    /*line-height: 4.375rem;*/
+    /*background-color: #fff;*/
+    /*box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);*/
+    /*padding: 16px;*/
+    display:none;
+}
+
+.page-title h1 {
+    margin-bottom: 0;
+    padding: 0 0 0 20px;
+    font-size: 1.75rem;
+    color: #572a57;
+}
+
+div.container {
+    max-width: unset;
+    padding: 0;
+}
+
+.access-marketplace-page,
+.main-container,
+.page-content,
+.container,
+.container-content {
+    height: 100%;
+}
+
+@media screen and (max-width:991px) {
+    .page-title {
+        display: none;
+    }
+}

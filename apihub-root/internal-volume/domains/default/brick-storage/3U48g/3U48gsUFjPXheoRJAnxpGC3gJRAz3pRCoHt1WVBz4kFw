@@ -1,0 +1,35 @@
+<psk-container controller-name='dossier-controllers/ShareDossierController'>
+    <psk-modal opened>
+        <psk-label slot="title" class="title" label="@title"></psk-label>
+
+        <psk-condition condition="@conditionalExpressions.isLoading">
+            <psk-ui-loader slot="condition-true" should-be-rendered="true"> </psk-ui-loader>
+
+            <psk-label slot="condition-false" label="@disclaimer"></psk-label>
+            <psk-card slot="condition-false" class="share-dossier">
+                <div class='form-group mb-2 full-width'>
+                    <psk-label label="@dossierSEEDLabel"></psk-label>
+                    <div class="input-group copy-clipboard-input">
+                        <psk-text-input view-model="dossierSEEDInput"></psk-text-input>
+                        <div class="input-group-append">
+                            <psk-button event-name="copy-clipboard" event-data="@dossierSEEDInput.value" button-class="btn-outline-secondary form-control">
+                                <psk-icon class="clipboard" icon='clipboard' color="#572a57"></psk-icon>
+                            </psk-button>
+                        </div>
+                    </div>
+                    <psk-condition condition="@conditionalExpressions.isSeedCopied">
+                        <psk-label class="success small" label="@seedCopiedToClipboardLabel"></psk-label>
+                    </psk-condition>
+                </div>
+                <psk-label class="m-4" label="@orLabel"></psk-label>
+                <psk-barcode-generator view-model="qrCode"></psk-barcode-generator>
+            </psk-card>
+
+            <psk-button-group slot="condition-false" class="modal-buttons">
+                <psk-button view-model="buttons.closeButton"></psk-button>
+            </psk-button-group>
+        </psk-condition>
+
+        <psk-label label="@error.message" class="error"></psk-label>
+    </psk-modal>
+</psk-container>

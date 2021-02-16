@@ -1,0 +1,27 @@
+:host {
+    width: 100%;
+}
+
+.navbar.navbar-dark{
+    padding: 0;
+    position: relative;
+    right: 8px;
+}
+
+.navbar-brand {
+    display: none!important;
+}
+
+.navbar-toggler {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px 7px 0 0;
+    border-color: #fff!important;
+    color: #fff!important;
+}
+
+.navbar-collapse{
+    margin: 50px 0 0 0;
+    background-color: #0b5410;
+}

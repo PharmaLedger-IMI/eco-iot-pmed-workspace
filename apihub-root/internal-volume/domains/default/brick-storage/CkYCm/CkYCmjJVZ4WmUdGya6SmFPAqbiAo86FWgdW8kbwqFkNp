@@ -1,0 +1,8 @@
+#actions {
+    display: flex;
+    justify-content: start;
+}
+
+.container {
+    max-width: 100%!important;
+}

@@ -1,0 +1,7 @@
+:host {
+    cursor: pointer;
+}
+
+.summary .icon {
+    color: #4461B5;
+}

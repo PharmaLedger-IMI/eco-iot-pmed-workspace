@@ -1,0 +1,64 @@
+:host([layout='default']) .content {
+    border: 0!important;
+    border-top: none;
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+    margin-bottom: 0!important;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+:host([layout="default"]) .title {
+    position: relative;
+}
+
+:host([layout="default"]) .title .rotated .icon,
+:host([layout="default"]) .title .icon {
+    display: none;
+}
+
+:host([layout="default"][opened]) .title,
+:host([layout="default"][opened="true"]) .title {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+:host([layout="default"][opened]) .title span,
+:host([layout="default"][opened="true"]) .title span {
+    color: #D6A229 !important;
+}
+
+:host([layout="default"]) .content {
+    margin-left: 40px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+:host {
+    color: #00345B !important;
+    margin-bottom: 10px;
+}
+
+:host .title .icon,
+:host .title span {
+    color: #00345B !important;
+    font-size: 13px !important;
+    font-weight: bolder !important;
+}
+
+:host([layout="default"]) .title:focus {
+    border: 0 !important;
+}
+
+:host([layout="default"]) .title::before {
+    content: "          ";
+    white-space: pre;
+    text-decoration: line-through;
+    position: absolute;
+    color: #00345B;
+    padding-top: 20px;
+}
+
+:host([layout="default"][opened]) .title::before,
+:host([layout="default"][opened="true"]) .title::before {
+    color: #D6A229 !important;
+}

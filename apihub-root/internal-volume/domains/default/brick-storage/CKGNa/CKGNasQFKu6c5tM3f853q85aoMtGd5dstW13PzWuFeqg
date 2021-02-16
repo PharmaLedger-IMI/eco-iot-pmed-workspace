@@ -1,0 +1,38 @@
+.boxHover .row:hover{
+    box-shadow: 0px 0px 6px 1px #c0c0c0;
+    border-bottom: 1px solid #00000021;
+}
+
+.boxHover .row{
+    box-shadow: 0px 0px 6px 1px #00000021;
+}
+
+.withSeparator .row {
+    border-bottom: 1px solid #00000021;
+}
+
+.withSeparator:last-child .row {
+    border-bottom: 0px;
+}
+
+psk-grid.history-item .row{
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+psk-grid.history-item .row div:first-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+psk-grid.history-item psk-icon span{
+    font-size: 48px;
+}
+
+psk-grid.history-item psk-label label{
+    word-break: break-word;
+}

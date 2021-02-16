@@ -1,0 +1,7 @@
+.page_content{
+    height: 99vh;
+}
+
+:host{
+    position:relative;
+}

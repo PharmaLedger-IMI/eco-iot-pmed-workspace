@@ -1,0 +1,33 @@
+.card-body.text-center {
+    padding-top: 15%;
+    padding-bottom: 15%;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    text-align: left !important;
+    column-gap: 10px;
+}
+
+img {
+    width: 60px;
+}
+
+p,
+.card-body.text-center h5 {
+    margin: 0;
+    padding: 0;
+}
+
+h5 {
+    font-size: 1.3125rem;
+    font-weight: bold;
+    align-self: end;
+}
+
+p {
+    font-size: 1rem;
+    align-self: start;
+}
+
+p:first-of-type {
+    grid-row: 1/ span 2;
+}

@@ -1,0 +1,8 @@
+:host(.app-example) .example-content{
+    background: #5E7FE111;
+    border: 1px solid #5E7FE122;
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+}
+

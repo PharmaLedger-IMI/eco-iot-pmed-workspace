@@ -1,0 +1,22 @@
+.psk-card .card-header h5{
+    color: #0b5410;
+}
+
+.twoCharsCol {
+    display: grid;
+    grid-template-columns: 2ch auto;
+}
+#to {
+    display: grid;
+    grid-template-columns: 2ch;
+}
+
+.fiveCharsCol {
+    display: grid;
+    grid-template-columns: 5ch auto;
+}
+#twoRowsGrid{
+    display: grid;
+    grid-template-rows: 2ch;
+    padding-bottom: 30px;
+}

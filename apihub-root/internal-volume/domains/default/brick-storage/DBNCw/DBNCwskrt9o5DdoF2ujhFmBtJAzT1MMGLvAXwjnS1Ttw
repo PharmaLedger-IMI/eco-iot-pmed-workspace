@@ -1,0 +1,3 @@
+<psk-container controller-name="SSAppController" data-ssapp-name="dossier-explorer-ssapp">
+    <psk-ssapp key-ssi="@keySSI"></psk-ssapp>
+</psk-container>

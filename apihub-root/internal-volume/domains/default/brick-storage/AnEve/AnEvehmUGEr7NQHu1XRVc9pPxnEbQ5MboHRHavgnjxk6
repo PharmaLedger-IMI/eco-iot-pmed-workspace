@@ -1,0 +1,21 @@
+{
+    "theme": "blue-fluorite-theme",
+    "appVersion": "0.2",
+    "basePagesUrl": "/pages/",
+    "profile": {
+        "username": "Dossier Explorer",
+        "avatar": "/assets/images/dossier-explorer.png"
+    },
+    "modals": {
+        "createDossierModal": "app/modals/dossier/create-dossier-modal.html",
+        "receiveDossierModal": "app/modals/dossier/receive-dossier-modal.html",
+        "runAppModal": "app/modals/dossier/run-app-modal.html",
+        "shareDossierModal": "app/modals/dossier/share-dossier-modal.html",
+        "deleteModal": "app/modals/actions/delete-modal.html",
+        "renameModal": "app/modals/actions/rename-modal.html",
+        "moveModal": "app/modals/actions/move-modal.html",
+        "viewFileModal": "app/modals/file-folder/view-file-modal.html",
+        "newFileModal": "app/modals/file-folder/new-file-modal.html",
+        "newFolderModal": "app/modals/file-folder/new-folder-modal.html"
+    }
+}

@@ -1,0 +1,30 @@
+#actions {
+    display: flex;
+    justify-content: start;
+}
+
+.container {
+    max-width: 100% !important;
+}
+
+.product-leaflet form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-leaflet .container {
+    padding: 0 !important;
+}
+
+.product-leaflet .container .product-leaflet-version{
+    width: 30% !important;
+}
+
+.language-leaflets-grid psk-for-each {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.language-leaflets-grid .container {
+    padding: 0;
+}

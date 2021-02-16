@@ -1,0 +1,10 @@
+.toast {
+    margin: 0.1rem 2rem;
+    background-color: #5E7FE1 !important;
+    color: #ffffff;
+}
+
+.toast-header {
+    background-color: #a9baef !important;
+    color: #ffffff !important;
+}

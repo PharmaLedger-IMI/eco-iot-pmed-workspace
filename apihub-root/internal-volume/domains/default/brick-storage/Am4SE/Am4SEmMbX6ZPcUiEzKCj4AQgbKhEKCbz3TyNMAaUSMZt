@@ -1,0 +1,9 @@
+label{
+    text-align: start;
+}
+
+psk-label{
+    display:flex;
+    align-items: center;
+}
+
