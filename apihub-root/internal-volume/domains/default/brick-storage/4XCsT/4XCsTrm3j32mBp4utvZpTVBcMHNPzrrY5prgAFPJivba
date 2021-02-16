@@ -1,4 +1,0 @@
-.toast {
-    margin: 0.1rem 2rem;
-    background-color:  #ccccb3 !important;
-}

@@ -1,7 +1,0 @@
-.icon.disable-color {
-    color: #999 !important;
-}
-
-span.icon {
-    color: grey;
-}

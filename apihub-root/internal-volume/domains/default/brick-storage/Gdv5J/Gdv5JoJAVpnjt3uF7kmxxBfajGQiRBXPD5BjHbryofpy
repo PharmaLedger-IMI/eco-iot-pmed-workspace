@@ -1,9 +1,0 @@
-<psk-container controller-name="dossier-controllers/RunApplicationController">
-    <psk-modal expanded="true" opened event-name="@addItems.closeModal">
-        <psk-label slot="title" class="title" label="@name"></psk-label>
-
-        <psk-ssapp app-name="@name" key-ssi="@keySSI"></psk-ssapp>
-
-    </psk-modal>
-
-</psk-container>

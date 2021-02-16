@@ -1,1 +1,0 @@
-function t(t,n){const o=document.createElement("style");o.innerHTML=n,t.shadowRoot.appendChild(o)}export{t as a}

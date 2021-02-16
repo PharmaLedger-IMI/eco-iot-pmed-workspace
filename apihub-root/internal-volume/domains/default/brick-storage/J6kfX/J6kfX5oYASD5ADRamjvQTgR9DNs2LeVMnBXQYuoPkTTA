@@ -1,5 +1,0 @@
-<psk-page title="Access Marketplace" class="access-marketplace-page">
-    <psk-container controller-name="AccessMarketplaceController">
-        <psk-ssapp app-name="@name" key-ssi="@keySSI"></psk-ssapp>
-    </psk-container>
-</psk-page>
