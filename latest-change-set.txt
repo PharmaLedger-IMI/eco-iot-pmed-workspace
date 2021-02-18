@@ -1,0 +1,1 @@
+    added tir.addDomainsInBDNS and tir.updateDBNS
