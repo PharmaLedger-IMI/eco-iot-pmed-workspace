@@ -17,9 +17,6 @@
     "staticServer"
   ],
   "endpointsConfig": {
-    "gtin-dsu-wizard": {
-      "module": "./../../gtin-dsu-wizard"
-    },
     "bricking": {
       "domains": {
         "epi": {
