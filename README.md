@@ -1,6 +1,6 @@
-# epi-workspace
+# iot-pmed-workspace
 
-*epi-workspace*  bundles all the necessary dependencies for building and running EPI SSApps in a single package.
+*iot-pmed-workspace*  bundles all the necessary dependencies for building and running EPI SSApps in a single package.
 
 For more details about what a *workspace* is check out the [template-workspace](https://github.com/PrivateSky/template-workspace).
 
@@ -8,18 +8,18 @@ For more details about what a *workspace* is check out the [template-workspace](
 
 In order to use the workspace, we need to follow a list of steps presented below. 
 
-If you have trouble installing the *epi-workspace*, please try to follow the guide provided on [PrivateSky.xyz](https://privatesky.xyz/?Start/installation)
+If you have trouble installing the *iot-pmed-workspace*, please try to follow the guide provided on [PrivateSky.xyz](https://privatesky.xyz/?Start/installation)
 
 ### Step 1: Clone the workspace
 
 ```sh
-$ git clone https://github.com/PharmaLedger-IMI/epi-workspace.git
+$ git clone https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git
 ```
 
 After the repository was cloned, you must install all the dependencies.
 
 ```sh
-$ cd epi-workspace
+$ cd iot-pmed-workspace
 #Important: If you plan to contribute to the project and/or dependecies please set DEV:true
 #in the file env.json before you run the installation!
 $ npm install
@@ -28,7 +28,7 @@ $ npm install
 
 ### Step 2: Launch the "server"
 
-While in the *epi-workspace* folder run:
+While in the *iot-pmed-workspace* folder run:
 
 ```sh
 $ npm run server
@@ -41,10 +41,10 @@ At the end of this command you get something similar to:
 
 ### Step 3: Build all things needed for the application to run.
 
-Open a new console inside *epi-workspace* folder and run:
+Open a new console inside *iot-pmed-workspace* folder and run:
 
 ```sh
-# Note: Run this in a new console inside "epi-workspace" folder
+# Note: Run this in a new console inside "iot-pmed-workspace" folder
 $ npm run build-all
 ```
 
@@ -92,8 +92,8 @@ be used to scan barcodes on drug's packages.
 Steps:
 1. start from a fresh install of the workspace.
 ```
-git clone https://github.com/PharmaLedger-IMI/epi-workspace
-cd epi-workspace
+git clone https://github.com/PharmaLedger-IMI/iot-pmed-workspace
+cd iot-pmed-workspace
 ```
 2. ensure that env variable called DEV is set to true in env.json file
 >{
