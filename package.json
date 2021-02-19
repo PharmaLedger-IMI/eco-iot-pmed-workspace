@@ -1,6 +1,6 @@
 {
-  "name": "iot-pmed-workspace",
-  "version": "1.0.1",
+  "name": "patient-workspace",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "dev-install": "node ./bin/mkDevEnv.js && npm install",
@@ -28,14 +28,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git"
+    "url": "git+https://github.com/PharmaLedger-IMI/epi-workspace.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace/issues"
+    "url": "https://github.com/PharmaLedger-IMI/epi-workspace/issues"
   },
-  "homepage": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace#readme",
+  "homepage": "https://github.com/PharmaLedger-IMI/epi-workspace#readme",
   "dependencies": {
     "octopus": "git+http://github.com/privatesky/octopus.git"
   }

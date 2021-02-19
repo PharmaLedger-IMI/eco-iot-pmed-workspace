@@ -1,0 +1,23 @@
+img {
+    max-width: 6rem;
+}
+
+@media screen and (max-width: 991px) {
+    .profile p,
+    .profile h5.card-title {
+        margin: 0;
+    }
+    .profile h5.card-title {
+        margin-left: .5rem;
+    }
+    .profile div.card-body {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0.5rem;
+    }
+    img {
+        max-width: 3rem;
+    }
+}

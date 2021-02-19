@@ -1,0 +1,20 @@
+{
+    "theme": "blue-fluorite-theme",
+    "appVersion": "0.2",
+    "basePagesUrl": "/pages/",
+    "profile": {
+        "username": "Dossier Explorer",
+        "avatar": "/assets/images/dossier-explorer.png"
+    },
+    "modals": {
+        "shareQRCodeModal": "modals/share-qrcode-modal.html",
+        "addClusterModal": "modals/add-cluster-modal.html",
+        "editClusterModal": "modals/edit-cluster-modal.html",
+        "addOrganizationModal": "modals/add-organization-modal.html",
+        "editOrganizationModal": "modals/edit-organization-modal.html",
+        "dsuTypesApprovalModal": "modals/dsu-types-approval-modal.html",
+        "governanceModal": "modals/governance.html",
+        "qrCodeImportModal": "modals/qrcode-import-modal.html",
+        "deleteModal": "modals/delete-modal.html"
+    }
+}

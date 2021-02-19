@@ -110,14 +110,9 @@ data:
         "bricksFabric",
         "bricking",
         "anchoring",
-        "dsu-wizard",
-        "gtin-dsu-wizard",
         "staticServer"
       ],
       "endpointsConfig": {
-        "gtin-dsu-wizard": {
-          "module": "./../../gtin-dsu-wizard"
-        },
         "bricking": {
           "domains": {
             "epi": {
@@ -175,8 +170,6 @@ data:
       "enableAuthorisation": false,
       "enableLocalhostAuthorization": false,
       "skipAuthorisation": [
-        "/leaflet-wallet",
-        "/dsu-fabric-wallet",
         "/directory-summary",
         "/resources",
         "/bdns",
