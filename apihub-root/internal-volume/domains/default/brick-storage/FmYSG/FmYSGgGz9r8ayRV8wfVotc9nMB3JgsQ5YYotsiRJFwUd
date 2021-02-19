@@ -1,0 +1,16 @@
+<psk-page title="Default landing page of the MenuWallet prototype.">
+    If you see this page means that your wallet is not properly configured!
+    <p>
+        <h2>How to</h2>
+        To configure the wallet you need to create a <u>menu.json</u> file into path <b>apihub-root/${wallet-name}/wallet-patch/menu.json</b>
+        <br>to overwrite the default <u>menu.json</u> in order to reflect your desired menu structure.
+    </p>
+    <p>
+        <h2>Possible causes</h2>
+        <ul>
+            <li>Missing menu.json file from the wallet-patch. Please check that you have a file: apihub-root/${wallet-name}/wallet-patch/menu.json</li>
+            <li>Trust loader was not able to retrieve info and files from the wallet-patch. Try to create a new wallet using new user details in create account page.</li>
+            <li>Wallet DSU suffered interventions with DSU Explorer solution or other ways and the menu.json was deleted from there.</li>
+        </ul>
+    </p>
+</psk-page>

@@ -1,0 +1,29 @@
+<psk-container controller-name="dossier-controllers/CreateDossierController">
+    <psk-modal opened>
+        <psk-label slot="title" class="title" label="@title"></psk-label>
+
+        <psk-condition condition="@conditionalExpressions.isLoading">
+            <psk-ui-loader slot="condition-true" should-be-rendered="true"> </psk-ui-loader>
+
+            <psk-condition slot="condition-false" condition="@conditionalExpressions.isDossierNameStep">
+                <psk-icon slot="condition-true" icon="pencil" color="#8197bc" class="dossier-icon icon-big"></psk-icon>
+                <psk-text-input slot="condition-true" view-model="dossierNameInput"></psk-text-input>
+
+                <psk-icon slot="condition-false" icon="check" color="#8197bc" class="dossier-icon icon-big"></psk-icon>
+                <psk-text-input slot="condition-false" view-model="dossierSeedOutput"></psk-text-input>
+            </psk-condition>
+
+            <psk-condition slot="condition-false" condition="@conditionalExpressions.isDossierNameStep">
+                <psk-button-group slot="condition-true" class="modal-buttons">
+                    <psk-button view-model="buttons.createDossier"></psk-button>
+                </psk-button-group>
+                <psk-button-group slot="condition-false" class="modal-buttons">
+                    <psk-button view-model="buttons.finishDossier"></psk-button>
+                </psk-button-group>
+            </psk-condition>
+
+        </psk-condition>
+
+        <psk-label label="@error.message" class="error"></psk-label>
+    </psk-modal>
+</psk-container>

@@ -1,0 +1,20 @@
+<psk-container controller-name='actions-controllers/DeleteController'>
+    <psk-modal opened>
+        <psk-label slot="title" class="title" label="@title"></psk-label>
+
+        <psk-condition condition="@conditionalExpressions.isLoading">
+            <psk-ui-loader slot="condition-true" should-be-rendered="true"> </psk-ui-loader>
+
+            <psk-icon slot="condition-false" icon="trash" color="#8197bc" class="dossier-icon icon-big"></psk-icon>
+
+            <psk-label slot="condition-false" label="@notificationMessage"></psk-label>
+
+            <psk-button-group slot="condition-false" class="modal-buttons">
+                <psk-button view-model="buttons.cancelButton"></psk-button>
+                <psk-button view-model="buttons.deleteButton"></psk-button>
+            </psk-button-group>
+        </psk-condition>
+
+        <psk-label label="@error.message" class="error"></psk-label>
+    </psk-modal>
+</psk-container>

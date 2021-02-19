@@ -1,0 +1,200 @@
+.card.psk-card, .image_container, .psk-description {
+    background: none;
+    border: none;
+    padding: 10px 0px 10px;
+}
+
+.card.psk-card .psk-description {
+    padding: 0;
+}
+
+.psk-card p {
+    margin: 0;
+    padding: 0.5rem 0;
+}
+
+.psk-card p, .psk-card li, .psk-card .card-body {
+    text-align: justify;
+}
+
+.card.psk-card .card.psk-card {
+    padding: 0.5rem 0;
+}
+
+/** first level*/
+
+.psk-card .card-header {
+    background: none;
+    border-bottom: none;
+    padding: 0.5rem 0px;
+}
+
+.psk-card .card-header h5 {
+    font-size: 1.266rem;
+    font-weight: bold;
+    color: #5E7FE1;
+    margin: 0;
+}
+
+.psk-card h1 {
+    color: #354F9B;
+    font-size: 1.424rem;
+    font-weight: bold;
+}
+
+/** second level*/
+
+.psk-card .psk-card .card-header {
+    padding: 0.5rem 0 0;
+}
+
+.psk-card .psk-card .card-header h5 {
+    color: #565656;
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.psk-card .card-body {
+    padding: 0.5rem 0px 0px;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.psk-card .card-body div {
+    padding-top: 0.5rem;
+}
+
+.psk-card p.subtitle {
+    color: #008A64;
+    padding-top: 0;
+}
+
+.api-title .psk-card h5 {
+    /* Used max-content value to have backgroud-color only for content, not for entire occupied space */
+    width: max-content;
+    background-color: #dfe5f9;
+    padding: 5px;
+}
+
+.api-subtitle .psk-card .card-header h5 {
+    background-color: initial;
+    font-size: 1rem;
+    padding: 0 5px 0 0;
+    font-weight: 600;
+    border: 1px solid #cfd9f6;
+}
+
+.api-subtitle .psk-card .card-header h5::before {
+    content: '...';
+    background-color: #cfd9f6;
+    color: #cfd9f6;
+    margin-right: 3px;
+}
+
+/* code tag */
+
+.psk-card .card-body p code, .psk-card .card-body ul code, .psk-card .card-body .psk-description code {
+    color: #008A64;
+    font-size: 100%;
+    padding: 0 3px;
+}
+
+/* list style */
+
+.psk-card ul, .psk-card ol {
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    margin: 0;
+}
+
+.psk-card ul ul {
+    list-style: none;
+}
+
+.psk-card ul ul li::before {
+    content: "-";
+    font-weight: 600;
+}
+
+.psk-card ol {
+    counter-reset: li;
+    list-style-type: none;
+}
+
+ol>li::before {
+    content: counter(li) ". ";
+    counter-increment: li;
+    color: #4C71DE;
+    font-weight: bold;
+    width: 1rem;
+    margin-left: -1.5rem;
+    margin-right: 0.5rem;
+    text-align: right;
+    direction: rtl;
+}
+
+.psk-card li {
+    padding: 0.5rem 0 0;
+}
+
+.psk-card li li {
+    padding: 0px;
+}
+
+/* page not-available */
+
+.psk-card#not-available .card-header h5 {
+    font-size: 1.802rem;
+    color: #F44336;
+    font-weight: bold;
+    text-align: center;
+}
+
+.psk-card#not-available .card-body {
+    font-size: 1.266rem;
+    text-align: center;
+}
+
+.psk-card#not-available {
+    position: relative;
+    background-image: url(../../../../assets/images/404.png);
+    background-repeat: no-repeat;
+    background-size: 200px;
+    background-position: top;
+    padding-top: 130px;
+    margin-top: 5rem;
+}
+
+@media (max-width: 960px) {
+    .card.psk-card, .image_container, .psk-description {
+        padding: 10px 5px 5px;
+    }
+    /** first level*/
+    .psk-card .card-header {
+        padding: 5px 0px;
+    }
+    .psk-card .card-header h5 {
+        font-size: 1.125rem;
+    }
+    .psk-card h1 {
+        font-size: 1.3125rem;
+    }
+    /** second level*/
+    .psk-card .psk-card .card-header h5 {
+        font-size: 0.875rem;
+        font-weight: bold;
+    }
+    .psk-card .card-body {
+        padding: 5px 0px;
+        font-size: 0.875rem;
+    }
+    .psk-card .card-body div {
+        padding-top: 0.5rem;
+    }
+    .psk-card#not-available .card-header h5 {
+        font-size: 1.266rem;
+    }
+    .psk-card#not-available .card-body {
+        font-size: 1rem;
+    }
+}

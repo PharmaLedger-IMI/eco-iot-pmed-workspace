@@ -1,0 +1,43 @@
+<psk-container controller-name="dossier-controllers/ReceiveDossierController">
+    <psk-modal opened>
+        <psk-label slot="title" class="title" label="@title"></psk-label>
+
+        <psk-condition condition="@conditionalExpressions.isLoading">
+            <psk-ui-loader slot="condition-true" should-be-rendered="true"></psk-ui-loader>
+            <psk-label slot="condition-true" label="@receiveDossierLoadingLabel"></psk-label>
+
+            <psk-condition slot='condition-false' condition="@conditionalExpressions.isDossierNameStep">
+                <psk-label label="@disclaimer"></psk-label>
+
+                <psk-icon icon="pencil" color="#8197bc" class="dossier-icon icon-big mb-4"></psk-icon>
+                <psk-text-input view-model="dossierNameInput"></psk-text-input>
+            </psk-condition>
+
+            <psk-condition slot="condition-false" condition="@conditionalExpressions.isDossierSeedStep">
+                <psk-icon icon="upload" color="#8197bc" class="dossier-icon icon-big mb-4"></psk-icon>
+                <psk-card class="receive-dossier full-width">
+                    <psk-text-input class="full-width" view-model="dossierSeedInput"></psk-text-input>
+                </psk-card>
+            </psk-condition>
+
+            <psk-condition slot="condition-false" condition="@conditionalExpressions.isScanQrCodeStep">
+                <psk-icon icon="upload" color="#8197bc" class="dossier-icon icon-big mb-4"></psk-icon>
+                <psk-card class="receive-dossier full-width">
+                    <psk-barcode-scanner view-model="qrCode"></psk-barcode-scanner>
+                </psk-card>
+            </psk-condition>
+
+            <psk-condition slot='condition-false' condition="@conditionalExpressions.isDossierNameStep">
+                <psk-button-group slot="condition-true" class="modal-buttons">
+                    <psk-button view-model="buttons.scanQrCodeButton"></psk-button>
+                    <psk-button view-model="buttons.enterSeedButton"></psk-button>
+                </psk-button-group>
+                <psk-button-group slot="condition-false" class="modal-buttons">
+                    <psk-button view-model="buttons.finishButton"></psk-button>
+                </psk-button-group>
+            </psk-condition>
+        </psk-condition>
+
+        <psk-label label="@error.message" class="error"></psk-label>
+    </psk-modal>
+</psk-container>
