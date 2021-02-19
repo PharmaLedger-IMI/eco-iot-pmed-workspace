@@ -1,0 +1,160 @@
+:host .psk-modal {
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+:host .psk-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+:host .modal-header {
+    background-color: #8197bc;
+    border-color: #8197bc;
+    border-radius: 0;
+    padding: 0.75rem 1rem;
+}
+
+:host .modal-header button.close,
+:host .modal-header button.expand .icon {
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+:host .modal-header .toolbar {
+    display: flex;
+    justify-content: flex-end;
+    width: 4em;
+    vertical-align: middle;
+}
+
+:host .modal-content {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+}
+
+:host .modal-body {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    line-height: 2rem;
+}
+
+:host .modal-footer {
+    display: none;
+}
+
+/*:host(.asset-modal) ::slotted(:not(psk-label)) {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    max-width: 90%;*/
+/*    max-height: 75%;*/
+/*}*/
+
+:host(.asset-modal) ::slotted(style) {
+    display: none;
+}
+
+:host(.asset-modal) ::slotted(.footer) {
+    display: flex;
+    flex: 1;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/** The content of the Exit modal **/
+
+:host(.exit-modal) ::slotted(.container) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+:host(.bpd-modal) .psk-modal-backdrop {
+    filter: invert(1);
+}
+
+:host(.bpd-wide-modal) .psk-modal-backdrop {
+    width: 900px;
+}
+
+:host(.bpd-modal) .modal-header {
+    background: white;
+    border-color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+
+:host(.bpd-modal) .modal-body {
+    background: white;
+    border-color: white;
+}
+
+:host(.bpd-modal) .psk-modal {
+    border: 2px solid rgba(0, 0, 255, 0.3);
+    padding: 20px;
+}
+
+:host(.bpd-modal) .psk-modal .modal-content {
+    background: white;
+    min-height: 500px;
+}
+
+:host(.bpd-wide-modal[opened]) .psk-modal {
+    width: 900px;
+}
+
+:host(.bpd-wide-modal) .psk-modal {
+    left: 20%;
+}
+
+:host(.bpd-wide-modal) .psk-modal .modal-content {
+    min-width: 700px !important;
+}
+
+:host(.bpd-modal) .modal-header psk-label {
+    color: black;
+}
+
+:host(.bpd-modal) .title {
+    color: black;
+}
+
+:host(.bpd-modal) .content {
+    margin: 20px;
+}
+
+:host(.bpd-modal) .bdp-row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bdp-row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+:host(.bpd-modal) .bdp-right {
+    display: flex;
+}
+
+:host(.bpd-modal) .bpd-input {
+    margin-bottom: 10px;
+}
+
+:host(.bpd-modal) .bpd-input psk-label {
+    display: none;
+}
+
+:host(.bpd-modal) .bpd-qr-code-with-text {
+    background-color: red;
+}

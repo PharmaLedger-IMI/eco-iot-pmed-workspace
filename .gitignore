@@ -1,0 +1,15 @@
+cardinal
+mobile/scan-app
+privatesky
+menu-wallet-prototype
+dossier-explorer-wallet-prototype
+apihub-root/patient-wallet/loader
+apihub-root/dsu-explorer/loader
+apihub-root/internal-volume/domains
+apihub-root/external-volume/domains
+dossier-explorer-ssapp
+node_modules
+package-lock.json
+env.json.devel
+.prettierrc
+.prettierignore
