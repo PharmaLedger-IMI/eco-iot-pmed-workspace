@@ -1,0 +1,16 @@
+psk-page-loader {
+    padding: 0!important;
+}
+
+.page_content{
+    height:100%;
+}
+
+
+.access-marketplace-page,
+.main-container,
+.page-content,
+.container,
+.container-content {
+    height: 100%;
+}

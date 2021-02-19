@@ -1,0 +1,12 @@
+.submit-app-import-image .outer-container {
+    width: 130px;
+    height: 130px;
+    margin: 0 0 30px 50px;
+    display: contents;
+}
+
+.submit-app-import-image .outer-container .display-img-container{
+    width: 130px;
+    height: 130px;
+    margin: 0 0 30px 30px;
+}

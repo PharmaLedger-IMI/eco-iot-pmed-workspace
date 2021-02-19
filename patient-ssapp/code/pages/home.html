@@ -1,0 +1,33 @@
+<psk-page title="Home">
+    <psk-container controller-name="HomeController">
+
+
+
+        <psk-card class="bpd-dashboard">
+            <psk-label class="bpd-dashboard-title" label="Home"/>
+            <div class="bpd-buttons-row bpd-wide-cards">
+                <psk-button class="bpd-organization-card " event-name="home:trial">
+                    <div class="bpd-organization-card-content">
+                        <psk-icon icon="pencil-square-o" color="rgb(255, 255, 255)"></psk-icon>
+                    </div>
+                    <psk-label class="bpd-organization-card-label" label="Create Trial"/>
+                </psk-button>
+
+                <psk-button class="bpd-organization-card" event-name="home:sites">
+                    <div class="bpd-organization-card-content">
+                        <psk-icon icon="users" color="rgb(255, 255, 255)"></psk-icon>
+                    </div>
+                    <psk-label class="bpd-organization-card-label" label="My Sites"/>
+                </psk-button>
+
+                <psk-button class="bpd-organization-card" event-name="home:patient">
+                    <div class="bpd-organization-card-content">
+                        <psk-icon icon="users" color="rgb(255, 255, 255)"></psk-icon>
+                    </div>
+                    <psk-label class="bpd-organization-card-label" label="Patient Data "/>
+                </psk-button>
+            </div>
+        </psk-card>
+
+    </psk-container>
+</psk-page>
