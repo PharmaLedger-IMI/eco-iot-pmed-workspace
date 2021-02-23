@@ -3,8 +3,8 @@ mobile/scan-app
 privatesky
 menu-wallet-prototype
 dossier-explorer-wallet-prototype
-apihub-root/patient-wallet/loader
-apihub-root/dsu-explorer/loader
+apihub-root/patient-wallet/
+apihub-root/dsu-explorer/
 apihub-root/internal-volume/domains
 apihub-root/external-volume/domains
 dossier-explorer-ssapp
