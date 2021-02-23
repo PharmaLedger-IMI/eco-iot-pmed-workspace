@@ -119,3 +119,10 @@
     refactor getKeySSI to getKeySSIAsString
     replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
     refactor getKeySSI to getKeySSIAsString
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    added tir.addDomainsInBDNS and tir.updateDBNS
+    extra info added into the landing page
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    refactor getKeySSI to getKeySSIAsString
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    refactor getKeySSI to getKeySSIAsString
