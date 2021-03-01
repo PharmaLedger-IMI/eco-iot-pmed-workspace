@@ -1,0 +1,84 @@
+:host footer {
+    border-top: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+    box-shadow: -1px 6px 29px -6px rgba(0,0,0,0.75);
+}
+
+:host(.pdfViewer) main,
+:host(.noPadding) main{
+    padding: 0 !important;
+}
+
+:host(.smpc-mobile) main{
+    padding-right: 0 !important;
+}
+
+:host(.historyPage) main {
+    background-color: #134E9E !important;
+}
+
+::slotted(iframe) {
+    width: 100%; height: 100%;
+    border: 0 !important;
+    padding: 0;
+    margin: 0 0 -10px 0;
+}
+
+.mobile > main {
+    background-color: #FFFFFF !important;
+}
+
+.mobile > main .main-cover {
+    position: absolute !important;
+    top: 50px !important;
+}
+
+.mobile > header > .title {
+    font-size: 1.2rem !important;
+}
+
+.mobile > header {
+    height: 50px !important;
+}
+
+.mobile > header .aside-menu {
+    top: 50px !important;
+}
+
+.mobile > header .aside-menu psk-app-menu {
+    margin-top: 100px;
+}
+
+.mobile > header,
+.mobile > header .aside-menu {
+    background-color: #00345B !important;
+}
+
+.mobile > header .aside-toggler::after {
+    color: #FFFFFF;
+    content: "e-Diary";
+    padding-left: 85px;
+    background-image: url(assets/images/pharmaledger-logo-negative.svg);
+    background-size: 80px 20px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 13px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.mobile > header .btn {
+    min-width: 30px !important;
+    min-height: 39px !important;
+}
+
+::slotted([slot="footer"]) {
+    padding: 0 !important;
+}
+
+/*
+:host(.background) main {
+    background-image: url('assets/images/Favorite.png');
+    height: 100%;
+}
+*/

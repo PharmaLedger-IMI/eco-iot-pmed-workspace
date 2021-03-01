@@ -1,0 +1,27 @@
+:host(.app-example) .example-content,
+:host(.mobile-example) .card-body {
+    background-color: #5E7FE111;
+    width: 100%; height: 100%;
+}
+
+:host(.mobile-example) .card.psk-card {
+    height: 100%;
+}
+
+:host(.mobile-example) .card-body {
+    padding: 0;
+}
+
+:host(.mobile-example) .card-body {
+    overflow: hidden;
+}
+
+:host(.mobile-example) .card-body .example-content {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 414px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}

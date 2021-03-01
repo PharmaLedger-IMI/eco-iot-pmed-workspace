@@ -1,0 +1,33 @@
+:host {
+    align-self: center;
+}
+
+.productItem_echo_manufName {
+    background: antiquewhite;
+}
+
+:host(.horizontal-aligned) {
+    display: grid;
+}
+
+.small-text {
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+:host(.horizontal-aligned) .small-text {
+    font-size: 8px;
+}
+
+.horizontal-aligned .small-text {
+    font-size: 8px;
+}
+
+.row {
+    display: flex;
+}
+
+:host(.home-default) {
+    width: 100%;
+    height: 100%;
+}

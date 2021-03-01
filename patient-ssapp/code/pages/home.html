@@ -1,33 +1,15 @@
-<psk-page title="Home">
-    <psk-container controller-name="HomeController">
+<psk-example class="mobile-example">
+    <psk-mobile class="noPadding background">
+        <psk-container controller-name="HomeController">
+            <psk-layout template-rows="1fr 2fr" align-items="center" class="coloredBackground">
+                <psk-layout-item class = "home-default">
+                    <psk-label class="drugName" label="product.name"></psk-label>
+                </psk-layout-item>
 
-
-
-        <psk-card class="bpd-dashboard">
-            <psk-label class="bpd-dashboard-title" label="Home"/>
-            <div class="bpd-buttons-row bpd-wide-cards">
-<!--                <psk-button class="bpd-organization-card " event-name="home:trial">-->
-<!--                    <div class="bpd-organization-card-content">-->
-<!--                        <psk-icon icon="pencil-square-o" color="rgb(255, 255, 255)"></psk-icon>-->
-<!--                    </div>-->
-<!--                    <psk-label class="bpd-organization-card-label" label="Create Trial"/>-->
-<!--                </psk-button>-->
-
-<!--                <psk-button class="bpd-organization-card" event-name="home:sites">-->
-<!--                    <div class="bpd-organization-card-content">-->
-<!--                        <psk-icon icon="users" color="rgb(255, 255, 255)"></psk-icon>-->
-<!--                    </div>-->
-<!--                    <psk-label class="bpd-organization-card-label" label="My Sites"/>-->
-<!--                </psk-button>-->
-
-                <psk-button class="bpd-organization-card" event-name="home:patient">
-                    <div class="bpd-organization-card-content">
-                        <psk-icon icon="users" color="rgb(255, 255, 255)"></psk-icon>
-                    </div>
-                    <psk-label class="bpd-organization-card-label" label="Patient Data "/>
-                </psk-button>
-            </div>
-        </psk-card>
-
-    </psk-container>
-</psk-page>
+                <psk-layout-item class="home-default">
+                    <psk-label label="bb"></psk-label>
+                </psk-layout-item>
+            </psk-layout>
+        </psk-container>
+    </psk-mobile>
+</psk-example>

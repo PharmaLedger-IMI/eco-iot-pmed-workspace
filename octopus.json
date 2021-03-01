@@ -138,6 +138,16 @@
       ]
     },
     {
+      "name": "themes/eDiary-theme",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/eDiary-theme && npm install"
+        }
+      ]
+    },
+    {
       "name": "patient-ssapp",
       "src": "",
       "actions": [
@@ -166,6 +176,16 @@
         {
           "type": "execute",
           "cmd": "cd themes/blue-fluorite-theme && npm run build-dossier"
+        }
+      ]
+    },
+    {
+      "name": "eDiary-theme-wallet-build",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/eDiary-theme && npm run build-dossier"
         }
       ]
     },
@@ -232,16 +252,16 @@
       ]
     },
     {
-      "name": "patient-wallet_bind_to_menu-wallet-prototype",
+      "name": "patient-wallet_bind_to_patient-ssapp",
       "src": "",
       "actions": [
         {
           "type": "execute",
-          "cmd": "cd menu-wallet-prototype && npm run build"
+          "cmd": "cd patient-ssapp && npm run build"
         },
         {
           "type": "copy",
-          "src": "./menu-wallet-prototype/seed",
+          "src": "./patient-ssapp/seed",
           "target": "./apihub-root/patient-wallet/wallet-patch/seed",
           "options": {
             "overwrite": true

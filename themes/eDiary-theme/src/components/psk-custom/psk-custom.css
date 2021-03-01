@@ -1,0 +1,55 @@
+:host > div,
+:host > div > ::slotted(*) {
+    padding: 0; margin: 0;
+}
+
+:host(.psk-row) > div,
+:host(.psk-columns) > div {
+    display: grid;
+    place-items: center;
+}
+
+:host(.psk-columns.psk-columns--2) > div {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+:host(.psk-columns.psk-columns--3) > div {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+:host(.psk-columns.psk-columns--4) > div {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+:host(.psk-columns__item) {
+    display: flex;
+}
+
+:host(.psk-columns__item.psk-columns__item--full) {
+    grid-column-start: 1;
+    grid-column-end: -1;
+}
+
+/* novatis */
+
+:host(.novatis) > div {
+    display: block;
+    padding: 0.5em 0 0.25em 0;
+    color: #FFFFFF;
+}
+
+:host(.novatis--header) ::slotted(h5) {
+    margin-bottom: 0 !important;
+}
+
+:host(.novatis__item.psk-columns__item) {
+    margin: 0.25em 0 !important;
+    font-size: 90%;
+}
+
+:host(.novatis__item.novatis__item--img.psk-columns__item) {
+    background-color: #FFFFFF;
+    padding: 10px !important;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}

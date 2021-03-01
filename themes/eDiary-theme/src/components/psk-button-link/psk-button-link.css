@@ -1,0 +1,71 @@
+:host(.footer-item) div,
+:host(.footer-item) psk-icon .icon {
+    color: #4461B5 !important;
+}
+:host(.footer-item) psk-icon .icon {
+    font-size: x-large !important;
+}
+
+.xlIcon {
+    font-size: 12px;
+    width: 80px;
+    height: 80px;
+}
+
+.xxlIcon {
+    width: 100px;
+    height: 100px;
+}
+
+.xlIcon, .xxlIcon {
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.78);
+}
+
+.xlIcon .fa {
+    font-size: 35px;
+    color: #cecece;
+}
+
+.xxlIcon .fa {
+    font-size: 40px;
+    color: #00345B;
+}
+
+.xlIcon .fa,
+.xxlIcon .fa {
+    text-align: center;
+}
+
+.redIcon .fa {
+    color: #ff0700 !important;
+}
+
+.blackIcon .fa {
+    color: black !important;
+}
+
+.purpleIcon .fa {
+    color: #585eb2;
+}
+
+.cabinetIcon .fa {
+    margin-left: 26px !important;
+    color: black;
+}
+
+div {
+    color: black;
+    line-height: 1.3 !important;
+    text-align: center !important;
+}
+
+.smpc div {
+    line-height: inherit !important;
+}
+.go-back-link .fa {
+    margin: 0;
+    font-size: 25px;
+    margin-right: 10px;
+}
