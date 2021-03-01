@@ -1,8 +1,17 @@
 # iot-pmed-workspace
 
-*iot-pmed-workspace*  bundles all the necessary dependencies for building and running EPI SSApps in a single package.
+*iot-pmed-workspace*  bundles all the necessary dependencies for building and running SSApps in a single package.
 
 For more details about what a *workspace* is check out the [template-workspace](https://github.com/PrivateSky/template-workspace).
+
+## IOT-PMED Space
+
+This workspace is intended to build 5 modules as described in the projects tab and the open issues.
+Currently, it includes 1 patient app and its wallet.
+To add more modules, we will include either more SAPPs or cardinal webpages (for prototypes and alpha versions).
+
+To add modules for the alpha versions prototypes we can use cardinal as described in the documentation here:
+[PrivateSkyCardinal.xyz](https://privatesky.xyz/?Howto/a-site-with-cardinal)
 
 ## Installation
 
@@ -20,9 +29,9 @@ After the repository was cloned, you must install all the dependencies.
 
 ```sh
 $ cd iot-pmed-workspace
-#Important: If you plan to contribute to the project and/or dependecies please set DEV:true
-#in the file env.json before you run the installation!
-$ npm install
+#Important: for the development mode we proceed with npm run dev-install
+#For normal installation, the command is: npm install
+$ npm run dev-install 
 ```
 **Note:** this command might take quite some time depending on your internet connection and you machine processing power.
 
@@ -53,40 +62,7 @@ $ npm run build-all
 ## Running 
 To run the application launch your browser (preferably Chrome) in Incognito mode and access the http://localhost:8080 link.
 
-### Enterprise wallet
 
-Enterprise wallet allows creation of Products and Batches.
-
-#### Step 1: Register details
-
-```
-Username: test1234
-
-Email: test@test.test
-
-Password: test1234567890
-```
-
-#### Step 2: Setup credential for Issuer
-    1. Go to Issuer page
-    2. Put "epi" in application domain field and press "Generate Identity"
-    3. Copy the the generated issuer identity
-    4. Paste and save it into /apihub-root/external-volume/issuers-public-identities file. The entry should be on a single line.
-
-#### Step 3: Setup credentials for Holder
-    1. Go to Holder
-    2. Put "epi" in application domain field and press "Generate Identity"
-    3. Copy the generated User Identity 
-    4. Paste it into Issuer's field named "Identity of a new user in domain [epi]" and press "Generate Credentials"
-    5. Copy the generated credentials (from Issuer's page) and paste it into credential field inside the Holder page and press "Save Credentials"
-
-Now you will act as a Holder thus will be able to add Products (and leaflets for it) and create Batches of products.
-
-
-
-### EPI Client
-This is the part a normal user will see. The part that will
-be used to scan barcodes on drug's packages.
 
 ## Prepare & release a new stable version of the workspace
 Steps:
@@ -95,17 +71,12 @@ Steps:
 git clone https://github.com/PharmaLedger-IMI/iot-pmed-workspace
 cd iot-pmed-workspace
 ```
-2. ensure that env variable called DEV is set to true in env.json file
->{
->  "PSK_TMP_WORKING_DIR": "tmp",
->  "PSK_CONFIG_LOCATION": "../apihub-root/external-volume/config",
->  **"DEV": true**
->}
-3. run the installation process of the workspace
+
+2. run the installation process of the workspace
 ```
 npm install
 ```
-4. run the server and build the ssapps and wallets
+3. run the server and build the ssapps and wallets
 ```
 npm run server
 npm run build-all
@@ -117,49 +88,3 @@ npm run freeze
 ```
 6. verify the output of freeze command and check for errors. If any, correct them and run again the freeze command.
 7. commit the new version of the octopus.json file obtained with the freeze command.
-
-
-### Build Android APK
-
-Steps
-
-1. Install all dependencies (as develoment) for this workspace
-```sh
-npm run dev-install
-```
-
-2. Bind Android repository into workspace
-```sh
-npm run install-mobile
-```
-
-3. Launch API HUB
-```sh
-npm run server
-```
-
-4. Prepare the Node files that will be packed into the Android app
-```sh
-#In another tab / console
-npm build-mobile
-```
-
-5. Have /mobile/scan-app/android/local.properties file with the following content
-
-```sh
-# Change the value to your SDK path
-sdk.dir=/home/alex/Android/Sdk
-```
-More on this [here](https://github.com/PrivateSky/android-edge-agent#iv-setup-local-environment-values)
-
-6. Build the APK
-```sh
-npm build-android-apk
-```
-
-This concludes the steps to build the APK file.
-
-**Note:** The .apk file should be in folder
-```
-mobile/scan-app/android/app/build/outputs/apk/release
-```
