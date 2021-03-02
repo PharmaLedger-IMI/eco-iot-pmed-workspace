@@ -12,18 +12,18 @@ psk-container.pdfViewer .content {
 }
 
 .ed-avatar-bordered-image #ed-profile-image {
-    border: 3px dashed white;
-    border-radius: 100px;
-    width: 184px;
-    height: 184px;
+    border-radius: 90px;
+    width: 124px;
+    height: 124px;
     position: relative;
     left: 5px;
     top: 5px;
 }
 
 .ed-avatar-bordered-image #ed-profile-border {
+    border: 5px solid white;
     background-image: url(assets/images/cat.jpg);
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
+    width: 180px;
+    height: 180px;
+    border-radius: 90px;
 }

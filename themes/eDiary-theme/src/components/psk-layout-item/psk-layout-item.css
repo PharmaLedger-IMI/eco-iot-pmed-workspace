@@ -44,12 +44,7 @@
 }
 
 :host(.home-image) {
-    width: 360px;
-    background-color: #1c7430;
+    width: 180px;
     z-index: 100;
-}
-
-:host(.home-image) #ed-profile-image {
-
-    background-color: yellow;
+    padding-bottom: 160px;
 }
