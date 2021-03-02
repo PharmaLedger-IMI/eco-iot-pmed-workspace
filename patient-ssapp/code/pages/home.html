@@ -1,20 +1,83 @@
 <psk-example class="mobile-example">
-    <psk-mobile class="noPadding background">
+    <psk-mobile class="noPadding background" disable-header>
         <psk-container controller-name="HomeController">
-            <psk-layout template-rows="1fr 3fr" align-items="center" class="coloredBackground">
-                <psk-layout-item class = "home-default">
-                    <psk-img  src="assets/images/pharmaup.jpg" ></psk-img>
-                </psk-layout-item>
-
+            <psk-layout template-rows="25% 0% 75%" align-items="center" class="coloredBackground">
+                <psk-layout-item class="home-default"></psk-layout-item>
 
                 <psk-layout-item class="home-image">
-                    <psk-img  src="assets/images/userprofile.png" height="50" ></psk-img>
+                    <psk-container class="ed-avatar-bordered-image">
+                        <div id="ed-profile-image">
+                            <div id="ed-profile-border"></div>
+                        </div>
+                    </psk-container>
                 </psk-layout-item>
+
                 <psk-layout-item class="home-default-bottom">
-                    <psk-label label="bottom"></psk-label>
+                    <psk-label class="user-name-title" label="User ID"></psk-label>
+
+                    <psk-layout template-rows="1fr 1fr 1fr" align-items="center" row-gap="10%" class="ed-controls">
+                        <psk-layout-item>
+                            <psk-card class="ed-control-line-father">
+                                <div class="ed-control-line-left">
+                                    <psk-img class="ed-control-image" src="assets/images/greensquare.png" height='70'
+                                             width='70'></psk-img>
+                                </div>
+                                <div class="ed-control-line-right">
+                                    <div>
+                                        <psk-label class="ed-control-button-title" label="Consent"></psk-label>
+                                    </div>
+                                    <div>
+                                        <psk-label class=""
+                                                   label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"></psk-label>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </psk-card>
+                        </psk-layout-item>
+
+
+                        <psk-layout-item>
+                            <psk-card class="ed-control-line-father">
+                                <div class="ed-control-line-left">
+                                    <psk-img class="ed-control-image" src="assets/images/greensquare.png" height='70'
+                                             width='70'></psk-img>
+                                </div>
+                                <div class="ed-control-line-right">
+                                    <div>
+                                        <psk-label class="ed-control-button-title"
+                                                   label="IoT Questionnaire"></psk-label>
+                                    </div>
+                                    <div>
+                                        <psk-label class=""
+                                                   label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"></psk-label>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </psk-card>
+                        </psk-layout-item>
+
+                        <psk-layout-item>
+                            <psk-card class="ed-control-line-father">
+                                <div class="ed-control-line-left">
+                                    <psk-img class="ed-control-image" src="assets/images/greensquare.png" height='70'
+                                             width='70'></psk-img>
+                                </div>
+                                <div class="ed-control-line-right">
+                                    <div>
+                                        <psk-label class="ed-control-button-title" label="E-Diary"></psk-label>
+                                    </div>
+                                    <div>
+                                        <psk-label class=""
+                                                   label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"></psk-label>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </psk-card>
+                        </psk-layout-item>
+
+                    </psk-layout>
+                    <psk-button class="log-out-button" event-name="">Log out</psk-button>
                 </psk-layout-item>
-
-
             </psk-layout>
         </psk-container>
     </psk-mobile>

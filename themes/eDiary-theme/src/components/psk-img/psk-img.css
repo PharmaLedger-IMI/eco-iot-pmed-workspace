@@ -2,8 +2,9 @@ img {
     max-width: 100%;
 }
 
-.productItem_img img {
+.ed-control-image img {
     vertical-align: middle;
+    border-radius: 10px;
 }
 
 img.productStatusImg {
@@ -41,4 +42,8 @@ img.productStatusImg {
 
 .navbar-img .image_wrapper {
     padding-top: 20%;
+}
+
+.ed-cover-img {
+    font-size: 0 !important;
 }

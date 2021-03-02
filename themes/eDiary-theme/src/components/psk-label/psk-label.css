@@ -89,3 +89,16 @@ psk-label{
 .text-centered label {
     text-align: center;
 }
+
+.user-name-title {
+    margin-top: 20%;
+    font-size: 30px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+
+.ed-control-button-title {
+    font-weight: bold;
+    font-size: 18px;
+}

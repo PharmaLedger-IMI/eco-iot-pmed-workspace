@@ -99,3 +99,20 @@ psk-button.fullWidth button{
 .epi-button .btn.btn-primary {
     width: 120px;
 }
+
+.log-out-button {
+    text-align: center;
+    padding-top: 10%;
+    position: absolute;
+    bottom: 2%;
+    width: 100%;
+}
+
+.log-out-button button {
+    width: 80%;
+    background-color: #008798 !important;
+    border: #008798 !important;
+    border-radius: 20px !important;
+    height: 45px;
+    font-weight: bold;
+}

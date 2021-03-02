@@ -226,3 +226,22 @@ ol > li::before {
 .cheatsheet-item .card.psk-card .card-body ul {
     list-style-position: inside;
 }
+
+.ed-control-line-father .card-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ed-control-line-father hr {
+    background-color: white;
+    color: white;
+}
+
+.ed-control-line-left {
+    width: 40%;
+}
+
+.ed-control-line-right .col-form-label,
+.psk-card .card-body div.ed-control-line-right {
+    padding: 0 !important;
+}

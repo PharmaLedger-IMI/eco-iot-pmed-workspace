@@ -1,22 +1,24 @@
 :host(.coloredBackground){
-    background-color: #134E9E !important;
+    background-color: #00345B !important;
     color: white;
     width: 100%;
     height: 100%;
-    padding-top: 10px;
 }
 
 :host(.topPadding) {
     padding-top: 50px;
 }
 
-:host(.productItem) {
-    margin-top: 20px;
-    background-color: #FFFFFF;
+:host(.ed-controls) {
+    margin-top: 5%;
     border-radius: 20px;
     padding: 15px 10px;
 }
 
 :host(.smallTopPadding) {
     padding-top: 20px;
+}
+
+:host(.ed-control) {
+    color: white !important;
 }

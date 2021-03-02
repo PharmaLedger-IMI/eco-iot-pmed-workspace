@@ -6,3 +6,24 @@ psk-container.pdfViewer .content {
     display: flex;
 }
 
+
+.ed-avatar-bordered-image {
+    background-color: white;
+}
+
+.ed-avatar-bordered-image #ed-profile-image {
+    border: 3px dashed white;
+    border-radius: 100px;
+    width: 184px;
+    height: 184px;
+    position: relative;
+    left: 5px;
+    top: 5px;
+}
+
+.ed-avatar-bordered-image #ed-profile-border {
+    background-image: url(assets/images/cat.jpg);
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+}
