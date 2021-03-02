@@ -1,13 +1,13 @@
 import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
-import TrialService from "./services/TrialService.js";
+import EDiaryService from "./services/EDiaryService.js";
 
 const initModel = {
-    title: 'Create Trial',
+    title: 'Create EDiary',
     name: {
         name: 'name',
-        label: 'Trial Name',
+        label: 'EDiary Name',
         required: true,
-        placeholder: 'Trial name',
+        placeholder: 'EDiary name',
         value: ''
     },
     consentName: {
@@ -35,16 +35,16 @@ const initModel = {
 
 }
 
-export default class TrialsController extends ContainerController {
+export default class EDiaryController extends ContainerController {
     constructor(element, history) {
         super(element, history);
 
         this.setModel(JSON.parse(JSON.stringify(initModel)));
 
-        this._attachHandlerTrialCreate();
+        this._attachHandlerEDiaryCreate();
 
-        this.TrialService = new TrialService(this.DSUStorage);
-        this.TrialService.getTrial((err, data) => {
+        this.EDiaryService = new EDiaryService(this.DSUStorage);
+        this.EDiaryService.getEdiary((err, data) => {
             if (err) {
                 console.log(err);
                 return;
@@ -60,25 +60,25 @@ export default class TrialsController extends ContainerController {
 
 
 
-    _attachHandlerTrialCreate (){
-        this.on('trial:create', (event) => {
+    _attachHandlerEDiaryCreate (){
+        this.on('ediary:create', (event) => {
 
             if(this.__displayErrorMessages(event)){
                 return;
             }
-            let trialObject = {
+            let ediaryObject = {
                 name: this.model.name.value,
                 consentName: this.model.consentName.value,
                 version: this.model.version.value,
                 status: this.model.status.value,
             }
 
-            this.TrialService.saveTrial( trialObject,(err, updTrial) => {
+            this.EDiaryService.saveEdiary( ediaryObject,(err, updEDiary) => {
                 if (err) {
                     console.log(err);
                     return;
                 }
-                console.log("Trial saved" +updTrial.uid);
+                console.log("EDiary saved" +updEDiary.uid);
             
             });
         });
