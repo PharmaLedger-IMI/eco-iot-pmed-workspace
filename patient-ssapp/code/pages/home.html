@@ -1,14 +1,20 @@
 <psk-example class="mobile-example">
     <psk-mobile class="noPadding background">
         <psk-container controller-name="HomeController">
-            <psk-layout template-rows="1fr 2fr" align-items="center" class="coloredBackground">
+            <psk-layout template-rows="1fr 3fr" align-items="center" class="coloredBackground">
                 <psk-layout-item class = "home-default">
-                    <psk-label class="drugName" label="product.name"></psk-label>
+                    <psk-img  src="assets/images/pharmaup.jpg" ></psk-img>
                 </psk-layout-item>
 
-                <psk-layout-item class="home-default">
-                    <psk-label label="bb"></psk-label>
+
+                <psk-layout-item class="home-image">
+                    <psk-img  src="assets/images/userprofile.png" height="50" ></psk-img>
                 </psk-layout-item>
+                <psk-layout-item class="home-default-bottom">
+                    <psk-label label="bottom"></psk-label>
+                </psk-layout-item>
+
+
             </psk-layout>
         </psk-container>
     </psk-mobile>
