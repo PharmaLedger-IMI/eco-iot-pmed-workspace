@@ -60,7 +60,7 @@
     box-shadow: rgb(76, 100, 100) 5px 0 20px -3px;
 }
 
-@media(max-width:960px) {
+@media (max-width: 960px) {
     .big-button .btn.btn-primary {
         font-size: 1rem;
         padding: 5px;
@@ -86,22 +86,35 @@ psk-mobile [slot='footer'] .btn span {
     color: #FFFFFF;
 }
 
-psk-button.fullWidth button{
+psk-button.fullWidth button {
     width: 100%;
 }
 
 .epi-button .btn.btn-primary:focus,
 .epi-button .btn.btn-primary:not(:disabled):not(.disabled):active,
 .epi-button .submit,
-.epi-button .btn.btn-primary{
+.epi-button .btn.btn-primary {
     background: #00345b;
 }
+
 .epi-button .btn.btn-primary {
     width: 120px;
 }
 
-.log-out-button {
+.ed-button {
     text-align: center;
+
+}
+
+.ed-button button {
+    background-color: #008798 !important;
+    border: #008798 !important;
+    border-radius: 20px !important;
+    height: 45px;
+    font-weight: bold;
+}
+
+.log-out-button {
     padding-top: 10%;
     position: absolute;
     bottom: 2%;
@@ -110,9 +123,52 @@ psk-button.fullWidth button{
 
 .log-out-button button {
     width: 80%;
-    background-color: #008798 !important;
-    border: #008798 !important;
-    border-radius: 20px !important;
-    height: 45px;
-    font-weight: bold;
+}
+
+.half-screen-button,
+.half-screen-button button {
+    width: 40% !important;
+}
+
+.half-screen-button {
+    position: static !important;
+    padding-top: 10%;
+    bottom: 2%;
+    width: 100%;
+}
+
+.invisible-button {
+    font-size: 0 !important;
+}
+
+.invisible-button button,
+.invisible-button button:hover {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+.black-blue-text button {
+    color: #00345B !important;
+}
+
+.half-button {
+
+}
+
+.half-button button {
+    width: 130px !important;
+    margin: 0 !important;
+    height: 35px !important;
+}
+
+.left-half button {
+    border-radius: 20px 0 0 20px !important;
+}
+
+.right-half button {
+    border-radius: 0 20px 20px 0 !important;
 }

@@ -43,6 +43,13 @@
     color: white;
 }
 
+:host(.ediary-default-bottom) {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: black;
+}
+
 :host(.home-image) {
     width: 180px;
     z-index: 100;

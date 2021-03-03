@@ -2,36 +2,6 @@ import ContainerController from '../../../cardinal/controllers/base-controllers/
 import EDiaryService from "./services/EDiaryService.js";
 
 const initModel = {
-    title: 'Create EDiary',
-    name: {
-        name: 'name',
-        label: 'EDiary Name',
-        required: true,
-        placeholder: 'EDiary name',
-        value: ''
-    },
-    consentName: {
-        name: 'consentName',
-        label: 'Consent Name',
-        required: true,
-        placeholder: 'Consent name',
-        value: ''
-    },
-    version: {
-        name: 'version',
-        label: 'Version',
-        required: true,
-        placeholder: 'Version',
-        value: ''
-    },
-    status: {
-        name: "status",
-        required: true,
-        checkboxLabel: "status",
-        checkedValue: 1,
-        uncheckedValue: 0,
-        value: ''
-    }
 
 }
 
@@ -43,15 +13,6 @@ export default class EDiaryController extends ContainerController {
 
         this._attachHandlerEDiaryCreate();
 
-        this.EDiaryService = new EDiaryService(this.DSUStorage);
-        this.EDiaryService.getEdiary((err, data) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            //bind
-            this.setModel(data);
-        });
 
         this.on('openFeedback', (evt) => {
             this.feedbackEmitter = evt.detail;
@@ -62,25 +23,7 @@ export default class EDiaryController extends ContainerController {
 
     _attachHandlerEDiaryCreate (){
         this.on('ediary:create', (event) => {
-
-            if(this.__displayErrorMessages(event)){
-                return;
-            }
-            let ediaryObject = {
-                name: this.model.name.value,
-                consentName: this.model.consentName.value,
-                version: this.model.version.value,
-                status: this.model.status.value,
-            }
-
-            this.EDiaryService.saveEdiary( ediaryObject,(err, updEDiary) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                console.log("EDiary saved" +updEDiary.uid);
-            
-            });
+            this.History.navigateToPageByTag('create-diary');
         });
     }
 

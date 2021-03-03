@@ -11,20 +11,19 @@ export default class HomeController extends ContainerController {
     _attachHandlerEconsent(){
         this.on('home:econsent', (event) => {
             console.log ("Button pressed");
-            this.History.navigateToPageByTag('econsent');
+            //this.History.navigateToPageByTag('econsent');
         });
     }
 
     _attachHandlerIotQuestionarie(){
-        this.on('home:questionarie', (event) => {
+        this.on('home:questionnaire', (event) => {
             console.log ("Button 2 pressed");
-            this.History.navigateToPageByTag('questionarie');
+            //this.History.navigateToPageByTag('questionnaire');
         });
     }
 
     _attachHandlerEDiary(){
         this.on('home:ediary', (event) => {
-            console.log ("Button 2 pressed");
             this.History.navigateToPageByTag('ediary');
         });
     }

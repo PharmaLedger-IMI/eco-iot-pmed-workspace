@@ -245,3 +245,23 @@ ol > li::before {
 .psk-card .card-body div.ed-control-line-right {
     padding: 0 !important;
 }
+
+.ediary-controls .card.psk-card{
+    position: absolute;
+    bottom: 2%;
+    width: 100%;
+    display: flex;
+}
+
+.ediary-controls .psk-card .card-body {
+    padding-left: 10%;
+}
+
+.diary-input-card .card.psk-card {
+    padding: 0 20px !important;
+}
+
+.double-button .psk-card .card-body {
+    text-align: center;
+    font-size: 0 !important;
+}

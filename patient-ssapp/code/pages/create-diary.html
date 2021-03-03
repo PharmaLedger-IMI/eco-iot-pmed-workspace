@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<psk-example class="mobile-example">
+    <psk-mobile class="noPadding background" disable-header>
+        <psk-container controller-name="CreateEdiaryController">
+            <psk-layout template-rows="25% 75%" align-items="center" class="coloredBackground">
+                <psk-layout-item class="home-default"></psk-layout-item>
 
-</body>
-</html>
+                <psk-layout-item class="ediary-default-bottom">
+                    <psk-label class="ediary-user-name-title" label="E-diary"></psk-label>
+                    <psk-label class="ediary-user-name-sub-title"
+                               label="Record your daily use of the device and patch"></psk-label>
+
+                    <psk-card class="diary-input-card">
+                        <div>
+                            <psk-label class="ed-label"
+                                       label="Please select the option New or used patch?"></psk-label>
+                            <psk-card class="double-button">
+                                <psk-button class="ed-button half-button left-half" event-name="">New</psk-button>
+                                <psk-button class="ed-button half-button right-half" event-name="">Used</psk-button>
+                            </psk-card>
+                        </div>
+                        <div>
+                            <psk-label class="ed-label"
+                                       label="Please select the options. Did you attached or detached the patch?"></psk-label>
+                            <psk-card class="double-button">
+                                <psk-button class="ed-button half-button left-half" event-name="">Attached</psk-button>
+                                <psk-button class="ed-button half-button right-half" event-name="">Detached</psk-button>
+                            </psk-card>
+                        </div>
+                        <div>
+                            <psk-date-input class="ed-label" view-model="date"></psk-date-input>
+                        </div>
+                        <div>
+                            <psk-textarea class="ed-label" view-model="notes"></psk-textarea>
+                        </div>
+                    </psk-card>
+
+                    <psk-button class="ed-button log-out-button" event-name="">Save</psk-button>
+                </psk-layout-item>
+            </psk-layout>
+        </psk-container>
+    </psk-mobile>
+</psk-example>
