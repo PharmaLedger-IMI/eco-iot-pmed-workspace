@@ -1,5 +1,9 @@
 import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
-import EDiaryService from "./services/EDiaryService.js";
+
+const BUTTON_NEW = 'ed-button-new';
+const BUTTON_USED = 'ed-button-used';
+const BUTTON_ATTACHED = 'ed-button-attached';
+const BUTTON_DETACHED = 'ed-button-detached';
 
 const initModel = {
     title: 'Create EDiary',
@@ -7,8 +11,8 @@ const initModel = {
         label: "Please indicate the date of the activity",
         name: "date",
         required: true,
-        dataFormat: "DD/MM/YYYY",
-        placeholder: "DD/MM/YYYY",
+        dataFormat: "DD MM YYYY",
+        placeholder: "DD MM YYYY",
         value: ''
     },
     notes: {
@@ -17,8 +21,7 @@ const initModel = {
         required: true,
         placeholder: "Notes",
         value: ''
-    },
-
+    }
 }
 
 export default class CreateEdiaryController extends ContainerController {
@@ -27,36 +30,53 @@ export default class CreateEdiaryController extends ContainerController {
 
         this.setModel(JSON.parse(JSON.stringify(initModel)));
 
-        this._attachHandlerEDiaryCreate();
-
         this.on('openFeedback', (evt) => {
             this.feedbackEmitter = evt.detail;
         });
+        debugger
+
+        this._initHandlers()
     }
 
 
+
+    _initHandlers() {
+        this._attachHandlerEDiaryCreate();
+
+        this.on(BUTTON_NEW, (event) => {
+            this._unfadeButton(BUTTON_NEW);
+            this._fadeButton(BUTTON_USED);
+        });
+        this.on(BUTTON_USED, (event) => {
+            this._unfadeButton(BUTTON_USED);
+            this._fadeButton(BUTTON_NEW);
+        });
+
+        this.on(BUTTON_ATTACHED, (event) => {
+            this._unfadeButton(BUTTON_ATTACHED);
+            this._fadeButton(BUTTON_DETACHED);
+        });
+        this.on(BUTTON_DETACHED, (event) => {
+            this._unfadeButton(BUTTON_DETACHED);
+            this._fadeButton(BUTTON_ATTACHED)
+        });
+
+        this._fadeButton(BUTTON_USED);
+        this._fadeButton(BUTTON_DETACHED);
+    }
+
     _attachHandlerEDiaryCreate() {
         this.on('ediary:create', (event) => {
-
-            if (this.__displayErrorMessages(event)) {
-                return;
-            }
-            let ediaryObject = {
-                name: this.model.name.value,
-                consentName: this.model.consentName.value,
-                version: this.model.version.value,
-                status: this.model.status.value,
-            }
-
-            this.EDiaryService.saveEdiary(ediaryObject, (err, updEDiary) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                console.log("EDiary saved" + updEDiary.uid);
-
-            });
+            console.log('ediary:create');
         });
+    }
+
+    _fadeButton(id) {
+        this.element.querySelector("#" + id).classList.add('ed-faded')
+    }
+
+    _unfadeButton(id) {
+        this.element.querySelector("#" + id).classList.remove('ed-faded')
     }
 
     __displayErrorMessages = (event) => {

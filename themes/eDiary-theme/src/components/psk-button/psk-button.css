@@ -166,9 +166,24 @@ psk-button.fullWidth button {
 }
 
 .left-half button {
-    border-radius: 20px 0 0 20px !important;
+    box-shadow: 33px 0 0 0 #D0D0D0 !important;
+    border-radius: 20px !important;
 }
 
 .right-half button {
+    box-shadow: -33px 0 0 0 #D0D0D0 !important;
+    border-radius: 20px !important;
+}
+
+.left-half.ed-faded button {
+    border-radius: 20px 0 0 20px !important;
+}
+
+.right-half.ed-faded button {
     border-radius: 0 20px 20px 0 !important;
+}
+
+.ed-faded button {
+    box-shadow: none !important;
+    background-color: #D0D0D0 !important;
 }

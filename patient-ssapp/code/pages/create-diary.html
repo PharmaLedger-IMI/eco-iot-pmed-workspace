@@ -14,16 +14,16 @@
                             <psk-label class="ed-label"
                                        label="Please select the option New or used patch?"></psk-label>
                             <psk-card class="double-button">
-                                <psk-button class="ed-button half-button left-half" event-name="">New</psk-button>
-                                <psk-button class="ed-button half-button right-half" event-name="">Used</psk-button>
+                                <psk-button id="ed-button-new" class="ed-button half-button left-half" event-name="ed-button-new">New</psk-button>
+                                <psk-button id="ed-button-used" class="ed-button half-button right-half" event-name="ed-button-used">Used</psk-button>
                             </psk-card>
                         </div>
                         <div>
                             <psk-label class="ed-label"
                                        label="Please select the options. Did you attached or detached the patch?"></psk-label>
                             <psk-card class="double-button">
-                                <psk-button class="ed-button half-button left-half" event-name="">Attached</psk-button>
-                                <psk-button class="ed-button half-button right-half" event-name="">Detached</psk-button>
+                                <psk-button id="ed-button-attached" class="ed-button half-button left-half" event-name="ed-button-attached">Attached</psk-button>
+                                <psk-button id="ed-button-detached" class="ed-button half-button right-half" event-name="ed-button-detached">Detached</psk-button>
                             </psk-card>
                         </div>
                         <div>
@@ -34,7 +34,7 @@
                         </div>
                     </psk-card>
 
-                    <psk-button class="ed-button log-out-button" event-name="">Save</psk-button>
+                    <psk-button class="ed-button log-out-button" event-name="ediary:create">Save</psk-button>
                 </psk-layout-item>
             </psk-layout>
         </psk-container>
