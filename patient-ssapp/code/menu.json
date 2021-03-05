@@ -11,26 +11,12 @@
       "name": "Home",
       "path": "/home",
       "icon": "fa-home",
-      "pageSrc": "home.html",
-      "tags": "home"
+      "pageSrc": "home.html"
     },
     {
       "name": "Create trial",
       "tags": "create-trial",
       "indexed": false
-    },
-    {
-      "name": "Create diary",
-      "pageSrc": "create-diary.html",
-      "tags": "create-diary",
-      "indexed": false
-    },
-    {
-      "name": "Ediary",
-      "path": "/ediary",
-      "icon": "fa-home",
-      "pageSrc": "ediary.html",
-      "tags": "ediary"
     }
   ]
 }

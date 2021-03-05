@@ -1,4 +1,4 @@
-export default class EDiaryModel {
+export default class TrialModel {
 
     constructor() {
     }

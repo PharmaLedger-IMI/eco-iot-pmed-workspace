@@ -1,36 +1,36 @@
-import TrialModel from '../../models/EDIaryModel.js';
+import TrialModel from '../../models/TrialModel.js';
 
-export default class EDiaryService {
+export default class TrialService {
 
-    EDIARY_PATH = "/ediaryies";
+    SERVICE_PATH = "/trials";
 
     constructor(DSUStorage) {
         this.DSUStorage = DSUStorage;
     }
 
     getServiceModel(callback){
-        this.DSUStorage.call('listDSUs', this.EDIARY_PATH, (err, dsuList) => {
+        this.DSUStorage.call('listDSUs', this.SERVICE_PATH, (err, dsuList) => {
             if (err){
                 callback(err, undefined);
                 return;
             }
-            let ediaryies = [];
+            let organisations = [];
             let getServiceDsu = (dsuItem) => {
                 this.DSUStorage.getItem(this._getDsuStoragePath(dsuItem.identifier), (err, content) => {
                     if (err)
                     {
-                        ediaryies.slice(0);
+                        organisations.slice(0);
                         callback(err, undefined);
                         return;
                     }
                     let textDecoder = new TextDecoder("utf-8");
                     let trial = JSON.parse(textDecoder.decode(content));
-                    ediaryies.push(trial);
+                    organisations.push(trial);
 
                     if (dsuList.length === 0)
                     {
                         const model = new TrialModel()._getWrapperData();
-                        model.trials = ediaryies;
+                        model.trials = organisations;
                         callback(undefined, model);
                         return;
                     }
@@ -49,7 +49,7 @@ export default class EDiaryService {
 
     }
 
-    getEdiary(uid, callback){
+    getTrial(uid, callback){
         this.DSUStorage.getItem(this._getDsuStoragePath(uid), (err, content) => {
             if (err)
             {
@@ -62,8 +62,9 @@ export default class EDiaryService {
         })
     }
 
-    saveEdiary(data, callback){
-        this.DSUStorage.call('createSSIAndMount',this.EDIARY_PATH, (err, keySSI) => {
+    saveTrial(data, callback){
+        debugger
+        this.DSUStorage.call('createSSIAndMount',this.SERVICE_PATH, (err, keySSI) => {
             if (err)
             {
                 callback(err,undefined);
@@ -71,17 +72,18 @@ export default class EDiaryService {
             }
             data.KeySSI = keySSI;
             data.uid = keySSI;
-            this.updateEdiary(data, callback);
+            this.updateTrial(data, callback);
         })
     }
-    mountEdiary(keySSI, callback){
-        this.DSUStorage.call('mount',this.EDIARY_PATH, keySSI, (err) =>{
+    mountTrial(keySSI, callback){
+        this.DSUStorage.call('mount',this.SERVICE_PATH, keySSI, (err) =>{
             if (err)
             {
                 return callback(err, undefined);
             }
 
-            this.getEdiary(keySSI, (err, org) =>{
+            this.getTrial(keySSI, (err, org) =>{
+                debugger
                 if (err)
                 {
                     return callback(err, undefined);
@@ -92,7 +94,9 @@ export default class EDiaryService {
 
         })
     }
-    updateEdiary(data, callback){
+    updateTrial(data, callback){
+        //Todo add file - read the file in a var and in set object the second param will be that var
+        // uid is the same with keyssi
         this.DSUStorage.setObject(this._getDsuStoragePath(data.uid), data, (err) => {
             if (err){
                 callback(err, undefined);
@@ -102,9 +106,9 @@ export default class EDiaryService {
         })
     }
 
-    unmountEdiary(diaryUid, callback) {
-        let unmountPath = this.EDIARY_PATH + '/' + diaryUid;
-        this.DSUStorage.call('ediaryUnmount', unmountPath, (err, result) => {
+    unmountTrial(orgUid, callback) {
+        let unmountPath = this.SERVICE_PATH + '/' + orgUid;
+        this.DSUStorage.call('organizationUnmount', unmountPath, (err, result) => {
             if (err) {
                 callback(err, undefined);
                 return;
@@ -114,6 +118,6 @@ export default class EDiaryService {
     }
 
     _getDsuStoragePath(keySSI){
-        return this.EDIARY_PATH + '/' + keySSI + '/data.json';
+        return this.SERVICE_PATH + '/' + keySSI + '/data.json';
     }
 }
