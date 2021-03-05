@@ -1,0 +1,46 @@
+{
+  "_from": "git+https://github.com/PrivateSky/octopus.git",
+  "_id": "octopus@1.0.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/octopus",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "octopus@git+https://github.com/PrivateSky/octopus.git",
+    "name": "octopus",
+    "escapedName": "octopus",
+    "rawSpec": "git+https://github.com/PrivateSky/octopus.git",
+    "saveSpec": "git+https://github.com/PrivateSky/octopus.git",
+    "fetchSpec": "https://github.com/PrivateSky/octopus.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://github.com/PrivateSky/octopus.git#ec0faf1b4c3ea162f784ad113210e9aa1a24d0fe",
+  "_spec": "octopus@git+https://github.com/PrivateSky/octopus.git",
+  "_where": "C:\\Users\\fotis\\Desktop\\hacker-news\\pharmaledger\\patient-workspace\\patient-ssapp",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/privatesky/octopus/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Octopus is a custom task runner used in PrivateSky to handle all deps and other tasks necessary in projects.",
+  "directories": {
+    "lib": "lib"
+  },
+  "homepage": "https://github.com/privatesky/octopus#readme",
+  "license": "MIT",
+  "main": "Runner.js",
+  "name": "octopus",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/privatesky/octopus.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

@@ -128,6 +128,21 @@
       ]
     },
     {
+      "name": "apihub-root/ediary-wallet/loader",
+      "src": "http://github.com/privatesky/trust-loader.git",
+      "actions": [
+        {
+          "type": "smartClone",
+          "target": ".",
+          "collectLog": false
+        },
+        {
+          "type": "execute",
+          "cmd": "cd apihub-root/ediary-wallet/loader && npm install"
+        }
+      ]
+    },
+    {
       "name": "themes/blue-fluorite-theme",
       "src": "",
       "actions": [
@@ -154,6 +169,16 @@
         {
           "type": "execute",
           "cmd": "cd patient-ssapp && npm install"
+        }
+      ]
+    },
+    {
+      "name": "ediary-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd ediary-ssapp && npm install"
         }
       ]
     }
@@ -288,6 +313,46 @@
         {
           "type": "execute",
           "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
+        }
+      ]
+    },
+    {
+      "name": "ediary-wallet_bind_to_ediary-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd ediary-ssapp && npm run build"
+        },
+        {
+          "type": "copy",
+          "src": "./ediary-ssapp/seed",
+          "target": "./apihub-root/ediary-wallet/wallet-patch/seed",
+          "options": {
+            "overwrite": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "ediary-wallet_bind_to_ediary-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd ediary-ssapp && npm run build"
+        },
+        {
+          "type": "copy",
+          "src": "./ediary-ssapp/seed",
+          "target": "./apihub-root/ediary-wallet/apps-patch/ediary-ssapp/seed",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "execute",
+          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/ediary-wallet/apps-patch/ediary-ssapp/readme"
         }
       ]
     }
