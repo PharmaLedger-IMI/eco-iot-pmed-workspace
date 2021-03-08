@@ -1,0 +1,10 @@
+{
+  "patients": [
+    {
+      "name": "patient1"
+    },
+    {
+      "name": "patient2"
+    }
+  ]
+}
