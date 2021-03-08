@@ -9,7 +9,10 @@
   },
   "pages": [
     {
-      "name": "home"
+      "name": "Patient Ssapp"
+    },
+    {
+      "name": "Ediary Ssapp"
     }
   ]
 }
