@@ -14,6 +14,13 @@
       "pageSrc": "home.html"
     },
     {
+      "name": "profile",
+      "path": "/profile",
+      "icon": "fa-home",
+      "pageSrc": "profile.html",
+      "tags": "profile"
+    },
+    {
       "name": "Create trial",
       "tags": "create-trial",
       "indexed": false
