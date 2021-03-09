@@ -1,0 +1,84 @@
+#backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(10, 20, 50, 0.5);
+    z-index: 99998;
+    opacity: 0;
+    pointer-events: none;
+}
+
+:host([opened]) #backdrop,
+:host([opened]) #modal {
+    opacity: 1;
+    pointer-events: all;
+}
+
+:host([opened]) #modal {
+    top: 15vh;
+}
+
+#modal {
+    position: fixed;
+    top: 10vh;
+    left: 25%;
+    width: 50%;
+    z-index: 99999;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-out;
+    border-radius:5px;
+}
+::slotted(h3){
+    margin-top:1.5rem !important;
+    margin-left: auto;
+    font-size: 1.37rem !important;
+    color:#4C71DE;
+}
+.modal-header{
+    border:none;
+    padding:2rem 2rem 0.5rem;
+}
+.modal-body{
+    padding:0 3rem;
+}
+.modal-footer{
+    border:none;
+    padding:0 4rem 1rem;
+}
+#main {
+    padding: 1rem;
+}
+
+#actions {
+    padding: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 769px) {
+    #modal,
+    #backdrop {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+     :host([opened]) #modal {
+        top: 0;
+    }
+    #actions {
+        padding: 2rem;
+    }
+    .modal-content{
+        margin-bottom: 1rem;
+    }
+}
