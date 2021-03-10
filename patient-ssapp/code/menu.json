@@ -14,9 +14,31 @@
       "pageSrc": "home.html"
     },
     {
+      "name": "profile",
+      "path": "/profile",
+      "icon": "fa-home",
+      "pageSrc": "profile.html",
+      "tags": "profile"
+    },
+    {
+      "name": "mydata",
+      "path": "/mydata",
+      "icon": "fa-home",
+      "pageSrc": "mydata.html",
+      "tags": "mydata"
+    },
+    {
+      "name": "my-health-data-sample",
+      "path": "/my-health-data-sample",
+      "icon": "fa-home",
+      "pageSrc": "my-health-data-sample.html",
+      "tags": "my-health-data-sample"
+    },
+    {
       "name": "Create trial",
       "tags": "create-trial",
       "indexed": false
     }
   ]
 }
+

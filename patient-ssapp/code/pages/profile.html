@@ -1,0 +1,26 @@
+<psk-page title="Patient Profile">
+
+    <psk-toc title="View the data of the patient" slot="toc"></psk-toc>
+
+    <psk-container controller-name="ProfileController">
+
+        <psk-card class="bpd-dashboard">
+
+            <psk-label class="bpd-dashboard-title" label="Patient Information"/>
+
+            <psk-text-input class="patient-smaller-label" view-model="@name"></psk-text-input>
+            <psk-number-input class="patient-smaller-label" view-model="@age"></psk-number-input>
+            <psk-email-input class="patient-smaller-label" view-model="@email"></psk-email-input>
+            <psk-password-input class="patient-smaller-label" view-model="@password"></psk-password-input>
+
+            <psk-card>
+                <psk-button event-name="profile:edit" view-model="@editButton"></psk-button>
+                <psk-button event-name="profile:delete">Delete profile</psk-button>
+            </psk-card>
+
+        </psk-card>
+
+    </psk-container>
+</psk-page>
+
+
