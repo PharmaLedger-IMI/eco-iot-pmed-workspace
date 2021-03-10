@@ -34,7 +34,7 @@ export default class HomeController extends ContainerController {
     _attachHandlerFeedback(){
         this.on('home:feedback', (event) => {
             console.log ("Feedback button pressed");
-            this.History.navigateToPageByTag('mydata');
+            this.History.navigateToPageByTag('index');
         });
     }
 }
