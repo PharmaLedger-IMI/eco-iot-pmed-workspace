@@ -1,8 +1,25 @@
 import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+import PatientService from "./services/PatientService.js";
 
 export default class HomeController extends ContainerController {
     constructor(element, history) {
         super(element, history);
+        this.setModel({});
+
+        this.PatientService = new PatientService(this.DSUStorage);
+        let initProfile = {
+            name: "Maria",
+            age: "24",
+            email: "maria@gmail.com",
+            password: "password",
+        }
+        this.PatientService.createProfile(initProfile, (err, userProfile) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("CREATED WITH DSU-STORAGE", userProfile);
+            this.model.profileIdentifier = userProfile.identifier;
+        })
 
         this._attachHandlerEditProfile();
         this._attachHandlerMyData();
@@ -13,7 +30,10 @@ export default class HomeController extends ContainerController {
     _attachHandlerEditProfile(){
         this.on('home:profile', (event) => {
             console.log ("Profile button pressed");
-            this.History.navigateToPageByTag('profile');
+            let state = {
+                profileId: this.model.profileIdentifier
+            }
+            this.History.navigateToPageByTag('profile', state);
         });
     }
 
