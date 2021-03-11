@@ -157,6 +157,18 @@
         }
       ]
     },
+
+    {
+      "name": "professional-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd professional-ssapp && npm install"
+        }
+      ]
+    },
+
     {
       "name": "ediary-ssapp",
       "src": "",
@@ -298,6 +310,28 @@
         {
           "type": "execute",
           "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
+        }
+      ]
+    },
+    {
+      "name": "patient-wallet_bind_to_professional-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd professional-ssapp && npm run build"
+        },
+        {
+          "type": "copy",
+          "src": "./professional-ssapp/seed",
+          "target": "./apihub-root/patient-wallet/apps-patch/professional-ssapp/seed",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "execute",
+          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/professional-ssapp/readme"
         }
       ]
     },
