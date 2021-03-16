@@ -182,3 +182,17 @@
     removed obsolete functions from use
     replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
     removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    refactor getKeySSI to getKeySSIAsString
+    removed obsolete functions from use
+    refactored getKeySSI to getKeySSIAsString
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    refactor getKeySSI to getKeySSIAsString
+    removed obsolete functions from use
+    refactored getKeySSI to getKeySSIAsString
+    removed obsolete functions from use
