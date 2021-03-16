@@ -12,6 +12,43 @@
       "path": "/home",
       "icon": "fa-home",
       "pageSrc": "home.html"
+    },
+    {
+      "name": "Configure Access",
+      "path": "/configure-access",
+      "icon": "fa-home",
+      "pageSrc": "configure-access.html",
+      "tags": "configure-access"
+    },
+    {
+      "name": "Information Request",
+      "path": "/information-request",
+      "icon": "fa-home",
+      "pageSrc": "information-request.html",
+      "tags": "information-request"
+    },
+    {
+      "name": "Evidence",
+      "path": "/evidence",
+      "icon": "fa-home",
+      "pageSrc": "evidence.html",
+      "tags": "evidence"
+    },
+    {
+      "name": "View dynamic Consent",
+      "path": "/view-dynamic-consent",
+      "icon": "fa-home",
+      "pageSrc": "view-dynamic-consent.html",
+      "tags": "view-dynamic-consent"
+    },
+    {
+      "name": "issue-new-request",
+      "path": "/issue-new-request",
+      "icon": "fa-home",
+      "pageSrc": "issue-new-request.html",
+      "tags": "issue-new-request"
     }
   ]
 }
+
+

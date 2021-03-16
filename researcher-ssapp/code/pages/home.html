@@ -1,5 +1,53 @@
-<psk-page title="Cardinal.js">
-    <psk-card title="Cardinal.jsMini Framework for building web applications">
-        <p>Reseacher</p>
-    </psk-card>
+<psk-page title="Researcher Application">
+
+
+    <psk-container controller-name="HomeController">
+
+        <psk-card class="bpd-dashboard">
+
+            <psk-label class="bpd-dashboard-title" label="Researcher Dashboard"/>
+
+            <div class="bpd-buttons-row bpd-wide-cards">
+
+                <psk-layout columns="2" align-items="auto">
+
+                    <psk-button class="bpd-organization-card" event-name="home:information-request">
+                        <div class="bpd-organization-card-content">
+                            <psk-icon icon="user" color="rgb(255, 255, 255)"></psk-icon>
+                        </div>
+                        <psk-label class="bpd-organization-card-label" label="Information Request"/>
+                    </psk-button>
+
+                    <psk-button class="bpd-organization-card" event-name="home:configure-access">
+                        <div class="bpd-organization-card-content">
+                            <psk-icon icon="cloud" color="rgb(255, 255, 255)"></psk-icon>
+                        </div>
+                        <psk-label class="bpd-organization-card-label" label="Configure Access"/>
+                    </psk-button>
+
+                    <psk-button class="bpd-organization-card" event-name="home:view-dynamic-consent">
+                        <div class="bpd-organization-card-content">
+                            <psk-icon icon="bug" color="rgb(255, 255, 255)"></psk-icon>
+                        </div>
+                        <psk-label class="bpd-organization-card-label" label="View dynamic consent"/>
+                    </psk-button>
+
+                    <psk-button class="bpd-organization-card" event-name="home:evidence">
+                        <div class="bpd-organization-card-content">
+                            <psk-icon icon="tasks" color="rgb(255, 255, 255)"></psk-icon>
+                        </div>
+                        <psk-label class="bpd-organization-card-label" label="Evidence"/>
+                    </psk-button>
+
+                </psk-layout>
+
+
+
+            </div>
+
+        </psk-card>
+
+    </psk-container>
+
+
 </psk-page>
