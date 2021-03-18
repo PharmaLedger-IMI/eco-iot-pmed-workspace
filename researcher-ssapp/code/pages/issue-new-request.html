@@ -1,10 +1,13 @@
 <psk-page title="Issue new information request">
 
-    <psk-container>
+    <psk-container controller-name="RequestsController">
 
         <psk-card class="bpd-dashboard">
 
-            <psk-label class="bpd-dashboard-title" label="Complete the information to generate a new information request"/>
+            <psk-label class="bpd-dashboard-title" label="The information requested has been issued and waiting for approval."/>
+
+            <hr>
+            <psk-button event-name="request:go-back">Go back</psk-button>
 
         </psk-card>
 

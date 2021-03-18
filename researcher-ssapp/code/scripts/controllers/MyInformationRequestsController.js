@@ -9,12 +9,12 @@ const requests_data_model = {
         required: true,
         options: [{
             label: "All requests",
-            value: 'All requests'
+            value: 'info_all_requests',
+            checked: true
         },
             {
                 label: "Request Information 1",
-                value: "info_request1",
-                checked: true
+                value: "info_request1"
             },
             {
                 label: "Request Information 2",
@@ -41,6 +41,7 @@ const requests_data_model = {
 
 export default class ViewRequestsController extends ContainerController {
     constructor(element, history) {
+
         super(element, history);
 
         this.model = this.setModel(JSON.parse(JSON.stringify(requests_data_model)));
@@ -56,11 +57,11 @@ export default class ViewRequestsController extends ContainerController {
 
         let radioSubmit = () => {
             let choice = this.model.myrequests.value;
-            if (choice === "info_request1"){
-                console.log("Clicked Request 1!")
-                //this.History.navigateToPageByTag('my-health-data-sample');
+            if (choice === "info_all_requests"){
+                console.log("Clicked info_all_requests!")
+                this.History.navigateToPageByTag('view-information-requests');
             } else {
-                console.log("Some request clicked!")
+                console.log("Some other request clicked!")
             }
         }
 

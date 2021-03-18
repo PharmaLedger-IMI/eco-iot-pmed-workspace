@@ -8,7 +8,7 @@
 
             <div>
                 <psk-form controller-name="MyInformationRequestsController" form-actions="View">
-                    <psk-form-row layout="xs=[12] m=[12] l=[12] xl=[12]">
+                    <psk-form-row layout="xs=[auto] m=[auto] l=[auto] xl=[auto]">
                         <psk-radio-group view-model="myrequests"> </psk-radio-group>
                     </psk-form-row>
                 </psk-form>
@@ -18,11 +18,21 @@
 
 
         <psk-card class="bpd-dashboard">
-            <div>
-                <psk-button event-name="home:new-information-request">
-                    <psk-label class="bpd-organization-card-label" label="New request"/>
-                </psk-button>
-            </div>
+
+            <!-- This component is loaded using the options defined by the select-options attribute -->
+            <psk-select label="Select the user you want to request information" select-options="Patient 1 | Patient 2 | Patient 3">
+            </psk-select>
+
+            <psk-select label="Select the type of data you are interested in" select-options="Medical History | Allergies | Clinical Trial X">
+            </psk-select>
+
+            <psk-text-input view-model="@name"></psk-text-input>
+            <psk-email-input view-model="@email"></psk-email-input>
+            <psk-password-input view-model="@password"></psk-password-input>
+
+
+            <psk-button event-name="new:request" view-model="@requestsButton"></psk-button>
+
         </psk-card>
 
     </psk-container>

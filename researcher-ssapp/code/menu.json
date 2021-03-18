@@ -11,7 +11,8 @@
       "name": "Home",
       "path": "/home",
       "icon": "fa-home",
-      "pageSrc": "home.html"
+      "pageSrc": "home.html",
+      "tags": "home"
     },
     {
       "name": "Configure Access",
@@ -26,6 +27,13 @@
       "icon": "fa-home",
       "pageSrc": "information-request.html",
       "tags": "information-request"
+    },
+    {
+      "name": "View Information Requests",
+      "path": "/view-information-requests",
+      "icon": "fa-home",
+      "pageSrc": "view-information-requests.html",
+      "tags": "view-information-requests"
     },
     {
       "name": "Evidence",
