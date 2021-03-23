@@ -1,23 +1,26 @@
 import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
 import PatientService from "./services/PatientService.js";
+import {patientModelHL7} from '../models/PatientModel.js';
+
 
 export default class HomeController extends ContainerController {
     constructor(element, history) {
         super(element, history);
         this.setModel({});
 
+        let initProfile = patientModelHL7;
+        initProfile.PatientName.value = "Maria";
+        initProfile.PatientBirthDate.value = "01/01/2000";
+        initProfile.PatientTelecom.value = "maria@gmail.com";
+        initProfile.password.value = "password";
+
         this.PatientService = new PatientService(this.DSUStorage);
-        let initProfile = {
-            name: "Maria",
-            age: "24",
-            email: "maria@gmail.com",
-            password: "password",
-        }
+
         this.PatientService.createProfile(initProfile, (err, userProfile) => {
             if (err) {
                 return console.log(err);
             }
-            console.log("CREATED WITH DSU-STORAGE", userProfile);
+            console.log("CREATED WITH DSU-STORAGE AND KEYSSI: ", userProfile);
             this.model.profileIdentifier = userProfile.identifier;
         })
 
