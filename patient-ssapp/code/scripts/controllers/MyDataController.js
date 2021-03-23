@@ -9,7 +9,8 @@ const healthdatamodel = {
         required: true,
         options: [{
             label: "All records",
-            value: 'All records'
+            value: 'All records',
+            checked: true
         },
             {
                 label: "Allergies",
@@ -17,8 +18,7 @@ const healthdatamodel = {
             },
             {
                 label: "Clinical vitals",
-                value: "cv",
-                checked: true
+                value: "cv"
             },
             {
                 label: "Conditions",

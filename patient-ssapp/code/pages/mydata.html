@@ -2,11 +2,17 @@
 
     <psk-toc title="View the IoT and Health Data of the patient" slot="toc"></psk-toc>
 
-    <psk-container>
+    <psk-container controller-name="MyDataMainPageController">
 
         <psk-card class="bpd-dashboard">
 
-            <psk-label label="Health Data Consolidation"/>
+
+            <div id="div0" style="background-color: #d3d3d3; width: auto; position: relative;">
+                <psk-label label="Welcome: "/>
+                <psk-label label="@name"></psk-label>
+                <psk-label label="Your KEY SSI is:"/>
+                <psk-label label="@id"></psk-label>
+            </div>
 
             <div>
                 <psk-form controller-name="MyDataController" form-actions="View">
@@ -25,7 +31,7 @@
                 </psk-form>
             </div>
 
-
+<!--            007BFF-->
 
         </psk-card>
 

@@ -21,7 +21,9 @@ export default class HomeController extends ContainerController {
                 return console.log(err);
             }
             console.log("CREATED WITH DSU-STORAGE AND KEYSSI: ", userProfile);
+
             this.model.profileIdentifier = userProfile.identifier;
+            this.model.name = userProfile.PatientName.value;
         })
 
         this._attachHandlerEditProfile();
@@ -43,7 +45,11 @@ export default class HomeController extends ContainerController {
     _attachHandlerMyData(){
         this.on('home:mydata', (event) => {
             console.log ("My Data button pressed");
-            this.History.navigateToPageByTag('mydata');
+            let state = {
+                profileId: this.model.profileIdentifier,
+                nameId: this.model.name
+            }
+            this.History.navigateToPageByTag('mydata', state);
         });
     }
 
