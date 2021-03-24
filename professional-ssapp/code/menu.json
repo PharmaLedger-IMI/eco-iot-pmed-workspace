@@ -13,6 +13,27 @@
       "icon": "fa-home",
       "pageSrc": "home.html",
       "tags": "home"
+    },
+    {
+      "name": "list-of-patients",
+      "path": "/list-of-patients",
+      "icon": "fa-home",
+      "pageSrc": "list-of-patients.html",
+      "tags": "list-of-patients"
+    },
+    {
+      "name": "manage-devices",
+      "path": "/manage-devices",
+      "icon": "fa-home",
+      "pageSrc": "manage-devices.html",
+      "tags": "manage-devices"
+    },
+    {
+      "name": "trial-management",
+      "path": "/trial-management",
+      "icon": "fa-home",
+      "pageSrc": "trial-management.html",
+      "tags": "trial-management"
     }
   ]
 }
