@@ -1,6 +1,6 @@
 <psk-page title="Patient Profile">
 
-    <psk-toc title="View the data of the patient" slot="toc"></psk-toc>
+    <psk-toc title="View and edit your personal profile data" slot="toc"></psk-toc>
 
     <psk-container controller-name="ProfileController">
 
@@ -15,7 +15,7 @@
 
             <psk-card>
                 <psk-button event-name="profile:edit" view-model="@editButton"></psk-button>
-                <psk-button event-name="profile:delete">Delete profile</psk-button>
+                <psk-button event-name="profile:back" view-model="@backButton"></psk-button>
             </psk-card>
 
         </psk-card>

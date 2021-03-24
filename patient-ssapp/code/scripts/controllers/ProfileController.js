@@ -40,6 +40,10 @@ const DisplayProfileModel = {
     editButton: {
         label: "Edit profile",
         editState: false
+    },
+    backButton: {
+        label: "Back",
+        editState: false
     }
 }
 
@@ -98,6 +102,11 @@ export default class ProfileController extends ContainerController {
                 this.model.password.readOnly = false;
                 this.model.editButton.editState = true;
             }
+        })
+
+        this.on('profile:back', (event) => {
+            console.log("go back!")
+            this.History.navigateToPageByTag('home');
         })
 
     }

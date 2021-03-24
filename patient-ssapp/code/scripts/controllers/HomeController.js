@@ -56,14 +56,14 @@ export default class HomeController extends ContainerController {
     _attachHandlerMyPlatforms(){
         this.on('home:platforms', (event) => {
             console.log ("Platforms button pressed");
-            this.History.navigateToPageByTag('mydata');
+            this.History.navigateToPageByTag('platforms');
         });
     }
 
     _attachHandlerFeedback(){
         this.on('home:feedback', (event) => {
             console.log ("Feedback button pressed");
-            this.History.navigateToPageByTag('index');
+            this.History.navigateToPageByTag('feedback');
         });
     }
 }

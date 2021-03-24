@@ -11,7 +11,8 @@
       "name": "Home",
       "path": "/home",
       "icon": "fa-home",
-      "pageSrc": "home.html"
+      "pageSrc": "home.html",
+      "tags": "home"
     },
     {
       "name": "profile",
@@ -19,6 +20,20 @@
       "icon": "fa-home",
       "pageSrc": "profile.html",
       "tags": "profile"
+    },
+    {
+      "name": "platforms",
+      "path": "/platforms",
+      "icon": "fa-home",
+      "pageSrc": "platforms.html",
+      "tags": "platforms"
+    },
+    {
+      "name": "feedback",
+      "path": "/feedback",
+      "icon": "fa-home",
+      "pageSrc": "feedback.html",
+      "tags": "feedback"
     },
     {
       "name": "mydata",

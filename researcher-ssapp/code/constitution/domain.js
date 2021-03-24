@@ -19,3 +19,7 @@ if (typeof $$ !== "undefined") {
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"./../../domain":"./../../domain"}]},{},["C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\researcher-ssapp\\builds\\tmp\\domain_intermediar.js"])
+                    ;(function(global) {
+                        global.bundlePaths = {"domain":"code\\constitution\\domain.js"};
+                    })(typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
+                

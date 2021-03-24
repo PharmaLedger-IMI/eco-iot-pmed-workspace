@@ -70,6 +70,7 @@ if (typeof $$ !== "undefined") {
 module.exports = {
   BROWSER_ENVIRONMENT_TYPE: 'browser',
   MOBILE_BROWSER_ENVIRONMENT_TYPE: 'mobile-browser',
+  WEB_WORKER_ENVIRONMENT_TYPE: 'web-worker',
   SERVICE_WORKER_ENVIRONMENT_TYPE: 'service-worker',
   ISOLATE_ENVIRONMENT_TYPE: 'isolate',
   THREAD_ENVIRONMENT_TYPE: 'thread',
@@ -405,14 +406,23 @@ function ECKeyGenerator() {
     const KeyEncoder = require('./keyEncoder');
 
     this.generateKeyPair = (namedCurve, callback) => {
-        if (typeof namedCurve === "function") {
-            callback = namedCurve;
+        if (typeof namedCurve === "undefined") {
+            callback = undefined;
             namedCurve = 'secp256k1';
+        } else {
+            if (typeof namedCurve === "function") {
+                callback = namedCurve;
+                namedCurve = 'secp256k1';
+            }
         }
+
         const ec = crypto.createECDH(namedCurve);
         const publicKey = ec.generateKeys();
         const privateKey = ec.getPrivateKey();
-        callback(undefined, publicKey, privateKey);
+        if(callback) {
+            callback(undefined, publicKey, privateKey);
+        }
+        return {publicKey, privateKey};
     };
 
     this.getPemKeys = (privateKey, publicKey, options) => {
@@ -451,14 +461,14 @@ function PskCrypto() {
     const utils = require("./utils/cryptoUtils");
     const derAsn1Decoder = require("./utils/DerASN1Decoder");
     const PskEncryption = require("./PskEncryption");
-    const or = require('overwrite-require');
+
 
     this.createPskEncryption = (algorithm) => {
         return new PskEncryption(algorithm);
     };
 
     this.generateKeyPair = (options, callback) => {
-        this.createKeyPairGenerator().generateKeyPair(options, callback);
+        return this.createKeyPairGenerator().generateKeyPair(options, callback);
     };
 
     this.createKeyPairGenerator = require("./ECKeyGenerator").createECKeyGenerator;
@@ -600,7 +610,7 @@ function PskCrypto() {
 
 
     this.randomBytes = (len) => {
-        if ($$.environmentType === or.constants.BROWSER_ENVIRONMENT_TYPE) {
+        if ($$.environmentType === "browser" /*or.constants.BROWSER_ENVIRONMENT_TYPE*/) {
             let randomArray = new Uint8Array(len);
 
             return window.crypto.getRandomValues(randomArray);
@@ -646,7 +656,7 @@ module.exports = new PskCrypto();
 
 
 
-},{"../signsensusDS/ssutil":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\signsensusDS\\ssutil.js","./ECKeyGenerator":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\ECKeyGenerator.js","./PskEncryption":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\PskEncryption.js","./utils/DerASN1Decoder":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\utils\\DerASN1Decoder.js","./utils/cryptoUtils":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\utils\\cryptoUtils.js","crypto":"crypto","overwrite-require":"overwrite-require"}],"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\PskEncryption.js":[function(require,module,exports){
+},{"../signsensusDS/ssutil":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\signsensusDS\\ssutil.js","./ECKeyGenerator":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\ECKeyGenerator.js","./PskEncryption":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\PskEncryption.js","./utils/DerASN1Decoder":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\utils\\DerASN1Decoder.js","./utils/cryptoUtils":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\utils\\cryptoUtils.js","crypto":"crypto"}],"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\modules\\pskcrypto\\lib\\PskEncryption.js":[function(require,module,exports){
 function PskEncryption(algorithm) {
     const crypto = require("crypto");
     const utils = require("./utils/cryptoUtils");
@@ -38321,6 +38331,7 @@ function enableForEnvironment(envType){
         case moduleConstants.BROWSER_ENVIRONMENT_TYPE :
             global = window;
             break;
+        case moduleConstants.WEB_WORKER_ENVIRONMENT_TYPE:
         case moduleConstants.SERVICE_WORKER_ENVIRONMENT_TYPE:
             global = self;
             break;
@@ -38627,6 +38638,10 @@ function enableForEnvironment(envType){
 
         switch ($$.environmentType) {
             case moduleConstants.BROWSER_ENVIRONMENT_TYPE:
+                makeBrowserRequire();
+                $$.require = require;
+                break;
+            case moduleConstants.WEB_WORKER_ENVIRONMENT_TYPE:
                 makeBrowserRequire();
                 $$.require = require;
                 break;
@@ -39257,3 +39272,7 @@ function hasOwnProperty(obj, prop) {
 }).call(this)}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"./support/isBuffer":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\node_modules\\util\\support\\isBufferBrowser.js","_process":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\node_modules\\process\\browser.js","inherits":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\node_modules\\util\\node_modules\\inherits\\inherits_browser.js"}]},{},["C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\builds\\tmp\\webshims.js"])
+                    ;(function(global) {
+                        global.bundlePaths = {"webshims":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\webshims.js","pskruntime":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\pskruntime.js","pskWebServer":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\pskWebServer.js","consoleTools":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\consoleTools.js","blockchain":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\blockchain.js","openDSU":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\openDSU.js","nodeBoot":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\nodeBoot.js","testsRuntime":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\testsRuntime.js","bindableModel":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\bindableModel.js","loaderBoot":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\loaderBoot.js","swBoot":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\swBoot.js","iframeBoot":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\iframeBoot.js","launcherBoot":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\launcherBoot.js","testRunnerBoot":"C:\\Users\\Nikos Liappas\\iot-pmed-workspace\\privatesky\\psknode\\bundles\\testRunnerBoot.js"};
+                    })(typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
+                
