@@ -210,6 +210,16 @@
       ]
     },
     {
+      "name": "epi-theme",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/epi-theme && npm run build-dossier"
+        }
+      ]
+    },
+    {
       "name": "eDiary-theme-wallet-build",
       "src": "",
       "actions": [

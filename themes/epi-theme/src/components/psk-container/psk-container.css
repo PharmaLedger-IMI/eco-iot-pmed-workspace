@@ -1,0 +1,7 @@
+psk-container.pdfViewer .content {
+    height: calc(100vh - 4rem);
+}
+
+.header-row {
+    display: flex;
+}

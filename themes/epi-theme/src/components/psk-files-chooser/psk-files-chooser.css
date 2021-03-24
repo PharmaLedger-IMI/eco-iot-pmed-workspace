@@ -1,0 +1,23 @@
+input[type=file].form-control-sm {
+    padding-left: 0;
+    display: none;
+}
+
+.paperclip label:before {
+    content: "\f0c6";
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+}
+
+.paperclip label{
+    margin-bottom: 0!important;
+}
+
+.inline{
+    display: inline-block;
+    margin-left: 30px;
+}
+
+label {
+    cursor: pointer;
+}
