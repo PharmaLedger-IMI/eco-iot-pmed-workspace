@@ -24,7 +24,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "node ./bin/clean.js ./",
     "clean-build": "npm run clean && npm run build privatesky && npm run build-all",
-    "freeze": "node ./node_modules/octopus/scripts/freeze dependencies install-mobile"
+    "freeze": "node ./node_modules/octopus/scripts/freeze dependencies install-mobile",
+    "debug": "nodemon -e html,js,css,json --watch professional-ssapp/code --ignore professional-ssapp/code/constitution --ignore professional-ssapp/code/scripts/bundles --exec \"npm run build professional-ssapp\"",
+    "debug:theme": "nodemon -e html,js,css --watch themes/professional-theme --exec \"npm run build:theme\"",
+    "build:theme": "cd themes/professional-theme && npm run build-dossier"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,9 @@
+psk-barcode-generator div.card div.card-header,
+psk-barcode-generator div.card div.card-body {
+    padding: 0;
+    margin: 0;
+}
+
+.content psk-barcode-generator {
+    margin: 20px;
+}

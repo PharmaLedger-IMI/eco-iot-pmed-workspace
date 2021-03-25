@@ -1,0 +1,26 @@
+:host {
+    color: rgba(80, 118, 179, 0.8);
+    background: #e9e8e8;
+    scrollbar-color: #572a57 #E5E5E5;
+    scrollbar-width: thin;
+}
+
+:host::-webkit-scrollbar {
+    background-color: #fff;
+    width: 0.5rem;
+}
+
+:host::-webkit-scrollbar-track {
+    background-color: #E5E5E5;
+}
+
+:host::-webkit-scrollbar-thumb {
+    background-color: #572a57;
+    border-radius: 0.5rem;
+    border: 0.125rem solid #FFF;
+}
+
+:host button[disabled] {
+    font-weight: bold;
+    color: rgba(80, 118, 179, 1);
+}

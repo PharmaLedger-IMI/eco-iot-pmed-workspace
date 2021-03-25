@@ -1,0 +1,21 @@
+* {
+    outline: none !important;
+}
+
+
+.psk-card ol {
+    counter-reset: li;
+    list-style-type: none;
+}
+
+ol li::before {
+    content: counter(li) ". ";
+    counter-increment: li;
+    color: #4C71DE;
+    font-weight: bold;
+    width: 1rem;
+    margin-left: -1.5rem;
+    margin-right: 0.5rem;
+    text-align: right;
+    direction: rtl;
+}

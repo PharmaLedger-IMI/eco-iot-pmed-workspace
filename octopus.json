@@ -138,6 +138,16 @@
       ]
     },
     {
+      "name": "themes/professional-theme",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/professional-theme && npm install"
+        }
+      ]
+    },
+    {
       "name": "themes/eDiary-theme",
       "src": "",
       "actions": [
@@ -148,12 +158,42 @@
       ]
     },
     {
+      "name": "epi-theme",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/epi-theme && npm install"
+        }
+      ]
+    },
+    {
       "name": "patient-ssapp",
       "src": "",
       "actions": [
         {
           "type": "execute",
           "cmd": "cd patient-ssapp && npm install"
+        }
+      ]
+    },
+    {
+      "name": "professional-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd professional-ssapp && npm install"
+        }
+      ]
+    },
+    {
+      "name": "researcher-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd researcher-ssapp && npm install"
         }
       ]
     },
@@ -196,6 +236,26 @@
         {
           "type": "execute",
           "cmd": "cd themes/blue-fluorite-theme && npm run build-dossier"
+        }
+      ]
+    },
+    {
+      "name": "professional-theme-wallet-build",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/professional-theme && npm run build-dossier"
+        }
+      ]
+    },
+    {
+      "name": "epi-theme-wallet-build",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/epi-theme && npm run build-dossier"
         }
       ]
     },
@@ -308,6 +368,50 @@
         {
           "type": "execute",
           "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
+        }
+      ]
+    },
+    {
+      "name": "patient-wallet_bind_to_researcher-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd researcher-ssapp && npm run build"
+        },
+        {
+          "type": "copy",
+          "src": "./researcher-ssapp/seed",
+          "target": "./apihub-root/patient-wallet/apps-patch/researcher-ssapp/seed",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "execute",
+          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/researcher-ssapp/readme"
+        }
+      ]
+    },
+    {
+      "name": "patient-wallet_bind_to_professional-ssapp",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd professional-ssapp && npm run build"
+        },
+        {
+          "type": "copy",
+          "src": "./professional-ssapp/seed",
+          "target": "./apihub-root/patient-wallet/apps-patch/professional-ssapp/seed",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "execute",
+          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/professional-ssapp/readme"
         }
       ]
     },

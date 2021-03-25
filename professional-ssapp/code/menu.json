@@ -1,0 +1,39 @@
+{
+  "defaultMenuConfig": {
+    "icon": "fa-bars",
+    "type": "route",
+    "component": "psk-page-loader",
+    "exact": true,
+    "404": "/pages/404.html"
+  },
+  "pages": [
+    {
+      "name": "Home",
+      "path": "/home",
+      "icon": "fa-home",
+      "pageSrc": "home.html",
+      "tags": "home"
+    },
+    {
+      "name": "list-of-patients",
+      "path": "/list-of-patients",
+      "icon": "fa-home",
+      "pageSrc": "list-of-patients.html",
+      "tags": "list-of-patients"
+    },
+    {
+      "name": "manage-devices",
+      "path": "/manage-devices",
+      "icon": "fa-home",
+      "pageSrc": "manage-devices.html",
+      "tags": "manage-devices"
+    },
+    {
+      "name": "trial-management",
+      "path": "/trial-management",
+      "icon": "fa-home",
+      "pageSrc": "trial-management.html",
+      "tags": "trial-management"
+    }
+  ]
+}

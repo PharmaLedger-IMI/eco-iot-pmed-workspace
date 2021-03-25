@@ -1,0 +1,21 @@
+.image_container {
+    text-align: center;
+}
+
+.image_description {
+    text-align: center;
+    padding: 10px;
+    font-style: italic;
+    font-size: 1rem;
+}
+.image_description::before{
+    content:"- ";
+}
+.image_description::after{
+    content:" -";
+}
+
+.image_wrapper{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

@@ -1,0 +1,46 @@
+
+:host(.mobile-modal) .psk-modal .modal-header .toolbar button {
+    display: none;
+}
+
+:host(.mobile-modal) .modal-footer {
+    justify-content: center;
+}
+
+:host(.mobile-modal) .modal-body label {
+    text-align: center;
+}
+
+:host(.mobile-modal) .psk-modal {
+    left: 35%;
+    width: 30%;
+    top: 40% !important;
+}
+
+@media (min-width: 1650px) {
+    :host(.mobile-modal) .psk-modal {
+        left: 40%;
+        width: 20%;
+    }
+}
+
+@media (min-width: 1350px) and (max-width: 1650px) {
+    :host(.mobile-modal) .psk-modal {
+        left: 37.5%;
+        width: 25%;
+    }
+}
+
+@media (min-width: 551px) and (max-width: 840px) {
+    :host(.mobile-modal) .psk-modal {
+        left: 30%;
+        width: 40%;
+    }
+}
+
+@media (max-width: 550px) {
+    :host(.mobile-modal) .psk-modal {
+        left: 15%;
+        width: 70%;
+    }
+}

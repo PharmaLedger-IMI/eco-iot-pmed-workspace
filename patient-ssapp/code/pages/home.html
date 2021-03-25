@@ -1,20 +1,45 @@
-<psk-page title="Home">
+<psk-page title="Patient Dashboard">
+
     <psk-container controller-name="HomeController">
 
-
-
         <psk-card class="bpd-dashboard">
-            <psk-label class="bpd-dashboard-title" label="Home"/>
+
+            <psk-label class="bpd-dashboard-title" label="Patient Dashboard"/>
+
             <div class="bpd-buttons-row bpd-wide-cards">
 
+                <psk-layout columns="2" align-items="auto">
 
+                    <psk-button class="bpd-organization-card" event-name="home:profile">
+                        <div class="bpd-organization-card-content">
+                            <psk-icon icon="user" color="rgb(255, 255, 255)"></psk-icon>
+                        </div>
+                        <psk-label class="bpd-organization-card-label" label="My Profile"/>
+                    </psk-button>
 
-                <psk-button class="bpd-organization-card" event-name="home:patient">
-                    <div class="bpd-organization-card-content">
-                        <psk-icon icon="users" color="rgb(255, 255, 255)"></psk-icon>
-                    </div>
-                    <psk-label class="bpd-organization-card-label" label="Patient Data "/>
-                </psk-button>
+                    <psk-button class="bpd-organization-card" event-name="home:mydata">
+                        <div class="bpd-organization-card-content">
+                            <psk-icon icon="cloud" color="rgb(255, 255, 255)"></psk-icon>
+                        </div>
+                        <psk-label class="bpd-organization-card-label" label="My Data"/>
+                    </psk-button>
+
+                    <psk-button class="bpd-organization-card" event-name="home:platforms">
+                        <div class="bpd-organization-card-content">
+                            <psk-icon icon="tasks" color="rgb(255, 255, 255)"></psk-icon>
+                        </div>
+                        <psk-label class="bpd-organization-card-label" label="Platforms"/>
+                    </psk-button>
+
+                    <psk-button class="bpd-organization-card" event-name="home:feedback">
+                        <div class="bpd-organization-card-content">
+                            <psk-icon icon="bug" color="rgb(255, 255, 255)"></psk-icon>
+                        </div>
+                        <psk-label class="bpd-organization-card-label" label="Feedback"/>
+                    </psk-button>
+
+                </psk-layout>
+
 
 
             </div>

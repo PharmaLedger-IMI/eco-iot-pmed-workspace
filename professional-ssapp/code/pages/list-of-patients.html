@@ -1,0 +1,86 @@
+<psk-page title="List of Patients" style="height: 100vh">
+  <psk-container controller-name="ListPatientsController" style="height: 100%">
+    <div class="p-5 container-background-primary">
+      <div class="pharma-main-container">
+        <div class="d-flex flex-row align-content-center justify-content-between">
+          <img
+            width="110"
+            height="47"
+            src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
+            alt="Pharmaledger logo"
+          />
+          <div class="d-flex flex-row justify-content-center align-items-center">
+            <div class="mr-2">Help</div>
+            <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
+          </div>
+        </div>
+        <div class="flex-grow-1">
+          <psk-condition condition="@trialsNotEmpty">
+            <div slot="condition-true" style="height: 100%">
+              <psk-condition condition="@participantsNotEmpty">
+                <div slot="condition-false" style="height: 100%">
+                  <psk-layout
+                    class="d-flex flex-column justify-content-center align-items-center mb-5"
+                    style="height: 100%"
+                  >
+                    <psk-select view-model="trials" event-name="trial-select"></psk-select>
+                    <psk-button class="pharma-primary" label="Go Back" event-name="go-back"></psk-button>
+                  </psk-layout>
+                </div>
+                <div
+                  slot="condition-true"
+                  class="m-5 d-flex flex-column align-items-center justify-content-center"
+                  style="height: 100%"
+                >
+                  <h4 class="bold">Patient List</h4>
+                  <div>
+                    <psk-layout class="border-bottom border-top" slot="condition-true" columns="4">
+                      <psk-label label="Patient ID"></psk-label>
+                      <psk-label label="Device Status"></psk-label>
+                      <psk-label label="Time"></psk-label>
+                      <psk-label label="Options"></psk-label>
+                    </psk-layout>
+                    <psk-for-each data-view-model="@participants" style="display: contents">
+                      <psk-layout columns="4" class="justify-content-center align-items-center table-row">
+                        <psk-label label="@id"></psk-label>
+                        <psk-label label="@deviceStatus"></psk-label>
+                        <psk-label label="@patientSigned"></psk-label>
+                        <div class="d-flex flex-row align-items-center justify-content-around">
+                          <psk-button
+                            class="btn-bare table-cell m-1 pharma-primary"
+                            event-name="view-patient"
+                            event-data="@id"
+                          >
+                            View
+                          </psk-button>
+                          <psk-button
+                            class="btn-bare table-cell m-1 pharma-primary"
+                            event-name="edit-patient"
+                            event-data="@id"
+                          >
+                            Edit
+                          </psk-button>
+                        </div>
+                      </psk-layout>
+                    </psk-for-each>
+                  </div>
+                  <psk-button class="mt-2 pharma-primary" label="Go Back" event-name="go-back"></psk-button>
+                </div>
+              </psk-condition>
+            </div>
+          </psk-condition>
+        </div>
+      </div>
+      <div class="pharma-footer">
+        <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
+        <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+          <div class="text-white text-centered text-justify">
+            This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+            under grant agreement No 853992
+          </div>
+          <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+        </div>
+      </div>
+    </div>
+  </psk-container>
+</psk-page>

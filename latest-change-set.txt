@@ -134,10 +134,99 @@
     replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
     refactor getKeySSI to getKeySSIAsString
     psk-layout modification regarding updating state
+<<<<<<< HEAD
 
     Merge branch 'master' of http://github.com/privatesky/privatesky
     extra info added into the landing page
     adjusted the template ssi when a new DSU is created
+=======
+    Update test.yml
+    extra info added into the landing page
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    refactor getKeySSI to getKeySSIAsString
+    removed obsolete functions from use
+    refactored getKeySSI to getKeySSIAsString
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    Update test.yml
+    extra info added into the landing page
+    refactor getKeySSI to getKeySSIAsString
+    removed obsolete functions from use
+    refactored getKeySSI to getKeySSIAsString
+    removed obsolete functions from use
+    psk-layout modification regarding updating state
+    new freeze version
+    extra info added into the landing page
+    removed psk-page from access marketplace page
+    show error when passwords are not identical
+
+    Merge pull request #1 from daniel-visoiu/master
+    
+    Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
+    show error when passwords are not identical
+    psk-layout modification regarding updating state
+    new freeze version
+    extra info added into the landing page
+    removed psk-page from access marketplace page
+    show error when passwords are not identical
+
+    Merge pull request #1 from daniel-visoiu/master
+    
+    Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
+    show error when passwords are not identical
+    psk-layout modification regarding updating state
+    new freeze version
+    extra info added into the landing page
+    removed psk-page from access marketplace page
+>>>>>>> 8d121e2cd324ac1a9921707c45ab748a2cc894f8
     show error when passwords are not identical
 
     Merge pull request #1 from daniel-visoiu/master

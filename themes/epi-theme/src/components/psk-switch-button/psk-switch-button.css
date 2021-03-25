@@ -1,0 +1,46 @@
+.switch-item:first-child {
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    border-right: none;
+}
+
+.switch-item:last-child {
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    border-left: none;
+}
+
+.status-container {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+    text-align: center;
+}
+
+.status-container h5 {
+    color: #516397;
+}
+
+.switch-item {
+    border: 0.0625rem solid #b75367;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    word-wrap: break-word;
+}
+
+.status-container psk-grid .row {
+    cursor: pointer;
+    display: -webkit-box;
+}
+
+.switch-item p {
+    margin-bottom: 0;
+    padding: 0.5rem 0;
+}
+
+.selected {
+    color: white;
+    align-self: center;
+    background-color: #b75367;
+}

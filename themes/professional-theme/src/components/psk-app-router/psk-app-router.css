@@ -1,0 +1,9 @@
+/*psk-app-router css*/
+psk-ssapp{
+    display: flex;
+    height: 100% !important;
+}
+
+.app_container{
+    height:100%;
+}

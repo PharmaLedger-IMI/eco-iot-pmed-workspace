@@ -1,0 +1,40 @@
+<psk-page title="Information Request">
+
+    <psk-toc title="View, manage and create information requests" slot="toc"></psk-toc>
+
+    <psk-container controller-name="RequestsController">
+
+        <psk-card class="bpd-dashboard">
+
+            <div>
+                <psk-form controller-name="MyInformationRequestsController" form-actions="View">
+                    <psk-form-row layout="xs=[auto] m=[auto] l=[auto] xl=[auto]">
+                        <psk-radio-group view-model="myrequests"> </psk-radio-group>
+                    </psk-form-row>
+                </psk-form>
+            </div>
+
+        </psk-card>
+
+
+        <psk-card class="bpd-dashboard">
+
+            <!-- This component is loaded using the options defined by the select-options attribute -->
+            <psk-select label="Select the user you want to request information" select-options="Patient 1 | Patient 2 | Patient 3">
+            </psk-select>
+
+            <psk-select label="Select the type of data you are interested in" select-options="Medical History | Allergies | Clinical Trial X">
+            </psk-select>
+
+            <psk-text-input view-model="@name"></psk-text-input>
+            <psk-email-input view-model="@email"></psk-email-input>
+            <psk-password-input view-model="@password"></psk-password-input>
+
+
+            <psk-button event-name="new:request" view-model="@requestsButton"></psk-button>
+
+        </psk-card>
+
+    </psk-container>
+
+</psk-page>

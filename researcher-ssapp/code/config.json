@@ -1,0 +1,12 @@
+{
+    "theme": "blue-fluorite-theme",
+    "appVersion": "0.2",
+    "basePagesUrl": "/pages/",
+    "profile": {
+        "username": "Dossier Explorer",
+        "avatar": "/assets/images/dossier-explorer.png"
+    },
+    "modals": {
+
+    }
+}

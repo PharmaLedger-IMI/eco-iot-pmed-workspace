@@ -1,0 +1,53 @@
+div.container {
+    position: relative;
+    transform: translateX(10rem);
+    background-image: url(../../../../assets/images/404.png);
+    background-repeat: no-repeat;
+    background-size: 200px;
+    background-position: top;
+    padding-top: 130px;
+    margin-top: 5rem;
+}
+:host-context(psk-example)>.container{
+    transform: translateX(0);
+}
+:host-context(psk-container)>.container{
+    transform: translate(10rem);
+}
+
+
+.card .card-header {
+    background-color: transparent;
+    border: none;
+    padding-bottom: 0;
+}
+
+.card .card-header h2{
+    font-size: 1.802rem;
+    color: #F44336;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card .card-body {
+    font-size: 1.266rem;
+    text-align: center;
+    border: none;
+    padding-top: 0;
+}
+
+.card {
+    border: none;
+}
+
+@media(max-width:960px) {
+    .container {
+        left: 0px;
+    }
+    .card .card-body p{
+        font-size: 1rem;
+    }
+    .card .card-header h2 {
+        font-size: 1.266rem;
+    }
+}

@@ -19,3 +19,15 @@ package-lock.json
 env.json.devel
 .prettierrc
 .prettierignore
+
+
+.idea
+.vscode
+apihub-root/dsu-explorer/wallet-patch/seed
+apihub-root/ediary-wallet/loader
+apihub-root/patient-wallet/apps-patch/ediary-ssapp/seed
+
+
+
+apihub-root/patient-wallet/apps-patch/professional-ssapp/seed
+apihub-root/patient-wallet/apps-patch/researcher-ssapp/seed

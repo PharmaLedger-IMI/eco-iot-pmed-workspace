@@ -63,7 +63,6 @@ export default class TrialService {
     }
 
     saveTrial(data, callback){
-        debugger
         this.DSUStorage.call('createSSIAndMount',this.SERVICE_PATH, (err, keySSI) => {
             if (err)
             {

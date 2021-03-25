@@ -1,0 +1,29 @@
+.clearItem,
+.selectedItem {
+  border: 1px solid black;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  box-shadow: 0 0 3px 0 rgba(0,0,0,0.75);
+  background-color: white;
+}
+
+.selectedItem {
+  background-color: cornsilk;
+  padding: 0 !important;
+}
+
+.arrow-button .btn.btn-primary{
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.icon {
+  margin: 0!important;
+}
+.arrow-button-container {
+  padding: 0 !important;
+}

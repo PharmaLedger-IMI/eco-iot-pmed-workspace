@@ -1,0 +1,16 @@
+.boxHover .row:hover{
+    box-shadow: 0px 0px 6px 1px #c0c0c0;
+    border-bottom: 1px solid #00000021;
+}
+
+.boxHover .row{
+    box-shadow: 0px 0px 6px 1px #00000021;
+}
+
+.withSeparator .row {
+    border-bottom: 1px solid #00000021;
+}
+
+.withSeparator:last-child .row {
+    border-bottom: 0px;
+}
