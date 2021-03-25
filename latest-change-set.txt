@@ -196,3 +196,33 @@
     removed obsolete functions from use
     refactored getKeySSI to getKeySSIAsString
     removed obsolete functions from use
+    psk-layout modification regarding updating state
+    new freeze version
+    extra info added into the landing page
+    removed psk-page from access marketplace page
+    show error when passwords are not identical
+
+    Merge pull request #1 from daniel-visoiu/master
+    
+    Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
+    show error when passwords are not identical
+    psk-layout modification regarding updating state
+    new freeze version
+    extra info added into the landing page
+    removed psk-page from access marketplace page
+    show error when passwords are not identical
+
+    Merge pull request #1 from daniel-visoiu/master
+    
+    Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
+    show error when passwords are not identical
+    psk-layout modification regarding updating state
+    new freeze version
+    extra info added into the landing page
+    removed psk-page from access marketplace page
+    show error when passwords are not identical
+
+    Merge pull request #1 from daniel-visoiu/master
+    
+    Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
+    show error when passwords are not identical

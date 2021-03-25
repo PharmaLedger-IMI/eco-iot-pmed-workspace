@@ -138,6 +138,16 @@
       ]
     },
     {
+      "name": "themes/professional-theme",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/professional-theme && npm install"
+        }
+      ]
+    },
+    {
       "name": "themes/eDiary-theme",
       "src": "",
       "actions": [
@@ -216,6 +226,16 @@
         {
           "type": "execute",
           "cmd": "cd themes/blue-fluorite-theme && npm run build-dossier"
+        }
+      ]
+    },
+    {
+      "name": "professional-theme-wallet-build",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/professional-theme && npm run build-dossier"
         }
       ]
     },

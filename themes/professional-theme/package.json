@@ -1,0 +1,22 @@
+{
+  "name": "blue-florite-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": " ",
+  "scripts": {
+    "build-dossier": "node ./node_modules/octopus/scripts/buildDossier.js --bundles=./../../privatesky/psknode/bundles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/privatesky/blue-florite-theme.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/privatesky/blue-florite-theme/issues"
+  },
+  "homepage": "https://github.com/privatesky/blue-florite-theme#readme",
+  "dependencies": {
+    "octopus": "git+http://github.com/privatesky/octopus.git"
+  }
+}
