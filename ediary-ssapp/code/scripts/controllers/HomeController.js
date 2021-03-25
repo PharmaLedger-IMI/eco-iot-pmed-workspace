@@ -1,8 +1,9 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const { WebcController } = WebCardinal.controllers;
 
-export default class HomeController extends ContainerController {
+export default class HomeController extends WebcController {
     constructor(element, history) {
         super(element, history);
+
         this._attachHandlerEconsent();
         this._attachHandlerIotQuestionarie();
         this._attachHandlerEDiary();
@@ -10,21 +11,19 @@ export default class HomeController extends ContainerController {
 
     _attachHandlerEconsent(){
         this.on('home:econsent', (event) => {
-            console.log ("Button pressed");
-            //this.History.navigateToPageByTag('econsent');
+            // this.navigateToPageTag('econsent', {date: 'a'});
         });
     }
 
     _attachHandlerIotQuestionarie(){
         this.on('home:questionnaire', (event) => {
-            console.log ("Button 2 pressed");
-            //this.History.navigateToPageByTag('questionnaire');
+            this.navigateToPageTag('questionnaire');
         });
     }
 
     _attachHandlerEDiary(){
         this.on('home:ediary', (event) => {
-            this.History.navigateToPageByTag('ediary');
+            this.navigateToPageTag('ediary');
         });
     }
 }

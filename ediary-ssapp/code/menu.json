@@ -31,6 +31,13 @@
       "icon": "fa-home",
       "pageSrc": "ediary.html",
       "tags": "ediary"
+    },
+    {
+      "name": "Questionnaire",
+      "path": "/questionnaire",
+      "icon": "fa-home",
+      "pageSrc": "questionnaire.html",
+      "tags": "questionnaire"
     }
   ]
 }

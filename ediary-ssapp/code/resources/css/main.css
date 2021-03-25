@@ -2,6 +2,10 @@
 @import url("fonts/nunito/nunito.css");
 @import url("bootstrap/css/bootstrap.min.css");
 
+:root {
+    --webc-app-menu-mode: none
+}
+
 body {
   margin: 0;
   padding: 0;

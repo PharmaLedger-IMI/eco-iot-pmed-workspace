@@ -1,0 +1,25 @@
+.tabs {
+    box-shadow: none !important;
+    margin: 30px 10px !important;
+}
+
+.tabs .tab-navigator {
+    border-radius: 15px !important;
+    order: 1 !important;
+    background-color: white !important;
+}
+
+.tabs .tab-navigator .btn {
+    background-color: #c8cbcf !important;
+    border-radius: 50%;
+    width: 40px;
+}
+
+.tabs .tab-navigator psk-button.active button.btn {
+    background-color: #008798 !important;
+}
+
+.tabs .tab-container {
+    border-top: 0 !important;
+}
+

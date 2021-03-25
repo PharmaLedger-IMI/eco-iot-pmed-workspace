@@ -1,0 +1,53 @@
+<psk-example class="mobile-example">
+    <psk-mobile class="noPadding background" disable-header>
+        <link rel="stylesheet" href="./../assets/css/pages/questionnaire.css">
+        <webc-container controller="QuestionnaireController">
+            <psk-layout template-rows="25% 75%" align-items="center" class="coloredBackground">
+                <psk-layout-item class="home-default"></psk-layout-item>
+
+                <psk-layout-item class="ediary-default-bottom">
+                    <div class="margin-sides" data-if="@votingOpen">
+                        <container slot="true">
+                            <psk-label class="ediary-user-name-title">IoT Device Questionnaire</psk-label>
+
+                            <psk-tab-navigator class="margin-sides question-navigator" data-for="@questions"
+                                               view-model="questionnairesTabNavigator">
+                                <psk-tab title="">
+                                    <div class="question-details">
+                                        <psk-label class="ed-question-title">{{@title}}</psk-label>
+                                        <psk-label class="ed-question-subtitle">{{@subTitle}}</psk-label>
+                                    </div>
+                                    <div class="answers" data-for="@answers">
+                                        <div class="answer">
+                                            <input type="radio" id="@id" name="gender" value="@label">
+                                            <label for="@id">{{@label}}</label><br>
+                                        </div>
+                                    </div>
+                                </psk-tab>
+                            </psk-tab-navigator>
+                            <div class="button-bottom-row">
+                                <div class="width-100 align-center" data-if="@buttonsState.showLeft">
+                                    <button class="ed-btn always-left" data-tag="prev">Back</button>
+                                </div>
+                                <div class="width-100 align-center" data-if="@buttonsState.showRight">
+                                    <button class="ed-btn always-right" data-tag="next">Next</button>
+                                </div>
+                            </div>
+                            <div class="width-100 align-center" data-if="@buttonsState.showFeedback">
+                                <button class="ed-btn ed-big-button always-center" data-tag="send-feedback">Send Feedback</button>
+                            </div>
+                        </container>
+                        <container slot="false">
+                            <psk-label class="ediary-user-name-title">Thank you!</psk-label>
+                            <psk-label class="ed-question-title">You have successfully completed the questionnaire.</psk-label>
+                            <div class="width-100 align-center">
+                                <button class="ed-btn ed-big-button always-center" data-tag="finish-questionnaire">Ok</button>
+                            </div>
+                        </container>
+                    </div>
+
+                </psk-layout-item>
+            </psk-layout>
+        </webc-container>
+    </psk-mobile>
+</psk-example>

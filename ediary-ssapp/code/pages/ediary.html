@@ -1,6 +1,7 @@
 <psk-example class="mobile-example">
     <psk-mobile class="noPadding background" disable-header>
-        <psk-container controller-name="EDiaryController">
+        <webc-container controller="EDiaryController">
+
             <psk-layout template-rows="25% 75%" align-items="center" class="coloredBackground">
                 <psk-layout-item class="home-default"></psk-layout-item>
 
@@ -79,11 +80,12 @@
 
                     </psk-layout>
                     <psk-card class="ediary-controls">
-                        <psk-button class="ed-button half-screen-button" event-name="ediary:create">New Input</psk-button>
+                        <psk-button class="ed-button half-screen-button" event-name="ediary:create">New Input
+                        </psk-button>
                         <psk-button class="ed-button half-screen-button" event-name="">Back</psk-button>
                     </psk-card>
                 </psk-layout-item>
             </psk-layout>
-        </psk-container>
+        </webc-container>
     </psk-mobile>
 </psk-example>

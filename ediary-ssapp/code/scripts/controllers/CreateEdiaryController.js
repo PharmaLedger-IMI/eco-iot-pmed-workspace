@@ -1,4 +1,4 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const { WebcController } = WebCardinal.controllers;
 
 const BUTTON_NEW = 'ed-button-new';
 const BUTTON_USED = 'ed-button-used';
@@ -24,7 +24,7 @@ const initModel = {
     }
 }
 
-export default class CreateEdiaryController extends ContainerController {
+export default class CreateEdiaryController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
@@ -36,8 +36,6 @@ export default class CreateEdiaryController extends ContainerController {
 
         this._initHandlers()
     }
-
-
 
     _initHandlers() {
         this._attachHandlerEDiaryCreate();

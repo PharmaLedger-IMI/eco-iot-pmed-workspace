@@ -1,29 +1,22 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
-import EDiaryService from "./services/EDiaryService.js";
+const { WebcController } = WebCardinal.controllers;
 
-const initModel = {
 
-}
-
-export default class EDiaryController extends ContainerController {
+export default class EDiaryController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
-        this.setModel(JSON.parse(JSON.stringify(initModel)));
+        this.setModel({});
 
         this._attachHandlerEDiaryCreate();
-
 
         this.on('openFeedback', (evt) => {
             this.feedbackEmitter = evt.detail;
         });
     }
 
-
-
     _attachHandlerEDiaryCreate (){
         this.on('ediary:create', (event) => {
-            this.History.navigateToPageByTag('create-diary');
+            this.navigateToPageTag('create-diary');
         });
     }
 
