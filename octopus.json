@@ -166,6 +166,16 @@
           "cmd": "cd ediary-ssapp && npm install"
         }
       ]
+    },
+    {
+      "name": "iot-adaptor",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd iot-adaptor && npm install"
+        }
+      ]
     }
   ],
   "build": [

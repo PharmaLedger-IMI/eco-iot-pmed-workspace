@@ -1,8 +1,17 @@
 const fileService = require("../utils/fileService");
-
+    //   , mkFhir = require('fhir.js');
+    try {
+        const mkFhir = require('fhir.js');
+    } catch (error) {
+        console.log("Error Found!", error);
+        console.log(__dirname);
+    }
 $$.flow.describe('IotAdaptor', {
 
     init: function (domainConfig) {
+        // this.fhirClient = mkFhir({
+        //     baseUrl: 'http://hapi.fhir.org/baseR4'
+        // });
         const endpointURL = new URL(domainConfig.option.endpoint);
         this.commandData = {};
         this.commandData.apiEndpoint = endpointURL.hostname;

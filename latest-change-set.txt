@@ -133,3 +133,14 @@
     refactor getKeySSI to getKeySSIAsString
     replaced bin/build and bin/build-dossier with the buildDossier script provided by octopus
     refactor getKeySSI to getKeySSIAsString
+    psk-layout modification regarding updating state
+
+    Merge branch 'master' of http://github.com/privatesky/privatesky
+    extra info added into the landing page
+    adjusted the template ssi when a new DSU is created
+    show error when passwords are not identical
+
+    Merge pull request #1 from daniel-visoiu/master
+    
+    Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
+    show error when passwords are not identical
