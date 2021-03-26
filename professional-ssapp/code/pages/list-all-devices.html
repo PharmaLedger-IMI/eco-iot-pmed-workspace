@@ -1,0 +1,106 @@
+<psk-page title="List devices">
+
+    <psk-toc title="List devices" slot="toc"></psk-toc>
+
+    <psk-container controller-name="ListDevicesController">
+
+        <psk-card class="bpd-dashboard">
+
+
+            <div
+                    slot="condition-true"
+                    class="m-5 d-flex flex-column align-items-center justify-content-center"
+                    style="height: 100%"
+            >
+                <h4 class="bold">Devices List</h4>
+                <div>
+                    <psk-layout class="border-bottom border-top" slot="condition-true" columns="6">
+                        <psk-label label="Device ID"></psk-label>
+                        <psk-label label="Brand"></psk-label>
+                        <psk-label label="Model"></psk-label>
+                        <psk-label label="Status"></psk-label>
+                        <psk-label label="Trial"></psk-label>
+                        <psk-label label="Options"></psk-label>
+
+                    </psk-layout>
+
+                        <psk-layout columns="6" class="justify-content-center align-items-center table-row">
+                            <psk-label label="A"></psk-label>
+                            <psk-label label="B"></psk-label>
+                            <psk-label label="C"></psk-label>
+                            <psk-label label="D"></psk-label>
+                            <psk-label label="E"></psk-label>
+<!--                            <psk-label label="F"></psk-label>-->
+                            <div class="d-flex flex-row align-items-center justify-content-around">
+                                <psk-button
+                                        class="btn-bare table-cell m-1 pharma-primary"
+                                        event-name="view-patient"
+
+                                >
+                                    View
+                                </psk-button>
+                                <psk-button
+                                        class="btn-bare table-cell m-1 pharma-primary"
+                                        event-name="edit-patient"
+
+                                >
+                                    Edit
+                                </psk-button>
+                            </div>
+                            <psk-label label="A"></psk-label>
+                            <psk-label label="B"></psk-label>
+                            <psk-label label="C"></psk-label>
+                            <psk-label label="D"></psk-label>
+                            <psk-label label="E"></psk-label>
+                            <!--                            <psk-label label="F"></psk-label>-->
+                            <div class="d-flex flex-row align-items-center justify-content-around">
+                                <psk-button
+                                        class="btn-bare table-cell m-1 pharma-primary"
+                                        event-name="view-patient"
+
+                                >
+                                    View
+                                </psk-button>
+                                <psk-button
+                                        class="btn-bare table-cell m-1 pharma-primary"
+                                        event-name="edit-patient"
+
+                                >
+                                    Edit
+                                </psk-button>
+                            </div>
+                            <psk-label label="A"></psk-label>
+                            <psk-label label="B"></psk-label>
+                            <psk-label label="C"></psk-label>
+                            <psk-label label="D"></psk-label>
+                            <psk-label label="E"></psk-label>
+                            <!--                            <psk-label label="F"></psk-label>-->
+                            <div class="d-flex flex-row align-items-center justify-content-around">
+                                <psk-button
+                                        class="btn-bare table-cell m-1 pharma-primary"
+                                        event-name="view-patient"
+
+                                >
+                                    View
+                                </psk-button>
+                                <psk-button
+                                        class="btn-bare table-cell m-1 pharma-primary"
+                                        event-name="edit-patient"
+
+                                >
+                                    Edit
+                                </psk-button>
+                            </div>
+                        </psk-layout>
+                </div>
+                <psk-button class="mt-2 pharma-primary" label="Go Back" event-name="go-back"></psk-button>
+            </div>
+
+
+
+
+        </psk-card>
+
+    </psk-container>
+
+</psk-page>

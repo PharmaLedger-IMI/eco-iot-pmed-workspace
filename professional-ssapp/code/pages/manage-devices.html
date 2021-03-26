@@ -2,9 +2,38 @@
 
     <psk-toc title="Manage Devices" slot="toc"></psk-toc>
 
-    <psk-container>
+    <psk-container controller-name="ManageDevicesController">
 
-        <psk-card class="bpd-dashboard">
+        <psk-card class="bpd-dashboard" label="Manage Devices">
+
+            <div class="bpd-buttons-row bpd-wide-cards">
+
+            <psk-layout>
+
+                <psk-button class="bpd-organization-card" event-name="devices:add">
+                    <div class="bpd-organization-card-content">
+                        <psk-icon icon="user" color="rgb(255, 255, 255)"></psk-icon>
+                    </div>
+                    <psk-label class="bpd-organization-card-label" label="Add devices"/>
+                </psk-button>
+
+                <psk-button class="bpd-organization-card" event-name="devices:search">
+                    <div class="bpd-organization-card-content">
+                        <psk-icon icon="cloud" color="rgb(255, 255, 255)"></psk-icon>
+                    </div>
+                    <psk-label class="bpd-organization-card-label" label="Search device"/>
+                </psk-button>
+
+                <psk-button class="bpd-organization-card" event-name="devices:back">
+                    <div class="bpd-organization-card-content">
+                        <psk-icon icon="tasks" color="rgb(255, 255, 255)"></psk-icon>
+                    </div>
+                    <psk-label class="bpd-organization-card-label" label="Back"/>
+                </psk-button>
+
+            </psk-layout>
+
+            </div>
 
         </psk-card>
 

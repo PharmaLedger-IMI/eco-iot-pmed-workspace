@@ -22,6 +22,20 @@
       "tags": "list-of-patients"
     },
     {
+      "name": "add-device",
+      "path": "/add-device",
+      "icon": "fa-home",
+      "pageSrc": "add-device.html",
+      "tags": "add-device"
+    },
+    {
+      "name": "list-all-devices",
+      "path": "/list-all-devices",
+      "icon": "fa-home",
+      "pageSrc": "list-all-devices.html",
+      "tags": "list-all-devices"
+    },
+    {
       "name": "manage-devices",
       "path": "/manage-devices",
       "icon": "fa-home",
