@@ -1,11 +1,11 @@
 const fileService = require("../utils/fileService");
     //   , mkFhir = require('fhir.js');
-    try {
-        const mkFhir = require('fhir.js');
-    } catch (error) {
-        console.log("Error Found!", error);
-        console.log(__dirname);
-    }
+//     try {
+//         const mkFhir = require('fhir.js');
+//     } catch (error) {
+//         console.log("Error Found!", error);
+//         console.log(__dirname);
+//     }
 $$.flow.describe('IotAdaptor', {
 
     init: function (domainConfig) {
