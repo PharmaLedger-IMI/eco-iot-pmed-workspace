@@ -6,7 +6,22 @@
 
         <psk-card class="bpd-dashboard">
 
-            <psk-label class="bpd-dashboard-title" label="Data access API, and the interface to manage the access to this API"/>
+            <psk-label class="bpd-dashboard-title" label="API for sharing patient results"/>
+
+            <psk-accordion multiple="">
+                <psk-accordion-item title="GET">/api/results</psk-accordion-item>
+                <psk-accordion-item title="PUT" opened="true">/api/results</psk-accordion-item>
+                <psk-accordion-item title="PATCH" opened="">/api/results</psk-accordion-item>
+                <psk-accordion-item title="POST">/api/results</psk-accordion-item>
+                <psk-accordion-item title="DELETE">/api/results</psk-accordion-item>
+            </psk-accordion>
+
+
+            <psk-details title="Models">
+                <psk-card title="Available data models:">
+                    <p>💣</p>
+                </psk-card>
+            </psk-details>
 
         </psk-card>
 
