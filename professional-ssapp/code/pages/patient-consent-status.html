@@ -1,0 +1,56 @@
+<psk-page title="Patient Consent Status">
+
+    <psk-toc title="Patient Consernt Status" slot="toc"></psk-toc>
+
+    <psk-container controller-name="PatientConsentStatusController">
+        <div 
+        slot="condition-true"
+        class="m-5 d-flex flex-column align-items-center justify-content-center"
+        >
+            <psk-layout class="border-bottom border-top" slot="condition-true" columns="7">
+                <psk-label label="Patient ID"></psk-label>
+                <psk-label label="Device ID"></psk-label>
+            </psk-layout>
+            <psk-layout class="border-bottom border-top" slot="condition-true" columns="7">
+                <psk-label label="Hope_001"></psk-label>
+                <psk-label label="PL_IoT_001"></psk-label>
+            </psk-layout>
+        </div>
+        <psk-card class="bpd-dashboard">
+
+            <div
+                    slot="condition-true"
+                    class="m-5 d-flex flex-column align-items-center justify-content-center"
+                    style="height: 100%"
+            >
+                <h4 class="bold">Patient Consent Status</h4>
+                <div>
+                    <psk-layout class="border-bottom border-top" slot="condition-true" columns="7">
+                        <psk-label label="Trial"></psk-label>
+                        <psk-label label="Sponsor"></psk-label>
+                        <psk-label label="Hospital"></psk-label>
+                        <psk-label label="Consent Name"></psk-label>
+                        <psk-label label="Consent Version"></psk-label>
+                        <psk-label label="Consent Status"></psk-label>
+                        <psk-label label="Date"></psk-label>
+
+                    </psk-layout>
+
+                    <psk-layout columns="7" class="justify-content-center align-items-center table-row">
+                        <psk-label label="A"></psk-label>
+                        <psk-label label="B"></psk-label>
+                        <psk-label label="C"></psk-label>
+                        <psk-label label="D"></psk-label>
+                        <psk-label label="E"></psk-label>
+                        <psk-label label="F"></psk-label>
+                        <psk-label label="G"></psk-label>
+                        
+                    </psk-layout>
+                </div>
+                <psk-button class="mt-2 pharma-primary" label="Go Back" event-name="go-back"></psk-button>
+            </div>     
+        </psk-card>
+
+    </psk-container>
+
+</psk-page>

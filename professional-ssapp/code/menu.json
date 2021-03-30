@@ -48,6 +48,34 @@
       "icon": "fa-home",
       "pageSrc": "trial-management.html",
       "tags": "trial-management"
+    },
+    {
+      "name": "patient-status",
+      "path": "/patient-status",
+      "icon": "fa-home",
+      "pageSrc": "patient-status.html",
+      "tags": "patient-status"
+    },
+    {
+      "name": "patient-device-history",
+      "path": "/patient-device-history",
+      "icon": "fa-home",
+      "pageSrc": "patient-device-history.html",
+      "tags": "patient-device-history"
+    },
+    {
+      "name": "patient-consent-status",
+      "path": "/patient-consent-status",
+      "icon": "fa-home",
+      "pageSrc": "patient-consent-status.html",
+      "tags": "patient-consent-status"
+    },
+    {
+      "name": "patient-alert-history",
+      "path": "/patient-alert-history",
+      "icon": "fa-home",
+      "pageSrc": "patient-alert-history.html",
+      "tags": "patient-alert-history"
     }
   ]
 }

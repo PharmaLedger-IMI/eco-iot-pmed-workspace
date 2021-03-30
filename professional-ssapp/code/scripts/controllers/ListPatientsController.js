@@ -15,10 +15,10 @@ export default class ListPatientsController extends ContainerController {
     });
 
     this.participantsService = participantsService;
-
-    this.attachAll();
-
     this.init();
+    this.attachAll();
+    this._attachHandlerPatientStatus();
+    
   }
 
   async init() {
@@ -54,7 +54,11 @@ export default class ListPatientsController extends ContainerController {
     this.on('go-back', async (event) => {
       this.History.navigateToPageByTag('home', event.data);
     });
-
+   
+    this.on('patient-status',  (event) => {
+        console.log ("Patient Status button pressed");
+        this.History.navigateToPageByTag('patient-status');
+    });
     this.on('trial-select', async (event) => {
       try {
         this.model.participants = (
@@ -68,5 +72,6 @@ export default class ListPatientsController extends ContainerController {
         console.log(error);
       }
     });
+    
   }
 }
