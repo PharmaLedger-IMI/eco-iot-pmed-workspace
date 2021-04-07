@@ -12,6 +12,7 @@
   "dependencies": {
     "encoding": "^0.1.13",
     "fhir-kit-client": "^1.6.3",
+    "lodash": "^4.17.21",
     "supports-color": "^8.1.1"
   }
 }

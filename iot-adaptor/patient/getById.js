@@ -1,4 +1,6 @@
-function searchPatient(request, response, next) {
+function getPatientById(request, response) {
+    // console.log("Hello getById");
+    // console.log(request.params.id);
     const receivedDomain = "default";
     const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {
@@ -8,7 +10,7 @@ function searchPatient(request, response, next) {
 
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
-    flow.searchPatient((err, result) => {
+    flow.getPatientById(request.params.id, (err, result) => {
         if (err) {
             if (err.code === 'EACCES') {
                 return response.send(409);
@@ -19,4 +21,4 @@ function searchPatient(request, response, next) {
     });
 }
 
-module.exports = searchPatient;
+module.exports = getPatientById;
