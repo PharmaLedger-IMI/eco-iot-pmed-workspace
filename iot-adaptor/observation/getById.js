@@ -1,6 +1,6 @@
 function getObservationById(request, response) {
     console.log("Hello getById");
-    console.log(request.params.id);
+    // console.log(request.params.id);
     const receivedDomain = "default";
     const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {

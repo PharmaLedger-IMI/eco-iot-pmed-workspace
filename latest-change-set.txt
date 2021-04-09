@@ -233,3 +233,14 @@
     
     Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
     show error when passwords are not identical
+    fixing the build
+    Update procedure
+    new freeze
+    extra info added into the landing page
+    removed psk-page from access marketplace page
+    preparing diddemo
+
+    Merge pull request #1 from daniel-visoiu/master
+    
+    Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
+    preparing diddemo

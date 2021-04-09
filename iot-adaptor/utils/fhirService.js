@@ -149,6 +149,19 @@ const updateObservation = (id, jsonData, callback) => {
     });
 };
 
+const getObservationById = (id, callback) => {
+  console.log(id);
+  fhirClient
+    .request(`Observation/${id}`)
+    .then((response) => {
+     
+      callback(undefined, response);
+    })
+    .catch((error) => {
+      callback(error, []);
+    });
+};
+
 
 module.exports = {
     patient: {
@@ -160,7 +173,8 @@ module.exports = {
     observation: {
       search: searchObservation,
       create: createObservation,
-      update: updateObservation
+      update: updateObservation, 
+      getById: getObservationById
     }
 
 }

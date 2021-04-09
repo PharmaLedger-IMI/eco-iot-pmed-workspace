@@ -24,13 +24,13 @@ function IotAdapter(server) {
     server.post(`/iotAdapter/Patient`, CreatePatient);
     server.put(`/iotAdapter/Patient/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/Patient/:id`, UpdatePatient);
-    server.get(`/iotAdapter/Patient/:id`, requestBodyJSONMiddleware);
+    // server.get(`/iotAdapter/Patient/:id`, requestBodyJSONMiddleware);
     server.get(`/iotAdapter/Patient/:id`, GetPatientById);
 
     
 
     server.get(`/iotAdapter/Observation`, SearchObservation);
-    server.get(`/iotAdapter/Observation/:id`, requestBodyJSONMiddleware);
+    // server.get(`/iotAdapter/Observation/:id`, requestBodyJSONMiddleware);
     server.get(`/iotAdapter/Observation/:id`, GetObservationById);
     // server.delete(`/iotAdapter/Observation/:id`, DeleteObservationById);
     server.post(`/iotAdapter/Observation`, requestBodyJSONMiddleware);

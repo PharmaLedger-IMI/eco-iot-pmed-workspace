@@ -46,7 +46,7 @@ $$.flow.describe('IotAdaptor', {
         fhirService.observation.update(id, jsonData, callback);
         // dsuService.patient.create(jsonData, callback);
     },
-    getObservation: function (id, callback) {
+    getObservationById: function (id, callback) {
         console.log(id);
         fhirService.observation.getById(id, callback);
         // dsuService.patient.create(jsonData, callback);
