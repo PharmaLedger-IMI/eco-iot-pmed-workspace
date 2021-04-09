@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const FhirClient = require('fhir-kit-client');
-const { concat } = require('lodash');
 const fhirClient = new FhirClient({
   baseUrl: 'http://localhost:8090/fhir'
 });
