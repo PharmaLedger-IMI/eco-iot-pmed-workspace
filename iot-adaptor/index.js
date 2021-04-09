@@ -2,6 +2,8 @@ function IotAdapter(server) {
     console.log("IotAdapter called")
     require('./strategies/IotAdapter');
 
+    const DynavisionPlatform = require('./platform/dynavision');
+
     const CreatePatient = require('./patient/create');
     const SearchPatient = require('./patient/search');
     const GetPatientById = require('./patient/getById');
@@ -12,10 +14,11 @@ function IotAdapter(server) {
     const UpdateObservation = require('./observation/update');
     const GetObservationById = require('./observation/getById');
     // const DeleteObservationById = require('./observation/deleteById');
-    
-    
+
+
 
     const { responseModifierMiddleware, requestBodyJSONMiddleware } = require('../privatesky/modules/apihub/utils/middlewares');
+    const { requestBodyXMLMiddleware } = require('./utils/middlewares');
 
     server.use(`/iotAdapter/*`, responseModifierMiddleware);
 
@@ -27,7 +30,7 @@ function IotAdapter(server) {
     // server.get(`/iotAdapter/Patient/:id`, requestBodyJSONMiddleware);
     server.get(`/iotAdapter/Patient/:id`, GetPatientById);
 
-    
+
 
     server.get(`/iotAdapter/Observation`, SearchObservation);
     // server.get(`/iotAdapter/Observation/:id`, requestBodyJSONMiddleware);
@@ -37,8 +40,9 @@ function IotAdapter(server) {
     server.post(`/iotAdapter/Observation`, CreateObservation);
     server.put(`/iotAdapter/Observation/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/Observation/:id`, UpdateObservation);
-    
+
+    server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
+    server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
 }
 
 module.exports = IotAdapter;
-

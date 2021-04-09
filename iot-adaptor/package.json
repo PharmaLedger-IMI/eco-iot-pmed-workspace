@@ -13,6 +13,8 @@
     "encoding": "^0.1.13",
     "fhir-kit-client": "^1.6.3",
     "lodash": "^4.17.21",
-    "supports-color": "^8.1.1"
+    "moment": "^2.29.1",
+    "supports-color": "^8.1.1",
+    "xml2js": "^0.4.23"
   }
 }

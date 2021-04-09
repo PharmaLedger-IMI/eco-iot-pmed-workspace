@@ -1,4 +1,5 @@
 const fhirService = require("../utils/fhirService");
+const etlService = require("../utils/etlService");
 $$.flow.describe('IotAdaptor', {
 
     init: function (domainConfig) {
@@ -8,9 +9,11 @@ $$.flow.describe('IotAdaptor', {
         this.commandData.apiPort = endpointURL.port;
         this.commandData.protocol = endpointURL.protocol.replace(':', "");
     },
-
-    searchPatient: function (callback) {
-        fhirService.patient.search(callback);
+    processXml: function (xmlString, callback) {
+        etlService.processXml(xmlString, callback);
+    },
+    searchPatient: function (params, callback) {
+        fhirService.patient.search(params, callback);
         // dsuService.patient.search(callback);
     },
     getPatientById: function (id, callback) {
@@ -53,6 +56,6 @@ $$.flow.describe('IotAdaptor', {
     },
     deleteObservation: function(id, callback) {
         fhirService.observation.deleteById(id, callback);
-        
+
     }
 });
