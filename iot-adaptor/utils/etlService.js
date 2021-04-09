@@ -92,7 +92,9 @@ const processXml = (xmlString, callback) => {
             effectiveDateTime: moment(measurement_info.date[0], 'YYYY-MM-DD HH:mm:ss').toISOString(),
             valueQuantity: {
               value: patient_info.height[0],
-              unit: "cm"
+              unit: "cm",
+              system: "http://unitsofmeasure.org",
+              code: "cm"
             }
           }
           fhirService.observation.findOrCreate(bodyHeight, { identifier: heightIdentifier }, (err, response) => {
