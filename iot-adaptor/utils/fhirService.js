@@ -239,6 +239,116 @@ const getObservationById = (id, callback) => {
 };
 
 
+//Resource
+
+const searchResource = (type, callback) => {
+  // console.log("Hello Search");
+  fhirClient
+    .search({ resourceType: type, searchParams: {}})
+    .then((response) => {
+      callback(undefined, response);
+    })
+    .catch((error) => {
+      callback(error, []);
+    });
+};
+
+const createResource = (type, jsonData, callback) => {
+
+  console.log(jsonData);
+  // return jsonData;
+  const newObservation = _.merge({"resourceType":type}, jsonData);
+  console.log(jsonData.name);
+  console.log(newObservation);
+  // jsonData.resourceType = 'Patient';
+  // jsonData.active = true;
+
+  fhirClient
+    .create({
+      resourceType: type,
+      body: newObservation,
+    })
+    .then((response) => {
+      console.log("Done");
+      callback(undefined, response);
+    })
+    .catch((error) => {
+      // console.log(erro.data);
+      callback(error, null);
+    });
+};
+
+const updateResource = (type, id, jsonData, callback) => {
+
+  console.log(jsonData);
+  // return jsonData;
+  const newPatient = _.merge({"resourceType":type}, jsonData);
+  // console.log(jsonData.name);
+  console.log(newPatient);
+  console.log(id);
+  // jsonData.resourceType = 'Patient';
+  // jsonData.active = true;
+
+  fhirClient
+    .update({
+      resourceType: type,
+      id: id,
+      body: newPatient,
+    })
+    .then((response) => {
+      console.log("Done");
+      callback(undefined, response);
+    })
+    .catch((error) => {
+      console.log(error);
+      callback(error, null);
+    });
+};
+
+const getResourceById = (type, id, callback) => {
+  console.log(id);
+  fhirClient
+    .request(`${type}/${id}`)
+    .then((response) => {
+
+      callback(undefined, response);
+    })
+    .catch((error) => {
+      callback(error, []);
+    });
+};
+
+
+const findOrCreateResource = (type, jsonData, searchParams, callback) => {
+  fhirClient
+    .search({ resourceType: type, searchParams: searchParams})
+    .then((response) => {
+      if(response.entry){
+        // console.log('Observation found');
+        callback(undefined, response.entry[0].resource);
+      } else {
+        const newObject = _.merge({"resourceType":type}, jsonData);
+        fhirClient
+          .create({
+            resourceType: type,
+            body: newObject,
+          })
+          .then((response) => {
+            // console.log('Observation created');
+            callback(undefined, response);
+          })
+          .catch((error) => {
+            callback(error, null);
+          });
+      }
+    })
+    .catch((error) => {
+      callback(error, null);
+    });
+};
+
+
+
 module.exports = {
     patient: {
       search: searchPatient,
@@ -256,6 +366,13 @@ module.exports = {
     },
     device: {
       findOrCreate: findOrCreateDevice
+    },
+    resource: {
+      search: searchResource,
+      getById: getResourceById,
+      create: createResource,
+      update: updateResource,
+      findOrCreate: findOrCreateResource  
     }
 
 }
