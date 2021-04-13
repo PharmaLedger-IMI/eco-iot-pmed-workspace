@@ -1,3 +1,5 @@
+import QuestionnaireService from "./services/QuestionnaireService.js";
+import Questionnaire from "../models/Questionnaire.js";
 const { WebcController } = WebCardinal.controllers;
 
 export default class HomeController extends WebcController {
@@ -7,6 +9,13 @@ export default class HomeController extends WebcController {
         this._attachHandlerEconsent();
         this._attachHandlerIotQuestionarie();
         this._attachHandlerEDiary();
+
+        this.QuestionnaireService = new QuestionnaireService(this.DSUStorage);
+        this.QuestionnaireService.saveQuestionnaire(Questionnaire.example, (err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+        })
     }
 
     _attachHandlerEconsent(){

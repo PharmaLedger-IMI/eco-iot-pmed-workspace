@@ -1,47 +1,39 @@
-import TrialModel from '../../models/EDIaryModel.js';
+export default class QuestionnaireService {
 
-export default class EDiaryService {
-
-    EDIARY_PATH = "/ediaryies";
+    QUESTIONNAIRE_PATH = "/questionnaires";
 
     constructor(DSUStorage) {
         this.DSUStorage = DSUStorage;
     }
 
-    getServiceModel(callback){
-        this.DSUStorage.call('listDSUs', this.EDIARY_PATH, (err, dsuList) => {
-            if (err){
+    getServiceModel(callback) {
+        this.DSUStorage.call('listDSUs', this.QUESTIONNAIRE_PATH, (err, dsuList) => {
+            if (err) {
                 callback(err, undefined);
                 return;
             }
-            let ediaryies = [];
+            let questionnaires = [];
             let getServiceDsu = (dsuItem) => {
                 this.DSUStorage.getItem(this._getDsuStoragePath(dsuItem.identifier), (err, content) => {
-                    if (err)
-                    {
-                        ediaryies.slice(0);
+                    if (err) {
+                        questionnaires.slice(0);
                         callback(err, undefined);
                         return;
                     }
                     let textDecoder = new TextDecoder("utf-8");
                     let trial = JSON.parse(textDecoder.decode(content));
-                    ediaryies.push(trial);
+                    questionnaires.push(trial);
 
-                    if (dsuList.length === 0)
-                    {
-                        const model = new TrialModel()._getWrapperData();
-                        model.trials = ediaryies;
-                        callback(undefined, model);
+                    if (dsuList.length === 0) {
+                        callback(undefined, {questionnaires: questionnaires});
                         return;
                     }
                     getServiceDsu(dsuList.shift());
                 })
             };
 
-
-            if (dsuList.length === 0){
-                const model = new TrialModel()._getWrapperData();
-                callback(undefined, model);
+            if (dsuList.length === 0) {
+                callback(undefined, {questionnaires: []});
                 return;
             }
             getServiceDsu(dsuList.shift());
@@ -49,10 +41,9 @@ export default class EDiaryService {
 
     }
 
-    getEdiary(uid, callback){
+    getQuestionnaire(uid, callback) {
         this.DSUStorage.getItem(this._getDsuStoragePath(uid), (err, content) => {
-            if (err)
-            {
+            if (err) {
                 callback(err, undefined);
                 return;
             }
@@ -62,41 +53,36 @@ export default class EDiaryService {
         })
     }
 
-    saveEdiary(data, callback){
-        this.DSUStorage.call('createSSIAndMount',this.EDIARY_PATH, (err, keySSI) => {
-            if (err)
-            {
-                callback(err,undefined);
+    saveQuestionnaire(data, callback) {
+        this.DSUStorage.call('createSSIAndMount', this.QUESTIONNAIRE_PATH, (err, keySSI) => {
+            if (err) {
+                callback(err, undefined);
                 return;
             }
             data.KeySSI = keySSI;
             data.uid = keySSI;
-            this.updateEdiary(data, callback);
+            this.updateQuestionnaire(data, callback);
         })
     }
 
-    mountEdiary(keySSI, callback){
-        this.DSUStorage.call('mount',this.EDIARY_PATH, keySSI, (err) =>{
-            if (err)
-            {
+    mountQuestionnaire(keySSI, callback) {
+        this.DSUStorage.call('mount', this.QUESTIONNAIRE_PATH, keySSI, (err) => {
+            if (err) {
                 return callback(err, undefined);
             }
 
-            this.getEdiary(keySSI, (err, org) =>{
-                if (err)
-                {
+            this.getQuestionnaire(keySSI, (err, org) => {
+                if (err) {
                     return callback(err, undefined);
                 }
                 callback(undefined, org);
             })
-
-
         })
     }
 
-    updateEdiary(data, callback){
+    updateQuestionnaire(data, callback) {
         this.DSUStorage.setObject(this._getDsuStoragePath(data.uid), data, (err) => {
-            if (err){
+            if (err) {
                 callback(err, undefined);
                 return;
             }
@@ -104,8 +90,8 @@ export default class EDiaryService {
         })
     }
 
-    unmountEdiary(diaryUid, callback) {
-        let unmountPath = this.EDIARY_PATH + '/' + diaryUid;
+    unmountQuestionnaire(diaryUid, callback) {
+        let unmountPath = this.QUESTIONNAIRE_PATH + '/' + diaryUid;
         this.DSUStorage.call('unmount', unmountPath, (err, result) => {
             if (err) {
                 callback(err, undefined);
@@ -115,7 +101,7 @@ export default class EDiaryService {
         });
     }
 
-    _getDsuStoragePath(keySSI){
-        return this.EDIARY_PATH + '/' + keySSI + '/data.json';
+    _getDsuStoragePath(keySSI) {
+        return this.QUESTIONNAIRE_PATH + '/' + keySSI + '/data.json';
     }
 }

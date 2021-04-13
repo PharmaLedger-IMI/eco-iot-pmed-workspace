@@ -121,6 +121,11 @@ psk-button.fullWidth button {
     width: 100%;
 }
 
+.save-button {
+    position: initial !important;
+    padding-left: 10% !important;
+}
+
 .log-out-button button {
     width: 80%;
 }

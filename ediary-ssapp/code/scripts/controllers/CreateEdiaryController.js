@@ -7,6 +7,8 @@ const BUTTON_DETACHED = 'ed-button-detached';
 
 const initModel = {
     title: 'Create EDiary',
+    patchState: null,
+    patchOption: null,
     date: {
         label: "Please indicate the date of the activity",
         name: "date",
@@ -41,19 +43,23 @@ export default class CreateEdiaryController extends WebcController {
         this._attachHandlerEDiaryCreate();
 
         this.on(BUTTON_NEW, (event) => {
+            this.model.patchState = BUTTON_NEW;
             this._unfadeButton(BUTTON_NEW);
             this._fadeButton(BUTTON_USED);
         });
         this.on(BUTTON_USED, (event) => {
+            this.model.patchState = BUTTON_USED;
             this._unfadeButton(BUTTON_USED);
             this._fadeButton(BUTTON_NEW);
         });
 
         this.on(BUTTON_ATTACHED, (event) => {
+            this.model.patchOption = BUTTON_ATTACHED;
             this._unfadeButton(BUTTON_ATTACHED);
             this._fadeButton(BUTTON_DETACHED);
         });
         this.on(BUTTON_DETACHED, (event) => {
+            this.model.patchOption = BUTTON_DETACHED;
             this._unfadeButton(BUTTON_DETACHED);
             this._fadeButton(BUTTON_ATTACHED)
         });
@@ -64,6 +70,8 @@ export default class CreateEdiaryController extends WebcController {
 
     _attachHandlerEDiaryCreate() {
         this.on('ediary:create', (event) => {
+            console.log(this.model)
+            debugger
             console.log('ediary:create');
         });
     }
