@@ -4,16 +4,16 @@ const fhirService = require("../utils/fhirService");
 const moment = require('moment');
 
 const escapeXml = (unsafe) => {
-    return unsafe.replace(/[&]/g, function (c) {
-        switch (c) {
-            case '&': return '&amp;';
-        }
-    });
+  return unsafe.replace(/[&]/g, function (c) {
+    switch (c) {
+      case '&': return '&amp;';
+    }
+  });
 }
 
 const processXml = (xmlString, callback) => {
   parseXml(escapeXml(xmlString), function (err, result) {
-    if(err) {
+    if (err) {
       callback(err, null);
     } else {
       const patient_info = result.dantest.patient_info[0];
@@ -22,9 +22,10 @@ const processXml = (xmlString, callback) => {
       const pwv = results.pwv[0];
       const patientIdentifier = patient_info.patientcode[0];
       const deviceSN = measurement_info.hw_sn[0];
+      const effectiveDateTime = moment(measurement_info.date[0], 'YYYY-MM-DD HH:mm:ss');
       // console.log(pwv);
       const newPatient = {
-        name: [{ use: 'official', family: patient_info.lname[0], given: [patient_info.fname[0]]}],
+        name: [{ use: 'official', family: patient_info.lname[0], given: [patient_info.fname[0]] }],
         identifier: [
           {
             use: 'official',
@@ -71,12 +72,13 @@ const processXml = (xmlString, callback) => {
       }
 
       fhirService.patient.findOrCreate(newPatient, { identifier: patientIdentifier }, (err, response) => {
-        if(err) {
+        if (err) {
           // console.log(err);
         } else {
           // console.log(response);
           //Start Height
-          const heightIdentifier = `Patient/${response.id}/height/cm/${patient_info.height[0]}`;
+
+          const heightIdentifier = `patient/${response.id}/observation/height/${effectiveDateTime.unix()}`;
           const bodyHeight = {
             identifier: [
               {
@@ -85,16 +87,16 @@ const processXml = (xmlString, callback) => {
               }
             ],
             code: {
-              coding: [ {
+              coding: [{
                 system: "http://loinc.org",
                 code: "8302-2"
-              } ],
+              }],
               text: "Height"
             },
             subject: {
               reference: `Patient/${response.id}`
             },
-            effectiveDateTime: moment(measurement_info.date[0], 'YYYY-MM-DD HH:mm:ss').toISOString(),
+            effectiveDateTime: effectiveDateTime.toISOString(),
             valueQuantity: {
               value: patient_info.height[0],
               unit: "cm",
@@ -105,10 +107,11 @@ const processXml = (xmlString, callback) => {
           fhirService.observation.findOrCreate(bodyHeight, { identifier: heightIdentifier }, (err, response) => {
             // console.log(err);
             // console.log(response);
+            
           });
           //End Height
           //Start Weight
-          const weightIdentifier = `Patient/${response.id}/weight/kg/${patient_info.weight[0]}`;
+          const weightIdentifier = `patient/${response.id}/observation/weight/${effectiveDateTime.unix()}`;
           const bodyWeight = {
             identifier: [
               {
@@ -117,16 +120,16 @@ const processXml = (xmlString, callback) => {
               }
             ],
             code: {
-              coding: [ {
+              coding: [{
                 system: "http://loinc.org",
                 code: "29463-7"
-              } ],
+              }],
               text: "Weight"
             },
             subject: {
               reference: `Patient/${response.id}`
             },
-            effectiveDateTime: moment(measurement_info.date[0], 'YYYY-MM-DD HH:mm:ss').toISOString(),
+            effectiveDateTime: effectiveDateTime.toISOString(),
             valueQuantity: {
               value: patient_info.weight[0],
               unit: "kg",
@@ -138,93 +141,199 @@ const processXml = (xmlString, callback) => {
             // console.log(err);
             // console.log(response);
           });
-        //End Weight
+          //End Weight
 
-         //Start Age
-         const ageIdentifier = `Patient/${response.id}/age/a/${patient_info.age[0]}`;
-         const age = {
-           identifier: [
-             {
-               use: 'secondary',
-               value: ageIdentifier
-             }
-           ],
-           code: {
-             coding: [ {
-               system: "http://loinc.org",
-               code: "30525-0"
-             } ],
-             text: "Age"
-           },
-           subject: {
-             reference: `Patient/${response.id}`
-           },
-           effectiveDateTime: moment(measurement_info.date[0], 'YYYY-MM-DD HH:mm:ss').toISOString(),
-           valueQuantity: {
-             value: patient_info.age[0],
-             unit: "a",
-             system: "http://unitsofmeasure.org",
-             code: "a"
-           }
-         }
-         fhirService.observation.findOrCreate(age, { identifier: ageIdentifier }, (err, response) => {
-           // console.log(err);
-           // console.log(response);
-         });
-         //End Age
+          //Start Age
+          const ageIdentifier = `patient/${response.id}/observation/age/${effectiveDateTime.unix()}`;
+          const age = {
+            identifier: [
+              {
+                use: 'secondary',
+                value: ageIdentifier
+              }
+            ],
+            code: {
+              coding: [{
+                system: "http://loinc.org",
+                code: "30525-0"
+              }],
+              text: "Age"
+            },
+            subject: {
+              reference: `Patient/${response.id}`
+            },
+            effectiveDateTime: effectiveDateTime.toISOString(),
+            valueQuantity: {
+              value: patient_info.age[0],
+              unit: "a",
+              system: "http://unitsofmeasure.org",
+              code: "a"
+            }
+          }
+          fhirService.observation.findOrCreate(age, { identifier: ageIdentifier }, (err, response) => {
+            // console.log(err);
+            // console.log(response);
+          });
+          //End Age
+          //Start Systolic Blood Pressure
+          const sbp = _.find(pwv.item, function (object) { return object.$.code === 'PTG-BPSYS'; });
+          const sbpIdentifier = `patient/${response.id}/observation/sbp/${effectiveDateTime.unix()}`;
+          const sBloodPressure = {
+            identifier: [
+              {
+                use: 'secondary',
+                value: sbpIdentifier
+              }
+            ],
+            code: {
+              coding: [{
+                system: "http://loinc.org",
+                code: "60984-2"
+              }
+              ],
+              text: "Systolic Blood Pressure"
+            },
+            subject: {
+              reference: `Patient/${response.id}`
+            },
+            effectiveDateTime: effectiveDateTime.toISOString(),
+            valueQuantity: {
+              value: sbp._,
+              unit: "mmHg",
+              system: "http://unitsofmeasure.org",
+              code: "mmHg"
+            }
+          }
+          fhirService.observation.findOrCreate(sBloodPressure, { identifier: sbpIdentifier }, (err, response) => {
+            // console.log(err);
+            // console.log(response);
+            // console.log("Successfully processed Systolic Blood Pressure");
+          });
+          //End Blood Pressure
+          //Start Diasystolic Blood Pressure
+          const dbp = _.find(pwv.item, function (object) { return object.$.code === 'PTG-BPDIA'; });
+          const dbpIdentifier = `patient/${response.id}/observation/dbp/${effectiveDateTime.unix()}`;
+          const dBloodPressure = {
+            identifier: [
+              {
+                use: 'secondary',
+                value: dbpIdentifier
+              }
+            ],
+            code: {
+              coding: [
+                {
+                  system: "http://loinc.org",
+                  code: "60982-6"
+                }
+              ],
+              text: "Diastolic Blood Pressure"
+            },
+            subject: {
+              reference: `Patient/${response.id}`
+            },
+            effectiveDateTime: effectiveDateTime.toISOString(),
+            valueQuantity: {
+              value: dbp._,
+              unit: "mmHg",
+              system: "http://unitsofmeasure.org",
+              code: "mmHg"
+            }
+          }
+          fhirService.observation.findOrCreate(dBloodPressure, { identifier: dbpIdentifier }, (err, response) => {
+            // console.log(err);
+            // console.log(response);
+            // console.log("Successfully processed Diasystolic Blood Pressure");
+          });
+          //End Diasystolic Blood Pressure
 
+          //Start Central Systolic Blood Pressure
+          const csbp = _.find(pwv.item, function (object) { return object.$.code === 'PTG-BpCASP'; });
+          const csbpIdentifier = `patient/${response.id}/observation/csbp/${effectiveDateTime.unix()}`;
+          const csBloodPressure = {
+            identifier: [
+              {
+                use: 'secondary',
+                value: csbpIdentifier
+              }
+            ],
+            code: {
+              coding: [
+                {
+                  system: "http://loinc.org",
+                  code: "60981-8"
+                }
+              ],
+              text: "Central Systolic Blood Pressure"
+            },
+            subject: {
+              reference: `Patient/${response.id}`
+            },
+            effectiveDateTime: effectiveDateTime.toISOString(),
+            valueQuantity: {
+              value: csbp._,
+              unit: "mmHg",
+              system: "http://unitsofmeasure.org",
+              code: "mmHg"
+            }
+          }
+          fhirService.observation.findOrCreate(csBloodPressure, { identifier: csbpIdentifier }, (err, response) => {
+            // console.log(err);
+            // console.log(response);
+            // console.log("Successfully processed Central Systolic Blood Pressure");
+          });
+          //End Central Systolic Blood Pressure
 
-         //Start SpO2
-         const spo2  = _.find(pwv.item, function(object){ return object.$.code === 'PTG-SpO2'; });
-         const SpO2Identifier = `Patient/${response.id}/SpO2/%/${spo2._}`;
-         const SpO2 = {
-           identifier: [
-             {
-               use: 'secondary',
-               value: SpO2Identifier
-             }
-           ],
-           code: {
-             coding: [ {
-               system: "http://loinc.org",
-               code: "20564-1"
-             } ],
-             text: "SpO2"
-           },
-           subject: {
-             reference: `Patient/${response.id}`
-           },
-           effectiveDateTime: moment(measurement_info.date[0], 'YYYY-MM-DD HH:mm:ss').toISOString(),
-           valueQuantity: {
-             value: spo2._,
-             unit: "%",
-             system: "http://unitsofmeasure.org",
-             code: "%"
-           }
-         }
-         fhirService.observation.findOrCreate(SpO2, { identifier: SpO2Identifier }, (err, response) => {
-           // console.log(err);
-           // console.log(response);
-           console.log("Successfully created SpO2");
-         });
-         //End Age
-
+          //Start SpO2
+          const spo2 = _.find(pwv.item, function (object) { return object.$.code === 'PTG-SpO2'; });
+          const SpO2Identifier = `patient/${response.id}/observation/spo2/${effectiveDateTime.unix()}`;
+          const SpO2 = {
+            identifier: [
+              {
+                use: 'secondary',
+                value: SpO2Identifier
+              }
+            ],
+            code: {
+              coding: [{
+                system: "http://loinc.org",
+                code: "20564-1"
+              }],
+              text: "SpO2"
+            },
+            subject: {
+              reference: `Patient/${response.id}`
+            },
+            effectiveDateTime: effectiveDateTime.toISOString(),
+            valueQuantity: {
+              value: spo2._,
+              unit: "%",
+              system: "http://unitsofmeasure.org",
+              code: "%"
+            }
+          }
+          fhirService.observation.findOrCreate(SpO2, { identifier: SpO2Identifier }, (err, response) => {
+            // console.log(err);
+            // console.log(response);
+            // console.log("Successfully processed SpO2");
+          });
+          //End SpO2
         }
       });
 
       fhirService.device.findOrCreate(newDevice, { identifier: deviceSN }, (err, response) => {
-        if(err) {
+        if (err) {
           // console.log(err);
         } else {
           // console.log(response);
         }
       });
 
-      callback(undefined, {success: true});
+      callback(undefined, { success: true });
     }
   });
 };
 
 module.exports = {
-    processXml: processXml
+  processXml: processXml
 }
