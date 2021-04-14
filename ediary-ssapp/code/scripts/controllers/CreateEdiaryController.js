@@ -1,3 +1,5 @@
+import EDiaryService from "./services/EDiaryService.js";
+
 const { WebcController } = WebCardinal.controllers;
 
 const BUTTON_NEW = 'ed-button-new';
@@ -7,8 +9,8 @@ const BUTTON_DETACHED = 'ed-button-detached';
 
 const initModel = {
     title: 'Create EDiary',
-    patchState: null,
-    patchOption: null,
+    patchState: BUTTON_NEW,
+    patchOption: BUTTON_ATTACHED,
     date: {
         label: "Please indicate the date of the activity",
         name: "date",
@@ -31,6 +33,8 @@ export default class CreateEdiaryController extends WebcController {
         super(element, history);
 
         this.setModel(JSON.parse(JSON.stringify(initModel)));
+
+        this.EDiaryService = new EDiaryService(this.DSUStorage);
 
         this.on('openFeedback', (evt) => {
             this.feedbackEmitter = evt.detail;
@@ -70,9 +74,18 @@ export default class CreateEdiaryController extends WebcController {
 
     _attachHandlerEDiaryCreate() {
         this.on('ediary:create', (event) => {
-            console.log(this.model)
-            debugger
-            console.log('ediary:create');
+            let ediaryRecord = {
+                patchOption: this.model.patchOption,
+                patchState: this.model.patchState,
+                date: this._getDateFormatted(),
+                notes: this.model.notes.value,
+            }
+            this.EDiaryService.saveEdiary(ediaryRecord, (err, data) => {
+                if (err) {
+                    return console.log(err);
+                }
+                this.navigateToPageTag('ediary');
+            });
         });
     }
 
@@ -104,6 +117,11 @@ export default class CreateEdiaryController extends WebcController {
         if (typeof this.feedbackEmitter === 'function') {
             this.feedbackEmitter(message, "Validation", alertType)
         }
+    }
+
+    _getDateFormatted() {
+        let date = new Date(this.model.date.value);
+        return date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
     }
 
 }

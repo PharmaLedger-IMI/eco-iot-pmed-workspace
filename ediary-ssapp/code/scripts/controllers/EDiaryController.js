@@ -1,3 +1,5 @@
+import EDiaryService from "./services/EDiaryService.js";
+
 const { WebcController } = WebCardinal.controllers;
 
 
@@ -5,7 +7,17 @@ export default class EDiaryController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
-        this.setModel({});
+        this.setModel({
+            trials: []
+        });
+
+        this.EDiaryService = new EDiaryService(this.DSUStorage);
+        this.EDiaryService.getServiceModel((err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            this.model.trials = data.trials;
+        });
 
         this._attachHandlerEDiaryCreate();
 

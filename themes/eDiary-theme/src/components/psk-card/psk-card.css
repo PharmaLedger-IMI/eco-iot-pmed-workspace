@@ -254,6 +254,8 @@ ol > li::before {
 }
 
 .ediary-controls .psk-card .card-body {
+    background-color: white;
+    padding-top: 20px;
     padding-left: 10%;
 }
 

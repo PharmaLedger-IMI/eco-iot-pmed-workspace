@@ -1,5 +1,6 @@
 <psk-example class="mobile-example">
     <psk-mobile class="noPadding background" disable-header>
+        <link rel="stylesheet" href="./../assets/css/pages/ediary.css">
         <webc-container controller="EDiaryController">
 
             <psk-layout template-rows="25% 75%" align-items="center" class="coloredBackground">
@@ -9,76 +10,27 @@
                     <psk-label class="ediary-user-name-title" label="E-diary"></psk-label>
                     <psk-label class="ediary-user-name-sub-title" label="Summary of your last reports"></psk-label>
 
-                    <psk-layout template-rows="1fr 1fr 1fr" align-items="center" row-gap="10%" class="ed-controls">
-                        <psk-layout-item>
-                            <psk-button class="invisible-button black-blue-text">
-                                <psk-card class="ed-control-line-father">
-                                    <div class="ed-control-line-left">
-                                        <psk-img class="ed-control-image" src="assets/images/greensquare.png"
-                                                 height='70'
-                                                 width='70'></psk-img>
+                    <div class="ediary-trial-list" data-for="@trials">
+                        <psk-button class="invisible-button black-blue-text">
+                            <psk-card class="ed-control-line-father">
+                                <div class="ed-control-line-left">
+                                    <psk-img class="ed-control-image" src="assets/images/greensquare.png"
+                                             height='70'
+                                             width='70'></psk-img>
+                                </div>
+                                <div class="ed-control-line-right">
+                                    <div>
+                                        <psk-label class="ed-control-button-title">{{@date}}</psk-label>
                                     </div>
-                                    <div class="ed-control-line-right">
-                                        <div>
-                                            <psk-label class="ed-control-button-title" label="DD/MM/YYYY"></psk-label>
-                                        </div>
-                                        <div>
-                                            <psk-label class=""
-                                                       label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"></psk-label>
-                                        </div>
-                                        <hr>
+                                    <div class="word-wrap-label">
+                                        <psk-label>{{@notes}}</psk-label>
                                     </div>
-                                </psk-card>
-                            </psk-button>
-                        </psk-layout-item>
+                                    <hr>
+                                </div>
+                            </psk-card>
+                        </psk-button>
+                    </div>
 
-
-                        <psk-layout-item>
-                            <psk-button class="invisible-button black-blue-text">
-                                <psk-card class="ed-control-line-father">
-                                    <div class="ed-control-line-left">
-                                        <psk-img class="ed-control-image" src="assets/images/greensquare.png"
-                                                 height='70'
-                                                 width='70'></psk-img>
-                                    </div>
-                                    <div class="ed-control-line-right">
-                                        <div>
-                                            <psk-label class="ed-control-button-title"
-                                                       label="DD/MM/YYYY"></psk-label>
-                                        </div>
-                                        <div>
-                                            <psk-label class=""
-                                                       label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"></psk-label>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                </psk-card>
-                            </psk-button>
-                        </psk-layout-item>
-
-                        <psk-layout-item>
-                            <psk-button class="invisible-button black-blue-text">
-                                <psk-card class="ed-control-line-father">
-                                    <div class="ed-control-line-left">
-                                        <psk-img class="ed-control-image" src="assets/images/greensquare.png"
-                                                 height='70'
-                                                 width='70'></psk-img>
-                                    </div>
-                                    <div class="ed-control-line-right">
-                                        <div>
-                                            <psk-label class="ed-control-button-title" label="DD/MM/YYYY"></psk-label>
-                                        </div>
-                                        <div>
-                                            <psk-label class=""
-                                                       label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"></psk-label>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                </psk-card>
-                            </psk-button>
-                        </psk-layout-item>
-
-                    </psk-layout>
                     <psk-card class="ediary-controls">
                         <psk-button class="ed-button half-screen-button" event-name="ediary:create">New Input
                         </psk-button>
