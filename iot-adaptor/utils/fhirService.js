@@ -174,15 +174,7 @@ const searchObservation = (callback) => {
 };
 
 const createObservation = (jsonData, callback) => {
-
-  console.log(jsonData);
-  // return jsonData;
   const newObservation = _.merge({"resourceType":"Observation"}, jsonData);
-  console.log(jsonData.name);
-  console.log(newObservation);
-  // jsonData.resourceType = 'Patient';
-  // jsonData.active = true;
-
   fhirClient
     .create({
       resourceType: 'Observation',
@@ -293,6 +285,16 @@ const getResourceById = (type, id, callback) => {
       callback(error, null);
     });
 };
+const deleteResource = (type, id, callback) => {
+  fhirClient
+    .request(`${type}/${id}`)
+    .then((response) => {
+      callback(undefined, response);
+    })
+    .catch((error) => {
+      callback(error, null);
+    });
+};
 
 const findOrCreateResource = (type, jsonData, params, callback) => {
   fhirClient
@@ -345,7 +347,8 @@ module.exports = {
       getById: getResourceById,
       create: createResource,
       update: updateResource,
-      findOrCreate: findOrCreateResource  
+      findOrCreate: findOrCreateResource,
+      delete: deleteResource  
     }
 
 }

@@ -18,6 +18,7 @@ function IotAdapter(server) {
     const CreateResource = require('./resource/create');
     const SearchResource = require('./resource/search');
     const UpdateResource = require('./resource/update');
+    const DeleteResource = require('./resource/delete');
     const GetResourceById = require('./resource/getById');
     // const DeleteObservationById = require('./observation/deleteById');
 
@@ -56,6 +57,7 @@ function IotAdapter(server) {
     server.post(`/iotAdapter/resource/:resource_type`, CreateResource);
     server.put(`/iotAdapter/resource/:resource_type/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/resource/:resource_type/:id`, UpdateResource);
+    server.delete(`/iotAdapter/resource/:resource_type/:id`, DeleteResource);
 
     server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
     server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);

@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-function updateResource(request, response) {
+function searchResource(request, response, next) {
     const receivedDomain = "default";
     const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {
@@ -9,8 +9,10 @@ function updateResource(request, response) {
     }
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
+    const queryParams = _.merge({}, request.query);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
-    flow.updateResource(resourceType, request.params.id, request.body, (err, result) => {
+    const id  = request.params.id;
+    flow.deleteResource(resourceType, id, (err, result) => {
         if (err) {
             if (err.code === 'EACCES') {
                 return response.send(409);
@@ -20,4 +22,5 @@ function updateResource(request, response) {
         response.send(200, result);
     });
 }
-module.exports = updateResource;
+
+module.exports = searchResource;
