@@ -13,49 +13,50 @@ $$.flow.describe('IotAdaptor', {
         etlService.processXml(xmlString, callback);
     },
     searchPatient: function (params, callback) {
-        fhirService.patient.search(params, callback);
-        // dsuService.patient.search(callback);
+        fhirService.resource.search('Patient', params, callback);
     },
     getPatientById: function (id, callback) {
-        console.log(id);
-        console.log("Test ID");
-        fhirService.patient.getById(id, callback);
-        // dsuService.patient.search(callback);
+        fhirService.resource.getById('Patient', id, callback);
     },
     cratePatient: function (jsonData, callback) {
-        fhirService.patient.create(jsonData, callback);
-        // dsuService.patient.create(jsonData, callback);
+        fhirService.resource.create('Patient', jsonData, callback);
     },
     updatePatient: function ( id, jsonData, callback) {
-        console.log("Hello Update!");
-        fhirService.patient.update(id, jsonData,  callback);
-        // dsuService.patient.create(jsonData, callback);
+        fhirService.resource.update('Patient', id, jsonData,  callback);
     },
-    deletePatient: function ( jsonData, callback) {
+    deletePatient: function ( id, callback) {
         console.log("Hello Delete!");
-        // fhirService.patient.update(jsonData,  callback);
-        // dsuService.patient.create(jsonData, callback);
     },
-    searchObservation: function (callback) {
-        fhirService.observation.search(callback);
-        // dsuService.observation.search(callback);
+    searchObservation: function (params, callback) {
+        fhirService.resource.search('Observation', params, callback);
     },
-
     crateObservation: function (jsonData, callback) {
-        fhirService.observation.create(jsonData, callback);
-        // dsuService.patient.create(jsonData, callback);
+        fhirService.resource.create('Observation', jsonData, callback);
     },
     updateObservation: function (id, jsonData, callback) {
-        fhirService.observation.update(id, jsonData, callback);
-        // dsuService.patient.create(jsonData, callback);
+        fhirService.resource.update('Observation', id, jsonData, callback);
     },
     getObservationById: function (id, callback) {
-        console.log(id);
-        fhirService.observation.getById(id, callback);
-        // dsuService.patient.create(jsonData, callback);
+        fhirService.resource.getById('Observation', id, callback);
     },
     deleteObservation: function(id, callback) {
-        fhirService.observation.deleteById(id, callback);
+        fhirService.resource.delete('Observation', id, callback);
+
+    },
+    searchResource: function (resourceType, params, callback) {
+        fhirService.resource.search(resourceType, params, callback);
+    },
+    createResource: function (resourceType, jsonData, callback) {
+        fhirService.resource.create(resourceType, jsonData, callback);
+    },
+    updateResource: function (resourceType, id, jsonData, callback) {
+        fhirService.resource.update(resourceType, id, jsonData, callback);
+    },
+    getResourceById: function (resourceType, id, callback) {
+        fhirService.resource.getById(resourceType, id, callback);
+    },
+    deleteResource: function(resourceType, id, callback) {
+        fhirService.resource.delete(resourceType, id, callback);
 
     }
 });

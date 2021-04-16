@@ -71,7 +71,7 @@ const processXml = (xmlString, callback) => {
         serialNumber: deviceSN
       }
 
-      fhirService.patient.findOrCreate(newPatient, { identifier: patientIdentifier }, (err, response) => {
+      fhirService.resource.findOrCreate('Patient', newPatient, { identifier: patientIdentifier }, (err, response) => {
         if (err) {
           // console.log(err);
         } else {
@@ -104,7 +104,7 @@ const processXml = (xmlString, callback) => {
               code: "cm"
             }
           }
-          fhirService.observation.findOrCreate(bodyHeight, { identifier: heightIdentifier }, (err, response) => {
+          fhirService.resource.findOrCreate('Observation', bodyHeight, { identifier: heightIdentifier }, (err, response) => {
             // console.log(err);
             // console.log(response);
             
@@ -137,7 +137,7 @@ const processXml = (xmlString, callback) => {
               code: "kg"
             }
           }
-          fhirService.observation.findOrCreate(bodyWeight, { identifier: weightIdentifier }, (err, response) => {
+          fhirService.resource.findOrCreate('Observation', bodyWeight, { identifier: weightIdentifier }, (err, response) => {
             // console.log(err);
             // console.log(response);
           });
@@ -170,7 +170,7 @@ const processXml = (xmlString, callback) => {
               code: "a"
             }
           }
-          fhirService.observation.findOrCreate(age, { identifier: ageIdentifier }, (err, response) => {
+          fhirService.resource.findOrCreate('Observation', age, { identifier: ageIdentifier }, (err, response) => {
             // console.log(err);
             // console.log(response);
           });
@@ -204,7 +204,7 @@ const processXml = (xmlString, callback) => {
               code: "mmHg"
             }
           }
-          fhirService.observation.findOrCreate(sBloodPressure, { identifier: sbpIdentifier }, (err, response) => {
+          fhirService.resource.findOrCreate('Observation', sBloodPressure, { identifier: sbpIdentifier }, (err, response) => {
             // console.log(err);
             // console.log(response);
             // console.log("Successfully processed Systolic Blood Pressure");
@@ -240,7 +240,7 @@ const processXml = (xmlString, callback) => {
               code: "mmHg"
             }
           }
-          fhirService.observation.findOrCreate(dBloodPressure, { identifier: dbpIdentifier }, (err, response) => {
+          fhirService.resource.findOrCreate('Observation', dBloodPressure, { identifier: dbpIdentifier }, (err, response) => {
             // console.log(err);
             // console.log(response);
             // console.log("Successfully processed Diasystolic Blood Pressure");
@@ -277,7 +277,7 @@ const processXml = (xmlString, callback) => {
               code: "mmHg"
             }
           }
-          fhirService.observation.findOrCreate(csBloodPressure, { identifier: csbpIdentifier }, (err, response) => {
+          fhirService.resource.findOrCreate('Observation', csBloodPressure, { identifier: csbpIdentifier }, (err, response) => {
             // console.log(err);
             // console.log(response);
             // console.log("Successfully processed Central Systolic Blood Pressure");
@@ -312,7 +312,7 @@ const processXml = (xmlString, callback) => {
               code: "%"
             }
           }
-          fhirService.observation.findOrCreate(SpO2, { identifier: SpO2Identifier }, (err, response) => {
+          fhirService.resource.findOrCreate('Observation', SpO2, { identifier: SpO2Identifier }, (err, response) => {
             // console.log(err);
             // console.log(response);
             // console.log("Successfully processed SpO2");
@@ -321,7 +321,7 @@ const processXml = (xmlString, callback) => {
         }
       });
 
-      fhirService.device.findOrCreate(newDevice, { identifier: deviceSN }, (err, response) => {
+      fhirService.resource.findOrCreate('Device', newDevice, { identifier: deviceSN }, (err, response) => {
         if (err) {
           // console.log(err);
         } else {

@@ -241,10 +241,9 @@ const getObservationById = (id, callback) => {
 
 //Resource
 
-const searchResource = (type, callback) => {
-  // console.log("Hello Search");
+const searchResource = (type, params, callback) => {
   fhirClient
-    .search({ resourceType: type, searchParams: {}})
+    .search({ resourceType: type, searchParams: params})
     .then((response) => {
       callback(undefined, response);
     })
@@ -254,87 +253,61 @@ const searchResource = (type, callback) => {
 };
 
 const createResource = (type, jsonData, callback) => {
-
-  console.log(jsonData);
-  // return jsonData;
-  const newObservation = _.merge({"resourceType":type}, jsonData);
-  console.log(jsonData.name);
-  console.log(newObservation);
-  // jsonData.resourceType = 'Patient';
-  // jsonData.active = true;
-
+  const resource = _.merge({"resourceType":type}, jsonData);
   fhirClient
     .create({
       resourceType: type,
-      body: newObservation,
+      body: resource,
     })
     .then((response) => {
-      console.log("Done");
       callback(undefined, response);
     })
     .catch((error) => {
-      // console.log(erro.data);
       callback(error, null);
     });
 };
 
 const updateResource = (type, id, jsonData, callback) => {
-
-  console.log(jsonData);
-  // return jsonData;
-  const newPatient = _.merge({"resourceType":type}, jsonData);
-  // console.log(jsonData.name);
-  console.log(newPatient);
-  console.log(id);
-  // jsonData.resourceType = 'Patient';
-  // jsonData.active = true;
-
+  const resource = _.merge({"resourceType":type}, jsonData);
   fhirClient
     .update({
       resourceType: type,
       id: id,
-      body: newPatient,
+      body: resource,
     })
     .then((response) => {
-      console.log("Done");
       callback(undefined, response);
     })
     .catch((error) => {
-      console.log(error);
       callback(error, null);
     });
 };
 
 const getResourceById = (type, id, callback) => {
-  console.log(id);
   fhirClient
     .request(`${type}/${id}`)
     .then((response) => {
-
       callback(undefined, response);
     })
     .catch((error) => {
-      callback(error, []);
+      callback(error, null);
     });
 };
 
-
-const findOrCreateResource = (type, jsonData, searchParams, callback) => {
+const findOrCreateResource = (type, jsonData, params, callback) => {
   fhirClient
-    .search({ resourceType: type, searchParams: searchParams})
+    .search({ resourceType: type, searchParams: params})
     .then((response) => {
       if(response.entry){
-        // console.log('Observation found');
         callback(undefined, response.entry[0].resource);
       } else {
-        const newObject = _.merge({"resourceType":type}, jsonData);
+        const resource = _.merge({"resourceType":type}, jsonData);
         fhirClient
           .create({
             resourceType: type,
-            body: newObject,
+            body: resource,
           })
           .then((response) => {
-            // console.log('Observation created');
             callback(undefined, response);
           })
           .catch((error) => {
