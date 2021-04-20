@@ -20,6 +20,7 @@ export default class EDiaryController extends WebcController {
         });
 
         this._attachHandlerEDiaryCreate();
+        this._attachHandlerEDiaryBack();
 
         this.on('openFeedback', (evt) => {
             this.feedbackEmitter = evt.detail;
@@ -29,6 +30,12 @@ export default class EDiaryController extends WebcController {
     _attachHandlerEDiaryCreate (){
         this.on('ediary:create', (event) => {
             this.navigateToPageTag('create-diary');
+        });
+    }
+
+    _attachHandlerEDiaryBack() {
+        this.on('ediary:back', (event) => {
+            this.navigateToPageTag('home');
         });
     }
 
