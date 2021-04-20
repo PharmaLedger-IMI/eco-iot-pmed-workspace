@@ -1,53 +1,76 @@
-<psk-page>
-
-    <psk-toc title="Patient Dashboard" slot="toc"></psk-toc>
-
-    <psk-container controller-name="HomeController">
-
-        <psk-card class="bpd-dashboard">
-
-<!--            <psk-label class="bpd-dashboard-title" label="Patient Dashboard"/>-->
-
-            <div class="bpd-buttons-row bpd-wide-cards">
-
-                <psk-layout columns="2" align-items="auto">
-
-                    <psk-button class="bpd-organization-card" event-name="home:profile">
-                        <div class="bpd-organization-card-content">
-                            <psk-icon icon="user" color="rgb(255, 255, 255)"></psk-icon>
-                        </div>
-                        <psk-label class="bpd-organization-card-label" label="My Profile"/>
-                    </psk-button>
-
-                    <psk-button class="bpd-organization-card" event-name="home:mydata">
-                        <div class="bpd-organization-card-content">
-                            <psk-icon icon="cloud" color="rgb(255, 255, 255)"></psk-icon>
-                        </div>
-                        <psk-label class="bpd-organization-card-label" label="My Data"/>
-                    </psk-button>
-
-                    <psk-button class="bpd-organization-card" event-name="home:platforms">
-                        <div class="bpd-organization-card-content">
-                            <psk-icon icon="tasks" color="rgb(255, 255, 255)"></psk-icon>
-                        </div>
-                        <psk-label class="bpd-organization-card-label" label="Platforms"/>
-                    </psk-button>
-
-                    <psk-button class="bpd-organization-card" event-name="home:feedback">
-                        <div class="bpd-organization-card-content">
-                            <psk-icon icon="bug" color="rgb(255, 255, 255)"></psk-icon>
-                        </div>
-                        <psk-label class="bpd-organization-card-label" label="Feedback"/>
-                    </psk-button>
-
-                </psk-layout>
-
-
-
+<psk-page title="Patient Dashboard" style="height: 100vh">
+    <psk-container controller-name="HomeController" style="height: 100%">
+      <div class="p-5 container-background-primary">
+        <div class="pharma-main-container">
+          <div class="d-flex flex-row align-content-center justify-content-between">
+            <img
+              width="110"
+              height="47"
+              src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
+              alt="Pharmaledger logo"
+            />
+            <div class="d-flex flex-row justify-content-center align-items-center">
+              <div class="mr-2">Help</div>
+              <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
             </div>
-        </psk-card>
+          </div>
+          <div class="flex-grow-1">
+            <psk-card class="bpd-dashboard text-center">
+                <div class="bpd-buttons-row bpd-wide-cards">
 
+                    <psk-layout columns="2" align-items="auto">
+    
+                        <psk-button class="bpd-organization-card" event-name="home:profile">
+                            <div class="bpd-organization-card-content">
+                                <psk-icon icon="user" color="rgb(255, 255, 255)"></psk-icon>
+                            </div>
+                            <psk-label class="bpd-organization-card-label" label="My Profile"/>
+                        </psk-button>
+    
+                        <psk-button class="bpd-organization-card" event-name="home:mydata">
+                            <div class="bpd-organization-card-content">
+                                <psk-icon icon="cloud" color="rgb(255, 255, 255)"></psk-icon>
+                            </div>
+                            <psk-label class="bpd-organization-card-label" label="My Data"/>
+                        </psk-button>
+    
+                        <psk-button class="bpd-organization-card" event-name="home:platforms">
+                            <div class="bpd-organization-card-content">
+                                <psk-icon icon="sitemap" color="rgb(255, 255, 255)"></psk-icon>
+                            </div>
+                            <psk-label class="bpd-organization-card-label" label="Platforms"/>
+                        </psk-button>
+    
+                        <psk-button class="bpd-organization-card" event-name="home:feedback">
+                            <div class="bpd-organization-card-content">
+                                <psk-icon icon="comments" color="rgb(255, 255, 255)"></psk-icon>
+                            </div>
+                            <psk-label class="bpd-organization-card-label" label="Feedback"/>
+                        </psk-button>
+    
+                    </psk-layout>
+    
+    
+    
+                </div>
+                              
+            </psk-card>
+          </div>
+        </div>
+        <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
+          <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
+          <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+            <div class="text-white text-centered text-justify">
+              This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+              under grant agreement No 853992
+            </div>
+            <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+          </div>
+        </div>
+      </div>
     </psk-container>
-</psk-page>
+  </psk-page>
+
+
 
 
