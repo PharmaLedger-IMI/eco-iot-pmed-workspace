@@ -101,6 +101,13 @@ psk-page div.card-body {
     }
 }
 
+@media  screen and (max-width:600px) {
+    .bpd-buttons-row{
+        flex-wrap: wrap;
+    }
+    
+}
+
 
 /** move modal **/
 
@@ -508,3 +515,4 @@ progress, progress[role] {
     -webkit-animation: bar-fill 2s;
     width: 0;
 }
+

@@ -224,7 +224,7 @@ psk-modal .footer .unsaved-file {
 }
 
 .container-background-primary {
-  background-color: var(--primary);
+  background-color: #00345B;;
   height: 100%;
   width: 100%;
   display: flex;
@@ -246,4 +246,5 @@ psk-modal .footer .unsaved-file {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+ 
 }

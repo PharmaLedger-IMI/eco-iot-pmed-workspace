@@ -39,13 +39,13 @@ const healthdatamodel = {
         ],
         value: ''
     }
+
 }
 
 
-export default class FormComponentExampleController extends ContainerController {
+export default class MyDataMainPageController extends ContainerController {
     constructor(element, history) {
         super(element, history);
-
         this.model = this.setModel(JSON.parse(JSON.stringify(healthdatamodel)));
 
         this.feedbackEmitter = null;
@@ -68,7 +68,13 @@ export default class FormComponentExampleController extends ContainerController 
         }
 
         this.on("View",radioSubmit,true);
+
+       
+        
     }
+   
+        
+
 
 
 

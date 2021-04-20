@@ -1,12 +1,12 @@
 .btn.btn-primary,
 .submit {
-  background-color: var(--secondary);
+  background-color: #008798;
   box-shadow: rgba(53, 79, 155, 0.35) 0px 15px 30px -12px;
   padding: 4px 16px;
   margin-right: 10px;
   border-radius: 5px;
   margin-bottom: 1rem;
-  border: 1px solid var(--secondary);
+  border: 1px solid #008798;
   color: white;
   font-size: 0.95rem;
 }
@@ -32,3 +32,5 @@
 .submit:disabled {
   background-color: rgba(0, 136, 152, 0.8) !important;
 }
+
+

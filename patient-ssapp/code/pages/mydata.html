@@ -1,39 +1,65 @@
-<psk-page title="Patient Profile IoT and Health Data">
+<psk-page title="Patient Profile IoT and Health Data" style="height: 100vh">
+    <psk-container controller-name="MyDataMainPageController" style="height: 100%">
+        <div class="p-5 container-background-primary">
+            <div class="pharma-main-container">
+                <div class="d-flex flex-row align-content-center justify-content-between">
+                    <img
+                      width="110"
+                      height="47"
+                      src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
+                      alt="Pharmaledger logo"
+                    />
+                    <div class="d-flex flex-row justify-content-center align-items-center">
+                      <div class="mr-2">Help</div>
+                      <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
+                    </div>
+                  </div>
+                <div class="flex-grow-1">
+                    <psk-card class="bpd-dashboard text-center">
 
-    <psk-toc title="View your IoT and Health Data" slot="toc"></psk-toc>
+                        <div id="div0" style="background-color: #d3d3d3; width: auto; position: relative;">
+                            <psk-label label="Welcome: "/>
+                            <psk-label label="@name"></psk-label>
+                            <psk-label label="Your KEY SSI is:"/>
+                            <psk-label label="@id"></psk-label>
+                        </div>
+            
+                        <div>
+                            <psk-form controller-name="MyDataController" form-actions="View">
+                                <psk-form-row layout="xs=[12] m=[12] l=[12] xl=[12]">
+                                    <psk-radio-group view-model="mydata"> </psk-radio-group>
+                                </psk-form-row>
+                            </psk-form>
+                        </div>
+            
+                        <div>
+                            <psk-form controller-name="MySourcesController" form-actions="Select">
+                                <psk-form-row layout="xs=[12] m=[12] l=[12] xl=[12]">
+                                    <psk-radio-group view-model="myhealthsources"> </psk-radio-group>
+                                </psk-form-row>
+                            </psk-form>
+                        </div>
+                        <psk-button class="mt-2 pharma-primary" label="go back" event-name="go-back"></psk-button>
+                        
+                        
+                             
+                    </psk-card>   
+                                 
+                </div>
 
-    <psk-container controller-name="MyDataMainPageController">
-
-        <psk-card class="bpd-dashboard">
-
-
-            <div id="div0" style="background-color: #d3d3d3; width: auto; position: relative;">
-                <psk-label label="Welcome: "/>
-                <psk-label label="@name"></psk-label>
-                <psk-label label="Your KEY SSI is:"/>
-                <psk-label label="@id"></psk-label>
             </div>
-
-            <div>
-                <psk-form controller-name="MyDataController" form-actions="View">
-                    <psk-form-row layout="xs=[12] m=[12] l=[12] xl=[12]">
-                        <psk-radio-group view-model="mydata"> </psk-radio-group>
-                    </psk-form-row>
-                </psk-form>
-            </div>
-
-
-            <div>
-                <psk-form controller-name="MySourcesController" form-actions="Select">
-                    <psk-form-row layout="xs=[12] m=[12] l=[12] xl=[12]">
-                        <psk-radio-group view-model="myhealthsources"> </psk-radio-group>
-                    </psk-form-row>
-                </psk-form>
-            </div>
-
-<!--            007BFF-->
-
-        </psk-card>
+            <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
+                <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
+                <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+                  <div class="text-white text-centered text-justify">
+                    This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+                    under grant agreement No 853992
+                  </div>
+                  <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+                </div>
+              </div>
+        </div>
+        
 
     </psk-container>
 </psk-page>
