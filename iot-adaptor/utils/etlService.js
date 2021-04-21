@@ -75,7 +75,6 @@ const processXml = (xmlString, callback) => {
         if (err) {
           // console.log(err);
         } else {
-          // console.log(response);
           //Start Height
 
           const heightIdentifier = `patient/${response.id}/observation/height/${effectiveDateTime.unix()}`;
@@ -104,12 +103,10 @@ const processXml = (xmlString, callback) => {
               code: "cm"
             }
           }
-          fhirService.resource.findOrCreate('Observation', bodyHeight, { identifier: heightIdentifier }, (err, response) => {
-            // console.log(err);
-            // console.log(response);
-            
+          fhirService.resource.findOrCreate('Observation', bodyHeight, { identifier: heightIdentifier }, (err, response) => {            
           });
           //End Height
+
           //Start Weight
           const weightIdentifier = `patient/${response.id}/observation/weight/${effectiveDateTime.unix()}`;
           const bodyWeight = {
@@ -175,6 +172,7 @@ const processXml = (xmlString, callback) => {
             // console.log(response);
           });
           //End Age
+
           //Start Systolic Blood Pressure
           const sbp = _.find(pwv.item, function (object) { return object.$.code === 'PTG-BPSYS'; });
           const sbpIdentifier = `patient/${response.id}/observation/sbp/${effectiveDateTime.unix()}`;
@@ -188,7 +186,7 @@ const processXml = (xmlString, callback) => {
             code: {
               coding: [{
                 system: "http://loinc.org",
-                code: "60984-2"
+                code: "8480-6"
               }
               ],
               text: "Systolic Blood Pressure"
@@ -205,11 +203,10 @@ const processXml = (xmlString, callback) => {
             }
           }
           fhirService.resource.findOrCreate('Observation', sBloodPressure, { identifier: sbpIdentifier }, (err, response) => {
-            // console.log(err);
-            // console.log(response);
-            // console.log("Successfully processed Systolic Blood Pressure");
+            
           });
           //End Blood Pressure
+
           //Start Diasystolic Blood Pressure
           const dbp = _.find(pwv.item, function (object) { return object.$.code === 'PTG-BPDIA'; });
           const dbpIdentifier = `patient/${response.id}/observation/dbp/${effectiveDateTime.unix()}`;
@@ -224,7 +221,7 @@ const processXml = (xmlString, callback) => {
               coding: [
                 {
                   system: "http://loinc.org",
-                  code: "60982-6"
+                  code: "8462-4"
                 }
               ],
               text: "Diastolic Blood Pressure"
@@ -241,9 +238,7 @@ const processXml = (xmlString, callback) => {
             }
           }
           fhirService.resource.findOrCreate('Observation', dBloodPressure, { identifier: dbpIdentifier }, (err, response) => {
-            // console.log(err);
-            // console.log(response);
-            // console.log("Successfully processed Diasystolic Blood Pressure");
+           
           });
           //End Diasystolic Blood Pressure
 
