@@ -1,0 +1,72 @@
+<psk-page title="Evidence">
+    <psk-toc title="Evidence Module" slot="toc"></psk-toc>
+    <psk-container controller-name="EvidenceController">
+        <psk-card class="bpd-dashboard">
+            <div>
+                <psk-layout class="border-bottom border-top" slot="condition-true" columns="6">
+                    <psk-label label="Evidence ID"></psk-label>
+                    <psk-label label="Name"></psk-label>
+                    <psk-label label="Title"></psk-label>
+                    <psk-label label="Version"></psk-label>
+                    <psk-label label="Status"></psk-label>
+                    <psk-label label="Options"></psk-label>
+
+                </psk-layout>
+
+                    <psk-layout columns="6" class="justify-content-center align-items-center table-row">
+                        <psk-label label="E001"></psk-label>
+                        <psk-label label="Test 1"></psk-label>
+                        <psk-label label="Title 1"></psk-label>
+                        <psk-label label="v.0.0.1"></psk-label>
+                        <psk-label label="Draft"></psk-label>
+                        <div class="d-flex flex-row align-items-center justify-content-around">
+                            <psk-button
+                                    class="btn-bare table-cell m-1 pharma-primary"
+                                    event-name="evidence:view"
+
+                            >
+                                View
+                            </psk-button>
+                            <psk-button
+                                    class="btn-bare table-cell m-1 pharma-primary"
+                                    event-name="evidence:edit"
+
+                            >
+                                Edit
+                            </psk-button>
+                        </div>
+
+                        <psk-label label="E002"></psk-label>
+                        <psk-label label="Test 2"></psk-label>
+                        <psk-label label="Title 1"></psk-label>
+                        <psk-label label="v.0.0.3"></psk-label>
+                        <psk-label label="Pending"></psk-label>
+                        <div class="d-flex flex-row align-items-center justify-content-around">
+                            <psk-button
+                                    class="btn-bare table-cell m-1 pharma-primary"
+                                    event-name="evidence:view"
+                            >
+                                View
+                            </psk-button>
+                            <psk-button
+                                    class="btn-bare table-cell m-1 pharma-primary"
+                                    event-name="evidence:edit"
+                            >
+                                Edit
+                            </psk-button>
+                        </div>
+                        
+                        
+                    </psk-layout>
+            </div>
+            <div class="d-flex flex-row align-items-center justify-content-around">
+                <psk-button
+                class="btn-bare table-cell m-1 pharma-primary"
+                event-name="evidence:back-to-menu"
+              >
+                Back
+              </psk-button>
+            </div>
+        </psk-card>
+    </psk-container>
+</psk-page>

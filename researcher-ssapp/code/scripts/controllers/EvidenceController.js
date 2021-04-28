@@ -82,14 +82,30 @@ export default class EvidenceController extends ContainerController {
         this._attachHandlerEvidenceP2()
         this._attachHandlerEvidenceP3()
         this._attachHandlerEvidenceBackMenu()
+        this._attachHandlerEvidenceConfirm()
+        this._attachHandlerEvidence()
+        this._attachHandlerEvidenceList()
+        this._attachHandlerHome()
         // this._attachHandlerEvidenceP4()
         // this._attachHandlerEvidenceP5()
     }
     
+    _attachHandlerHome(){
+        this.on('evidence:home', (event) => {
+            // console.log ("Evidence go back button pressed");
+            this.History.navigateToPageByTag('home');
+        });
+    }
     _attachHandlerEvidence(){
         this.on('evidence:evidence', (event) => {
             console.log ("Evidence go back button pressed");
             this.History.navigateToPageByTag('evidence');
+        });
+    }
+    _attachHandlerEvidenceList(){
+        this.on('evidence:list', (event) => {
+            console.log ("Evidence go back button pressed");
+            this.History.navigateToPageByTag('evidence-list');
         });
     }
     _attachHandlerEvidenceP1(){
@@ -110,10 +126,10 @@ export default class EvidenceController extends ContainerController {
             this.History.navigateToPageByTag('add-evidence-p3');
         });
     }
-    _attachHandlerEvidenceP3(){
-        this.on('evidence:add-evidence-p3', (event) => {
-            console.log ("Evidence P3 button pressed");
-            this.History.navigateToPageByTag('add-evidence-p3');
+    _attachHandlerEvidenceConfirm(){
+        this.on('evidence:confirm', (event) => {
+            console.log ("Evidence Confirm button pressed");
+            this.History.navigateToPageByTag('confirm-evidence');
         });
     }
     _attachHandlerEvidenceBackMenu(){

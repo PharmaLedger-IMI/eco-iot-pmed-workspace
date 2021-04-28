@@ -63,7 +63,20 @@
       "pageSrc": "addEvidenceP3.html",
       "tags": "add-evidence-p3"
     },
-    
+    {
+      "name": "Add Evidence",
+      "path": "/confirm-evidence",
+      "icon": "fa-home",
+      "pageSrc": "completedEvidence.html",
+      "tags": "confirm-evidence"
+    },
+    {
+      "name": "All Evidences",
+      "path": "/evidence-list",
+      "icon": "fa-home",
+      "pageSrc": "evidenceList.html",
+      "tags": "evidence-list"
+    },
     {
       "name": "View dynamic Consent",
       "path": "/view-dynamic-consent",
