@@ -34,14 +34,36 @@
       "icon": "fa-home",
       "pageSrc": "view-information-requests.html",
       "tags": "view-information-requests"
-    },
+    }, 
     {
-      "name": "Evidence",
+      "name": "evidence",
       "path": "/evidence",
       "icon": "fa-home",
       "pageSrc": "evidence.html",
       "tags": "evidence"
     },
+    {
+      "name": "Add Evidence",
+      "path": "/add-evidence-p1",
+      "icon": "fa-home",
+      "pageSrc": "addEvidenceP1.html",
+      "tags": "add-evidence-p1"
+    },
+    {
+      "name": "Add Evidence",
+      "path": "/add-evidence-p2",
+      "icon": "fa-home",
+      "pageSrc": "addEvidenceP2.html",
+      "tags": "add-evidence-p2"
+    },
+    {
+      "name": "Add Evidence",
+      "path": "/add-evidence-p3",
+      "icon": "fa-home",
+      "pageSrc": "addEvidenceP3.html",
+      "tags": "add-evidence-p3"
+    },
+    
     {
       "name": "View dynamic Consent",
       "path": "/view-dynamic-consent",

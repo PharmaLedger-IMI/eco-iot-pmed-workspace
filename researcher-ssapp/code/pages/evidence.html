@@ -1,15 +1,29 @@
 <psk-page title="Evidence">
-
-    <psk-toc title="Evidence and Outcomes" slot="toc"></psk-toc>
-
-    <psk-container>
-
+    <psk-toc title="Evidence Module" slot="toc"></psk-toc>
+    <psk-container controller-name="EvidenceController">
         <psk-card class="bpd-dashboard">
-
-            <psk-label class="bpd-dashboard-title" label="Write produce and report evidence"/>
-
+          <div class="d-flex flex-row align-items-center justify-content-around">
+            <psk-button
+              class="btn-bare table-cell m-1 pharma-primary"
+              event-name="evidence:add-evidence-p1"
+            >
+              Add New Evidence
+            </psk-button>
+            <psk-button
+              class="btn-bare table-cell m-1 pharma-primary"
+              event-name="evidence:search-evidence"
+            >
+              Search Evidence
+            </psk-button>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-around">
+            <psk-button
+              class="btn-bare table-cell m-1 pharma-primary"
+              event-name="evidence:back"
+            >
+              Back
+            </psk-button>
+          </div>
         </psk-card>
-
     </psk-container>
-
 </psk-page>

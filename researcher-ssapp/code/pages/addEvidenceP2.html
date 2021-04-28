@@ -1,0 +1,33 @@
+<psk-page title="Evidence">
+    <psk-toc title="Evidence Module" slot="toc"></psk-toc>
+    <psk-container controller-name="EvidenceController">
+        <psk-card class="bpd-dashboard">
+            <psk-text-input view-model="@title"></psk-text-input>
+            <psk-text-input view-model="@subtitle"></psk-text-input>
+            <div>
+                <psk-text-input view-model="@version"></psk-text-input>
+                <psk-select label="Status" select-options="Status 1 | Status 2 | Status 3">
+                </psk-select>
+                <psk-select label="Topic" select-options="Topic 1 | Topic 2 | Topic 3">
+                </psk-select>
+                <psk-select label="Exposure Background" select-options="Exposure Background 1 | Exposure Background 2 | Exposure Background 3">
+                </psk-select>
+            </div>
+            <textarea data-view-model="@description" rows="6"></textarea>
+            <div class="d-flex flex-row align-items-center justify-content-around">
+              <psk-button
+                class="btn-bare table-cell m-1 pharma-primary"
+                event-name="evidence:add-evidence-p3"
+              >
+                Next
+              </psk-button>
+              <psk-button
+                class="btn-bare table-cell m-1 pharma-primary"
+                event-name="evidence:evidence"
+              >
+                Back
+              </psk-button>
+            </div>
+        </psk-card>
+    </psk-container>
+</psk-page>

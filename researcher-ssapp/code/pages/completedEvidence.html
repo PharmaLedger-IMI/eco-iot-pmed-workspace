@@ -1,0 +1,24 @@
+<psk-page title="Evidence">
+    <psk-toc title="Evidence Module" slot="toc"></psk-toc>
+    <psk-container controller-name="EvidenceController">
+        <psk-card class="bpd-dashboard">
+            <psk-text-input view-model="@name"></psk-text-input>
+            <psk-text-input view-model="@organization"></psk-text-input>
+            <psk-text-input view-model="@email"></psk-text-input>
+            <div class="d-flex flex-row align-items-center justify-content-around">
+              <psk-button
+                class="btn-bare table-cell m-1 pharma-primary"
+                event-name="evidence:add-evidence-p2"
+              >
+                Next
+              </psk-button>
+              <psk-button
+                class="btn-bare table-cell m-1 pharma-primary"
+                event-name="evidence:back-to-menu"
+              >
+                Back To Menu
+              </psk-button>
+            </div>
+        </psk-card>
+    </psk-container>
+</psk-page>
