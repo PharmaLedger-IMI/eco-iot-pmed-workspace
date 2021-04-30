@@ -1,15 +1,49 @@
 <psk-page title="Evidence">
     <psk-toc title="Evidence Summary" slot="toc"></psk-toc>
     <psk-container controller-name="EvidenceController">
-        <psk-card class="bpd-dashboard">
-            <h3>Your evidence created successfully!</h3>
-              <psk-button
-                class="btn-bare table-cell m-1 pharma-primary"
-                event-name="evidence:back-to-menu"
-              >
-                Back To Menu
-              </psk-button>
-            </div>
-        </psk-card>
-    </psk-container>
-</psk-page>
+      <div class="p-5 container-background-primary">
+        <div class="pharma-main-container">
+            <div class="d-flex flex-row align-content-center justify-content-between">
+                <psk-img 
+                width="120"
+                height="50"
+                src="../resources/images/pharmaledger.jpg" 
+                alt="Pharmaledger logo">
+                </psk-img>
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                  <div class="mr-2">Help</div>
+                  <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
+                </div>
+              </div>
+              <div class="flex-grow-1">
+                <psk-card class="bpd-dashboard ">
+                    <div class="bpd-wide-cards">
+                      <h3>Your evidence created successfully!</h3>
+                      <psk-button
+                        class="btn-bare table-cell m-1 pharma-primary"
+                        event-name="evidence:back-to-menu"
+                      >
+                        Back To Menu
+                      </psk-button>
+                    </div>
+                  </psk-card>  
+                </div>
+              </div>
+              <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
+                  <psk-img 
+                  width="123"
+                  height="83"
+                  src="../resources/images/EU_flag.jpg" 
+                  alt="EU Flag">
+                  </psk-img>
+                  <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+                      <div class="text-black text-centered text-justify">
+                      This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+                      under grant agreement No 853992
+                      </div>
+                      <div class="text-black text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+                  </div>
+              </div>
+          </div>
+      </psk-container>
+  </psk-page>

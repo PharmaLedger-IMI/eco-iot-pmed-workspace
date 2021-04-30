@@ -1,47 +1,73 @@
 <psk-page title="Evidence">
     <psk-toc title="Evidence Module" slot="toc"></psk-toc>
     <psk-container controller-name="EvidenceController">
-        <psk-card class="bpd-dashboard">
-            <div>
-                <psk-layout class="border-bottom border-top" slot="condition-true" columns="5">
-                    <psk-label label="Evidence ID"></psk-label>
-                    <psk-label label="Name"></psk-label>
-                    <psk-label label="Title"></psk-label>
-                    <psk-label label="Version"></psk-label>
-                    <psk-label label="Status"></psk-label>
+      <div class="p-5 container-background-primary">
+        <div class="pharma-main-container">
+          <div class="d-flex flex-row align-content-center justify-content-between">
+            <psk-img 
+            width="120"
+            height="50"
+            src="../resources/images/pharmaledger.jpg" 
+            alt="Pharmaledger logo">
+            </psk-img>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+              <div class="mr-2">Help</div>
+              <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
+            </div>
+          </div>
+          <div class="flex-grow-1">
+            <psk-card class="bpd-dashboard ">
+                <div class="bpd-wide-cards">
+                  <div>
+                    <psk-layout class="border-bottom border-top" slot="condition-true" columns="5">
+                        <psk-label label="Evidence ID"></psk-label>
+                        <psk-label label="Name"></psk-label>
+                        <psk-label label="Title"></psk-label>
+                        <psk-label label="Version"></psk-label>
+                        <psk-label label="Status"></psk-label>
 
-                </psk-layout>
-
+                    </psk-layout>
                     <psk-layout columns="5" class="justify-content-center align-items-center table-row">
                         <psk-label label="E001"></psk-label>
                         <psk-label label="Test 1"></psk-label>
                         <psk-label label="Title 1"></psk-label>
                         <psk-label label="v.0.0.1"></psk-label>
                         <psk-label label="Draft"></psk-label>
-
-                        <psk-label label="E002"></psk-label>
-                        <psk-label label="Test 2"></psk-label>
-                        <psk-label label="Title 1"></psk-label>
-                        <psk-label label="v.0.0.3"></psk-label>
-                        <psk-label label="Pending"></psk-label>
-                        
-                        
                     </psk-layout>
+                  </div>
+                  <div class="d-flex flex-row align-items-center justify-content-around">
+                    <psk-button
+                      class="btn-bare table-cell m-1 pharma-primary"
+                      event-name="evidence:confirm"
+                    >
+                      Confirm
+                    </psk-button>
+                    <psk-button
+                      class="btn-bare table-cell m-1 pharma-primary"
+                      event-name="evidence:edit"
+                    >
+                      Edit
+                    </psk-button>
+                  </div>
+                </div>
+              </psk-card>
             </div>
-            <div class="d-flex flex-row align-items-center justify-content-around">
-              <psk-button
-                class="btn-bare table-cell m-1 pharma-primary"
-                event-name="evidence:confirm"
-              >
-                Confirm
-              </psk-button>
-              <psk-button
-                class="btn-bare table-cell m-1 pharma-primary"
-                event-name="evidence:edit-description"
-              >
-                Edit
-              </psk-button>
+          </div>
+          <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
+            <psk-img 
+            width="123"
+            height="83"
+            src="../resources/images/EU_flag.jpg" 
+            alt="EU Flag">
+            </psk-img>
+          <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+            <div class="text-black text-centered text-justify">
+              This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+              under grant agreement No 853992
             </div>
-        </psk-card>
+            <div class="text-black text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+          </div>
+        </div>
+      </div>
     </psk-container>
-</psk-page>
+  </psk-page>

@@ -71,6 +71,13 @@
       "tags": "confirm-evidence"
     },
     {
+      "name": "Edit Evidence",
+      "path": "/ediy-evidence",
+      "icon": "fa-home",
+      "pageSrc": "editEvidence.html",
+      "tags": "edit-evidence"
+    },
+    {
       "name": "All Evidences",
       "path": "/evidence-list",
       "icon": "fa-home",

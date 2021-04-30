@@ -50,11 +50,11 @@ const AddDevicesViewModel = {
         value: ''
     },
     description: {
+        
         name: 'description',
         label: "Description",
-        placeholder: 'Description',
+        placeholder: 'Description of the evidence',
         required: true,
-        readOnly: false,
         value: ''
     },
     saveButton: {
@@ -86,6 +86,7 @@ export default class EvidenceController extends ContainerController {
         this._attachHandlerEvidence()
         this._attachHandlerEvidenceList()
         this._attachHandlerHome()
+        this._attachHandlerEvidenceEdit()
         // this._attachHandlerEvidenceP4()
         // this._attachHandlerEvidenceP5()
     }
@@ -130,6 +131,12 @@ export default class EvidenceController extends ContainerController {
         this.on('evidence:confirm', (event) => {
             console.log ("Evidence Confirm button pressed");
             this.History.navigateToPageByTag('confirm-evidence');
+        });
+    }
+    _attachHandlerEvidenceEdit(){
+        this.on('evidence:edit', (event) => {
+            console.log ("Evidence Edit button pressed");
+            this.History.navigateToPageByTag('edit-evidence');
         });
     }
     _attachHandlerEvidenceBackMenu(){
