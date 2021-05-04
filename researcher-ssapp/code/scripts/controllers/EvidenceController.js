@@ -87,61 +87,50 @@ export default class EvidenceController extends ContainerController {
         this._attachHandlerEvidenceList()
         this._attachHandlerHome()
         this._attachHandlerEvidenceEdit()
-        // this._attachHandlerEvidenceP4()
-        // this._attachHandlerEvidenceP5()
     }
     
     _attachHandlerHome(){
         this.on('evidence:home', (event) => {
-            // console.log ("Evidence go back button pressed");
             this.History.navigateToPageByTag('home');
         });
     }
     _attachHandlerEvidence(){
         this.on('evidence:evidence', (event) => {
-            console.log ("Evidence go back button pressed");
             this.History.navigateToPageByTag('evidence');
         });
     }
     _attachHandlerEvidenceList(){
         this.on('evidence:list', (event) => {
-            console.log ("Evidence go back button pressed");
             this.History.navigateToPageByTag('evidence-list');
         });
     }
     _attachHandlerEvidenceP1(){
         this.on('evidence:add-evidence-p1', (event) => {
-            console.log ("Evidence P1 button pressed");
             this.History.navigateToPageByTag('add-evidence-p1');
         });
     }
     _attachHandlerEvidenceP2(){
         this.on('evidence:add-evidence-p2', (event) => {
-            console.log ("Evidence P2 button pressed");
             this.History.navigateToPageByTag('add-evidence-p2');
         });
     }
     _attachHandlerEvidenceP3(){
         this.on('evidence:add-evidence-p3', (event) => {
-            console.log ("Evidence P3 button pressed");
             this.History.navigateToPageByTag('add-evidence-p3');
         });
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
-            console.log ("Evidence Confirm button pressed");
             this.History.navigateToPageByTag('confirm-evidence');
         });
     }
     _attachHandlerEvidenceEdit(){
         this.on('evidence:edit', (event) => {
-            console.log ("Evidence Edit button pressed");
             this.History.navigateToPageByTag('edit-evidence');
         });
     }
     _attachHandlerEvidenceBackMenu(){
         this.on('evidence:back-to-menu', (event) => {
-            console.log ("Evidence back to menu button pressed");
             this.History.navigateToPageByTag('evidence');
         });
     }
