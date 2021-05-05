@@ -12,37 +12,6 @@ $$.flow.describe('IotAdaptor', {
     processXml: function (xmlString, callback) {
         etlService.processXml(xmlString, callback);
     },
-    searchPatient: function (params, callback) {
-        fhirService.resource.search('Patient', params, callback);
-    },
-    getPatientById: function (id, callback) {
-        fhirService.resource.getById('Patient', id, callback);
-    },
-    cratePatient: function (jsonData, callback) {
-        fhirService.resource.create('Patient', jsonData, callback);
-    },
-    updatePatient: function ( id, jsonData, callback) {
-        fhirService.resource.update('Patient', id, jsonData,  callback);
-    },
-    deletePatient: function ( id, callback) {
-        console.log("Hello Delete!");
-    },
-    searchObservation: function (params, callback) {
-        fhirService.resource.search('Observation', params, callback);
-    },
-    crateObservation: function (jsonData, callback) {
-        fhirService.resource.create('Observation', jsonData, callback);
-    },
-    updateObservation: function (id, jsonData, callback) {
-        fhirService.resource.update('Observation', id, jsonData, callback);
-    },
-    getObservationById: function (id, callback) {
-        fhirService.resource.getById('Observation', id, callback);
-    },
-    deleteObservation: function(id, callback) {
-        fhirService.resource.delete('Observation', id, callback);
-
-    },
     searchResource: function (resourceType, params, callback) {
         fhirService.resource.search(resourceType, params, callback);
     },
