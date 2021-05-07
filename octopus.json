@@ -163,6 +163,26 @@
       ]
     },
     {
+      "name": "themes/patient-theme",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/patient-theme && npm install"
+        }
+      ]
+    },
+    {
+      "name": "themes/researcher-theme",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/researcher-theme && npm install"
+        }
+      ]
+    },
+    {
       "name": "themes/eDiary-theme",
       "src": "",
       "actions": [
@@ -280,6 +300,26 @@
         {
           "type": "execute",
           "cmd": "cd themes/epi-theme && npm run build-dossier"
+        }
+      ]
+    },
+    {
+      "name": "patient-theme-wallet-build",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/patient-theme && npm run build-dossier"
+        }
+      ]
+    },
+    {
+      "name": "researcher-theme-wallet-build",
+      "src": "",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd themes/researcher-theme && npm run build-dossier"
         }
       ]
     },
