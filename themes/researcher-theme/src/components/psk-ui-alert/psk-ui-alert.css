@@ -1,0 +1,23 @@
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.alert-feedback {
+    bottom: 0;
+    position: fixed;
+    width: 70%;
+    left: 15%;
+    animation: fadein 1s;
+    z-index: 999;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1.25rem;
+    border-width: 1px;
+    border-style: solid;
+    border-image: initial;
+    border-radius: 0.25rem;
+}

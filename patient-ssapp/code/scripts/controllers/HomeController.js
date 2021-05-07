@@ -1,7 +1,7 @@
 import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
 import PatientService from "./services/PatientService.js";
 import {patientModelHL7} from '../models/PatientModel.js';
-
+//const { WebcController } = WebCardinal.controllers;
 
 export default class HomeController extends ContainerController {
     constructor(element, history) {
@@ -14,6 +14,38 @@ export default class HomeController extends ContainerController {
         initProfile.PatientTelecom.value = "maria@gmail.com";
         initProfile.password.value = "password";
 
+        this.on('home:feedback', (event) => {
+            console.log ("Feedback button pressed");
+            this.History.navigateToPageByTag("feedback");
+        });
+
+        this.on('home:profile', (event) => {
+            console.log ("Profile button pressed");
+            let state = {
+                profileId: this.model.profileIdentifier
+            }
+            
+            this.History.navigateToPageByTag("profile", state);
+        });
+
+        this.on('home:mydata', (event) => {
+            console.log ("My Data button pressed");
+            let state = {
+                profileId: this.model.profileIdentifier,
+                nameId: this.model.name
+            }
+            this.History.navigateToPageByTag("mydata", state);
+        });
+
+
+        this.on('home:platforms', (event) => {
+            console.log ("Platforms button pressed");
+            this.History.navigateToPageByTag("platforms");
+        });
+
+        
+
+
         this.PatientService = new PatientService(this.DSUStorage);
 
         this.PatientService.createProfile(initProfile, (err, userProfile) => {
@@ -25,11 +57,11 @@ export default class HomeController extends ContainerController {
             this.model.profileIdentifier = userProfile.identifier;
             this.model.name = userProfile.PatientName.value;
         })
-
-        this._attachHandlerEditProfile();
-        this._attachHandlerMyData();
-        this._attachHandlerMyPlatforms();
-        this._attachHandlerFeedback();
+        
+        //this._attachHandlerEditProfile();
+        //this._attachHandlerMyData();
+        //this._attachHandlerMyPlatforms();
+        //this._attachHandlerFeedback();
     }
 
     _attachHandlerEditProfile(){
@@ -38,6 +70,7 @@ export default class HomeController extends ContainerController {
             let state = {
                 profileId: this.model.profileIdentifier
             }
+            
             this.History.navigateToPageByTag('profile', state);
         });
     }
@@ -49,8 +82,9 @@ export default class HomeController extends ContainerController {
                 profileId: this.model.profileIdentifier,
                 nameId: this.model.name
             }
-            this.History.navigateToPageByTag('mydata', state);
+            this.navigateToPageTag('mydata', state);
         });
+
     }
 
     _attachHandlerMyPlatforms(){
@@ -61,9 +95,6 @@ export default class HomeController extends ContainerController {
     }
 
     _attachHandlerFeedback(){
-        this.on('home:feedback', (event) => {
-            console.log ("Feedback button pressed");
-            this.History.navigateToPageByTag('feedback');
-        });
+        
     }
 }

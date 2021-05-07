@@ -2,32 +2,40 @@ import ContainerController from '../../../cardinal/controllers/base-controllers/
 
 
 const requestInformationModel = {
-    name: {
-        name: 'name',
-        label: "Name",
-        placeholder: 'Enter your full name',
+    Title: {
+        name: 'Title',
+        placeholder: 'Title',
         required: true,
         readOnly: false,
         value: ''
     },
-    email: {
-        name: 'email',
-        label: "Email",
-        placeholder: 'Enter your email',
+    Period: {
+        name: 'Period',
+        placeholder: 'Period',
         required: true,
         readOnly: false,
         value: ''
     },
-    password: {
-        name: 'password',
-        label: "Password",
-        placeholder: 'Enter your password',
+    Status: {
+        name: 'Status',
+        placeholder: 'Status',
         required: true,
         readOnly: false,
         value: ''
+    },
+    Terms: {
+        name: 'Terms',
+        placeholder: 'Terms',
+        required: true,
+        readOnly: false,
+        value:''
     },
     requestsButton: {
         label: "New request",
+        editState: false,
+    },
+    goBack: {
+        label: "Go Back",
         editState: false
     }
 }

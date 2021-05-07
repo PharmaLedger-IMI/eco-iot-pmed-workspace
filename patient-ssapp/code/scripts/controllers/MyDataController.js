@@ -5,7 +5,7 @@ const healthdatamodel = {
 
     mydata: {
 
-        label: "Select your data to present:",
+        label: "My documents",
         required: true,
         options: [{
             label: "All records",

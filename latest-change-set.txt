@@ -253,3 +253,14 @@
     
     Added "Test Dossier Handler" action for testing opendsu-resolver-getDSUHandler.
     preparing diddemo
+    added default callback to showModal
+    frist freeze version
+    added test1 and test2 domains in BDNS
+    extra info added into the landing page
+    fixed createMarketplace swarm
+    environment update
+
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    environment update

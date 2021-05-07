@@ -44,6 +44,9 @@ const DisplayProfileModel = {
     backButton: {
         label: "Back",
         editState: false
+    },
+    modal: { 
+        opened: false 
     }
 }
 
@@ -51,6 +54,7 @@ export default class ProfileController extends ContainerController {
     constructor(element, history) {
         super(element, history);
         this.setModel(DisplayProfileModel);
+       
 
         let receivedModel = this.History.getState();
         //debugger
@@ -78,7 +82,7 @@ export default class ProfileController extends ContainerController {
                 this.model.email.readOnly = true;
                 this.model.password.readOnly = true;
                 this.model.editButton.editState = false;
-
+                
                 let ProfileAmendmentObj = patientModelHL7;
                 ProfileAmendmentObj.identifier = this.model.profile.identifier;
 
@@ -92,7 +96,11 @@ export default class ProfileController extends ContainerController {
                         return console.log(err);
                     }
                     console.log("EDIT WORKED", profileObject);
+                    this.model.modal.opened =true;
                 })
+                
+                
+                
 
             } else {
                 this.model.editButton.label = "Save profile";
@@ -108,6 +116,11 @@ export default class ProfileController extends ContainerController {
             console.log("go back!")
             this.History.navigateToPageByTag('home');
         })
+
+        this.on('closeModal', _ => this.model.modal.opened = false);
+        
+       
+       
 
     }
 

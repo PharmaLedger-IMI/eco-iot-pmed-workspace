@@ -1,0 +1,16 @@
+.submit-app-row psk-grid .row {
+    display: block;
+    margin: 0 30px;
+}
+
+.submit-app-row psk-text-input form-group {
+    margin: 0;
+}
+
+.submit-app-row psk-grid {
+    display: grid;
+}
+
+.submit-app-row psk-grid > * {
+    margin-bottom: 10px;
+}

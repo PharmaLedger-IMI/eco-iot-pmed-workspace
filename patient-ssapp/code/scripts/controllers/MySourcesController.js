@@ -4,7 +4,7 @@ import ContainerController from "../../cardinal/controllers/base-controllers/Con
 const healthsourcesmodel = {
 
     myhealthsources: {
-        label: "Select your health sources:",
+        label: "My sources:",
         required: true,
         options: [{
             label: "All sources",

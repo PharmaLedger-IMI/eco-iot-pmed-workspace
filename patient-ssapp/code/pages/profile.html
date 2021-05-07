@@ -26,10 +26,20 @@
                   <psk-text-input class="patient-smaller-label" view-model="@birthdate"></psk-text-input>
                   <psk-email-input class="patient-smaller-label" view-model="@email"></psk-email-input>
                   <psk-password-input class="patient-smaller-label" view-model="@password"></psk-password-input>
-      
+                  
+                  <psk-modal class="modal-body" opened="@modal.opened" expanded="true">
+                    <p>Profile updated!</p>
+                
+                    <!-- slots -->
+                    
+                    <psk-button  event-name="closeModal">OK</psk-button>
+                  </psk-modal>
                   <psk-card>
-                      <psk-button event-name="profile:edit" view-model="@editButton"></psk-button>
-                      <psk-button event-name="profile:back" label="go back" view-model="@backButton"></psk-button>
+                    
+                   
+                    <psk-button  event-name="profile:edit" view-model="@editButton"></psk-button>
+                    
+                    <psk-button event-name="profile:back" label="go back" view-model="@backButton"></psk-button>
                   </psk-card>
       
                 </psk-card>

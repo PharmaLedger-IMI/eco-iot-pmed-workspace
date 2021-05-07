@@ -1,0 +1,34 @@
+div.input-group {
+    flex-wrap: nowrap;
+}
+
+div.input-group psk-text-input {
+    width: 100%;
+}
+
+div.copy-clipboard-input+psk-condition {
+    margin-top: -0.5rem;
+}
+
+.marketplace-search-bar {
+    margin: 0 1rem;
+    width: 500px;
+}
+
+.marketplace-search-bar psk-text-input input{
+    border: 1px solid rgba(87, 42, 87, 1);
+}
+
+.bpd-input .form-group {
+    width: 450px;
+}
+
+.bpd-date-input .form-group {
+    width: 315px;
+}
+
+@media screen and (max-width:991px) {
+    .marketplace-search-bar {
+        width: 200px;
+    }
+}
