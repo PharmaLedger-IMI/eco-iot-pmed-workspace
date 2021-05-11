@@ -1,4 +1,5 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const { WebcController } = WebCardinal.controllers;
+
 
 const AddDevicesViewModel = {
     name: {
@@ -73,11 +74,11 @@ const AddDevicesViewModel = {
     }
 }
 
-export default class EvidenceController extends ContainerController {
+export default class EvidenceController extends WebcController {
     constructor(element, history) {
 
         super(element, history);
-        this.model = this.setModel(JSON.parse(JSON.stringify(AddDevicesViewModel)));
+        this.model = AddDevicesViewModel;
         this._attachHandlerEvidenceP1()
         this._attachHandlerEvidenceP2()
         this._attachHandlerEvidenceP3()
@@ -91,47 +92,48 @@ export default class EvidenceController extends ContainerController {
     
     _attachHandlerHome(){
         this.on('evidence:home', (event) => {
-            this.History.navigateToPageByTag('home');
+            this.navigateToPageTag('home');
         });
     }
     _attachHandlerEvidence(){
         this.on('evidence:evidence', (event) => {
-            this.History.navigateToPageByTag('evidence');
+            this.navigateToPageTag('evidence');
         });
     }
     _attachHandlerEvidenceList(){
         this.on('evidence:list', (event) => {
-            this.History.navigateToPageByTag('evidence-list');
+            this.navigateToPageTag('evidence-list');
         });
     }
     _attachHandlerEvidenceP1(){
         this.on('evidence:add-evidence-p1', (event) => {
-            this.History.navigateToPageByTag('add-evidence-p1');
+            console.log("I am in event add evidence p1!!")
+            this.navigateToPageTag('add-evidence-p1');
         });
     }
     _attachHandlerEvidenceP2(){
         this.on('evidence:add-evidence-p2', (event) => {
-            this.History.navigateToPageByTag('add-evidence-p2');
+            this.navigateToPageTag('add-evidence-p2');
         });
     }
     _attachHandlerEvidenceP3(){
         this.on('evidence:add-evidence-p3', (event) => {
-            this.History.navigateToPageByTag('add-evidence-p3');
+            this.navigateToPageTag('add-evidence-p3');
         });
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
-            this.History.navigateToPageByTag('confirm-evidence');
+            this.navigateToPageTag('confirm-evidence');
         });
     }
     _attachHandlerEvidenceEdit(){
         this.on('evidence:edit', (event) => {
-            this.History.navigateToPageByTag('edit-evidence');
+            this.navigateToPageTag('edit-evidence');
         });
     }
     _attachHandlerEvidenceBackMenu(){
         this.on('evidence:back-to-menu', (event) => {
-            this.History.navigateToPageByTag('evidence');
+            this.navigateToPageTag('evidence');
         });
     }
 }

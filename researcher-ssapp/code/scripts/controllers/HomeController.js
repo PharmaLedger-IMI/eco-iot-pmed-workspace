@@ -1,7 +1,7 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const {WebcController} = WebCardinal.controllers;
 
 
-export default class HomeController extends ContainerController {
+export default class HomeController extends WebcController {
     constructor(element, history) {
 
         super(element, history);
@@ -16,28 +16,28 @@ export default class HomeController extends ContainerController {
     _attachHandlerInformationRequest(){
         this.on('home:information-request', (event) => {
             console.log ("Information request button pressed");
-            this.History.navigateToPageByTag('information-request');
+            this.navigateToPageTag('information-request');
         });
     }
 
     _attachHandlerConfigureAccessToData(){
         this.on('home:configure-access', (event) => {
             console.log ("Configure Access to Data button pressed");
-            this.History.navigateToPageByTag('configure-access');
+            this.navigateToPageTag('configure-access');
         });
     }
 
     _attachHandlerViewDynamicConsent(){
         this.on('home:view-dynamic-consent', (event) => {
             console.log ("View dynamic consent button pressed");
-            this.History.navigateToPageByTag('view-dynamic-consent');
+            this.navigateToPageTag('view-dynamic-consent');
         });
     }
 
     _attachHandlerEvidence(){
         this.on('home:evidence', (event) => {
             console.log ("Evidence button pressed");
-            this.History.navigateToPageByTag('evidence');
+            this.navigateToPageTag('evidence');
         });
     }
 }

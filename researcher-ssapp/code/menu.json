@@ -34,7 +34,7 @@
       "icon": "fa-home",
       "pageSrc": "view-information-requests.html",
       "tags": "view-information-requests"
-    }, 
+    },
     {
       "name": "evidence",
       "path": "/evidence",
@@ -100,5 +100,3 @@
     }
   ]
 }
-
-

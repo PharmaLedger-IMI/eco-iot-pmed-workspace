@@ -1,4 +1,4 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const { WebcController } = WebCardinal.controllers;
 
 
 const requestInformationModel = {
@@ -41,7 +41,7 @@ const requestInformationModel = {
 }
 
 
-export default class RequestsController extends ContainerController {
+export default class RequestsController extends WebcController {
     constructor(element, history) {
 
         super(element, history);
@@ -54,14 +54,14 @@ export default class RequestsController extends ContainerController {
     _attachHandlerIssueNewRequest(){
         this.on('new:request', (event) => {
             console.log ("New information request button pressed");
-            this.History.navigateToPageByTag('issue-new-request');
+            this.navigateToPageTag('issue-new-request');
         });
     }
 
     _attachHandlerGoBack(){
         this.on('request:go-back', (event) => {
             console.log ("Go back button pressed");
-            this.History.navigateToPageByTag('home');
+            this.navigateToPageTag('home');
         });
     }
 
