@@ -1,8 +1,8 @@
 <psk-page title="Patient Profile" style="height: 100vh">
-
+  <link rel="stylesheet" href="../assets/css/common_style_patient_ssapp.css">
   <!--  <psk-toc title="View and edit your personal profile data" slot="toc"></psk-toc> -->
 
-    <psk-container controller-name="ProfileController" style="height: 100%">
+    <webc-container controller="ProfileController" style="height: 100%">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container" >
               <div class="d-flex flex-row align-content-center justify-content-between">
@@ -39,7 +39,7 @@
                    
                     <psk-button  event-name="profile:edit" view-model="@editButton"></psk-button>
                     
-                    <psk-button event-name="profile:back" label="go back" view-model="@backButton"></psk-button>
+                    <psk-button event-name="go-back" label="go back" view-model="@backButton"></psk-button>
                   </psk-card>
       
                 </psk-card>
@@ -59,7 +59,7 @@
             </div>
             </div>
         </div>
-    </psk-container>
+    </webc-container>
 </psk-page>
 
 

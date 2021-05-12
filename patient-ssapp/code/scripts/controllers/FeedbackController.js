@@ -1,8 +1,7 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const { WebcController } = WebCardinal.controllers;
 
 
-
-export default class FeedbackController extends ContainerController {
+export default class FeedbackController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
@@ -15,7 +14,7 @@ export default class FeedbackController extends ContainerController {
     _attachHandlerGoBack(){
         this.on('go-back', (event) => {
             console.log ("Go Back button pressed");
-            this.History.navigateToPageByTag('home');
+            this.navigateToPageTag('home');
         });
     }
 

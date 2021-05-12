@@ -1,8 +1,6 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const { WebcController } = WebCardinal.controllers;
 
-
-
-export default class PlatformsController extends ContainerController {
+export default class PlatformsController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
@@ -17,20 +15,20 @@ export default class PlatformsController extends ContainerController {
     _attachHandlerGoBack(){
         this.on('go-back', (event) => {
             console.log ("Go Back button pressed");
-            this.History.navigateToPageByTag('home');
+            this.navigateToPageTag('home');
         });
     }
 
     _attachHandlerMyProjects(){
         this.on('platforms:myprojects',(event)=>{
             console.log ("MyProjects button pressed");
-            this.History.navigateToPageByTag('myprojects');
+            this.navigateToPageTag('myprojects');
         });
     }
     _attachHandlerNewProject(){
         this.on('platforms:newproject',(event)=>{
             console.log ("NewProject button pressed");
-            this.History.navigateToPageByTag('newproject');
+            this.navigateToPageTag('newproject');
         });
     }
 

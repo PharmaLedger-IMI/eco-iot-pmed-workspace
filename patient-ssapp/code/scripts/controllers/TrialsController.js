@@ -1,5 +1,6 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+
 import TrialService from "./services/TrialService.js";
+const { WebcController } = WebCardinal.controllers;
 
 const initModel = {
     title: 'Create Trial',
@@ -35,7 +36,7 @@ const initModel = {
 
 }
 
-export default class TrialsController extends ContainerController {
+export default class TrialsController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
@@ -108,3 +109,4 @@ export default class TrialsController extends ContainerController {
     }
 
 }
+

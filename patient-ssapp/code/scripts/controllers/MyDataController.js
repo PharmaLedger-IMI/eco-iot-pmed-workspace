@@ -1,5 +1,4 @@
-import ContainerController from "../../../cardinal/controllers/base-controllers/ContainerController.js";
-
+const { WebcController } = WebCardinal.controllers;
 
 const healthdatamodel = {
 
@@ -43,7 +42,7 @@ const healthdatamodel = {
 }
 
 
-export default class MyDataMainPageController extends ContainerController {
+export default class MyDataMainPageController extends WebcController {
     constructor(element, history) {
         super(element, history);
         this.model = this.setModel(JSON.parse(JSON.stringify(healthdatamodel)));

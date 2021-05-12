@@ -1,5 +1,4 @@
-import ContainerController from "../../cardinal/controllers/base-controllers/ContainerController.js";
-
+const { WebcController } = WebCardinal.controllers;
 
 const healthsourcesmodel = {
 
@@ -24,7 +23,7 @@ const healthsourcesmodel = {
 }
 
 
-export default class MySourcesController extends ContainerController {
+export default class MySourcesController extends WebcController {
     constructor(element) {
         super(element);
 

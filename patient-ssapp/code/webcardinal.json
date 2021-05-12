@@ -1,0 +1,51 @@
+{
+    "theme": "patient-theme",
+    "pages": [
+      {
+        "name": "Home",
+        "path": "/home",
+        "src": "home.html",
+        "tag": "home"
+      },
+      {
+        "name": "profile",
+        "path": "/profile",
+        "icon": "fa-home",
+        "tag": "profile"
+      },
+      {
+        "name": "platforms",
+        "path": "/platforms",
+        "icon": "fa-home",
+        "tag": "platforms"
+      },
+      {
+        "name": "mydata",
+        "path": "/mydata",
+        "src": "mydata.html",
+        "tag": "mydata"
+      },
+      {
+        "name": "feedback",
+        "path": "/feedback",
+        "src": "feedback.html",
+        "tag": "feedback"
+      },
+      {
+        "name": "my-health-data-sample",
+        "path": "/my-health-data-sample",
+        "src": "my-health-data-sample.html",
+        "tag": "my-health-data-sample"
+      },
+      {
+        "name": "Create trial",
+        "tag": "create-trial",
+        "indexed": false
+      }
+     
+    ],
+    "pagesFallback": {
+      "name": "404",
+      "src": "./home.html"
+    }
+  }

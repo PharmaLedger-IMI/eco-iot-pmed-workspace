@@ -1,6 +1,6 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
 import PatientService from "./services/PatientService.js";
 import {patientModelHL7} from '../models/PatientModel.js';
+const { WebcController } = WebCardinal.controllers;
 
 
 const DisplayProfileModel = {
@@ -50,10 +50,11 @@ const DisplayProfileModel = {
     }
 }
 
-export default class ProfileController extends ContainerController {
+export default class ProfileController extends WebcController {
     constructor(element, history) {
         super(element, history);
-        this.setModel(DisplayProfileModel);
+        this._attachHandlerGoBack();
+        this.setModel(JSON.parse(JSON.stringify(DisplayProfileModel)));
        
 
         let receivedModel = this.History.getState();
@@ -112,16 +113,20 @@ export default class ProfileController extends ContainerController {
             }
         })
 
-        this.on('profile:back', (event) => {
-            console.log("go back!")
-            this.History.navigateToPageByTag('home');
-        })
+        
 
         this.on('closeModal', _ => this.model.modal.opened = false);
         
        
        
 
+    }
+
+    _attachHandlerGoBack(){
+        this.on('go-back', (event) => {
+            console.log ("Go Back button pressed");
+            this.navigateToPageTag('home');
+        });
     }
 
 
