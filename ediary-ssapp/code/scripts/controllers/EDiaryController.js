@@ -12,11 +12,11 @@ export default class EDiaryController extends WebcController {
         });
 
         this.EDiaryService = new EDiaryService(this.DSUStorage);
-        this.EDiaryService.getServiceModel((err, data) => {
+        this.EDiaryService.getEdiaries((err, data) => {
             if (err) {
                 return console.log(err);
             }
-            this.model.trials = data.trials;
+            this.model.trials = data;
         });
 
         this._attachHandlerEDiaryCreate();

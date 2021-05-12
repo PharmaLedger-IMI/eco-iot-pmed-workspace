@@ -1,4 +1,6 @@
 import QuestionnaireService from "./services/QuestionnaireService.js";
+import QuestionnaireResponse from "../models/QuestionnaireResponse.js";
+import ResponsesService from "./services/ResponsesService.js";
 
 const {WebcController} = WebCardinal.controllers;
 
@@ -28,6 +30,8 @@ export default class QuestionnaireController extends WebcController {
 
         this.tabsContainer = this.querySelector('#tabs-container');
         this.QuestionnaireService = new QuestionnaireService(this.DSUStorage);
+        this.ResponsesService = new ResponsesService(this.DSUStorage);
+
         this.updateQuestionnaire();
 
         this.onTagClick('prev', (event) => {
@@ -49,7 +53,7 @@ export default class QuestionnaireController extends WebcController {
         this.onTagClick('send-feedback', (event) => {
             this.model.questions = this.model.questions.map(question => {
                 return {
-                    ... question,
+                    ...question,
                     response: this.querySelector(`input[name="${question.name}"]:checked`).value
                 }
             })
@@ -57,17 +61,46 @@ export default class QuestionnaireController extends WebcController {
         });
 
         this.onTagClick('finish-questionnaire', (event) => {
+            let questionTemplate = QuestionnaireResponse.example;
+            questionTemplate.item = this.model.questions.map((question) => {
+                return {
+                    linkId: question.name,
+                    text: question.title,
+                    answer: [
+                        {
+                            valueCoding: {
+                                code: question.response
+                            }
+                        }
+                    ],
+                }
+            });
+            this.ResponsesService.saveResponse(questionTemplate, (err, data) => {
+                if (err) {
+                    return console.log(err);
+                }
+                this.ResponsesService.getResponses((err, data) => {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    data.forEach(response => {
+                        response.item.forEach(item => {
+                            //console.log(item.answer[0], item.linkId, item.text)
+                        })
+                    })
+                })
+            });
             this.model.questions.forEach(question => console.log(question.id, question.response, question.title))
             this.navigateToPageTag('home');
         });
     }
 
     updateQuestionnaire() {
-        this.QuestionnaireService.getServiceModel((err, data) => {
+        this.QuestionnaireService.getQuestionnaires((err, data) => {
             if (err) {
                 return console.log(err);
             }
-            let questionnaire = data.questionnaires[0];
+            let questionnaire = data[0];
             let items = questionnaire.item.filter(item => item.type === 'choice');
             let questions = [];
             for (let i = 0; i < items.length; i++) {
