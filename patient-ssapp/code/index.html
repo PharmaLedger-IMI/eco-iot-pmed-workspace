@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>WebCardinal Application</title>
 
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>PSK App Core</title>
+    PLACEHOLDER_THAT_WILL_BE_REPLACED_BY_SW_OR_SERVER_WITH_BASE_TAG
     <link href="resources/css/main.css" rel="stylesheet" type="text/css">
-    <!-- WebCardinal dist -->
-    <script type="module" src="/webcardinal/webcardinal.js"></script>
-    <link rel="stylesheet" href="/webcardinal/webcardinal.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="scripts/bundles/iframeBoot.js"></script>
     <script src="scripts/bundles/webshims.js"></script>
     <script src="scripts/bundles/pskruntime.js"></script>
-
-    <!-- local assets -->
-    <link rel="icon" type="image/png" href="/assets/favicon/favicon.png">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <script src="scripts/bundles/gtinResolver.js"></script>-->
+<!--    <script src="../../nativeBridge.js"></script>-->
+    <link rel="stylesheet" href="webcardinal/webcardinal.css">
+    <script type="module" src="webcardinal/webcardinal.js"></script>
     <script>
         if (window.frameElement) {
             const iframeIdentity = window.frameElement.getAttribute('identity');
@@ -34,11 +31,13 @@
 </head>
 
 <body>
-    <webc-app-root class="" style="display: flex; width: 100%; align-items: stretch">
-        <webc-app-container>
-            <webc-app-router style="width: 100%" failRedirectTo="/home">
-            </webc-app-router>
-        </webc-app-container>
-    </webc-app-root>
+
+        <webc-app-root>
+            <webc-app-container>
+                <webc-app-router>
+                </webc-app-router>
+            </webc-app-container>
+        </webc-app-root>
 </body>
+
 </html>
