@@ -1,4 +1,4 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const {WebcController} = WebCardinal.controllers;
 
 
 const AddDevicesViewModel = {
@@ -28,12 +28,12 @@ const AddDevicesViewModel = {
 
 
 
-export default class AddDeviceController extends ContainerController {
+export default class AddDeviceController extends WebcController {
     constructor(element, history) {
 
         super(element, history);
 
-        this.model = this.setModel(JSON.parse(JSON.stringify(AddDevicesViewModel)));
+        this.model = AddDevicesViewModel;
 
         this._attachHandlerGoBackButton();
 
@@ -43,7 +43,7 @@ export default class AddDeviceController extends ContainerController {
     _attachHandlerGoBackButton(){
         this.on('devices:go-back', (event) => {
             console.log ("Go back button pressed");
-            this.History.navigateToPageByTag('manage-devices');
+            this.navigateToPageTag('manage-devices');
         });
     }
 

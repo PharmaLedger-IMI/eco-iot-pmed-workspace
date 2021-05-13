@@ -1,10 +1,10 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const {WebcController} = WebCardinal.controllers;
 
 
-export default class HomeController extends ContainerController {
+export default class HomeController extends WebcController {
     constructor(element, history) {
         super(element, history);
-        //this.setModel({});
+
 
         this._attachHandlerManageDevices();
         this._attachHandlerTrialManagement();
@@ -15,21 +15,21 @@ export default class HomeController extends ContainerController {
     _attachHandlerManageDevices(){
         this.on('home:manage-devices', (event) => {
             console.log ("Manage devices button pressed");
-            this.History.navigateToPageByTag('manage-devices');
+            this.navigateToPageTag('manage-devices');
         });
     }
 
     _attachHandlerTrialManagement(){
         this.on('home:trial-management', (event) => {
             console.log ("Trial Management button pressed");
-            this.History.navigateToPageByTag('trial-management');
+            this.navigateToPageTag('trial-management');
         });
     }
 
     _attachHandlerListOfPatients(){
         this.on('home:list-of-patients', (event) => {
             console.log ("List of Patients button pressed");
-            this.History.navigateToPageByTag('list-of-patients');
+            this.navigateToPageTag('list-of-patients');
         });
     }
 

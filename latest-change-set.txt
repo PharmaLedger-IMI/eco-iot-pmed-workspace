@@ -294,3 +294,13 @@
     
     Added "Test Contract Method" functionality for testing contract methods.
     environment update
+    added default callback to showModal
+    [Freeze] webcardinal-core
+    Added contractServices BDNS entries for TIR.
+    extra info added into the landing page
+    fixed createMarketplace swarm
+    environment update
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    environment update

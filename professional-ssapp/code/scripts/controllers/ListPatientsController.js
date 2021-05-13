@@ -1,10 +1,11 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const {WebcController} = WebCardinal.controllers;
 import { participantsService } from '../services/participants.service.js';
 
-export default class ListPatientsController extends ContainerController {
+
+export default class ListPatientsController extends WebcController {
   constructor(element, history) {
     super(element, history);
-    this.setModel({
+    this.model =  {
       trials: {
         label: 'Select a trial',
         placeholder: 'Please select an option',
@@ -12,12 +13,12 @@ export default class ListPatientsController extends ContainerController {
         options: [],
       },
       participants: null,
-    });
+    };
 
     this.participantsService = participantsService;
     this.init();
     this.attachAll();
-    this._attachHandlerPatientStatus();
+    //this._attachHandlerPatientStatus();
     
   }
 
@@ -52,12 +53,12 @@ export default class ListPatientsController extends ContainerController {
     );
 
     this.on('go-back', async (event) => {
-      this.History.navigateToPageByTag('home', event.data);
+      this.navigateToPageTag('home', event.data);
     });
    
     this.on('patient-status',  (event) => {
         console.log ("Patient Status button pressed");
-        this.History.navigateToPageByTag('patient-status');
+        this.navigateToPageTag('patient-status');
     });
     this.on('trial-select', async (event) => {
       try {

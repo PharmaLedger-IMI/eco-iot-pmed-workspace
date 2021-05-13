@@ -1,4 +1,4 @@
-import ContainerController from '../../../cardinal/controllers/base-controllers/ContainerController.js';
+const {WebcController} = WebCardinal.controllers;
 
 // const ViewPatientList = {
 //
@@ -15,10 +15,10 @@ import ContainerController from '../../../cardinal/controllers/base-controllers/
 // }
 
 
-export default class PatientStatusController extends ContainerController {
+export default class PatientStatusController extends WebcController {
     constructor(element, history) {
         super(element, history);
-        //this.setModel(ViewPatientList);
+        //this.model= ViewPatientList;
         this._attachHandlerGoBack();
         this._attachHandlerPatientAlertHistory();
         this._attachHandlerPatientDeviceHistory();
@@ -30,25 +30,25 @@ export default class PatientStatusController extends ContainerController {
     _attachHandlerGoBack(){
         this.on('go-back', (event) => {
             console.log ("Go Back button pressed");
-            this.History.navigateToPageByTag('manage-devices');
+            this.navigateToPageTag('list-of-patients');
         });
     }
     _attachHandlerPatientAlertHistory(){        
         this.on('patient-alert-history',  (event) => {
             console.log ("Patient Alert History button pressed");
-            this.History.navigateToPageByTag('patient-alert-history');
+            this.navigateToPageTag('patient-alert-history');
         });
     }
     _attachHandlerPatientDeviceHistory(){
         this.on('patient-device-history',  (event) => {
             console.log ("Patient Device History button pressed");
-            this.History.navigateToPageByTag('patient-device-history');
+            this.navigateToPageTag('patient-device-history');
         });
     }
     _attachHandlerPatientConsentStatus(){
         this.on('patient-consent-status',  (event) => {
             console.log ("Patient Consent Status button pressed");
-            this.History.navigateToPageByTag('patient-consent-status');
+            this.navigateToPageTag('patient-consent-status');
         });
     }
 
