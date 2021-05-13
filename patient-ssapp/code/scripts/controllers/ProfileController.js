@@ -54,10 +54,10 @@ export default class ProfileController extends WebcController {
     constructor(element, history) {
         super(element, history);
         this._attachHandlerGoBack();
-        this.setModel(JSON.parse(JSON.stringify(DisplayProfileModel)));
+        this.model = DisplayProfileModel;
        
 
-        let receivedModel = this.History.getState();
+        let receivedModel = this.getState();
         //debugger
         this.PatientService = new PatientService(this.DSUStorage);
         this.PatientService.getProfile(receivedModel.profileId, (err, profile) => {
