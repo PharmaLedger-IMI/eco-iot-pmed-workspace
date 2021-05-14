@@ -35,8 +35,11 @@
         "name": "my-health-data-sample",
         "path": "/my-health-data-sample",
         "src": "my-health-data-sample.html",
-        "tag": "my-health-data-sample"
+        "tag": "sample"
       },
+      
+
+
       {
         "name": "Create trial",
         "tag": "create-trial",

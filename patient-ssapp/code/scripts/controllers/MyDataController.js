@@ -45,7 +45,7 @@ const healthdatamodel = {
 export default class MyDataMainPageController extends WebcController {
     constructor(element, history) {
         super(element, history);
-        this.model = this.setModel(JSON.parse(JSON.stringify(healthdatamodel)));
+        this.model = JSON.parse(JSON.stringify(healthdatamodel));
 
         this.feedbackEmitter = null;
 
@@ -60,7 +60,8 @@ export default class MyDataMainPageController extends WebcController {
             let choice = this.model.mydata.value;
             if (choice === "cv"){
                 console.log(`Hello there, Clinical vitals!`,"radio Example","alert-primary")
-                this.History.navigateToPageByTag('my-health-data-sample');
+                this.navigateToPageTag('sample');
+                
             } else {
                 console.log(`Good day to you, rest of choices!`,"radio Example","alert-primary")
             }
