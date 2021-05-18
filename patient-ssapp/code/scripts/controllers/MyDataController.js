@@ -42,7 +42,7 @@ const healthdatamodel = {
 }
 
 
-export default class MyDataMainPageController extends WebcController {
+export default class MyDataController extends WebcController {
     constructor(element, history) {
         super(element, history);
         this.model = JSON.parse(JSON.stringify(healthdatamodel));
