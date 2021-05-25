@@ -6,9 +6,8 @@ For more details about what a *workspace* is check out the [template-workspace](
 
 ## IOT-PMED Space
 
-This workspace is intended to build 5 modules as described in the projects tab and the open issues.
-Currently, it includes 1 patient app and its wallet.
-To add more modules, we will include either more SAPPs or cardinal webpages (for prototypes and alpha versions).
+This workspace is building 5 modules as described in the projects tab and the open issues.
+Currently, it includes 4 SSApps, 1 adaptor and one common wallet.
 
 To add modules for the alpha versions prototypes we can use cardinal as described in the documentation here:
 [PrivateSkyCardinal.xyz](https://privatesky.xyz/?Howto/a-site-with-cardinal)
