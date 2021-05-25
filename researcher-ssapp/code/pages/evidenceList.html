@@ -1,23 +1,23 @@
-<psk-page title="Evidence">
+<psk-page title="Seach Evidence" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <psk-toc title="Evidence Module" slot="toc"></psk-toc>
-    <webc-container controller="EvidenceController">
+    <webc-container controller="EvidenceController" style="height: 100%">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
                 <div class="d-flex flex-row align-content-center justify-content-between">
-                    <psk-img 
-                    width="120"
-                    height="50"
-                    src="../resources/images/pharmaledger.jpg" 
-                    alt="Pharmaledger logo">
-                    </psk-img>
+                    <img
+                            width="110"
+                            height="47"
+                            src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
+                            alt="Pharmaledger logo"
+                    />
                     <div class="d-flex flex-row justify-content-center align-items-center">
-                      <div class="mr-2">Help</div>
-                      <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
+                        <div class="mr-2">Help</div>
+                        <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
                     </div>
-                  </div>
-                  <div class="flex-grow-1">
-                    <psk-card class="bpd-dashboard ">
+                </div>
+                <div class="flex-grow-1">
+                    <psk-card class="bpd-dashboard">
+
                         <div class="bpd-wide-cards">
                             <div>
                                 <psk-layout class="border-bottom border-top" slot="condition-true" columns="6">
@@ -72,11 +72,11 @@
                                             Edit
                                         </psk-button>
                                     </div>
-                                    
+
                                     <div class="d-flex flex-row align-items-center justify-content-around">
                                         <psk-button
-                                        class="btn-bare table-cell m-1 pharma-secondary"
-                                        event-name="evidence:back-to-menu"
+                                                class="btn-bare table-cell m-1 pharma-secondary"
+                                                event-name="evidence:back-to-menu"
                                         >
                                             Back
                                         </psk-button>
@@ -84,25 +84,38 @@
                                 </psk-layout>
                             </div>
                         </div>
+
+
+
+
+
                     </psk-card>
                 </div>
-                
-            <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
-                <psk-img 
-                width="123"
-                height="83"
-                src="../resources/images/EU_flag.jpg" 
-                alt="EU Flag">
-                </psk-img>
+            </div>
+            <div class="pharma-footer">
+                <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
                 <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
                     <div class="text-white text-centered text-justify">
-                    This project has received funding from the European Union’s Horizon 2020 research and innovation programme
-                    under grant agreement No 853992
+                        This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+                        under grant agreement No 853992
                     </div>
                     <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
                 </div>
             </div>
         </div>
-        </div>
+
+
+
+
+
     </webc-container>
+
 </psk-page>
+
+
+
+
+
+
+
+

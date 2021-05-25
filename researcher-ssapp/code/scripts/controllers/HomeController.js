@@ -9,7 +9,7 @@ export default class HomeController extends WebcController {
 
         this._attachHandlerInformationRequest()
         this._attachHandlerConfigureAccessToData()
-        this._attachHandlerViewDynamicConsent()
+        this._attachHandlerViewDynamicPermission()
         this._attachHandlerEvidence()
     }
 
@@ -27,10 +27,10 @@ export default class HomeController extends WebcController {
         });
     }
 
-    _attachHandlerViewDynamicConsent(){
-        this.on('home:view-dynamic-consent', (event) => {
-            console.log ("View dynamic consent button pressed");
-            this.navigateToPageTag('view-dynamic-consent');
+    _attachHandlerViewDynamicPermission(){
+        this.on('home:view-dynamic-permission', (event) => {
+            console.log ("View dynamic permission button pressed");
+            this.navigateToPageTag('view-dynamic-permission');
         });
     }
 

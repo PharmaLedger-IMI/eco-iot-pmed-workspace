@@ -1,6 +1,7 @@
-<psk-page title="Configure Access" style="height: 100vh">
+<psk-page title="View Dynamic Permission" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <webc-container controller="ConfigureAccessController" style="height: 100%">
+
+    <webc-container controller="ViewDynamicPermissionController" style="height: 100%">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
                 <div class="d-flex flex-row align-content-center justify-content-between">
@@ -18,15 +19,31 @@
                 <div class="flex-grow-1">
                     <psk-card class="bpd-dashboard">
 
-                        <psk-accordion multiple="">
-                            <psk-accordion-item title="GET">/api/get_results</psk-accordion-item>
-                            <psk-accordion-item title="PUT">/api/put_results</psk-accordion-item>
-                            <psk-accordion-item title="PATCH">/api/patch_results</psk-accordion-item>
-                            <psk-accordion-item title="POST">/api/post_results</psk-accordion-item>
-                            <psk-accordion-item title="DELETE">/api/delete_results</psk-accordion-item>
-                        </psk-accordion>
-                        <psk-button event-name="" view-model="@configurebutton"></psk-button>
-                        <psk-button event-name="configure-access:go-back" view-model="@gobackbutton"></psk-button>
+
+<!--                        <psk-label label="Listing and viewing the issued dynamic permissions by patients"/>-->
+<!--                        <psk-select label="Dynamic consent for patient:" select-options="Patient 1 | Patient 2 | Patient 3">-->
+<!--                        </psk-select>-->
+
+<!--                        <psk-button event-name="" view-model="@viewbutton"></psk-button>-->
+<!--                        <psk-button event-name="dynamic-permission:go-back" view-model="@gobackbutton"></psk-button>-->
+                        <div>
+                        <psk-form form-actions="View">
+                            <psk-form-row layout="xs=[12] m=[6] l=[12] xl=[4]">
+                                <psk-label>Dynamic permission for patient:</psk-label>
+                            </psk-form-row>
+
+                            <psk-form-row layout="xs=[12,12,12] m=[6,6,6] l=[12,12,12] xl=[4,4,4]">
+                                <!-- This component will receive the options and the other properties from the model -->
+                                <psk-select view-model="patient_options"></psk-select>
+                            </psk-form-row>
+                        </psk-form>
+                        </div>
+                        <div>
+                            &nbsp &nbsp <psk-button event-name="dynamic-permission:go-back" view-model="@gobackbutton"></psk-button>
+                        </div>
+
+
+
 
 
                     </psk-card>
@@ -48,5 +65,9 @@
     </webc-container>
 
 </psk-page>
+
+
+
+
 
 

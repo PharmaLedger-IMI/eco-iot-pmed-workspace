@@ -85,11 +85,11 @@
       "tags": "evidence-list"
     },
     {
-      "name": "View dynamic Consent",
-      "path": "/view-dynamic-consent",
+      "name": "View dynamic Permission",
+      "path": "/view-dynamic-permission",
       "icon": "fa-home",
-      "pageSrc": "view-dynamic-consent.html",
-      "tags": "view-dynamic-consent"
+      "pageSrc": "view-dynamic-permission.html",
+      "tags": "view-dynamic-permission"
     },
     {
       "name": "issue-new-request",

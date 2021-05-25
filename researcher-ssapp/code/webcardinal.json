@@ -68,16 +68,22 @@
       "tag": "evidence-list"
     },
     {
-      "name": "View dynamic Consent",
-      "path": "/view-dynamic-consent",
-      "src": "view-dynamic-consent.html",
-      "tag": "view-dynamic-consent"
+      "name": "View dynamic Permission",
+      "path": "/view-dynamic-permission",
+      "src": "view-dynamic-permission.html",
+      "tag": "view-dynamic-permission"
     },
     {
       "name": "issue-new-request",
       "path": "/issue-new-request",
       "src": "issue-new-request.html",
       "tag": "issue-new-request"
+    },
+    {
+      "name": "patient-dynamic-permission",
+      "path": "/patient-dynamic-permission",
+      "src": "patient-dynamic-permission.html",
+      "tag": "patient-dynamic-permission"
     }
   ],
   "pagesFallback": {

@@ -1,4 +1,4 @@
-const { WebcController } = WebCardinal.controllers;
+const {WebcController} = WebCardinal.controllers;
 
 
 const requestInformationModel = {
@@ -35,7 +35,7 @@ const requestInformationModel = {
         editState: false,
     },
     goBack: {
-        label: "Go Back",
+        label: "Back",
         editState: false
     }
 }
@@ -47,7 +47,7 @@ export default class RequestsController extends WebcController {
         super(element, history);
         this._attachHandlerIssueNewRequest()
         this._attachHandlerGoBack()
-        this.setModel(requestInformationModel);
+        this.model = requestInformationModel;
 
     }
 

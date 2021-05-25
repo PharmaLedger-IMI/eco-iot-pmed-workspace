@@ -1,0 +1,31 @@
+:host {
+    cursor: pointer;
+}
+
+.summary .icon {
+    color: #4461B5;
+}
+
+:host([layout="collapsable"]) {
+    border-radius: 0 !important;
+}
+
+:host([layout="collapsable"]) .content {
+    background-color: #134E9E !important;
+    color: #FFFFFF;
+}
+
+:host([layout="collapsable"]) .footer {
+    background-color: #134E9E !important;
+    border-radius: 20px;
+}
+
+:host([layout="collapsable"]) .footer .icon {
+    color: #FFFFFF !important;
+}
+
+:host([layout="collapsable"][opened]),
+:host([layout="collapsable"][opened="true"]) {
+    box-shadow: 0 0 0 !important;
+    border-radius: 0;
+}

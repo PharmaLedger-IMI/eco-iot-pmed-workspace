@@ -32,9 +32,9 @@
         "tag": "feedback"
       },
       {
-        "name": "my-health-data-sample",
-        "path": "/my-health-data-sample",
-        "src": "my-health-data-sample.html",
+        "name": "sample",
+        "path": "/sample",
+        "src": "sample.html",
         "tag": "sample"
       },
       

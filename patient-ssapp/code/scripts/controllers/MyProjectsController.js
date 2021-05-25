@@ -7,9 +7,6 @@ export default class MyProjectsController extends WebcController {
 
         this._attachHandlerGoBack();
         this._attachHandlerHome();
-    
-       
-        
 
     }
     _attachHandlerGoBack(){

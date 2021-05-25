@@ -1,6 +1,6 @@
-<psk-page title="Configure Access" style="height: 100vh">
-    <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <webc-container controller="ConfigureAccessController" style="height: 100%">
+<psk-page title="Patient Profile IoT and Health Data" style="height: 100vh">
+    <link rel="stylesheet" href="../assets/css/common_style_patient_ssapp.css">
+    <webc-container controller="SampleController" style="height: 100%">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
                 <div class="d-flex flex-row align-content-center justify-content-between">
@@ -18,15 +18,11 @@
                 <div class="flex-grow-1">
                     <psk-card class="bpd-dashboard">
 
-                        <psk-accordion multiple="">
-                            <psk-accordion-item title="GET">/api/get_results</psk-accordion-item>
-                            <psk-accordion-item title="PUT">/api/put_results</psk-accordion-item>
-                            <psk-accordion-item title="PATCH">/api/patch_results</psk-accordion-item>
-                            <psk-accordion-item title="POST">/api/post_results</psk-accordion-item>
-                            <psk-accordion-item title="DELETE">/api/delete_results</psk-accordion-item>
-                        </psk-accordion>
-                        <psk-button event-name="" view-model="@configurebutton"></psk-button>
-                        <psk-button event-name="configure-access:go-back" view-model="@gobackbutton"></psk-button>
+<!--                        <psk-label label="Health Data Consolidation"/>-->
+
+                        <psk-img src="assets/images/samplefigure.png" width="600" height="480">
+
+                        <psk-button event-name="go-back" label="Back"></psk-button>
 
 
                     </psk-card>
