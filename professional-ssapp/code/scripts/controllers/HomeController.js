@@ -1,5 +1,6 @@
 const {WebcController} = WebCardinal.controllers;
-
+import CommunicationService from '../services/CommunicationService.js';
+import ResponsesService from '../services/ResponsesService.js';
 
 export default class HomeController extends WebcController {
     constructor(element, history) {
@@ -9,6 +10,37 @@ export default class HomeController extends WebcController {
         this._attachHandlerManageDevices();
         this._attachHandlerTrialManagement();
         this._attachHandlerListOfPatients();
+
+        this.ResponsesService = new ResponsesService(this.DSUStorage);
+        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.PROFESSIONAL_IDENTITY);
+        this.CommunicationService.listenForMessages((err, data) => {
+            if (err) {
+                return console.error(err);
+            }
+            data = JSON.parse(data);
+            switch (data.message.operation) {
+                case 'questionnaire-response': {
+                    console.log('Received message', data.message)
+                    this.ResponsesService.mount(data.message.ssi, (err, data) => {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        this.ResponsesService.getResponses((err, data) => {
+                            if (err) {
+                                return console.log(err);
+                            }
+                            console.log('ProfessionalSSAPP_HomeController');
+                            data.forEach(response => {
+                                response.item.forEach(item => {
+                                    console.log(item.answer[0], item.linkId, item.text)
+                                })
+                            })
+                        })
+                    });
+                    break;
+                }
+            }
+        });
 
     }
 

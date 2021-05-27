@@ -1,11 +1,11 @@
-import EDiaryService from "./services/EDiaryService.js";
+import EDiaryService from "../services/EDiaryService.js";
 
 const { WebcController } = WebCardinal.controllers;
 
 
 export default class EDiaryController extends WebcController {
-    constructor(element, history) {
-        super(element, history);
+    constructor(...props) {
+        super(...props);
 
         this.setModel({
             trials: []

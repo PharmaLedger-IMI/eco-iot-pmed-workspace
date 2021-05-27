@@ -1,6 +1,7 @@
-import QuestionnaireService from "./services/QuestionnaireService.js";
+import QuestionnaireService from "../services/QuestionnaireService.js";
 import QuestionnaireResponse from "../models/QuestionnaireResponse.js";
-import ResponsesService from "./services/ResponsesService.js";
+import ResponsesService from "../services/ResponsesService.js";
+import CommunicationService from '../services/CommunicationService.js';
 
 const {WebcController} = WebCardinal.controllers;
 
@@ -23,12 +24,13 @@ const TAB_MIN_VALUE = 0;
 let TAB_MAX_VALUE = 0;
 
 export default class QuestionnaireController extends WebcController {
-    constructor(element, history) {
-        super(element, history);
+    constructor(...props) {
+        super(...props);
 
         this.setModel(getInitModel());
 
         this.tabsContainer = this.querySelector('#tabs-container');
+        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.EDIARY_IDENTITY);
         this.QuestionnaireService = new QuestionnaireService(this.DSUStorage);
         this.ResponsesService = new ResponsesService(this.DSUStorage);
 
@@ -79,6 +81,7 @@ export default class QuestionnaireController extends WebcController {
                 if (err) {
                     return console.log(err);
                 }
+                this.sendMessageToProfessional('questionnaire-response', data.uid);
                 this.ResponsesService.getResponses((err, data) => {
                     if (err) {
                         return console.log(err);
@@ -124,6 +127,13 @@ export default class QuestionnaireController extends WebcController {
             this.querySelector('#tabs-container').innerHTML = `<webc-template template="questionnaire-template" data-view-model="@"></webc-template>`
             TAB_MAX_VALUE = questions.length;
         })
+    }
+
+    sendMessageToProfessional(operation, ssi) {
+        this.CommunicationService.sendMessage(CommunicationService.identities.PROFESSIONAL_IDENTITY, {
+            operation: operation,
+            ssi: ssi
+        });
     }
 
     computeButtonStates() {

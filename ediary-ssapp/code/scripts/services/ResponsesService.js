@@ -6,6 +6,8 @@ export default class ResponsesService extends DSUService {
         super(DSUStorage, '/responses');
     }
 
+    mount = (keySSI, callback) => this.mountEntity(keySSI, callback)
+
     saveResponse = (response, callback) => this.saveEntity(response, callback)
 
     getResponses = (callback) => this.getEntities(callback);

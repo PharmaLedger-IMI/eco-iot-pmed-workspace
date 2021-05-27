@@ -107,7 +107,7 @@ export default class TrialService {
 
     unmountTrial(orgUid, callback) {
         let unmountPath = this.SERVICE_PATH + '/' + orgUid;
-        this.DSUStorage.call('organizationUnmount', unmountPath, (err, result) => {
+        this.DSUStorage.call('unmount', unmountPath, (err, result) => {
             if (err) {
                 callback(err, undefined);
                 return;

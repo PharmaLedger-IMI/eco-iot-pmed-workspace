@@ -10,3 +10,7 @@ seed
 bundles
 package-lock.json
 .eslintrc.json
+SharedStorage.js
+CommunicationService.js
+DSUService.js
+api.js

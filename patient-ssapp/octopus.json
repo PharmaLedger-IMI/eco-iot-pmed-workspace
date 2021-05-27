@@ -36,6 +36,14 @@
         },
         {
           "type": "copy",
+          "src": "../privatesky/psknode/bundles/iframeBoot.js",
+          "target": "code/scripts/bundles/iframeBoot.js",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "copy",
           "src": "../privatesky/psknode/bundles/webshims.js",
           "target": "code/scripts/bundles/webshims.js",
           "options": {

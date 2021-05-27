@@ -274,6 +274,43 @@
       ]
     },
     {
+      "name": "utilitaries",
+      "actions": [
+        {
+          "type": "copy",
+          "src": "./utilitaries",
+          "target": "./ediary-ssapp/",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "copy",
+          "src": "./utilitaries",
+          "target": "./patient-ssapp/",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "copy",
+          "src": "./utilitaries",
+          "target": "./professional-ssapp/",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "copy",
+          "src": "./utilitaries",
+          "target": "./researcher-ssapp/",
+          "options": {
+            "overwrite": true
+          }
+        }
+      ]
+    },
+    {
       "name": "blue-fluorite-theme-wallet-build",
       "src": "",
       "actions": [
@@ -389,6 +426,10 @@
     {
       "name": "copy-bundles",
       "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd apihub-root/patient-wallet/loader && npm install"
+        },
         {
           "type": "execute",
           "cmd": "cd apihub-root/dsu-explorer/loader && npm install"

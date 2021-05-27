@@ -1,10 +1,10 @@
-import QuestionnaireService from "./services/QuestionnaireService.js";
+import QuestionnaireService from "../services/QuestionnaireService.js";
 import Questionnaire from "../models/Questionnaire.js";
 const { WebcController } = WebCardinal.controllers;
 
 export default class HomeController extends WebcController {
-    constructor(element, history) {
-        super(element, history);
+    constructor(...props) {
+        super(...props);
 
         this._attachHandlerEconsent();
         this._attachHandlerIotQuestionarie();
