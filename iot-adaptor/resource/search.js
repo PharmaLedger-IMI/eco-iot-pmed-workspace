@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-function searchResource(request, response, next) {
+function searchResources(request, response, next) {
     const receivedDomain = "default";
     const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {
@@ -11,15 +11,13 @@ function searchResource(request, response, next) {
     flow.init(domainConfig);
     const queryParams = _.merge({}, request.query);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
-    flow.searchResource(resourceType, queryParams, (err, result) => {
-        if (err) {
-            if (err.code === 'EACCES') {
-                return response.send(409);
-            }
-            return response.send(500);
-        }
-        response.send(200, result);
+    flow.searchResources(resourceType, queryParams, (error, result) => {
+      if (error) {
+        return response.send(error.status, error);
+      } else {
+        return response.send(200, result);
+      }
     });
 }
 
-module.exports = searchResource;
+module.exports = searchResources;

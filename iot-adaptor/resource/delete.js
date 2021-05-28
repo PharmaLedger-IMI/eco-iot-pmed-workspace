@@ -12,14 +12,12 @@ function searchResource(request, response, next) {
     const queryParams = _.merge({}, request.query);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
     const id  = request.params.id;
-    flow.deleteResource(resourceType, id, (err, result) => {
-        if (err) {
-            if (err.code === 'EACCES') {
-                return response.send(409);
-            }
-            return response.send(500);
+    flow.deleteResource(resourceType, id, (error, result) => {
+        if (error) {
+          return response.send(error.status, error);
+        } else {
+          return response.send(200, result);
         }
-        response.send(200, result);
     });
 }
 

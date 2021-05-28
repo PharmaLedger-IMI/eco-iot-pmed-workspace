@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const parseXml = require('xml2js').parseString;
-const fhirService = require("../utils/fhirService");
+// const FhirStorage = require("../storages/fhir.js")
+const DbStorage = require("../storages/db.js")
 const moment = require('moment');
 
 const escapeXml = (unsafe) => {
@@ -278,9 +279,9 @@ const buildSpO2Resource = (patientId, xmlDocument) => {
 }
 
 const processXml = (xmlString, callback) => {
-  parseXml(escapeXml(xmlString), function (err, result) {
-    if (err) {
-      callback(err, null);
+  parseXml(escapeXml(xmlString), function (error, result) {
+    if (error) {
+      callback(error, null);
     } else {
       const patient_info = result.dantest.patient_info[0];
       const measurement_info = result.dantest.measurement_info[0];
@@ -295,18 +296,32 @@ const processXml = (xmlString, callback) => {
       const patientIdentifier = newPatient.identifier[0].value;
       const deviceSN = newDevice.identifier[0].value;
 
+      // storage = new FhirStorage({
+      //   baseUrl: 'http://localhost:8090/fhir'
+      // });
 
-      fhirService.resource.findOrCreate('Patient', newPatient, { identifier: patientIdentifier }, (err, resource) => {
-        if (err) {
-          // console.log(err);
+      storage = new DbStorage({
+        baseURL: 'http://localhost:1337/v1/storage',
+        headers: {
+          'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
+          'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+          'Content-Type': 'application/json'
+        }
+      })
+
+      //storage.findOrCreateResource('Patient', newPatient, { identifier: patientIdentifier }, (error, resource) => {
+      storage.findOrCreateResource('Patient', newPatient, { where: { "identifier.value": patientIdentifier } }, (error, resource) => {
+        if (error) {
+          // console.log(error);
         } else {
           //Start Height
 
           const bodyHeight = buildHeightResource(resource.id, result);
           const heightIdentifier = bodyHeight.identifier[0].value;
 
-          fhirService.resource.findOrCreate('Observation', bodyHeight, { identifier: heightIdentifier }, (err, resource) => {
-            // console.log(err);
+          //storage.findOrCreateResource('Observation', bodyHeight, { identifier: heightIdentifier }, (error, resource) => {
+          storage.findOrCreateResource('Observation', bodyHeight, { where: { "identifier.value": heightIdentifier } }, (error, resource) => {
+            // console.log(error);
             // console.log(resource);
           });
           //End Height
@@ -314,9 +329,9 @@ const processXml = (xmlString, callback) => {
           //Start Weight
           const bodyWeight = buildWeightResource(resource.id, result);
           const weightIdentifier = bodyWeight.identifier[0].value;
-
-          fhirService.resource.findOrCreate('Observation', bodyWeight, { identifier: weightIdentifier }, (err, resource) => {
-            // console.log(err);
+          //storage.findOrCreateResource('Observation', bodyWeight, { identifier: weightIdentifier }, (error, resource) => {
+          storage.findOrCreateResource('Observation', bodyWeight, { where: { "identifier.value": weightIdentifier } }, (error, resource) => {
+            // console.log(error);
             // console.log(resource);
           });
           //End Weight
@@ -324,9 +339,9 @@ const processXml = (xmlString, callback) => {
           //Start Age
           const age = buildAgeResource(resource.id, result);
           const ageIdentifier = age.identifier[0].value;
-
-          fhirService.resource.findOrCreate('Observation', age, { identifier: ageIdentifier }, (err, resource) => {
-            // console.log(err);
+          //storage.findOrCreateResource('Observation', age, { identifier: ageIdentifier }, (error, resource) => {
+          storage.findOrCreateResource('Observation', age, { where: { "identifier.value": ageIdentifier } }, (error, resource) => {
+            // console.log(error);
             // console.log(resource);
           });
           //End Age
@@ -334,8 +349,9 @@ const processXml = (xmlString, callback) => {
           //Start Systolic Blood Pressure
           const bpSys = buildSystolicBloodPressureResource(resource.id, result);
           const bpSysIdentifier = bpSys.identifier[0].value;
-          fhirService.resource.findOrCreate('Observation', bpSys, { identifier: bpSysIdentifier }, (err, resource) => {
-            // console.log(err);
+          //storage.findOrCreateResource('Observation', bpSys, { identifier: bpSysIdentifier }, (error, resource) => {
+          storage.findOrCreateResource('Observation', bpSys, { where: { "identifier.value": bpSysIdentifier } }, (error, resource) => {
+            // console.log(error);
             // console.log(resource);
           });
           //End Blood Pressure
@@ -343,8 +359,9 @@ const processXml = (xmlString, callback) => {
           //Start Diasystolic Blood Pressure
           const bpDia = buildDiasystolicBloodPressureResource(resource.id, result);
           const bpDiaIdentifier = bpDia.identifier[0].value;
-          fhirService.resource.findOrCreate('Observation', bpDia, { identifier: bpDiaIdentifier }, (err, resource) => {
-            // console.log(err);
+          //storage.findOrCreateResource('Observation', bpDia, { identifier: bpDiaIdentifier }, (error, resource) => {
+          storage.findOrCreateResource('Observation', bpDia, { where: { "identifier.value": bpDiaIdentifier } }, (error, resource) => {
+            // console.log(error);
             // console.log(resource);
           });
           //End Diasystolic Blood Pressure
@@ -352,17 +369,19 @@ const processXml = (xmlString, callback) => {
           //Start SpO2
           const spO2 = buildSpO2Resource(resource.id, result);
           const spO2Identifier = spO2.identifier[0].value;
-          fhirService.resource.findOrCreate('Observation', spO2, { identifier: spO2Identifier }, (err, resource) => {
-            // console.log(err);
+          //storage.findOrCreateResource('Observation', spO2, { identifier: spO2Identifier }, (error, resource) => {
+          storage.findOrCreateResource('Observation', spO2, { where: { "identifier.value": spO2Identifier } }, (error, resource) => {
+            // console.log(error);
             // console.log(resource);
           });
           //End SpO2
         }
       });
 
-      fhirService.resource.findOrCreate('Device', newDevice, { identifier: deviceSN }, (err, resource) => {
-        if (err) {
-          // console.log(err);
+      //storage.findOrCreateResource('Device', newDevice, { identifier: deviceSN }, (error, resource) => {
+      storage.findOrCreateResource('Device', newDevice, { where: { "identifier.value": deviceSN } }, (error, resource) => {
+        if (error) {
+          // console.log(error);
         } else {
           // console.log(resource);
         }
