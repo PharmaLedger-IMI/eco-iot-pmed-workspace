@@ -3,7 +3,8 @@ function IotAdapter(server) {
     require('./strategies/IotAdapter');
 
     const DynavisionPlatform = require('./platform/dynavision');
-    const DsuTest = require('./dsu/test');
+    const CreateDsu = require('./dsu/create');
+    const CreateDsuResource = require('./dsu/create_resource');
 
     const CreateResource = require('./resource/create');
     const SearchResources = require('./resource/search');
@@ -32,7 +33,9 @@ function IotAdapter(server) {
     server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
     server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
 
-    server.post(`/iotAdapter/dsu/test`, DsuTest);
+    server.post(`/iotAdapter/dsu`, CreateDsu);
+    server.post(`/iotAdapter/dsu/resource/:resource_type`, requestBodyJSONMiddleware);
+    server.post(`/iotAdapter/dsu/resource/:resource_type`, CreateDsuResource);
 }
 
 module.exports = IotAdapter;

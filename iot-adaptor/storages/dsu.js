@@ -39,7 +39,7 @@ class DsuStorage {
 
   searchResources(type, params, callback) {
     const _self = this;
-    
+
   }
 
   createResource(type, jsonData, callback) {
@@ -47,10 +47,11 @@ class DsuStorage {
     const resource = _.merge({
       "resourceType": type
     }, jsonData);
+
+    console.log(jsonData);
     console.log("*******50*******");
     this.client.insertRecord(type, uuidv4(), jsonData, function(error, response){
         console.log("**************");
-        console.log(error);
         if(error){
             callback(_self.normalizeErrorResponse(error), null);
         }
@@ -59,7 +60,7 @@ class DsuStorage {
         }
         console.log(response);
     });
-    
+
   }
 
   updateResource(type, id, jsonData, callback) {
@@ -68,22 +69,22 @@ class DsuStorage {
       "resourceType": type
     }, jsonData);
 
-    
+
   }
 
   getResourceById(type, id, callback) {
     const _self = this;
-    
+
   }
 
   deleteResource(type, id, callback) {
     const _self = this;
-    
+
   }
 
   findOrCreateResource(type, jsonData, params, callback) {
     const _self = this;
-    
+
   }
 }
 

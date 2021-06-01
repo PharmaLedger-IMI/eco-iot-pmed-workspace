@@ -8,14 +8,12 @@ function createDSU(request, response, next) {
 
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
-    flow.createDSU((err, result) => {
-        if (err) {
-            if (err.code === 'EACCES') {
-                return response.send(409);
-            }
-            return response.send(500);
-        }
-        response.send(200, result);
+    flow.createDSU((error, result) => {
+      if (error) {
+        return response.send(error.status, error);
+      } else {
+        return response.send(200, result);
+      }
     });
 }
 module.exports = createDSU;

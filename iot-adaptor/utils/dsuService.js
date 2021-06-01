@@ -11,35 +11,21 @@ const createSeedSSI = () => {
   return keyssispace.createSeedSSI('default');
 }
 
-const createSharedDB = (keySSI, dbName) => {
-  const sReadSSI = keyssispace.parse(keySSI);
-  const dbObject = db.getSharedDB(sReadSSI, dbName);
+const getSharedDB = (sReadSSI, dbName) => {
+  const sReadSSIObject = keyssispace.parse(sReadSSI);
+  const dbObject = db.getSharedDB(sReadSSIObject, dbName);
   return dbObject;
 }
 
-const createWalletDB = (dbName) => {
-  // const seedSSI = createSeedSSI();
-  const seedSSI = keyssispace.parse('BBudGH6ySHG6GUHN8ogNrTWbZEWkEbNKVx3B4SemQtqsuo5uH8MXwouNfNRMtUjjksECEL4ZMHAui9kHiaM426GJ3');
-  const sReadSSI = seedSSI.derive();
-  const dbObject = db.getWalletDB(seedSSI, dbName);
-  console.log('seedSSI: ', seedSSI.getIdentifier());
-  console.log('sReadSSI: ', sReadSSI.getIdentifier());
-  // dbObject.insertRecord("test", "123456", "{}", function (err, res) {
-  //   console.log('ola: ', err);
-  //   console.log('lla: ', res);
-  // });
-  // callback(undefined, dbObject);
-  return dbObject;
-};
-
-const getSharedDB = (callback) => {
-  const db = createSharedDB('27XvCBPKSWpUwscQUxwsVDTxRcX1tD7FdVriPyPpAMo2Dh65efWLEEBSiDVSSt6TmNdiH2G5nvBkXm4gsJcZC2snhsbNsq4M2gPptVPsr91HQmwnw5X56WNRExbxbMQqzj17JoYGfVSbQaDkWXu6wEX', 'testDb');
-  db.insertRecord("test", "key1", {value:"v0"}, function(err,res){
-    console.log(err);
-    console.log(res);
+const createWalletDB = (dbName, callback) => {
+  const seedSSIObject = createSeedSSI();
+  const sReadSSIObject = seedSSIObject.derive();
+  const dbObject = db.getWalletDB(seedSSIObject, dbName);
+  callback(null, {
+    seedSSI: seedSSIObject.getIdentifier(),
+    sReadSSI: sReadSSIObject.getIdentifier()
   });
-  callback(undefined, {});
-}
+};
 
 //Resource
 
@@ -72,5 +58,5 @@ module.exports = {
       findOrCreate: findOrCreateResource,
       delete: deleteResource
     },
-    getSharedDB: getSharedDB
+    createWalletDB: createWalletDB
 }

@@ -25,9 +25,9 @@ $$.flow.describe('IotAdaptor', {
           }
         });
         this.dsu = new DsuStorage({
-            keySSI: '27XvCBPKSWpUwscQUxwsVDTxRcX1tD7FdVriPyPpAMo2Dh65efWLEEBSiDVSSt6TmNdiH2G5nvBkXm4gsJcZC2snhsbNsq4M2gPptVPsr91HQmwnw5X56WNRExbxbMQqzj17JoYGfVSbQaDkWXu6wEX',
-            dbName: 'testDb'
-          });
+          keySSI: '27XvCBPKSWpUwscQUxwsVDTxRbu6NJNsNQdej53NWdT4n2vpZQ9C9Togs4JtULoJL5HFAWG6oFBjNukMN1ej7Ly5HXCWorTHinNhYtpUpEtmvKrSh6f1HVcm6MLBNJy1EXLZmVt4HgbgW2Xq8KzAnT1',
+          dbName: 'sharedDB'
+        });
     },
     processXml: function (xmlString, callback) {
         etlService.processXml(xmlString, callback);
@@ -53,7 +53,10 @@ $$.flow.describe('IotAdaptor', {
         this.db.deleteResource(resourceType, id, callback);
     },
     createDSU: function (callback) {
-        dsuService.getSharedDB(callback);
-        // this.dsu.createResource("Patient", {name:"test"}, callback);
-    }
+        dsuService.createWalletDB('sharedDB', callback);
+    },
+    createDsuResource: function (resourceType, jsonData, callback) {
+        this.dsu.createResource(resourceType, jsonData, callback);
+    },
+
 });
