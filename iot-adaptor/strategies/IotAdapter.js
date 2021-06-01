@@ -1,7 +1,8 @@
 const etlService = require("../utils/etlService");
-// const dsuService = require("../utils/dsuService");
+const dsuService = require("../utils/dsuService");
 const FhirStorage = require("../storages/fhir.js")
 const DbStorage = require("../storages/db.js")
+const DsuStorage = require("../storages/dsu.js")
 
 $$.flow.describe('IotAdaptor', {
 
@@ -23,6 +24,10 @@ $$.flow.describe('IotAdaptor', {
             'Content-Type': 'application/json'
           }
         });
+        this.dsu = new DsuStorage({
+            keySSI: '27XvCBPKSWpUwscQUxwsVDTxRcX1tD7FdVriPyPpAMo2Dh65efWLEEBSiDVSSt6TmNdiH2G5nvBkXm4gsJcZC2snhsbNsq4M2gPptVPsr91HQmwnw5X56WNRExbxbMQqzj17JoYGfVSbQaDkWXu6wEX',
+            dbName: 'testDb'
+          });
     },
     processXml: function (xmlString, callback) {
         etlService.processXml(xmlString, callback);
@@ -47,7 +52,8 @@ $$.flow.describe('IotAdaptor', {
         //this.fhir.deleteResource(resourceType, id, callback);
         this.db.deleteResource(resourceType, id, callback);
     },
-    // createDSU: function (callback) {
-    //     dsuService.getSharedDB(callback);
-    // },
+    createDSU: function (callback) {
+        dsuService.getSharedDB(callback);
+        // this.dsu.createResource("Patient", {name:"test"}, callback);
+    }
 });
