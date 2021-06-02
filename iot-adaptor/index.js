@@ -9,6 +9,8 @@ function IotAdapter(server) {
     const CreateDsuResource = require('./dsu/resource/create');
     const SearchDsuResources = require('./dsu/resource/search');
     const UpdateDsuResource = require('./dsu/resource/update');
+    const DeleteDsuResource = require('./dsu/resource/delete');
+    const GetDsuResourceById = require('./dsu/resource/getById');
 
     const CreateResource = require('./resource/create');
     const SearchResources = require('./resource/search');
@@ -43,6 +45,9 @@ function IotAdapter(server) {
     server.get(`/iotAdapter/dsu/resource/:resource_type`, SearchDsuResources);
     server.put(`/iotAdapter/dsu/resource/:resource_type/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/dsu/resource/:resource_type/:id`, UpdateDsuResource);
+    server.delete(`/iotAdapter/dsu/resource/:resource_type/:id`, DeleteDsuResource);
+    server.get(`/iotAdapter/dsu/resource/:resource_type/:id`, GetDsuResourceById);
+
 
 }
 

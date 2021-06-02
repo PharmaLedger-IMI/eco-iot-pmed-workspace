@@ -25,7 +25,7 @@ $$.flow.describe('IotAdaptor', {
           }
         });
         this.dsu = new DsuStorage({
-          keySSI: '27XvCBPKSWpUwscQUxwsVDTxRbqjKM4aKLixMpoFdBfjh6irD9nfrEdzABGqjsLYwAxeVwHFzQzivCmGSvsCCPyH27AcavSfpzLT7ysyMHrZHktbPPzh6nE5ZLuNWojR1C2FnG1Y1VCiNVRGhM1X17d',
+          keySSI: '27XvCBPKSWpUwscQUxwsVDTxRcaTm68UgLe4r8wS8x1rpAcoeS3CJse2jjPMNBbp8gPPbnyJpFAUxBFfp3ov2U7Wc6rBkpeBE7njKd5UYwpvE74BTQHSTf8jnxCDtWWtd4Q47AfPfCNpebpLpoCc1Jo',
           dbName: 'sharedDB'
         });
     },
@@ -63,6 +63,12 @@ $$.flow.describe('IotAdaptor', {
     },
     updateDsuResource: function (resourceType, id, jsonData, callback) {
         this.dsu.updateResource(resourceType, id, jsonData, callback);
+    },
+    getDsuResourceById: function (resourceType, id, callback) {
+        this.dsu.getResourceById(resourceType, id, callback);
+    },
+    deleteDsuResource: function(resourceType, id, callback) {
+        this.dsu.deleteResource(resourceType, id, callback);
     },
 
 });

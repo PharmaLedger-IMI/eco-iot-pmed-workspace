@@ -40,7 +40,7 @@ class DsuStorage {
       return _resource;
     }
     this.normalizeErrorResponse = function(error) {
-      return { status: 500, message: error.message };
+      return { status: 500, message: error.debug_message };
     }
   }
 
@@ -64,10 +64,10 @@ class DsuStorage {
 
     this.client.insertRecord(type, uuidv4(), resource, function(error, response){
         if(error){
-            callback(_self.normalizeErrorResponse(error), null);
+            callback(_self.normalizeErrorResponse(error), undefined);
         }
         else{
-            callback(null, _self.normalizeSingleResponse(response));
+            callback(undefined, _self.normalizeSingleResponse(response));
         }
     });
 
@@ -80,10 +80,10 @@ class DsuStorage {
       }, jsonData);
     this.client.updateRecord(type, id, resource, function(error, response){
         if(error){
-            callback(_self.normalizeErrorResponse(error), null);
+            callback(_self.normalizeErrorResponse(error), undefined);
         }
         else{
-            callback(null, _self.normalizeSingleResponse(response));
+            callback(undefined, _self.normalizeSingleResponse(response));
         }
         console.log(response);
     });
@@ -92,19 +92,36 @@ class DsuStorage {
 
   getResourceById(type, id, callback) {
     const _self = this;
+    this.client.getRecord(type, id, function(error, response){
+        if(error){
+            callback(_self.normalizeErrorResponse(error), undefined);
+        }
+        else{
+            callback(undefined, _self.normalizeSingleResponse(response));
+        }
+        console.log(error);
+    });
 
   }
 
   deleteResource(type, id, callback) {
     const _self = this;
-
+    this.client.deleteRecord(type, id, function(error, response){
+      if(error){
+          callback(_self.normalizeErrorResponse(error), undefined);
+      }
+      else{
+          callback(undefined, {});
+      }
+      console.log(response);
+    });
   }
 
   findOrCreateResource(type, jsonData, params, callback) {
     const _self = this;
     _self.searchResources(type, params, function(error, resources){
       if(error){
-        callback(_self.normalizeErrorResponse(error), null);
+        callback(_self.normalizeErrorResponse(error), undefined);
       } else {
         if (resources && resources.length > 0) {
           callback(undefined, resources[0]);
