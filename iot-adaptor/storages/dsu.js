@@ -62,7 +62,7 @@ class DsuStorage {
       "resourceType": type
     }, jsonData);
 
-    this.client.insertRecord(type, uuidv4(), jsonData, function(error, response){
+    this.client.insertRecord(type, uuidv4(), resource, function(error, response){
         if(error){
             callback(_self.normalizeErrorResponse(error), null);
         }
@@ -76,9 +76,17 @@ class DsuStorage {
   updateResource(type, id, jsonData, callback) {
     const _self = this;
     const resource = _.merge({
-      "resourceType": type
-    }, jsonData);
-
+        "resourceType": type
+      }, jsonData);
+    this.client.updateRecord(type, id, resource, function(error, response){
+        if(error){
+            callback(_self.normalizeErrorResponse(error), null);
+        }
+        else{
+            callback(null, _self.normalizeSingleResponse(response));
+        }
+        console.log(response);
+    });
 
   }
 

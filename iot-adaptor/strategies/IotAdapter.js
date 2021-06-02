@@ -61,4 +61,8 @@ $$.flow.describe('IotAdaptor', {
     searchDsuResources: function (resourceType, params, callback) {
         this.dsu.searchResources(resourceType, params, callback);
     },
+    updateDsuResource: function (resourceType, id, jsonData, callback) {
+        this.dsu.updateResource(resourceType, id, jsonData, callback);
+    },
+
 });
