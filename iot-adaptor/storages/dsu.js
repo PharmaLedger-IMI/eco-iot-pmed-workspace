@@ -17,29 +17,43 @@ class DsuStorage {
     this.client = db.getSharedDB(sReadSSI, config.dbName);
 
     this.normalizeCollectionResponse = function(response) {
-      const resources = response.data.results;
-      return _.map(resources, function(resource) {
+      return _.map(response, function(resource) {
         const _resource = _.omit(resource, [
-          'objectId',
-          'createdAt',
-          'updatedAt',
-          'ACL'
+          'pk',
+          '__version',
+          '__timestamp',
+          '_sk',
         ]);
-        _resource.id = resource.objectId;
+        _resource.id = resource.pk;
         return _resource;
       });
     }
     this.normalizeSingleResponse = function(response) {
-      return response;
+      const resource = response;
+      const _resource = _.omit(resource, [
+        'pk',
+        '__version',
+        '__timestamp',
+        '_sk',
+      ]);
+      _resource.id = resource.pk;
+      return _resource;
     }
     this.normalizeErrorResponse = function(error) {
-      return { status: 500, message: error.message }
+      return { status: 500, message: error.message };
     }
   }
 
   searchResources(type, params, callback) {
     const _self = this;
-
+    this.client.filter(type, params.query, params.sort, params.limit, function(error, response){
+        if(error){
+          callback(_self.normalizeErrorResponse(error), {});
+        }
+        else{
+          callback(undefined, _self.normalizeCollectionResponse(response));
+        }
+    });
   }
 
   createResource(type, jsonData, callback) {
@@ -48,17 +62,13 @@ class DsuStorage {
       "resourceType": type
     }, jsonData);
 
-    console.log(jsonData);
-    console.log("*******50*******");
     this.client.insertRecord(type, uuidv4(), jsonData, function(error, response){
-        console.log("**************");
         if(error){
             callback(_self.normalizeErrorResponse(error), null);
         }
         else{
             callback(null, _self.normalizeSingleResponse(response));
         }
-        console.log(response);
     });
 
   }
@@ -84,7 +94,17 @@ class DsuStorage {
 
   findOrCreateResource(type, jsonData, params, callback) {
     const _self = this;
-
+    _self.searchResources(type, params, function(error, resources){
+      if(error){
+        callback(_self.normalizeErrorResponse(error), null);
+      } else {
+        if (resources && resources.length > 0) {
+          callback(undefined, resources[0]);
+        } else {
+          _self.createResource(type, jsonData, callback);
+        }
+      }
+    });
   }
 }
 

@@ -1,8 +1,8 @@
 const _ = require('lodash');
 
-function createDsuResource(request, response, next) {
+function createResource(request, response, next) {
     const receivedDomain = "default";
-    const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
+    const domainConfig = require("../../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {
         console.log('Deployment Domain not found : ', receivedDomain);
         return response.send(500);
@@ -19,4 +19,4 @@ function createDsuResource(request, response, next) {
       }
     });
 }
-module.exports = createDsuResource;
+module.exports = createResource;

@@ -1,7 +1,8 @@
 const _ = require('lodash');
 const parseXml = require('xml2js').parseString;
-// const FhirStorage = require("../storages/fhir.js")
-const DbStorage = require("../storages/db.js")
+// const FhirStorage = require("../storages/fhir.js");
+const DbStorage = require("../storages/db.js");
+const DsuStorage = require("../storages/dsu.js");
 const moment = require('moment');
 
 const escapeXml = (unsafe) => {
@@ -15,6 +16,7 @@ const escapeXml = (unsafe) => {
 const buildPatientResource = (xmlDocument) => {
   const patientInfo = xmlDocument.dantest.patient_info[0];
   const resource = {
+    _sk: patientInfo.patientcode[0],
     name: [{ use: 'official', family: patientInfo.lname[0], given: [patientInfo.fname[0]] }],
     identifier: [
       {
@@ -49,6 +51,7 @@ const buildPatientResource = (xmlDocument) => {
 const buildDeviceResource = (xmlDocument) => {
   const measurement_info = xmlDocument.dantest.measurement_info[0];
   const resource = {
+    _sk: measurement_info.hw_sn[0],
     identifier: [
       {
         use: 'official',
@@ -74,6 +77,7 @@ const buildHeightResource = (patientId, xmlDocument) => {
   const effectiveDateTime = moment(measurementInfo.date[0], 'YYYY-MM-DD HH:mm:ss');
   const identifier = `patient/${patientId}/observation/height/${effectiveDateTime.unix()}`;
   const resource = {
+    _sk: identifier,
     identifier: [
       {
         use: 'secondary',
@@ -107,6 +111,7 @@ const buildWeightResource = (patientId, xmlDocument) => {
   const effectiveDateTime = moment(measurementInfo.date[0], 'YYYY-MM-DD HH:mm:ss');
   const identifier = `patient/${patientId}/observation/weight/${effectiveDateTime.unix()}`;
   const resource = {
+    _sk: identifier,
     identifier: [
       {
         use: 'secondary',
@@ -140,6 +145,7 @@ const buildAgeResource = (patientId, xmlDocument) => {
   const effectiveDateTime = moment(measurementInfo.date[0], 'YYYY-MM-DD HH:mm:ss');
   const identifier = `patient/${patientId}/observation/age/${effectiveDateTime.unix()}`;
   const resource = {
+    _sk: identifier,
     identifier: [
       {
         use: 'secondary',
@@ -176,6 +182,7 @@ const buildSystolicBloodPressureResource = (patientId, xmlDocument) => {
   const bpSys = _.find(pwv.item, function (object) { return object.$.code === 'PTG-BPSYS'; });
   const identifier = `patient/${patientId}/observation/bpsys/${effectiveDateTime.unix()}`;
   const resource = {
+    _sk: identifier,
     identifier: [
       {
         use: 'secondary',
@@ -213,6 +220,7 @@ const buildDiasystolicBloodPressureResource = (patientId, xmlDocument) => {
   const bpDia = _.find(pwv.item, function (object) { return object.$.code === 'PTG-BPDIA'; });
   const identifier = `patient/${patientId}/observation/bpdia/${effectiveDateTime.unix()}`;
   const resource = {
+    _sk: identifier,
     identifier: [
       {
         use: 'secondary',
@@ -251,6 +259,7 @@ const buildSpO2Resource = (patientId, xmlDocument) => {
   const spO2 = _.find(pwv.item, function (object) { return object.$.code === 'PTG-SpO2'; });
   const identifier = `patient/${patientId}/observation/spo2/${effectiveDateTime.unix()}`;
   const resource = {
+    _sk: identifier,
     identifier: [
       {
         use: 'secondary',
@@ -309,8 +318,14 @@ const processXml = (xmlString, callback) => {
         }
       })
 
+      storage = new DsuStorage({
+        keySSI: '27XvCBPKSWpUwscQUxwsVDTxRbqjKM4aKLixMpoFdBfjh6irD9nfrEdzABGqjsLYwAxeVwHFzQzivCmGSvsCCPyH27AcavSfpzLT7ysyMHrZHktbPPzh6nE5ZLuNWojR1C2FnG1Y1VCiNVRGhM1X17d',
+        dbName: 'sharedDB'
+      });
+
       //storage.findOrCreateResource('Patient', newPatient, { identifier: patientIdentifier }, (error, resource) => {
-      storage.findOrCreateResource('Patient', newPatient, { where: { "identifier.value": patientIdentifier } }, (error, resource) => {
+      //storage.findOrCreateResource('Patient', newPatient, { where: { "identifier.value": patientIdentifier } }, (error, resource) => {
+      storage.findOrCreateResource('Patient', newPatient, { query: `_sk == '${patientIdentifier}'` }, (error, resource) => {
         if (error) {
           // console.log(error);
         } else {
@@ -320,7 +335,8 @@ const processXml = (xmlString, callback) => {
           const heightIdentifier = bodyHeight.identifier[0].value;
 
           //storage.findOrCreateResource('Observation', bodyHeight, { identifier: heightIdentifier }, (error, resource) => {
-          storage.findOrCreateResource('Observation', bodyHeight, { where: { "identifier.value": heightIdentifier } }, (error, resource) => {
+          // storage.findOrCreateResource('Observation', bodyHeight, { where: { "identifier.value": heightIdentifier } }, (error, resource) => {
+          storage.findOrCreateResource('Observation', bodyHeight, { query: `_sk == '${heightIdentifier}'` }, (error, resource) => {
             // console.log(error);
             // console.log(resource);
           });
@@ -330,7 +346,8 @@ const processXml = (xmlString, callback) => {
           const bodyWeight = buildWeightResource(resource.id, result);
           const weightIdentifier = bodyWeight.identifier[0].value;
           //storage.findOrCreateResource('Observation', bodyWeight, { identifier: weightIdentifier }, (error, resource) => {
-          storage.findOrCreateResource('Observation', bodyWeight, { where: { "identifier.value": weightIdentifier } }, (error, resource) => {
+          //storage.findOrCreateResource('Observation', bodyWeight, { where: { "identifier.value": weightIdentifier } }, (error, resource) => {
+          storage.findOrCreateResource('Observation', bodyWeight, { query: `_sk == '${weightIdentifier}'` }, (error, resource) => {
             // console.log(error);
             // console.log(resource);
           });
@@ -340,7 +357,8 @@ const processXml = (xmlString, callback) => {
           const age = buildAgeResource(resource.id, result);
           const ageIdentifier = age.identifier[0].value;
           //storage.findOrCreateResource('Observation', age, { identifier: ageIdentifier }, (error, resource) => {
-          storage.findOrCreateResource('Observation', age, { where: { "identifier.value": ageIdentifier } }, (error, resource) => {
+          //storage.findOrCreateResource('Observation', age, { where: { "identifier.value": ageIdentifier } }, (error, resource) => {
+          storage.findOrCreateResource('Observation', age, { query: `_sk == '${ageIdentifier}'` }, (error, resource) => {
             // console.log(error);
             // console.log(resource);
           });
@@ -350,7 +368,8 @@ const processXml = (xmlString, callback) => {
           const bpSys = buildSystolicBloodPressureResource(resource.id, result);
           const bpSysIdentifier = bpSys.identifier[0].value;
           //storage.findOrCreateResource('Observation', bpSys, { identifier: bpSysIdentifier }, (error, resource) => {
-          storage.findOrCreateResource('Observation', bpSys, { where: { "identifier.value": bpSysIdentifier } }, (error, resource) => {
+          //storage.findOrCreateResource('Observation', bpSys, { where: { "identifier.value": bpSysIdentifier } }, (error, resource) => {
+          storage.findOrCreateResource('Observation', bpSys, { query: `_sk == '${bpSysIdentifier}'` }, (error, resource) => {
             // console.log(error);
             // console.log(resource);
           });
@@ -360,7 +379,8 @@ const processXml = (xmlString, callback) => {
           const bpDia = buildDiasystolicBloodPressureResource(resource.id, result);
           const bpDiaIdentifier = bpDia.identifier[0].value;
           //storage.findOrCreateResource('Observation', bpDia, { identifier: bpDiaIdentifier }, (error, resource) => {
-          storage.findOrCreateResource('Observation', bpDia, { where: { "identifier.value": bpDiaIdentifier } }, (error, resource) => {
+          // storage.findOrCreateResource('Observation', bpDia, { where: { "identifier.value": bpDiaIdentifier } }, (error, resource) => {
+          storage.findOrCreateResource('Observation', bpDia, { query: `_sk == '${bpDiaIdentifier}'` }, (error, resource) => {
             // console.log(error);
             // console.log(resource);
           });
@@ -370,7 +390,8 @@ const processXml = (xmlString, callback) => {
           const spO2 = buildSpO2Resource(resource.id, result);
           const spO2Identifier = spO2.identifier[0].value;
           //storage.findOrCreateResource('Observation', spO2, { identifier: spO2Identifier }, (error, resource) => {
-          storage.findOrCreateResource('Observation', spO2, { where: { "identifier.value": spO2Identifier } }, (error, resource) => {
+          //storage.findOrCreateResource('Observation', spO2, { where: { "identifier.value": spO2Identifier } }, (error, resource) => {
+          storage.findOrCreateResource('Observation', spO2, { query: `_sk == '${spO2Identifier}'` }, (error, resource) => {
             // console.log(error);
             // console.log(resource);
           });
@@ -379,7 +400,8 @@ const processXml = (xmlString, callback) => {
       });
 
       //storage.findOrCreateResource('Device', newDevice, { identifier: deviceSN }, (error, resource) => {
-      storage.findOrCreateResource('Device', newDevice, { where: { "identifier.value": deviceSN } }, (error, resource) => {
+      //storage.findOrCreateResource('Device', newDevice, { where: { "identifier.value": deviceSN } }, (error, resource) => {
+      storage.findOrCreateResource('Device', newDevice, { query: `_sk == '${deviceSN}'` }, (error, resource) => {
         if (error) {
           // console.log(error);
         } else {
