@@ -1,7 +1,7 @@
 const {WebcController} = WebCardinal.controllers;
 
 
-const requestInformationModel = {
+const requestInformationViewModel = {
     Title: {
         name: 'Title',
         placeholder: 'Title',
@@ -9,26 +9,51 @@ const requestInformationModel = {
         readOnly: false,
         value: ''
     },
-    Period: {
-        name: 'Period',
-        placeholder: 'Period',
-        required: true,
-        readOnly: false,
-        value: ''
-    },
     Status: {
-        name: 'Status',
-        placeholder: 'Status',
+        label: "Status",
+        placeholder: "Select the status",
         required: true,
-        readOnly: false,
-        value: ''
+        options: [
+            {
+                label: "Cancelled",
+                value: "cancelled"
+            },
+            {
+                label: "Executable",
+                value: "executable"
+            },
+            {
+                label: "Executed",
+                value: "executed"
+            },
+            {
+                label: "Offered",
+                value: "offered"
+            },
+        ]
     },
     Terms: {
-        name: 'Terms',
-        placeholder: 'Terms',
+        label: "Terms",
+        placeholder: "Select the terms",
         required: true,
-        readOnly: false,
-        value:''
+        options: [
+            {
+                label: "ECG",
+                value: "ecg"
+            },
+            {
+                label: "Respiration",
+                value: "respiration"
+            },
+            {
+                label: "SpO2",
+                value: "spo2"
+            },
+            {
+                label: "Temperature",
+                value: "temperature"
+            },
+        ]
     },
     requestsButton: {
         label: "New request",
@@ -37,24 +62,50 @@ const requestInformationModel = {
     goBack: {
         label: "Back",
         editState: false
-    }
+    },
+    startDate: {
+        label: "Start Date",
+        input: {
+            name: "date-to-start",
+            required: false,
+            value: ''
+        }
+    },
+    endDate: {
+        label: "End Date",
+        input: {
+            name: "date-to-end",
+            required: false,
+            value: ''
+        }
+    },
 }
 
 
 export default class RequestsController extends WebcController {
-    constructor(element, history) {
+    constructor(...props) {
 
-        super(element, history);
+        super(...props);
         this._attachHandlerIssueNewRequest()
         this._attachHandlerGoBack()
-        this.model = requestInformationModel;
+        this.model = requestInformationViewModel;
 
     }
 
     _attachHandlerIssueNewRequest(){
         this.on('new:request', (event) => {
             console.log ("New information request button pressed");
-            this.navigateToPageTag('issue-new-request');
+
+            let RequestState = {
+                title: this.model.Title.value,
+                startDate: this.model.startDate.value,
+                endDate: this.model.endDate.value,
+                status: this.model.Status.value,
+                terms: this.model.Terms.value
+            }
+            console.log(RequestState)
+
+            this.navigateToPageTag('issue-new-request', RequestState);
         });
     }
 

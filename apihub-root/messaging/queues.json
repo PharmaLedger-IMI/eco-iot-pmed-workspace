@@ -1,0 +1,8 @@
+{
+    "timeouts": {
+        "did:demo:professionalIdentity": 500
+    },
+    "queues": [
+        "did:demo:professionalIdentity"
+    ]
+}

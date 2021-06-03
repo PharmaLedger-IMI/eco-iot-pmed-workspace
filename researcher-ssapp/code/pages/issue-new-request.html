@@ -1,6 +1,6 @@
 <psk-page title="Information Request" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <webc-container controller="RequestsController" style="height: 100%">
+    <webc-container controller="IssueNewRequestController" style="height: 100%">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
               <div class="d-flex flex-row align-content-center justify-content-between">
@@ -18,13 +18,24 @@
               <div class="flex-grow-1">
                 <psk-card class="bpd-dashboard center ">
                     <div>
-                        <psk-label class="bpd-dashboard-title" label="Information Included!"/>
+                        <psk-label class="bpd-dashboard-title" label="This information has been requested between the following date calendars:"/>
                     </div>
-                    <div>
-                        <psk-button event-name="request:go-back">Go back</psk-button>
-                    </div>
-                    
-        
+
+                    <psk-label label="@title"></psk-label>
+                    <psk-label label="@status"></psk-label>
+                    <psk-label label="@terms"></psk-label>
+
+
+                    <psk-date-input view-model="@formatedDateStart"></psk-date-input>
+                    <psk-date-input view-model="@formatedDateEnd"></psk-date-input>
+
+
+
+                    <!--                    <div>-->
+<!--                        <psk-button event-name="request:go-back">Go back</psk-button>-->
+<!--                    </div>-->
+<!--                    -->
+
                 </psk-card>
               </div>
             </div>

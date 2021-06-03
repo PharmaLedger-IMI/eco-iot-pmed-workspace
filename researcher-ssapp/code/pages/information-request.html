@@ -17,12 +17,22 @@
               </div>
               <div class="flex-grow-1">
                 <psk-card class="bpd-dashboard">
+
+                    <h3 style="text-align:center;">Information Request for patients</h3>
+
+
+
+
                     <psk-text-input view-model="@Title"></psk-text-input>
+
+                    <psk-date-input view-model="@startDate"></psk-date-input>
+                    <psk-date-input view-model="@endDate"></psk-date-input>
                     
-                    <psk-select  view-model="@Period" ></psk-select>           
-                    <psk-select view-model="@Status"  select-options="Cancelled | Executable | Executed | Ofered"></psk-select>
-                    <psk-select view-model="@Terms" select-options="ECG | Respiration | Sp02 | Temperature"></psk-select>
-                    
+                    <psk-select view-model="@Status"></psk-select>
+                    <psk-select view-model="@Terms"></psk-select>
+
+
+
                     <psk-button event-name="new:request" view-model="@requestsButton"></psk-button>
                     <psk-button event-name="request:go-back" view-model="@goBack"></psk-button>
                 
