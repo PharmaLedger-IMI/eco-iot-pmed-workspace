@@ -17,14 +17,14 @@ const getSharedDB = (sReadSSI, dbName) => {
   return dbObject;
 }
 
-const createWalletDB = (dbName, callback) => {
+const createWalletDB = (dbName) => {
   const seedSSIObject = createSeedSSI();
   const sReadSSIObject = seedSSIObject.derive();
   const dbObject = db.getWalletDB(seedSSIObject, dbName);
-  callback(null, {
+  return {
     seedSSI: seedSSIObject.getIdentifier(),
     sReadSSI: sReadSSIObject.getIdentifier()
-  });
+  };
 };
 
 //Resource

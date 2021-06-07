@@ -22,7 +22,7 @@ class DsuStorage {
           'pk',
           '__version',
           '__timestamp',
-          '_sk',
+          'sk',
         ]);
         _resource.id = resource.pk;
         return _resource;
@@ -34,7 +34,7 @@ class DsuStorage {
         'pk',
         '__version',
         '__timestamp',
-        '_sk',
+        'sk',
       ]);
       _resource.id = resource.pk;
       return _resource;

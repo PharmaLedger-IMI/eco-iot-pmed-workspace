@@ -29,20 +29,33 @@ class DbStorage {
       return _resource;
     }
     this.normalizeErrorResponse = function(error) {
-      return { status: error.response.status, message: error.response.statusText }
+      if(error.response){
+        return { status: error.response.status, message: error.response.statusText }
+      } else {
+        return { status: 500, message: error.message }
+      }
     }
   }
 
   searchResources(type, params, callback) {
     const _self = this;
     this.client
-      .get(`/classes/${type}`)
+      .get(`/classes/${type}`, { params: params })
       .then((response) => {
         callback(undefined, _self.normalizeCollectionResponse(response));
       })
       .catch((error) => {
         callback(_self.normalizeErrorResponse(error), null);
       });
+  }
+
+  async searchResourcesAsync(type, params) {
+    try {
+      const response = await this.client.get(`/classes/${type}`, { params: params });
+      return Promise.resolve(this.normalizeCollectionResponse(response));
+    } catch(error) {
+      return Promise.reject(this.normalizeErrorResponse(error));
+    }
   }
 
   createResource(type, jsonData, callback) {
@@ -60,6 +73,21 @@ class DbStorage {
       .catch((error) => {
         callback(_self.normalizeErrorResponse(error), null);
       });
+  }
+
+  async createResourceAsync(type, jsonData) {
+    const _self = this;
+    const resource = _.merge({
+      "resourceType": type
+    }, jsonData);
+
+    try {
+      const response = await this.client.post(`/classes/${type}`, resource);
+      let _resource = this.normalizeSingleResponse(response);
+      return this.getResourceByIdAsync(type, _resource.id);
+    } catch(error) {
+      return Promise.reject(this.normalizeErrorResponse(error));
+    }
   }
 
   updateResource(type, id, jsonData, callback) {
@@ -90,6 +118,15 @@ class DbStorage {
       });
   }
 
+  async getResourceByIdAsync(type, id) {
+    try {
+      const response = await this.client.get(`/classes/${type}/${id}`);
+      return Promise.resolve(this.normalizeSingleResponse(response));
+    } catch(error) {
+      return Promise.reject(this.normalizeErrorResponse(error));
+    }
+  }
+
   deleteResource(type, id, callback) {
     const _self = this;
     this.client
@@ -106,7 +143,7 @@ class DbStorage {
     const _self = this;
     _self.searchResources(type, params, function(error, resources){
       if(error){
-        callback(_self.normalizeErrorResponse(error), null);
+        callback(error, null);
       } else {
         if (resources && resources.length > 0) {
           callback(undefined, resources[0]);
@@ -115,6 +152,43 @@ class DbStorage {
         }
       }
     });
+  }
+
+  async findOrCreateResourceAsync(type, jsonData, params) {
+    try {
+      const resource = await this.findResourceAsync(type, params);
+      if (resource) {
+        return Promise.resolve(resource);
+      } else {
+        return this.createResourceAsync(type, jsonData);
+      }
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  findResource(type, params, callback) {
+    const _self = this;
+    _self.searchResources(type, params, function(error, resources){
+      if(error){
+        callback(error, null);
+      } else {
+        if (resources && resources.length > 0) {
+          callback(undefined, resources[0]);
+        } else {
+          callback(undefined, null);
+        }
+      }
+    });
+  }
+
+  async findResourceAsync(type, params) {
+    try {
+      const resources = await this.searchResourcesAsync(type, params);
+      return Promise.resolve(resources[0]);
+    } catch(error) {
+      return Promise.reject(error);
+    }
   }
 }
 

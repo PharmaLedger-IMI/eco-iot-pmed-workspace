@@ -16,7 +16,7 @@ $$.flow.describe('IotAdaptor', {
         //   baseUrl: 'http://localhost:8090/fhir'
         // });
 
-        this.db = new DbStorage({
+        this.mainDb = new DbStorage({
           baseURL: 'http://localhost:1337/v1/storage',
           headers: {
             'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
@@ -24,33 +24,34 @@ $$.flow.describe('IotAdaptor', {
             'Content-Type': 'application/json'
           }
         });
+
         this.dsu = new DsuStorage({
-          keySSI: '27XvCBPKSWpUwscQUxwsVDTxRcaTm68UgLe4r8wS8x1rpAcoeS3CJse2jjPMNBbp8gPPbnyJpFAUxBFfp3ov2U7Wc6rBkpeBE7njKd5UYwpvE74BTQHSTf8jnxCDtWWtd4Q47AfPfCNpebpLpoCc1Jo',
+          keySSI: '27XvCBPKSWpUwscQUxwsVDTxRcdJW6agn5PqbLhwPEX9CkG3HeQVqKaKf53pGL8X3SXaZktfUBeAsoYwpbvx4aW3m71qYw9nTazDCcvb31g1Bt7Yk5Ch4zZpjVsU5a3yGXMqpeFeRqn7U8yxFjuzfif',
           dbName: 'sharedDB'
         });
     },
     processXml: function (xmlString, callback) {
-        etlService.processXml(xmlString, callback);
+        etlService.processXml(this.mainDb, xmlString, callback);
     },
     searchResources: function (resourceType, params, callback) {
         //this.fhir.searchResources(resourceType, params, callback);
-        this.db.searchResources(resourceType, params, callback);
+        this.mainDb.searchResources(resourceType, params, callback);
     },
     createResource: function (resourceType, jsonData, callback) {
         //this.fhir.createResource(resourceType, jsonData, callback);
-        this.db.createResource(resourceType, jsonData, callback);
+        this.mainDb.createResource(resourceType, jsonData, callback);
     },
     updateResource: function (resourceType, id, jsonData, callback) {
         //this.fhir.updateResource(resourceType, id, jsonData, callback);
-        this.db.updateResource(resourceType, id, jsonData, callback);
+        this.mainDb.updateResource(resourceType, id, jsonData, callback);
     },
     getResourceById: function (resourceType, id, callback) {
         //this.fhir.getResourceById(resourceType, id, callback);
-        this.db.getResourceById(resourceType, id, callback);
+        this.mainDb.getResourceById(resourceType, id, callback);
     },
     deleteResource: function(resourceType, id, callback) {
         //this.fhir.deleteResource(resourceType, id, callback);
-        this.db.deleteResource(resourceType, id, callback);
+        this.mainDb.deleteResource(resourceType, id, callback);
     },
     createDSU: function (callback) {
         dsuService.createWalletDB('sharedDB', callback);
@@ -70,5 +71,53 @@ $$.flow.describe('IotAdaptor', {
     deleteDsuResource: function(resourceType, id, callback) {
         this.dsu.deleteResource(resourceType, id, callback);
     },
+    assignDevice: async function (jsonData, callback) {
+      const patientId = jsonData.patientId;
+      const deviceId = jsonData.deviceId;
+      try {
+        const patients = await this.mainDb.searchResourcesAsync('Patient', { where: { "identifier.value": patientId } });
+        const devices = await this.mainDb.searchResourcesAsync('Device', { where: { "identifier.value": deviceId } });
+        const patient = patients[0];
+        const device = devices[0];
 
+        const newDeviceRequest = {
+          status: 'active',
+          intent: 'original-order',
+          codeReference: {
+            reference: `Device/${device.id}`
+          },
+          subject: {
+            reference: `Patient/${patient.id}`
+          }
+        }
+
+        let deviceRequest, healthDataDsu;
+        const dsuDbName = 'sharedDB';
+        deviceRequest = await this.mainDb.findResourceAsync('DeviceRequest', { where: { "status": "active", "codeReference.reference": `Device/${device.id}`, "subject.reference": `Patient/${patient.id}` } });
+
+        if(!deviceRequest) {
+          deviceRequest = await this.mainDb.createResourceAsync('DeviceRequest', newDeviceRequest);
+          dsu = dsuService.createWalletDB(dsuDbName);
+          const newHeathDataDsu = {
+            codeReference: {
+              reference: `DeviceRequest/${deviceRequest.id}`
+            },
+            seedSSI: dsu.seedSSI,
+            sReadSSI: dsu.sReadSSI,
+            dbName: dsuDbName
+          }
+          healthDataDsu = await this.mainDb.createResourceAsync('HealthDataDsu', newHeathDataDsu);
+        } else {
+          healthDataDsu = await this.mainDb.findResourceAsync('HealthDataDsu', { where: { "codeReference.reference": `DeviceRequest/${deviceRequest.id}` } });
+        }
+
+        callback(undefined, {
+          deviceRequest: deviceRequest,
+          healthDataDsu: healthDataDsu
+        });
+      } catch (error) {
+        console.error(error);
+        callback(error, undefined);
+      }
+    }
 });

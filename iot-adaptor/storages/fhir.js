@@ -106,7 +106,7 @@ class FhirStorage {
     const _self = this;
     _self.searchResources(type, params, function(error, resources){
       if(error){
-        callback(_self.normalizeErrorResponse(error), null);
+        callback(error, null);
       } else {
         if (resources && resources.length > 0) {
           callback(undefined, resources[0]);
