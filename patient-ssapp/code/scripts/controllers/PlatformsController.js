@@ -6,8 +6,7 @@ export default class PlatformsController extends WebcController {
 
        
         this._attachHandlerGoBack();
-        this._attachHandlerMyProjects();
-        this._attachHandlerNewProject();
+
 
 
     }
@@ -18,20 +17,6 @@ export default class PlatformsController extends WebcController {
             this.navigateToPageTag('home');
         });
     }
-
-    _attachHandlerMyProjects(){
-        this.on('platforms:myprojects',(event)=>{
-            console.log ("MyProjects button pressed");
-            this.navigateToPageTag('myprojects');
-        });
-    }
-    _attachHandlerNewProject(){
-        this.on('platforms:newproject',(event)=>{
-            console.log ("NewProject button pressed");
-            this.navigateToPageTag('newproject');
-        });
-    }
-
 
 
 

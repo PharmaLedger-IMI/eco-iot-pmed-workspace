@@ -1,0 +1,20 @@
+:host(.coloredBackground){
+    background-color: #134E9E !important;
+    color: white;
+    padding-top: 10px;
+}
+
+:host(.topPadding) {
+    padding-top: 50px;
+}
+
+:host(.productItem) {
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    padding: 15px 10px;
+}
+
+:host(.smallTopPadding) {
+    padding-top: 20px;
+}

@@ -10,7 +10,7 @@ export default class SampleController extends WebcController {
     _attachHandlerGoBack(){
         this.on('go-back', (event) => {
             console.log ("Go Back button pressed");
-            this.navigateToPageTag('home');
+            this.navigateToPageTag('mydata');
         });
     }
 
