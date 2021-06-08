@@ -7,6 +7,7 @@ export default class FeedbackController extends WebcController {
 
        
         this._attachHandlerGoBack();
+        this._attachHandlerGoSampleFeedBack();
 
 
     }
@@ -15,6 +16,13 @@ export default class FeedbackController extends WebcController {
         this.on('go-back', (event) => {
             console.log ("Go Back button pressed");
             this.navigateToPageTag('home');
+        });
+    }
+
+    _attachHandlerGoSampleFeedBack(){
+        this.on('see-the-evidence', (event) => {
+            console.log ("see the evidence");
+            this.navigateToPageTag('personalized-feedback2');
         });
     }
 

@@ -26,10 +26,16 @@
         "tag": "mydata"
       },
       {
-        "name": "feedback",
-        "path": "/feedback",
-        "src": "feedback.html",
-        "tag": "feedback"
+        "name": "personalized-feedback",
+        "path": "/personalized-feedback",
+        "src": "personalized-feedback.html",
+        "tag": "personalized-feedback"
+      },
+      {
+        "name": "personalized-feedback2",
+        "path": "/personalized-feedback2",
+        "src": "personalized-feedback2.html",
+        "tag": "personalized-feedback2"
       },
       {
         "name": "sample",

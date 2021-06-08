@@ -73,7 +73,7 @@ export default class HomeController extends WebcController {
     _attachHandlerFeedback(){
         this.on('home:feedback', (event) => {
             console.log ("Feedback button pressed");
-            this.navigateToPageTag("feedback");
+            this.navigateToPageTag("personalized-feedback");
         });
         
     }
