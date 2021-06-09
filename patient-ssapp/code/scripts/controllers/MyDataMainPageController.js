@@ -15,18 +15,19 @@ const ViewPersonalHealthDataModel = {
     mydata: {
         label: "Choose one or multiple options to see your data:",
         required: true,
-        options: [{
+        options: [
+            {
             label: "All records",
             value: 'all',
             checked: true
-        },
+            },
             {
                 label: "ECG",
                 value: "ecg"
             },
             {
                 label: "Blood pressure",
-                value: "blood"
+                value: "bp"
             },
             {
                 label: "Respiration data",
@@ -68,11 +69,29 @@ export default class MyDataMainPageController extends  WebcController  {
 
 
         let radioSubmitData = () => {
+            let allData = [
+                {
+                    name: "Systolic Blood Pressure",
+                    value: 40
+                },
+                {
+                    name: "Diastolic Blood Pressure",
+                    value: 90
+                },
+                {
+                    name: "Central Systolic Blood Pressure",
+                    value: 65
+                }
+            ];
             let choice = this.model.mydata.value;
             if (choice === "ecg"){
                 console.log('Hello ECG pressed!')
                 this.navigateToPageTag('sample');
-            } else {
+            } else if (choice === "bp"){
+                console.log('Hello Blood Pressure pressed!')
+                this.navigateToPageTag('clinicalData', allData);
+            }
+             else {
                 console.log(`Good day to you, rest of choices!`,"radio Example","alert-primary")
             }
         }

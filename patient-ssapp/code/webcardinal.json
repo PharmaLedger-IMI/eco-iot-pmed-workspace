@@ -43,7 +43,12 @@
         "src": "sample.html",
         "tag": "sample"
       },
-      
+      {
+        "name": "clinicalData",
+        "path": "/clinicalData",
+        "src": "clinicalData.html",
+        "tag": "clinicalData"
+      },
 
 
       {
