@@ -10,8 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fhir.js": "0.0.22",
-    "node-fetch": "^2.6.1",
-    "underscore": "^1.12.1"
+    "axios": "^0.21.1",
+    "encoding": "^0.1.13",
+    "fhir-kit-client": "^1.6.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "supports-color": "^8.1.1",
+    "uuid": "^8.3.2",
+    "xml2js": "^0.4.23"
   }
 }
