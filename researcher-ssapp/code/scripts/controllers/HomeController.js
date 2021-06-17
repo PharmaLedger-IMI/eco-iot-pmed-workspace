@@ -2,15 +2,16 @@ const {WebcController} = WebCardinal.controllers;
 
 
 export default class HomeController extends WebcController {
-    constructor(element, history) {
+    constructor(...props) {
 
-        super(element, history);
+        super(...props);
 
 
         this._attachHandlerInformationRequest()
         this._attachHandlerConfigureAccessToData()
         this._attachHandlerViewDynamicPermission()
         this._attachHandlerEvidence()
+
     }
 
     _attachHandlerInformationRequest(){

@@ -17,24 +17,35 @@
               </div>
               <div class="flex-grow-1">
                 <psk-card class="bpd-dashboard center ">
-                    <div>
-                        <psk-label class="bpd-dashboard-title" label="This information has been requested between the following date calendars:"/>
+                    <div style="text-align:center;">
+                        <h4>Information has been requested given the following data:</h4>
                     </div>
+                    <br>
+<!--                    <div style="font-size:20px;">-->
+<!--                        Title is: <psk-label label="@title"></psk-label><br>-->
+<!--                        Status is: <psk-label label="@status"></psk-label><br>-->
+<!--                        Terms are: <psk-label label="@terms"></psk-label>-->
+<!--                    </div>-->
 
-                    <psk-label label="@title"></psk-label>
-                    <psk-label label="@status"></psk-label>
-                    <psk-label label="@terms"></psk-label>
+                    <psk-highlight title="Requested Data: " type-of-highlight="note">
+                        Title is: <psk-label label="@title"></psk-label><br>
+                        Status is: <psk-label label="@status"></psk-label><br>
+                        Terms are: <psk-label label="@terms"></psk-label>
+                    </psk-highlight>
 
 
                     <psk-date-input view-model="@formatedDateStart"></psk-date-input>
                     <psk-date-input view-model="@formatedDateEnd"></psk-date-input>
 
+                    <psk-highlight title="DSU Status:" type-of-highlight="note">
+                        <psk-label label="@dsuStatus"></psk-label>
+                    </psk-highlight>
+                    <div style="text-align:center;">
+                        <psk-button event-name="issue-new-request-go-back">Back</psk-button>
+                    </div>
 
 
-                    <!--                    <div>-->
-<!--                        <psk-button event-name="request:go-back">Go back</psk-button>-->
-<!--                    </div>-->
-<!--                    -->
+
 
                 </psk-card>
               </div>
