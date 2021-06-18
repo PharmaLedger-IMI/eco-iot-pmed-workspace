@@ -26,7 +26,8 @@ const NewRequestViewModel = {
         value: '2322352464212',
         dataFormat:"DD MM YYYY"
     },
-    dsuStatus: "Not Saved"
+    dsuStatus: "Not Saved",
+    total_dsus: "unknown"
 }
 
 
@@ -60,13 +61,12 @@ export default class IssueNewRequestController extends WebcController {
             this.model.dsuStatus = "DSU saved with keySSI: ".concat('', data.KeySSI);
         });
 
-
-        // this.InformationRequestService.getInformationRequests((err, data) => {
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     console.log(data);
-        // });
+        this.InformationRequestService.getInformationRequests((err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            this.model.total_dsus = data.length;
+        });
 
 
 
