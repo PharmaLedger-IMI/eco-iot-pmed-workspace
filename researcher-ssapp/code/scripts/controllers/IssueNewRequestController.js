@@ -1,6 +1,8 @@
 import InformationRequestService from "../services/InformationRequestService.js";
 import {contractModelHL7} from "../models/HL7/ContractModel.js";
 import {consentModelHL7} from "../models/HL7/ConsentModel.js";
+import ResponsesService from "../services/ResponsesService.js";
+import CommunicationService from "../services/CommunicationService.js";
 const {WebcController} = WebCardinal.controllers;
 
 
@@ -35,14 +37,9 @@ export default class IssueNewRequestController extends WebcController {
     constructor(...props) {
 
         super(...props);
-
         this.model = NewRequestViewModel;
-
         this._attachHandlerGoBack();
-
         let requestState = this.getState();
-
-
 
         this.model.title = requestState.title
         this.model.startDate = requestState.startDate
@@ -68,12 +65,29 @@ export default class IssueNewRequestController extends WebcController {
             this.model.total_dsus = data.length;
         });
 
+        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.RESEARCHER_IDENTITY);
+        this.ResponsesService = new ResponsesService(this.DSUStorage);
+        this.ResponsesService.saveResponse(contractModelHL7, (err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            this.sendMessageToPatient('information-request-response', data.uid);
+            this.ResponsesService.getResponses((err, data) => {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log(data);
+            })
+        });
 
 
+    }
 
-
-
-
+    sendMessageToPatient(operation, ssi) {
+        this.CommunicationService.sendMessage(CommunicationService.identities.PATIENT_IDENTITY, {
+            operation: operation,
+            ssi: ssi
+        });
     }
 
     _attachHandlerGoBack(){

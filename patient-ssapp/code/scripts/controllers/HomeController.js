@@ -1,7 +1,9 @@
-
+import CommunicationService from '../services/CommunicationService.js';
+import ResponsesService from '../services/ResponsesService.js';
 import PatientService from "./services/PatientService.js";
 import {patientModelHL7} from '../models/PatientModel.js';
-const { WebcController } = WebCardinal.controllers;
+const {WebcController} = WebCardinal.controllers;
+
 
 export default class HomeController extends WebcController {
     constructor(element, history) {
@@ -13,12 +15,6 @@ export default class HomeController extends WebcController {
         initProfile.PatientBirthDate.value = "01/01/2000";
         initProfile.PatientTelecom.value = "maria@gmail.com";
         initProfile.password.value = "password";
-
-       
-
-        
-
-        
 
 
         this.PatientService = new PatientService(this.DSUStorage);
@@ -32,11 +28,42 @@ export default class HomeController extends WebcController {
             this.model.profileIdentifier = userProfile.identifier;
             this.model.name = userProfile.PatientName.value;
         })
+
+
+        this.ResponsesService = new ResponsesService(this.DSUStorage);
+        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.PATIENT_IDENTITY);
+        this.CommunicationService.listenForMessages((err, data) => {
+            if (err) {
+                return console.error(err);
+            }
+            data = JSON.parse(data);
+            console.log('Received message', data.message)
+
+            switch (data.message.operation) {
+                case 'information-request-response': {
+                    this.ResponsesService.mount(data.message.ssi, (err, data) => {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        this.ResponsesService.getResponses((err, data) => {
+                            if (err) {
+                                return console.log(err);
+                            }
+                            console.log('PatientSSAPP_HomeController');
+                            console.log(data[data.length-1]);
+                        })
+                    });
+                    break;
+                }
+            }
+
+        });
         
         this._attachHandlerEditProfile();
         this._attachHandlerMyData();
         this._attachHandlerMyPlatforms();
         this._attachHandlerFeedback();
+
     }
 
     _attachHandlerEditProfile(){

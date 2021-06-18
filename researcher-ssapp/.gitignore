@@ -5,4 +5,4 @@ node_modules
 SharedStorage.js
 CommunicationService.js
 DSUService.js
-code/api.js
+api.js
