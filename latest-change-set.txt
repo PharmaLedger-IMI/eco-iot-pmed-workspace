@@ -334,3 +334,13 @@
     
     Added "Test Contract Method" functionality for testing contract methods.
     environment update
+    Fix for #183 (1 replace scan done div)
+    [Freeze] webcardinal-core && cardinal-forms
+    fixes for node environment
+    extra info added into the landing page
+    fixed createMarketplace swarm
+    environment update
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    environment update

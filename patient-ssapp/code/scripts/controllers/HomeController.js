@@ -1,14 +1,14 @@
 import CommunicationService from '../services/CommunicationService.js';
 import InformationRequestService from '../services/InformationRequestService.js';
-import PatientService from "./services/PatientService.js";
+import ProfileManagementService from '../services/ProfileManagementService.js';
 import {patientModelHL7} from '../models/PatientModel.js';
 const {WebcController} = WebCardinal.controllers;
 
 
 export default class HomeController extends WebcController {
-    constructor(element, history) {
-        super(element, history);
-        this.setModel({});
+    constructor(...props) {
+        super(...props);
+        this.model = {}
 
         let initProfile = patientModelHL7;
         initProfile.PatientName.value = "Maria";
@@ -16,18 +16,16 @@ export default class HomeController extends WebcController {
         initProfile.PatientTelecom.value = "maria@gmail.com";
         initProfile.password.value = "password";
 
-
-        this.PatientService = new PatientService(this.DSUStorage);
-
-        this.PatientService.createProfile(initProfile, (err, userProfile) => {
+        this.PatientService = new ProfileManagementService(this.DSUStorage);
+        this.PatientService.saveProfile(initProfile, (err, userProfile) => {
             if (err) {
                 return console.log(err);
             }
-            console.log("CREATED WITH DSU-STORAGE AND KEYSSI: ", userProfile);
+            console.log("CREATED WITH DSU-STORAGE AND KEYSSI: ", userProfile.KeySSI);
 
-            this.model.profileIdentifier = userProfile.identifier;
+            this.model.profileIdentifier = userProfile.KeySSI;
             this.model.name = userProfile.PatientName.value;
-        })
+        });
 
         this.InformationRequestService = new InformationRequestService(this.DSUStorage);
         this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.PATIENT_IDENTITY);

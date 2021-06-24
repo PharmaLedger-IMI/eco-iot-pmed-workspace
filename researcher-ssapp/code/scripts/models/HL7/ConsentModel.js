@@ -68,9 +68,4 @@ export const consentModelHL7 = {
         label: "consent_policy_rule",
         value: ''
     },
-     ConsentProvision: {
-        name: 'Consent Provision',
-        label: "consent_provision",
-        value: ''
-    }
 };
