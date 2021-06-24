@@ -1,5 +1,5 @@
 import CommunicationService from '../services/CommunicationService.js';
-import ResponsesService from '../services/ResponsesService.js';
+import InformationRequestService from '../services/InformationRequestService.js';
 import PatientService from "./services/PatientService.js";
 import {patientModelHL7} from '../models/PatientModel.js';
 const {WebcController} = WebCardinal.controllers;
@@ -29,8 +29,7 @@ export default class HomeController extends WebcController {
             this.model.name = userProfile.PatientName.value;
         })
 
-
-        this.ResponsesService = new ResponsesService(this.DSUStorage);
+        this.InformationRequestService = new InformationRequestService(this.DSUStorage);
         this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.PATIENT_IDENTITY);
         this.CommunicationService.listenForMessages((err, data) => {
             if (err) {
@@ -41,18 +40,20 @@ export default class HomeController extends WebcController {
 
             switch (data.message.operation) {
                 case 'information-request-response': {
-                    this.ResponsesService.mount(data.message.ssi, (err, data) => {
+                    this.InformationRequestService.mount(data.message.ssi, (err, data) => {
+                        console.log("mounted!!!")
                         if (err) {
                             return console.log(err);
                         }
-                        this.ResponsesService.getResponses((err, data) => {
+                        this.InformationRequestService.getInformationRequests((err, data) => {
                             if (err) {
                                 return console.log(err);
                             }
                             console.log('PatientSSAPP_HomeController');
                             console.log(data[data.length-1]);
-                        })
+                        });
                     });
+                    console.log("CASE RECEIVED INFORMATION REQUEST!")
                     break;
                 }
             }

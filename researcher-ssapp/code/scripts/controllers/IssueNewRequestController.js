@@ -1,7 +1,6 @@
 import InformationRequestService from "../services/InformationRequestService.js";
 import {contractModelHL7} from "../models/HL7/ContractModel.js";
 import {consentModelHL7} from "../models/HL7/ConsentModel.js";
-import ResponsesService from "../services/ResponsesService.js";
 import CommunicationService from "../services/CommunicationService.js";
 const {WebcController} = WebCardinal.controllers;
 
@@ -56,7 +55,13 @@ export default class IssueNewRequestController extends WebcController {
                 return console.log(err);
             }
             this.model.dsuStatus = "DSU saved with keySSI: ".concat('', data.KeySSI);
+
+
+
+            this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.RESEARCHER_IDENTITY);
+            this.sendMessageToPatient('information-request-response', data.uid);
         });
+
 
         this.InformationRequestService.getInformationRequests((err, data) => {
             if (err) {
@@ -64,23 +69,6 @@ export default class IssueNewRequestController extends WebcController {
             }
             this.model.total_dsus = data.length;
         });
-
-        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.RESEARCHER_IDENTITY);
-        this.ResponsesService = new ResponsesService(this.DSUStorage);
-        this.ResponsesService.saveResponse(contractModelHL7, (err, data) => {
-            if (err) {
-                return console.log(err);
-            }
-            this.sendMessageToPatient('information-request-response', data.uid);
-            this.ResponsesService.getResponses((err, data) => {
-                if (err) {
-                    return console.log(err);
-                }
-                console.log(data);
-            })
-        });
-
-
     }
 
     sendMessageToPatient(operation, ssi) {
