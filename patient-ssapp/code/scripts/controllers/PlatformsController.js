@@ -4,10 +4,8 @@ export default class PlatformsController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
-       
         this._attachHandlerGoBack();
-
-
+        this._attachHandlerGoToMyNotifications();
 
     }
 
@@ -18,6 +16,12 @@ export default class PlatformsController extends WebcController {
         });
     }
 
+    _attachHandlerGoToMyNotifications(){
+        this.on('my-notifications', (event) => {
+            console.log ("My notifications button pressed");
+            this.navigateToPageTag('my-notifications');
+        });
+    }
 
 
 

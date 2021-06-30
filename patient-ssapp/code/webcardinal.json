@@ -49,7 +49,12 @@
         "src": "clinicalData.html",
         "tag": "clinicalData"
       },
-
+      {
+        "name": "my-notifications",
+        "path": "/my-notifications",
+        "src": "my-notifications.html",
+        "tag": "my-notifications"
+      },
 
       {
         "name": "Create trial",

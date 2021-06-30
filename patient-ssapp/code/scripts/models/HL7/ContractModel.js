@@ -50,6 +50,16 @@ export const contractModelHL7 = {
         label: "contract_title",
         value: ''
     },
+    ContractAuthor: {
+        name: 'Contract Author',
+        label: "contract_author",
+        value: ''
+    },
+    ContractType: {
+        name: 'Contract Type',
+        label: "contract_type",
+        value: ''
+    },
     ContractSubtype: {
         name: 'Contract Subtype',
         label: "contract_subtype",
@@ -74,5 +84,5 @@ export const contractModelHL7 = {
         name: 'Contract Term Offer Text',
         label: "contract_term_offer_text",
         value: ''
-    },
+    }
 };

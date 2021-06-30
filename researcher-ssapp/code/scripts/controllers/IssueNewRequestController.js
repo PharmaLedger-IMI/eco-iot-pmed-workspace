@@ -49,14 +49,21 @@ export default class IssueNewRequestController extends WebcController {
         this.model.formatedDateStart.value = this.model.startDate;
         this.model.formatedDateEnd.value = this.model.endDate;
 
+        //prepare contract based on input
+        let initContract = contractModelHL7;
+        initContract.ContractTitle = this.model.title;
+        initContract.ContractStatus = this.model.status;
+        initContract.ContractTerm = this.model.terms;
+        initContract.ContractIssued = new Date();
+        initContract.ContractVersion = 0;
+        initContract.ContractApplies = [this.model.startDate, this.model.endDate];
+
         this.InformationRequestService = new InformationRequestService(this.DSUStorage);
-        this.InformationRequestService.saveInformationRequest(contractModelHL7, (err, data) => {
+        this.InformationRequestService.saveInformationRequest(initContract, (err, data) => {
             if (err) {
                 return console.log(err);
             }
-            this.model.dsuStatus = "DSU saved with keySSI: ".concat('', data.KeySSI);
-
-
+            this.model.dsuStatus = "DSU contract saved with keySSI: ".concat('', data.KeySSI);
 
             this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.RESEARCHER_IDENTITY);
             this.sendMessageToPatient('information-request-response', data.uid);
@@ -67,7 +74,7 @@ export default class IssueNewRequestController extends WebcController {
             if (err) {
                 return console.log(err);
             }
-            this.model.total_dsus = data.length;
+            this.model.total_dsus = data.length+1;
         });
     }
 
