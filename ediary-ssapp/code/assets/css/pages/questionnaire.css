@@ -61,3 +61,17 @@
     text-align: center !important;
 }
 
+.max-width {
+    width: 100%;
+}
+
+.max-width input {
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: #008798;
+}
+
+.max-width input:focus {
+    border-width: 0 0 2px;
+}
+

@@ -30,7 +30,7 @@ export default class QuestionnaireController extends WebcController {
         this.setModel(getInitModel());
 
         this.tabsContainer = this.querySelector('#tabs-container');
-        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.EDIARY_IDENTITY);
+        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.EDIARY_IDENTITY);
         this.QuestionnaireService = new QuestionnaireService(this.DSUStorage);
         this.ResponsesService = new ResponsesService(this.DSUStorage);
 
@@ -54,9 +54,13 @@ export default class QuestionnaireController extends WebcController {
 
         this.onTagClick('send-feedback', (event) => {
             this.model.questions = this.model.questions.map(question => {
+                let querySelector = `input[name="${question.name}"]`;
+                if (question.type === 'choice') {
+                    querySelector = querySelector + ':checked';
+                }
                 return {
                     ...question,
-                    response: this.querySelector(`input[name="${question.name}"]:checked`).value
+                    response: this.querySelector(querySelector).value
                 }
             })
             this.model.votingOpen = false;
@@ -104,33 +108,40 @@ export default class QuestionnaireController extends WebcController {
                 return console.log(err);
             }
             let questionnaire = data[0];
-            let items = questionnaire.item.filter(item => item.type === 'choice');
-            let questions = [];
-            for (let i = 0; i < items.length; i++) {
-                let item = items[i];
-                let answers = item.answerOption.map(answer => {
+            this.model.questions = questionnaire.item
+                .map((item, i) => {
+                    let answers = [{
+                        id: 'input-' + item.type + '-' + i,
+                        name: item.linkId,
+                        value: ''
+                    }];
+                    let templateType = 'question-' + item.type + '-template';
+                    if (item.type === 'choice') {
+                        answers = item.answerOption.map(answer => {
+                            return {
+                                id: answer.valueCoding.code,
+                                label: answer.valueCoding.code,
+                                name: item.linkId
+                            };
+                        });
+                    }
                     return {
-                        id: answer.valueCoding.code,
-                        label: answer.valueCoding.code,
-                        name: item.linkId
-                    };
+                        id: i,
+                        name: item.linkId,
+                        type: item.type,
+                        title: item.text,
+                        response: -1,
+                        template: templateType,
+                        answers: answers
+                    }
                 })
-                questions.push({
-                    id: i,
-                    name: item.linkId,
-                    title: item.text,
-                    response: -1,
-                    answers: answers
-                })
-            }
-            this.model.questions = questions;
             this.querySelector('#tabs-container').innerHTML = `<webc-template template="questionnaire-template" data-view-model="@"></webc-template>`
-            TAB_MAX_VALUE = questions.length;
+            TAB_MAX_VALUE = this.model.questions.length;
         })
     }
 
     sendMessageToProfessional(operation, ssi) {
-        this.CommunicationService.sendMessage(CommunicationService.identities.PROFESSIONAL_IDENTITY, {
+        this.CommunicationService.sendMessage(CommunicationService.identities.IOT.PROFESSIONAL_IDENTITY, {
             operation: operation,
             ssi: ssi
         });
