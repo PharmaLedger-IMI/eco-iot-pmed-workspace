@@ -29,7 +29,7 @@ class CommunicationService {
     senderIdentity = null;
 
     constructor(identity) {
-        this.validateIdentity(identity);
+        this._validateIdentity(identity);
         this.senderIdentity = identity;
         w3cDID.createIdentity(this.DEMO_METHOD_NAME, identity.did, (err, didDocument) => {
             if (err) {
@@ -47,15 +47,19 @@ class CommunicationService {
      * Represents the message that you want to send to @destinationIdentity
      */
     sendMessage(destinationIdentity, message) {
-        this.validateIdentity(destinationIdentity);
+        this._validateIdentity(destinationIdentity);
         this.didDocument.setDomain(destinationIdentity.domain);
         let toSentObject = {
             ...this.senderIdentity,
             message: message
         }
-        const recipientIdentity = this.getIdentityConsideringDemoMode(destinationIdentity.did);
+        const recipientIdentity = this._getIdentityConsideringDemoMode(destinationIdentity.did);
         this.didDocument.sendMessage(JSON.stringify(toSentObject), recipientIdentity, (err) => {
             if (err) {
+                if (err.debug_message === 'Failed to send message'
+                    && destinationIdentity.domain !== this.senderIdentity.domain) {
+                    return console.log(destinationIdentity, ' was not initialized.');
+                }
                 throw err;
             }
             console.log(this.senderIdentity, ' sent a message to ', destinationIdentity);
@@ -72,29 +76,41 @@ class CommunicationService {
         });
     }
 
-    listenForMessages(callback) {
+    listenForMessages(domain, callback) {
+        if (typeof domain === 'function') {
+            callback = domain;
+            domain = this.senderIdentity.domain;
+        }
+        this._listenMessagesFromDomain(domain, callback);
+    }
+
+    /**
+     * EXPERIMENTAL FUNCTION
+     * @param callback
+     */
+    listenForMessagesOnAllDomains(callback) {
         let waitTime = 0;
         for (let workspace in DEMO_IDENTITIES) {
             let domain = DEMO_IDENTITIES[workspace].domain;
-            setTimeout(() => this.listenMessagesFromDomain(domain, callback), waitTime++ * 1000)
+            setTimeout(() => this._listenMessagesFromDomain(domain, callback), waitTime++ * 1000)
         }
     }
 
-    listenMessagesFromDomain(domain, callback) {
+    _listenMessagesFromDomain(domain, callback) {
         this.didDocument.setDomain(domain);
         this.readMessage((err, msg) => {
             callback(err, msg);
-            this.listenMessagesFromDomain(domain, callback);
+            this._listenMessagesFromDomain(domain, callback);
         })
     }
 
-    validateIdentity(identity) {
+    _validateIdentity(identity) {
         if (typeof identity !== 'object' || identity.did === undefined || identity.domain === undefined) {
             throw Error('Invalid identity details format.')
         }
     }
 
-    getIdentityConsideringDemoMode = (identifier) => {
+    _getIdentityConsideringDemoMode = (identifier) => {
         for (let workspace in DEMO_IDENTITIES) {
             let apps = DEMO_IDENTITIES[workspace].apps;
             for (let appName in apps) {

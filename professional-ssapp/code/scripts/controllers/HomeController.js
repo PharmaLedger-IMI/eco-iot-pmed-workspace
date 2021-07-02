@@ -21,10 +21,6 @@ export default class HomeController extends WebcController {
             debugger
             switch (data.message.operation) {
                 case 'questionnaire-response': {
-                    this.CommunicationService.sendMessage(CommunicationService.identities.ECO.HCO_IDENTITY, {
-                        operation: "operation",
-                        ssi: "ssi"
-                    });
                     console.log('Received message', data.message)
                     this.ResponsesService.mount(data.message.ssi, (err, data) => {
                         if (err) {
@@ -46,10 +42,20 @@ export default class HomeController extends WebcController {
                 }
             }
         });
-
+        //this._demoOfDomainCommunications();
     }
 
-    _attachHandlerManageDevices(){
+    _demoOfDomainCommunications() {
+        this.CommunicationService.listenForMessages('eco', (err, data) => {
+            debugger
+            this.CommunicationService.sendMessage(CommunicationService.identities.ECO.HCO_IDENTITY, {
+                operation: "operation",
+                ssi: "ssi"
+            });
+        });
+    }
+
+    _attachHandlerManageDevices() {
         this.on('home:manage-devices', (event) => {
             console.log ("Manage devices button pressed");
             this.navigateToPageTag('manage-devices');
