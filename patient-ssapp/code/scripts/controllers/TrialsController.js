@@ -86,7 +86,6 @@ export default class TrialsController extends WebcController {
     }
 
     __displayErrorMessages = (event) => {
-        debugger;
         return this.__displayErrorRequiredField(event, 'name', this.model.name.value) ||
             this.__displayErrorRequiredField(event, 'version', this.model.version.value) ||
               this.__displayErrorRequiredField(event, 'consentName', this.model.consentName.value) ;

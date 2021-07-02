@@ -18,7 +18,6 @@ export default class HomeController extends WebcController {
                 return console.error(err);
             }
             data = JSON.parse(data);
-            debugger
             switch (data.message.operation) {
                 case 'questionnaire-response': {
                     console.log('Received message', data.message)
@@ -47,7 +46,6 @@ export default class HomeController extends WebcController {
 
     _demoOfDomainCommunications() {
         this.CommunicationService.listenForMessages('eco', (err, data) => {
-            debugger
             this.CommunicationService.sendMessage(CommunicationService.identities.ECO.HCO_IDENTITY, {
                 operation: "operation",
                 ssi: "ssi"
