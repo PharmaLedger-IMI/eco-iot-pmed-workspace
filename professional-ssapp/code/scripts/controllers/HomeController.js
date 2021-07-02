@@ -12,14 +12,19 @@ export default class HomeController extends WebcController {
         this._attachHandlerListOfPatients();
 
         this.ResponsesService = new ResponsesService(this.DSUStorage);
-        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.PROFESSIONAL_IDENTITY);
+        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.PROFESSIONAL_IDENTITY);
         this.CommunicationService.listenForMessages((err, data) => {
             if (err) {
                 return console.error(err);
             }
             data = JSON.parse(data);
+            debugger
             switch (data.message.operation) {
                 case 'questionnaire-response': {
+                    this.CommunicationService.sendMessage(CommunicationService.identities.ECO.HCO_IDENTITY, {
+                        operation: "operation",
+                        ssi: "ssi"
+                    });
                     console.log('Received message', data.message)
                     this.ResponsesService.mount(data.message.ssi, (err, data) => {
                         if (err) {
