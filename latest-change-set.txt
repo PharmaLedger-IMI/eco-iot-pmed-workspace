@@ -374,3 +374,13 @@
     
     Added "Test Contract Method" functionality for testing contract methods.
     environment update
+    Fix navigation from menu and ssapp components (issue #269)
+    [Freeze]
+    new release (important bug fixes)
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+    environment update
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    environment update

@@ -1,11 +1,30 @@
 const { WebcController } = WebCardinal.controllers;
 
+const ViewModel = {
+    notification: ""
+}
+
+
 export default class PlatformsController extends WebcController {
-    constructor(element, history) {
-        super(element, history);
+    constructor(...props) {
+        super(...props);
+
+        this.model = ViewModel;
 
         this._attachHandlerGoBack();
         this._attachHandlerGoToMyNotifications();
+
+        if (this.getState()){
+            let receivedNotification = this.getState();
+            console.log("Received: " + receivedNotification);
+            this.model.ssi = receivedNotification.ssi
+            this.model.title   = receivedNotification.title
+            this.model.notification = "There is a new request, Please review your notifications."
+            if (this.model.ssi == null){
+                this.model.notification = ""
+            }
+
+        }
 
     }
 
@@ -19,7 +38,11 @@ export default class PlatformsController extends WebcController {
     _attachHandlerGoToMyNotifications(){
         this.on('my-notifications', (event) => {
             console.log ("My notifications button pressed");
-            this.navigateToPageTag('my-notifications');
+            let information_request_state = {
+                ssi: this.model.ssi,
+                title: this.model.title
+            }
+            this.navigateToPageTag('my-notifications', information_request_state);
         });
     }
 
