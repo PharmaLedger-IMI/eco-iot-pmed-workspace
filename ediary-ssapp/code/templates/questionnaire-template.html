@@ -4,7 +4,13 @@
         <div class="question-details">
             <psk-label class="ed-question-title">{{@title}}</psk-label>
         </div>
-        <webc-template template="@template" data-view-model="@"></webc-template>
+        <div class="answers" data-for="@answers">
+            <div class="answer">
+                <input type="radio" id="@id" name="@name" value="@label">
+                <label for="@id">{{@label}}</label><br>
+            </div>
+        </div>
+<!--        <webc-template template="@template" data-view-model="@"></webc-template>-->
     </psk-tab>
 </psk-tab-navigator>
 <div class="button-bottom-row">

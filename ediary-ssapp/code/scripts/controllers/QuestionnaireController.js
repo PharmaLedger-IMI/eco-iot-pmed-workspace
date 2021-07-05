@@ -109,6 +109,7 @@ export default class QuestionnaireController extends WebcController {
             }
             let questionnaire = data[0];
             this.model.questions = questionnaire.item
+                .filter(item => item.type === 'choice')
                 .map((item, i) => {
                     let answers = [{
                         id: 'input-' + item.type + '-' + i,
