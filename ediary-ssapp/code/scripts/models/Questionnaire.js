@@ -27,7 +27,7 @@ export default {
         "item": [
             {
                 "linkId": "nameOfChild",
-                "text": "Name of child",
+                "text": "Enter your name:",
                 "type": "string"
             },
             {
@@ -37,7 +37,7 @@ export default {
             },
             {
                 "linkId": "vitaminiKDose1",
-                "text": "1st dose",
+                "text": "Your birthday",
                 "type": "dateTime"
             },
             {

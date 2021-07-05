@@ -58,7 +58,6 @@ export default class ProfileController extends WebcController {
        
 
         let receivedModel = this.getState();
-        //debugger
         this.PatientService = new PatientService(this.DSUStorage);
         this.PatientService.getProfile(receivedModel.profileId, (err, profile) => {
             if(err) {

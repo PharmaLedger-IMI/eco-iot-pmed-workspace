@@ -65,7 +65,7 @@ export default class IssueNewRequestController extends WebcController {
             }
             this.model.dsuStatus = "DSU contract saved with keySSI: ".concat('', data.KeySSI);
 
-            this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.RESEARCHER_IDENTITY);
+            this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.RESEARCHER_IDENTITY);
             this.sendMessageToPatient('information-request-response', data.uid);
         });
 
@@ -79,7 +79,7 @@ export default class IssueNewRequestController extends WebcController {
     }
 
     sendMessageToPatient(operation, ssi) {
-        this.CommunicationService.sendMessage(CommunicationService.identities.PATIENT_IDENTITY, {
+        this.CommunicationService.sendMessage(CommunicationService.identities.IOT.PATIENT_IDENTITY, {
             operation: operation,
             ssi: ssi
         });

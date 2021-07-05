@@ -20,7 +20,7 @@ export default class MyNotificationsController extends  WebcController  {
 
 
         this.InformationRequestService = new InformationRequestService(this.DSUStorage);
-        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.PATIENT_IDENTITY);
+        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.PATIENT_IDENTITY);
         this.CommunicationService.listenForMessages((err, data) => {
             if (err) {
                 return console.error(err);

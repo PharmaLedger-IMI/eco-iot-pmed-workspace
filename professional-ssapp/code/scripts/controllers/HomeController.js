@@ -12,7 +12,7 @@ export default class HomeController extends WebcController {
         this._attachHandlerListOfPatients();
 
         this.ResponsesService = new ResponsesService(this.DSUStorage);
-        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.PROFESSIONAL_IDENTITY);
+        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.PROFESSIONAL_IDENTITY);
         this.CommunicationService.listenForMessages((err, data) => {
             if (err) {
                 return console.error(err);
@@ -41,10 +41,19 @@ export default class HomeController extends WebcController {
                 }
             }
         });
-
+        //this._demoOfDomainCommunications();
     }
 
-    _attachHandlerManageDevices(){
+    _demoOfDomainCommunications() {
+        this.CommunicationService.listenForMessages('eco', (err, data) => {
+            this.CommunicationService.sendMessage(CommunicationService.identities.ECO.HCO_IDENTITY, {
+                operation: "operation",
+                ssi: "ssi"
+            });
+        });
+    }
+
+    _attachHandlerManageDevices() {
         this.on('home:manage-devices', (event) => {
             console.log ("Manage devices button pressed");
             this.navigateToPageTag('manage-devices');

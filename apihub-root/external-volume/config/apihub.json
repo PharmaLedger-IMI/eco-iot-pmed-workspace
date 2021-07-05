@@ -14,6 +14,7 @@
     "anchoring",
     "iot-adaptor",
     "debugLogger",
+    "mq",
     "staticServer"
   ],
   "componentsConfig": {

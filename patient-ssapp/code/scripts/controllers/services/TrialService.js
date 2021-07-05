@@ -82,7 +82,6 @@ export default class TrialService {
             }
 
             this.getTrial(keySSI, (err, org) =>{
-                debugger
                 if (err)
                 {
                     return callback(err, undefined);
