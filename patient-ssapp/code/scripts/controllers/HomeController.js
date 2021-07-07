@@ -2,20 +2,30 @@ import ProfileManagementService from '../services/ProfileManagementService.js';
 import CommunicationService from "../services/CommunicationService.js";
 import InformationRequestService from "../services/InformationRequestService.js";
 import {patientModelHL7} from '../models/PatientModel.js';
+import DPermissionService from "../services/DPermissionService.js";
 
 const {WebcController} = WebCardinal.controllers;
+
+
+const HomePageViewModel = {
+    ssi: null
+}
 
 
 export default class HomeController extends WebcController {
     constructor(...props) {
         super(...props);
-        this.model = {}
+
+        this.model = HomePageViewModel;
 
         let initProfile = patientModelHL7;
         initProfile.PatientName.value = "Maria";
         initProfile.PatientBirthDate.value = "01/01/2000";
         initProfile.PatientTelecom.value = "maria@gmail.com";
         initProfile.password.value = "password";
+
+        let received_information_request = {};
+        this.model.ssi = null
 
         this.InformationRequestService = new InformationRequestService(this.DSUStorage);
         this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.PATIENT_IDENTITY);
@@ -24,7 +34,7 @@ export default class HomeController extends WebcController {
                 return console.error(err);
             }
             data = JSON.parse(data);
-            console.log('Received message', data.message)
+            console.log('Received Message', data.message)
 
             switch (data.message.operation) {
                 case 'information-request-response': {
@@ -36,15 +46,14 @@ export default class HomeController extends WebcController {
                             if (err) {
                                 return console.log(err);
                             }
-                            let last_request = (data[data.length-1]);
-                            console.log(last_request);
 
-                            //this.model.contract = last_request;
-                            this.model.ssi = last_request.KeySSI;
-                            this.model.title = last_request.ContractTitle;
+                            received_information_request = (data[data.length-1]);
+                            console.log("Mounted Information Request")
+                            //console.log(JSON.stringify(received_information_request, null, 4));
+                            this.model.ssi = received_information_request.KeySSI;
                         });
                     });
-                    console.log("CASE RECEIVED INFORMATION REQUEST");
+                    console.log("Received Information Request");
                     break;
                 }
             }
@@ -56,12 +65,25 @@ export default class HomeController extends WebcController {
             if (err) {
                 return console.log(err);
             }
-            console.log("CREATED WITH DSU-STORAGE AND KEYSSI: ", userProfile.KeySSI);
+            //console.log("CREATED PROFILE WITH KEYSSI: ", userProfile.KeySSI);
 
             this.model.profileIdentifier = userProfile.KeySSI;
             this.model.name = userProfile.PatientName.value;
         });
 
+
+        //Save Sample DPermissions
+        this.DPermissionService = new DPermissionService(this.DSUStorage);
+        let sampleDPermission = {
+            permission: "GRANTED"
+        }
+        this.DPermissionService.saveDPermission(sampleDPermission, (err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("D Permission saved with keySSI " + data.keySSI)
+            this.model.dpermissionssi = data.KeySSI;
+        });
 
         this._attachHandlerEditProfile();
         this._attachHandlerMyData();
@@ -72,7 +94,7 @@ export default class HomeController extends WebcController {
 
     _attachHandlerEditProfile(){
         this.on('home:profile', (event) => {
-            console.log ("Profile button pressed");
+            //console.log ("Profile button pressed");
             let state = {
                 profileId: this.model.profileIdentifier
             }
@@ -84,7 +106,7 @@ export default class HomeController extends WebcController {
 
     _attachHandlerMyData(){
         this.on('home:mydata', (event) => {
-            console.log ("My Data button pressed");
+            //console.log ("My Data button pressed");
             let state = {
                 profileId: this.model.profileIdentifier,
                 nameId: this.model.name
@@ -96,10 +118,10 @@ export default class HomeController extends WebcController {
 
     _attachHandlerMyPlatforms(){
         this.on('home:platforms', (event) => {
-            console.log ("Platforms button pressed");
+            //console.log ("Platforms button pressed");
             let information_request_state = {
                 ssi: this.model.ssi,
-                title: this.model.title
+                dssi: this.model.dpermissionssi
             }
             this.navigateToPageTag('platforms', information_request_state);
         });
@@ -107,7 +129,7 @@ export default class HomeController extends WebcController {
 
     _attachHandlerFeedback(){
         this.on('home:feedback', (event) => {
-            console.log ("Feedback button pressed");
+            //console.log ("Feedback button pressed");
             this.navigateToPageTag("personalized-feedback");
         });
         

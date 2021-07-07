@@ -20,13 +20,12 @@ export default class MyNotificationsController extends  WebcController  {
             let receivedNotification = this.getState();
             console.log("Received keySSI object: " + receivedNotification.ssi);
             this.model.ssi = receivedNotification.ssi
-            this.model.title   = receivedNotification.title
 
             if (this.model.ssi == null){
                 this.model.message = ""
             }
             else{
-                this.model.message = "Received an information request with keySSI " + this.model.ssi + "   and title: " + this.model.title
+                this.model.message = "Received an information request with keySSI " + this.model.ssi
             }
         }
 
