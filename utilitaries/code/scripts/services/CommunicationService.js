@@ -27,6 +27,7 @@ class CommunicationService {
     DEMO_METHOD_NAME = "demo";
 
     senderIdentity = null;
+    listenerIsActive = false;
 
     constructor(identity) {
         this._validateIdentity(identity);
@@ -67,7 +68,9 @@ class CommunicationService {
     }
 
     readMessage(callback) {
+        this.listenerIsActive = true;
         this.didDocument.readMessage((err, msg) => {
+            this.listenerIsActive = false;
             if (err) {
                 return callback(err);
             }
@@ -77,6 +80,9 @@ class CommunicationService {
     }
 
     listenForMessages(domain, callback) {
+        if (this.listenerIsActive) {
+            return;
+        }
         if (typeof domain === 'function') {
             callback = domain;
             domain = this.senderIdentity.domain;
