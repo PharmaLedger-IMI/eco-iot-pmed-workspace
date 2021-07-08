@@ -24,11 +24,6 @@ $$.flow.describe('IotAdaptor', {
             'Content-Type': 'application/json'
           }
         });
-
-        this.dsu = new DsuStorage({
-          keySSI: '27XvCBPKSWpUwscQUxwsVDTxRcdJW6agn5PqbLhwPEX9CkG3HeQVqKaKf53pGL8X3SXaZktfUBeAsoYwpbvx4aW3m71qYw9nTazDCcvb31g1Bt7Yk5Ch4zZpjVsU5a3yGXMqpeFeRqn7U8yxFjuzfif',
-          dbName: 'sharedDB'
-        });
     },
     processXml: function (xmlString, callback) {
         etlService.processXml(this.mainDb, xmlString, callback);
@@ -56,20 +51,40 @@ $$.flow.describe('IotAdaptor', {
     createDSU: function (callback) {
         dsuService.createWalletDB('sharedDB', callback);
     },
-    createDsuResource: function (resourceType, jsonData, callback) {
-        this.dsu.createResource(resourceType, jsonData, callback);
+    createDsuResource: function (keySSI, dbName, resourceType, jsonData, callback) {
+        const dsu = new DsuStorage({
+          keySSI: keySSI,
+          dbName: dbName
+        });
+        dsu.createResource(resourceType, jsonData, callback);
     },
-    searchDsuResources: function (resourceType, params, callback) {
-        this.dsu.searchResources(resourceType, params, callback);
+    searchDsuResources: function (keySSI, dbName, resourceType, params, callback) {
+        const dsu = new DsuStorage({
+          keySSI: keySSI,
+          dbName: dbName
+        });
+        dsu.searchResources(resourceType, params, callback);
     },
-    updateDsuResource: function (resourceType, id, jsonData, callback) {
-        this.dsu.updateResource(resourceType, id, jsonData, callback);
+    updateDsuResource: function (keySSI, dbName, resourceType, id, jsonData, callback) {
+        const dsu = new DsuStorage({
+          keySSI: keySSI,
+          dbName: dbName
+        });
+        dsu.updateResource(resourceType, id, jsonData, callback);
     },
-    getDsuResourceById: function (resourceType, id, callback) {
-        this.dsu.getResourceById(resourceType, id, callback);
+    getDsuResourceById: function (keySSI, dbName, resourceType, id, callback) {
+        const dsu = new DsuStorage({
+          keySSI: keySSI,
+          dbName: dbName
+        });
+        dsu.getResourceById(resourceType, id, callback);
     },
-    deleteDsuResource: function(resourceType, id, callback) {
-        this.dsu.deleteResource(resourceType, id, callback);
+    deleteDsuResource: function(keySSI, dbName, resourceType, id, callback) {
+        const dsu = new DsuStorage({
+          keySSI: keySSI,
+          dbName: dbName
+        });
+        dsu.deleteResource(resourceType, id, callback);
     },
     assignDevice: async function (jsonData, callback) {
       const patientId = jsonData.patientId;

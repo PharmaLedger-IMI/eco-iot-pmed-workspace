@@ -1,9 +1,4 @@
 function requestBodyXMLMiddleware(request, response, next) {
-    /**
-     * Prepare headers for response
-     */
-    response.setHeader('Content-Type', 'application/json');
-
     let body = '';
 
     request.on('data', (chunk) => {
@@ -16,4 +11,12 @@ function requestBodyXMLMiddleware(request, response, next) {
     });
 }
 
-module.exports = { requestBodyXMLMiddleware };
+function responseBodyJsonMiddleware(request, response, next) {
+    /**
+     * Prepare headers for response
+     */
+    response.setHeader('Content-Type', 'application/json');
+    next();
+}
+
+module.exports = { requestBodyXMLMiddleware, responseBodyJsonMiddleware };

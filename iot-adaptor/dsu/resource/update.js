@@ -8,11 +8,13 @@ function updateDsuResource(request, response) {
         console.log('Deployment Domain not found : ', receivedDomain);
         return response.send(500);
     }
-   
+
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
-    flow.updateDsuResource(resourceType, request.params.id, request.body, (error, result) => {
+    const keySSI = request.headers['x-keyssi'];
+    const dbName = request.headers['x-db-name'];
+    flow.updateDsuResource(keySSI, dbName, resourceType, request.params.id, request.body, (error, result) => {
       if (error) {
         return response.send(error.status, error);
       } else {

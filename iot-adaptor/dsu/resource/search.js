@@ -11,7 +11,9 @@ function searchResources(request, response, next) {
     flow.init(domainConfig);
     const queryParams = _.merge({}, request.query);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
-    flow.searchDsuResources(resourceType, queryParams, (error, result) => {
+    const keySSI = request.headers['x-keyssi'];
+    const dbName = request.headers['x-db-name'];
+    flow.searchDsuResources(keySSI, dbName, resourceType, queryParams, (error, result) => {
       if (error) {
         return response.send(error.status, error);
       } else {

@@ -1,5 +1,5 @@
 function IotAdapter(server) {
-    console.log("IotAdapter called")
+    console.log("IotAdapter called");
     require('./strategies/IotAdapter');
 
     const DynavisionPlatform = require('./platform/dynavision');
@@ -21,9 +21,10 @@ function IotAdapter(server) {
     const AssignDevice = require('./api/assign_device');
 
     const { responseModifierMiddleware, requestBodyJSONMiddleware } = require('../privatesky/modules/apihub/utils/middlewares');
-    const { requestBodyXMLMiddleware } = require('./utils/middlewares');
+    const { requestBodyXMLMiddleware, responseBodyJsonMiddleware } = require('./utils/middlewares');
 
     server.use(`/iotAdapter/*`, responseModifierMiddleware);
+    server.use(`/iotAdapter/*`, responseBodyJsonMiddleware);
 
     // For debugging purpose
     server.get(`/iotAdapter/resource/:resource_type`, SearchResources);

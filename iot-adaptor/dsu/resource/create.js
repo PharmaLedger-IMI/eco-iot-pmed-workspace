@@ -11,7 +11,9 @@ function createResource(request, response, next) {
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
-    flow.createDsuResource(resourceType, request.body, (error, result) => {
+    const keySSI = request.headers['x-keyssi'];
+    const dbName = request.headers['x-db-name'];
+    flow.createDsuResource(keySSI, dbName, resourceType, request.body, (error, result) => {
       if (error) {
         return response.send(error.status, error);
       } else {

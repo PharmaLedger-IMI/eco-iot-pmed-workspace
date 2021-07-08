@@ -10,7 +10,9 @@ function getResourceById(request, response) {
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
-    flow.getDsuResourceById(resourceType, request.params.id, (error, result) => {
+    const keySSI = request.headers['x-keyssi'];
+    const dbName = request.headers['x-db-name'];
+    flow.getDsuResourceById(keySSI, db, resourceType, request.params.id, (error, result) => {
       if (error) {
         return response.send(error.status, error);
       } else {

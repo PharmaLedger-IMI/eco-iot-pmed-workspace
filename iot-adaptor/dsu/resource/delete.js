@@ -12,7 +12,9 @@ function searchResource(request, response, next) {
     const queryParams = _.merge({}, request.query);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
     const id  = request.params.id;
-    flow.deleteDsuResource(resourceType, id, (error, result) => {
+    const keySSI = request.headers['x-keyssi'];
+    const dbName = request.headers['x-db-name'];
+    flow.deleteDsuResource(keySSI, dbName, resourceType, id, (error, result) => {
         if (error) {
           return response.send(error.status, error);
         } else {
