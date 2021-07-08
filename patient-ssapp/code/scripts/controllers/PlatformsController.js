@@ -32,50 +32,58 @@ export default class PlatformsController extends WebcController {
 
 
 
+        // DATA MATCHMAKING FUNCTION
+        this.InformationRequestService = new InformationRequestService(this.DSUStorage);
+
+        //List all information Requests
+        let all_information_requests;
+        this.InformationRequestService.getInformationRequests((err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            all_information_requests = data;
+            console.log("All information Requests are: " + all_information_requests.length);
+            console.log(JSON.stringify(all_information_requests[all_information_requests.length-1], null, 4 ));
+        });
+
+
+        // Mount Specific Information Request
         if (!this._isBlank(this.model.ssi)){
-            // DATA MATCHMAKING FUNCTION
-            // List all the requests
-            this.InformationRequestService = new InformationRequestService(this.DSUStorage);
             let mounted_information_request;
-            let all_information_requests;
             this.InformationRequestService.mount(this.model.ssi, (err, data) => {
                 if (err) {
                     return console.log(err);
                 }
                 mounted_information_request = data;
-                this.InformationRequestService.getInformationRequests((err, data) => {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    all_information_requests = data;
-                    console.log("Mounted Information Request with SSI " + this.model.ssi)
-                    //console.log(JSON.stringify(mounted_information_request, null, 4));
-                    //console.log(JSON.stringify(all_information_requests[all_information_requests.length-1], null, 4 ));
-                });
+                console.log(JSON.stringify(mounted_information_request, null, 4 ));
             });
         }
 
 
         //List all the D.Permissions
+        this.DPermissionService = new DPermissionService(this.DSUStorage);
+
+        this.DPermissionService.getDPermissions((err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            //console.log(JSON.stringify(data, null, 4));
+            console.log("Total D Permissions are: " + data.length);
+        });
+
+
+        // Mount Specific D Permission with giver keySSI
         if (!this._isBlank(this.model.dssi)){
-            console.log(this.model.dssi);
-
-            this.DPermissionService = new DPermissionService(this.DSUStorage);
-
+            console.log("Trying to mount this D Permission: " + this.model.dssi);
 
             this.DPermissionService.mount(this.model.dssi, (err, data) => {
                 if (err) {
                     return console.log(err);
                 }
-                this.DPermissionService.getDPermissions((err, data) => {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    console.log(JSON.stringify(data, null, 4));
-                });
+                console.log("This D Permission is: ");
+                console.log(JSON.stringify(data, null, 4));
             });
         }
-
 
 
     }
