@@ -1,6 +1,7 @@
 const {WebcController} = WebCardinal.controllers;
 import { participantsService } from '../services/participants.service.js';
-
+import TrialRepository from '../repositories/TrialRepository.js';
+import TrialParticipantRepository from '../repositories/TrialParticipantRepository.js';
 
 export default class ListPatientsController extends WebcController {
   constructor(element, history) {
@@ -15,22 +16,25 @@ export default class ListPatientsController extends WebcController {
       participants: null,
     };
 
+    this.TrialRepository = TrialRepository.getInstance(this.DSUStorage);
+    this.TrialParticipantRepository = TrialParticipantRepository.getInstance(this.DSUStorage);
+
     this.participantsService = participantsService;
     this.init();
     this.attachAll();
     //this._attachHandlerPatientStatus();
-    
   }
 
   async init() {
-    try {
-      this.model.trials.options = (await this.participantsService.getTrials()).map((trial) => ({
+    this.TrialRepository.findAll((err, trials) => {
+      if (err) {
+        return console.log(err);
+      }
+      this.model.trials.options = trials.map((trial) => ({
         label: trial.name,
-        value: trial.id,
+        value: trial.id
       }));
-    } catch (error) {
-      console.log(error);
-    }
+    });
   }
 
   attachAll() {
@@ -61,18 +65,19 @@ export default class ListPatientsController extends WebcController {
         this.navigateToPageTag('patient-status');
     });
     this.on('trial-select', async (event) => {
-      try {
-        this.model.participants = (
-          await this.participantsService.getTrialParticipants(parseInt(this.model.trials.value))
-        ).map((participant) => ({
-          ...participant,
-        }));
-
-        console.log(this.model.participants);
-      } catch (error) {
-        console.log(error);
-      }
+      this.TrialParticipantRepository.filter(`trialId == ${this.model.trials.value}`, 'ascending', 30, (err, trialParticipants) => {
+        if (err) {
+          return console.log(err);
+        }
+        this.model.participants = trialParticipants.map(tp => {
+          // TODO: bring other relevant data from ECO.
+          return {
+            ...tp,
+            deviceStatus: 'OK',
+            patientSigned: 'DD/MM/YYYY'
+          }
+        })
+      });
     });
-    
   }
 }
