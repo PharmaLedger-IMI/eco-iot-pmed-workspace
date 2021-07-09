@@ -3,6 +3,9 @@ import CommunicationService from "../services/CommunicationService.js";
 import InformationRequestService from "../services/InformationRequestService.js";
 import {patientModelHL7} from '../models/PatientModel.js';
 import DPermissionService from "../services/DPermissionService.js";
+import {consentModelHL7} from "../models/HL7/ConsentModel.js"
+import EconsentStatusService from "../services/EconsentStatusService.js";
+
 
 const {WebcController} = WebCardinal.controllers;
 
@@ -72,7 +75,7 @@ export default class HomeController extends WebcController {
         });
 
 
-        //Save Sample DPermissions
+        //Save Sample DPermission
         this.DPermissionService = new DPermissionService(this.DSUStorage);
         let sampleDPermission = {
             permission: "GRANTED"
@@ -83,6 +86,17 @@ export default class HomeController extends WebcController {
             }
             console.log("D Permission saved with keySSI " + data.keySSI)
             this.model.dpermissionssi = data.KeySSI;
+        });
+
+
+        // Generate eConsent Sample
+        this.EconsentStatusService = new EconsentStatusService(this.DSUStorage);
+        this.EconsentStatusService.saveConsent(consentModelHL7, (err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("Consent saved with keySSI " + data.keySSI)
+            this.model.studyssi = data.KeySSI;
         });
 
         this._attachHandlerEditProfile();

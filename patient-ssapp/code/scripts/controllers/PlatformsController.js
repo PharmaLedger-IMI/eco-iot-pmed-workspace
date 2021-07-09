@@ -1,8 +1,8 @@
 import InformationRequestService from "../services/InformationRequestService.js";
 import DPermissionService from "../services/DPermissionService.js";
 import AvailableStudiesToParticipateService from "../services/AvailableStudiesToParticipateService.js";
-
-
+import {consentModelHL7} from "../models/HL7/ConsentModel.js"
+import EconsentStatusService from "../services/EconsentStatusService.js"
 const {WebcController} = WebCardinal.controllers;
 
 
@@ -102,6 +102,22 @@ export default class PlatformsController extends WebcController {
             console.log("Sample Study saved with keySSI " + data.keySSI)
             this.model.studyssi = data.KeySSI;
         });
+
+
+
+        //F-M3-6F dynamic Permissioning using eConsent UC
+        //List all the eConsents
+        this.EconsentStatusService = new EconsentStatusService(this.DSUStorage);
+        this.EconsentStatusService.getConsents((err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("Total consents are: " + data.length);
+
+        });
+        //check econsentStatus here
+
+
 
 
     }
