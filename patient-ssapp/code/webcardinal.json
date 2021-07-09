@@ -20,6 +20,18 @@
         "tag": "platforms"
       },
       {
+        "name": "my-studies",
+        "path": "/my-studies",
+        "icon": "fa-home",
+        "tag": "my-studies"
+      },
+      {
+        "name": "participate-to-study",
+        "path": "/participate-to-study",
+        "icon": "fa-home",
+        "tag": "participate-to-study"
+      },
+      {
         "name": "mydata",
         "path": "/mydata",
         "src": "mydata.html",

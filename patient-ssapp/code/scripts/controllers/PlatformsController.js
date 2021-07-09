@@ -18,18 +18,21 @@ export default class PlatformsController extends WebcController {
 
         this._attachHandlerGoBack();
         this._attachHandlerGoToMyNotifications();
+        this._attachHandlerMyStudies();
+        this._attachHandlerParticipate();
 
-        let receivedState = this.getState();
-        console.log("Received State: " + JSON.stringify(receivedState, null, 4));
-        this.model.ssi = receivedState.ssi
-        this.model.dssi = receivedState.dssi;
+        if (this.getState()){
+            let receivedState = this.getState();
+            console.log("Received State: " + JSON.stringify(receivedState, null, 4));
+            this.model.ssi = receivedState.ssi
+            this.model.dssi = receivedState.dssi;
 
-        this.model.notification = "There is a new request, Please review your notifications."
-        if (this.model.ssi == null){
-            this.model.notification = ""
+            this.model.notification = "There is a new request, Please review your notifications."
+            if (this.model.ssi == null){
+                this.model.notification = ""
+            }
+            this.model.dssi = receivedState.dssi;
         }
-        this.model.dssi = receivedState.dssi;
-
 
 
         // DATA MATCHMAKING FUNCTION
@@ -92,6 +95,21 @@ export default class PlatformsController extends WebcController {
         this.on('go-back', (event) => {
             console.log ("Go Back button pressed");
             this.navigateToPageTag('home');
+        });
+    }
+
+
+    _attachHandlerParticipate(){
+        this.on('participate-to-study', (event) => {
+            console.log ("Participate to study button pressed");
+            this.navigateToPageTag('participate-to-study');
+        });
+    }
+
+    _attachHandlerMyStudies(){
+        this.on('my-studies', (event) => {
+            console.log ("My Studies button pressed");
+            this.navigateToPageTag('my-studies');
         });
     }
 
