@@ -1,5 +1,6 @@
 import InformationRequestService from "../services/InformationRequestService.js";
 import DPermissionService from "../services/DPermissionService.js";
+import AvailableStudiesToParticipateService from "../services/AvailableStudiesToParticipateService.js";
 
 
 const {WebcController} = WebCardinal.controllers;
@@ -87,6 +88,20 @@ export default class PlatformsController extends WebcController {
                 console.log(JSON.stringify(data, null, 4));
             });
         }
+
+        // Generate study to participate according to the Information Request
+        this.AvailableStudiesToParticipateService = new AvailableStudiesToParticipateService(this.DSUStorage);
+        //Save Sample Study
+        let sampleStudy = {
+            study: "Study with date time: " + new Date().toString()
+        }
+        this.AvailableStudiesToParticipateService.saveStudy(sampleStudy, (err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("Sample Study saved with keySSI " + data.keySSI)
+            this.model.studyssi = data.KeySSI;
+        });
 
 
     }
