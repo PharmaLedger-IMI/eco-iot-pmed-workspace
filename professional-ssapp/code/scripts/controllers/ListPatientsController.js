@@ -74,7 +74,7 @@ export default class ListPatientsController extends WebcController {
           return {
             ...tp,
             deviceStatus: 'OK',
-            patientSigned: 'DD/MM/YYYY'
+            patientSigned: tp.signDate
           }
         })
       });
