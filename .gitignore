@@ -8,6 +8,13 @@ apihub-root/patient-wallet/apps-patch/patient-ssapp/seed
 apihub-root/patient-wallet/loader
 apihub-root/patient-wallet/wallet-patch/seed
 
+apihub-root/professional-wallet/apps-patch/patient-ssapp/seed
+apihub-root/professional-wallet/loader
+apihub-root/professional-wallet/wallet-patch/seed
+
+apihub-root/researcher-wallet/apps-patch/patient-ssapp/seed
+apihub-root/researcher-wallet/loader
+apihub-root/researcher-wallet/wallet-patch/seed
 
 apihub-root/dsu-explorer/
 apihub-root/internal-volume/domains
@@ -20,17 +27,14 @@ env.json.devel
 .prettierrc
 .prettierignore
 
-
 .idea
 .vscode
 apihub-root/dsu-explorer/wallet-patch/seed
 apihub-root/ediary-wallet/loader
+
 apihub-root/patient-wallet/apps-patch/ediary-ssapp/seed
-
-
-
-apihub-root/patient-wallet/apps-patch/professional-ssapp/seed
-apihub-root/patient-wallet/apps-patch/researcher-ssapp/seed
+apihub-root/professional-wallet/apps-patch/professional-ssapp/seed
+apihub-root/researcher-wallet/apps-patch/researcher-ssapp/seed
 
 webcardinal
 webcardinal/seed
