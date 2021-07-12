@@ -1,0 +1,21 @@
+{
+  "defaultMenuConfig": {
+    "icon": "fa-bars",
+    "type": "route",
+    "component": "psk-page-loader",
+    "exact": true,
+    "historyType": "browser",
+    "404": "/pages/404.html"
+  },
+  "pages": [
+    {
+      "name": "Patient SSApp"
+    },
+    {
+      "name": "Researcher SSApp"
+    },
+    {
+      "name": "Ediary SSApp"
+    }
+  ]
+}
