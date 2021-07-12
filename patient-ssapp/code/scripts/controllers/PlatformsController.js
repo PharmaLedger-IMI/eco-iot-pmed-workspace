@@ -115,6 +115,7 @@ export default class PlatformsController extends WebcController {
             console.log("Total consents are: " + data.length);
 
         });
+
         //check econsentStatus here
 
 

@@ -9,13 +9,7 @@
   },
   "pages": [
     {
-      "name": "Patient SSApp"
-    },
-    {
-      "name": "Researcher SSApp"
-    },
-    {
-      "name": "Ediary SSApp"
+      "name": "Professional SSApp"
     }
   ]
 }

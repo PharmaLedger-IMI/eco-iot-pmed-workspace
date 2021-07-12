@@ -1,5 +1,5 @@
 export default {
-    appName: 'patient-wallet',
+    appName: 'researcher-wallet',
     vault: 'server',
     agent: 'browser',
     system: 'any',
