@@ -1,5 +1,8 @@
+import DsuStorage from "../services/DsuStorage.js";
 const { WebcController } = WebCardinal.controllers;
 
+const keySSIVal = "27XvCBPKSWpUwscQUxwsVDTxRcN8W1Wo6hEs4MjyrGAtsPMrvWZT5RuYoxanyJzuyUKAn4bfin43keaSMiMrAEAfitqEEUsp12YedxFK8kzCsjzzZAuMggWUNh33iEHXGXKDgmJzJ2aaVaqAKEWqNSb";
+let testData = [] ;
 const ViewPersonalHealthDataModel = {
 
     name: {
@@ -17,33 +20,29 @@ const ViewPersonalHealthDataModel = {
         required: true,
         options: [
             {
-            label: "All records",
-            value: 'all',
-            checked: true
+                label: "All records",
+                value: 'all'
+            },
+            
+            {
+                label: "Systolic Blood Pressure",
+                value: "bpsys"
             },
             {
-                label: "ECG",
-                value: "ecg"
+                label: "Diastolic Blood Pressure",
+                value: "bpdia"
             },
             {
-                label: "Blood pressure",
-                value: "bp"
+                label: "SpO2",
+                value: "spo2"
             },
             {
-                label: "Respiration data",
-                value: "respiration"
+                label: "Weight",
+                value: "weight"
             },
             {
-                label: "Temperature",
-                value: "temperature"
-            },
-            {
-                label: "Height/Weight",
+                label: "Height",
                 value: "height"
-            },
-            {
-                label: "EMR (sociodemo data, lab results...)",
-                value: "emr"
             }
         ],
         value: ''
@@ -57,6 +56,22 @@ export default class MyDataMainPageController extends  WebcController  {
         super(...props);
        
         this.model = ViewPersonalHealthDataModel ;
+        this.healthDataDsu =  new DsuStorage({
+            keySSI: keySSIVal,
+            dbName: "sharedDB"
+        });
+        this.healthDataDsu.searchResources("Observation", {}, function(error, resources){
+            testData = [];
+            resources.forEach(value => {
+               let initData = {
+                   name: value.code.text,
+                   value: value.valueQuantity.value,
+                   unit: value.valueQuantity.unit
+               };
+               testData.push(initData);
+            });
+
+        });
 
         if (this.getState()){
             let receivedModel = this.getState();
@@ -69,31 +84,30 @@ export default class MyDataMainPageController extends  WebcController  {
 
 
         let radioSubmitData = () => {
-            let allData = [
-                {
-                    name: "Systolic Blood Pressure",
-                    value: 40
-                },
-                {
-                    name: "Diastolic Blood Pressure",
-                    value: 90
-                },
-                {
-                    name: "Central Systolic Blood Pressure",
-                    value: 65
-                }
-            ];
+            
+            
             let choice = this.model.mydata.value;
-            if (choice === "ecg"){
-                console.log('Hello ECG pressed!')
-                this.navigateToPageTag('sample');
-            } else if (choice === "bp"){
-                console.log('Hello Blood Pressure pressed!')
-                this.navigateToPageTag('clinicalData', allData);
+            if (choice === "all"){
+                let allData = testData;
+                this.navigateToPageTag('clinicalData',{allData: allData});
+            } else if (choice === "bpsys"){
+               
+                let allData = testData.filter(function(value){ return value.name=="Systolic Blood Pressure";});
+                this.navigateToPageTag('clinicalData',{allData: allData});
+            } else if (choice === "bpdia"){
+                let allData = testData.filter(function(value){ return value.name=="Diastolic Blood Pressure";});
+                this.navigateToPageTag('clinicalData',{allData: allData});
+            }else if (choice === "spo2"){
+                let allData = testData.filter(function(value){ return value.name=="SpO2";});
+                this.navigateToPageTag('clinicalData',{allData: allData});
+            }else if (choice === "weight"){
+                let allData = testData.filter(function(value){ return value.name=="Weight";});
+                this.navigateToPageTag('clinicalData',{allData: allData});
+            } else if (choice === "height"){
+                let allData = testData.filter(function(value){ return value.name=="Height";});
+                this.navigateToPageTag('clinicalData',{allData: allData});
             }
-             else {
-                console.log(`Good day to you, rest of choices!`,"radio Example","alert-primary")
-            }
+             
         }
 
         this.on("Show Data",radioSubmitData,true);

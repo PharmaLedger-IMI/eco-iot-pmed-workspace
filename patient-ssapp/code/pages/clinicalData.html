@@ -1,6 +1,6 @@
 <psk-page title="Patient Profile IoT and Health Data" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_patient_ssapp.css">
-    <webc-container controller="MyDataMainPageController" style="height: 100%">
+    <webc-container controller="ClinicalDataController" style="height: 100%">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
                 <div class="d-flex flex-row align-content-center justify-content-between">
@@ -17,15 +17,12 @@
                 </div>
                 <div class="flex-grow-1">
                     <psk-card class="bpd-dashboard">
-                        <psk-for-each data-view-model="allData">
+                        <div data-for="@allData">
                             <psk-layout columns="2" >
-                                <p data-view-model="@name"></p>
-                                <p data-view-model="@value"></p>
+                                <p>{{@name}}</p>
+                                <p>{{@value}}</p>
                             </psk-layout>
-                        </psk-for-each>
-                        <!-- <p>Systolic Blood Pressure: 35</p>
-                        <p>Diastolic Blood Pressure: 90</p>
-                        <p>Central Systolic Blood Pressure: 62</p> -->
+                        </div>
                         <psk-button event-name="go-back" label="Back"></psk-button>
                     </psk-card>
                 </div>
