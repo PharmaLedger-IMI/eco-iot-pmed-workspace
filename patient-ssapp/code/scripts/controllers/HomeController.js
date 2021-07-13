@@ -51,7 +51,7 @@ export default class HomeController extends WebcController {
                             }
 
                             received_information_request = (data[data.length-1]);
-                            console.log("Mounted Information Request")
+                            //console.log("Mounted Information Request")
                             //console.log(JSON.stringify(received_information_request, null, 4));
                             this.model.ssi = received_information_request.KeySSI;
                         });
@@ -77,10 +77,15 @@ export default class HomeController extends WebcController {
 
         //Save Sample DPermission
         this.DPermissionService = new DPermissionService(this.DSUStorage);
-        let sampleDPermission = {
-            permission: "GRANTED"
-        }
-        this.DPermissionService.saveDPermission(sampleDPermission, (err, data) => {
+
+        let DPermissionSample = consentModelHL7;
+        DPermissionSample.ConsentStatus.value = "active";
+        DPermissionSample.ConsentPatient.value = initProfile.PatientName.value;
+        DPermissionSample.ConsentScope.value = "research";
+        DPermissionSample.ConsentDateTime.value = new Date().toString();
+        DPermissionSample.ConsentOrganization.value = "CERTH";
+
+        this.DPermissionService.saveDPermission(DPermissionSample, (err, data) => {
             if (err) {
                 return console.log(err);
             }
@@ -96,7 +101,7 @@ export default class HomeController extends WebcController {
                 return console.log(err);
             }
             console.log("Consent saved with keySSI " + data.keySSI)
-            this.model.studyssi = data.KeySSI;
+            this.model.consentssi = data.KeySSI;
         });
 
         this._attachHandlerEditProfile();
@@ -135,7 +140,8 @@ export default class HomeController extends WebcController {
             //console.log ("Platforms button pressed");
             let information_request_state = {
                 ssi: this.model.ssi,
-                dssi: this.model.dpermissionssi
+                dssi: this.model.dpermissionssi,
+                cssi: this.model.consentssi
             }
             this.navigateToPageTag('platforms', information_request_state);
         });
