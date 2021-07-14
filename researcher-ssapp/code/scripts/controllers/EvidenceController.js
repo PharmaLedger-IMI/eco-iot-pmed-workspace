@@ -71,8 +71,81 @@ const AddDevicesViewModel = {
         required: true,
         readOnly: false,
         value: ''
+    },
+    status: {
+        label: "Status",
+        required: true,
+        options: [
+            {
+                label: "Status 1",
+                value: 'Status 1'
+            },
+            {
+                label: "Status 2",
+                value: 'Status 2'
+            },
+            {
+                label: "Status 3",
+                value: 'Status 3'
+            },
+            
+        ],
+        value: ''
+    },
+    topics: {
+        label: "Topics",
+        required: true,
+        options: [
+            {
+                label: "Topics 1",
+                value: 'Topics 1'
+            },
+            {
+                label: "Topics 2",
+                value: 'Topics 2'
+            },
+            {
+                label: "Topics 3",
+                value: 'Topics 3'
+            }
+        ],
+        value: ''
+    },
+    exposureBackground: {
+        label: "Exposure Background",
+        required: true,
+        options: [
+            {
+                label: "Exposure Background 1",
+                value: 'Exposure Background 1'
+            },
+            {
+                label: "Exposure Background 2",
+                value: 'Exposure Background 2'
+            },
+            {
+                label: "Exposure Background 3",
+                value: 'Exposure Background 3'
+            },
+            
+            
+        ],
+        value: ''
     }
 }
+let evidenceData = {
+    name: "",
+    organization: "",
+    email: "",
+    title: "",
+    subtitle: "",
+    version: "",
+    description: "",
+    status: "",
+    topics: "",
+    exposureBackground: "",
+
+};
 
 export default class EvidenceController extends WebcController {
     constructor(element, history) {
@@ -107,23 +180,39 @@ export default class EvidenceController extends WebcController {
     }
     _attachHandlerEvidenceP1(){
         this.on('evidence:add-evidence-p1', (event) => {
-            console.log("I am in event add evidence p1!!")
+            // console.log (evidenceData);
             this.navigateToPageTag('add-evidence-p1');
         });
     }
     _attachHandlerEvidenceP2(){
         this.on('evidence:add-evidence-p2', (event) => {
+            evidenceData.name = this.model.name.value;
+            evidenceData.email = this.model.email.value;
+            evidenceData.organization = this.model.organization.value;
+            evidenceData.title = this.model.title.value;
+            evidenceData.subtitle = this.model.subtitle.value;
+            evidenceData.version = this.model.version.value;
+            // console.log (evidenceData);
+            // console.log (this.model.title);
             this.navigateToPageTag('add-evidence-p2');
         });
     }
     _attachHandlerEvidenceP3(){
         this.on('evidence:add-evidence-p3', (event) => {
+           
+            evidenceData.description = this.model.description.value;
+            evidenceData.topics = this.model.topics.value;
+            evidenceData.status = this.model.status.value;
+            evidenceData.exposureBackground = this.model.exposureBackground.value;
+            // console.log (evidenceData);
             this.navigateToPageTag('add-evidence-p3');
         });
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
-            this.navigateToPageTag('confirm-evidence');
+            // console.log (evidenceData);
+            // console.log (this.model);
+            this.navigateToPageTag('confirm-evidence',{allData: evidenceData});
         });
     }
     _attachHandlerEvidenceEdit(){

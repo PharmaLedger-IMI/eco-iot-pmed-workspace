@@ -394,3 +394,23 @@
     
     Added "Test Contract Method" functionality for testing contract methods.
     environment update
+    Fix navigation from menu and ssapp components (issue #269)
+    [Freeze]
+    Included bricksledger tests.
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+    cleanup
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    cleanup
+    Fix navigation from menu and ssapp components (issue #269)
+    [Freeze]
+    Included bricksledger tests.
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+    cleanup
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    cleanup

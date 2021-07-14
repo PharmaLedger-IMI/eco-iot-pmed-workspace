@@ -3,6 +3,9 @@ import CommunicationService from "../services/CommunicationService.js";
 import InformationRequestService from "../services/InformationRequestService.js";
 import {patientModelHL7} from '../models/PatientModel.js';
 import DPermissionService from "../services/DPermissionService.js";
+import {consentModelHL7} from "../models/HL7/ConsentModel.js"
+import EconsentStatusService from "../services/EconsentStatusService.js";
+
 
 const {WebcController} = WebCardinal.controllers;
 
@@ -34,7 +37,7 @@ export default class HomeController extends WebcController {
                 return console.error(err);
             }
             data = JSON.parse(data);
-            console.log('Received Message', data.message)
+            console.log('Received Message', data.message);
 
             switch (data.message.operation) {
                 case 'information-request-response': {
@@ -48,7 +51,7 @@ export default class HomeController extends WebcController {
                             }
 
                             received_information_request = (data[data.length-1]);
-                            console.log("Mounted Information Request")
+                            //console.log("Mounted Information Request")
                             //console.log(JSON.stringify(received_information_request, null, 4));
                             this.model.ssi = received_information_request.KeySSI;
                         });
@@ -72,17 +75,39 @@ export default class HomeController extends WebcController {
         });
 
 
-        //Save Sample DPermissions
+        //Generate Sample DPermission for testing in Platforms page
         this.DPermissionService = new DPermissionService(this.DSUStorage);
-        let sampleDPermission = {
-            permission: "GRANTED"
-        }
-        this.DPermissionService.saveDPermission(sampleDPermission, (err, data) => {
+
+        let DPermissionSample = consentModelHL7;
+        DPermissionSample.ConsentStatus.value = "active";
+        DPermissionSample.ConsentPatient.value = initProfile.PatientName.value;
+        DPermissionSample.ConsentScope.value = "research";
+        DPermissionSample.ConsentDateTime.value = new Date().toString();
+        DPermissionSample.ConsentOrganization.value = "UPM";
+
+        this.DPermissionService.saveDPermission(DPermissionSample, (err, dpermissiondata) => {
             if (err) {
                 return console.log(err);
             }
-            console.log("D Permission saved with keySSI " + data.keySSI)
-            this.model.dpermissionssi = data.KeySSI;
+            console.log("A Sample D Permission saved with keySSI " + dpermissiondata.keySSI)
+            //console.log(JSON.stringify(dpermissiondata, null, 4));
+            this.model.dpermissionssi = dpermissiondata.KeySSI;
+        });
+
+
+        // Generate eConsent Sample for testing in Platforms page
+        this.EconsentStatusService = new EconsentStatusService(this.DSUStorage);
+
+        let EConsentSample = consentModelHL7;
+        EConsentSample.ConsentStatus.value = "active";
+
+        this.EconsentStatusService.saveConsent(EConsentSample, (err, econsentdata) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("A Sample E Consent saved with keySSI " + econsentdata.keySSI)
+            //console.log(JSON.stringify(econsentdata, null, 4));
+            this.model.consentssi = econsentdata.KeySSI;
         });
 
         this._attachHandlerEditProfile();
@@ -121,7 +146,8 @@ export default class HomeController extends WebcController {
             //console.log ("Platforms button pressed");
             let information_request_state = {
                 ssi: this.model.ssi,
-                dssi: this.model.dpermissionssi
+                dssi: this.model.dpermissionssi,
+                cssi: this.model.consentssi
             }
             this.navigateToPageTag('platforms', information_request_state);
         });
