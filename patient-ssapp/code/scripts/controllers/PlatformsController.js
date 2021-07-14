@@ -131,7 +131,8 @@ export default class PlatformsController extends WebcController {
 
         // F-M3-6F dynamic Permissioning using eConsent UC
 
-        this.model.found = false;
+        this.model.dpermission_found = false;
+        this.model.econsent_found = false;
 
         this.DPermissionService.getDPermissions((err, data) => {
             if (err) {
@@ -140,15 +141,14 @@ export default class PlatformsController extends WebcController {
             //console.log(JSON.stringify(data, null, 4));
             console.log("Total D Permissions are: " + (data.length));
             for (let key in data){
-                if(data[key].ConsentStatus.value === "n/a"){
+                if(data[key].ConsentStatus.value === "active"){
                     console.log("DPermission is ACTIVE, check other filters");
                     let not_revoked = true;
                     if (not_revoked) {
                         let DPermissionObject = data[key];
-                        this.model.found = true;
-                        console.log(this.model.found);
                         console.log("D Permission found and ......")
                         // Send DSU or Do something else
+                        this.model.dpermission_found = true;
                         break;
                     }
                     else{
@@ -156,35 +156,51 @@ export default class PlatformsController extends WebcController {
                     }
                 }
             }
-            if (this.model.found === false){
+            if (this.model.dpermission_found === false){
                 this.EconsentStatusService.getConsents((err, data) => {
                     if (err) {
                         return console.log(err);
                     }
                     console.log("Total consents are: " + (data.length));
                     for (let key in data) {
-                        if(data[key].ConsentStatus.value === "n/a"){
-                            let answer = window.confirm("Consent found. Do you agree to share this content?");
-                                if (answer) {
-                                    console.log("USER AGREES SAVE THE DSU")
-                                    let DPermissionObject = data[key];
-                                    // Add metadata to the new D Permission object
-                                    DPermissionObject.ConsentStatus.value = "New Generated from Consent";
-                                    DPermissionObject.Metadata = "metadata";
-                                    DPermissionObject.Revoked = "no";
-                                    // optional?? send to researcher ?? ACCEPT SEND DSU
-                                    this.DPermissionService.saveDPermission(DPermissionObject, (err, data) => {
-                                        if (err) {
-                                            return console.log(err);
-                                        }
-                                        console.log("New Dynamic Permission Object saved with keySSI " + data.keySSI);
-                                        //console.log(JSON.stringify(data, null, 4));
-                                    });
-                                    break;
+                        if(data[key].ConsentStatus.value === "active"){
+                            let DPermissionObject = data[key];
+                            // Add metadata to the new D Permission object
+                            DPermissionObject.ConsentStatus.value = "New Generated Automatically from EConsent";
+                            DPermissionObject.Metadata = "metadata";
+                            DPermissionObject.Revoked = "no";
+                            // optional?? send to researcher ?? ACCEPT SEND DSU
+                            this.DPermissionService.saveDPermission(DPermissionObject, (err, data) => {
+                                if (err) {
+                                    return console.log(err);
                                 }
-                                else {
-                                    console.log("USER DOES NOT AGREE")
+                                console.log("New Dynamic Automatic Permission Object saved with keySSI " + data.keySSI);
+                                //console.log(JSON.stringify(data, null, 4));
+                            });
+                            this.model.econsent_found = true;
+                            break;
+                        }
+                    }
+                    if (this.model.econsent_found === false){
+                        let answer = window.confirm("E Consent not found. Do you agree to donate/share this content?");
+                        if (answer) {
+                            console.log("USER DOES AGREE")
+
+                            let DPermissionObject = JSON.parse(JSON.stringify(consentModelHL7));
+                            // Add metadata to the new D Permission object
+                            DPermissionObject.ConsentStatus.value = "dPUI";
+                            DPermissionObject.Metadata = "metadata";
+                            DPermissionObject.Revoked = "no";
+                            // optional?? send to researcher ?? ACCEPT SEND DSU
+                            this.DPermissionService.saveDPermission(DPermissionObject, (err, data) => {
+                                if (err) {
+                                    return console.log(err);
                                 }
+                                console.log("New D Permission Generated Manually from UI with keySSI " + data.keySSI);
+                            });
+                        }
+                        else {
+                            console.log("USER DOES NOT AGREE")
                         }
                     }
                 });

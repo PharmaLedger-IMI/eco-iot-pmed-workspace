@@ -79,7 +79,7 @@ export default class HomeController extends WebcController {
         this.DPermissionService = new DPermissionService(this.DSUStorage);
 
         let DPermissionSample = JSON.parse(JSON.stringify(consentModelHL7));
-        DPermissionSample.ConsentStatus.value = "active";
+        DPermissionSample.ConsentStatus.value = "not active";
         DPermissionSample.ConsentPatient.value = initProfile.PatientName.value;
         DPermissionSample.ConsentScope.value = "research";
         DPermissionSample.ConsentDateTime.value = new Date().toString();
@@ -99,7 +99,7 @@ export default class HomeController extends WebcController {
         this.EconsentStatusService = new EconsentStatusService(this.DSUStorage);
 
         let EConsentSample = JSON.parse(JSON.stringify(consentModelHL7));
-        EConsentSample.ConsentStatus.value = "active";
+        EConsentSample.ConsentStatus.value = "nactive";
 
         this.EconsentStatusService.saveConsent(EConsentSample, (err, econsentdata) => {
             if (err) {
