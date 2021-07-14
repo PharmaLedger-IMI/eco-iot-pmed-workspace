@@ -21,7 +21,7 @@ export default class HomeController extends WebcController {
 
         this.model = HomePageViewModel;
 
-        let initProfile = patientModelHL7;
+        let initProfile = JSON.parse(JSON.stringify(patientModelHL7));
         initProfile.PatientName.value = "Maria";
         initProfile.PatientBirthDate.value = "01/01/2000";
         initProfile.PatientTelecom.value = "maria@gmail.com";
@@ -78,7 +78,7 @@ export default class HomeController extends WebcController {
         //Generate Sample DPermission for testing in Platforms page
         this.DPermissionService = new DPermissionService(this.DSUStorage);
 
-        let DPermissionSample = consentModelHL7;
+        let DPermissionSample = JSON.parse(JSON.stringify(consentModelHL7));
         DPermissionSample.ConsentStatus.value = "active";
         DPermissionSample.ConsentPatient.value = initProfile.PatientName.value;
         DPermissionSample.ConsentScope.value = "research";
@@ -98,7 +98,7 @@ export default class HomeController extends WebcController {
         // Generate eConsent Sample for testing in Platforms page
         this.EconsentStatusService = new EconsentStatusService(this.DSUStorage);
 
-        let EConsentSample = consentModelHL7;
+        let EConsentSample = JSON.parse(JSON.stringify(consentModelHL7));
         EConsentSample.ConsentStatus.value = "active";
 
         this.EconsentStatusService.saveConsent(EConsentSample, (err, econsentdata) => {

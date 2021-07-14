@@ -83,7 +83,7 @@ export default class ProfileController extends WebcController {
                 this.model.password.readOnly = true;
                 this.model.editButton.editState = false;
                 
-                let ProfileAmendmentObj = patientModelHL7;
+                let ProfileAmendmentObj = JSON.parse(JSON.stringify(patientModelHL7));
                 ProfileAmendmentObj.identifier = this.model.profile.identifier;
 
                 ProfileAmendmentObj.PatientName.value = this.model.name.value;
