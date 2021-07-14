@@ -29,12 +29,12 @@
                                     <psk-label label="Status"></psk-label>
 
                                 </psk-layout>
-                                <psk-layout columns="5" class="justify-content-center align-items-center table-row">
-                                    <psk-label label="E001"></psk-label>
-                                    <psk-label label="Test 1"></psk-label>
-                                    <psk-label label="Title 1"></psk-label>
-                                    <psk-label label="v.0.0.1"></psk-label>
-                                    <psk-label label="Draft"></psk-label>
+                                <psk-layout columns="5" class="justify-content-center align-items-center table-row" data-view-model="@allData">
+                                    <p>E001</p>
+                                    <p>{{@name}}</p>
+                                    <p>{{@title}}</p>
+                                    <p>{{@version}}</p>
+                                    <p>{{@status}}</p>
                                 </psk-layout>
                             </div>
                             <div class="d-flex flex-row align-items-center justify-content-around">
