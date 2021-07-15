@@ -1,7 +1,7 @@
 const { WebcController } = WebCardinal.controllers;
 
 
-const AddDevicesViewModel = {
+const AddEvidenceViewModel = {
     name: {
         name: 'name',
         label: "Name",
@@ -151,7 +151,7 @@ export default class EvidenceController extends WebcController {
     constructor(element, history) {
 
         super(element, history);
-        this.model = AddDevicesViewModel;
+        this.model = AddEvidenceViewModel;
         this._attachHandlerEvidenceP1()
         this._attachHandlerEvidenceP2()
         this._attachHandlerEvidenceP3()
@@ -189,10 +189,8 @@ export default class EvidenceController extends WebcController {
             evidenceData.name = this.model.name.value;
             evidenceData.email = this.model.email.value;
             evidenceData.organization = this.model.organization.value;
-            evidenceData.title = this.model.title.value;
-            evidenceData.subtitle = this.model.subtitle.value;
-            evidenceData.version = this.model.version.value;
-            // console.log (evidenceData);
+            
+            console.log (evidenceData);
             // console.log (this.model.title);
             this.navigateToPageTag('add-evidence-p2');
         });
@@ -200,18 +198,20 @@ export default class EvidenceController extends WebcController {
     _attachHandlerEvidenceP3(){
         this.on('evidence:add-evidence-p3', (event) => {
            
+            evidenceData.title = this.model.title.value;
+            evidenceData.subtitle = this.model.subtitle.value;
+            evidenceData.version = this.model.version.value;
             evidenceData.description = this.model.description.value;
             evidenceData.topics = this.model.topics.value;
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
-            // console.log (evidenceData);
+            console.log (evidenceData);
             this.navigateToPageTag('add-evidence-p3');
         });
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
-            // console.log (evidenceData);
-            // console.log (this.model);
+           
             this.navigateToPageTag('confirm-evidence',{allData: evidenceData});
         });
     }

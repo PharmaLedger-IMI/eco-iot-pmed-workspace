@@ -20,28 +20,22 @@
 
 
 
-                        <psk-select label="Brand" select-options="Brand 1 | Brand 2 | Brand 3">
+                        <psk-select label="Brand" view-model="@brands">
                         </psk-select>
 
-                        <psk-select label="Model" select-options="Model 1 | Model 2 | Model 3">
+                        <psk-select label="Model" view-model="@models">
                         </psk-select>
 
-                        <psk-select label="Trial" select-options="Trial 1 | Trial 2 | Trial 3">
+                        <psk-select label="Trial" view-model="@trails">
                         </psk-select>
 
-                        <psk-select label="Status" select-options="Status 1 | Status 2 | Status 3">
+                        <psk-select label="Status" view-model="@status">
                         </psk-select>
 
-                        <psk-text-input view-model="@deviceid"></psk-text-input>
+                        <psk-text-input view-model="@deviceId"></psk-text-input>
 
                         <psk-button event-name="devices:save" view-model="@saveButton"></psk-button>
                         <psk-button event-name="devices:go-back" view-model="@gobackButton"></psk-button>
-
-
-
-
-
-
                     </psk-card>
                 </div>
             </div>
