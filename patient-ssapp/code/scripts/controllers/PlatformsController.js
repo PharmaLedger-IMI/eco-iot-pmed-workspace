@@ -3,6 +3,7 @@ import DPermissionService from "../services/DPermissionService.js";
 import AvailableStudiesToParticipateService from "../services/AvailableStudiesToParticipateService.js";
 import {consentModelHL7} from "../models/HL7/ConsentModel.js"
 import EconsentStatusService from "../services/EconsentStatusService.js"
+import CommunicationService from "../services/CommunicationService.js";
 const {WebcController} = WebCardinal.controllers;
 
 
@@ -188,7 +189,7 @@ export default class PlatformsController extends WebcController {
 
                             let DPermissionObject = JSON.parse(JSON.stringify(consentModelHL7));
                             // Add metadata to the new D Permission object
-                            DPermissionObject.ConsentStatus.value = "dPUI";
+                            DPermissionObject.ConsentStatus.value = "active";
                             DPermissionObject.Metadata = "metadata";
                             DPermissionObject.Revoked = "no";
                             // optional?? send to researcher ?? ACCEPT SEND DSU
@@ -208,6 +209,29 @@ export default class PlatformsController extends WebcController {
         });
 
 
+        // Send all the D.Permissions to Researcher
+        this.DPermissionService.getDPermissions((err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+
+            console.log("Sending to Researcher the D Permissions: " + (data.length));
+            let DpermissionKeySSIlist = []
+            data.forEach(d_permission => {
+                DpermissionKeySSIlist.push(d_permission.KeySSI);
+            })
+            console.log(DpermissionKeySSIlist);
+            this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.PATIENT_IDENTITY);
+            this.sendMessageToResearcher('d-permission-list', DpermissionKeySSIlist);
+        });
+
+    }
+
+    sendMessageToResearcher(operation, ssi_list) {
+        this.CommunicationService.sendMessage(CommunicationService.identities.IOT.RESEARCHER_IDENTITY, {
+            operation: operation,
+            d_permission_keyssi_list: ssi_list
+        });
     }
 
     _attachHandlerGoBack(){

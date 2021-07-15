@@ -99,7 +99,7 @@ export default class HomeController extends WebcController {
         this.EconsentStatusService = new EconsentStatusService(this.DSUStorage);
 
         let EConsentSample = JSON.parse(JSON.stringify(consentModelHL7));
-        EConsentSample.ConsentStatus.value = "nactive";
+        EConsentSample.ConsentStatus.value = "not active";
 
         this.EconsentStatusService.saveConsent(EConsentSample, (err, econsentdata) => {
             if (err) {
