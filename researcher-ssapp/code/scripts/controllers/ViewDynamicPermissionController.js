@@ -1,3 +1,5 @@
+import DPermissionService from "../services/DPermissionService.js";
+
 const {WebcController} = WebCardinal.controllers;
 
 const ViewDynamicPermissionViewModel = {
@@ -34,9 +36,14 @@ const ViewDynamicPermissionViewModel = {
             value: "PX"
         }
         ]
-    }
+    },
+
+    all_d_permissions: 0,
+    all_users: 0,
+    observation_types: 0
 
 }
+
 
 export default class ViewDynamicPermissionController extends WebcController {
     constructor(...props) {
@@ -48,8 +55,7 @@ export default class ViewDynamicPermissionController extends WebcController {
 
         let selectSubmit = () => {
             let option_chosen = this.model.patient_options.value;
-            if(option_chosen === 'P1'){
-                console.log("Chosen Patient 1")
+            if(option_chosen){
                 this.navigateToPageTag('patient-dynamic-permission');
             } else {
                 console.log("Chosen Patient ...")
@@ -57,7 +63,35 @@ export default class ViewDynamicPermissionController extends WebcController {
         }
 
         this.on("View",selectSubmit,true);
-      
+
+
+        this.DPermissionService = new DPermissionService(this.DSUStorage);
+        //List all the D.Permissions
+        this.DPermissionService.getDPermissions((err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            //console.log(JSON.stringify(data, null, 4));
+            console.log("Total D Permissions are: " + (data.length));
+            this.model.all_d_permissions = data.length;
+        });
+
+
+        //Mount Specific D Permission with given keySSI
+        // if (!this._isBlank(this.model.dssi)){
+        //     //console.log("Trying to mount this D Permission: " + this.model.dssi);
+        //
+        //     this.DPermissionService.mount(this.model.dssi, (err, data) => {
+        //         if (err) {
+        //             return console.log(err);
+        //         }
+        //         // console.log("This D Permission is: ");
+        //         // console.log(JSON.stringify(data, null, 4));
+        //     });
+        // }
+
+
+
     }
 
     _attachHandlerGoBack(){
