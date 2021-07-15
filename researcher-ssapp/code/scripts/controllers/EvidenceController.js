@@ -147,6 +147,7 @@ let evidenceData = {
 
 };
 
+
 export default class EvidenceController extends WebcController {
     constructor(element, history) {
 
@@ -206,13 +207,13 @@ export default class EvidenceController extends WebcController {
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
             console.log (evidenceData);
-            this.navigateToPageTag('add-evidence-p3');
+            this.navigateToPageTag('add-evidence-p3',{allData: evidenceData});
         });
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
            
-            this.navigateToPageTag('confirm-evidence',{allData: evidenceData});
+            this.navigateToPageTag('confirm-evidence');
         });
     }
     _attachHandlerEvidenceEdit(){

@@ -1,6 +1,6 @@
 <psk-page title="Evidence" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <webc-container controller="EvidenceController">
+    <webc-container controller="ConfirmEvidenceController">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
                 <div class="d-flex flex-row align-content-center justify-content-between">
@@ -31,10 +31,10 @@
                                 </psk-layout>
                                 <psk-layout columns="5" class="justify-content-center align-items-center table-row" data-view-model="@allData">
                                     <p>E001</p>
-                                    <p>{{@name}}</p>
-                                    <p>{{@title}}</p>
-                                    <p>{{@version}}</p>
-                                    <p>{{@status}}</p>
+                                    <p>{{@allData.name}}</p>
+                                    <p>{{@allData.title}}</p>
+                                    <p>{{@allData.version}}</p>
+                                    <p>{{@allData.status}}</p>
                                 </psk-layout>
                             </div>
                             <div class="d-flex flex-row align-items-center justify-content-around">
