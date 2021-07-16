@@ -40,6 +40,7 @@ const ViewDynamicPermissionViewModel = {
 
     all_d_permissions: 0,
     all_users: 0,
+    all_users_number: 0,
     observation_types: 0
 
 }
@@ -74,6 +75,14 @@ export default class ViewDynamicPermissionController extends WebcController {
             //console.log(JSON.stringify(data, null, 4));
             console.log("Total D Permissions are: " + (data.length));
             this.model.all_d_permissions = data.length;
+
+            let users = [];
+            for (let i=0;i<data.length;i+=1){
+                users.push((data[i].ConsentPatient.value));
+            }
+
+            this.model.all_users = users.filter((v, i, a) => a.indexOf(v) === i);
+            this.model.all_users_number = this.model.all_users.length;
         });
 
 

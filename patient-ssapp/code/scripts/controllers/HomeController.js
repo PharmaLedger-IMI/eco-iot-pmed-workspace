@@ -80,7 +80,7 @@ export default class HomeController extends WebcController {
 
         let DPermissionSample = JSON.parse(JSON.stringify(consentModelHL7));
         DPermissionSample.ConsentStatus.value = "not active";
-        DPermissionSample.ConsentPatient.value = initProfile.PatientName.value;
+        DPermissionSample.ConsentPatient.value = this.model.profileIdentifier;
         DPermissionSample.ConsentScope.value = "research";
         DPermissionSample.ConsentDateTime.value = new Date().toString();
         DPermissionSample.ConsentOrganization.value = "UPM";

@@ -23,22 +23,20 @@ export default class HomeController extends WebcController {
                 return console.error(err);
             }
             data = JSON.parse(data);
-            console.log('Received Message', data.message);
+            // console.log('Received Message', data.message);
 
             switch (data.message.operation) {
                 case 'd-permission-list': {
-                    //console.log(data.message.d_permission_keyssi_list);
-                    //this.model.d_permission_keyssi_list = data.message.d_permission_keyssi_list;
                     data.message.d_permission_keyssi_list.forEach(ssi => {
-                        console.log(ssi);
-                        this.DPermissionService.mount(ssi, (err, data) => {
-                            if (err) {
-                                return console.log(err);
-                            }
-                            console.log(JSON.stringify(data, null, 4));
-                        });
+                        // console.log(ssi);
                     })
-                    console.log("Received D Permission List");
+                    this.DPermissionService.mount(data.message.d_permission_keyssi_list[data.message.d_permission_keyssi_list.length-1], (err, data) => {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        // console.log(JSON.stringify(data, null, 4));
+                    });
+                              console.log("Received D Permission List");
                     break;
                 }
             }
