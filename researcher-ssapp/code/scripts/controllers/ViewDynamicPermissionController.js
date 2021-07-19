@@ -38,6 +38,28 @@ const ViewDynamicPermissionViewModel = {
         ]
     },
 
+    d_permission_per_day: {
+        name: 'Number of dynamic permissions per day',
+        label: "Number of dynamic permissions per day",
+        required: true,
+        value: ''
+    },
+
+    users_d_permission_per_day: {
+        name: 'Number of users with dynamic permissions per day',
+        label: "Number of users with dynamic permissions per day",
+        required: true,
+        value: ''
+    },
+
+    total_users_button: {
+        name: 'Total users',
+        label: "Total users",
+        required: true,
+        value: ''
+    },
+
+
     all_d_permissions: 0,
     all_users: 0,
     all_users_number: 0,
@@ -51,15 +73,18 @@ export default class ViewDynamicPermissionController extends WebcController {
 
         super(...props);
         this.model = ViewDynamicPermissionViewModel;
-        this._attachHandlerGoBack()
-
+        this._attachHandlerGoBack();
+        this._attachHandlerdpperday();
+        this._attachHandlerudpperday();
+        this._attachHandlertotalusers();
 
         let selectSubmit = () => {
             let option_chosen = this.model.patient_options.value;
             if(option_chosen){
-                this.navigateToPageTag('patient-dynamic-permission');
+                console.log("Chosen Patient ...");
+                //this.navigateToPageTag('patient-dynamic-permission');
             } else {
-                console.log("Chosen Patient ...")
+                console.log("Chosen Patient ...");
             }
         }
 
@@ -100,13 +125,34 @@ export default class ViewDynamicPermissionController extends WebcController {
         // }
 
 
-
     }
 
     _attachHandlerGoBack(){
         this.on('dynamic-permission:go-back', (event) => {
             console.log ("Go back button pressed");
             this.navigateToPageTag('home');
+        });
+    }
+
+    _attachHandlerdpperday(){
+        this.on('dynamic-permission:statistics-d-permission-per-day', (event) => {
+            this.navigateToPageTag('statistics-d-permissions-per-day');
+        });
+    }
+
+    _attachHandlerudpperday(){
+        this.on('dynamic-permission:statistics-users-d-permission-per-day', (event) => {
+            this.navigateToPageTag('statistics-d-permissions-per-day-users');
+        });
+    }
+
+    _attachHandlertotalusers(){
+        this.on('dynamic-permission:statistics-total-users', (event) => {
+            let state = {
+                all_d_permissions: this.model.all_d_permissions,
+                all_users_number: this.model.all_users_number,
+            }
+            this.navigateToPageTag('statistics-d-permissions-total-users', state);
         });
     }
 
