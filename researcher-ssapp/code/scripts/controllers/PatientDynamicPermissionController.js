@@ -9,8 +9,39 @@ const ViewPatientDynamicPermissionViewModel = {
         label: "Back",
         required: true,
         readOnly: false,
-        value: ''
-    }
+        value: 'sasdsad'
+    },
+
+    entities: [
+        {
+            id: {
+                label: "id",
+                value: "1",
+            },
+            name: {
+                label: "name",
+                value: "2",
+            },
+            information: {
+                label: "information",
+                value: "3",
+            }
+        },
+        {
+            id: {
+                label: "id",
+                value: "4",
+            },
+            name: {
+                label: "name",
+                value: "5",
+            },
+            information: {
+                label: "information",
+                value: "6",
+            }
+        }
+    ]
 }
 
 export default class PatientDynamicPermissionController extends WebcController {
@@ -21,7 +52,7 @@ export default class PatientDynamicPermissionController extends WebcController {
         this.model = ViewPatientDynamicPermissionViewModel;
         this._attachHandlerGoBack()
 
-        //let random_consent = consentModelHL7;
+
 
 
 

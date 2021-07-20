@@ -59,7 +59,6 @@ const ViewDynamicPermissionViewModel = {
         value: ''
     },
 
-
     all_d_permissions: 0,
     all_users: 0,
     all_users_number: 0,
@@ -73,23 +72,22 @@ export default class ViewDynamicPermissionController extends WebcController {
 
         super(...props);
         this.model = ViewDynamicPermissionViewModel;
-        this._attachHandlerGoBack();
-        this._attachHandlerdpperday();
-        this._attachHandlerudpperday();
-        this._attachHandlertotalusers();
+        this._attachHandlerGoBack()
+        this._attachHandlerdpperday()
+        this._attachHandlerudpperday()
+        this._attachHandlertotalusers()
 
         let selectSubmit = () => {
             let option_chosen = this.model.patient_options.value;
             if(option_chosen){
                 console.log("Chosen Patient ...");
-                //this.navigateToPageTag('patient-dynamic-permission');
+                this.navigateToPageTag('patient-dynamic-permission');
             } else {
                 console.log("Chosen Patient ...");
             }
         }
 
         this.on("View",selectSubmit,true);
-
 
         this.DPermissionService = new DPermissionService(this.DSUStorage);
         //List all the D.Permissions
