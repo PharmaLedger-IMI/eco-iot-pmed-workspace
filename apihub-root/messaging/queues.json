@@ -1,7 +1,5 @@
 {
     "queues": [
-        "did:demo:patientIdentity",
-        "did:demo:researcherIdentity",
-        "did:demo:professionalIdentity"
+        "did:demo:patientIdentity"
     ]
 }
