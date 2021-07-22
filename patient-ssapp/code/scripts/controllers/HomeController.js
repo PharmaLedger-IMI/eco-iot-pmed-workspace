@@ -11,7 +11,7 @@ const {WebcController} = WebCardinal.controllers;
 
 
 const HomePageViewModel = {
-    ssi: null
+    information_request_ssi: ""
 }
 
 
@@ -27,8 +27,9 @@ export default class HomeController extends WebcController {
         initProfile.PatientTelecom.value = "maria@gmail.com";
         initProfile.password.value = "password";
 
-        let received_information_request = {};
-        this.model.ssi = null
+        this.model.information_request_ssi = false
+        this.model.dpermissionssi = false
+        this.model.consentssi = false
 
         this.InformationRequestService = new InformationRequestService(this.DSUStorage);
         this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.PATIENT_IDENTITY);
@@ -41,22 +42,8 @@ export default class HomeController extends WebcController {
 
             switch (data.message.operation) {
                 case 'information-request-response': {
-                    this.InformationRequestService.mount(data.message.ssi, (err, data) => {
-                        if (err) {
-                            return console.log(err);
-                        }
-                        this.InformationRequestService.getInformationRequests((err, data) => {
-                            if (err) {
-                                return console.log(err);
-                            }
-
-                            received_information_request = (data[data.length-1]);
-                            //console.log("Mounted Information Request")
-                            //console.log(JSON.stringify(received_information_request, null, 4));
-                            this.model.ssi = received_information_request.KeySSI;
-                        });
-                    });
-                    console.log("Received Information Request");
+                    this.model.information_request_ssi = data.message.ssi;
+                    console.log("Received Information Request with KeySSI: " + this.model.information_request_ssi);
                     break;
                 }
             }
@@ -69,7 +56,6 @@ export default class HomeController extends WebcController {
                 return console.log(err);
             }
             //console.log("CREATED PROFILE WITH KEYSSI: ", userProfile.KeySSI);
-
             this.model.profileIdentifier = userProfile.KeySSI;
             this.model.name = userProfile.PatientName.value;
         });
@@ -145,9 +131,9 @@ export default class HomeController extends WebcController {
         this.on('home:platforms', (event) => {
             //console.log ("Platforms button pressed");
             let information_request_state = {
-                ssi: this.model.ssi,
-                dssi: this.model.dpermissionssi,
-                cssi: this.model.consentssi
+                information_request_ssi: this.model.information_request_ssi,
+                d_permission_ssi: this.model.dpermissionssi,
+                e_consent_ssi: this.model.consentssi
             }
             this.navigateToPageTag('platforms', information_request_state);
         });

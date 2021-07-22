@@ -6,7 +6,7 @@ const {WebcController} = WebCardinal.controllers;
 
 
 const ViewModel = {
-    notification: ""
+    notification: false
 }
 
 
@@ -21,22 +21,31 @@ export default class PlatformsController extends WebcController {
         this._attachHandlerMyStudies();
         this._attachHandlerParticipate();
 
+        this.model.information_request_ssi = ""
+        this.model.dssi = false
+        this.model.cssi = false
+        this.model.notification = false
+
         if (this.getState()){
             let receivedState = this.getState();
             console.log("Received State: " + JSON.stringify(receivedState, null, 4));
-            this.model.ssi = receivedState.ssi
-            this.model.dssi = receivedState.dssi;
-            this.model.cssi = receivedState.cssi;
 
-            this.model.notification = "There is a new request, Please review your notifications."
-            if (this.model.ssi == null){
-                this.model.notification = ""
-            }
-            this.model.dssi = receivedState.dssi;
+            this.model.information_request_ssi = receivedState.information_request_ssi
+            this.model.dssi = receivedState.d_permission_ssi;
+            this.model.cssi = receivedState.e_consent_ssi;
+
+           if (this._isBlank(this.model.information_request_ssi) || this.model.information_request_ssi === null) {
+               this.model.notification = false
+           }
+           else{
+               this.model.notification = "Received a new information request with keySSI: " + this.model.information_request_ssi.substr(this.model.information_request_ssi.length - 10)
+           }
         }
 
-        this.DConsentHelperService = new DConsentHelperService(this.DSUStorage);
-        this.DConsentHelperService.DPermissionCheckAndGeneration();
+
+
+        // this.DConsentHelperService = new DConsentHelperService(this.DSUStorage);
+        // this.DConsentHelperService.DPermissionCheckAndGeneration();
 
         this.DataMatchMakingService = new DataMatchMakingService(this.DSUStorage);
 
@@ -44,7 +53,7 @@ export default class PlatformsController extends WebcController {
         this.DataMatchMakingService.listEConsents();
         this.DataMatchMakingService.listDPermissions();
 
-        this.DataMatchMakingService.generateParticipatingStudy();
+        //this.DataMatchMakingService.generateParticipatingStudy();
 
         //Send all the D.Permissions to Researcher
         // this.DPermissionService = new DPermissionService(this.DSUStorage);
@@ -95,10 +104,10 @@ export default class PlatformsController extends WebcController {
     _attachHandlerGoToMyNotifications(){
         this.on('my-notifications', (event) => {
             console.log ("My notifications button pressed");
-            let information_request_state = {
-                ssi: this.model.ssi
-            }
-            this.navigateToPageTag('my-notifications', information_request_state);
+            // let information_request_state = {
+            //     information_request_ssi: this.model.information_request_ssi
+            // }
+            this.navigateToPageTag('my-notifications');
         });
     }
 
