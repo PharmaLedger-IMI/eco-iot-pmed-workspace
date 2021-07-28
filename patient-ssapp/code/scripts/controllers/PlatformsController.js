@@ -47,11 +47,15 @@ export default class PlatformsController extends WebcController {
         // this.DConsentHelperService = new DConsentHelperService(this.DSUStorage);
         // this.DConsentHelperService.DPermissionCheckAndGeneration();
 
-        this.DataMatchMakingService = new DataMatchMakingService(this.DSUStorage);
+        if (!this._isBlank(this.model.information_request_ssi) || this.model.information_request_ssi === null) {
+            this.DataMatchMakingService = new DataMatchMakingService(this.DSUStorage, this.model.information_request_ssi);
+        }
 
-        this.DataMatchMakingService.listInformationRequests();
-        this.DataMatchMakingService.listEConsents();
-        this.DataMatchMakingService.listDPermissions();
+
+        //
+        // this.DataMatchMakingService.listInformationRequests();
+        // this.DataMatchMakingService.listEConsents();
+        // this.DataMatchMakingService.listDPermissions();
 
         //this.DataMatchMakingService.generateParticipatingStudy();
 
@@ -107,6 +111,7 @@ export default class PlatformsController extends WebcController {
             // let information_request_state = {
             //     information_request_ssi: this.model.information_request_ssi
             // }
+            this.DataMatchMakingService.printTheRequest();
             this.navigateToPageTag('my-notifications');
         });
     }

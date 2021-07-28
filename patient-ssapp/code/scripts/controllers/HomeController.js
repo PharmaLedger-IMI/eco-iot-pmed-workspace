@@ -49,7 +49,6 @@ export default class HomeController extends WebcController {
             }
         });
 
-
         this.PatientService = new ProfileManagementService(this.DSUStorage);
         this.PatientService.saveProfile(initProfile, (err, userProfile) => {
             if (err) {
@@ -60,17 +59,14 @@ export default class HomeController extends WebcController {
             this.model.name = userProfile.PatientName.value;
         });
 
-
         //Generate Sample DPermission for testing in Platforms page
         this.DPermissionService = new DPermissionService(this.DSUStorage);
-
         let DPermissionSample = JSON.parse(JSON.stringify(consentModelHL7));
         DPermissionSample.ConsentStatus.value = "not active";
         DPermissionSample.ConsentPatient.value = this.model.profileIdentifier;
         DPermissionSample.ConsentScope.value = "research";
         DPermissionSample.ConsentDateTime.value = new Date().toString();
         DPermissionSample.ConsentOrganization.value = "UPM";
-
         this.DPermissionService.saveDPermission(DPermissionSample, (err, dpermissiondata) => {
             if (err) {
                 return console.log(err);
@@ -80,13 +76,10 @@ export default class HomeController extends WebcController {
             this.model.dpermissionssi = dpermissiondata.KeySSI;
         });
 
-
         // Generate eConsent Sample for testing in Platforms page
         this.EconsentStatusService = new EconsentStatusService(this.DSUStorage);
-
         let EConsentSample = JSON.parse(JSON.stringify(consentModelHL7));
         EConsentSample.ConsentStatus.value = "not active";
-
         this.EconsentStatusService.saveConsent(EConsentSample, (err, econsentdata) => {
             if (err) {
                 return console.log(err);
