@@ -134,5 +134,29 @@ $$.flow.describe('IotAdaptor', {
         console.error(error);
         callback(error, undefined);
       }
+    },
+    createEvidenceDsu: async function (jsonData, callback) {
+      const resources = await this.mainDb.searchResourcesAsync('EvidenceDataDsu', { where: {  } });
+      let evidenceDataDsu = resources[0];
+      
+      if(!evidenceDataDsu){
+        const dsuDbName = "clinicalDecisionSupport";
+        const dsu = dsuService.createWalletDB(dsuDbName);
+        const newEvidenceDataDsu = {
+          // codeReference: {
+          //   reference: `Practitioner/${deviceRequest.id}`
+          // },
+          seedSSI: dsu.seedSSI,
+          sReadSSI: dsu.sReadSSI,
+          dbName: dsuDbName
+        }
+
+        evidenceDataDsu = await this.mainDb.createResourceAsync('EvidenceDataDsu', newEvidenceDataDsu);
+      } 
+      
+      callback(undefined, evidenceDataDsu);
+
     }
+    
+
 });
