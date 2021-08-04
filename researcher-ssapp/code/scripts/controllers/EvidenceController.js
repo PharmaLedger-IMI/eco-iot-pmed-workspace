@@ -1,6 +1,6 @@
 const { WebcController } = WebCardinal.controllers;
-
-
+// const axios = require('axios');
+import axios from "axios";
 const AddEvidenceViewModel = {
     name: {
         name: 'name',
@@ -77,16 +77,16 @@ const AddEvidenceViewModel = {
         required: true,
         options: [
             {
-                label: "Status 1",
-                value: 'Status 1'
+                label: "Draft",
+                value: 'Draft'
             },
             {
-                label: "Status 2",
-                value: 'Status 2'
+                label: "Active",
+                value: 'Active'
             },
             {
-                label: "Status 3",
-                value: 'Status 3'
+                label: "Inactive",
+                value: 'Inactive'
             },
             
         ],
@@ -135,8 +135,7 @@ const AddEvidenceViewModel = {
 }
 let evidenceData = {
     name: "",
-    organization: "",
-    email: "",
+    contact: [],
     title: "",
     subtitle: "",
     version: "",
@@ -182,14 +181,50 @@ export default class EvidenceController extends WebcController {
     _attachHandlerEvidenceP1(){
         this.on('evidence:add-evidence-p1', (event) => {
             // console.log (evidenceData);
+            let myBody ={};
+            // let myJson;
+            // const url = 'http://localhost:8080/iotAdapter/create-evidence-dsu';
+            //     const response =  fetch(url, {
+            //       method: 'POST',
+            //       body: myBody, // string or object
+            //       headers: {
+            //         'Content-Type': 'application/json'
+                    
+            //       },
+            //       credentials: true
+            //     });
+            //     console.log (response);
+            
+            axios.post('http://localhost:8080/iotAdapter/create-evidence-dsu', {
+                data: mydata
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+              
             this.navigateToPageTag('add-evidence-p1');
         });
     }
     _attachHandlerEvidenceP2(){
         this.on('evidence:add-evidence-p2', (event) => {
             evidenceData.name = this.model.name.value;
-            evidenceData.email = this.model.email.value;
-            evidenceData.organization = this.model.organization.value;
+            evidenceData.contact = [
+                {
+                    "name": "Name of the Publisher(Organization/individual)",
+                    "telecom": [
+                        {
+                            "system": "email",
+                            "value": this.model.email.value
+                        }
+                    ]
+                }
+            ];
+
+            // evidenceData.email = this.model.email.value;
+            evidenceData.publisher = this.model.organization.value;
             
             console.log (evidenceData);
             // console.log (this.model.title);
@@ -212,7 +247,6 @@ export default class EvidenceController extends WebcController {
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
-           
             this.navigateToPageTag('confirm-evidence');
         });
     }
