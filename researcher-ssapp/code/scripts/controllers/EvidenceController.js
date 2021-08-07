@@ -1,6 +1,7 @@
 const { WebcController } = WebCardinal.controllers;
+import EcoAdaptorApi from "./EcoAdaptorApi.js";
 // const axios = require('axios');
-import axios from "axios";
+// import axios from "axios";
 const AddEvidenceViewModel = {
     name: {
         name: 'name',
@@ -161,6 +162,31 @@ export default class EvidenceController extends WebcController {
         this._attachHandlerEvidenceList()
         this._attachHandlerHome()
         this._attachHandlerEvidenceEdit()
+        // debugger
+        // this.EcoAdaptorApi = new EcoAdaptorApi()
+        // // debugger
+        // this.EcoAdaptorApi.getSites((err, sites) => {
+        //     // debugger
+        //     if (err) {
+        //         return console.log(err);
+        //     }
+        //     callback(undefined, sites);
+        // })
+        let myBody = {};
+        const url = 'http://localhost:8080/iotAdapter/get-evidence/17110073-c4a5-465f-93da-d84009359133';
+        const response =  fetch(url, {
+            method: 'get',
+        //   body: JSON.stringify(myBody), // string or object
+            headers: {
+            'Content-Type': 'application/json',
+            'X-KeySSI': "27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR",
+            "Access-Control-Allow-Origin" : "*", 
+            "Access-Control-Allow-Credentials" : true 
+            
+            }
+        //   credentials: true
+        });
+        console.log (response);
     }
     
     _attachHandlerHome(){
@@ -195,16 +221,25 @@ export default class EvidenceController extends WebcController {
             //     });
             //     console.log (response);
             
-            axios.post('http://localhost:8080/iotAdapter/create-evidence-dsu', {
-                data: mydata
-              })
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-              
+            // axios.post('http://localhost:8080/iotAdapter/create-evidence-dsu', {
+            //     data: myBody,
+            //     credentials: true
+            //   })
+            //   .then(function (response) {
+            //     console.log(response);
+            //   })
+            //   .catch(function (error) {
+            //     console.log(error);
+            //   });
+            //   fetch('http://localhost:8080/iotAdapter/create-evidence-dsu', {
+            //     method: "POST",
+            //     body: JSON.stringify(_data),
+            //     headers: {"Content-type": "application/json; charset=UTF-8"}
+            //     })
+            //     .then(response => response.json()) 
+            //     .then(json => console.log(json))
+            //     .catch(err => console.log(err));
+            
             this.navigateToPageTag('add-evidence-p1');
         });
     }
@@ -241,7 +276,7 @@ export default class EvidenceController extends WebcController {
             evidenceData.topics = this.model.topics.value;
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
-            console.log (evidenceData);
+            // console.log (evidenceData);
             this.navigateToPageTag('add-evidence-p3',{allData: evidenceData});
         });
     }
