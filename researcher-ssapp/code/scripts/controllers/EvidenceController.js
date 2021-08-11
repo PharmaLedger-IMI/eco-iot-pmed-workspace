@@ -1,6 +1,5 @@
 const { WebcController } = WebCardinal.controllers;
-// import IotAdapterApi from "./IotAdapterApi.js";
-import EcoAdaptorApi from "../../../EcoAdaptorApi.js";
+import IotAdaptorApi from "../services/IotAdaptorApi.js";
 // const axios = require('axios');
 // import axios from "axios";
 // var axios = require("axios").default;
@@ -146,9 +145,7 @@ let evidenceData = {
     status: "",
     topics: "",
     exposureBackground: "",
-
 };
-
 
 export default class EvidenceController extends WebcController {
     constructor(element, history) {
@@ -164,13 +161,16 @@ export default class EvidenceController extends WebcController {
         this._attachHandlerEvidenceList()
         this._attachHandlerHome()
         this._attachHandlerEvidenceEdit()
-        this.EcoAdaptorApi = new EcoAdaptorApi()
-        this.EcoAdaptorApi.getSites((err, sites) => {
-            debugger
+
+        this.IotAdaptorApi = new IotAdaptorApi();
+        let id = '17110073-c4a5-465f-93da-d84009359133';
+        let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR';
+
+        this.IotAdaptorApi.getEvidence(id, keySSI, (err, evidence) => {
             if (err) {
                 return console.log(err);
             }
-            callback(undefined, sites);
+            callback(undefined, evidence);
         })
         
         // // debugger
