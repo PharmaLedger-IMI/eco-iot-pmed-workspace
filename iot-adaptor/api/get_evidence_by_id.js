@@ -1,6 +1,7 @@
 const _ = require('lodash');
 
 function getEvidenceById(request, response) {
+  console.log("Calling get evidence by id");
     const receivedDomain = "default";
     const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {

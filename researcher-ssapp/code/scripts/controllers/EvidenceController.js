@@ -1,7 +1,9 @@
 const { WebcController } = WebCardinal.controllers;
-import EcoAdaptorApi from "./EcoAdaptorApi.js";
+// import IotAdapterApi from "./IotAdapterApi.js";
+import EcoAdaptorApi from "../../../EcoAdaptorApi.js";
 // const axios = require('axios');
 // import axios from "axios";
+// var axios = require("axios").default;
 const AddEvidenceViewModel = {
     name: {
         name: 'name',
@@ -162,31 +164,62 @@ export default class EvidenceController extends WebcController {
         this._attachHandlerEvidenceList()
         this._attachHandlerHome()
         this._attachHandlerEvidenceEdit()
-        // debugger
-        // this.EcoAdaptorApi = new EcoAdaptorApi()
+        this.EcoAdaptorApi = new EcoAdaptorApi()
+        this.EcoAdaptorApi.getSites((err, sites) => {
+            debugger
+            if (err) {
+                return console.log(err);
+            }
+            callback(undefined, sites);
+        })
+        
         // // debugger
-        // this.EcoAdaptorApi.getSites((err, sites) => {
+        // this.IotAdapterApi = new IotAdapterApi()
+        // // debugger
+        // this.IotAdapterApi.getEvidence("17110073-c4a5-465f-93da-d84009359133",(err, evidence) => {
         //     // debugger
         //     if (err) {
         //         return console.log(err);
         //     }
-        //     callback(undefined, sites);
+        //     callback(undefined, evidence);
         // })
-        let myBody = {};
-        const url = 'http://localhost:8080/iotAdapter/get-evidence/17110073-c4a5-465f-93da-d84009359133';
-        const response =  fetch(url, {
-            method: 'get',
-        //   body: JSON.stringify(myBody), // string or object
-            headers: {
-            'Content-Type': 'application/json',
-            'X-KeySSI': "27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR",
-            "Access-Control-Allow-Origin" : "*", 
-            "Access-Control-Allow-Credentials" : true 
+        // var myHeaders = new Headers();
+        // myHeaders.append("Content-Type", "application/json");
+        // myHeaders.append("X-KeySSI", "27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR");
+        
+        // var requestOptions = {
+        //   method: 'GET',
+        //   headers: myHeaders,
+        //   redirect: 'follow'
+        // };
+        
+        // fetch("http://localhost:8080/iotAdapter/get-evidence/17110073-c4a5-465f-93da-d84009359133", requestOptions)
+        //   .then(response => response.text())
+        //   .then(result => console.log(result))
+        //   .catch(error => {
+        //     debugger 
+        //     console.log('error', error)
+        //   });
+    
+
+        // const url = 'http://localhost:8080/iotAdapter/get-evidence/17110073-c4a5-465f-93da-d84009359133';
+        // const response =  fetch(url, {
+        //     method: 'GET',
+        // //   body: JSON.stringify(myBody), // string or object
+        //     headers: {
+        //     'Content-Type': 'application/json',
+        //     'X-KeySSI': "27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR",
+        //     // "Access-Control-Allow-Origin" : "*", 
+        //     "Access-Control-Allow-Credentials" : true ,
+        //     "withCredentials": true
             
-            }
-        //   credentials: true
-        });
-        console.log (response);
+        //     }
+        // //   credentials: true
+        // });
+        // console.log (response);
+
+        
+       
     }
     
     _attachHandlerHome(){

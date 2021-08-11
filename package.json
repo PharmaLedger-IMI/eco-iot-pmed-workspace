@@ -40,7 +40,6 @@
   },
   "homepage": "https://github.com/PharmaLedger-IMI/epi-workspace#readme",
   "dependencies": {
-    "axios": "^0.21.1",
     "octopus": "git+http://github.com/privatesky/octopus.git"
   }
 }
