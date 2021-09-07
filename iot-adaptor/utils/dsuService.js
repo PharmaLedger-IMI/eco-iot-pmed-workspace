@@ -18,9 +18,12 @@ const getSharedDB = (sReadSSI, dbName) => {
 }
 
 const createWalletDB = (dbName) => {
+  console.log("Create Wallet DB DSU Service");
   const seedSSIObject = createSeedSSI();
   const sReadSSIObject = seedSSIObject.derive();
   const dbObject = db.getWalletDB(seedSSIObject, dbName);
+  // console.log(dbObject);
+  console.log(sReadSSIObject);
   return {
     seedSSI: seedSSIObject.getIdentifier(),
     sReadSSI: sReadSSIObject.getIdentifier()
