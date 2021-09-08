@@ -82,15 +82,6 @@ export default class PlatformsController extends WebcController {
             operation: operation,
             d_permission_keyssi_list: ssi_list
         });
-<<<<<<< HEAD
-
-        //check econsentStatus here
-
-
-
-
-=======
->>>>>>> origin/master
     }
 
     _attachHandlerGoBack(){
