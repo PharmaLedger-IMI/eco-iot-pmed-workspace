@@ -111,7 +111,7 @@ export default class PlatformsController extends WebcController {
             // let information_request_state = {
             //     information_request_ssi: this.model.information_request_ssi
             // }
-            this.DataMatchMakingService.printTheRequest();
+            //this.DataMatchMakingService.printTheRequest();
             this.navigateToPageTag('my-notifications');
         });
     }

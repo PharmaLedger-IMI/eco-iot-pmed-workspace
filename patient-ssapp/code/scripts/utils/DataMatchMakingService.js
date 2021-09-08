@@ -97,7 +97,7 @@ export default class DataMatchMakingService {
             if (found_data){
                 console.log("Data found. Checking the requested dates.")
                 let sample_date_min = new Date(2020, 0, 1);
-                let sample_date_max = new Date(2021, 10, 1);
+                let sample_date_max = new Date(2021, 11, 1);
                 if((sample_date_min.getTime() < new Date().getTime()) && (new Date().getTime()<sample_date_max.getTime()))  {
                     console.log("Data found within the dates' range. Creating the Shareable DSU.")
                     this.generateParticipatingStudy();

@@ -414,3 +414,13 @@
     
     Added "Test Contract Method" functionality for testing contract methods.
     cleanup
+    #Fix for leaflet ssapp webcardinal migration
+    Update octopus.json
+    #207 and #327 Buffering mechanism and configurable webhooks with tests
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+    fix for the bug that was preventing wallets to open on mobile devices (failing to check sw support)
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    fix for the bug that was preventing wallets to open on mobile devices (failing to check sw support)
