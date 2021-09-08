@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-function searchResource(request, response, next) {
+function deleteResource(request, response, next) {
     const receivedDomain = "default";
     const domainConfig = require("../../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {
@@ -23,4 +23,4 @@ function searchResource(request, response, next) {
     });
 }
 
-module.exports = searchResource;
+module.exports = deleteResource;

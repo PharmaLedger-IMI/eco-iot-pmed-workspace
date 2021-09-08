@@ -9,7 +9,7 @@ export default class ClinicalDataController extends  WebcController  {
       
         // console.log("************************");
         // console.log(allData);
-
+        this._attachHandlerGoBack();
 
     }
 

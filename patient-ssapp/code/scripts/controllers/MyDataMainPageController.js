@@ -1,7 +1,8 @@
 import DsuStorage from "../services/DsuStorage.js";
 const { WebcController } = WebCardinal.controllers;
 
-const keySSIVal = "27XvCBPKSWpUwscQUxwsVDTxRcN8W1Wo6hEs4MjyrGAtsPMrvWZT5RuYoxanyJzuyUKAn4bfin43keaSMiMrAEAfitqEEUsp12YedxFK8kzCsjzzZAuMggWUNh33iEHXGXKDgmJzJ2aaVaqAKEWqNSb";
+const keySSIVal = "27XvCBPKSWpUwscQUxwsVDTxRcNY7dNoPQ7xBCMgRErDktEEw6eEvCGaSfpJEiRBvFhAvtk7BpbUYJv6F1EySzgaMUcBETwzmtGsYeYQhLbFXTimNA2fYChVJSzADXeomv3cwLMhrMwXGU8XYgfchtB";
+// const givenKeySSI = "BBudGH6ySHG6GUHN8ogNrTWc6ir1BBhD6u3WJNJorKyvv1bBQCbg8qSwfvNfGuSBCZqWUJg6RPLjogj3r4eGjuzKy";
 let testData = [] ;
 const ViewPersonalHealthDataModel = {
 
@@ -72,6 +73,7 @@ export default class MyDataMainPageController extends  WebcController  {
             });
 
         });
+        console.log(testData);
 
         if (this.getState()){
             let receivedModel = this.getState();
@@ -87,6 +89,7 @@ export default class MyDataMainPageController extends  WebcController  {
             
             
             let choice = this.model.mydata.value;
+            console.log(choice);
             if (choice === "all"){
                 let allData = testData;
                 this.navigateToPageTag('clinicalData',{allData: allData});

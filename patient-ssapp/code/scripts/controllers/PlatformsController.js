@@ -1,13 +1,12 @@
-import InformationRequestService from "../services/InformationRequestService.js";
+import CommunicationService from "../services/CommunicationService.js";
+import DConsentHelperService from "../utils/DConsentHelperService.js"
 import DPermissionService from "../services/DPermissionService.js";
-import AvailableStudiesToParticipateService from "../services/AvailableStudiesToParticipateService.js";
-import {consentModelHL7} from "../models/HL7/ConsentModel.js"
-import EconsentStatusService from "../services/EconsentStatusService.js"
+import DataMatchMakingService from "../utils/DataMatchMakingService.js"
 const {WebcController} = WebCardinal.controllers;
 
 
 const ViewModel = {
-    notification: ""
+    notification: false
 }
 
 
@@ -22,105 +21,76 @@ export default class PlatformsController extends WebcController {
         this._attachHandlerMyStudies();
         this._attachHandlerParticipate();
 
+        this.model.information_request_ssi = ""
+        this.model.dssi = false
+        this.model.cssi = false
+        this.model.notification = false
+
         if (this.getState()){
             let receivedState = this.getState();
             console.log("Received State: " + JSON.stringify(receivedState, null, 4));
-            this.model.ssi = receivedState.ssi
-            this.model.dssi = receivedState.dssi;
 
-            this.model.notification = "There is a new request, Please review your notifications."
-            if (this.model.ssi == null){
-                this.model.notification = ""
-            }
-            this.model.dssi = receivedState.dssi;
+            this.model.information_request_ssi = receivedState.information_request_ssi
+            this.model.dssi = receivedState.d_permission_ssi;
+            this.model.cssi = receivedState.e_consent_ssi;
+
+           if (this._isBlank(this.model.information_request_ssi) || this.model.information_request_ssi === null) {
+               this.model.notification = false
+           }
+           else{
+               this.model.notification = "Received a new information request with keySSI: " + this.model.information_request_ssi.substr(this.model.information_request_ssi.length - 10)
+           }
         }
 
 
-        // DATA MATCHMAKING FUNCTION
-        this.InformationRequestService = new InformationRequestService(this.DSUStorage);
 
-        //List all information Requests
-        let all_information_requests;
-        this.InformationRequestService.getInformationRequests((err, data) => {
-            if (err) {
-                return console.log(err);
-            }
-            all_information_requests = data;
-            console.log("All information Requests are: " + all_information_requests.length);
-            console.log(JSON.stringify(all_information_requests[all_information_requests.length-1], null, 4 ));
-        });
+        // this.DConsentHelperService = new DConsentHelperService(this.DSUStorage);
+        // this.DConsentHelperService.DPermissionCheckAndGeneration();
 
-
-        // Mount Specific Information Request
-        if (!this._isBlank(this.model.ssi)){
-            let mounted_information_request;
-            this.InformationRequestService.mount(this.model.ssi, (err, data) => {
-                if (err) {
-                    return console.log(err);
-                }
-                mounted_information_request = data;
-                console.log(JSON.stringify(mounted_information_request, null, 4 ));
-            });
+        if (!this._isBlank(this.model.information_request_ssi) || this.model.information_request_ssi === null) {
+            this.DataMatchMakingService = new DataMatchMakingService(this.DSUStorage, this.model.information_request_ssi);
         }
 
 
-        //List all the D.Permissions
-        this.DPermissionService = new DPermissionService(this.DSUStorage);
+        //
+        // this.DataMatchMakingService.listInformationRequests();
+        // this.DataMatchMakingService.listEConsents();
+        // this.DataMatchMakingService.listDPermissions();
 
-        this.DPermissionService.getDPermissions((err, data) => {
-            if (err) {
-                return console.log(err);
-            }
-            //console.log(JSON.stringify(data, null, 4));
-            console.log("Total D Permissions are: " + data.length);
+        //this.DataMatchMakingService.generateParticipatingStudy();
+
+        //Send all the D.Permissions to Researcher
+        // this.DPermissionService = new DPermissionService(this.DSUStorage);
+        // this.DPermissionService.getDPermissions((err, data) => {
+        //     if (err) {
+        //         return console.log(err);
+        //     }
+        //
+        //     console.log("Sending to Researcher the D Permissions: " + (data.length));
+        //     let DpermissionKeySSIlist = []
+        //     data.forEach(d_permission => {
+        //         DpermissionKeySSIlist.push(d_permission.KeySSI);
+        //     })
+        //     console.log(DpermissionKeySSIlist);
+        //     this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.PATIENT_IDENTITY);
+        //     this.sendMessageToResearcher('d-permission-list', DpermissionKeySSIlist);
+        // });
+    }
+
+    sendMessageToResearcher(operation, ssi_list) {
+        this.CommunicationService.sendMessage(CommunicationService.identities.IOT.RESEARCHER_IDENTITY, {
+            operation: operation,
+            d_permission_keyssi_list: ssi_list
         });
-
-
-        // Mount Specific D Permission with giver keySSI
-        if (!this._isBlank(this.model.dssi)){
-            console.log("Trying to mount this D Permission: " + this.model.dssi);
-
-            this.DPermissionService.mount(this.model.dssi, (err, data) => {
-                if (err) {
-                    return console.log(err);
-                }
-                console.log("This D Permission is: ");
-                console.log(JSON.stringify(data, null, 4));
-            });
-        }
-
-        // Generate study to participate according to the Information Request
-        this.AvailableStudiesToParticipateService = new AvailableStudiesToParticipateService(this.DSUStorage);
-        //Save Sample Study
-        let sampleStudy = {
-            study: "Study with date time: " + new Date().toString()
-        }
-        this.AvailableStudiesToParticipateService.saveStudy(sampleStudy, (err, data) => {
-            if (err) {
-                return console.log(err);
-            }
-            console.log("Sample Study saved with keySSI " + data.keySSI)
-            this.model.studyssi = data.KeySSI;
-        });
-
-
-
-        //F-M3-6F dynamic Permissioning using eConsent UC
-        //List all the eConsents
-        this.EconsentStatusService = new EconsentStatusService(this.DSUStorage);
-        this.EconsentStatusService.getConsents((err, data) => {
-            if (err) {
-                return console.log(err);
-            }
-            console.log("Total consents are: " + data.length);
-
-        });
+<<<<<<< HEAD
 
         //check econsentStatus here
 
 
 
 
+=======
+>>>>>>> origin/master
     }
 
     _attachHandlerGoBack(){
@@ -129,7 +99,6 @@ export default class PlatformsController extends WebcController {
             this.navigateToPageTag('home');
         });
     }
-
 
     _attachHandlerParticipate(){
         this.on('participate-to-study', (event) => {
@@ -148,17 +117,17 @@ export default class PlatformsController extends WebcController {
     _attachHandlerGoToMyNotifications(){
         this.on('my-notifications', (event) => {
             console.log ("My notifications button pressed");
-            let information_request_state = {
-                ssi: this.model.ssi
-            }
-            this.navigateToPageTag('my-notifications', information_request_state);
+            // let information_request_state = {
+            //     information_request_ssi: this.model.information_request_ssi
+            // }
+            //this.DataMatchMakingService.printTheRequest();
+            this.navigateToPageTag('my-notifications');
         });
     }
 
     _isBlank(str) {
         return (!str || /^\s*$/.test(str));
     }
-
 
 
 }

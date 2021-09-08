@@ -19,15 +19,9 @@
                 <div class="flex-grow-1">
                     <psk-card class="bpd-dashboard">
 
+                        <div div style="text-align:center;">
+                        <psk-form>
 
-<!--                        <psk-label label="Listing and viewing the issued dynamic permissions by patients"/>-->
-<!--                        <psk-select label="Dynamic consent for patient:" select-options="Patient 1 | Patient 2 | Patient 3">-->
-<!--                        </psk-select>-->
-
-<!--                        <psk-button event-name="" view-model="@viewbutton"></psk-button>-->
-<!--                        <psk-button event-name="dynamic-permission:go-back" view-model="@gobackbutton"></psk-button>-->
-                        <div>
-                        <psk-form form-actions="View">
                             <psk-form-row layout="xs=[12] m=[6] l=[12] xl=[4]">
                                 <psk-label>Dynamic permission for patient:</psk-label>
                             </psk-form-row>
@@ -35,18 +29,45 @@
                             <psk-form-row layout="xs=[12,12,12] m=[6,6,6] l=[12,12,12] xl=[4,4,4]">
                                 <!-- This component will receive the options and the other properties from the model -->
                                 <psk-select view-model="patient_options"></psk-select>
+                                <psk-button label="View" type="submit" event-name="View"></psk-button>
                             </psk-form-row>
+
                         </psk-form>
                         </div>
-                        <div>
-                            &nbsp &nbsp <psk-button event-name="dynamic-permission:go-back" view-model="@gobackbutton"></psk-button>
+
+                        <div style="text-align:center;">
+                            <div>
+                                <psk-button event-name="dynamic-permission:statistics-d-permission-per-day" view-model="@d_permission_per_day"></psk-button>
+                            </div>
+                            <div>
+                                <psk-button event-name="dynamic-permission:statistics-users-d-permission-per-day" view-model="@users_d_permission_per_day"></psk-button>
+                            </div>
+                            <div>
+                                <psk-button event-name="dynamic-permission:statistics-total-users" view-model="@total_users_button"></psk-button>
+                            </div>
+                            <div>
+                                <psk-button event-name="dynamic-permission:go-back" view-model="@gobackbutton"></psk-button>
+                            </div>
                         </div>
-
-
-
 
 
                     </psk-card>
+
+<!--                    <psk-card class="bpd-dashboard">-->
+<!--                         <div>-->
+<!--                             <p>All Dynamic Permissions issued are: </p>-->
+<!--                             <psk-label label="@all_d_permissions"></psk-label>-->
+<!--                         </div>-->
+<!--                        <div>-->
+<!--                            <br>-->
+<!--                            <p>All users are: </p>-->
+<!--                            <psk-label label="@all_users_number"></psk-label>-->
+<!--                        </div>-->
+<!--                    </psk-card>-->
+
+
+
+
                 </div>
             </div>
             <div class="pharma-footer">

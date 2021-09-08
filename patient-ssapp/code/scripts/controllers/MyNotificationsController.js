@@ -2,10 +2,6 @@ const {WebcController} = WebCardinal.controllers;
 
 
 const ViewNotificationsModel = {
-    contract: "empty",
-    title: "empty",
-    ssi: "empty",
-    message: ""
 }
 
 
@@ -18,15 +14,7 @@ export default class MyNotificationsController extends  WebcController  {
 
         if (this.getState()){
             let receivedNotification = this.getState();
-            console.log("Received keySSI object: " + receivedNotification.ssi);
-            this.model.ssi = receivedNotification.ssi
-
-            if (this.model.ssi == null){
-                this.model.message = ""
-            }
-            else{
-                this.model.message = "Received an information request with keySSI " + this.model.ssi
-            }
+            console.log("Received State: " + JSON.stringify(receivedNotification, null, 4));
         }
 
     }

@@ -2,7 +2,6 @@ const _ = require('lodash');
 
 function updateDsuResource(request, response) {
     const receivedDomain = "default";
-    console.log("updateDSUResource");
     const domainConfig = require("../../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {
         console.log('Deployment Domain not found : ', receivedDomain);

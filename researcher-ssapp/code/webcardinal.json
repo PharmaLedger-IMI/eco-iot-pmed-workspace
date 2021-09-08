@@ -80,6 +80,24 @@
       "tag": "issue-new-request"
     },
     {
+      "name": "statistics-d-permissions-per-day",
+      "path": "/statistics-d-permissions-per-day",
+      "src": "statistics-d-permissions-per-day.html",
+      "tag": "statistics-d-permissions-per-day"
+    },
+    {
+      "name": "statistics-d-permissions-per-day-users",
+      "path": "/statistics-d-permissions-per-day-users",
+      "src": "statistics-d-permissions-per-day-users.html",
+      "tag": "statistics-d-permissions-per-day-users"
+    },   
+    {
+      "name": "statistics-d-permissions-total-users",
+      "path": "/statistics-d-permissions-total-users",
+      "src": "statistics-d-permissions-total-users.html",
+      "tag": "statistics-d-permissions-total-users"
+    },
+    {
       "name": "patient-dynamic-permission",
       "path": "/patient-dynamic-permission",
       "src": "patient-dynamic-permission.html",

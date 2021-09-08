@@ -12,7 +12,7 @@ function getResourceById(request, response) {
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
     const keySSI = request.headers['x-keyssi'];
     const dbName = request.headers['x-db-name'];
-    flow.getDsuResourceById(keySSI, db, resourceType, request.params.id, (error, result) => {
+    flow.getDsuResourceById(keySSI, dbName, resourceType, request.params.id, (error, result) => {
       if (error) {
         return response.send(error.status, error);
       } else {

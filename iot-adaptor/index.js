@@ -20,6 +20,13 @@ function IotAdapter(server) {
 
     const AssignDevice = require('./api/assign_device');
 
+    const CreateEvidenceDsu = require('./api/create_evidence_dsu.js');
+    const CreateEvidence = require('./api/create_evidence.js');
+    const SearchEvidence = require('./api/search_evidence.js');
+    const UpdateEvidence = require('./api/update_evidence.js');
+    const DeleteEvidence = require('./api/delete_evidence.js');
+    const GetEvidenceById = require('./api/get_evidence_by_id.js');
+
     const { responseModifierMiddleware, requestBodyJSONMiddleware } = require('../privatesky/modules/apihub/utils/middlewares');
     const { requestBodyXMLMiddleware, responseBodyJsonMiddleware } = require('./utils/middlewares');
 
@@ -37,13 +44,13 @@ function IotAdapter(server) {
 
     server.post(`/iotAdapter/dsu`, CreateDsu);
     server.get(`/iotAdapter/dsu/resource/:resource_type`, SearchDsuResources);
-    server.get(`/iotAdapter/dsu/resource/:resource_type/:id`, GetDsuResourceById);
     server.post(`/iotAdapter/dsu/resource/:resource_type`, requestBodyJSONMiddleware);
     server.post(`/iotAdapter/dsu/resource/:resource_type`, CreateDsuResource);
-    server.get(`/iotAdapter/dsu/resource/:resource_type`, SearchDsuResources);
     server.put(`/iotAdapter/dsu/resource/:resource_type/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/dsu/resource/:resource_type/:id`, UpdateDsuResource);
     server.delete(`/iotAdapter/dsu/resource/:resource_type/:id`, DeleteDsuResource);
+    server.get(`/iotAdapter/dsu/resource/:resource_type/:id`, GetDsuResourceById);
+
     // End for debugging purpose
 
     // Actual APIs
@@ -51,6 +58,19 @@ function IotAdapter(server) {
     server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
     server.post(`/iotAdapter/assign-device`, requestBodyJSONMiddleware);
     server.post(`/iotAdapter/assign-device`, AssignDevice);
+
+    server.post(`/iotAdapter/create-evidence-dsu`, requestBodyJSONMiddleware);
+    server.post(`/iotAdapter/create-evidence-dsu`, CreateEvidenceDsu);
+
+    server.get(`/iotAdapter/search-evidence`, SearchEvidence);
+    server.post(`/iotAdapter/create-evidence`, requestBodyJSONMiddleware);
+    server.post(`/iotAdapter/create-evidence`, CreateEvidence);
+    server.put(`/iotAdapter/update-evidence/:id`, requestBodyJSONMiddleware);
+    server.put(`/iotAdapter/update-evidence/:id`, UpdateEvidence);
+    server.delete(`/iotAdapter/delete-evidence/:id`, DeleteEvidence);
+    server.get(`/iotAdapter/get-evidence/:id`, GetEvidenceById);
+
+
 }
 
 module.exports = IotAdapter;

@@ -1,0 +1,54 @@
+<psk-page title="" style="height: 100vh">
+    <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
+    <webc-container controller="StatisticsDPermissionsPerDayPerUserController" style="height: 100%">
+        <div class="p-5 container-background-primary">
+            <div class="pharma-main-container">
+                <div class="d-flex flex-row align-content-center justify-content-between">
+                    <img
+                            width="110"
+                            height="47"
+                            src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
+                            alt="Pharmaledger logo"
+                    />
+                    <div class="d-flex flex-row justify-content-center align-items-center">
+                        <div class="mr-2">Help</div>
+                        <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <psk-card style="text-align:center;" class="bpd-dashboard">
+
+                        <h5 style="text-align:center;">#Dynamic Permissions Per Day Per User</h5>
+
+                        <div id="chart_div"></div>
+
+                        <div style="text-align:center;">
+                            <psk-button event-name="dynamic-permission:go-back" view-model="@gobackbutton"></psk-button>
+                        </div>
+
+
+
+                    </psk-card>
+                </div>
+            </div>
+            <div class="pharma-footer">
+                <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
+                <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+                    <div class="text-white text-centered text-justify">
+                        This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+                        under grant agreement No 853992
+                    </div>
+                    <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </webc-container>
+
+</psk-page>
+
+

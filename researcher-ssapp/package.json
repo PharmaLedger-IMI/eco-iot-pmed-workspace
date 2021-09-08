@@ -16,6 +16,7 @@
     "url": "git+https://github.com/PrivateSky/ssapp-template.git"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "octopus": "git+https://github.com/PrivateSky/octopus.git"
   },
   "keywords": [

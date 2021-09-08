@@ -1,5 +1,6 @@
 <psk-page title="Patient Dynamic Permission" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
+    <link rel="stylesheet" href="../assets/css/patient-d-permission_researcher_ssapp.css">
     <webc-container controller="PatientDynamicPermissionController" style="height: 100%">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
@@ -18,19 +19,64 @@
                 <div class="flex-grow-1">
                     <psk-card class="bpd-dashboard">
 
-<!--                        <div data-for="@model">-->
+
+                        <div  style="text-align:center;">
+
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <th>ID</th>-->
+<!--                                    <th>Name of Study</th>-->
+<!--                                    <th>Information</th>-->
+<!--                                </tr>-->
+<!--                                    <tr data-for="@entities">-->
+<!--                                        <td>{{@sectionTitle.label}}</td>-->
+<!--                                        <td>{{@name.label}}</td>-->
+<!--                                        <td>{{@email.label}}</td> <hr>-->
+<!--                                    </tr>-->
+<!--                            </table>-->
 
 
+<!--                            <div data-for="@entities">-->
 <!--                                <psk-layout columns="1">-->
-<!--                                    <input data-view-model="@ConsentIdentifier">-->
+<!--                                    <psk-layout columns="2">-->
+<!--                                        <label data-view-model="@sectionTitle"></label>-->
+<!--                                    </psk-layout>-->
+
+<!--                                    <psk-layout columns="2">-->
+<!--                                        <input data-view-model="@name">-->
+<!--                                        <input data-view-model="@email">-->
+<!--                                    </psk-layout>-->
 
 <!--                                </psk-layout>-->
+<!--                                <psk-card slot="no-data" title="Slot 'no-data' example">-->
+<!--                                    <p>A psk-card with slot="no-data" for the data-for example!</p>-->
+<!--                                </psk-card>-->
+<!--                            </div>-->
+<!--                            -->
+                            <h5>Permissions for the Patient: </h5>
+                            <psk-layout columns="1" class="border-bottom border-top">
+                            <psk-layout columns="3">
+                                <label>ID</label>
+                                <label>Name of Study</label>
+                                <label>Participating Information</label>
+                            </psk-layout>
+                            <div data-for="@entities" style="display:contents">
+                                <psk-layout columns="3" class="justify-content-center align-items-center table-row">
+                                    <label>{{@id.value}}</label>
+                                    <label>{{@name.value}}</label>
+                                    <label>{{@information.value}}</label>
+                                </psk-layout>
+                            </div>
+                            </psk-layout>
+                            <br><psk-button event-name="patient-permission:go-back" view-model="@gobackbutton"></psk-button>
 
-<!--                            </psk-layout>-->
+                        </div>
 
-<!--                        </div>-->
 
-                        <psk-button event-name="patient-permission:go-back" view-model="@gobackbutton"></psk-button>
+
+
+
+
 
 
                     </psk-card>
