@@ -399,10 +399,96 @@
     Included bricksledger tests.
     Fix navigation from menu and ssapp components (issue #269)
     fixed createMarketplace swarm
+<<<<<<< HEAD
+    configured workspace
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    configured workspace
+    Fix navigation from menu and ssapp components (issue #269)
+    [Freeze]
+    Included bricksledger tests.
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+    configured workspace
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    configured workspace
+    configured workspace
+    Fix navigation from menu and ssapp components (issue #269)
+    [Freeze]
+    Included bricksledger tests.
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+    configured workspace
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    configured workspace
+    configured workspace
+    Fix navigation from menu and ssapp components (issue #269)
+    [Freeze]
+    Included bricksledger tests.
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+
+    Merge pull request #5 from adiganga2002/master
+    
+    refactoring and new config feature for the trust loader
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+
+    Merge pull request #5 from adiganga2002/master
+    
+    refactoring and new config feature for the trust loader
+
+    Merge pull request #5 from adiganga2002/master
+    
+    refactoring and new config feature for the trust loader
+    Fix navigation from menu and ssapp components (issue #269)
+    [Freeze]
+    Included bricksledger tests.
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+
+    Merge pull request #5 from adiganga2002/master
+    
+    refactoring and new config feature for the trust loader
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+
+    Merge pull request #5 from adiganga2002/master
+    
+    refactoring and new config feature for the trust loader
+
+    Merge pull request #5 from adiganga2002/master
+    
+    refactoring and new config feature for the trust loader
+    Merge pull request #5 from adiganga2002/master
+    
+    refactoring and new config feature for the trust loader
+=======
     cleanup
     Merge pull request #2 from daniel-visoiu/master
     
     Added "Test Contract Method" functionality for testing contract methods.
+    cleanup
+>>>>>>> origin/master
+    Fix navigation from menu and ssapp components (issue #269)
+    [Freeze]
+    Included bricksledger tests.
+    Fix navigation from menu and ssapp components (issue #269)
+    fixed createMarketplace swarm
+    cleanup
+    Merge pull request #2 from daniel-visoiu/master
+    
+    Added "Test Contract Method" functionality for testing contract methods.
+    cleanup
+<<<<<<< HEAD
+    cleanup
     cleanup
     Fix navigation from menu and ssapp components (issue #269)
     [Freeze]
@@ -414,6 +500,9 @@
     
     Added "Test Contract Method" functionality for testing contract methods.
     cleanup
+    cleanup
+    cleanup
+=======
     #Fix for leaflet ssapp webcardinal migration
     Update octopus.json
     #207 and #327 Buffering mechanism and configurable webhooks with tests
@@ -424,3 +513,4 @@
     
     Added "Test Contract Method" functionality for testing contract methods.
     fix for the bug that was preventing wallets to open on mobile devices (failing to check sw support)
+>>>>>>> origin/master

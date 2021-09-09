@@ -1,0 +1,4 @@
+input#pin:focus{
+    border-color:#fff;
+    box-shadow: 0px 0px 6px 1px rgba(76,113,222,1);
+}

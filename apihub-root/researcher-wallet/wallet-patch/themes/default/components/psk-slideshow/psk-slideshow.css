@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+}
+
+.psk-slideshow-container {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+#psk-content-slider {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#psk-slider {
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    overflow: visible;
+    position: relative;
+}
+
+#psk-slider-mask {
+    overflow: hidden;
+}
+
+#psk-slider ul {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    padding: 20px;
+}
+
+#psk-slider li {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    list-style: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    left: 0;
+    top: 5%;
+    opacity: 0;
+    animation-name: fade;
+    animation-iteration-count: infinite;
+}
+
+#psk-slider li {
+    width: 100%;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content {
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    background-color: rgb(255, 255, 255);
+    margin: 0 40px;
+    box-shadow: rgba(76, 113, 222, 0.3) 0px 20px 40px 0.1px;
+}
+
+.content .title {
+    font-size: 175%;
+    color: #354F9B;
+    font-weight: bold;
+}
+
+.content .caption {
+    font-size: 131.25%;
+    color: #565656;
+}
+
+.content .actions {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.content>* {
+    padding: 10px 0px;
+    text-align: center;
+}
+
+@media(max-width:1200px) {
+    .content {
+        padding: 20px 10px;
+        font-size: 85%;
+    }
+}
+
+@media(max-width:960px) {
+    .container {
+        justify-content: center;
+    }
+    .content {
+        padding: 20px 10px;
+        font-size: 75%;
+        margin: 20px;
+        margin-top: 10%;
+    }
+    .content .actions {
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+    }
+}
