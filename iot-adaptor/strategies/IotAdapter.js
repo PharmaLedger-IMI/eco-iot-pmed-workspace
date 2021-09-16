@@ -49,7 +49,13 @@ $$.flow.describe('IotAdaptor', {
         this.mainDb.deleteResource(resourceType, id, callback);
     },
     createDSU: function (callback) {
-        dsuService.createWalletDB('sharedDB', callback);
+        dsuService.createWalletDB('sharedDB')
+          .then((response) => {
+              callback(undefined, response);
+          })
+          .catch((error) => {
+              callback(error, undefined);
+          });
     },
     createDsuResource: function (keySSI, dbName, resourceType, jsonData, callback) {
         const dsu = new DsuStorage({
@@ -112,7 +118,7 @@ $$.flow.describe('IotAdaptor', {
 
         if(!deviceRequest) {
           deviceRequest = await this.mainDb.createResourceAsync('DeviceRequest', newDeviceRequest);
-          dsu = dsuService.createWalletDB(dsuDbName);
+          dsu = await dsuService.createWalletDB(dsuDbName);
           const newHeathDataDsu = {
             codeReference: {
               reference: `DeviceRequest/${deviceRequest.id}`
@@ -138,10 +144,10 @@ $$.flow.describe('IotAdaptor', {
     createEvidenceDsu: async function (jsonData, callback) {
       const resources = await this.mainDb.searchResourcesAsync('EvidenceDataDsu', { where: {  } });
       let evidenceDataDsu = resources[0];
-      
+
       if(!evidenceDataDsu){
         const dsuDbName = "clinicalDecisionSupport";
-        const dsu = dsuService.createWalletDB(dsuDbName);
+        const dsu = await dsuService.createWalletDB(dsuDbName);
         const newEvidenceDataDsu = {
           // codeReference: {
           //   reference: `Practitioner/${deviceRequest.id}`
@@ -152,11 +158,11 @@ $$.flow.describe('IotAdaptor', {
         }
 
         evidenceDataDsu = await this.mainDb.createResourceAsync('EvidenceDataDsu', newEvidenceDataDsu);
-      } 
-      
+      }
+
       callback(undefined, evidenceDataDsu);
 
     }
-    
+
 
 });

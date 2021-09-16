@@ -20,7 +20,7 @@ class FhirStorage {
       ]);
     }
     this.normalizeErrorResponse = function(error) {
-      console.log(error);
+      // console.log(error);
       return { status: error.response.status, message: error.response.data.issue[0].diagnostics }
     }
   }

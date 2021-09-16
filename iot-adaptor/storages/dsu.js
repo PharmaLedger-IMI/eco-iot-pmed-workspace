@@ -85,7 +85,7 @@ class DsuStorage {
         else{
             callback(undefined, _self.normalizeSingleResponse(response));
         }
-        console.log(response);
+        // console.log(response);
     });
 
   }
@@ -99,7 +99,7 @@ class DsuStorage {
         else{
             callback(undefined, _self.normalizeSingleResponse(response));
         }
-        console.log(error);
+        // console.log(error);
     });
 
   }
@@ -113,7 +113,7 @@ class DsuStorage {
       else{
           callback(undefined, {});
       }
-      console.log(response);
+      // console.log(response);
     });
   }
 

@@ -375,7 +375,7 @@ const processXml = (mainDb, xmlString, callback) => {
         }
 
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
 
       callback(undefined, { success: true });

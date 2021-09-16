@@ -7,10 +7,6 @@ const keyssispace = opendsu.loadApi("keyssi");
 
 const db = opendsu.loadApi("db");
 
-const createSeedSSI = () => {
-  return keyssispace.createSeedSSI('default');
-}
-
 const getSharedDB = (sReadSSI, dbName) => {
   const sReadSSIObject = keyssispace.parse(sReadSSI);
   const dbObject = db.getSharedDB(sReadSSIObject, dbName);
@@ -18,16 +14,25 @@ const getSharedDB = (sReadSSI, dbName) => {
 }
 
 const createWalletDB = (dbName) => {
-  console.log("Create Wallet DB DSU Service");
-  const seedSSIObject = createSeedSSI();
-  const sReadSSIObject = seedSSIObject.derive();
-  const dbObject = db.getWalletDB(seedSSIObject, dbName);
-  // console.log(dbObject);
-  console.log(sReadSSIObject);
-  return {
-    seedSSI: seedSSIObject.getIdentifier(),
-    sReadSSI: sReadSSIObject.getIdentifier()
-  };
+  return new Promise(function(resolve, reject) {
+    // console.log("Create Wallet DB DSU Service");
+    keyssispace.createSeedSSI('default', (error, seedSSIObject) => {
+      if(error) {
+        reject(error);
+      } else {
+        // console.log('**********************');
+        const sReadSSIObject = seedSSIObject.derive();
+        const dbObject = db.getWalletDB(seedSSIObject, dbName);
+        // console.log(dbObject);
+        // console.log(sReadSSIObject);
+
+        resolve({
+          seedSSI: seedSSIObject.getIdentifier(),
+          sReadSSI: sReadSSIObject.getIdentifier()
+        });
+      }
+    });
+  });
 };
 
 //Resource
