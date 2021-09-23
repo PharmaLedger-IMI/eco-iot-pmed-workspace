@@ -1,5 +1,12 @@
 const { WebcController } = WebCardinal.controllers;
 import IotAdaptorApi from "../services/IotAdaptorApi.js";
+import CommunicationService from "../services/CommunicationService.js";
+
+import NewEvidenceService from "../services/newEvidenceService.js";
+import {evidenceModelHL7} from "../models/HL7/EvidenceModel.js";
+
+
+
 // const axios = require('axios');
 // import axios from "axios";
 // var axios = require("axios").default;
@@ -161,6 +168,7 @@ export default class EvidenceController extends WebcController {
         this._attachHandlerEvidenceList()
         this._attachHandlerHome()
         this._attachHandlerEvidenceEdit()
+      
 
         this.IotAdaptorApi = new IotAdaptorApi();
         let id = '17110073-c4a5-465f-93da-d84009359133';
@@ -217,10 +225,13 @@ export default class EvidenceController extends WebcController {
         // //   credentials: true
         // });
         // console.log (response);
+            //prepare contract based on input
+            
+        }
 
         
        
-    }
+    
     
     _attachHandlerHome(){
         this.on('evidence:home', (event) => {
@@ -310,12 +321,43 @@ export default class EvidenceController extends WebcController {
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
             // console.log (evidenceData);
+            let initEvidence = JSON.parse(JSON.stringify(evidenceModelHL7));
+
+            initEvidence.EvidenceName.value = this.model.name.value;
+            initEvidence.EvidenceOrganization.value = this.model.organization.value;
+            initEvidence.EvidenceEmail.value = this.model.email.value;
+
+            initEvidence.EvidenceTitle.value = this.model.title.value;
+            initEvidence.EvidenceSubtitle.value = this.model.subtitle.value;
+            initEvidence.EvidenceVersion.value = this.model.version.value;
+            initEvidence.EvidenceStatus.value = this.model.status.value;
+            initEvidence.EvidenceTopics.value = this.model.topics.value;
+            initEvidence.EvidenceExposureBackground.value = this.model.exposureBackground.value;
+            initEvidence.EvidenceDescription.value = this.model.description.value;
+           
+            
+         
+    
+            //console.log(initEvidence);
+    
+    
+            this.newEvidenceService = new NewEvidenceService(this.DSUStorage);
+            this.newEvidenceService.saveNewEvidence(initEvidence, (err, data) => {
+                if (err) {
+                    return console.log(err);
+                }
+                this.model.dsuStatus = "DSU contract saved and sent to patient with keySSI: ".concat('', data.KeySSI.substr(data.KeySSI.length - 10));
+    
+                this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.RESEARCHER_IDENTITY);
+                this.sendMessageToPatient('evidence-response', data.uid);
+            });
             this.navigateToPageTag('add-evidence-p3',{allData: evidenceData});
         });
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
             this.navigateToPageTag('confirm-evidence');
+           
         });
     }
     _attachHandlerEvidenceEdit(){
@@ -328,4 +370,15 @@ export default class EvidenceController extends WebcController {
             this.navigateToPageTag('evidence');
         });
     }
+
+    sendMessageToPatient(operation, ssi) {
+        this.CommunicationService.sendMessage(CommunicationService.identities.IOT.PATIENT_IDENTITY, {
+            operation: operation,
+            ssi: ssi
+        });
+    }
+
+    
+        
+
 }

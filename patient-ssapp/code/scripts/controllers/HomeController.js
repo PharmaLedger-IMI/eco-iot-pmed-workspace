@@ -5,13 +5,15 @@ import {patientModelHL7} from '../models/PatientModel.js';
 import DPermissionService from "../services/DPermissionService.js";
 import {consentModelHL7} from "../models/HL7/ConsentModel.js"
 import EconsentStatusService from "../services/EconsentStatusService.js";
+import NewEvidenceService from "../services/newEvidenceService.js";
 
 
 const {WebcController} = WebCardinal.controllers;
 
 
 const HomePageViewModel = {
-    information_request_ssi: ""
+    information_request_ssi: "",
+    evidence: ""
 }
 
 
@@ -28,10 +30,13 @@ export default class HomeController extends WebcController {
         initProfile.password.value = "password";
 
         this.model.information_request_ssi = false
+        this.model.evidence = false
         this.model.dpermissionssi = false
         this.model.consentssi = false
 
         this.InformationRequestService = new InformationRequestService(this.DSUStorage);
+        this.newEvidenceService = new NewEvidenceService(this.DSUStorage);
+
         this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.PATIENT_IDENTITY);
         this.CommunicationService.listenForMessages((err, data) => {
             if (err) {
@@ -46,8 +51,15 @@ export default class HomeController extends WebcController {
                     console.log("Received Information Request with KeySSI: " + this.model.information_request_ssi);
                     break;
                 }
+                case 'evidence-response': {
+                    this.model.evidence_ssi = data.message.ssi;
+                    console.log("Received evidence " + this.model.evidence_ssi);
+                }
             }
         });
+
+        
+       
 
         this.PatientService = new ProfileManagementService(this.DSUStorage);
         this.PatientService.saveProfile(initProfile, (err, userProfile) => {
@@ -135,7 +147,10 @@ export default class HomeController extends WebcController {
     _attachHandlerFeedback(){
         this.on('home:feedback', (event) => {
             //console.log ("Feedback button pressed");
-            this.navigateToPageTag("personalized-feedback");
+            let information_evidence_state_ssi ={
+                information_evidence_ssi: this.model.evidence_ssi,
+            }
+            this.navigateToPageTag("personalized-feedback",information_evidence_state_ssi);
         });
         
     }
