@@ -1,4 +1,5 @@
 const { WebcController } = WebCardinal.controllers;
+import IotAdaptorApi from "../services/IotAdaptorApi.js";
 
 
 export default class ConfirmEvidenceController extends  WebcController  {
@@ -21,8 +22,18 @@ export default class ConfirmEvidenceController extends  WebcController  {
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
-           
-            this.navigateToPageTag('confirm-evidence');
+            console.log("Evidence Confirmed")
+            this.IotAdaptorApi = new IotAdaptorApi();
+            let id = 'cfe2eece-1744-4e5b-8a4d-455b40340861';
+            let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
+
+            this.IotAdaptorApi.createEvidence(evidenceData, keySSI, (err, evidence) => {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log (evidence);
+                callback(undefined, evidence);
+            })
         });
     }
     _attachHandlerEvidenceEdit(){

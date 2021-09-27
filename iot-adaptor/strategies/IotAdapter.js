@@ -144,7 +144,7 @@ $$.flow.describe('IotAdaptor', {
     createEvidenceDsu: async function (jsonData, callback) {
       const resources = await this.mainDb.searchResourcesAsync('EvidenceDataDsu', { where: {  } });
       let evidenceDataDsu = resources[0];
-
+      // console.log("Flow of the eveidence DSU");
       if(!evidenceDataDsu){
         const dsuDbName = "clinicalDecisionSupport";
         const dsu = await dsuService.createWalletDB(dsuDbName);

@@ -26,17 +26,17 @@
                                     <psk-label label="Title"></psk-label>
                                     <psk-label label="Version"></psk-label>
                                     <psk-label label="Status"></psk-label>
-                                    <psk-label label="Options"></psk-label>
+                                    <!-- <psk-label label="Options"></psk-label> -->
 
                                 </psk-layout>
 
-                                <psk-layout columns="6" class="justify-content-center align-items-center table-row">
-                                    <psk-label label="E001"></psk-label>
-                                    <psk-label label="Test 1"></psk-label>
-                                    <psk-label label="Title 1"></psk-label>
-                                    <psk-label label="v.0.0.1"></psk-label>
-                                    <psk-label label="Draft"></psk-label>
-                                    <div class="d-flex flex-row align-items-center justify-content-around">
+                                <psk-layout columns="5" class="justify-content-center align-items-center table-row" data-view-model="@allEvidences">
+                                    <p>{{@allEvidences.id}}</p>
+                                    <p>{{@allEvidences.name}}</p>
+                                    <p>{{@allEvidences.title}}</p>
+                                    <p>{{@allEvidences.version}}</p>
+                                    <p>{{@allEvidences.status}}</p>
+                                    <!-- <div class="d-flex flex-row align-items-center justify-content-around">
                                         <psk-button
                                                 class="btn-bare table-cell m-1 pharma-primary"
                                                 event-name="evidence:view"
@@ -47,48 +47,23 @@
                                         <psk-button
                                                 class="btn-bare table-cell m-1 pharma-primary"
                                                 event-name="evidence:edit"
-
                                         >
                                             Edit
                                         </psk-button>
-                                    </div>
+                                    </div> -->
 
-                                    <psk-label label="E002"></psk-label>
-                                    <psk-label label="Test 2"></psk-label>
-                                    <psk-label label="Title 1"></psk-label>
-                                    <psk-label label="v.0.0.3"></psk-label>
-                                    <psk-label label="Pending"></psk-label>
-                                    <div class="d-flex flex-row align-items-center justify-content-around">
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="evidence:view"
-                                        >
-                                            View
-                                        </psk-button>
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="evidence:edit"
-                                        >
-                                            Edit
-                                        </psk-button>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center justify-content-around">
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-secondary"
-                                                event-name="evidence:back-to-menu"
-                                        >
-                                            Back
-                                        </psk-button>
-                                    </div>
+                                    
                                 </psk-layout>
+                                <div class="d-flex flex-row align-items-center justify-content-around">
+                                    <psk-button
+                                            class="btn-bare table-cell m-1 pharma-secondary"
+                                            event-name="evidence:back-to-menu"
+                                    >
+                                        Back
+                                    </psk-button>
+                                </div>
                             </div>
                         </div>
-
-
-
-
-
                     </psk-card>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <psk-page title="Evidence" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <webc-container controller="ConfirmEvidenceController">
+    <webc-container controller="EvidenceController">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
                 <div class="d-flex flex-row align-content-center justify-content-between">
@@ -21,16 +21,15 @@
 
                         <div class="bpd-wide-cards">
                             <div>
-                                <psk-layout class="border-bottom border-top" slot="condition-true" columns="5">
-                                    <psk-label label="Evidence ID"></psk-label>
+                                <psk-layout class="border-bottom border-top" slot="condition-true" columns="4">
+            
                                     <psk-label label="Name"></psk-label>
                                     <psk-label label="Title"></psk-label>
                                     <psk-label label="Version"></psk-label>
                                     <psk-label label="Status"></psk-label>
 
                                 </psk-layout>
-                                <psk-layout columns="5" class="justify-content-center align-items-center table-row" data-view-model="@allData">
-                                    <p>E001</p>
+                                <psk-layout columns="4" class="justify-content-center align-items-center table-row" data-view-model="@allData">
                                     <p>{{@allData.name}}</p>
                                     <p>{{@allData.title}}</p>
                                     <p>{{@allData.version}}</p>

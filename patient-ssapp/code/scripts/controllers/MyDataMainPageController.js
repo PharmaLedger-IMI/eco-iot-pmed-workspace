@@ -92,22 +92,28 @@ export default class MyDataMainPageController extends  WebcController  {
             console.log(choice);
             if (choice === "all"){
                 let allData = testData;
+               
                 this.navigateToPageTag('clinicalData',{allData: allData});
             } else if (choice === "bpsys"){
                
                 let allData = testData.filter(function(value){ return value.name=="Systolic Blood Pressure";});
+                console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             } else if (choice === "bpdia"){
                 let allData = testData.filter(function(value){ return value.name=="Diastolic Blood Pressure";});
+                console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             }else if (choice === "spo2"){
                 let allData = testData.filter(function(value){ return value.name=="SpO2";});
+                console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             }else if (choice === "weight"){
                 let allData = testData.filter(function(value){ return value.name=="Weight";});
+                console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             } else if (choice === "height"){
                 let allData = testData.filter(function(value){ return value.name=="Height";});
+                console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             }
              

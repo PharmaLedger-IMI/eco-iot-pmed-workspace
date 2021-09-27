@@ -53,7 +53,6 @@ const AddEvidenceViewModel = {
         value: ''
     },
     description: {
-        
         name: 'description',
         label: "Description",
         placeholder: 'Description of the evidence',
@@ -89,7 +88,7 @@ const AddEvidenceViewModel = {
             {
                 label: "Inactive",
                 value: 'Inactive'
-            },
+            }
             
         ],
         value: ''
@@ -135,7 +134,7 @@ const AddEvidenceViewModel = {
         value: ''
     }
 }
-let evidenceData = {
+let evidenceData={
     name: "",
     contact: [],
     title: "",
@@ -144,7 +143,7 @@ let evidenceData = {
     description: "",
     status: "",
     topics: "",
-    exposureBackground: "",
+    exposureBackground: ""
 };
 
 export default class EvidenceController extends WebcController {
@@ -161,69 +160,27 @@ export default class EvidenceController extends WebcController {
         this._attachHandlerEvidenceList()
         this._attachHandlerHome()
         this._attachHandlerEvidenceEdit()
+        this._attachHandlerUpdateEvidence()
 
-        this.IotAdaptorApi = new IotAdaptorApi();
-        let id = '17110073-c4a5-465f-93da-d84009359133';
-        let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR';
-
-        this.IotAdaptorApi.getEvidence(id, keySSI, (err, evidence) => {
-            if (err) {
-                return console.log(err);
-            }
-            callback(undefined, evidence);
-        })
-        
-        // // debugger
-        // this.IotAdapterApi = new IotAdapterApi()
-        // // debugger
-        // this.IotAdapterApi.getEvidence("17110073-c4a5-465f-93da-d84009359133",(err, evidence) => {
-        //     // debugger
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     callback(undefined, evidence);
-        // })
-        // var myHeaders = new Headers();
-        // myHeaders.append("Content-Type", "application/json");
-        // myHeaders.append("X-KeySSI", "27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR");
-        
-        // var requestOptions = {
-        //   method: 'GET',
-        //   headers: myHeaders,
-        //   redirect: 'follow'
-        // };
-        
-        // fetch("http://localhost:8080/iotAdapter/get-evidence/17110073-c4a5-465f-93da-d84009359133", requestOptions)
-        //   .then(response => response.text())
-        //   .then(result => console.log(result))
-        //   .catch(error => {
-        //     debugger 
-        //     console.log('error', error)
-        //   });
-    
-
-        // const url = 'http://localhost:8080/iotAdapter/get-evidence/17110073-c4a5-465f-93da-d84009359133';
-        // const response =  fetch(url, {
-        //     method: 'GET',
-        // //   body: JSON.stringify(myBody), // string or object
-        //     headers: {
-        //     'Content-Type': 'application/json',
-        //     'X-KeySSI': "27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR",
-        //     // "Access-Control-Allow-Origin" : "*", 
-        //     "Access-Control-Allow-Credentials" : true ,
-        //     "withCredentials": true
-            
-        //     }
-        // //   credentials: true
-        // });
-        // console.log (response);
-
-        
+        // this.IotAdaptorApi = new IotAdaptorApi();
+        // let id = 'cfe2eece-1744-4e5b-8a4d-455b40340861';
+        // let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
        
     }
     
     _attachHandlerHome(){
         this.on('evidence:home', (event) => {
+            evidenceData = {
+                name: "",
+                contact: [],
+                title: "",
+                subtitle: "",
+                version: "",
+                description: "",
+                status: "",
+                topics: "",
+                exposureBackground: "",
+            };
             this.navigateToPageTag('home');
         });
     }
@@ -234,45 +191,25 @@ export default class EvidenceController extends WebcController {
     }
     _attachHandlerEvidenceList(){
         this.on('evidence:list', (event) => {
-            this.navigateToPageTag('evidence-list');
+            let allEvidences ;
+            this.IotAdaptorApi = new IotAdaptorApi();
+            let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
+
+            this.IotAdaptorApi.searchEvidence(keySSI, (err, evidence) => {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log ("*********************************");
+                allEvidences = evidence;
+                console.log (allEvidences)
+                callback(undefined, evidence);
+            })
+ 
+            this.navigateToPageTag('evidence-list', allEvidences);
         });
     }
     _attachHandlerEvidenceP1(){
-        this.on('evidence:add-evidence-p1', (event) => {
-            // console.log (evidenceData);
-            let myBody ={};
-            // let myJson;
-            // const url = 'http://localhost:8080/iotAdapter/create-evidence-dsu';
-            //     const response =  fetch(url, {
-            //       method: 'POST',
-            //       body: myBody, // string or object
-            //       headers: {
-            //         'Content-Type': 'application/json'
-                    
-            //       },
-            //       credentials: true
-            //     });
-            //     console.log (response);
-            
-            // axios.post('http://localhost:8080/iotAdapter/create-evidence-dsu', {
-            //     data: myBody,
-            //     credentials: true
-            //   })
-            //   .then(function (response) {
-            //     console.log(response);
-            //   })
-            //   .catch(function (error) {
-            //     console.log(error);
-            //   });
-            //   fetch('http://localhost:8080/iotAdapter/create-evidence-dsu', {
-            //     method: "POST",
-            //     body: JSON.stringify(_data),
-            //     headers: {"Content-type": "application/json; charset=UTF-8"}
-            //     })
-            //     .then(response => response.json()) 
-            //     .then(json => console.log(json))
-            //     .catch(err => console.log(err));
-            
+        this.on('evidence:add-evidence-p1', (event) => {            
             this.navigateToPageTag('add-evidence-p1');
         });
     }
@@ -294,7 +231,7 @@ export default class EvidenceController extends WebcController {
             // evidenceData.email = this.model.email.value;
             evidenceData.publisher = this.model.organization.value;
             
-            console.log (evidenceData);
+            // console.log (evidenceData);
             // console.log (this.model.title);
             this.navigateToPageTag('add-evidence-p2');
         });
@@ -309,12 +246,38 @@ export default class EvidenceController extends WebcController {
             evidenceData.topics = this.model.topics.value;
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
-            // console.log (evidenceData);
+            // console.log(this.model.description.value);
+            this.navigateToPageTag('add-evidence-p3',{allData: evidenceData});
+        });
+    }
+    _attachHandlerUpdateEvidence(){
+        this.on('evidence:update-evidence', (event) => {
+           
+            evidenceData.title = this.model.title.value;
+            evidenceData.subtitle = this.model.subtitle.value;
+            evidenceData.version = this.model.version.value;
+            evidenceData.description = this.model.description.value;
+            evidenceData.topics = this.model.topics.value;
+            evidenceData.status = this.model.status.value;
+            evidenceData.exposureBackground = this.model.exposureBackground.value;
+            // console.log(this.model.description.value);
             this.navigateToPageTag('add-evidence-p3',{allData: evidenceData});
         });
     }
     _attachHandlerEvidenceConfirm(){
         this.on('evidence:confirm', (event) => {
+            console.log("Evidence Confirmed")
+            this.IotAdaptorApi = new IotAdaptorApi();
+            let id = 'cfe2eece-1744-4e5b-8a4d-455b40340861';
+            let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
+
+            this.IotAdaptorApi.createEvidence(evidenceData, keySSI, (err, evidence) => {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log (evidence);
+                callback(undefined, evidence);
+            })
             this.navigateToPageTag('confirm-evidence');
         });
     }
@@ -325,6 +288,17 @@ export default class EvidenceController extends WebcController {
     }
     _attachHandlerEvidenceBackMenu(){
         this.on('evidence:back-to-menu', (event) => {
+            evidenceData = {
+                name: "",
+                contact: [],
+                title: "",
+                subtitle: "",
+                version: "",
+                description: "",
+                status: "",
+                topics: "",
+                exposureBackground: "",
+            };
             this.navigateToPageTag('evidence');
         });
     }
