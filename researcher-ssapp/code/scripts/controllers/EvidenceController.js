@@ -1,5 +1,12 @@
 const { WebcController } = WebCardinal.controllers;
 import IotAdaptorApi from "../services/IotAdaptorApi.js";
+import CommunicationService from "../services/CommunicationService.js";
+
+import NewEvidenceService from "../services/newEvidenceService.js";
+import {evidenceModelHL7} from "../models/HL7/EvidenceModel.js";
+
+
+
 // const axios = require('axios');
 // import axios from "axios";
 // var axios = require("axios").default;
@@ -160,13 +167,78 @@ export default class EvidenceController extends WebcController {
         this._attachHandlerEvidenceList()
         this._attachHandlerHome()
         this._attachHandlerEvidenceEdit()
+<<<<<<< HEAD
         this._attachHandlerUpdateEvidence()
 
         // this.IotAdaptorApi = new IotAdaptorApi();
         // let id = 'cfe2eece-1744-4e5b-8a4d-455b40340861';
         // let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
+=======
+      
+
+        this.IotAdaptorApi = new IotAdaptorApi();
+        let id = '17110073-c4a5-465f-93da-d84009359133';
+        let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR';
+
+        this.IotAdaptorApi.getEvidence(id, keySSI, (err, evidence) => {
+            if (err) {
+                return console.log(err);
+            }
+            callback(undefined, evidence);
+        })
+        
+        // // debugger
+        // this.IotAdapterApi = new IotAdapterApi()
+        // // debugger
+        // this.IotAdapterApi.getEvidence("17110073-c4a5-465f-93da-d84009359133",(err, evidence) => {
+        //     // debugger
+        //     if (err) {
+        //         return console.log(err);
+        //     }
+        //     callback(undefined, evidence);
+        // })
+        // var myHeaders = new Headers();
+        // myHeaders.append("Content-Type", "application/json");
+        // myHeaders.append("X-KeySSI", "27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR");
+        
+        // var requestOptions = {
+        //   method: 'GET',
+        //   headers: myHeaders,
+        //   redirect: 'follow'
+        // };
+        
+        // fetch("http://localhost:8080/iotAdapter/get-evidence/17110073-c4a5-465f-93da-d84009359133", requestOptions)
+        //   .then(response => response.text())
+        //   .then(result => console.log(result))
+        //   .catch(error => {
+        //     debugger 
+        //     console.log('error', error)
+        //   });
+    
+
+        // const url = 'http://localhost:8080/iotAdapter/get-evidence/17110073-c4a5-465f-93da-d84009359133';
+        // const response =  fetch(url, {
+        //     method: 'GET',
+        // //   body: JSON.stringify(myBody), // string or object
+        //     headers: {
+        //     'Content-Type': 'application/json',
+        //     'X-KeySSI': "27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR",
+        //     // "Access-Control-Allow-Origin" : "*", 
+        //     "Access-Control-Allow-Credentials" : true ,
+        //     "withCredentials": true
+            
+        //     }
+        // //   credentials: true
+        // });
+        // console.log (response);
+            //prepare contract based on input
+            
+        }
+
+        
+>>>>>>> b38902808523e147c4e3f0d3bda4af3298419137
        
-    }
+    
     
     _attachHandlerHome(){
         this.on('evidence:home', (event) => {
@@ -246,6 +318,7 @@ export default class EvidenceController extends WebcController {
             evidenceData.topics = this.model.topics.value;
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
+<<<<<<< HEAD
             // console.log(this.model.description.value);
             this.navigateToPageTag('add-evidence-p3',{allData: evidenceData});
         });
@@ -261,6 +334,39 @@ export default class EvidenceController extends WebcController {
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
             // console.log(this.model.description.value);
+=======
+            // console.log (evidenceData);
+            let initEvidence = JSON.parse(JSON.stringify(evidenceModelHL7));
+
+            initEvidence.EvidenceName.value = this.model.name.value;
+            initEvidence.EvidenceOrganization.value = this.model.organization.value;
+            initEvidence.EvidenceEmail.value = this.model.email.value;
+
+            initEvidence.EvidenceTitle.value = this.model.title.value;
+            initEvidence.EvidenceSubtitle.value = this.model.subtitle.value;
+            initEvidence.EvidenceVersion.value = this.model.version.value;
+            initEvidence.EvidenceStatus.value = this.model.status.value;
+            initEvidence.EvidenceTopics.value = this.model.topics.value;
+            initEvidence.EvidenceExposureBackground.value = this.model.exposureBackground.value;
+            initEvidence.EvidenceDescription.value = this.model.description.value;
+           
+            
+         
+    
+            //console.log(initEvidence);
+    
+    
+            this.newEvidenceService = new NewEvidenceService(this.DSUStorage);
+            this.newEvidenceService.saveNewEvidence(initEvidence, (err, data) => {
+                if (err) {
+                    return console.log(err);
+                }
+                this.model.dsuStatus = "DSU contract saved and sent to patient with keySSI: ".concat('', data.KeySSI.substr(data.KeySSI.length - 10));
+    
+                this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.RESEARCHER_IDENTITY);
+                this.sendMessageToPatient('evidence-response', data.uid);
+            });
+>>>>>>> b38902808523e147c4e3f0d3bda4af3298419137
             this.navigateToPageTag('add-evidence-p3',{allData: evidenceData});
         });
     }
@@ -279,6 +385,7 @@ export default class EvidenceController extends WebcController {
                 callback(undefined, evidence);
             })
             this.navigateToPageTag('confirm-evidence');
+           
         });
     }
     _attachHandlerEvidenceEdit(){
@@ -302,4 +409,15 @@ export default class EvidenceController extends WebcController {
             this.navigateToPageTag('evidence');
         });
     }
+
+    sendMessageToPatient(operation, ssi) {
+        this.CommunicationService.sendMessage(CommunicationService.identities.IOT.PATIENT_IDENTITY, {
+            operation: operation,
+            ssi: ssi
+        });
+    }
+
+    
+        
+
 }
