@@ -17,10 +17,10 @@ $$.flow.describe('IotAdaptor', {
         // });
 
         this.mainDb = new DbStorage({
-          baseURL: 'http://localhost:1337/v1/storage',
+          baseURL: process.env.STORAGE_API_BASE_URL,
           headers: {
-            'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
-            'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+            'X-Storage-Application-Id': process.env.STORAGE_API_APP_ID,
+            'X-Storage-REST-API-Key': process.env.STORAGE_API_REST_API_KEY,
             'Content-Type': 'application/json'
           }
         });
