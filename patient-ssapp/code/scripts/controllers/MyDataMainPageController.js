@@ -61,8 +61,10 @@ export default class MyDataMainPageController extends  WebcController  {
             keySSI: keySSIVal,
             dbName: "sharedDB"
         });
+        // dsu.searchResources(resourceType, params, callback);
         this.healthDataDsu.searchResources("Observation", {}, function(error, resources){
             testData = [];
+            console.log(error);
             resources.forEach(value => {
                let initData = {
                    name: value.code.text,

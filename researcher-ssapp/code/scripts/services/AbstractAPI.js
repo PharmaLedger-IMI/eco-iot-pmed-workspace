@@ -21,7 +21,7 @@ export default class AbstractAPI {
             callback = body;
             body = {};
         }
-        console.log(`[${this.ADAPTER_PATH}][Request]`, method, path, JSON.stringify(body));
+        // console.log(`[${this.ADAPTER_PATH}][Request]`, method, path, JSON.stringify(body));
         const bodyData = JSON.stringify(body);
         const apiHeaders = {
             'Content-Type': 'application/json',
@@ -44,10 +44,10 @@ export default class AbstractAPI {
                 try {
                     const data = await response.json();
                     console.log(`[${this.ADAPTER_PATH}][Response]`, method, path, response.status, response.statusCode, data);
-                    if (!response.ok || response.status != 201) {
+                    if (!response.ok || response.status != 200) {
                         return callback(response);
                     }
-                    callback(undefined, data);
+                    return callback(undefined, data);
                 } catch (err) {
                     console.error('Response could not be transformed into JSON.');
                     return callback(err);

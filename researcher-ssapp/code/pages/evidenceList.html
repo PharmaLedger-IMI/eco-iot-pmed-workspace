@@ -1,6 +1,6 @@
 <psk-page title="Seach Evidence" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <webc-container controller="EvidenceController" style="height: 100%">
+    <webc-container controller="EvidenceListController" style="height: 100%">
         <div class="p-5 container-background-primary">
             <div class="pharma-main-container">
                 <div class="d-flex flex-row align-content-center justify-content-between">
@@ -18,7 +18,7 @@
                 <div class="flex-grow-1">
                     <psk-card class="bpd-dashboard">
 
-                        <div class="bpd-wide-cards">
+                        <div class="bpd-wide-cards" data-if="@allEvidences">
                             <div>
                                 <psk-layout class="border-bottom border-top" slot="condition-true" columns="6">
                                     <psk-label label="Evidence ID"></psk-label>
@@ -30,12 +30,12 @@
 
                                 </psk-layout>
 
-                                <psk-layout columns="5" class="justify-content-center align-items-center table-row" data-view-model="@allEvidences">
-                                    <p>{{@allEvidences.id}}</p>
-                                    <p>{{@allEvidences.name}}</p>
-                                    <p>{{@allEvidences.title}}</p>
-                                    <p>{{@allEvidences.version}}</p>
-                                    <p>{{@allEvidences.status}}</p>
+                                <psk-layout columns="5" class="justify-content-center align-items-center table-row" data-for="@allEvidences">
+                                    <p>{{@id}}</p>
+                                    <p>{{@name}}</p>
+                                    <p>{{@title}}</p>
+                                    <p>{{@version}}</p>
+                                    <p>{{@status}}</p>
                                     <!-- <div class="d-flex flex-row align-items-center justify-content-around">
                                         <psk-button
                                                 class="btn-bare table-cell m-1 pharma-primary"
@@ -54,14 +54,15 @@
 
                                     
                                 </psk-layout>
+                                
+                                </div>
                                 <div class="d-flex flex-row align-items-center justify-content-around">
                                     <psk-button
                                             class="btn-bare table-cell m-1 pharma-secondary"
-                                            event-name="evidence:back-to-menu"
+                                            event-name="evidence:to-evidence"
                                     >
                                         Back
                                     </psk-button>
-                                </div>
                             </div>
                         </div>
                     </psk-card>
