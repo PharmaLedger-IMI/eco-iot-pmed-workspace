@@ -25,7 +25,6 @@ export default class AbstractAPI {
         const bodyData = JSON.stringify(body);
         const apiHeaders = {
             'Content-Type': 'application/json',
-            'Content-Length': bodyData.length,
             ...headers
         };
         const options = {

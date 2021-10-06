@@ -30,4 +30,12 @@ export default class IotAdaptorApi extends AbstractAPI {
         }
         this.makeRequest('GET', path, headers, callback);
     }
+
+    createEvidenceDsu(jsonData, callback) {
+        let path = `${this.ADAPTER_PATH}/create-evidence-dsu`;
+        let headers = {
+            'Content-Type': "application/json"
+        }
+        this.makeRequest('POST', path, headers, jsonData, callback);    
+    }
 } 
