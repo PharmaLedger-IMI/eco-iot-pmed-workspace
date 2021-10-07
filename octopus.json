@@ -22,7 +22,7 @@
     },
     {
       "name": "webcardinal",
-      "src": "https://github.com/Mastaleru/webcardinal-bundler",
+      "src": "https://github.com/webcardinal/webcardinal-bundler",
       "actions": [
         {
           "type": "smartClone",
