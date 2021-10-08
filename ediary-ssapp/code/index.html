@@ -17,16 +17,44 @@
     <script type="module" src="webcardinal/webcardinal.js"></script>
     <script>
         if (window.frameElement) {
-            const iframeIdentity = window.frameElement.getAttribute('identity');
+            let iframeIdentity = window.frameElement.getAttribute('identity');
 
-            if (iframeIdentity) {
-                window.parent.document.dispatchEvent(new CustomEvent(iframeIdentity, {
+            //is just a hosted SSApp in a wallet
+            let isSimpleSSApp = false;
+            let iframeWindow = window.parent;
+            if (!iframeIdentity) {
+                isSimpleSSApp = true;
+
+                //parent.top does not fit the case when the wallet is an iframe in another application
+                let getWalletAppIframeWindow = function (parentWindow){
+
+                    if (parentWindow.frameElement) {
+                        if (parentWindow.frameElement.hasAttribute("identity")) {
+                            iframeIdentity = parentWindow.frameElement.getAttribute("identity")
+                            return parentWindow;
+                        }
+                    }
+
+                    if(parentWindow === window.top){
+                        console.log("No wallet environment found");
+                        return;
+                    }
+
+                    return getWalletAppIframeWindow(parentWindow.parent);
+                }
+
+                iframeWindow = getWalletAppIframeWindow(iframeWindow);
+            }
+
+            if (iframeWindow) {
+                iframeWindow.parent.document.dispatchEvent(new CustomEvent(iframeIdentity, {
                     detail: {
                         status: 'completed'
                     }
                 }));
             }
         }
+
     </script>
 </head>
 
