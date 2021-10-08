@@ -1,19 +1,5 @@
 const {WebcController} = WebCardinal.controllers;
 
-// const ViewPatientList = {
-//
-//     name: {
-//         name: 'NAME',
-//         label: "name",
-//         value: 'name'
-//     },
-//     id: {
-//         name: 'ID',
-//         label: "id",
-//         value: 'id'
-//     }
-// }
-
 
 export default class PatientAlertHistoryController extends WebcController {
     constructor(element, history) {

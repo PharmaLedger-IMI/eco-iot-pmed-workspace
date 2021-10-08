@@ -1,27 +1,14 @@
 const {WebcController} = WebCardinal.controllers;
-
-// const ViewPatientList = {
-//
-//     name: {
-//         name: 'NAME',
-//         label: "name",
-//         value: 'name'
-//     },
-//     id: {
-//         name: 'ID',
-//         label: "id",
-//         value: 'id'
-//     }
-// }
-
-
 export default class ListDevicesController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
         //this.setModel(ViewPatientList);
-
+        let receivedState = this.getState();
+        this.model.allDevices = receivedState;
+        console.log (this.model.allDevices);
         this._attachHandlerGoBack();
+        this._attachHandlerPatientStatus();
 
 
     }
@@ -32,9 +19,12 @@ export default class ListDevicesController extends WebcController {
             this.navigateToPageTag('manage-devices');
         });
     }
-
-
-
+    _attachHandlerPatientStatus(){
+        this.on('patient-status',  (event) => {
+            console.log ("Patient Status button pressed");
+            this.navigateToPageTag('patient-status');
+        });
+    }
 
 
 }

@@ -37,83 +37,26 @@
 
                                 </psk-layout>
 
-                                <psk-layout columns="6" class="justify-content-center align-items-center table-row">
-                                    <psk-label label="A"></psk-label>
-                                    <psk-label label="B"></psk-label>
-                                    <psk-label label="C"></psk-label>
-                                    <psk-label label="D"></psk-label>
-                                    <psk-label label="E"></psk-label>
-                                    <!--                            <psk-label label="F"></psk-label>-->
+                                <psk-layout columns="6" class="justify-content-center align-items-center table-row" data-for="@allDevices">
+                                    <p>{{@serialNumber}}</p>
+                                    <p>{{@brand}}</p>
+                                    <p>{{@modelNumber}}</p>
+                                    <p>{{@status}}</p>
+                                    <p>{{@trial}}</p>
                                     <div class="d-flex flex-row align-items-center justify-content-around">
                                         <psk-button
                                                 class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="view-patient"
+                                                event-name="patient-status"
 
                                         >
                                             View
                                         </psk-button>
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="edit-patient"
-
-                                        >
-                                            Edit
-                                        </psk-button>
-                                    </div>
-                                    <psk-label label="A"></psk-label>
-                                    <psk-label label="B"></psk-label>
-                                    <psk-label label="C"></psk-label>
-                                    <psk-label label="D"></psk-label>
-                                    <psk-label label="E"></psk-label>
-                                    <!--                            <psk-label label="F"></psk-label>-->
-                                    <div class="d-flex flex-row align-items-center justify-content-around">
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="view-patient"
-
-                                        >
-                                            View
-                                        </psk-button>
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="edit-patient"
-
-                                        >
-                                            Edit
-                                        </psk-button>
-                                    </div>
-                                    <psk-label label="A"></psk-label>
-                                    <psk-label label="B"></psk-label>
-                                    <psk-label label="C"></psk-label>
-                                    <psk-label label="D"></psk-label>
-                                    <psk-label label="E"></psk-label>
-                                    <!--                            <psk-label label="F"></psk-label>-->
-                                    <div class="d-flex flex-row align-items-center justify-content-around">
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="view-patient"
-
-                                        >
-                                            View
-                                        </psk-button>
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="edit-patient"
-
-                                        >
-                                            Edit
-                                        </psk-button>
+                                    
                                     </div>
                                 </psk-layout>
                             </div>
                             <psk-button class="mt-2 pharma-primary" label="Go Back" event-name="go-back"></psk-button>
                         </div>
-
-
-
-
-
-
                     </psk-card>
                 </div>
             </div>

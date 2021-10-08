@@ -7,8 +7,8 @@ export default class ClinicalDataController extends  WebcController  {
         // let allData = this.getState();
         this.model = {...this.history.win.history.state.state};
       
-        // console.log("************************");
-        // console.log(allData);
+        console.log("********** This Mod **************");
+        console.log(this.model);
         this._attachHandlerGoBack();
 
     }

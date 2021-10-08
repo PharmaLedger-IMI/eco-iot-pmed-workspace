@@ -30,7 +30,7 @@ export default class PatientStatusController extends WebcController {
     _attachHandlerGoBack(){
         this.on('go-back', (event) => {
             console.log ("Go Back button pressed");
-            this.navigateToPageTag('list-of-patients');
+            this.navigateToPageTag('manage-devices');
         });
     }
     _attachHandlerPatientAlertHistory(){        

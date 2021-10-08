@@ -181,18 +181,27 @@ export default class EvidenceController extends WebcController {
         //     if(data.length == 0){
                 
                 this.IotAdaptorApi = new IotAdaptorApi();
+                const me = this;
     
                 this.IotAdaptorApi.createEvidenceDsu({}, (err, evidence) => {
                     if (err) {
                         return console.log(err);
                     }
-                    console.log(evidence.sReadSSI);
+                    console.log('Ola ........... *********');
+                    console.log(evidence);
                     sReadSSI = evidence.sReadSSI;
-                    this.EvidenceConfig.saveEvidenceConfig(evidence, (err, data) => {
+
+                    me.EvidenceConfig.saveEvidenceConfig(evidence, (err, data) => {
                         if (err) {
                             return console.log(err);
                         }
-                        console.log(data.keySSI);
+                        //console.log(data.keySSI);
+
+                        me.EvidenceConfig.mountEntity(data.keySSI, '/', function(){
+                            me.EvidenceConfig.getEntities('/', function(entities){
+                                console.log(entities);
+                            })
+                        });
                     });
                     // console.log(evidence.sReadSSI);
                 });
