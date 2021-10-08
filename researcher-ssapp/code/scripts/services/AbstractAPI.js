@@ -21,10 +21,11 @@ export default class AbstractAPI {
             callback = body;
             body = {};
         }
-        // console.log(`[${this.ADAPTER_PATH}][Request]`, method, path, JSON.stringify(body));
+        console.log(`[${this.ADAPTER_PATH}][Request]`, method, path, JSON.stringify(body));
         const bodyData = JSON.stringify(body);
         const apiHeaders = {
             'Content-Type': 'application/json',
+            'Content-Length': bodyData.length,
             ...headers
         };
         const options = {
@@ -43,10 +44,10 @@ export default class AbstractAPI {
                 try {
                     const data = await response.json();
                     console.log(`[${this.ADAPTER_PATH}][Response]`, method, path, response.status, response.statusCode, data);
-                    if (!response.ok || response.status != 200) {
+                    if (!response.ok || response.status != 201) {
                         return callback(response);
                     }
-                    return callback(undefined, data);
+                    callback(undefined, data);
                 } catch (err) {
                     console.error('Response could not be transformed into JSON.');
                     return callback(err);
