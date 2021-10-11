@@ -3,6 +3,7 @@ import IotAdaptorApi from "../services/IotAdaptorApi.js";
 import EvidenceConfigService from "../services/EvidenceConfigService.js";
 
 var singleData;
+var evidenceConfigDSU;
 
 export default class ConfirmEvidenceController extends  WebcController  {
     constructor(...props) {

@@ -4,7 +4,9 @@ import CommunicationService from "../services/CommunicationService.js";
 
 import NewEvidenceService from "../services/newEvidenceService.js";
 import {evidenceModelHL7} from "../models/HL7/EvidenceModel.js";
+import EvidenceConfigService from "../services/EvidenceConfigService.js";
 
+ var evidenceConfigDSU;
 
 
 // const axios = require('axios');
@@ -194,23 +196,35 @@ export default class EvidenceController extends WebcController {
     }
     _attachHandlerEvidenceList(){
         this.on('evidence:list', (event) => {
-            var allEvidences ;
-            this.IotAdaptorApi = new IotAdaptorApi();
-            let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
-            console.log ("*********************************");
-            console.log (sReadSSI);
-            this.IotAdaptorApi.searchEvidence(keySSI, (err, evidence) => {
-                if (err) {
-                    return console.log(err);
-                }
-                console.log ("*********************************");
-                // console.log (evidence)
-                allEvidences = evidence;
-                console.log (allEvidences)
-                this.navigateToPageTag('evidence-list', allEvidences);
 
-                // callback(undefined, evidence);
-            })
+            this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
+           
+            const me = this;
+            let evidenceConfigDSU;
+            me.EvidenceConfigService.getEvidenceConfig(function(error, data){
+                me.evidenceConfigDSU = data[0];
+                console.log("Evidence DSU Config", me.evidenceConfigDSU);
+           
+                var allEvidences ;
+                // this.IotAdaptorApi = new IotAdaptorApi();
+                // let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
+                console.log ("*********************************");
+                console.log (me.evidenceConfigDSU.sReadSSI);
+                me.IotAdaptorApi = new IotAdaptorApi();
+                me.IotAdaptorApi.searchEvidence(me.evidenceConfigDSU.sReadSSI, (err, evidence) => {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log ("*********************************");
+                    // console.log (evidence)
+                    allEvidences = evidence;
+                    console.log (allEvidences)
+                    me.navigateToPageTag('evidence-list', allEvidences);
+
+                    // callback(undefined, evidence);
+                });
+            });
+
         });
     }
     _attachHandlerEvidenceP1(){
