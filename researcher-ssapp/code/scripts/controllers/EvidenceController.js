@@ -88,15 +88,19 @@ const AddEvidenceViewModel = {
         options: [
             {
                 label: "Draft",
-                value: 'Draft'
+                value: 'draft'
             },
             {
                 label: "Active",
-                value: 'Active'
+                value: 'active'
             },
             {
-                label: "Inactive",
-                value: 'Inactive'
+                label: "Retired",
+                value: 'retired'
+            },
+            {
+                label: "Unknown",
+                value: 'unknown'
             }
             
         ],
