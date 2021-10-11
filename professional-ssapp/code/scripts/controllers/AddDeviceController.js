@@ -141,10 +141,6 @@ export default class AddDeviceController extends WebcController {
 
         this._attachHandlerGoBackButton();
         this._attachHandlerSaveButton();
-
-        
-
-
     }
 
     _attachHandlerGoBackButton(){
@@ -173,7 +169,7 @@ export default class AddDeviceController extends WebcController {
                 if (err) {
                     return console.log(err);
                 }
-                console.log('********************** List Of Devices from ManageDeviceController *********');
+                console.log('********************** Created a Device from AddDeviceController *********');
                 console.log(devices);
                
                 // console.log(evidence.sReadSSI);
