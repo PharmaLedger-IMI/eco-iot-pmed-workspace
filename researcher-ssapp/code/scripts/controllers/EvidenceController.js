@@ -1,17 +1,10 @@
-const { WebcController } = WebCardinal.controllers;
+const {WebcController} = WebCardinal.controllers;
 import IotAdaptorApi from "../services/IotAdaptorApi.js";
 import CommunicationService from "../services/CommunicationService.js";
-
 import NewEvidenceService from "../services/newEvidenceService.js";
 import {evidenceModelHL7} from "../models/HL7/EvidenceModel.js";
 import EvidenceConfigService from "../services/EvidenceConfigService.js";
 
- var evidenceConfigDSU;
-
-
-// const axios = require('axios');
-// import axios from "axios";
-// var axios = require("axios").default;
 const AddEvidenceViewModel = {
     name: {
         name: 'name',
@@ -85,8 +78,7 @@ const AddEvidenceViewModel = {
     status: {
         label: "Status",
         required: true,
-        options: [
-            {
+        options: [{
                 label: "Draft",
                 value: 'draft'
             },
@@ -102,25 +94,24 @@ const AddEvidenceViewModel = {
                 label: "Unknown",
                 value: 'unknown'
             }
-            
+
         ],
         value: ''
     },
     topics: {
         label: "Topics",
         required: true,
-        options: [
-            {
-                label: "Topics 1",
-                value: 'Topics 1'
+        options: [{
+                label: "Education",
+                value: 'Education'
             },
             {
-                label: "Topics 2",
-                value: 'Topics 2'
+                label: "Treatment",
+                value: 'Treatment'
             },
             {
-                label: "Topics 3",
-                value: 'Topics 3'
+                label: "Assessment",
+                value: 'Assessment'
             }
         ],
         value: ''
@@ -128,8 +119,7 @@ const AddEvidenceViewModel = {
     exposureBackground: {
         label: "Exposure Background",
         required: true,
-        options: [
-            {
+        options: [{
                 label: "Exposure Background 1",
                 value: 'Exposure Background 1'
             },
@@ -141,13 +131,13 @@ const AddEvidenceViewModel = {
                 label: "Exposure Background 3",
                 value: 'Exposure Background 3'
             },
-            
-            
+
+
         ],
         value: ''
     }
 }
-let evidenceData={
+let evidenceData = {
     name: "",
     contact: [],
     title: "",
@@ -158,26 +148,49 @@ let evidenceData={
     topics: "",
     exposureBackground: ""
 };
+
 var sReadSSI;
+var evidenceConfigDSU;
+
 export default class EvidenceController extends WebcController {
     constructor(element, history) {
 
         super(element, history);
         this.model = AddEvidenceViewModel;
-        this._attachHandlerEvidenceP1()
-        this._attachHandlerEvidenceP2()
-        this._attachHandlerEvidenceP3()
-        this._attachHandlerEvidenceBackMenu()
-        this._attachHandlerEvidenceConfirm()
-        this._attachHandlerEvidence()
-        this._attachHandlerEvidenceList()
-        this._attachHandlerHome()
-        this._attachHandlerEvidenceEdit()
-        this._attachHandlerUpdateEvidence()
-            
+        this._attachHandlerEvidenceP1();
+        this._attachHandlerEvidenceP2();
+        this._attachHandlerEvidenceP3();
+        this._attachHandlerEvidenceBackMenu();
+        this._attachHandlerEvidence();
+        this._attachHandlerEvidenceList();
+        this._attachHandlerHome();
+        this._attachHandlerUpdateEvidence();
+
+        this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
+        const me = this;
+        me.EvidenceConfigService.getEvidenceConfig(function(error, data) {
+            if (data.length === 0) {
+                me.IotAdaptorApi.createEvidenceDsu({}, (err, evidence) => {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    me.EvidenceConfigService.saveEvidenceConfig(evidence, (err, data) => {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        me.evidenceConfigDSU = data[0];
+                    });
+                });
+            } else {
+                me.evidenceConfigDSU = data[0];
+            }
+
+            console.log("Evidence DSU Config", me.evidenceConfigDSU);
+        });
+
     }
-    
-    _attachHandlerHome(){
+
+    _attachHandlerHome() {
         this.on('evidence:home', (event) => {
             evidenceData = {
                 name: "",
@@ -193,75 +206,60 @@ export default class EvidenceController extends WebcController {
             this.navigateToPageTag('home');
         });
     }
-    _attachHandlerEvidence(){
+    _attachHandlerEvidence() {
         this.on('evidence:evidence', (event) => {
             this.navigateToPageTag('evidence');
         });
     }
-    _attachHandlerEvidenceList(){
+    _attachHandlerEvidenceList() {
         this.on('evidence:list', (event) => {
 
             this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
-           
+
             const me = this;
-            let evidenceConfigDSU;
-            me.EvidenceConfigService.getEvidenceConfig(function(error, data){
-                me.evidenceConfigDSU = data[0];
+            
                 console.log("Evidence DSU Config", me.evidenceConfigDSU);
-           
-                var allEvidences ;
-                // this.IotAdaptorApi = new IotAdaptorApi();
-                // let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
-                console.log ("*********************************");
-                console.log (me.evidenceConfigDSU.sReadSSI);
+
+                var allEvidences;
+                console.log("*********************************");
+                console.log(me.evidenceConfigDSU.sReadSSI);
                 me.IotAdaptorApi = new IotAdaptorApi();
                 me.IotAdaptorApi.searchEvidence(me.evidenceConfigDSU.sReadSSI, (err, evidence) => {
                     if (err) {
                         return console.log(err);
                     }
-                    console.log ("*********************************");
+                    console.log("*********************************");
                     // console.log (evidence)
                     allEvidences = evidence;
-                    console.log (allEvidences)
+                    console.log(allEvidences)
                     me.navigateToPageTag('evidence-list', allEvidences);
 
-                    // callback(undefined, evidence);
-                });
             });
 
         });
     }
-    _attachHandlerEvidenceP1(){
-        this.on('evidence:add-evidence-p1', (event) => {            
+    _attachHandlerEvidenceP1() {
+        this.on('evidence:add-evidence-p1', (event) => {
             this.navigateToPageTag('add-evidence-p1');
         });
     }
-    _attachHandlerEvidenceP2(){
+    _attachHandlerEvidenceP2() {
         this.on('evidence:add-evidence-p2', (event) => {
             evidenceData.name = this.model.name.value;
-            evidenceData.contact = [
-                {
-                    "name": "Name of the Publisher(Organization/individual)",
-                    "telecom": [
-                        {
-                            "system": "email",
-                            "value": this.model.email.value
-                        }
-                    ]
-                }
-            ];
-
-            // evidenceData.email = this.model.email.value;
+            evidenceData.contact = [{
+                "name": "Name of the Publisher(Organization/individual)",
+                "telecom": [{
+                    "system": "email",
+                    "value": this.model.email.value
+                }]
+            }];
             evidenceData.publisher = this.model.organization.value;
-            
-            // console.log (evidenceData);
-            // console.log (this.model.title);
             this.navigateToPageTag('add-evidence-p2');
         });
     }
-    _attachHandlerEvidenceP3(){
+    _attachHandlerEvidenceP3() {
         this.on('evidence:add-evidence-p3', (event) => {
-           
+
             evidenceData.title = this.model.title.value;
             evidenceData.subtitle = this.model.subtitle.value;
             evidenceData.version = this.model.version.value;
@@ -270,12 +268,14 @@ export default class EvidenceController extends WebcController {
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
             // console.log(this.model.description.value);
-            this.navigateToPageTag('add-evidence-p3',{allData: evidenceData});
+            this.navigateToPageTag('add-evidence-p3', {
+                allData: evidenceData
+            });
         });
     }
-    _attachHandlerUpdateEvidence(){
+    _attachHandlerUpdateEvidence() {
         this.on('evidence:update-evidence', (event) => {
-           
+
             evidenceData.title = this.model.title.value;
             evidenceData.subtitle = this.model.subtitle.value;
             evidenceData.version = this.model.version.value;
@@ -283,8 +283,7 @@ export default class EvidenceController extends WebcController {
             evidenceData.topics = this.model.topics.value;
             evidenceData.status = this.model.status.value;
             evidenceData.exposureBackground = this.model.exposureBackground.value;
-            // console.log(this.model.description.value);
-            // console.log (evidenceData);
+
             let initEvidence = JSON.parse(JSON.stringify(evidenceModelHL7));
 
             initEvidence.EvidenceName.value = this.model.name.value;
@@ -298,50 +297,22 @@ export default class EvidenceController extends WebcController {
             initEvidence.EvidenceTopics.value = this.model.topics.value;
             initEvidence.EvidenceExposureBackground.value = this.model.exposureBackground.value;
             initEvidence.EvidenceDescription.value = this.model.description.value;
-           
-            
-         
-    
-            //console.log(initEvidence);
-    
-    
             this.newEvidenceService = new NewEvidenceService(this.DSUStorage);
             this.newEvidenceService.saveNewEvidence(initEvidence, (err, data) => {
                 if (err) {
                     return console.log(err);
                 }
                 this.model.dsuStatus = "DSU contract saved and sent to patient with keySSI: ".concat('', data.KeySSI.substr(data.KeySSI.length - 10));
-    
+
                 this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.RESEARCHER_IDENTITY);
                 this.sendMessageToPatient('evidence-response', data.uid);
             });
-            this.navigateToPageTag('add-evidence-p3',evidenceData);
-        });
-    }
-    _attachHandlerEvidenceConfirm(){
-        this.on('evidence:confirm', (event) => {
-            console.log("Evidence Confirmed")
-            this.IotAdaptorApi = new IotAdaptorApi();
-            let id = 'cfe2eece-1744-4e5b-8a4d-455b40340861';
-            let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
 
-            this.IotAdaptorApi.createEvidence(evidenceData, keySSI, (err, evidence) => {
-                if (err) {
-                    return console.log(err);
-                }
-                console.log (evidence);
-                // callback(undefined, evidence);
-            })
-            this.navigateToPageTag('confirm-evidence');
-           
+            this.navigateToPageTag('add-evidence-p3', evidenceData);
         });
     }
-    _attachHandlerEvidenceEdit(){
-        this.on('evidence:edit', (event) => {
-            this.navigateToPageTag('edit-evidence');
-        });
-    }
-    _attachHandlerEvidenceBackMenu(){
+   
+    _attachHandlerEvidenceBackMenu() {
         this.on('evidence:back-to-menu', (event) => {
             evidenceData = {
                 name: "",
@@ -365,7 +336,7 @@ export default class EvidenceController extends WebcController {
         });
     }
 
-    
-        
+
+
 
 }

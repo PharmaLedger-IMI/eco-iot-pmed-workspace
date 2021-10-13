@@ -54,13 +54,12 @@ export default class ConfirmEvidenceController extends  WebcController  {
             console.log("Evidence Confirmed")
             this.IotAdaptorApi = new IotAdaptorApi();
             let keySSI = this.evidenceConfigDSU.sReadSSI;
-
+            console.log("*************************  KeySSI on Confirmed Evidence Controller ***************************");
             this.IotAdaptorApi.createEvidence(singleData.allData, keySSI, (err, evidence) => {
                 if (err) {
                     return console.log(err);
                 }
-                console.log (evidence);
-                // callback(undefined, evidence);
+                callback(undefined, evidence);
             })
             this.navigateToPageTag('confirm-evidence');
         });
