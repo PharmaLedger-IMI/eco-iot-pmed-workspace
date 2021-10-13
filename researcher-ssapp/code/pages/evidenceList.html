@@ -17,52 +17,22 @@
                 </div>
                 <div class="flex-grow-1">
                     <psk-card class="bpd-dashboard">
-
+                        <h3 style="text-align:center;">Evidence List</h3>
                         <div class="bpd-wide-cards" data-if="@allEvidences">
-                            <div>
-                                <psk-layout class="border-bottom border-top" slot="condition-true" columns="6">
-                                    <psk-label label="Evidence ID"></psk-label>
-                                    <psk-label label="Name"></psk-label>
-                                    <psk-label label="Title"></psk-label>
-                                    <psk-label label="Version"></psk-label>
-                                    <psk-label label="Status"></psk-label>
-                                    <!-- <psk-label label="Options"></psk-label> -->
-
-                                </psk-layout>
-
-                                <psk-layout columns="5" class="justify-content-center align-items-center table-row" data-for="@allEvidences">
-                                    <p>{{@id}}</p>
-                                    <p>{{@name}}</p>
-                                    <p>{{@title}}</p>
-                                    <p>{{@version}}</p>
-                                    <p>{{@status}}</p>
-                                    <!-- <div class="d-flex flex-row align-items-center justify-content-around">
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="evidence:view"
-
-                                        >
-                                            View
-                                        </psk-button>
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="evidence:edit"
-                                        >
-                                            Edit
-                                        </psk-button>
-                                    </div> -->
-
-                                    
-                                </psk-layout>
-                                
+                            <psk-table header="true" footer="false" style="text-align:center;" class="border-bottom border-top" slot="condition-true">
+                                Evidence ID | Name | Title | Version | Status
+                                <div data-for="@allEvidences">
+                                    {{@id}} | {{@name}} | {{@title}} | {{@version}} | {{@status}}
                                 </div>
-                                <div class="d-flex flex-row align-items-center justify-content-around">
-                                    <psk-button
-                                            class="btn-bare table-cell m-1 pharma-secondary"
-                                            event-name="evidence:to-evidence"
-                                    >
-                                        Back
-                                    </psk-button>
+                            </psk-table>
+                            
+                            <div class="d-flex flex-row align-items-center justify-content-around">
+                                <psk-button
+                                        class="btn-bare table-cell m-1 pharma-secondary"
+                                        event-name="evidence:to-evidence"
+                                >
+                                    Back
+                                </psk-button>
                             </div>
                         </div>
                     </psk-card>

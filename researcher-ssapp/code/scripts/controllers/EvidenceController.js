@@ -3,9 +3,10 @@ import IotAdaptorApi from "../services/IotAdaptorApi.js";
 import CommunicationService from "../services/CommunicationService.js";
 
 import NewEvidenceService from "../services/newEvidenceService.js";
-import EvidenceConfig from "../services/EvidenceConfig.js";
 import {evidenceModelHL7} from "../models/HL7/EvidenceModel.js";
+import EvidenceConfigService from "../services/EvidenceConfigService.js";
 
+ var evidenceConfigDSU;
 
 
 // const axios = require('axios');
@@ -87,15 +88,19 @@ const AddEvidenceViewModel = {
         options: [
             {
                 label: "Draft",
-                value: 'Draft'
+                value: 'draft'
             },
             {
                 label: "Active",
-                value: 'Active'
+                value: 'active'
             },
             {
-                label: "Inactive",
-                value: 'Inactive'
+                label: "Retired",
+                value: 'retired'
+            },
+            {
+                label: "Unknown",
+                value: 'unknown'
             }
             
         ],
@@ -169,58 +174,8 @@ export default class EvidenceController extends WebcController {
         this._attachHandlerHome()
         this._attachHandlerEvidenceEdit()
         this._attachHandlerUpdateEvidence()
-        this.EvidenceConfig = new EvidenceConfig(this.DSUStorage);
-        //List all the D.Permissions
-        // this.EvidenceConfig.getEvidenceConfig((err, data) => {
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     //console.log(JSON.stringify(data, null, 4));
-        //     console.log("Total Evidence are: " + (data.length));
-
-        //     if(data.length == 0){
-                
-                this.IotAdaptorApi = new IotAdaptorApi();
-    
-                this.IotAdaptorApi.createEvidenceDsu({}, (err, evidence) => {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    console.log(evidence.sReadSSI);
-                    sReadSSI = evidence.sReadSSI;
-                    this.EvidenceConfig.saveEvidenceConfig(evidence, (err, data) => {
-                        if (err) {
-                            return console.log(err);
-                        }
-                        console.log(data.keySSI);
-                    });
-                    // console.log(evidence.sReadSSI);
-                });
-                
-        //     }
             
-        // });
-
-        // this.IotAdaptorApi = new IotAdaptorApi();
-        // let id = 'cfe2eece-1744-4e5b-8a4d-455b40340861';
-        // let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
-      
-
-        // this.IotAdaptorApi = new IotAdaptorApi();
-        // let id = '17110073-c4a5-465f-93da-d84009359133';
-        // let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbtRUj2BgpWpCpmb1K68vgLwMCAcwnDZytNtFmJ5cKvSjfLmBBZas8oGJpHFudxF1gF7thkV7uWv4AywGuZKqUvunP2erz5EkJn9M4qPAkxxinSJDSLfawZuVba7NTR';
-
-        // this.IotAdaptorApi.getEvidence(id, keySSI, (err, evidence) => {
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     callback(undefined, evidence);
-        // })
-        
-            
-        }
-
-       
+    }
     
     _attachHandlerHome(){
         this.on('evidence:home', (event) => {
@@ -245,23 +200,35 @@ export default class EvidenceController extends WebcController {
     }
     _attachHandlerEvidenceList(){
         this.on('evidence:list', (event) => {
-            var allEvidences ;
-            this.IotAdaptorApi = new IotAdaptorApi();
-            let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
-            console.log ("*********************************");
-            console.log (sReadSSI);
-            this.IotAdaptorApi.searchEvidence(keySSI, (err, evidence) => {
-                if (err) {
-                    return console.log(err);
-                }
-                console.log ("*********************************");
-                // console.log (evidence)
-                allEvidences = evidence;
-                console.log (allEvidences)
-                this.navigateToPageTag('evidence-list', allEvidences);
 
-                // callback(undefined, evidence);
-            })
+            this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
+           
+            const me = this;
+            let evidenceConfigDSU;
+            me.EvidenceConfigService.getEvidenceConfig(function(error, data){
+                me.evidenceConfigDSU = data[0];
+                console.log("Evidence DSU Config", me.evidenceConfigDSU);
+           
+                var allEvidences ;
+                // this.IotAdaptorApi = new IotAdaptorApi();
+                // let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
+                console.log ("*********************************");
+                console.log (me.evidenceConfigDSU.sReadSSI);
+                me.IotAdaptorApi = new IotAdaptorApi();
+                me.IotAdaptorApi.searchEvidence(me.evidenceConfigDSU.sReadSSI, (err, evidence) => {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log ("*********************************");
+                    // console.log (evidence)
+                    allEvidences = evidence;
+                    console.log (allEvidences)
+                    me.navigateToPageTag('evidence-list', allEvidences);
+
+                    // callback(undefined, evidence);
+                });
+            });
+
         });
     }
     _attachHandlerEvidenceP1(){

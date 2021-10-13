@@ -44,7 +44,8 @@ export default class AbstractAPI {
                 try {
                     const data = await response.json();
                     console.log(`[${this.ADAPTER_PATH}][Response]`, method, path, response.status, response.statusCode, data);
-                    if (!response.ok || response.status != 201) {
+
+                    if (!response.ok) {
                         return callback(response);
                     }
                     callback(undefined, data);

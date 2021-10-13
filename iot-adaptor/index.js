@@ -27,6 +27,12 @@ function IotAdapter(server) {
     const DeleteEvidence = require('./api/delete_evidence.js');
     const GetEvidenceById = require('./api/get_evidence_by_id.js');
 
+    const CreateDevice = require('./api/create_device.js');
+    const SearchDevice = require('./api/search_device.js');
+    const UpdateDevice = require('./api/update_device.js');
+    const DeleteDevice = require('./api/delete_device.js');
+    const GetDeviceById = require('./api/get_device_by_id.js');
+
     const { responseModifierMiddleware, requestBodyJSONMiddleware } = require('../privatesky/modules/apihub/utils/middlewares');
     const { requestBodyXMLMiddleware, responseBodyJsonMiddleware } = require('./utils/middlewares');
 
@@ -69,6 +75,14 @@ function IotAdapter(server) {
     server.put(`/iotAdapter/update-evidence/:id`, UpdateEvidence);
     server.delete(`/iotAdapter/delete-evidence/:id`, DeleteEvidence);
     server.get(`/iotAdapter/get-evidence/:id`, GetEvidenceById);
+
+    server.get(`/iotAdapter/search-device`, SearchDevice);
+    server.post(`/iotAdapter/create-device`, requestBodyJSONMiddleware);
+    server.post(`/iotAdapter/create-device`, CreateDevice);
+    server.put(`/iotAdapter/update-device/:id`, requestBodyJSONMiddleware);
+    server.put(`/iotAdapter/update-device/:id`, UpdateDevice);
+    server.delete(`/iotAdapter/delete-device/:id`, DeleteDevice);
+    server.get(`/iotAdapter/get-device/:id`, GetDeviceById);
 
 
 }

@@ -1,6 +1,9 @@
 const { WebcController } = WebCardinal.controllers;
 import IotAdaptorApi from "../services/IotAdaptorApi.js";
+import EvidenceConfigService from "../services/EvidenceConfigService.js";
+
 var singleData;
+var evidenceConfigDSU;
 
 export default class ConfirmEvidenceController extends  WebcController  {
     constructor(...props) {
@@ -13,6 +16,30 @@ export default class ConfirmEvidenceController extends  WebcController  {
         this._attachHandlerGoBack();
         this._attachHandlerEvidenceConfirm();
         this._attachHandlerEvidenceEdit();
+
+
+        this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
+        this.IotAdaptorApi = new IotAdaptorApi();
+        const me = this;
+        me.EvidenceConfigService.getEvidenceConfig(function(error, data){
+            if(data.length === 0) {
+                me.IotAdaptorApi.createEvidenceDsu({}, (err, evidence) => {
+                    if (err) {
+                        return console.log(err);
+                    }                    
+                    me.EvidenceConfigService.saveEvidenceConfig(evidence, (err, data) => {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        me.evidenceConfigDSU = data[0];
+                    });
+                });
+            } else {
+                me.evidenceConfigDSU = data[0];
+            }
+
+            console.log("Evidence DSU Config", me.evidenceConfigDSU);
+        });
     }
 
 
@@ -26,8 +53,7 @@ export default class ConfirmEvidenceController extends  WebcController  {
         this.on('evidence:confirm', (event) => {
             console.log("Evidence Confirmed")
             this.IotAdaptorApi = new IotAdaptorApi();
-            let id = 'cfe2eece-1744-4e5b-8a4d-455b40340861';
-            let keySSI = '27XvCBPKSWpUwscQUxwsVDTxRbaerzjCvpuajSFrnCUrhNuFJc3P3uS1hWAeCvKgPrBQvF6H4AYErQLTxKvqMjFZr7ukHRjmaFfPjuxQdyLC5fFr4qyETTyscVgZjp5q1QCgq8SXuGua9xudXdxQffu';
+            let keySSI = this.evidenceConfigDSU.sReadSSI;
 
             this.IotAdaptorApi.createEvidence(singleData.allData, keySSI, (err, evidence) => {
                 if (err) {

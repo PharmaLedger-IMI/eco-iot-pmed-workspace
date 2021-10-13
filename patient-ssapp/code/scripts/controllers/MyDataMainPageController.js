@@ -1,9 +1,9 @@
 import DsuStorage from "../services/DsuStorage.js";
 const { WebcController } = WebCardinal.controllers;
 
-const keySSIVal = "27XvCBPKSWpUwscQUxwsVDTxRcNY7dNoPQ7xBCMgRErDktEEw6eEvCGaSfpJEiRBvFhAvtk7BpbUYJv6F1EySzgaMUcBETwzmtGsYeYQhLbFXTimNA2fYChVJSzADXeomv3cwLMhrMwXGU8XYgfchtB";
-// const givenKeySSI = "BBudGH6ySHG6GUHN8ogNrTWc6ir1BBhD6u3WJNJorKyvv1bBQCbg8qSwfvNfGuSBCZqWUJg6RPLjogj3r4eGjuzKy";
-let testData = [] ;
+const keySSIVal = "27XvCBPKSWpUwscQUxwsVDTxRcaqv8AeYwe1gWThxDxXfJdmac1CRnDBV8VC8X1rxWjG6xjh7NthKZwsSJZw8r12kcpRuvJyo5wtZ6n5x7ATpS7V4N8RUNjcFFHkLpPkCkMeMVxVuL7yfxLvtVccSZ5";
+// const givenKeySSI = "BBudGH6ySHG6GUHN8ogNrTWc4qy2hWpSRGr1ZNsKsLEgDjnAm5FpV29n8eC1ke8YhDmFV2cvGwJwAC1WuYkKjqWa3";
+var testData = [] ;
 const ViewPersonalHealthDataModel = {
 
     name: {
@@ -75,6 +75,7 @@ export default class MyDataMainPageController extends  WebcController  {
             });
 
         });
+        console.log("***************************** All MyData Values *******************************************");
         console.log(testData);
 
         if (this.getState()){
@@ -99,22 +100,29 @@ export default class MyDataMainPageController extends  WebcController  {
             } else if (choice === "bpsys"){
                
                 let allData = testData.filter(function(value){ return value.name=="Systolic Blood Pressure";});
+                console.log("***************************** Systolic Blood Pressure *******************************************");
+
                 console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             } else if (choice === "bpdia"){
+                console.log("***************************** Diastolic Blood Pressure *******************************************");
+
                 let allData = testData.filter(function(value){ return value.name=="Diastolic Blood Pressure";});
                 console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             }else if (choice === "spo2"){
                 let allData = testData.filter(function(value){ return value.name=="SpO2";});
+                console.log("***************************** SpO2 *******************************************");
                 console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             }else if (choice === "weight"){
                 let allData = testData.filter(function(value){ return value.name=="Weight";});
+                console.log("***************************** Weight *******************************************");
                 console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             } else if (choice === "height"){
                 let allData = testData.filter(function(value){ return value.name=="Height";});
+                console.log("***************************** Height *******************************************");
                 console.log(allData);
                 this.navigateToPageTag('clinicalData',{allData: allData});
             }
