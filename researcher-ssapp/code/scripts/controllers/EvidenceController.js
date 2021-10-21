@@ -1,8 +1,13 @@
-const {WebcController} = WebCardinal.controllers;
+const {
+    WebcController
+} = WebCardinal.controllers;
 import IotAdaptorApi from "../services/IotAdaptorApi.js";
 import CommunicationService from "../services/CommunicationService.js";
+
 import NewEvidenceService from "../services/newEvidenceService.js";
-import {evidenceModelHL7} from "../models/HL7/EvidenceModel.js";
+import {
+    evidenceModelHL7
+} from "../models/HL7/EvidenceModel.js";
 import EvidenceConfigService from "../services/EvidenceConfigService.js";
 
 const AddEvidenceViewModel = {
@@ -102,16 +107,16 @@ const AddEvidenceViewModel = {
         label: "Topics",
         required: true,
         options: [{
-                label: "Education",
-                value: 'Education'
+                label: "Topics 1",
+                value: 'Topics 1'
             },
             {
-                label: "Treatment",
-                value: 'Treatment'
+                label: "Topics 2",
+                value: 'Topics 2'
             },
             {
-                label: "Assessment",
-                value: 'Assessment'
+                label: "Topics 3",
+                value: 'Topics 3'
             }
         ],
         value: ''
@@ -148,10 +153,7 @@ let evidenceData = {
     topics: "",
     exposureBackground: ""
 };
-
 var sReadSSI;
-var evidenceConfigDSU;
-
 export default class EvidenceController extends WebcController {
     constructor(element, history) {
 
@@ -166,25 +168,22 @@ export default class EvidenceController extends WebcController {
         this._attachHandlerHome();
         this._attachHandlerUpdateEvidence();
 
+        this.IotAdaptorApi = new IotAdaptorApi();
         this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
         const me = this;
         me.EvidenceConfigService.getEvidenceConfig(function(error, data) {
-            if (data.length === 0) {
-                me.IotAdaptorApi.createEvidenceDsu({}, (err, evidence) => {
+            console.log(data);
+            me.IotAdaptorApi.createEvidenceDsu({}, (err, evidence) => {
+                if (err) {
+                    return console.log(err);
+                }
+                me.EvidenceConfigService.saveEvidenceConfig(evidence, (err, data) => {
                     if (err) {
                         return console.log(err);
                     }
-                    me.EvidenceConfigService.saveEvidenceConfig(evidence, (err, data) => {
-                        if (err) {
-                            return console.log(err);
-                        }
-                        me.evidenceConfigDSU = data[0];
-                    });
+                    me.evidenceConfigDSU = data[data.length - 1];
                 });
-            } else {
-                me.evidenceConfigDSU = data[0];
-            }
-
+            });
             console.log("Evidence DSU Config", me.evidenceConfigDSU);
         });
 
@@ -215,25 +214,19 @@ export default class EvidenceController extends WebcController {
         this.on('evidence:list', (event) => {
 
             this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
-
             const me = this;
-            
-                console.log("Evidence DSU Config", me.evidenceConfigDSU);
-
+            let evidenceConfigDSU;
+            me.EvidenceConfigService.getEvidenceConfig(function(error, data) {
+                me.evidenceConfigDSU = data[data.length - 1];
                 var allEvidences;
-                console.log("*********************************");
-                console.log(me.evidenceConfigDSU.sReadSSI);
                 me.IotAdaptorApi = new IotAdaptorApi();
                 me.IotAdaptorApi.searchEvidence(me.evidenceConfigDSU.sReadSSI, (err, evidence) => {
                     if (err) {
                         return console.log(err);
                     }
-                    console.log("*********************************");
-                    // console.log (evidence)
                     allEvidences = evidence;
-                    console.log(allEvidences)
                     me.navigateToPageTag('evidence-list', allEvidences);
-
+                });
             });
 
         });
@@ -285,11 +278,9 @@ export default class EvidenceController extends WebcController {
             evidenceData.exposureBackground = this.model.exposureBackground.value;
 
             let initEvidence = JSON.parse(JSON.stringify(evidenceModelHL7));
-
             initEvidence.EvidenceName.value = this.model.name.value;
             initEvidence.EvidenceOrganization.value = this.model.organization.value;
             initEvidence.EvidenceEmail.value = this.model.email.value;
-
             initEvidence.EvidenceTitle.value = this.model.title.value;
             initEvidence.EvidenceSubtitle.value = this.model.subtitle.value;
             initEvidence.EvidenceVersion.value = this.model.version.value;
@@ -297,21 +288,19 @@ export default class EvidenceController extends WebcController {
             initEvidence.EvidenceTopics.value = this.model.topics.value;
             initEvidence.EvidenceExposureBackground.value = this.model.exposureBackground.value;
             initEvidence.EvidenceDescription.value = this.model.description.value;
+
             this.newEvidenceService = new NewEvidenceService(this.DSUStorage);
             this.newEvidenceService.saveNewEvidence(initEvidence, (err, data) => {
                 if (err) {
                     return console.log(err);
                 }
                 this.model.dsuStatus = "DSU contract saved and sent to patient with keySSI: ".concat('', data.KeySSI.substr(data.KeySSI.length - 10));
-
                 this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.RESEARCHER_IDENTITY);
                 this.sendMessageToPatient('evidence-response', data.uid);
             });
-
             this.navigateToPageTag('add-evidence-p3', evidenceData);
         });
     }
-   
     _attachHandlerEvidenceBackMenu() {
         this.on('evidence:back-to-menu', (event) => {
             evidenceData = {
@@ -335,8 +324,5 @@ export default class EvidenceController extends WebcController {
             ssi: ssi
         });
     }
-
-
-
 
 }
