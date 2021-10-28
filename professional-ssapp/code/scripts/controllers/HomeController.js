@@ -3,11 +3,14 @@ import CommunicationService from '../services/CommunicationService.js';
 import ResponsesService from '../services/ResponsesService.js';
 import TrialParticipantRepository from '../repositories/TrialParticipantRepository.js';
 import TrialRepository from '../repositories/TrialRepository.js';
+import IotAdaptorApi from "../services/IotAdaptorApi.js";
+
+var observations;
 
 export default class HomeController extends WebcController {
     constructor(element, history) {
         super(element, history);
-
+        this.model ={};
 
         this._attachHandlerManageDevices();
         this._attachHandlerTrialManagement();
@@ -96,12 +99,36 @@ export default class HomeController extends WebcController {
         });
     }
 
-    _attachHandlerListOfPatients(){
+   
+    async _attachHandlerListOfPatients(){
         this.on('home:list-of-patients', (event) => {
-            console.log ("List of Patients button pressed");
-            this.navigateToPageTag('list-of-patients');
+            // console.log ("Status Patients button pressed");
+            this.IotAdaptorApi = new IotAdaptorApi();
+            var observations = [];
+           this.IotAdaptorApi.searchResource("Observation", function(err,result){
+                result.forEach(value => {
+                    let initData = {
+                        name: value.code.text,
+                        value: value.valueQuantity.value,
+                        unit: value.valueQuantity.unit
+                    };
+                    observations.push(initData);
+                 });
+                console.log ("List of Patient Observation from vitre ");
+                console.log(observations);
+            });
+            console.log ("List of Patient Observation ");
+            console.log (observations);
+            this.navigateToPageTag('patient-status',{allData: observations});
+            
         });
     }
+    // _attachHandlerListOfPatients(){
+    //     this.on('home:list-of-patients', (event) => {
+    //         console.log ("List of Patients button pressed");
+    //         this.navigateToPageTag('list-of-patients');
+    //     });
+    // }
 
 
 }

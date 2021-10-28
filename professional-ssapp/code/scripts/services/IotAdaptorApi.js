@@ -30,6 +30,16 @@ export default class IotAdaptorApi extends AbstractAPI {
         }
         this.makeRequest('GET', path, headers, callback);
     }
+    searchResource(resourceType, callback) {
+        let path = `${this.ADAPTER_PATH}/resource/${resourceType}`;
+        let headers = {}
+        this.makeRequest('GET', path, headers, callback);
+    }
+    observationByPatientId(patientId, callback) {
+        let path = `${this.ADAPTER_PATH}/Observation/Patient/${patientId}`;
+        let headers = {}
+        this.makeRequest('GET', path, headers, callback);
+    }
 
     
 } 

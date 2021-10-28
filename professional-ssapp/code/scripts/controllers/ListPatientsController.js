@@ -22,7 +22,6 @@ export default class ListPatientsController extends WebcController {
     this.participantsService = participantsService;
     this.init();
     this.attachAll();
-    //this._attachHandlerPatientStatus();
   }
 
   async init() {
@@ -61,7 +60,7 @@ export default class ListPatientsController extends WebcController {
     });
    
     this.on('patient-status',  (event) => {
-        console.log ("Patient Status button pressed");
+      
         this.navigateToPageTag('patient-status');
     });
     this.on('trial-select', async (event) => {

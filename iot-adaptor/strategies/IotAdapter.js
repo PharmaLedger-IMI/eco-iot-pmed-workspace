@@ -28,9 +28,16 @@ $$.flow.describe('IotAdaptor', {
     processXml: function (xmlString, callback) {
         etlService.processXml(this.mainDb, xmlString, callback);
     },
-    searchResources: function (resourceType, params, callback) {
+    searchResources: async function (resourceType, params, callback) {
         //this.fhir.searchResources(resourceType, params, callback);
-        this.mainDb.searchResources(resourceType, params, callback);
+        console.log("Resource Type: "+resourceType+"Params: "+params);
+        let resource = await this.mainDb.searchResourcesAsync(resourceType, params);
+        if(resource){
+          callback(undefined, resource);
+        }
+        // else {
+        //   callback(error, undefined)
+        // }
     },
     createResource: function (resourceType, jsonData, callback) {
         //this.fhir.createResource(resourceType, jsonData, callback);
@@ -43,6 +50,10 @@ $$.flow.describe('IotAdaptor', {
     getResourceById: function (resourceType, id, callback) {
         //this.fhir.getResourceById(resourceType, id, callback);
         this.mainDb.getResourceById(resourceType, id, callback);
+    },
+    getObservationByPatientId: function (resourceType, id, callback) {
+      //this.fhir.getResourceById(resourceType, id, callback);
+        this.mainDb.getObservationByPatientId(resourceType, id, callback);
     },
     deleteResource: function(resourceType, id, callback) {
         //this.fhir.deleteResource(resourceType, id, callback);

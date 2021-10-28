@@ -16,6 +16,8 @@ function IotAdapter(server) {
     const UpdateResource = require('./resource/update');
     const DeleteResource = require('./resource/delete');
     const GetResourceById = require('./resource/getById');
+    const GetObservationByPatientId = require('./api/get_observation_by_patient_id.js');
+
     // const DeleteObservationById = require('./observation/deleteById');
 
     const AssignDevice = require('./api/assign_device');
@@ -38,6 +40,12 @@ function IotAdapter(server) {
 
     server.use(`/iotAdapter/*`, responseModifierMiddleware);
     server.use(`/iotAdapter/*`, responseBodyJsonMiddleware);
+
+
+    // For testing
+
+    server.get(`/iotAdapter/resource/observation/patient/:id`, GetObservationByPatientId);
+
 
     // For debugging purpose
     server.get(`/iotAdapter/resource/:resource_type`, SearchResources);
