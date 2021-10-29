@@ -5,8 +5,6 @@ import TrialParticipantRepository from '../repositories/TrialParticipantReposito
 import TrialRepository from '../repositories/TrialRepository.js';
 import IotAdaptorApi from "../services/IotAdaptorApi.js";
 
-var observations;
-
 export default class HomeController extends WebcController {
     constructor(element, history) {
         super(element, history);
@@ -105,7 +103,7 @@ export default class HomeController extends WebcController {
             // console.log ("Status Patients button pressed");
             this.IotAdaptorApi = new IotAdaptorApi();
             var observations = [];
-           this.IotAdaptorApi.searchResource("Observation", function(err,result){
+            this.IotAdaptorApi.searchResource("Observation", function(err,result){
                 result.forEach(value => {
                     let initData = {
                         name: value.code.text,
@@ -114,12 +112,11 @@ export default class HomeController extends WebcController {
                     };
                     observations.push(initData);
                  });
-                console.log ("List of Patient Observation from vitre ");
-                console.log(observations);
+                
             });
-            console.log ("List of Patient Observation ");
-            console.log (observations);
+            
             this.navigateToPageTag('patient-status',{allData: observations});
+            
             
         });
     }

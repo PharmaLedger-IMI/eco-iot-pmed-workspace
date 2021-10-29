@@ -43,12 +43,35 @@
                 </div>
                 <br>
                 <br>
-                <div if="@allData">
-                  <div data-for="@allData">
-                    <psk-button class="btn-bare table-cell m-1 pharma-primary">
-                      {{@name}}: {{@value}} {{@unit}}
-                    </psk-button>
-                  </div>
+                <div >
+                    <div data-if="@allData"  >
+                        <div data-for="@allData">
+                            <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                              {{@name}}: {{@value}} {{@unit}}
+                            </psk-button>
+                        </div>
+                    </div>
+                    <!-- <div slot="false">
+                        <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Height : 170 cm
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Weight : 92 kg
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Age : 63 a
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Systolic Blood Pressure : 102.7 mmHg
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Diastolic Blood Pressure : 72 mmHg
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            SpO2 : 95.4179104477612 %
+                        </psk-button>
+                    </div> -->
+                  
                 </div>
                 <psk-button class="mt-2 pharma-primary" label="Go Back" event-name="go-back"></psk-button>
               </div>
