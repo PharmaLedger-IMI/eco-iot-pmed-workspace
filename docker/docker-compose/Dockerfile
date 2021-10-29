@@ -12,4 +12,7 @@ RUN ls && npm run dev-install --unsafe-perm
 
 RUN echo 'npm run server & \n sleep 1m \n npm run build-all \n tail -f /dev/null' >> startup-script.sh
 
+EXPOSE 8080/tcp
+
+
 ENTRYPOINT ["sh", "startup-script.sh"]
