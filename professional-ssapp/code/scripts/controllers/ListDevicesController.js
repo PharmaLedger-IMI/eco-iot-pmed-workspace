@@ -3,14 +3,11 @@ export default class ListDevicesController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
-        //this.setModel(ViewPatientList);
         let receivedState = this.getState();
         this.model.allDevices = receivedState;
-        console.log (this.model.allDevices);
+
         this._attachHandlerGoBack();
         this._attachHandlerPatientStatus();
-
-
     }
 
     _attachHandlerGoBack(){

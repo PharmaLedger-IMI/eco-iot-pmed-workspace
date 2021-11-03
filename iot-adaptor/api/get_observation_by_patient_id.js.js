@@ -1,7 +1,6 @@
 const _ = require('lodash');
 
-function searchResources(request, response, next) {
-  
+function getObservationByPatientId(request, response) {
     const receivedDomain = "default";
     const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
     if (!domainConfig) {
@@ -10,12 +9,9 @@ function searchResources(request, response, next) {
     }
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
-    const queryParams = _.merge({}, request.query);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
-
-    flow.searchResources(resourceType, queryParams, (error, result) => {
+    flow.getObservationByPatientId(resourceType, request.params.id, (error, result) => {
       if (error) {
-          console.log("Search resource DomainConfig is working");
         return response.send(error.status, error);
       } else {
         return response.send(200, result);
@@ -23,4 +19,4 @@ function searchResources(request, response, next) {
     });
 }
 
-module.exports = searchResources;
+module.exports = getObservationByPatientId;

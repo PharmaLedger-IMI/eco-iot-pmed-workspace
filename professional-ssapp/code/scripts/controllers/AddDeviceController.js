@@ -1,8 +1,8 @@
-const {WebcController} = WebCardinal.controllers;
-import IotAdaptorApi from "../services/IotAdaptorApi.js";
+const {
+    WebcController
+} = WebCardinal.controllers;
 import DeviceService from "../services/DeviceService.js"
 const keySSI = "27XvCBPKSWpUwscQUxwsVDTxRcaqv8AeYwe1gWThxDxXfJdmac1CRnDBV8VC8X1rxWjG6xjh7NthKZwsSJZw8r12kcpRuvJyo5wtZ6n5x7ATpS7V4N8RUNjcFFHkLpPkCkMeMVxVuL7yfxLvtVccSZ5";
-
 
 const AddDevicesViewModel = {
     deviceId: {
@@ -62,8 +62,7 @@ const AddDevicesViewModel = {
     status: {
         label: "Device Status",
         required: true,
-        options: [
-            {
+        options: [{
                 label: "active",
                 value: 'active'
             },
@@ -79,16 +78,15 @@ const AddDevicesViewModel = {
                 label: "unknown",
                 value: 'unknown'
             }
-            
+
         ],
         value: 'active'
     },
-    
+
     trial: {
         label: "Clinical trial Number",
         required: true,
-        options: [
-            {
+        options: [{
                 label: "trials 1",
                 value: 'trials 1'
             },
@@ -103,33 +101,29 @@ const AddDevicesViewModel = {
         ],
         value: ''
     }
-    
+
 }
 let deviceData = {
-            brand: "",
-            trial: "",
-            modelNumber: "",
-            status: "",
-            manufacturer:"",
-            deviceName: "",
-            resourceType:"Device",
-            identifier: [
-                {
-                    "use": "official",
-                    "type": {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-                                "code": "SNO"
-                            }
-                        ]
-                    },
-                    "value": "09160534033345"
-                }
-            ],
-            serialNumber: "09160534033345",
-            sk:"09160534033345"
-        };
+    brand: "",
+    trial: "",
+    modelNumber: "",
+    status: "",
+    manufacturer: "",
+    deviceName: "",
+    resourceType: "Device",
+    identifier: [{
+        "use": "official",
+        "type": {
+            "coding": [{
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "SNO"
+            }]
+        },
+        "value": "09160534033345"
+    }],
+    serialNumber: "09160534033345",
+    sk: "09160534033345"
+};
 
 
 export default class AddDeviceController extends WebcController {
@@ -138,22 +132,19 @@ export default class AddDeviceController extends WebcController {
         super(element, history);
 
         this.model = AddDevicesViewModel;
-
+        
         this._attachHandlerGoBackButton();
         this._attachHandlerSaveButton();
 
-        
-
-
     }
 
-    _attachHandlerGoBackButton(){
+    _attachHandlerGoBackButton() {
         this.on('devices:go-back', (event) => {
-            console.log ("Go back button pressed");
+            console.log("Go back button pressed");
             this.navigateToPageTag('manage-devices');
         });
     }
-    _attachHandlerSaveButton(){
+    _attachHandlerSaveButton() {
         this.on('devices:save', (event) => {
             // console.log (this.model);
             deviceData.serialNumber = this.model.deviceId.value;
@@ -165,18 +156,12 @@ export default class AddDeviceController extends WebcController {
             deviceData.status = this.model.status.value;
             deviceData.brand = this.model.brand.value;
             deviceData.identifier[0].value = this.model.deviceId.value;
-            console.log(deviceData);
-           
-            this.DeviceService = new DeviceService();
 
-            this.DeviceService.createDevice(deviceData,(err, devices) => {
+            this.DeviceService = new DeviceService();
+            this.DeviceService.createDevice(deviceData, (err, devices) => {
                 if (err) {
                     return console.log(err);
                 }
-                console.log('********************** List Of Devices from ManageDeviceController *********');
-                console.log(devices);
-               
-                // console.log(evidence.sReadSSI);
             });
             this.navigateToPageTag('manage-devices');
         });

@@ -26,7 +26,7 @@ export default class PatientConsentStatusController extends WebcController {
     _attachHandlerGoBack(){
         this.on('go-back', (event) => {
             console.log ("Go Back button pressed");
-            this.navigateToPageTag('patient-status');
+            this.navigateToPageTag('home');
         });
     }
 

@@ -29,8 +29,6 @@ export default class ManageDevicesController extends WebcController {
             if (err) {
                 return console.log(err);
             }
-            console.log('********************** List Of Devices from ManageDeviceController *********');
-            console.log(devices);
            this.navigateToPageTag('list-all-devices', devices);
             // console.log(evidence.sReadSSI);
         });

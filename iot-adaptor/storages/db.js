@@ -118,6 +118,7 @@ class DbStorage {
       });
   }
 
+
   async getResourceByIdAsync(type, id) {
     try {
       const response = await this.client.get(`/classes/${type}/${id}`);
@@ -189,6 +190,19 @@ class DbStorage {
     } catch(error) {
       return Promise.reject(error);
     }
+  }
+
+  getObservationByPatientId(type, id, callback) {
+    const _self = this;
+
+    this.client
+      .get(`/classes/${type}?where={"sk":{"$text":{"$search":{"$term":${id}}}}}`)
+      .then((response) => {
+        callback(undefined, _self.normalizeSingleResponse(response));
+      })
+      .catch((error) => {
+        callback(_self.normalizeErrorResponse(error), null);
+      });
   }
 }
 

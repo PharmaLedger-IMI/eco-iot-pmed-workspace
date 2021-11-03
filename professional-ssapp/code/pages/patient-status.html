@@ -1,127 +1,91 @@
 <psk-page title="Patient Status" style="height: 100vh">
     <link rel="stylesheet" href="../assets/css/common_style_professional_ssapp.css">
     <webc-container controller="PatientStatusController">
-        <div class="p-5 container-background-primary">
-            <div class="pharma-main-container">
-                <div class="d-flex flex-row align-content-center justify-content-between">
-                    <psk-img
-                            width="120"
-                            height="50"
-                            src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
-                            alt="Pharmaledger logo">
-                    </psk-img>
-                    <div class="d-flex flex-row justify-content-center align-items-center">
-                        <div class="mr-2">Help</div>
-                        <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
-                    </div>
+      <div class="p-5 container-background-primary">
+        <div class="pharma-main-container">
+          <div class="d-flex flex-row align-content-center justify-content-between">
+            <psk-img width="120" height="50" src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg" alt="Pharmaledger logo"></psk-img>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+              <div class="mr-2">Help</div>
+              <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
+            </div>
+          </div>
+          <div class="flex-grow-1">
+            <psk-card class="bpd-dashboard ">
+              <div slot="condition-true" class="m-5 d-flex flex-column align-items-center justify-content-center" style="height: 100%">
+                <div>
+                  <h4 class="bold">Patient Status</h4>
+                  <psk-button class="btn-bare table-cell m-1 pharma-primary" event-name="patient-device-history">
+                    <psk-icon icon="history" color="rgb(256, 256, 256)"></psk-icon>
+                  </psk-button>
+                  <psk-button class="btn-bare table-cell m-1 pharma-primary" event-name="patient-alert-history">
+                    <psk-icon icon="bell" color="rgb(256, 256, 256)"></psk-icon>
+                  </psk-button>
+                  <psk-button class="btn-bare table-cell m-1 pharma-primary" event-name="patient-consent-status">
+                    <psk-icon icon="edit" color="rgb(256, 256, 256)"></psk-icon>
+                  </psk-button>
                 </div>
-                <div class="flex-grow-1">
-                    <psk-card class="bpd-dashboard ">
-
-
-
-
-                        <div
-                                slot="condition-true"
-                                class="m-5 d-flex flex-column align-items-center justify-content-center"
-                                style="height: 100%"
-                        >
-                            <div>
-                                <h4 class="bold">Patient Status</h4>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                        event-name="patient-device-history"
-                                >
-                                    <psk-icon icon="history" color="rgb(256, 256, 256)"></psk-icon>
-                                </psk-button>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                        event-name="patient-alert-history"
-                                >
-                                    <psk-icon icon="bell" color="rgb(256, 256, 256)"></psk-icon>
-                                </psk-button>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                        event-name="patient-consent-status"
-                                >
-                                    <psk-icon icon="edit" color="rgb(256, 256, 256)"></psk-icon>
-                                </psk-button>
-
-                            </div>
-
-                            <div>
-                                <psk-layout class="border-bottom border-top" slot="condition-true" columns="5">
-                                    <psk-label label="Patient ID"></psk-label>
-                                    <psk-label label="Device ID"></psk-label>
-                                    <psk-label label="Device Status"></psk-label>
-                                    <psk-label label="Time"></psk-label>
-                                    <psk-label label="Consent Status"></psk-label>
-                                </psk-layout>
-
-                                <psk-layout columns="5" class="justify-content-center align-items-center table-row">
-                                    <psk-label label="A"></psk-label>
-                                    <psk-label label="B"></psk-label>
-                                    <psk-label label="C"></psk-label>
-                                    <psk-label label="D"></psk-label>
-                                    <psk-label label="E"></psk-label>
-                                </psk-layout>
-                            </div>
-                            <br>
-                            <br>
-                            <div>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                        label="ECG Value"
-                                >
-
-                                </psk-button>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                >
-                                    Heart Rate
-                                </psk-button>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                >
-                                    Body Tempereaure
-                                </psk-button>
-                            </div>
-                            <div>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                >
-                                    Heart Pressure
-                                </psk-button>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                >
-                                    Respiratory Frequency
-                                </psk-button>
-                                <psk-button
-                                        class="btn-bare table-cell m-1 pharma-primary"
-                                >
-                                    SpO2
-                                </psk-button>
-                            </div>
-                            <psk-button class="mt-2 pharma-primary" label="Go Back" event-name="go-back"></psk-button>
+                <div>
+                  <psk-layout class="border-bottom border-top" slot="condition-true" columns="5">
+                    <psk-label label="Patient ID"></psk-label>
+                    <psk-label label="Device ID"></psk-label>
+                    <psk-label label="Device Status"></psk-label>
+                    <psk-label label="Time"></psk-label>
+                    <psk-label label="Consent Status"></psk-label>
+                  </psk-layout>
+                  <psk-layout columns="5" class="justify-content-center align-items-center table-row">
+                    <psk-label label="A"></psk-label>
+                    <psk-label label="B"></psk-label>
+                    <psk-label label="C"></psk-label>
+                    <psk-label label="D"></psk-label>
+                    <psk-label label="E"></psk-label>
+                  </psk-layout>
+                </div>
+                <br>
+                <br>
+                <div >
+                    <div data-if="@allData"  >
+                        <div data-for="@allData">
+                            <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                              {{@name}}: {{@value}} {{@unit}}
+                            </psk-button>
                         </div>
-
-
-
-                    </psk-card>
-                </div>
-            </div>
-            <div class="pharma-footer">
-                <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
-                <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
-                    <div class="text-white text-centered text-justify">
-                        This project has received funding from the European Union’s Horizon 2020 research and innovation programme
-                        under grant agreement No 853992
                     </div>
-                    <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+                    <!-- <div slot="false">
+                        <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Height : 170 cm
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Weight : 92 kg
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Age : 63 a
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Systolic Blood Pressure : 102.7 mmHg
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            Diastolic Blood Pressure : 72 mmHg
+                          </psk-button>
+                          <psk-button class="btn-bare table-cell m-1 pharma-primary">
+                            SpO2 : 95.4179104477612 %
+                        </psk-button>
+                    </div> -->
+                  
                 </div>
-            </div>
+                <psk-button class="mt-2 pharma-primary" label="Go Back" event-name="go-back"></psk-button>
+              </div>
+            </psk-card>
+          </div>
         </div>
+        <div class="pharma-footer">
+          <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
+          <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+            <div class="text-white text-centered text-justify"> This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 853992 </div>
+            <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+          </div>
         </div>
+      </div>
+      </div>
     </webc-container>
-</psk-page>
+  </psk-page>

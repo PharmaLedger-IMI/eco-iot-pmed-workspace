@@ -1,10 +1,10 @@
 const {WebcController} = WebCardinal.controllers;
 
-
 export default class PatientAlertHistoryController extends WebcController {
     constructor(element, history) {
+
         super(element, history);
-        //this.setModel(ViewPatientList);
+
         this._attachHandlerGoBack();
     }
 
