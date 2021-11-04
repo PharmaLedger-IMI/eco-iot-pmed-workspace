@@ -4,7 +4,7 @@ RUN npm install -g node-gyp
 
 # RUN git clone https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git iot-pmed-workspace
 
-COPY ./iot-pmed-workspace ./iot-pmed-workspace
+COPY ./ ./iot-pmed-workspace
 
 WORKDIR iot-pmed-workspace
 
