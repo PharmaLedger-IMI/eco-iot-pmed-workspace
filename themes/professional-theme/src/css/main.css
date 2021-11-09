@@ -2,11 +2,6 @@
 @import url('fonts/nunito/nunito.css');
 @import url('bootstrap/css/bootstrap.min.css');
 
-:root {
-  --primary: #00345b;
-  --secondary: #008798;
-}
-
 body {
   margin: 0;
   padding: 0;
