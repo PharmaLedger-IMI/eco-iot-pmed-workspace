@@ -1,606 +1,592 @@
 {
-  "workDir": ".",
-  "dependencies": [
-    {
-      "name": "cardinal",
-      "src": "http://github.com/privatesky/cardinal.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd cardinal && npm install"
-        },
-        {
-          "type": "execute",
-          "cmd": "cd cardinal && npm run build"
-        }
-      ]
-    },
-    {
-      "name": "webcardinal",
-      "src": "https://github.com/webcardinal/webcardinal-bundler",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd webcardinal && npm install && npm run bundle-all && npm run build"
-        }
-      ]
-    },
-    {
-      "name": "privatesky",
-      "src": "http://github.com/privatesky/privatesky.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd privatesky && npm install"
-        }
-      ]
-    },
-    {
-      "name": "build privatesky",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd privatesky && npm run build"
-        }
-      ]
-    },
-    {
-      "name": "menu-wallet-prototype",
-      "src": "http://github.com/privatesky/menu-wallet-prototype.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd menu-wallet-prototype && npm install"
-        }
-      ]
-    },
-    {
-      "name": "dossier-explorer-wallet-prototype",
-      "src": "https://github.com/PrivateSky/dossier-explorer-wallet-prototype.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd dossier-explorer-wallet-prototype && npm install"
-        }
-      ]
-    },
-    {
-      "name": "apihub-root/dsu-explorer/loader",
-      "src": "https://github.com/PrivateSky/web-dossier-loader.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd apihub-root/dsu-explorer/loader && npm install"
-        },
-        {
-          "type": "copy",
-          "src": "apihub-root/dsu-explorer/loader/loader-config.local.json-template",
-          "target": "apihub-root/dsu-explorer/loader/loader-config.local.json",
-          "options": {
-            "overwrite": true
-          }
-        }
-      ]
-    },
-    {
-      "name": "dossier-explorer-ssapp",
-      "src": "https://github.com/PrivateSky/dossier-explorer-ssapp.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd dossier-explorer-ssapp && npm install"
-        }
-      ]
-    },
-    {
-      "name": "apihub-root/patient-wallet/loader",
-      "src": "http://github.com/privatesky/trust-loader.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd apihub-root/patient-wallet/loader && npm install"
-        }
-      ]
-    },
-    {
-      "name": "apihub-root/professional-wallet/loader",
-      "src": "http://github.com/privatesky/trust-loader.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd apihub-root/professional-wallet/loader && npm install"
-        }
-      ]
-    },
-    {
-      "name": "apihub-root/researcher-wallet/loader",
-      "src": "http://github.com/privatesky/trust-loader.git",
-      "actions": [
-        {
-          "type": "smartClone",
-          "target": ".",
-          "collectLog": false
-        },
-        {
-          "type": "execute",
-          "cmd": "cd apihub-root/researcher-wallet/loader && npm install"
-        }
-      ]
-    },
-    {
-      "name": "themes/blue-fluorite-theme",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/blue-fluorite-theme && npm install"
-        }
-      ]
-    },
-    {
-      "name": "themes/professional-theme",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/professional-theme && npm install"
-        }
-      ]
-    },
-    {
-      "name": "themes/patient-theme",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/patient-theme && npm install"
-        }
-      ]
-    },
-    {
-      "name": "themes/researcher-theme",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/researcher-theme && npm install"
-        }
-      ]
-    },
-    {
-      "name": "themes/eDiary-theme",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/eDiary-theme && npm install"
-        }
-      ]
-    },
-    {
-      "name": "epi-theme",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/epi-theme && npm install"
-        }
-      ]
-    },
-    {
-      "name": "patient-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd patient-ssapp && npm install"
-        }
-      ]
-    },
-    {
-      "name": "professional-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd professional-ssapp && npm install"
-        }
-      ]
-    },
-    {
-      "name": "researcher-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd researcher-ssapp && npm install"
-        }
-      ]
-    },
-    {
-      "name": "ediary-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd ediary-ssapp && npm install"
-        }
-      ]
-    },
-    {
-      "name": "iot-adaptor",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd iot-adaptor && npm install"
-        }
-      ]
-    }
-  ],
-  "build": [
-    {
-      "name": "cardinal-wallet-build",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd cardinal && npm run build-dossier"
-        }
-      ]
-    },
-    {
-      "name": "webcardinal-wallet-build",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd webcardinal && npm run build-dossier"
-        }
-      ]
-    },
-    {
-      "name": "utilitaries",
-      "actions": [
-        {
-          "type": "copy",
-          "src": "./utilitaries",
-          "target": "./ediary-ssapp/",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "copy",
-          "src": "./utilitaries",
-          "target": "./patient-ssapp/",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "copy",
-          "src": "./utilitaries",
-          "target": "./professional-ssapp/",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "copy",
-          "src": "./utilitaries",
-          "target": "./researcher-ssapp/",
-          "options": {
-            "overwrite": true
-          }
-        }
-      ]
-    },
-    {
-      "name": "blue-fluorite-theme-wallet-build",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/blue-fluorite-theme && npm run build-dossier"
-        }
-      ]
-    },
-    {
-      "name": "professional-theme-wallet-build",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/professional-theme && npm run build-dossier"
-        }
-      ]
-    },
-    {
-      "name": "epi-theme-wallet-build",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/epi-theme && npm run build-dossier"
-        }
-      ]
-    },
-    {
-      "name": "patient-theme-wallet-build",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/patient-theme && npm run build-dossier"
-        }
-      ]
-    },
-    {
-      "name": "researcher-theme-wallet-build",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/researcher-theme && npm run build-dossier"
-        }
-      ]
-    },
-    {
-      "name": "eDiary-theme-wallet-build",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd themes/eDiary-theme && npm run build-dossier"
-        }
-      ]
-    },
-    {
-      "name": "dossier-explorer-wallet-prototype-build",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd dossier-explorer-wallet-prototype && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./dossier-explorer-wallet-prototype/seed",
-          "target": "./apihub-root/dsu-explorer/wallet-patch/seed",
-          "options": {
-            "overwrite": true
-          }
-        }
-      ]
-    },
-    {
-      "name": "dsu-explorer_bind_to_dossier-explorer-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd dossier-explorer-ssapp && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./dossier-explorer-ssapp/seed",
-          "target": "./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/seed",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "execute",
-          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/readme"
-        }
-      ]
-    },
-    {
-      "name": "trust-loader-config",
-      "actions": [
-        {
-          "type": "copy",
-          "src": "./trust-loader-config",
-          "target": "./apihub-root",
-          "options": {
-            "overwrite": true
-          }
-        }
-      ]
-    },
-    {
-      "name": "copy-bundles",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd apihub-root/patient-wallet/loader && npm install"
-        },
-        {
-          "type": "execute",
-          "cmd": "cd apihub-root/professional-wallet/loader && npm install"
-        },
-        {
-          "type": "execute",
-          "cmd": "cd apihub-root/researcher-wallet/loader && npm install"
-        },
-        {
-          "type": "execute",
-          "cmd": "cd apihub-root/dsu-explorer/loader && npm install"
-        }
-      ]
-    },
-    {
-      "name": "patient-wallet_bind_to_menu-wallet-prototype",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd menu-wallet-prototype && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./menu-wallet-prototype/seed",
-          "target": "./apihub-root/patient-wallet/wallet-patch/seed",
-          "options": {
-            "overwrite": true
-          }
-        }
-      ]
-    },
-    {
-      "name": "bind_professional_ssapp_to_wallet",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd professional-ssapp && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./professional-ssapp/seed",
-          "target": "./apihub-root/professional-wallet/wallet-patch/seed",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "copy",
-          "src": "./professional-ssapp/seed",
-          "target": "./apihub-root/professional-wallet/apps-patch/professional-ssapp/seed",
-          "options": {
-            "overwrite": true
-          }
-        }
-      ]
-    },
-    {
-      "name": "researcher-wallet_bind_to_menu-wallet-prototype",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd menu-wallet-prototype && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./menu-wallet-prototype/seed",
-          "target": "./apihub-root/researcher-wallet/wallet-patch/seed",
-          "options": {
-            "overwrite": true
-          }
-        }
-      ]
-    },
-    {
-      "name": "patient-wallet_bind_to_patient-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd patient-ssapp && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./patient-ssapp/seed",
-          "target": "./apihub-root/patient-wallet/apps-patch/patient-ssapp/seed",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "execute",
-          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
-        }
-      ]
-    },
-    {
-      "name": "researcher-wallet_bind_to_researcher-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd researcher-ssapp && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./researcher-ssapp/seed",
-          "target": "./apihub-root/researcher-wallet/apps-patch/researcher-ssapp/seed",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "execute",
-          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/researcher-wallet/apps-patch/researcher-ssapp/readme"
-        }
-      ]
-    },
-    {
-      "name": "patient-wallet_bind_to_ediary-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd ediary-ssapp && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./ediary-ssapp/seed",
-          "target": "./apihub-root/patient-wallet/apps-patch/ediary-ssapp/seed",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "execute",
-          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/ediary-ssapp/readme"
-        }
-      ]
-    }
-  ]
+	"workDir": ".",
+	"dependencies": [
+		{
+			"name": "cardinal",
+			"src": "http://github.com/privatesky/cardinal.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd cardinal && npm install"
+				},
+				{
+					"type": "execute",
+					"cmd": "cd cardinal && npm run build"
+				}
+			]
+		},
+		{
+			"name": "webcardinal",
+			"src": "https://github.com/webcardinal/webcardinal-bundler",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd webcardinal && npm install && npm run bundle-all && npm run build"
+				}
+			]
+		},
+		{
+			"name": "privatesky",
+			"src": "http://github.com/privatesky/privatesky.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd privatesky && npm install"
+				}
+			]
+		},
+		{
+			"name": "build privatesky",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd privatesky && npm run build"
+				}
+			]
+		},
+		{
+			"name": "menu-wallet-prototype",
+			"src": "http://github.com/privatesky/menu-wallet-prototype.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd menu-wallet-prototype && npm install"
+				}
+			]
+		},
+		{
+			"name": "dossier-explorer-wallet-prototype",
+			"src": "https://github.com/PrivateSky/dossier-explorer-wallet-prototype.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd dossier-explorer-wallet-prototype && npm install"
+				}
+			]
+		},
+		{
+			"name": "apihub-root/dsu-explorer/loader",
+			"src": "https://github.com/PrivateSky/web-dossier-loader.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/dsu-explorer/loader && npm install"
+				},
+				{
+					"type": "copy",
+					"src": "apihub-root/dsu-explorer/loader/loader-config.local.json-template",
+					"target": "apihub-root/dsu-explorer/loader/loader-config.local.json",
+					"options": {
+						"overwrite": true
+					}
+				}
+			]
+		},
+		{
+			"name": "dossier-explorer-ssapp",
+			"src": "https://github.com/PrivateSky/dossier-explorer-ssapp.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd dossier-explorer-ssapp && npm install"
+				}
+			]
+		},
+		{
+			"name": "apihub-root/patient-wallet/loader",
+			"src": "http://github.com/privatesky/trust-loader.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/patient-wallet/loader && npm install"
+				}
+			]
+		},
+		{
+			"name": "apihub-root/professional-wallet/loader",
+			"src": "http://github.com/privatesky/trust-loader.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/professional-wallet/loader && npm install"
+				}
+			]
+		},
+		{
+			"name": "apihub-root/researcher-wallet/loader",
+			"src": "http://github.com/privatesky/trust-loader.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/researcher-wallet/loader && npm install"
+				}
+			]
+		},
+		{
+			"name": "themes/blue-fluorite-theme",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/blue-fluorite-theme && npm install"
+				}
+			]
+		},
+		{
+			"name": "themes/professional-theme",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/professional-theme && npm install"
+				}
+			]
+		},
+		{
+			"name": "themes/patient-theme",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/patient-theme && npm install"
+				}
+			]
+		},
+		{
+			"name": "themes/researcher-theme",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/researcher-theme && npm install"
+				}
+			]
+		},
+		{
+			"name": "themes/eDiary-theme",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/eDiary-theme && npm install"
+				}
+			]
+		},
+		{
+			"name": "epi-theme",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/epi-theme && npm install"
+				}
+			]
+		},
+		{
+			"name": "patient-ssapp",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd patient-ssapp && npm install"
+				}
+			]
+		},
+		{
+			"name": "professional-ssapp",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd professional-ssapp && npm install"
+				}
+			]
+		},
+		{
+			"name": "researcher-ssapp",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd researcher-ssapp && npm install"
+				}
+			]
+		},
+		{
+			"name": "ediary-ssapp",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd ediary-ssapp && npm install"
+				}
+			]
+		},
+		{
+			"name": "iot-adaptor",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd iot-adaptor && npm install"
+				}
+			]
+		}
+	],
+	"build": [
+		{
+			"name": "cardinal-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd cardinal && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "webcardinal-wallet-build",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd webcardinal && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "utilitaries",
+			"actions": [
+				{
+					"type": "copy",
+					"src": "./utilitaries",
+					"target": "./ediary-ssapp/",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "copy",
+					"src": "./utilitaries",
+					"target": "./patient-ssapp/",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "copy",
+					"src": "./utilitaries",
+					"target": "./professional-ssapp/",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "copy",
+					"src": "./utilitaries",
+					"target": "./researcher-ssapp/",
+					"options": {
+						"overwrite": true
+					}
+				}
+			]
+		},
+		{
+			"name": "blue-fluorite-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/blue-fluorite-theme && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "professional-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/professional-theme && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "epi-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/epi-theme && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "patient-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/patient-theme && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "researcher-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/researcher-theme && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "eDiary-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/eDiary-theme && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "dossier-explorer-wallet-prototype-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd dossier-explorer-wallet-prototype && npm run build"
+				},
+				{
+					"type": "copy",
+					"src": "./dossier-explorer-wallet-prototype/seed",
+					"target": "./apihub-root/dsu-explorer/wallet-patch/seed",
+					"options": {
+						"overwrite": true
+					}
+				}
+			]
+		},
+		{
+			"name": "dsu-explorer_bind_to_dossier-explorer-ssapp",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd dossier-explorer-ssapp && npm run build"
+				},
+				{
+					"type": "copy",
+					"src": "./dossier-explorer-ssapp/seed",
+					"target": "./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/seed",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "execute",
+					"cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/readme"
+				}
+			]
+		},
+		{
+			"name": "trust-loader-config",
+			"actions": [
+				{
+					"type": "copy",
+					"src": "./trust-loader-config",
+					"target": "./apihub-root",
+					"options": {
+						"overwrite": true
+					}
+				}
+			]
+		},
+		{
+			"name": "copy-bundles",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/patient-wallet/loader && npm install"
+				},
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/professional-wallet/loader && npm install"
+				},
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/researcher-wallet/loader && npm install"
+				},
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/dsu-explorer/loader && npm install"
+				}
+			]
+		},
+		{
+			"name": "bind_professional_ssapp_to_wallet",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd professional-ssapp && npm run build"
+				},
+				{
+					"type": "copy",
+					"src": "./professional-ssapp/seed",
+					"target": "./apihub-root/professional-wallet/wallet-patch/seed",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "copy",
+					"src": "./professional-ssapp/seed",
+					"target": "./apihub-root/professional-wallet/apps-patch/professional-ssapp/seed",
+					"options": {
+						"overwrite": true
+					}
+				}
+			]
+		},
+		{
+			"name": "bind_researcher_ssapp_to_wallet",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd researcher-ssapp && npm run build"
+				},
+				{
+					"type": "copy",
+					"src": "./researcher-ssapp/seed",
+					"target": "./apihub-root/researcher-wallet/wallet-patch/seed",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "copy",
+					"src": "./researcher-ssapp/seed",
+					"target": "./apihub-root/researcher-wallet/apps-patch/researcher-ssapp/seed",
+					"options": {
+						"overwrite": true
+					}
+				}
+			]
+		},
+		{
+			"name": "patient-wallet_bind_to_menu-wallet-prototype",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd menu-wallet-prototype && npm run build"
+				},
+				{
+					"type": "copy",
+					"src": "./menu-wallet-prototype/seed",
+					"target": "./apihub-root/patient-wallet/wallet-patch/seed",
+					"options": {
+						"overwrite": true
+					}
+				}
+			]
+		},
+		{
+			"name": "patient-wallet_bind_to_patient-ssapp",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd patient-ssapp && npm run build"
+				},
+				{
+					"type": "copy",
+					"src": "./patient-ssapp/seed",
+					"target": "./apihub-root/patient-wallet/apps-patch/patient-ssapp/seed",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "execute",
+					"cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
+				}
+			]
+		},
+		{
+			"name": "patient-wallet_bind_to_ediary-ssapp",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd ediary-ssapp && npm run build"
+				},
+				{
+					"type": "copy",
+					"src": "./ediary-ssapp/seed",
+					"target": "./apihub-root/patient-wallet/apps-patch/ediary-ssapp/seed",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "execute",
+					"cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/ediary-ssapp/readme"
+				}
+			]
+		}
+	]
 }
