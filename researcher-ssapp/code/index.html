@@ -3,21 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>PSK App Core</title>
+    <title>Researcher SSApp</title>
     PLACEHOLDER_THAT_WILL_BE_REPLACED_BY_SW_OR_SERVER_WITH_BASE_TAG
-    <link href="resources/css/main.css" rel="stylesheet" type="text/css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="themes/professional-theme/index.css" rel="stylesheet" type="text/css">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
     <script src="scripts/bundles/iframeBoot.js"></script>
     <script src="scripts/bundles/webshims.js"></script>
     <script src="scripts/bundles/pskruntime.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-
-<!--    <script src="scripts/bundles/gtinResolver.js"></script>-->
-<!--    <script src="../../nativeBridge.js"></script>-->
-    <link rel="stylesheet" href="webcardinal/webcardinal.css">
-    <script type="module" src="webcardinal/webcardinal.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
+    <link href="webcardinal/webcardinal.css" rel="stylesheet">
+    <script src="webcardinal/webcardinal.js" type="module"></script>
     <script>
         if (window.frameElement) {
             let iframeIdentity = window.frameElement.getAttribute('identity');
@@ -29,22 +25,22 @@
                 isSimpleSSApp = true;
 
                 //parent.top does not fit the case when the wallet is an iframe in another application
-                let getWalletAppIframeWindow = function (parentWindow){
+                let getWalletAppIframeWindow = function (parentWindow) {
 
                     if (parentWindow.frameElement) {
                         if (parentWindow.frameElement.hasAttribute("identity")) {
-                            iframeIdentity = parentWindow.frameElement.getAttribute("identity")
+                            iframeIdentity = parentWindow.frameElement.getAttribute("identity");
                             return parentWindow;
                         }
                     }
 
-                    if(parentWindow === window.top){
+                    if (parentWindow === window.top) {
                         console.log("No wallet environment found");
                         return;
                     }
 
                     return getWalletAppIframeWindow(parentWindow.parent);
-                }
+                };
 
                 iframeWindow = getWalletAppIframeWindow(iframeWindow);
             }
@@ -62,12 +58,12 @@
 
 <body>
 
-        <webc-app-root>
-            <webc-app-container>
-                <webc-app-router>
-                </webc-app-router>
-            </webc-app-container>
-        </webc-app-root>
+<webc-app-root>
+    <webc-app-container>
+        <webc-app-router>
+        </webc-app-router>
+    </webc-app-container>
+</webc-app-root>
 </body>
 
 </html>
