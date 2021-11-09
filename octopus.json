@@ -493,17 +493,25 @@
       ]
     },
     {
-      "name": "professional-wallet_bind_to_menu-wallet-prototype",
+      "name": "bind_professional_ssapp_to_wallet",
       "src": "",
       "actions": [
         {
           "type": "execute",
-          "cmd": "cd menu-wallet-prototype && npm run build"
+          "cmd": "cd professional-ssapp && npm run build"
         },
         {
           "type": "copy",
-          "src": "./menu-wallet-prototype/seed",
+          "src": "./professional-ssapp/seed",
           "target": "./apihub-root/professional-wallet/wallet-patch/seed",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "copy",
+          "src": "./professional-ssapp/seed",
+          "target": "./apihub-root/professional-wallet/apps-patch/professional-ssapp/seed",
           "options": {
             "overwrite": true
           }
@@ -569,28 +577,6 @@
         {
           "type": "execute",
           "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/researcher-wallet/apps-patch/researcher-ssapp/readme"
-        }
-      ]
-    },
-    {
-      "name": "professional-wallet_bind_to_professional-ssapp",
-      "src": "",
-      "actions": [
-        {
-          "type": "execute",
-          "cmd": "cd professional-ssapp && npm run build"
-        },
-        {
-          "type": "copy",
-          "src": "./professional-ssapp/seed",
-          "target": "./apihub-root/professional-wallet/apps-patch/professional-ssapp/seed",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "execute",
-          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/professional-wallet/apps-patch/professional-ssapp/readme"
         }
       ]
     },
