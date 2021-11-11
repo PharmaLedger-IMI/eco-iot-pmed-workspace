@@ -13,43 +13,19 @@
                     <psk-button class="mr-2 pharma-primary" event-name="log-out" label="Logout"></psk-button>
                 </div>
             </div>
-            <div class="flex-grow-1">
-                <psk-card class="bpd-dashboard ">
 
-                    <div class="bpd-buttons-row bpd-wide-cards">
+            <div class="container home">
+                <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
+                     width="480"/>
 
-                        <psk-layout align-items="auto" columns="2">
+                <div class="home-button-group">
+                    <button data-tag="devices:add">Add Device</button>
+                    <button data-tag="devices:search">Search device</button>
+                </div>
 
-
-                            <psk-button class="bpd-organization-card" event-name="devices:add">
-                                <div class="bpd-organization-card-content">
-                                    <psk-icon color="rgb(255, 255, 255)" icon="user"></psk-icon>
-                                </div>
-                                <psk-label class="bpd-organization-card-label" label="Add devices"/>
-                            </psk-button>
-
-                            <psk-button class="bpd-organization-card" event-name="devices:search">
-                                <div class="bpd-organization-card-content">
-                                    <psk-icon color="rgb(255, 255, 255)" icon="cloud"></psk-icon>
-                                </div>
-                                <psk-label class="bpd-organization-card-label" label="Search device"/>
-                            </psk-button>
-
-
-                        </psk-layout>
-                    </div>
-
-                    <div class="bpd-buttons-row bpd-wide-cards">
-                        <psk-button class="bpd-organization-card" event-name="devices:back">
-                            <div class="bpd-organization-card-content">
-                                <psk-icon color="rgb(255, 255, 255)" icon="tasks"></psk-icon>
-                            </div>
-                            <psk-label class="bpd-organization-card-label" label="Back"/>
-                        </psk-button>
-                    </div>
-
-
-                </psk-card>
+                <div class="home-button-group">
+                    <button data-tag="devices:back">Back</button>
+                </div>
             </div>
         </div>
         <div class="pharma-footer">
@@ -63,6 +39,5 @@
                 <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
             </div>
         </div>
-    </div>
     </div>
 </webc-container>

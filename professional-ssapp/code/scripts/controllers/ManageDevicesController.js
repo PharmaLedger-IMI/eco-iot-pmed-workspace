@@ -13,32 +13,26 @@ export default class ManageDevicesController extends WebcController {
 
     }
 
-    _attachHandlerAddDevice(){
-        this.on('devices:add', (event) => {
-            console.log ("Add devices button pressed");
+    _attachHandlerAddDevice() {
+        this.onTagClick('devices:add', () => {
             this.navigateToPageTag('add-device');
         });
     }
 
-    _attachHandlerSearchDevice(){
-        this.on('devices:search', (event) => {
-           
-        this.DeviceService = new DeviceService();
-
-        this.DeviceService.searchDevice((err, devices) => {
-            if (err) {
-                return console.log(err);
-            }
-           this.navigateToPageTag('list-all-devices', devices);
-            // console.log(evidence.sReadSSI);
-        });
-            
+    _attachHandlerSearchDevice() {
+        this.onTagClick('devices:search', () => {
+            this.DeviceService = new DeviceService();
+            this.DeviceService.searchDevice((err, devices) => {
+                if (err) {
+                    return console.log(err);
+                }
+                this.navigateToPageTag('list-all-devices', devices);
+            });
         });
     }
 
-    _attachHandlerGoBack(){
-        this.on('devices:back', (event) => {
-            console.log ("Back devices Patients button pressed");
+    _attachHandlerGoBack() {
+        this.onTagClick('devices:back', () => {
             this.navigateToPageTag('home');
         });
     }
