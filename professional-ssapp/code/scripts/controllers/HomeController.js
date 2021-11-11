@@ -8,7 +8,7 @@ import IotAdaptorApi from "../services/IotAdaptorApi.js";
 export default class HomeController extends WebcController {
     constructor(element, history) {
         super(element, history);
-        this.model ={};
+        this.model = {};
 
         this._attachHandlerManageDevices();
         this._attachHandlerTrialManagement();
@@ -84,26 +84,23 @@ export default class HomeController extends WebcController {
     }
 
     _attachHandlerManageDevices() {
-        this.on('home:manage-devices', (event) => {
-            console.log ("Manage devices button pressed");
+        this.onTagClick('home:manage-devices', () => {
             this.navigateToPageTag('manage-devices');
         });
     }
 
-    _attachHandlerTrialManagement(){
-        this.on('home:trial-management', (event) => {
-            console.log ("Trial Management button pressed");
+    _attachHandlerTrialManagement() {
+        this.onTagClick('home:trial-management', () => {
             this.navigateToPageTag('trial-management');
         });
     }
 
-   
-    async _attachHandlerListOfPatients(){
-        this.on('home:list-of-patients', (event) => {
-            // console.log ("Status Patients button pressed");
+
+    async _attachHandlerListOfPatients() {
+        this.onTagClick('home:list-of-patients', () => {
             this.IotAdaptorApi = new IotAdaptorApi();
-            var observations = [];
-            this.IotAdaptorApi.searchResource("Observation", function(err,result){
+            let observations = [];
+            this.IotAdaptorApi.searchResource("Observation", function (err, result) {
                 result.forEach(value => {
                     let initData = {
                         name: value.code.text,
@@ -111,15 +108,13 @@ export default class HomeController extends WebcController {
                         unit: value.valueQuantity.unit
                     };
                     observations.push(initData);
-                 });
-                
+                });
             });
-            
-            this.navigateToPageTag('patient-status',{allData: observations});
-            
-            
+
+            this.navigateToPageTag('patient-status', {allData: observations});
         });
     }
+
     // _attachHandlerListOfPatients(){
     //     this.on('home:list-of-patients', (event) => {
     //         console.log ("List of Patients button pressed");
