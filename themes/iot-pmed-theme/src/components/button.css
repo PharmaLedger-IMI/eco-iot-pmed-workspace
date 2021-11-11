@@ -1,0 +1,37 @@
+/* FROM psk-button - refactor this during webcardinal migration refactor */
+
+.btn.btn-primary,
+.submit {
+    background-color: #008798;
+    box-shadow: rgba(53, 79, 155, 0.35) 0 15px 30px -12px;
+    padding: 4px 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    border: 1px solid #008798;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.btn.btn-primary:focus,
+.btn.btn-primary:not(:disabled):not(.disabled):active,
+.submit {
+    border: none !important;
+}
+
+.btn.btn-primary:hover,
+.submit:hover {
+    background-color: rgba(0, 136, 152, 0.8);
+}
+
+.btn.btn-primary:active,
+.submit:active {
+    background-color: rgba(0, 136, 152, 0.8) !important;
+}
+
+.btn.btn-primary:disabled,
+.submit:disabled {
+    background-color: rgba(0, 136, 152, 0.8) !important;
+}
+
+

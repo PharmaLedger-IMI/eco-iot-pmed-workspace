@@ -1,90 +1,67 @@
-<psk-page title="Information Request" style="height: 100vh">
-    <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <webc-container controller="HomeController" style="height: 100%">
-        <div class="p-5 container-background-primary">
-            <div class="pharma-main-container">
-              <div class="d-flex flex-row align-content-center justify-content-between">
+<webc-container controller="HomeController" style="height: 100%">
+    <div class="p-5 container-background-primary">
+        <div class="pharma-main-container">
+            <div class="d-flex flex-row align-content-center justify-content-between">
                 <img
-                  width="110"
-                  height="47"
-                  src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
-                  alt="Pharmaledger logo"
+                        alt="Pharmaledger logo"
+                        height="47"
+                        src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
+                        width="110"
                 />
                 <div class="d-flex flex-row justify-content-center align-items-center">
-                  <div class="mr-2">Help</div>
-                  <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
+                    <div class="mr-2">Help</div>
+                    <psk-button class="mr-2 pharma-primary" event-name="log-out" label="Logout"></psk-button>
                 </div>
-              </div>
-              <div class="flex-grow-1">
-                <psk-card class="bpd-dashboard">
-
-                    <!--            <psk-label class="bpd-dashboard-title" label="Researcher Dashboard"/>-->
-                    
-                                <div class="bpd-buttons-row bpd-wide-cards">
-                    
-                                    <psk-layout columns="2" align-items="auto">
-                    
-                                        <psk-button class="bpd-organization-card" event-name="home:information-request">
-                                            <div class="bpd-organization-card-content">
-                                                <psk-icon icon="user" color="rgb(255, 255, 255)"></psk-icon>
-                                            </div>
-                                            <psk-label class="bpd-organization-card-label" label="Information Request"/>
-                                        </psk-button>
-                    
-                                        <psk-button class="bpd-organization-card" event-name="home:configure-access">
-                                            <div class="bpd-organization-card-content">
-                                                <psk-icon icon="cloud" color="rgb(255, 255, 255)"></psk-icon>
-                                            </div>
-                                            <psk-label class="bpd-organization-card-label" label="Configure Access"/>
-                                        </psk-button>
-                    
-                                        <psk-button class="bpd-organization-card" event-name="home:view-dynamic-permission">
-                                            <div class="bpd-organization-card-content">
-                                                <psk-icon icon="bug" color="rgb(255, 255, 255)"></psk-icon>
-                                            </div>
-                                            <psk-label class="bpd-organization-card-label" label="View dynamic consent"/>
-                                        </psk-button>
-                    
-                                        <psk-button class="bpd-organization-card" event-name="home:evidence">
-                                            <div class="bpd-organization-card-content">
-                                                <psk-icon icon="tasks" color="rgb(255, 255, 255)"></psk-icon>
-                                            </div>
-                                            <psk-label class="bpd-organization-card-label" label="Evidence"/>
-                                        </psk-button>
-                    
-                                    </psk-layout>
-                    
-                    
-                    
-                                </div>
-                    
-                            </psk-card>
-              </div>
             </div>
-            <div class="pharma-footer">
-              <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
-              <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+            <div class="flex-grow-1">
+                <psk-card class="bpd-dashboard">
+                    <!--            <psk-label class="bpd-dashboard-title" label="Researcher Dashboard"/>-->
+                    <div class="bpd-buttons-row bpd-wide-cards">
+                        <psk-layout align-items="auto" columns="2">
+
+                            <psk-button class="bpd-organization-card" event-name="home:information-request">
+                                <div class="bpd-organization-card-content">
+                                    <psk-icon color="rgb(255, 255, 255)" icon="user"></psk-icon>
+                                </div>
+                                <psk-label class="bpd-organization-card-label" label="Information Request"/>
+                            </psk-button>
+
+                            <psk-button class="bpd-organization-card" event-name="home:configure-access">
+                                <div class="bpd-organization-card-content">
+                                    <psk-icon color="rgb(255, 255, 255)" icon="cloud"></psk-icon>
+                                </div>
+                                <psk-label class="bpd-organization-card-label" label="Configure Access"/>
+                            </psk-button>
+
+                            <psk-button class="bpd-organization-card" event-name="home:view-dynamic-permission">
+                                <div class="bpd-organization-card-content">
+                                    <psk-icon color="rgb(255, 255, 255)" icon="bug"></psk-icon>
+                                </div>
+                                <psk-label class="bpd-organization-card-label" label="View dynamic consent"/>
+                            </psk-button>
+
+                            <psk-button class="bpd-organization-card" event-name="home:evidence">
+                                <div class="bpd-organization-card-content">
+                                    <psk-icon color="rgb(255, 255, 255)" icon="tasks"></psk-icon>
+                                </div>
+                                <psk-label class="bpd-organization-card-label" label="Evidence"/>
+                            </psk-button>
+
+                        </psk-layout>
+                    </div>
+                </psk-card>
+            </div>
+        </div>
+        <div class="pharma-footer">
+            <img alt="EU flag" class="ml-5" height="81" src="assets/images/EU_flag.jpg" width="123"/>
+            <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
                 <div class="text-white text-centered text-justify">
-                  This project has received funding from the European Union’s Horizon 2020 research and innovation programme
-                  under grant agreement No 853992
+                    This project has received funding from the European Union’s Horizon 2020 research and innovation
+                    programme
+                    under grant agreement No 853992
                 </div>
                 <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
-              </div>
             </div>
-          </div>
-        
-
-
-        
-
-    </webc-container>
-
-</psk-page>
-
-
-
-
-
-
-
-
+        </div>
+    </div>
+</webc-container>

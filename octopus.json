@@ -183,16 +183,6 @@
 			]
 		},
 		{
-			"name": "themes/professional-theme",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/professional-theme && npm install"
-				}
-			]
-		},
-		{
 			"name": "themes/patient-theme",
 			"src": "",
 			"actions": [
@@ -223,12 +213,12 @@
 			]
 		},
 		{
-			"name": "epi-theme",
+			"name": "iot-pmed-theme",
 			"src": "",
 			"actions": [
 				{
 					"type": "execute",
-					"cmd": "cd themes/epi-theme && npm install"
+					"cmd": "cd themes/iot-pmed-theme && npm install"
 				}
 			]
 		},
@@ -351,26 +341,6 @@
 			]
 		},
 		{
-			"name": "professional-theme-wallet-build",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/professional-theme && npm run build-dossier"
-				}
-			]
-		},
-		{
-			"name": "epi-theme-wallet-build",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/epi-theme && npm run build-dossier"
-				}
-			]
-		},
-		{
 			"name": "patient-theme-wallet-build",
 			"src": "",
 			"actions": [
@@ -397,6 +367,16 @@
 				{
 					"type": "execute",
 					"cmd": "cd themes/eDiary-theme && npm run build-dossier"
+				}
+			]
+		},
+		{
+			"name": "iot-pmed-theme-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/iot-pmed-theme && npm run build-dossier"
 				}
 			]
 		},

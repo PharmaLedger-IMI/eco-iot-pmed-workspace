@@ -1,65 +1,63 @@
-<psk-page title="Evidence" style="height: 100vh">
-  <link rel="stylesheet" href="../assets/css/common_style_researcher_ssapp.css">
-    <webc-container controller="EvidenceController">
-      <div class="p-5 container-background-primary">
+<webc-container controller="EvidenceController">
+    <div class="p-5 container-background-primary">
         <div class="pharma-main-container">
-          <div class="d-flex flex-row align-content-center justify-content-between">
-            <psk-img 
-            width="120"
-            height="50"
-            src="../assets/images/pharmaledger.jpg"
-            alt="Pharmaledger logo">
-            </psk-img>
-            <div class="d-flex flex-row justify-content-center align-items-center">
-              <div class="mr-2">Help</div>
-              <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
-            </div>
-          </div>
-          <div class="flex-grow-1">
-            <psk-card class="bpd-dashboard ">
-                <div class="bpd-wide-cards">
-                  <div class="d-flex flex-row align-items-center justify-content-around">
-                    <psk-button
-                      class="btn-bare table-cell m-1 pharma-primary"
-                      event-name="evidence:add-evidence-p1"
-                    >
-                      Add New Evidence
-                    </psk-button>
-                    <psk-button
-                      class="btn-bare table-cell m-1 pharma-primary"
-                      event-name="evidence:list"
-                    >
-                      Search Evidence
-                    </psk-button>
-                  </div>
-                  <br>
-                  <div class="d-flex flex-row align-items-center justify-content-around">
-                    <psk-button
-                      class="btn-bare table-cell m-1 pharma-primary"
-                      event-name="evidence:home"
-                    >
-                      Back
-                    </psk-button>
-                  </div>
+            <div class="d-flex flex-row align-content-center justify-content-between">
+                <psk-img
+                        alt="Pharmaledger logo"
+                        height="50"
+                        src="../assets/images/pharmaledger.jpg"
+                        width="120">
+                </psk-img>
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <div class="mr-2">Help</div>
+                    <psk-button class="mr-2 pharma-primary" event-name="log-out" label="Logout"></psk-button>
                 </div>
-              </psk-card>
             </div>
-          </div>
-        <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
-            <psk-img 
-            width="123"
-            height="83"
-            src="../assets/images/EU_flag.jpg"
-            alt="EU Flag">
-            </psk-img>
-          <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
-            <div class="text-white text-centered text-justify">
-              This project has received funding from the European Union’s Horizon 2020 research and innovation programme
-              under grant agreement No 853992
+            <div class="flex-grow-1">
+                <psk-card class="bpd-dashboard ">
+                    <div class="bpd-wide-cards">
+                        <div class="d-flex flex-row align-items-center justify-content-around">
+                            <psk-button
+                                    class="btn-bare table-cell m-1 pharma-primary"
+                                    event-name="evidence:add-evidence-p1"
+                            >
+                                Add New Evidence
+                            </psk-button>
+                            <psk-button
+                                    class="btn-bare table-cell m-1 pharma-primary"
+                                    event-name="evidence:list"
+                            >
+                                Search Evidence
+                            </psk-button>
+                        </div>
+                        <br>
+                        <div class="d-flex flex-row align-items-center justify-content-around">
+                            <psk-button
+                                    class="btn-bare table-cell m-1 pharma-primary"
+                                    event-name="evidence:home"
+                            >
+                                Back
+                            </psk-button>
+                        </div>
+                    </div>
+                </psk-card>
             </div>
-            <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
-          </div>
         </div>
-      </div>
-    </webc-container>
-</psk-page>
+        <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
+            <psk-img
+                    alt="EU Flag"
+                    height="83"
+                    src="../assets/images/EU_flag.jpg"
+                    width="123">
+            </psk-img>
+            <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+                <div class="text-white text-centered text-justify">
+                    This project has received funding from the European Union’s Horizon 2020 research and innovation
+                    programme
+                    under grant agreement No 853992
+                </div>
+                <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+            </div>
+        </div>
+    </div>
+</webc-container>

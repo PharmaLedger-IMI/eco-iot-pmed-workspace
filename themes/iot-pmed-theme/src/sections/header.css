@@ -1,0 +1,8 @@
+.pharma-main-container {
+    background-color: white;
+    border-radius: 1%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}

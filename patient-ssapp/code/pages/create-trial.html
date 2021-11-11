@@ -1,7 +1,5 @@
-<psk-page  title="Trials - Create Trial ">
-    <link rel="stylesheet" href="../assets/css/common_style_patient_ssapp.css">
-    <psk-form controller-name="TrialsController">
-    <psk-label slot="title" class="bpd-modal-title" label="@title"></psk-label>
+<psk-form controller-name="TrialsController">
+    <psk-label class="bpd-modal-title" label="@title" slot="title"></psk-label>
     <div class="content">
         <psk-text-input class="bpd-input" view-model="@name"></psk-text-input>
         <psk-text-input class="bpd-input" view-model="@consentName"></psk-text-input>
@@ -9,8 +7,6 @@
         <psk-checkbox view-model="status"></psk-checkbox>
         <psk-button event-name="trial:create">Create</psk-button>
     </div>
-        <psk-list-feedbacks>
-        </psk-list-feedbacks>
-    </psk-form>
-
-</psk-page>
+    <psk-list-feedbacks>
+    </psk-list-feedbacks>
+</psk-form>

@@ -1,66 +1,51 @@
-<psk-page title="Patient Profile IoT and Health Data" style="height: 100vh">
-    <link rel="stylesheet" href="../assets/css/common_style_patient_ssapp.css">
-    <webc-container controller="MyDataMainPageController" style="height: 100%">
-        <div class="p-5 container-background-primary">
-            <div class="pharma-main-container">
-                <div class="d-flex flex-row align-content-center justify-content-between">
-                    <img
-                      width="110"
-                      height="47"
-                      src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
-                      alt="Pharmaledger logo"
-                    />
-                    <div class="d-flex flex-row justify-content-center align-items-center">
-                      <div class="mr-2">Help</div>
-                      <psk-button class="mr-2 pharma-primary" label="Logout" event-name="log-out"></psk-button>
-                    </div>
-                  </div>
-                <div class="flex-grow-1">
-                    <psk-card class="bpd-dashboard text-center">
-
-                        <div id="div0" style="background-color: #a4dbd9; width: auto; position: relative;">
-                            <psk-label label="Welcome: "/>
-                            <psk-label label="@name"></psk-label>
-                            <psk-label label="Your KEY SSI is:"/>
-                            <psk-label label="@id"></psk-label>
-                        </div>
-                        <div class="bpd-buttons-row bpd-wide-cards">
-                            <psk-layout columns="0" align-items="auto">
-
-                                <psk-form form-actions="Show Data">
-                                    <psk-form-row layout="xs=[12] m=[12] l=[12] xl=[12]">
-                                        <psk-radio-group view-model="mydata"> </psk-radio-group>
-                                    </psk-form-row>
-                                </psk-form>
-
-
-                            </psk-layout>
-                        </div>
-
-
-
-
-                        <psk-button class="mt-2 pharma-primary" label="Back" event-name="go-back"></psk-button>
-                        
-                        
-                             
-                    </psk-card>   
-                                 
+<webc-container controller="MyDataMainPageController" style="height: 100%">
+    <div class="p-5 container-background-primary">
+        <div class="pharma-main-container">
+            <div class="d-flex flex-row align-content-center justify-content-between">
+                <img
+                        alt="Pharmaledger logo"
+                        height="47"
+                        src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
+                        width="110"
+                />
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <div class="mr-2">Help</div>
+                    <psk-button class="mr-2 pharma-primary" event-name="log-out" label="Logout"></psk-button>
                 </div>
-
             </div>
-            <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
-                <img class="ml-5" width="123" height="81" src="assets/images/EU_flag.jpg" alt="EU flag" />
-                <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
-                  <div class="text-white text-centered text-justify">
-                    This project has received funding from the European Union’s Horizon 2020 research and innovation programme
-                    under grant agreement No 853992
-                  </div>
-                  <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
-                </div>
-              </div>
-        </div>
-        
+            <div class="flex-grow-1">
+                <psk-card class="bpd-dashboard text-center">
 
-    </webc-container>
-</psk-page>
+                    <div id="div0" style="background-color: #a4dbd9; width: auto; position: relative;">
+                        <psk-label label="Welcome: "></psk-label>
+                        <psk-label label="@name"></psk-label>
+                        <psk-label label="Your KEY SSI is:"></psk-label>
+                        <psk-label label="@id"></psk-label>
+                    </div>
+                    <div class="bpd-buttons-row bpd-wide-cards">
+                        <psk-layout align-items="auto" columns="0">
+
+                            <psk-form form-actions="Show Data">
+                                <psk-form-row layout="xs=[12] m=[12] l=[12] xl=[12]">
+                                    <psk-radio-group view-model="mydata"></psk-radio-group>
+                                </psk-form-row>
+                            </psk-form>
+                        </psk-layout>
+                    </div>
+                    <psk-button class="mt-2 pharma-primary" event-name="go-back" label="Back"></psk-button>
+                </psk-card>
+            </div>
+        </div>
+        <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
+            <img alt="EU flag" class="ml-5" height="81" src="assets/images/EU_flag.jpg" width="123"/>
+            <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
+                <div class="text-white text-centered text-justify">
+                    This project has received funding from the European Union’s Horizon 2020 research and innovation
+                    programme
+                    under grant agreement No 853992
+                </div>
+                <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+            </div>
+        </div>
+    </div>
+</webc-container>
