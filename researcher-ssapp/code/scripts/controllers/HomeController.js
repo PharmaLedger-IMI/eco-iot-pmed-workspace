@@ -3,7 +3,6 @@ import DPermissionService from "../services/DPermissionService.js";
 const {WebcController} = WebCardinal.controllers;
 
 
-
 export default class HomeController extends WebcController {
     constructor(...props) {
         super(...props);
@@ -12,7 +11,6 @@ export default class HomeController extends WebcController {
 
 
         this._attachHandlerInformationRequest()
-        this._attachHandlerConfigureAccessToData()
         this._attachHandlerViewDynamicPermission()
         this._attachHandlerEvidence()
 
@@ -44,28 +42,21 @@ export default class HomeController extends WebcController {
     }
 
     _attachHandlerInformationRequest(){
-        this.on('home:information-request', (event) => {
+        this.onTagClick('home:information-request', (event) => {
             console.log ("Information request button pressed");
             this.navigateToPageTag('information-request');
         });
     }
 
-    _attachHandlerConfigureAccessToData(){
-        this.on('home:configure-access', (event) => {
-            console.log ("Configure Access to Data button pressed");
-            this.navigateToPageTag('configure-access');
-        });
-    }
-
     _attachHandlerViewDynamicPermission(){
-        this.on('home:view-dynamic-permission', (event) => {
+        this.onTagClick('home:view-dynamic-permission', (event) => {
             console.log ("View dynamic permission button pressed");
             this.navigateToPageTag('view-dynamic-permission');
         });
     }
 
     _attachHandlerEvidence(){
-        this.on('home:evidence', (event) => {
+        this.onTagClick('home:evidence', (event) => {
             console.log ("Evidence button pressed");
             this.navigateToPageTag('evidence');
         });

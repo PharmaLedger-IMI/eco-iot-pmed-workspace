@@ -17,7 +17,7 @@ export default class EvidenceListController extends  WebcController  {
        
     }
     _attachHandlerToEvidence(){
-        this.on('evidence:to-evidence', (event) => {
+        this.onTagClick('evidence:to-evidence', (event) => {
             this.navigateToPageTag('evidence');
         });
     }

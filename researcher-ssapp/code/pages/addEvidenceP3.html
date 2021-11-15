@@ -1,71 +1,31 @@
 <webc-container controller="ConfirmEvidenceController">
-    <div class="p-5 container-background-primary">
-        <div class="pharma-main-container">
-            <div class="d-flex flex-row align-content-center justify-content-between">
-                <psk-img
-                        alt="Pharmaledger logo"
-                        height="50"
-                        src="../assets/images/pharmaledger.jpg"
-                        width="120">
-                </psk-img>
-                <div class="d-flex flex-row justify-content-center align-items-center">
-                    <div class="mr-2">Help</div>
-                    <psk-button class="mr-2 pharma-primary" event-name="log-out" label="Logout"></psk-button>
-                </div>
-            </div>
-            <div class="flex-grow-1">
-                <psk-card class="bpd-dashboard ">
-                    <div class="bpd-wide-cards">
-                        <div>
-                            <psk-layout class="border-bottom border-top" columns="4" slot="condition-true">
+    <div class="container home">
+        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+             width="480"/>
 
-                                <psk-label label="Name"></psk-label>
-                                <psk-label label="Title"></psk-label>
-                                <psk-label label="Version"></psk-label>
-                                <psk-label label="Status"></psk-label>
+        <div>
+            <psk-layout class="border-bottom border-top" columns="4" slot="condition-true">
 
-                            </psk-layout>
-                            <psk-layout class="justify-content-center align-items-center table-row" columns="4"
-                                        data-view-model="@allData">
-                                <p>{{@allData.name}}</p>
-                                <p>{{@allData.title}}</p>
-                                <p>{{@allData.version}}</p>
-                                <p>{{@allData.status}}</p>
-                            </psk-layout>
-                        </div>
-                        <div class="d-flex flex-row align-items-center justify-content-around">
-                            <psk-button
-                                    class="btn-bare table-cell m-1 pharma-primary"
-                                    event-name="evidence:confirm"
-                            >
-                                Confirm
-                            </psk-button>
-                            <psk-button
-                                    class="btn-bare table-cell m-1 pharma-primary"
-                                    event-name="evidence:edit"
-                            >
-                                Edit
-                            </psk-button>
-                        </div>
-                    </div>
-                </psk-card>
-            </div>
+                <psk-label label="Name"></psk-label>
+                <psk-label label="Title"></psk-label>
+                <psk-label label="Version"></psk-label>
+                <psk-label label="Status"></psk-label>
+
+            </psk-layout>
+            <psk-layout class="justify-content-center align-items-center table-row" columns="4"
+                        data-view-model="@allData">
+                <p>{{@allData.name}}</p>
+                <p>{{@allData.title}}</p>
+                <p>{{@allData.version}}</p>
+                <p>{{@allData.status}}</p>
+            </psk-layout>
         </div>
-        <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
-            <psk-img
-                    alt="EU Flag"
-                    height="83"
-                    src="../assets/images/EU_flag.jpg"
-                    width="123">
-            </psk-img>
-            <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
-                <div class="text-white text-centered text-justify">
-                    This project has received funding from the European Union’s Horizon 2020 research and innovation
-                    programme
-                    under grant agreement No 853992
-                </div>
-                <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
-            </div>
+
+
+        <div class="home-button-group">
+            <button data-tag="evidence:confirm">Confirm</button>
+            <button data-tag="evidence:edit">Edit</button>
         </div>
+
     </div>
 </webc-container>

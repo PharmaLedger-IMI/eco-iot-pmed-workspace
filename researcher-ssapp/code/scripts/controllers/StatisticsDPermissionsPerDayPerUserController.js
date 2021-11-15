@@ -42,9 +42,9 @@ export default class StatisticsDPermissionsPerDayPerUser extends WebcController 
 
 
     _attachHandlerGoBack(){
-        this.on('dynamic-permission:go-back', (event) => {
+        this.onTagClick('dynamic-permission:go-back', (event) => {
             console.log ("Go back button pressed");
-            this.navigateToPageTag('home');
+            this.navigateToPageTag('view-dynamic-permission');
         });
     }
 

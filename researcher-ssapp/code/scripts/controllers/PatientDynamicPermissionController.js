@@ -59,9 +59,9 @@ export default class PatientDynamicPermissionController extends WebcController {
     }
 
     _attachHandlerGoBack(){
-        this.on('patient-permission:go-back', (event) => {
+        this.onTagClick('patient-permission:go-back', (event) => {
             console.log ("Go back button pressed");
-            this.navigateToPageTag('home');
+            this.navigateToPageTag('view-dynamic-permission');
         });
     }
 

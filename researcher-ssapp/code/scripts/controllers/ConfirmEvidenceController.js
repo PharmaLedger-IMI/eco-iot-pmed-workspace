@@ -46,14 +46,14 @@ export default class ConfirmEvidenceController extends WebcController {
     }
 
     _attachHandlerGoBack() {
-        this.on('go-back', (event) => {
+        this.onTagClick('go-back', (event) => {
             console.log("Go back button pressed");
             this.navigateToPageTag('home');
         });
     }
     _attachHandlerEvidenceConfirm() {
         const me = this;
-        this.on('evidence:confirm', (event) => {
+        this.onTagClick('evidence:confirm', (event) => {
             let keySSI = me.evidenceConfigDSU.sReadSSI;
             me.IotAdaptorApi.createEvidence(singleData.allData, keySSI, (err, evidence) => {
                 if (err) {
@@ -66,7 +66,7 @@ export default class ConfirmEvidenceController extends WebcController {
         });
     }
     _attachHandlerEvidenceEdit() {
-        this.on('evidence:edit', (event) => {
+        this.onTagClick('evidence:edit', (event) => {
             this.navigateToPageTag('edit-evidence');
         });
     }

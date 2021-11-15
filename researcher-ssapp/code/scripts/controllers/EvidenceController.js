@@ -190,7 +190,7 @@ export default class EvidenceController extends WebcController {
     }
 
     _attachHandlerHome() {
-        this.on('evidence:home', (event) => {
+        this.onTagClick('evidence:home', (event) => {
             evidenceData = {
                 name: "",
                 contact: [],
@@ -206,12 +206,12 @@ export default class EvidenceController extends WebcController {
         });
     }
     _attachHandlerEvidence() {
-        this.on('evidence:evidence', (event) => {
+        this.onTagClick('evidence:evidence', (event) => {
             this.navigateToPageTag('evidence');
         });
     }
     _attachHandlerEvidenceList() {
-        this.on('evidence:list', (event) => {
+        this.onTagClick('evidence:list', (event) => {
 
             this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
             const me = this;
@@ -232,12 +232,12 @@ export default class EvidenceController extends WebcController {
         });
     }
     _attachHandlerEvidenceP1() {
-        this.on('evidence:add-evidence-p1', (event) => {
+        this.onTagClick('evidence:add-evidence-p1', (event) => {
             this.navigateToPageTag('add-evidence-p1');
         });
     }
     _attachHandlerEvidenceP2() {
-        this.on('evidence:add-evidence-p2', (event) => {
+        this.onTagClick('evidence:add-evidence-p2', (event) => {
             evidenceData.name = this.model.name.value;
             evidenceData.contact = [{
                 "name": "Name of the Publisher(Organization/individual)",
@@ -251,7 +251,7 @@ export default class EvidenceController extends WebcController {
         });
     }
     _attachHandlerEvidenceP3() {
-        this.on('evidence:add-evidence-p3', (event) => {
+        this.onTagClick('evidence:add-evidence-p3', (event) => {
 
             evidenceData.title = this.model.title.value;
             evidenceData.subtitle = this.model.subtitle.value;
@@ -267,7 +267,7 @@ export default class EvidenceController extends WebcController {
         });
     }
     _attachHandlerUpdateEvidence() {
-        this.on('evidence:update-evidence', (event) => {
+        this.onTagClick('evidence:update-evidence', (event) => {
 
             evidenceData.title = this.model.title.value;
             evidenceData.subtitle = this.model.subtitle.value;
@@ -302,7 +302,7 @@ export default class EvidenceController extends WebcController {
         });
     }
     _attachHandlerEvidenceBackMenu() {
-        this.on('evidence:back-to-menu', (event) => {
+        this.onTagClick('evidence:back-to-menu', (event) => {
             evidenceData = {
                 name: "",
                 contact: [],

@@ -93,7 +93,7 @@ export default class RequestsController extends WebcController {
     }
 
     _attachHandlerIssueNewRequest(){
-        this.on('new:request', (event) => {
+        this.onTagClick('new:request', (event) => {
             console.log ("New information request button pressed");
 
             let RequestState = {
@@ -110,7 +110,7 @@ export default class RequestsController extends WebcController {
     }
 
     _attachHandlerGoBack(){
-        this.on('request:go-back', (event) => {
+        this.onTagClick('request:go-back', (event) => {
             console.log ("Go back button pressed");
             this.navigateToPageTag('home');
         });

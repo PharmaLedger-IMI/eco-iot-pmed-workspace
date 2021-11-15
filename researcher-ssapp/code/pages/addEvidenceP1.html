@@ -1,57 +1,15 @@
 <webc-container controller="EvidenceController">
-    <div class="p-5 container-background-primary">
-        <div class="pharma-main-container">
-            <div class="d-flex flex-row align-content-center justify-content-between">
-                <psk-img
-                        alt="Pharmaledger logo"
-                        height="50"
-                        src="../assets/images/pharmaledger.jpg"
-                        width="120">
-                </psk-img>
-                <div class="d-flex flex-row justify-content-center align-items-center">
-                    <div class="mr-2">Help</div>
-                    <psk-button class="mr-2 pharma-primary" event-name="log-out" label="Logout"></psk-button>
-                </div>
-            </div>
-            <div class="flex-grow-1">
-                <psk-card class="bpd-dashboard " id="div1">
-                    <div class="bpd-wide-cards">
-                        <psk-text-input view-model="@name"></psk-text-input>
-                        <psk-text-input view-model="@organization"></psk-text-input>
-                        <psk-text-input view-model="@email"></psk-text-input>
-                        <div class="d-flex flex-row align-items-center justify-content-around">
-                            <psk-button
-                                    class="btn-bare table-cell m-1 pharma-primary"
-                                    event-name="evidence:add-evidence-p2"
-                            >
-                                Next
-                            </psk-button>
-                            <psk-button
-                                    class="btn-bare table-cell m-1 pharma-primary"
-                                    event-name="evidence:evidence"
-                            >
-                                Back
-                            </psk-button>
-                        </div>
-                    </div>
-                </psk-card>
-            </div>
-        </div>
-        <div class="pharma-footer" style="font-family: 'Roboto', sans-serif;">
-            <psk-img
-                    alt="EU Flag"
-                    height="83"
-                    src="../assets/images/EU_flag.jpg"
-                    width="123">
-            </psk-img>
-            <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
-                <div class="text-white text-centered text-justify">
-                    This project has received funding from the European Union’s Horizon 2020 research and innovation
-                    programme
-                    under grant agreement No 853992
-                </div>
-                <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
-            </div>
+    <div class="container home">
+        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+             width="480"/>
+
+        <psk-text-input view-model="@name"></psk-text-input>
+        <psk-text-input view-model="@organization"></psk-text-input>
+        <psk-text-input view-model="@email"></psk-text-input>
+
+        <div class="home-button-group">
+            <button data-tag="evidence:evidence">Back</button>
+            <button data-tag="evidence:add-evidence-p2">Next</button>
         </div>
     </div>
 </webc-container>

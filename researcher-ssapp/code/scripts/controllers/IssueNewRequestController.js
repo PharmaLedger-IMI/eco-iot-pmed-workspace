@@ -86,7 +86,7 @@ export default class IssueNewRequestController extends WebcController {
     }
 
     _attachHandlerGoBack(){
-        this.on('issue-new-request-go-back', (event) => {
+        this.onTagClick('issue-new-request-go-back', (event) => {
             console.log ("Go back button pressed");
             this.navigateToPageTag('home');
         });

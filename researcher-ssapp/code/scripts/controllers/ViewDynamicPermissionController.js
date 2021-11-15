@@ -87,7 +87,7 @@ export default class ViewDynamicPermissionController extends WebcController {
             }
         }
 
-        this.on("View",selectSubmit,true);
+        this.onTagClick("View",selectSubmit,true);
 
         this.DPermissionService = new DPermissionService(this.DSUStorage);
         //List all the D.Permissions
@@ -126,26 +126,26 @@ export default class ViewDynamicPermissionController extends WebcController {
     }
 
     _attachHandlerGoBack(){
-        this.on('dynamic-permission:go-back', (event) => {
+        this.onTagClick('dynamic-permission:go-back', (event) => {
             console.log ("Go back button pressed");
             this.navigateToPageTag('home');
         });
     }
 
     _attachHandlerdpperday(){
-        this.on('dynamic-permission:statistics-d-permission-per-day', (event) => {
+        this.onTagClick('dynamic-permission:statistics-d-permission-per-day', (event) => {
             this.navigateToPageTag('statistics-d-permissions-per-day');
         });
     }
 
     _attachHandlerudpperday(){
-        this.on('dynamic-permission:statistics-users-d-permission-per-day', (event) => {
+        this.onTagClick('dynamic-permission:statistics-users-d-permission-per-day', (event) => {
             this.navigateToPageTag('statistics-d-permissions-per-day-users');
         });
     }
 
     _attachHandlertotalusers(){
-        this.on('dynamic-permission:statistics-total-users', (event) => {
+        this.onTagClick('dynamic-permission:statistics-total-users', (event) => {
             let state = {
                 all_d_permissions: this.model.all_d_permissions,
                 all_users_number: this.model.all_users_number,

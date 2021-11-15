@@ -1,79 +1,31 @@
-<webc-container controller="ViewDynamicPermissionController" style="height: 100%">
-    <div class="p-5 container-background-primary">
-        <div class="pharma-main-container">
-            <div class="d-flex flex-row align-content-center justify-content-between">
-                <img
-                        alt="Pharmaledger logo"
-                        height="47"
-                        src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
-                        width="110"
-                />
-                <div class="d-flex flex-row justify-content-center align-items-center">
-                    <div class="mr-2">Help</div>
-                    <psk-button class="mr-2 pharma-primary" event-name="log-out" label="Logout"></psk-button>
+<webc-container controller="ViewDynamicPermissionController">
+    <div class="container home">
+        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+             width="480"/>
+
+        <div>
+            <psk-form>
+                <psk-form-row>
+                    <psk-label>Dynamic permission for patient:</psk-label>
+                </psk-form-row>
+                <psk-form-row>
+                    <psk-select view-model="patient_options"></psk-select>
+<!--                    <psk-button event-name="View" label="View" type="submit"></psk-button>-->
+                </psk-form-row>
+
+                <div class="home-button-group">
+                    <button data-tag="View" type="submit">View</button>
                 </div>
-            </div>
-            <div class="flex-grow-1">
-                <psk-card class="bpd-dashboard">
-
-                    <div div style="text-align:center;">
-                        <psk-form>
-
-                            <psk-form-row layout="xs=[12] m=[6] l=[12] xl=[4]">
-                                <psk-label>Dynamic permission for patient:</psk-label>
-                            </psk-form-row>
-
-                            <psk-form-row layout="xs=[12,12,12] m=[6,6,6] l=[12,12,12] xl=[4,4,4]">
-                                <!-- This component will receive the options and the other properties from the model -->
-                                <psk-select view-model="patient_options"></psk-select>
-                                <psk-button event-name="View" label="View" type="submit"></psk-button>
-                            </psk-form-row>
-
-                        </psk-form>
-                    </div>
-
-                    <div style="text-align:center;">
-                        <div>
-                            <psk-button event-name="dynamic-permission:statistics-d-permission-per-day"
-                                        view-model="@d_permission_per_day"></psk-button>
-                        </div>
-                        <div>
-                            <psk-button event-name="dynamic-permission:statistics-users-d-permission-per-day"
-                                        view-model="@users_d_permission_per_day"></psk-button>
-                        </div>
-                        <div>
-                            <psk-button event-name="dynamic-permission:statistics-total-users"
-                                        view-model="@total_users_button"></psk-button>
-                        </div>
-                        <div>
-                            <psk-button event-name="dynamic-permission:go-back" view-model="@gobackbutton"></psk-button>
-                        </div>
-                    </div>
-                </psk-card>
-
-                <!--                    <psk-card class="bpd-dashboard">-->
-                <!--                         <div>-->
-                <!--                             <p>All Dynamic Permissions issued are: </p>-->
-                <!--                             <psk-label label="@all_d_permissions"></psk-label>-->
-                <!--                         </div>-->
-                <!--                        <div>-->
-                <!--                            <br>-->
-                <!--                            <p>All users are: </p>-->
-                <!--                            <psk-label label="@all_users_number"></psk-label>-->
-                <!--                        </div>-->
-                <!--                    </psk-card>-->
-            </div>
+            </psk-form>
         </div>
-        <div class="pharma-footer">
-            <img alt="EU flag" class="ml-5" height="81" src="assets/images/EU_flag.jpg" width="123"/>
-            <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
-                <div class="text-white text-centered text-justify">
-                    This project has received funding from the European Union’s Horizon 2020 research and innovation
-                    programme
-                    under grant agreement No 853992
-                </div>
-                <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
-            </div>
+
+        <div class="home-button-group">
+            <button data-tag="dynamic-permission:statistics-d-permission-per-day">Permissions per Day</button>
+            <button data-tag="dynamic-permission:statistics-users-d-permission-per-day">Permissions per User</button>
+            <button data-tag="dynamic-permission:statistics-total-users">Statistics</button>
+            <button data-tag="dynamic-permission:go-back">Back</button>
         </div>
+
+
     </div>
 </webc-container>
