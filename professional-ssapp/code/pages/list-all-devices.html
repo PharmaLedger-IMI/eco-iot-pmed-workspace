@@ -1,74 +1,46 @@
 <webc-container controller="ListDevicesController">
-    <div class="p-5 container-background-primary">
-        <div class="pharma-main-container">
-            <div class="d-flex flex-row align-content-center justify-content-between">
-                <psk-img
-                        alt="Pharmaledger logo"
-                        height="50"
-                        src="assets/images/pharmaledger-logo-rgb-final-1_054976490.jpg"
-                        width="120">
-                </psk-img>
-                <div class="d-flex flex-row justify-content-center align-items-center">
-                    <div class="mr-2">Help</div>
-                    <psk-button class="mr-2 pharma-primary" event-name="log-out" label="Logout"></psk-button>
-                </div>
-            </div>
-            <div class="flex-grow-1">
-                <psk-card class="bpd-dashboard ">
+    <div class="flex-grow-1">
+        <psk-card class="bpd-dashboard ">
 
 
-                    <div
-                            class="m-5 d-flex flex-column align-items-center justify-content-center"
-                            slot="condition-true"
-                            style="height: 100%"
-                    >
-                        <h4 class="bold">Devices List</h4>
-                        <div>
-                            <psk-layout class="border-bottom border-top" columns="6" slot="condition-true">
-                                <psk-label label="Device ID"></psk-label>
-                                <psk-label label="Brand"></psk-label>
-                                <psk-label label="Model"></psk-label>
-                                <psk-label label="Status"></psk-label>
-                                <psk-label label="Trial"></psk-label>
-                                <psk-label label="Options"></psk-label>
+            <div
+                    class="m-5 d-flex flex-column align-items-center justify-content-center"
+                    slot="condition-true"
+                    style="height: 100%"
+            >
+                <h4 class="bold">Devices List</h4>
+                <div>
+                    <psk-layout class="border-bottom border-top" columns="6" slot="condition-true">
+                        <psk-label label="Device ID"></psk-label>
+                        <psk-label label="Brand"></psk-label>
+                        <psk-label label="Model"></psk-label>
+                        <psk-label label="Status"></psk-label>
+                        <psk-label label="Trial"></psk-label>
+                        <psk-label label="Options"></psk-label>
 
-                            </psk-layout>
+                    </psk-layout>
 
-                            <psk-layout class="justify-content-center align-items-center table-row" columns="6"
-                                        data-for="@allDevices">
-                                <p>{{@serialNumber}}</p>
-                                <p>{{@brand}}</p>
-                                <p>{{@modelNumber}}</p>
-                                <p>{{@status}}</p>
-                                <p>{{@trial}}</p>
-                                <div class="d-flex flex-row align-items-center justify-content-around">
-                                    <psk-button
-                                            class="btn-bare table-cell m-1 pharma-primary"
-                                            event-name="patient-status"
+                    <psk-layout class="justify-content-center align-items-center table-row" columns="6"
+                                data-for="@allDevices">
+                        <p>{{@serialNumber}}</p>
+                        <p>{{@brand}}</p>
+                        <p>{{@modelNumber}}</p>
+                        <p>{{@status}}</p>
+                        <p>{{@trial}}</p>
+                        <div class="d-flex flex-row align-items-center justify-content-around">
+                            <psk-button
+                                    class="btn-bare table-cell m-1 pharma-primary"
+                                    event-name="patient-status"
 
-                                    >
-                                        View
-                                    </psk-button>
+                            >
+                                View
+                            </psk-button>
 
-                                </div>
-                            </psk-layout>
                         </div>
-                        <psk-button class="mt-2 pharma-primary" event-name="go-back" label="Go Back"></psk-button>
-                    </div>
-                </psk-card>
-            </div>
-        </div>
-        <div class="pharma-footer">
-            <img alt="EU flag" class="ml-5" height="81" src="assets/images/EU_flag.jpg" width="123"/>
-            <div class="d-flex flex-column align-items-center justify-content-center ml-5 mr-5">
-                <div class="text-white text-centered text-justify">
-                    This project has received funding from the European Union’s Horizon 2020 research and innovation
-                    programme
-                    under grant agreement No 853992
+                    </psk-layout>
                 </div>
-                <div class="text-white text-centered text-center">Copyright © PharmaLedger Consortium 2020 –2023</div>
+                <psk-button class="mt-2 pharma-primary" event-name="go-back" label="Go Back"></psk-button>
             </div>
-        </div>
-    </div>
+        </psk-card>
     </div>
 </webc-container>
