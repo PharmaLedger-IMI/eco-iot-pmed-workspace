@@ -1,6 +1,4 @@
-const {
-    WebcController
-} = WebCardinal.controllers;
+const {WebcController} = WebCardinal.controllers;
 import DeviceService from "../services/DeviceService.js"
 const keySSI = "27XvCBPKSWpUwscQUxwsVDTxRcaqv8AeYwe1gWThxDxXfJdmac1CRnDBV8VC8X1rxWjG6xjh7NthKZwsSJZw8r12kcpRuvJyo5wtZ6n5x7ATpS7V4N8RUNjcFFHkLpPkCkMeMVxVuL7yfxLvtVccSZ5";
 
@@ -45,64 +43,49 @@ const AddDevicesViewModel = {
         readOnly: false,
         value: ''
     },
-    saveButton: {
-        name: 'saveButton',
-        label: "Save",
-        required: true,
-        readOnly: false,
-        value: ''
-    },
-    gobackButton: {
-        name: 'Go Back Button',
-        label: "Back",
-        required: true,
-        readOnly: false,
-        value: ''
-    },
     status: {
         label: "Device Status",
         required: true,
         options: [{
-                label: "active",
-                value: 'active'
+                label: "Active",
+                value: 'Active'
             },
             {
-                label: "inactive",
-                value: 'inactive'
+                label: "Inactive",
+                value: 'Inactive'
             },
             {
-                label: "entered in error",
-                value: 'entered in error'
+                label: "Entered in error",
+                value: 'Entered in error'
             },
             {
-                label: "unknown",
-                value: 'unknown'
+                label: "Unknown",
+                value: 'Unknown'
             }
 
         ],
-        value: 'active'
+        value: 'Active'
     },
-
     trial: {
         label: "Clinical trial Number",
         required: true,
         options: [{
-                label: "trials 1",
-                value: 'trials 1'
+                label: "Trial 1",
+                value: 'Trial 1'
             },
             {
-                label: "trials 2",
-                value: 'trials 2'
+                label: "Trial 2",
+                value: 'Trial 2'
             },
             {
-                label: "trials 3",
-                value: 'trials 3'
+                label: "Trial 3",
+                value: 'Trial 3'
             }
         ],
         value: ''
     }
-
 }
+
 let deviceData = {
     brand: "",
     trial: "",
@@ -139,13 +122,12 @@ export default class AddDeviceController extends WebcController {
     }
 
     _attachHandlerGoBackButton() {
-        this.on('devices:go-back', (event) => {
-            console.log("Go back button pressed");
+        this.onTagClick('devices:go-back', (event) => {
             this.navigateToPageTag('manage-devices');
         });
     }
     _attachHandlerSaveButton() {
-        this.on('devices:save', (event) => {
+        this.onTagClick('devices:save', (event) => {
             // console.log (this.model);
             deviceData.serialNumber = this.model.deviceId.value;
             deviceData.sk = this.model.deviceId.value;
