@@ -7,10 +7,6 @@
 
 /* FROM psk-label - refactor this during webcardinal migration refactor */
 
-div.form-group {
-    margin-top: 0.5rem;
-}
-
 .align-left {
     text-align: left;
 }
@@ -51,17 +47,6 @@ psk-button label {
 
 .col-form-label {
     padding: 0 !important;
-}
-
-psk-label.title {
-    font-size: 1.25rem;
-    padding: 0;
-    display: flex;
-    flex: 1 1 auto;
-    justify-content: center;
-    width: 250%;
-    color: #fff;
-    opacity: 0.8;
 }
 
 psk-label.info,

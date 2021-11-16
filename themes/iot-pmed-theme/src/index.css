@@ -4,9 +4,9 @@
 @import url('bootstrap/css/bootstrap.min.css');
 
 @import url("sections/main.css");
-@import url("sections/header.css");
 @import url("sections/container.css");
 @import url("sections/footer.css");
+@import url("sections/form.css");
 @import url("sections/ediary.css");
 @import url("sections/questionnaire.css");
 

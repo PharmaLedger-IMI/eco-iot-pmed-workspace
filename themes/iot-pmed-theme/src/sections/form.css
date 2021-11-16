@@ -1,0 +1,11 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+@media (max-width: 899px) {
+    .form-group {
+        width: 100%;
+    }
+}

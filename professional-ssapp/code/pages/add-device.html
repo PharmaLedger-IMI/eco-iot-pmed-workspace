@@ -1,29 +1,48 @@
 <webc-container controller="AddDeviceController">
-
-
-    <div class="container home">
+    <div class="container flex-container">
         <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
-             width="480"/>
+             width="240"/>
+        <h4 class="title">Add Device</h4>
 
-        <psk-text-input view-model="@deviceId"></psk-text-input>
-        <psk-text-input view-model="@name"></psk-text-input>
-        <psk-text-input view-model="@manufacturer"></psk-text-input>
-        <psk-text-input view-model="@model"></psk-text-input>
-        <psk-text-input view-model="@brand"></psk-text-input>
-        <psk-select label="Trial" view-model="@trial"></psk-select>
-        <psk-select label="Status" view-model="@status"></psk-select>
+        <div class="inner-container">
+            <div class="form-group">
+                <label class="col-form-label" for="@devideId.name">{{@deviceId.label}}</label>
+                <input class="form-control" data-view-model="@deviceId" id="@devideId.name"/>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="@name.name">{{@name.label}}</label>
+                <input class="form-control" data-view-model="@name" id="@name.name"/>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="@manufacturer.name">{{@manufacturer.label}}</label>
+                <input class="form-control" data-view-model="@manufacturer" id="@manufacturer.name"/>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="@model.name">{{@model.label}}</label>
+                <input class="form-control" data-view-model="@model" id="@model.name"/>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="@brand.name">{{@brand.label}}</label>
+                <input class="form-control" data-view-model="@brand" id="@brand.name"/>
+            </div>
 
-
-        <div class="home-button-group">
-            <button data-tag="devices:go-back">Back</button>
-            <button data-tag="devices:save">Save</button>
+            <div class="form-group">
+                <label class="col-form-label">{{@trial.label}}</label>
+                <select class="form-control" data-for="@trial.options" value="@trial.value">
+                    <option value="@value">{{@label}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label">{{@status.label}}</label>
+                <select class="form-control" data-for="@status.options" value="@status.value">
+                    <option value="@value">{{@label}}</option>
+                </select>
+            </div>
         </div>
 
-
+        <div class="button-group-wrapper">
+            <button data-tag="devices:save">Save</button>
+            <button data-tag="devices:go-back">Go back</button>
+        </div>
     </div>
-
-
 </webc-container>
-
-
-

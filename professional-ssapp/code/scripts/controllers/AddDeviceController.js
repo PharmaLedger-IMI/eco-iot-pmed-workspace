@@ -1,154 +1,147 @@
 const {WebcController} = WebCardinal.controllers;
-import DeviceService from "../services/DeviceService.js"
-const keySSI = "27XvCBPKSWpUwscQUxwsVDTxRcaqv8AeYwe1gWThxDxXfJdmac1CRnDBV8VC8X1rxWjG6xjh7NthKZwsSJZw8r12kcpRuvJyo5wtZ6n5x7ATpS7V4N8RUNjcFFHkLpPkCkMeMVxVuL7yfxLvtVccSZ5";
-
-const AddDevicesViewModel = {
-    deviceId: {
-        name: 'deviceid',
-        label: "Device ID",
-        placeholder: 'QC1265389',
-        required: true,
-        readOnly: false,
-        value: ''
-    },
-    model: {
-        name: 'model',
-        label: "Device Model Number",
-        placeholder: 'ELI 230',
-        required: true,
-        readOnly: false,
-        value: ''
-    },
-    manufacturer: {
-        name: 'manufacturer',
-        label: "Device Manufacturer",
-        placeholder: 'Bionet',
-        required: true,
-        readOnly: false,
-        value: ''
-    },
-    name: {
-        name: 'name',
-        label: "Device Name",
-        placeholder: 'BURDICK ELI 230 EKG MACHINE',
-        required: true,
-        readOnly: false,
-        value: ''
-    },
-    brand: {
-        name: 'brand',
-        label: "Device Brand",
-        placeholder: 'Burdick',
-        required: true,
-        readOnly: false,
-        value: ''
-    },
-    status: {
-        label: "Device Status",
-        required: true,
-        options: [{
-                label: "Active",
-                value: 'Active'
-            },
-            {
-                label: "Inactive",
-                value: 'Inactive'
-            },
-            {
-                label: "Entered in error",
-                value: 'Entered in error'
-            },
-            {
-                label: "Unknown",
-                value: 'Unknown'
-            }
-
-        ],
-        value: 'Active'
-    },
-    trial: {
-        label: "Clinical trial Number",
-        required: true,
-        options: [{
-                label: "Trial 1",
-                value: 'Trial 1'
-            },
-            {
-                label: "Trial 2",
-                value: 'Trial 2'
-            },
-            {
-                label: "Trial 3",
-                value: 'Trial 3'
-            }
-        ],
-        value: ''
-    }
-}
-
-let deviceData = {
-    brand: "",
-    trial: "",
-    modelNumber: "",
-    status: "",
-    manufacturer: "",
-    deviceName: "",
-    resourceType: "Device",
-    identifier: [{
-        "use": "official",
-        "type": {
-            "coding": [{
-                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-                "code": "SNO"
-            }]
-        },
-        "value": "09160534033345"
-    }],
-    serialNumber: "09160534033345",
-    sk: "09160534033345"
-};
-
+import DeviceService from "../services/DeviceService.js";
 
 export default class AddDeviceController extends WebcController {
     constructor(element, history) {
 
         super(element, history);
 
-        this.model = AddDevicesViewModel;
-        
-        this._attachHandlerGoBackButton();
-        this._attachHandlerSaveButton();
+        this.model = this.getFormViewModel();
+
+        this.attachHandlerGoBackButton();
+        this.attachHandlerSaveButton();
 
     }
 
-    _attachHandlerGoBackButton() {
-        this.onTagClick('devices:go-back', (event) => {
+    attachHandlerGoBackButton() {
+        this.onTagClick('devices:go-back', () => {
+            console.log("Go back button pressed");
             this.navigateToPageTag('manage-devices');
         });
     }
-    _attachHandlerSaveButton() {
-        this.onTagClick('devices:save', (event) => {
-            // console.log (this.model);
-            deviceData.serialNumber = this.model.deviceId.value;
-            deviceData.sk = this.model.deviceId.value;
-            deviceData.deviceName = this.model.name.value;
-            deviceData.manufacturer = this.model.manufacturer.value;
-            deviceData.trial = this.model.trial.value;
-            deviceData.modelNumber = this.model.model.value;
-            deviceData.status = this.model.status.value;
-            deviceData.brand = this.model.brand.value;
-            deviceData.identifier[0].value = this.model.deviceId.value;
 
+    attachHandlerSaveButton() {
+        this.onTagClick('devices:save', () => {
+            const deviceData = this.prepareDeviceData();
             this.DeviceService = new DeviceService();
-            this.DeviceService.createDevice(deviceData, (err, devices) => {
+            this.DeviceService.createDevice(deviceData, (err) => {
                 if (err) {
-                    return console.log(err);
+                    console.log(err);
                 }
+
+                this.navigateToPageTag('manage-devices');
             });
-            this.navigateToPageTag('manage-devices');
         });
     }
 
+    prepareDeviceData() {
+        return {
+            brand: this.model.brand.value,
+            trial: this.model.trial.value,
+            modelNumber: this.model.model.value,
+            status: this.model.status.value,
+            manufacturer: this.model.manufacturer.value,
+            deviceName: this.model.name.value,
+            resourceType: "Device",
+            identifier: [{
+                use: "official",
+                type: {
+                    coding: [{
+                        system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+                        code: "SNO"
+                    }]
+                },
+                value: this.model.deviceId.value
+            }],
+            serialNumber: this.model.deviceId.value,
+            sk: this.model.deviceId.value
+        };
+    }
 
-
+    getFormViewModel() {
+        return {
+            deviceId: {
+                name: 'deviceid',
+                id: 'deviceid',
+                label: "Device ID",
+                placeholder: 'QC1265389',
+                required: true,
+                value: ''
+            },
+            model: {
+                name: 'model',
+                id: 'model',
+                label: "Device Model Number",
+                placeholder: 'ELI 230',
+                required: true,
+                value: ''
+            },
+            manufacturer: {
+                name: 'manufacturer',
+                id: 'manufacturer',
+                label: "Device Manufacturer",
+                placeholder: 'Bionet',
+                required: true,
+                value: ''
+            },
+            name: {
+                name: 'name',
+                id: 'name',
+                label: "Device Name",
+                placeholder: 'BURDICK ELI 230 EKG MACHINE',
+                required: true,
+                value: ''
+            },
+            brand: {
+                name: 'brand',
+                id: 'brand',
+                label: "Device Brand",
+                placeholder: 'Burdick',
+                required: true,
+                value: ''
+            },
+            status: {
+                label: "Device Status",
+                required: true,
+                options: [
+                    {
+                        label: "Active",
+                        value: 'Active'
+                    },
+                    {
+                        label: "Inactive",
+                        value: 'Inactive'
+                    },
+                    {
+                        label: "Entered in error",
+                        value: 'Entered in error'
+                    },
+                    {
+                        label: "Unknown",
+                        value: 'Unknown'
+                    }
+                ],
+                value: 'Active'
+            },
+            trial: {
+                label: "Clinical trial Number",
+                required: true,
+                options: [
+                    {
+                        label: "Trial 1",
+                        value: 'Trial 1'
+                    },
+                    {
+                        label: "Trial 2",
+                        value: 'Trial 2'
+                    },
+                    {
+                        label: "Trial 3",
+                        value: 'Trial 3'
+                    }
+                ],
+                value: ''
+            }
+        }
+    }
 }

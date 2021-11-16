@@ -60,7 +60,7 @@
     border-color: #008798;
 }
 
-.home-button-group {
+.button-group-wrapper {
     width: 70%;
     display: flex;
     justify-content: space-evenly;
@@ -68,7 +68,7 @@
     font-size: 18px;
 }
 
-.home-button-group button {
+.button-group-wrapper button {
     background: #008798;
     border: 1px solid transparent;
     border-radius: 0.5rem;
@@ -86,9 +86,9 @@
     padding: 0.5rem 1rem;
 }
 
-.home-button-group button:hover,
-.home-button-group button:active,
-.home-button-group button:focus {
+.button-group-wrapper button:hover,
+.button-group-wrapper button:active,
+.button-group-wrapper button:focus {
     background: transparent;
     border: 1px solid #008798;
     color: #000000;
