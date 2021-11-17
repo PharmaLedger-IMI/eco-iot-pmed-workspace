@@ -1,12 +1,12 @@
 const {WebcController} = WebCardinal.controllers;
-import DeviceService from "../services/DeviceService.js";
 
 export default class AddDeviceController extends WebcController {
     constructor(element, history) {
 
         super(element, history);
 
-        this.model = this.getFormViewModel();
+        const prevState = this.getState() || {};
+        this.model = this.getFormViewModel(prevState);
 
         this.attachHandlerGoBackButton();
         this.attachHandlerSaveButton();
@@ -23,14 +23,7 @@ export default class AddDeviceController extends WebcController {
     attachHandlerSaveButton() {
         this.onTagClick('devices:save', () => {
             const deviceData = this.prepareDeviceData();
-            this.DeviceService = new DeviceService();
-            this.DeviceService.createDevice(deviceData, (err) => {
-                if (err) {
-                    console.log(err);
-                }
-
-                this.navigateToPageTag('manage-devices');
-            });
+            this.navigateToPageTag("add-device-summary", deviceData);
         });
     }
 
@@ -58,7 +51,7 @@ export default class AddDeviceController extends WebcController {
         };
     }
 
-    getFormViewModel() {
+    getFormViewModel(prevState) {
         return {
             deviceId: {
                 name: 'deviceid',
@@ -66,7 +59,7 @@ export default class AddDeviceController extends WebcController {
                 label: "Device ID",
                 placeholder: 'QC1265389',
                 required: true,
-                value: ''
+                value: prevState.serialNumber || ""
             },
             model: {
                 name: 'model',
@@ -74,7 +67,7 @@ export default class AddDeviceController extends WebcController {
                 label: "Device Model Number",
                 placeholder: 'ELI 230',
                 required: true,
-                value: ''
+                value: prevState.modelNumber || ""
             },
             manufacturer: {
                 name: 'manufacturer',
@@ -82,7 +75,7 @@ export default class AddDeviceController extends WebcController {
                 label: "Device Manufacturer",
                 placeholder: 'Bionet',
                 required: true,
-                value: ''
+                value: prevState.manufacturer || ""
             },
             name: {
                 name: 'name',
@@ -90,7 +83,7 @@ export default class AddDeviceController extends WebcController {
                 label: "Device Name",
                 placeholder: 'BURDICK ELI 230 EKG MACHINE',
                 required: true,
-                value: ''
+                value: prevState.deviceName || ""
             },
             brand: {
                 name: 'brand',
@@ -98,7 +91,7 @@ export default class AddDeviceController extends WebcController {
                 label: "Device Brand",
                 placeholder: 'Burdick',
                 required: true,
-                value: ''
+                value: prevState.brand || ""
             },
             status: {
                 label: "Device Status",
@@ -121,7 +114,7 @@ export default class AddDeviceController extends WebcController {
                         value: 'Unknown'
                     }
                 ],
-                value: 'Active'
+                value: prevState.status || ""
             },
             trial: {
                 label: "Clinical trial Number",
@@ -140,7 +133,7 @@ export default class AddDeviceController extends WebcController {
                         value: 'Trial 3'
                     }
                 ],
-                value: ''
+                value: prevState.trial || ""
             }
         }
     }

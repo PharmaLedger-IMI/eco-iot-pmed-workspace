@@ -75,10 +75,3 @@
 ::slotted([slot="footer"]) {
     padding: 0 !important;
 }
-
-/*
-:host(.background) main {
-    background-image: url('assets/images/Favorite.png');
-    height: 100%;
-}
-*/

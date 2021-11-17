@@ -1,8 +1,51 @@
+label.option {
+    padding: 0 0.5rem 0 0;
+    margin: 0.5rem 0 0.5rem 0.5rem;
+    border-right: 1px solid;
+}
+
+label.option:last-child {
+    border: none;
+}
+
 .middle-text {
     font-size: 24px;
     display: flex;
     justify-content: center;
     margin-top: 25%;
+}
+
+h4.title {
+    font-size: 3rem;
+    padding: 1rem 0;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    text-align: center;
+    color: var(--secondary);
+    width: 100%;
+}
+
+.no-data {
+    color: var(--secondary);
+    font-size: 1.75rem;
+    font-style: italic;
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.link {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: rgba(47, 128, 237, 1);
+}
+
+.link:focus,
+.link:hover,
+.link:active {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 /* FROM psk-label - refactor this during webcardinal migration refactor */

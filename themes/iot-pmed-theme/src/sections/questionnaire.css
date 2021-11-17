@@ -1,6 +1,6 @@
 .ed-btn {
-    background-color: #008798 !important;
-    border: #008798 !important;
+    background-color: var(--secondary) !important;
+    border: var(--secondary) !important;
     border-radius: 20px !important;
     height: 45px;
     font-weight: bold;
@@ -59,7 +59,7 @@
 .max-width input {
     outline: 0;
     border-width: 0 0 1px;
-    border-color: #008798;
+    border-color: var(--secondary);
 }
 
 .max-width input:focus {

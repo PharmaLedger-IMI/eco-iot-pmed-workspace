@@ -29,10 +29,10 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #008798;
+    background: var(--secondary);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #008798;
+    background: var(--secondary);
 }

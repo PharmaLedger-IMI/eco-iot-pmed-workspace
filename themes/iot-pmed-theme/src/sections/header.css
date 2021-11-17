@@ -1,0 +1,11 @@
+header .row-wrapper {
+    border-top: 1px solid #00345B;
+    border-bottom: 1px solid #00345B;
+    transform: rotate(-0.06deg);
+}
+
+header label,
+header span,
+header button {
+    font-size: 0.875rem;
+}

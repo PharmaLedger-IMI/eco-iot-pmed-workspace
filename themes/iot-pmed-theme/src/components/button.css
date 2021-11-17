@@ -2,13 +2,13 @@
 
 .btn.btn-primary,
 .submit {
-    background-color: #008798;
+    background-color: var(--secondary);
     box-shadow: rgba(53, 79, 155, 0.35) 0 15px 30px -12px;
     padding: 4px 16px;
     margin-right: 10px;
     border-radius: 5px;
     margin-bottom: 1rem;
-    border: 1px solid #008798;
+    border: 1px solid var(--secondary);
     color: white;
     font-size: 0.95rem;
 }
@@ -41,7 +41,7 @@
 .button-menu {
     color: #FFFFFF;
     padding: 0.125rem 1.75rem;
-    background: #008798;
+    background: var(--secondary);
     border-radius: 0.25rem;
     border: 1px solid transparent;
     font-size: 18px;
@@ -57,19 +57,20 @@
 .button-menu:active {
     color: #000000;
     background: transparent;
-    border-color: #008798;
+    border-color: var(--secondary);
 }
 
 .button-group-wrapper {
-    width: 70%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     font-size: 18px;
+    padding: 0 5%;
+    width: 100%;
 }
 
 .button-group-wrapper button {
-    background: #008798;
+    background: var(--secondary);
     border: 1px solid transparent;
     border-radius: 0.5rem;
     color: #FFFFFF;
@@ -90,6 +91,6 @@
 .button-group-wrapper button:active,
 .button-group-wrapper button:focus {
     background: transparent;
-    border: 1px solid #008798;
+    border: 1px solid var(--secondary);
     color: #000000;
 }

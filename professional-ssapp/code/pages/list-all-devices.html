@@ -1,46 +1,42 @@
 <webc-container controller="ListDevicesController">
-    <div class="flex-grow-1">
-        <psk-card class="bpd-dashboard ">
+    <div class="container main-container">
+        <div class="container flex-container">
+            <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+                 width="180"/>
+            <h4 class="title">IOT Devices List</h4>
+        </div>
 
+        <div class="container" data-if="@allDevices">
+            <label class="no-data" slot="false">No devices registered</label>
 
-            <div
-                    class="m-5 d-flex flex-column align-items-center justify-content-center"
-                    slot="condition-true"
-                    style="height: 100%"
-            >
-                <h4 class="bold">Devices List</h4>
-                <div>
-                    <psk-layout class="border-bottom border-top" columns="6" slot="condition-true">
-                        <psk-label label="Device ID"></psk-label>
-                        <psk-label label="Brand"></psk-label>
-                        <psk-label label="Model"></psk-label>
-                        <psk-label label="Status"></psk-label>
-                        <psk-label label="Trial"></psk-label>
-                        <psk-label label="Options"></psk-label>
-
-                    </psk-layout>
-
-                    <psk-layout class="justify-content-center align-items-center table-row" columns="6"
-                                data-for="@allDevices">
-                        <p>{{@serialNumber}}</p>
-                        <p>{{@brand}}</p>
-                        <p>{{@modelNumber}}</p>
-                        <p>{{@status}}</p>
-                        <p>{{@trial}}</p>
-                        <div class="d-flex flex-row align-items-center justify-content-around">
-                            <psk-button
-                                    class="btn-bare table-cell m-1 pharma-primary"
-                                    event-name="patient-status"
-
-                            >
-                                View
-                            </psk-button>
-
-                        </div>
-                    </psk-layout>
+            <header slot="true">
+                <div class="row-wrapper grid-equal">
+                    <label>Device ID</label>
+                    <label>Brand</label>
+                    <label>Model</label>
+                    <label>Status</label>
+                    <label>Trial</label>
+                    <label>Options</label>
                 </div>
-                <psk-button class="mt-2 pharma-primary" event-name="go-back" label="Go Back"></psk-button>
-            </div>
-        </psk-card>
+            </header>
+
+            <main data-for="@allDevices" slot="true">
+                <div class="row-wrapper grid-equal">
+                    <label>{{@serialNumber}}</label>
+                    <label>{{@brand}}</label>
+                    <label>{{@modelNumber}}</label>
+                    <label>{{@status}}</label>
+                    <label>{{@trial}}</label>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <label class="link option" data-tag="view">View</label>
+                        <label class="link option" data-tag="edit">Edit</label>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="go-back">Go Back</button>
+        </footer>
     </div>
 </webc-container>

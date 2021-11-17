@@ -1,27 +1,35 @@
 const {WebcController} = WebCardinal.controllers;
+
 export default class ListDevicesController extends WebcController {
     constructor(element, history) {
         super(element, history);
 
-        let receivedState = this.getState();
-        this.model.allDevices = receivedState;
+        this.model = {allDevice: []};
+        this.model.allDevices = JSON.parse(JSON.stringify(this.getState()));
 
-        this._attachHandlerGoBack();
-        this._attachHandlerPatientStatus();
+        this.attachHandlerGoBack();
+        this.attachHandlerViewDevice();
+        this.attachHandlerEditDevice();
     }
 
-    _attachHandlerGoBack(){
-        this.on('go-back', (event) => {
-            console.log ("Go Back button pressed");
+    attachHandlerGoBack() {
+        this.onTagClick('go-back', () => {
+            console.log("Go Back button pressed");
             this.navigateToPageTag('manage-devices');
         });
     }
-    _attachHandlerPatientStatus(){
-        this.on('patient-status',  (event) => {
-            console.log ("Patient Status button pressed");
-            this.navigateToPageTag('patient-status');
+
+    attachHandlerViewDevice() {
+        this.onTagClick('view', (model) => {
+            console.log("Patient Status button pressed", model);
+            this.navigateToPageTag('patient-status', model);
         });
     }
 
-
+    attachHandlerEditDevice() {
+        this.onTagClick('view', (model) => {
+            console.log("Edit Device button pressed", model);
+            this.navigateToPageTag('patient-status', model);
+        });
+    }
 }

@@ -1,69 +1,81 @@
 {
-  "theme": "iot-pmed-theme",
-  "pages": [
-    {
-      "name": "Home",
-      "path": "/home",
-      "src": "home.html",
-      "tag": "home"
-    },
-    {
-      "name": "list-of-patients",
-      "path": "/list-of-patients",
-      "src": "list-of-patients.html",
-      "tag": "list-of-patients"
-    },
-    {
-      "name": "add-device",
-      "path": "/add-device",
-      "src": "add-device.html",
-      "tag": "add-device"
-    },
-    {
-      "name": "list-all-devices",
-      "path": "/list-all-devices",
-      "src": "list-all-devices.html",
-      "tag": "list-all-devices"
-    },
-    {
-      "name": "manage-devices",
-      "path": "/manage-devices",
-      "src": "manage-devices.html",
-      "tag": "manage-devices"
-    },
-    {
-      "name": "trial-management",
-      "path": "/trial-management",
-      "src": "trial-management.html",
-      "tag": "trial-management"
-    },
-    {
-      "name": "patient-status",
-      "path": "/patient-status",
-      "src": "patient-status.html",
-      "tag": "patient-status"
-    },
-    {
-      "name": "patient-device-history",
-      "path": "/patient-device-history",
-      "src": "patient-device-history.html",
-      "tag": "patient-device-history"
-    },
-    {
-      "name": "patient-consent-status",
-      "path": "/patient-consent-status",
-      "src": "patient-consent-status.html",
-      "tag": "patient-consent-status"
-    },
-    {
-      "name": "patient-alert-history",
-      "path": "/patient-alert-history",
-      "src": "patient-alert-history.html",
-      "tag": "patient-alert-history"
-    }
-  ],
-  "pagesFallback": {
-    "name": "404",
-    "src": "./home.html"
-  }
+	"theme": "iot-pmed-theme",
+	"pages": [
+		{
+			"name": "Home",
+			"path": "/home",
+			"src": "home.html",
+			"tag": "home"
+		},
+		{
+			"name": "list-of-patients",
+			"path": "/list-of-patients",
+			"src": "list-of-patients.html",
+			"tag": "list-of-patients"
+		},
+		{
+			"name": "confirmation-page",
+			"path": "/confirmation-page",
+			"src": "confirmation-page.html",
+			"tag": "confirmation-page"
+		},
+		{
+			"name": "add-device",
+			"path": "/add-device",
+			"src": "add-device.html",
+			"tag": "add-device"
+		},
+		{
+			"name": "add-device-summary",
+			"path": "/add-device-summary",
+			"src": "add-device-summary.html",
+			"tag": "add-device-summary"
+		},
+		{
+			"name": "list-all-devices",
+			"path": "/list-all-devices",
+			"src": "list-all-devices.html",
+			"tag": "list-all-devices"
+		},
+		{
+			"name": "manage-devices",
+			"path": "/manage-devices",
+			"src": "manage-devices.html",
+			"tag": "manage-devices"
+		},
+		{
+			"name": "trial-management",
+			"path": "/trial-management",
+			"src": "trial-management.html",
+			"tag": "trial-management"
+		},
+		{
+			"name": "patient-status",
+			"path": "/patient-status",
+			"src": "patient-status.html",
+			"tag": "patient-status"
+		},
+		{
+			"name": "patient-device-history",
+			"path": "/patient-device-history",
+			"src": "patient-device-history.html",
+			"tag": "patient-device-history"
+		},
+		{
+			"name": "patient-consent-status",
+			"path": "/patient-consent-status",
+			"src": "patient-consent-status.html",
+			"tag": "patient-consent-status"
+		},
+		{
+			"name": "patient-alert-history",
+			"path": "/patient-alert-history",
+			"src": "patient-alert-history.html",
+			"tag": "patient-alert-history"
+		}
+	],
+	"pagesFallback": {
+		"name": "404",
+		"src": "./home.html"
+	}
 }
