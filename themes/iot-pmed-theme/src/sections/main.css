@@ -1,18 +1,3 @@
-main .row-wrapper label:first-child {
-    display: inline-block;
-    max-width: 90%;
-    overflow: hidden;
-    text-align: left;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    white-space: nowrap;
-}
-
-main .row-wrapper.grid-equal label:first-child {
-    text-align: center;
-    max-width: 100%;
-}
-
 main .row-wrapper:nth-child(odd) {
     background-color: rgba(0, 135, 152, 0.19);
 }
