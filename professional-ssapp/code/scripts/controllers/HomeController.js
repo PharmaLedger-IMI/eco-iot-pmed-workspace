@@ -8,11 +8,12 @@ import IotAdaptorApi from "../services/IotAdaptorApi.js";
 export default class HomeController extends WebcController {
     constructor(element, history) {
         super(element, history);
+
         this.model = {};
 
-        this._attachHandlerManageDevices();
-        this._attachHandlerTrialManagement();
-        this._attachHandlerListOfPatients();
+        this.attachHandlerManageDevices();
+        this.attachHandlerTrialManagement();
+        this.attachHandlerListOfPatients();
 
         this.ResponsesService = new ResponsesService(this.DSUStorage);
         this.TrialParticipantRepository = TrialParticipantRepository.getInstance(this.DSUStorage);
@@ -36,10 +37,29 @@ export default class HomeController extends WebcController {
         });
     }
 
+    attachHandlerManageDevices() {
+        this.onTagClick('home:manage-devices', () => {
+            this.navigateToPageTag('manage-devices');
+        });
+    }
+
+    attachHandlerTrialManagement() {
+        this.onTagClick('home:trial-management', () => {
+            this.navigateToPageTag('trial-management');
+        });
+    }
+
+    attachHandlerListOfPatients() {
+        this.onTagClick('home:list-of-patients', () => {
+            console.log("List of Patients button pressed");
+            this.navigateToPageTag('list-of-patients');
+        });
+    }
+
     handleIotMessages(data) {
         switch (data.message.operation) {
             case 'questionnaire-response': {
-                console.log('Received message', data.message)
+                console.log('Received message', data.message);
                 this.ResponsesService.mount(data.message.ssi, (err, data) => {
                     if (err) {
                         return console.log(err);
@@ -48,7 +68,7 @@ export default class HomeController extends WebcController {
                         if (err) {
                             return console.log(err);
                         }
-                        console.log('ProfessionalSSAPP_HomeController');
+                        console.log('ProfessionalSSAPPHomeController');
                         data.forEach(response => {
                             response.item.forEach(item => {
                                 console.log(item.answer[0], item.linkId, item.text)
@@ -83,42 +103,23 @@ export default class HomeController extends WebcController {
         }
     }
 
-    _attachHandlerManageDevices() {
-        this.onTagClick('home:manage-devices', () => {
-            this.navigateToPageTag('manage-devices');
-        });
-    }
 
-    _attachHandlerTrialManagement() {
-        this.onTagClick('home:trial-management', () => {
-            this.navigateToPageTag('trial-management');
-        });
-    }
-
-
-    async _attachHandlerListOfPatients() {
-        this.onTagClick('home:list-of-patients', () => {
-            this.IotAdaptorApi = new IotAdaptorApi();
-            let observations = [];
-            this.IotAdaptorApi.searchResource("Observation", function (err, result) {
-                result.forEach(value => {
-                    let initData = {
-                        name: value.code.text,
-                        value: value.valueQuantity.value,
-                        unit: value.valueQuantity.unit
-                    };
-                    observations.push(initData);
-                });
-            });
-
-            this.navigateToPageTag('patient-status', {allData: observations});
-        });
-    }
-
-    // _attachHandlerListOfPatients(){
-    //     this.on('home:list-of-patients', (event) => {
-    //         console.log ("List of Patients button pressed");
-    //         this.navigateToPageTag('list-of-patients');
+    // async attachHandlerListOfPatients() {
+    //     this.onTagClick('home:list-of-patients', () => {
+    //         this.IotAdaptorApi = new IotAdaptorApi();
+    //         let observations = [];
+    //         this.IotAdaptorApi.searchResource("Observation", function (err, result) {
+    //             result.forEach(value => {
+    //                 let initData = {
+    //                     name: value.code.text,
+    //                     value: value.valueQuantity.value,
+    //                     unit: value.valueQuantity.unit
+    //                 };
+    //                 observations.push(initData);
+    //             });
+    //         });
+    //
+    //         this.navigateToPageTag('patient-status', {allData: observations});
     //     });
     // }
 

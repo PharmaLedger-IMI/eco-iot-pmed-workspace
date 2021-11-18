@@ -1,63 +1,37 @@
-<webc-container controller="ListPatientsController" style="height: 100%">
-    <div class="flex-grow-1">
-        <div data-if="@trialsNotEmpty">
-            <div slot="true" style="height: 100%">
-                <psk-condition condition="@participantsNotEmpty">
-                    <div slot="condition-false" style="height: 100%">
-                        <psk-layout
-                                class="d-flex flex-column justify-content-center align-items-center mb-5"
-                                style="height: 100%"
-                        >
-                            <psk-select event-name="trial-select" view-model="trials"></psk-select>
-                            <psk-button class="pharma-primary" event-name="go-back"
-                                        label="Go Back"></psk-button>
-                        </psk-layout>
-                    </div>
-                    <div
-                            class="m-5 d-flex flex-column align-items-center justify-content-center"
-                            slot="condition-true"
-                            style="height: 100%"
-                    >
-                        <h4 class="bold">Patient List</h4>
-                        <div>
-                            <psk-layout class="border-bottom border-top" columns="4" slot="condition-true">
-                                <psk-label label="Patient ID"></psk-label>
-                                <psk-label label="Device Status"></psk-label>
-                                <psk-label label="Sign Date"></psk-label>
-                                <psk-label label="Options"></psk-label>
-                            </psk-layout>
-                            <psk-for-each data-view-model="@participants" style="display: contents">
-                                <psk-layout class="justify-content-center align-items-center table-row"
-                                            columns="4">
-                                    <psk-label label="@id"></psk-label>
-                                    <psk-label label="@deviceStatus"></psk-label>
-                                    <psk-label label="@patientSigned"></psk-label>
-                                    <div class="d-flex flex-row align-items-center justify-content-around">
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-name="patient-status"
-                                        >
-                                            View
-                                        </psk-button>
-                                        <psk-button
-                                                class="btn-bare table-cell m-1 pharma-primary"
-                                                event-data="@id"
-                                                event-name="edit-patient"
-                                        >
-                                            Edit
-                                        </psk-button>
-                                    </div>
-                                </psk-layout>
-                            </psk-for-each>
-                        </div>
-                        <psk-button class="mt-2 pharma-primary" event-name="go-back"
-                                    label="Go Back"></psk-button>
-                    </div>
-                </psk-condition>
-            </div>
-            <div class="middle-text" slot="false">
-                <psk-label label="Trial list is empty."></psk-label>
-            </div>
+<webc-container controller="ListPatientsController">
+    <div class="container main-container">
+        <div class="container flex-container">
+            <img alt="IoT Clinical Trial" src="assets/images/hope_trial_logo.png"
+                 width="140"/>
+            <h4 class="title">Patient List</h4>
         </div>
+
+        <div class="container" data-if="@participantsNotEmpty">
+            <label class="no-data" slot="false">Trial list is empty.</label>
+
+            <header slot="true">
+                <div class="row-wrapper grid-equal">
+                    <label>Patient ID</label>
+                    <label>Device Status</label>
+                    <label>Time</label>
+                    <label>Options</label>
+                </div>
+            </header>
+
+            <main data-for="@participants" slot="true">
+                <div class="row-wrapper grid-equal">
+                    <label>{{@id}}</label>
+                    <label>{{@deviceStatus}}</label>
+                    <label>{{@patientSigned}}</label>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <label class="link option" data-tag="view">View</label>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="go-back">Go Back</button>
+        </footer>
     </div>
 </webc-container>
