@@ -5,12 +5,19 @@ export default class TrialManagementController extends WebcController {
         super(...props);
 
         this._attachHandlerGoBack();
+        this._attachHandlerPatientDeviceMatch();
     }
 
     _attachHandlerGoBack() {
-        this.on('go-back', (event) => {
+        this.onTagClick('go-back', (event) => {
             console.log("Go Back button pressed");
             this.navigateToPageTag('home');
+        });
+    }
+    _attachHandlerPatientDeviceMatch() {
+        this.onTagClick('patient-device-match', (event) => {
+            console.log ("patient device match");
+            this.navigateToPageTag('patient-device-match');
         });
     }
 

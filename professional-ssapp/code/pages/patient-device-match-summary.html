@@ -1,0 +1,34 @@
+<webc-container controller="PatientDeviceMatchSummaryController">
+    <div class="container main-container">
+        <div class="container flex-container">
+            <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+                  width="180"/>
+            <h4 class="title">Summary</h4>
+        </div>
+
+        <div class="container justify-content-start">
+            <header>
+                <div class="row-wrapper grid-equal">
+                    <label>Patient ID</label>
+                    <label>Device ID</label>
+                    <label>Trial</label>
+                    <label> Device Status</label>
+                </div>
+            </header>
+
+            <main>
+                <div class="row-wrapper grid-equal">
+                    <label>{{@patientId}}</label>
+                    <label>{{@deviceId}}</label>
+                    <label>{{@trial}}</label>
+                    <label>{{@status}}</label>
+                </div>
+            </main>
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="summary:accept">Accept</button>
+            <button data-tag="summary:edit">Edit</button>
+        </footer>
+    </div>
+</webc-container>

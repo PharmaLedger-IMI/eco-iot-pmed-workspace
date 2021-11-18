@@ -72,6 +72,18 @@
 			"path": "/patient-alert-history",
 			"src": "patient-alert-history.html",
 			"tag": "patient-alert-history"
+		},
+		{
+			"name": "patient-device-match",
+			"path": "/patient-device-match",
+			"src": "patient-device-match.html",
+			"tag": "patient-device-match"
+		},
+		{
+			"name": "patient-device-match-summary",
+			"path": "/patient-device-match-summary",
+			"src": "patient-device-match-summary.html",
+			"tag": "patient-device-match-summary"
 		}
 	],
 	"pagesFallback": {

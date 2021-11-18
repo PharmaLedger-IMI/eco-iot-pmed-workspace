@@ -1,0 +1,25 @@
+<webc-container controller="PatientDeviceMatchController">
+    <div class="container flex-container">
+        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+             width="360"/>
+        <h4 class="title">Match Patient/Device</h4>
+        <div class="inner-container">
+            <div class="form-group">
+                <label class="col-form-label">{{@patient.label}}</label>
+                <select class="form-control" data-for="@patient.options" value="@patient.value">
+                    <option value="@value">{{@label}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label">{{@device.label}}</label>
+                <select class="form-control" data-for="@device.options" value="@device.value">
+                    <option value="@value">{{@label}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="button-group-wrapper">
+            <button data-tag="save">Save</button>
+            <button data-tag="go-back">Go back</button>
+        </div>
+    </div>
+</webc-container>
