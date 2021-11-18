@@ -1,4 +1,5 @@
-label.option {
+label.option,
+main .row-wrapper label {
     padding: 0 0.5rem 0 0;
     margin: 0.5rem 0 0.5rem 0.5rem;
     border-right: 1px solid;
@@ -49,6 +50,25 @@ h4.title {
     text-decoration: underline;
 }
 
+main .row-wrapper label {
+    border: none;
+}
+
+main .row-wrapper label:first-child {
+    display: inline-block;
+    max-width: 90%;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+main .row-wrapper.grid-equal label:first-child {
+    text-align: center;
+    max-width: 100%;
+}
+
 /* FROM psk-label - refactor this during webcardinal migration refactor */
 
 .align-left {
@@ -67,6 +87,9 @@ psk-label {
 psk-label,
 label {
     max-width: 100%;
+    /* margin: 0; */
+    /* vertical-align: middle; */
+    /* display: flex; */
 }
 
 .item-wrapper psk-label,
