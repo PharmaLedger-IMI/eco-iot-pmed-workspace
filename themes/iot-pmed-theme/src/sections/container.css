@@ -131,6 +131,17 @@ webc-app-container .container {
     row-gap: 0.5rem;
 }
 
+.action-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 10%;
+    -webkit-column-gap: 1.5rem;
+    -moz-column-gap: 1.5rem;
+    column-gap: 1.5rem;
+}
+
 /* FROM psk-card - refactor this during webcardinal migration refactor *//* clean old style inherited from bootstrap */
 
 psk-card,

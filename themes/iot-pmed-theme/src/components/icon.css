@@ -1,3 +1,30 @@
+.fa.icon {
+    color: rgb(246, 246, 246);
+}
+
+.action-button-wrapper .fa.icon {
+    background: var(--secondary);
+    padding: 0.5rem;
+    width: auto;
+    cursor: pointer;
+    min-height: unset;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    -webkit-transition: all ease-in 0.1s;
+    -moz-transition: all ease-in 0.1s;
+    -ms-transition: all ease-in 0.1s;
+    -o-transition: all ease-in 0.1s;
+    transition: all ease-in 0.1s;
+}
+
+.action-button-wrapper .fa.icon:hover {
+    background: transparent;
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
 /* FROM psk-icon - refactor this during webcardinal migration refactor */
 
 .btn-exit span.icon {
@@ -138,7 +165,7 @@ div.menu-icons psk-icon {
     margin-right: 2rem;
 }
 
-.wallet-path>psk-icon span.icon {
+.wallet-path > psk-icon span.icon {
     font-size: 1.1rem;
     width: 1.1rem;
     text-align: left;

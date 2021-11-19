@@ -27,11 +27,20 @@ h4.title {
     width: 100%;
 }
 
+h5.title {
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--primary);
+    color: var(--secondary);
+}
+
 .no-data {
     color: var(--secondary);
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     font-style: italic;
-    padding-top: 2rem;
+    padding: 2rem 1rem 1rem;
     text-align: center;
     width: 100%;
 }
