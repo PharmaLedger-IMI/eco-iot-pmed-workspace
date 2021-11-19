@@ -5,8 +5,6 @@ export default class PatientDeviceMatchSummaryController extends WebcController 
         super(element, history);
 
         this.model = this.getState();
-        console.log("******************* Hello **************************");
-        console.log(this.model);
 
         this.attachHandlerEditButton();
         this.attachHandlerAcceptButton();
@@ -15,7 +13,7 @@ export default class PatientDeviceMatchSummaryController extends WebcController 
     attachHandlerEditButton() {
         this.onTagClick('summary:edit', () => {
             console.log("Edit button pressed");
-            this.navigateToPageTag('patient-device-match', this.model);
+            this.navigateToPageTag('patient-device-match', this.model.toObject());
         });
     }
 

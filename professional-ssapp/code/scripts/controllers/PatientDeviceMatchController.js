@@ -32,7 +32,7 @@ export default class PatientDeviceMatchController extends WebcController {
             trial: "Trail Demo",
             status: "Active",
             deviceId: this.model.device.value,
-            patientId: this.model.device.value
+            patientId: this.model.patient.value
             
         };
     }
@@ -61,7 +61,7 @@ export default class PatientDeviceMatchController extends WebcController {
                         value: 'QC12348'
                     }
                 ],
-                value: prevState.status || ""
+                value: prevState.deviceId || ""
             },
             patient: {
                 label: "Patient ID",
@@ -84,7 +84,7 @@ export default class PatientDeviceMatchController extends WebcController {
                         value: '6VHBJrEp4v'
                     }
                 ],
-                value: prevState.trial || ""
+                value: prevState.patientId || ""
             }
         }
     }

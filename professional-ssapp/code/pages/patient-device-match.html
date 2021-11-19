@@ -1,6 +1,6 @@
 <webc-container controller="PatientDeviceMatchController">
     <div class="container flex-container">
-        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/svg/hope_trial_logo.svg"
              width="360"/>
         <h4 class="title">Match Patient/Device</h4>
         <div class="inner-container">
@@ -9,8 +9,6 @@
                 <select class="form-control" data-for="@patient.options" value="@patient.value">
                     <option value="@value">{{@label}}</option>
                 </select>
-            </div>
-            <div class="form-group">
                 <label class="col-form-label">{{@device.label}}</label>
                 <select class="form-control" data-for="@device.options" value="@device.value">
                     <option value="@value">{{@label}}</option>
