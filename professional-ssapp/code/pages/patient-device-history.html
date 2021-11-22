@@ -1,35 +1,51 @@
 <webc-container controller="PatientDeviceHistoryController">
-    <div class="flex-grow-1">
-        <psk-card class="bpd-dashboard ">
+    <div class="container main-container">
+        <div class="container flex-container">
+            <h4 class="title">Patient Status</h4>
+        </div>
 
-            <div
-                    class="m-5 d-flex flex-column align-items-center justify-content-center"
-                    slot="condition-true"
-                    style="height: 100%"
-            >
-                <h4 class="bold">Patient Device History</h4>
-                <div>
-                    <psk-layout class="border-bottom border-top" columns="4" slot="condition-true">
-                        <psk-label label="Time"></psk-label>
-                        <psk-label label="Device Status"></psk-label>
-                        <psk-label label="Last Measurement"></psk-label>
-                        <psk-label label="Patient Status(PEWS)"></psk-label>
-
-
-                    </psk-layout>
-
-                    <psk-layout class="justify-content-center align-items-center table-row" columns="4">
-                        <psk-label label="Timestamp"></psk-label>
-                        <psk-label label="Running"></psk-label>
-                        <psk-label label="Timestamp"></psk-label>
-                        <psk-label label="6"></psk-label>
-
-
-                    </psk-layout>
-                </div>
-                <psk-button class="mt-2 pharma-primary" event-name="go-back" label="Go Back"></psk-button>
+        <div class="container">
+            <div class="flex-container small-container">
+                <header>
+                    <div class="row-wrapper grid-equal">
+                        <label>Patient ID</label>
+                        <label>Device ID</label>
+                    </div>
+                </header>
+                <main>
+                    <div class="row-wrapper grid-equal">
+                        <label>{{@patientId}}</label>
+                        <label>{{@deviceId}}</label>
+                    </div>
+                </main>
             </div>
 
-        </psk-card>
+            <div class="flex-container small-container">
+                <h5 class="title">Device Status</h5>
+            </div>
+
+            <div class="flex-container small-container">
+                <header>
+                    <div class="row-wrapper grid-equal">
+                        <label>Time</label>
+                        <label>Device Status</label>
+                        <label>Last Measurement</label>
+                        <label>Patient Status(PEWS)</label>
+                    </div>
+                </header>
+                <main>
+                    <div class="row-wrapper grid-equal">
+                        <label>{{@time}}</label>
+                        <label>{{@deviceStatus}}</label>
+                        <label>{{@lastMeasurement}}</label>
+                        <label>{{@pews}}</label>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="go-back">Go Back</button>
+        </footer>
     </div>
 </webc-container>
