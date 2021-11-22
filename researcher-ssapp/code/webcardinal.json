@@ -20,6 +20,18 @@
       "tag": "information-request"
     },
     {
+      "name": "Add Request Summary",
+      "path": "/add-request-summary",
+      "src": "add-request-summary.html",
+      "tag": "add-request-summary"
+    },
+    {
+      "name": "Confirmation Page",
+      "path": "/confirmation-page",
+      "src": "confirmation-page.html",
+      "tag": "confirmation-page"
+    },
+    {
       "name": "View Information Requests",
       "path": "/view-information-requests",
       "src": "view-information-requests.html",

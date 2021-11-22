@@ -676,3 +676,10 @@ progress, progress[role] {
     width: 0;
 }
 
+
+.grid-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+}
+

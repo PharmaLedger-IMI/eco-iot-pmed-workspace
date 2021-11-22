@@ -1,17 +1,39 @@
 <webc-container controller="RequestsController">
-
     <div class="container flex-container">
-        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
-             width="480"/>
 
-        <h4 style="color:#008798;">Issue a new request</h4>
-        <psk-text-input view-model="@Title"></psk-text-input>
+        <h4 class="title">Request data from patients</h4>
 
-        <psk-date-input view-model="@startDate"></psk-date-input>
-        <psk-date-input view-model="@endDate"></psk-date-input>
+        <div class="inner-container">
 
-        <psk-select view-model="@Status"></psk-select>
-        <psk-select view-model="@Terms"></psk-select>
+            <div class="form-group">
+                <label class="col-form-label" for="@title.name">{{@title.label}}</label>
+                <input class="form-control" data-view-model="@title" id="@title.name"/>
+            </div>
+
+            <div class="grid-two-columns">
+                <div class="grid-child">
+                    <label class="col-form-label">{{@startdate.label}}</label>
+                    <input class="form-control" type="date" data-view-model="@startdate" id="@startdate.name">
+                </div>
+                <div class="grid-child">
+                    <label class="col-form-label">{{@enddate.label}}</label>
+                    <input class="form-control" type="date" data-view-model="@enddate" id="@enddate.name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label">{{@status.label}}</label>
+                <select class="form-control" data-for="@status.options" value="@status.value">
+                    <option value="@value">{{@label}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label">{{@terms.label}}</label>
+                <select class="form-control" data-for="@terms.options" value="@terms.value">
+                    <option value="@value">{{@label}}</option>
+                </select>
+            </div>
 
         <div class="button-group-wrapper">
             <button data-tag="request:go-back">Back</button>
@@ -19,7 +41,4 @@
         </div>
 
     </div>
-
-
-
 </webc-container>

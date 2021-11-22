@@ -1,0 +1,36 @@
+<webc-container controller="AddRequestSummaryController">
+    <div class="container main-container">
+        <div class="container flex-container">
+            <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+                  width="180"/>
+            <h4 class="title">Summary</h4>
+        </div>
+
+        <div class="container justify-content-start">
+            <header>
+                <div class="row-wrapper grid-equal">
+                    <label>Title</label>
+                    <label>Start Date</label>
+                    <label>End Date</label>
+                    <label>Status</label>
+                    <label>Terms</label>
+                </div>
+            </header>
+
+            <main>
+                <div class="row-wrapper grid-equal">
+                    <label>{{@title}}</label>
+                    <label>{{@startdate}}</label>
+                    <label>{{@enddate}}</label>
+                    <label>{{@status}}</label>
+                    <label>{{@terms}}</label>
+                </div>
+            </main>
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="request:edit">Edit</button>
+            <button data-tag="request:accept">Accept</button>
+        </footer>
+    </div>
+</webc-container>
