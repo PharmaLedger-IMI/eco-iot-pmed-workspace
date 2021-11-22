@@ -5,16 +5,12 @@ export default class PatientAlertHistoryController extends WebcController {
 
         super(element, history);
 
-        this._attachHandlerGoBack();
+        this.attachHandlerGoBack();
     }
 
-    _attachHandlerGoBack() {
-        this.on('go-back', (event) => {
-            console.log("Go Back button pressed");
-            this.navigateToPageTag('patient-status');
+    attachHandlerGoBack() {
+        this.onTagClick('go-back', () => {
+            this.history.goBack();
         });
     }
-
-
-
 }
