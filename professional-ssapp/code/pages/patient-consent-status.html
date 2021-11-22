@@ -1,39 +1,57 @@
 <webc-container controller="PatientConsentStatusController">
-    <div class="flex-grow-1">
-        <psk-card class="bpd-dashboard ">
-            <div
-                    class="m-5 d-flex flex-column align-items-center justify-content-center"
-                    slot="condition-true"
-                    style="height: 100%"
-            >
-                <h4 class="bold">Patient Consent Status</h4>
-                <div>
-                    <psk-layout class="border-bottom border-top" columns="7" slot="condition-true">
-                        <psk-label label="Trial"></psk-label>
-                        <psk-label label="Sponsor"></psk-label>
-                        <psk-label label="Hospital"></psk-label>
-                        <psk-label label="Consent Name"></psk-label>
-                        <psk-label label="Consent Version"></psk-label>
-                        <psk-label label="Consent Status"></psk-label>
-                        <psk-label label="Date"></psk-label>
+    <div class="container main-container">
+        <div class="container flex-container">
+            <h4 class="title">Patient Status</h4>
+        </div>
 
-                    </psk-layout>
-
-                    <psk-layout class="justify-content-center align-items-center table-row" columns="7">
-                        <psk-label label="A"></psk-label>
-                        <psk-label label="B"></psk-label>
-                        <psk-label label="C"></psk-label>
-                        <psk-label label="D"></psk-label>
-                        <psk-label label="E"></psk-label>
-                        <psk-label label="F"></psk-label>
-                        <psk-label label="G"></psk-label>
-
-                    </psk-layout>
-                </div>
-                <psk-button class="mt-2 pharma-primary" event-name="go-back" label="Go Back"></psk-button>
+        <div class="container">
+            <div class="flex-container small-container">
+                <header>
+                    <div class="row-wrapper grid-equal">
+                        <label>Patient ID</label>
+                        <label>Device ID</label>
+                    </div>
+                </header>
+                <main>
+                    <div class="row-wrapper grid-equal">
+                        <label>{{@patientId}}</label>
+                        <label>{{@deviceId}}</label>
+                    </div>
+                </main>
             </div>
 
+            <div class="flex-container small-container">
+                <h5 class="title">Consent Status</h5>
+            </div>
 
-        </psk-card>
+            <div class="flex-container">
+                <header>
+                    <div class="row-wrapper grid-equal">
+                        <label>Trial</label>
+                        <label>Sponsor</label>
+                        <label>Hospital</label>
+                        <label>Consent name</label>
+                        <label>Consent version</label>
+                        <label>Consent status</label>
+                        <label>Date</label>
+                    </div>
+                </header>
+                <main>
+                    <div class="row-wrapper grid-equal">
+                        <label>{{@trial}}</label>
+                        <label>{{@sponsor}}</label>
+                        <label>{{@hospital}}</label>
+                        <label>{{@consentName}}</label>
+                        <label>{{@consentVersion}}</label>
+                        <label>{{@consentStatus}}</label>
+                        <label>{{@date}}</label>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="go-back">Go Back</button>
+        </footer>
     </div>
 </webc-container>
