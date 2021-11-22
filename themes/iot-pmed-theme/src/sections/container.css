@@ -131,6 +131,23 @@ webc-app-container .container {
     row-gap: 0.5rem;
 }
 
+.small-container {
+    padding: 0 15%;
+}
+
+@media (max-width: 1199px) {
+    .small-container {
+        padding: 0 10%;
+    }
+}
+
+
+@media (max-width: 991px) {
+    .small-container {
+        padding: 0 0.75rem;
+    }
+}
+
 .action-button-wrapper {
     display: flex;
     justify-content: center;
