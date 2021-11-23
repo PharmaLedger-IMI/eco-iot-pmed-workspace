@@ -1,5 +1,5 @@
 {
-  "theme": "iot-pmed-theme",
+  "theme": "clinical-site-theme",
   "pages": [
     {
       "name": "Home",
