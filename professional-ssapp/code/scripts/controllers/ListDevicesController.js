@@ -49,7 +49,7 @@ export default class ListDevicesController extends WebcController {
     }
 
     attachHandlerEditDevice() {
-        this.onTagClick('view', (model) => {
+        this.onTagClick('edit', (model) => {
             console.log("Edit Device button pressed", model);
             this.navigateToPageTag('patient-status', model);
         });
