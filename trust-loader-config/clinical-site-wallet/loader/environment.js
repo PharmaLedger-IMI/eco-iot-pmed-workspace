@@ -1,5 +1,5 @@
 export default {
-    appName: 'professional-wallet',
+    appName: 'clinical-site-wallet',
     vault: 'server',
     agent: 'browser',
     system: 'any',

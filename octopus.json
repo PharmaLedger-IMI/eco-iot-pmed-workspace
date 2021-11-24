@@ -463,7 +463,7 @@
 				{
 					"type": "copy",
 					"src": "./clinical-site-ssapp/seed",
-					"target": "./apihub-root/clinical-site/apps-patch/clinical-site-ssapp/seed",
+					"target": "./apihub-root/clinical-site-wallet/apps-patch/clinical-site-ssapp/seed",
 					"options": {
 						"overwrite": true
 					}
