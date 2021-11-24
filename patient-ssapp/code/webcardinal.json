@@ -1,4 +1,5 @@
 {
+	"logLevel": "none",
     "theme": "patient-theme",
     "pages": [
       {

@@ -143,7 +143,7 @@
 			]
 		},
 		{
-			"name": "apihub-root/professional-wallet/loader",
+			"name": "apihub-root/clinical-site-wallet/loader",
 			"src": "http://github.com/privatesky/trust-loader.git",
 			"actions": [
 				{
@@ -153,7 +153,7 @@
 				},
 				{
 					"type": "execute",
-					"cmd": "cd apihub-root/professional-wallet/loader && npm install"
+					"cmd": "cd apihub-root/clinical-site-wallet/loader && npm install"
 				}
 			]
 		},
@@ -169,6 +169,36 @@
 				{
 					"type": "execute",
 					"cmd": "cd apihub-root/researcher-wallet/loader && npm install"
+				}
+			]
+		},
+		{
+			"name": "clinical-site-ssapp",
+			"src": "https://github.com/PharmaLedger-IMI/clinical-site-ssapp.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd clinical-site-ssapp && npm install"
+				}
+			]
+		},
+		{
+			"name": "themes/clinical-site-theme",
+			"src": "https://github.com/PharmaLedger-IMI/clinical-site-theme.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd themes/clinical-site-theme && npm install"
 				}
 			]
 		},
@@ -193,16 +223,6 @@
 			]
 		},
 		{
-			"name": "themes/researcher-theme",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/researcher-theme && npm install"
-				}
-			]
-		},
-		{
 			"name": "themes/eDiary-theme",
 			"src": "",
 			"actions": [
@@ -213,32 +233,12 @@
 			]
 		},
 		{
-			"name": "iot-pmed-theme",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/iot-pmed-theme && npm install"
-				}
-			]
-		},
-		{
 			"name": "patient-ssapp",
 			"src": "",
 			"actions": [
 				{
 					"type": "execute",
 					"cmd": "cd patient-ssapp && npm install"
-				}
-			]
-		},
-		{
-			"name": "professional-ssapp",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd professional-ssapp && npm install"
 				}
 			]
 		},
@@ -315,7 +315,7 @@
 				{
 					"type": "copy",
 					"src": "./utilitaries",
-					"target": "./professional-ssapp/",
+					"target": "./clinical-site-ssapp/",
 					"options": {
 						"overwrite": true
 					}
@@ -327,6 +327,16 @@
 					"options": {
 						"overwrite": true
 					}
+				}
+			]
+		},
+		{
+			"name": "clinical-site-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/clinical-site-theme && npm run build-dossier"
 				}
 			]
 		},
@@ -351,32 +361,12 @@
 			]
 		},
 		{
-			"name": "researcher-theme-wallet-build",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/researcher-theme && npm run build-dossier"
-				}
-			]
-		},
-		{
 			"name": "eDiary-theme-wallet-build",
 			"src": "",
 			"actions": [
 				{
 					"type": "execute",
 					"cmd": "cd themes/eDiary-theme && npm run build-dossier"
-				}
-			]
-		},
-		{
-			"name": "iot-pmed-theme-build",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/iot-pmed-theme && npm run build-dossier"
 				}
 			]
 		},
@@ -442,7 +432,7 @@
 				},
 				{
 					"type": "execute",
-					"cmd": "cd apihub-root/professional-wallet/loader && npm install"
+					"cmd": "cd apihub-root/clinical-site-wallet/loader && npm install"
 				},
 				{
 					"type": "execute",
@@ -455,25 +445,25 @@
 			]
 		},
 		{
-			"name": "bind_professional_ssapp_to_wallet",
+			"name": "bind_clinical_site_ssapp_to_wallet",
 			"src": "",
 			"actions": [
 				{
 					"type": "execute",
-					"cmd": "cd professional-ssapp && npm run build"
+					"cmd": "cd clinical-site-ssapp && npm run build"
 				},
 				{
 					"type": "copy",
-					"src": "./professional-ssapp/seed",
-					"target": "./apihub-root/professional-wallet/wallet-patch/seed",
+					"src": "./clinical-site-ssapp/seed",
+					"target": "./apihub-root/clinical-site-wallet/wallet-patch/seed",
 					"options": {
 						"overwrite": true
 					}
 				},
 				{
 					"type": "copy",
-					"src": "./professional-ssapp/seed",
-					"target": "./apihub-root/professional-wallet/apps-patch/professional-ssapp/seed",
+					"src": "./clinical-site-ssapp/seed",
+					"target": "./apihub-root/clinical-site/apps-patch/clinical-site-ssapp/seed",
 					"options": {
 						"overwrite": true
 					}

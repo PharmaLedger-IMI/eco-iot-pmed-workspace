@@ -1,4 +1,0 @@
-delete /
-addfolder code
-mount ../webcardinal/seed /webcardinal
-mount ../themes/*/seed /themes/*
