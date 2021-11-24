@@ -1,19 +1,53 @@
-<webc-container controller="EvidenceController">
+<webc-container controller="AddEvidenceP2Controller">
     <div class="container flex-container">
-        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
-             width="480"/>
 
-        <psk-text-input view-model="@title"></psk-text-input>
-        <psk-text-input view-model="@subtitle"></psk-text-input>
-        <psk-text-input view-model="@version"></psk-text-input>
-        <psk-select view-model="@status"></psk-select>
-        <psk-select view-model="@topics"></psk-select>
-        <psk-select view-model="@exposureBackground"></psk-select>
-        <psk-text-input rows="6" view-model="@description" width="100%"></psk-text-input>
+        <div class="inner-container">
+            <h5 class="generic-title">Evidence Details</h5>
 
-        <div class="button-group-wrapper">
+            <div class="form-group">
+                <label class="col-form-label">{{@title.label}}</label>
+                <input class="form-control" data-view-model="@title" id="@title.name"/>
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label">{{@subtitle.label}}</label>
+                <input class="form-control" data-view-model="@subtitle" id="@subtitle.name"/>
+            </div>
+
+            <div class="grid-four-columns">
+                <div class="grid-child">
+                    <label class="col-form-label">{{@version.label}}</label>
+                    <input class="form-control" data-view-model="@version" id="@version.name"/>
+                </div>
+                <div class="grid-child">
+                    <label class="col-form-label">{{@status.label}}</label>
+                    <select class="form-control" data-for="@status.options" value="@status.value">
+                        <option value="@value">{{@label}}</option>
+                    </select>
+                </div>
+                <div class="grid-child">
+                    <label class="col-form-label">{{@topics.label}}</label>
+                    <select class="form-control" data-for="@topics.options" value="@topics.value">
+                        <option value="@value">{{@label}}</option>
+                    </select>
+                </div>
+                <div class="grid-child">
+                    <label class="col-form-label">{{@exposureBackground.label}}</label>
+                    <select class="form-control" data-for="@exposureBackground.options" value="@exposureBackground.value">
+                        <option value="@value">{{@label}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label">{{@description.label}}</label>
+                <textarea class="form-control" data-view-model="@description" id="@description.name" rows="5">
+                </textarea>
+            </div>
+
+            <div class="button-group-wrapper">
             <button data-tag="evidence:add-evidence-p1">Back</button>
-            <button data-tag="evidence:add-evidence-p3">Next</button>
+            <button data-tag="add-evidence-summary">Confirm</button>
         </div>
     </div>
 </webc-container>
