@@ -9,56 +9,30 @@ export default class AddEvidenceSummaryController extends WebcController {
 
         this.model = this.getState();
 
-        ////
         this.IotAdaptorApi = new IotAdaptorApi();
-        this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
-        const me = this;
-        me.evidenceConfigDSU = ""
-        me.EvidenceConfigService.getEvidenceConfig(function(error, data) {
-            if (!data) {
-                me.IotAdaptorApi.createEvidenceDsu({}, (err, evidence) => {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    me.evidenceConfigDSU = evidence[evidence.length - 1];
-                    me.EvidenceConfigService.saveEvidenceConfig(evidence, (err, saveData) => {
-                        if (err) {
-                            return console.log(err);
-                        }
-                    });
-                });
-            } else {
-                me.evidenceConfigDSU = data[data.length - 1];
-            }
-            console.log(me.evidenceConfigDSU);
-        });
-        ////
 
-        this.attachHandlerEditButton();
-        this.attachHandlerAcceptButton();
+        this._attachHandlerEditButton();
+        this._attachHandlerAcceptButton();
     }
 
-
-    attachHandlerEditButton() {
+    _attachHandlerEditButton() {
         this.onTagClick('evidence:edit', () => {
             console.log("Edit button pressed");
             this.navigateToPageTag('add-evidence-p1', this.model.toObject());
         });
     }
 
-
-    attachHandlerAcceptButton(){
-        const me = this;
+    _attachHandlerAcceptButton(){
         this.onTagClick('evidence:accept', () => {
-            ////
-            let keySSI = me.evidenceConfigDSU.sReadSSI;
-            me.IotAdaptorApi.createEvidence(this.prepareEvidenceData(), keySSI, (err, evidence) => {
+
+            let keySSI = "27XvCBPKSWpUwscQUxwsVDTxRcnKSPEFTyaG1PPvpnC76o4pD76pUsStY1bzektb9nVGZNH6N6eWHqvDvPABsPhAuyd7tdYW6nySVQtxMvWbNipbWVhz8xVikf2auFpsq9ULP2du51taiV552RjQS1u"
+            this.IotAdaptorApi.createEvidence(this.prepareEvidenceData(), keySSI, (err, evidence) => {
                 if (err) {
                     return console.log(err);
                 }
                 console.log(evidence);
             });
-            ////
+
             this.navigateToPageTag('confirmation-page', {
                 confirmationMessage: "The evidence has been generated!",
                 redirectPage: "home"
