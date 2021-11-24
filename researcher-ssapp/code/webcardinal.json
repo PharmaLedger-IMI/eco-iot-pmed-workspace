@@ -26,6 +26,12 @@
       "tag": "add-request-summary"
     },
     {
+      "name": "Add Evidence Summary",
+      "path": "/add-evidence-summary",
+      "src": "add-evidence-summary.html",
+      "tag": "add-evidence-summary"
+    },
+    {
       "name": "Confirmation Page",
       "path": "/confirmation-page",
       "src": "confirmation-page.html",
@@ -69,7 +75,7 @@
     },
     {
       "name": "Edit Evidence",
-      "path": "/ediy-evidence",
+      "path": "/edit-evidence",
       "src": "editEvidence.html",
       "tag": "edit-evidence"
     },
