@@ -1,10 +1,11 @@
+webcardinal
 cardinal
 mobile/scan-app
 privatesky
 menu-wallet-prototype
 dossier-explorer-wallet-prototype
 apihub-root/patient-wallet/loader
-apihub-root/professional-wallet/loader
+apihub-root/clinical-site-wallet/loader
 apihub-root/researcher-wallet/loader
 apihub-root/dsu-explorer/
 apihub-root/internal-volume/domains
@@ -19,8 +20,6 @@ env.json.devel
 .idea
 .vscode
 apihub-root/ediary-wallet/loader
-webcardinal
-webcardinal/latest-change-set.txt
 latest-change-set.txt
 apihub-root/messaging/queues.json
 iot-adaptor/data

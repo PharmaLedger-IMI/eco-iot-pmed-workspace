@@ -1,123 +1,124 @@
 {
-  "theme": "clinical-site-theme",
-  "pages": [
-    {
-      "name": "Home",
-      "path": "/home",
-      "src": "home.html",
-      "tag": "home"
-    },
-    {
-      "name": "Configure Access",
-      "path": "/configure-access",
-      "src": "configure-access.html",
-      "tag": "configure-access"
-    },
-    {
-      "name": "Information Request",
-      "path": "/information-request",
-      "src": "information-request.html",
-      "tag": "information-request"
-    },
-    {
-      "name": "Add Request Summary",
-      "path": "/add-request-summary",
-      "src": "add-request-summary.html",
-      "tag": "add-request-summary"
-    },
-    {
-      "name": "Confirmation Page",
-      "path": "/confirmation-page",
-      "src": "confirmation-page.html",
-      "tag": "confirmation-page"
-    },
-    {
-      "name": "View Information Requests",
-      "path": "/view-information-requests",
-      "src": "view-information-requests.html",
-      "tag": "view-information-requests"
-    },
-    {
-      "name": "evidence",
-      "path": "/evidence",
-      "src": "evidence.html",
-      "tag": "evidence"
-    },
-    {
-      "name": "Add Evidence",
-      "path": "/add-evidence-p1",
-      "src": "addEvidenceP1.html",
-      "tag": "add-evidence-p1"
-    },
-    {
-      "name": "Add Evidence",
-      "path": "/add-evidence-p2",
-      "src": "addEvidenceP2.html",
-      "tag": "add-evidence-p2"
-    },
-    {
-      "name": "Add Evidence",
-      "path": "/add-evidence-p3",
-      "src": "addEvidenceP3.html",
-      "tag": "add-evidence-p3"
-    },
-    {
-      "name": "Confirm Evidence",
-      "path": "/confirm-evidence",
-      "src": "completedEvidence.html",
-      "tag": "confirm-evidence"
-    },
-    {
-      "name": "Edit Evidence",
-      "path": "/ediy-evidence",
-      "src": "editEvidence.html",
-      "tag": "edit-evidence"
-    },
-    {
-      "name": "All Evidences",
-      "path": "/evidence-list",
-      "src": "evidenceList.html",
-      "tag": "evidence-list"
-    },
-    {
-      "name": "View dynamic Permission",
-      "path": "/view-dynamic-permission",
-      "src": "view-dynamic-permission.html",
-      "tag": "view-dynamic-permission"
-    },
-    {
-      "name": "issue-new-request",
-      "path": "/issue-new-request",
-      "src": "issue-new-request.html",
-      "tag": "issue-new-request"
-    },
-    {
-      "name": "statistics-d-permissions-per-day",
-      "path": "/statistics-d-permissions-per-day",
-      "src": "statistics-d-permissions-per-day.html",
-      "tag": "statistics-d-permissions-per-day"
-    },
-    {
-      "name": "statistics-d-permissions-per-day-users",
-      "path": "/statistics-d-permissions-per-day-users",
-      "src": "statistics-d-permissions-per-day-users.html",
-      "tag": "statistics-d-permissions-per-day-users"
-    },   
-    {
-      "name": "statistics-d-permissions-total-users",
-      "path": "/statistics-d-permissions-total-users",
-      "src": "statistics-d-permissions-total-users.html",
-      "tag": "statistics-d-permissions-total-users"
-    },
-    {
-      "name": "patient-dynamic-permission",
-      "path": "/patient-dynamic-permission",
-      "src": "patient-dynamic-permission.html",
-      "tag": "patient-dynamic-permission"
-    }
-  ],
-  "pagesFallback": {
-    "name": "404",
-    "src": "./home.html"
-  }
+	"logLevel": "none",
+	"theme": "clinical-site-theme",
+	"pages": [
+		{
+			"name": "Home",
+			"path": "/home",
+			"src": "home.html",
+			"tag": "home"
+		},
+		{
+			"name": "Configure Access",
+			"path": "/configure-access",
+			"src": "configure-access.html",
+			"tag": "configure-access"
+		},
+		{
+			"name": "Information Request",
+			"path": "/information-request",
+			"src": "information-request.html",
+			"tag": "information-request"
+		},
+		{
+			"name": "Add Request Summary",
+			"path": "/add-request-summary",
+			"src": "add-request-summary.html",
+			"tag": "add-request-summary"
+		},
+		{
+			"name": "Confirmation Page",
+			"path": "/confirmation-page",
+			"src": "confirmation-page.html",
+			"tag": "confirmation-page"
+		},
+		{
+			"name": "View Information Requests",
+			"path": "/view-information-requests",
+			"src": "view-information-requests.html",
+			"tag": "view-information-requests"
+		},
+		{
+			"name": "evidence",
+			"path": "/evidence",
+			"src": "evidence.html",
+			"tag": "evidence"
+		},
+		{
+			"name": "Add Evidence",
+			"path": "/add-evidence-p1",
+			"src": "addEvidenceP1.html",
+			"tag": "add-evidence-p1"
+		},
+		{
+			"name": "Add Evidence",
+			"path": "/add-evidence-p2",
+			"src": "addEvidenceP2.html",
+			"tag": "add-evidence-p2"
+		},
+		{
+			"name": "Add Evidence",
+			"path": "/add-evidence-p3",
+			"src": "addEvidenceP3.html",
+			"tag": "add-evidence-p3"
+		},
+		{
+			"name": "Confirm Evidence",
+			"path": "/confirm-evidence",
+			"src": "completedEvidence.html",
+			"tag": "confirm-evidence"
+		},
+		{
+			"name": "Edit Evidence",
+			"path": "/ediy-evidence",
+			"src": "editEvidence.html",
+			"tag": "edit-evidence"
+		},
+		{
+			"name": "All Evidences",
+			"path": "/evidence-list",
+			"src": "evidenceList.html",
+			"tag": "evidence-list"
+		},
+		{
+			"name": "View dynamic Permission",
+			"path": "/view-dynamic-permission",
+			"src": "view-dynamic-permission.html",
+			"tag": "view-dynamic-permission"
+		},
+		{
+			"name": "issue-new-request",
+			"path": "/issue-new-request",
+			"src": "issue-new-request.html",
+			"tag": "issue-new-request"
+		},
+		{
+			"name": "statistics-d-permissions-per-day",
+			"path": "/statistics-d-permissions-per-day",
+			"src": "statistics-d-permissions-per-day.html",
+			"tag": "statistics-d-permissions-per-day"
+		},
+		{
+			"name": "statistics-d-permissions-per-day-users",
+			"path": "/statistics-d-permissions-per-day-users",
+			"src": "statistics-d-permissions-per-day-users.html",
+			"tag": "statistics-d-permissions-per-day-users"
+		},
+		{
+			"name": "statistics-d-permissions-total-users",
+			"path": "/statistics-d-permissions-total-users",
+			"src": "statistics-d-permissions-total-users.html",
+			"tag": "statistics-d-permissions-total-users"
+		},
+		{
+			"name": "patient-dynamic-permission",
+			"path": "/patient-dynamic-permission",
+			"src": "patient-dynamic-permission.html",
+			"tag": "patient-dynamic-permission"
+		}
+	],
+	"pagesFallback": {
+		"name": "404",
+		"src": "./home.html"
+	}
 }

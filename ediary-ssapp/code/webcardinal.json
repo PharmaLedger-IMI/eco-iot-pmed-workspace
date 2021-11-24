@@ -1,38 +1,39 @@
 {
-  "theme": "eDiary-theme",
-  "pages": [
-    {
-      "name": "Home",
-      "path": "/home",
-      "src": "home.html",
-      "tag": "home"
-    },
-    {
-      "name": "Create trial",
-      "tag": "create-trial",
-      "indexed": false
-    },
-    {
-      "name": "Create diary",
-      "src": "create-diary.html",
-      "tag": "create-diary",
-      "indexed": false
-    },
-    {
-      "name": "Ediary",
-      "path": "/ediary",
-      "src": "ediary.html",
-      "tag": "ediary"
-    },
-    {
-      "name": "Questionnaire",
-      "path": "/questionnaire",
-      "src": "questionnaire.html",
-      "tag": "questionnaire"
-    }
-  ],
-  "pagesFallback": {
-    "name": "404",
-    "src": "./home.html"
-  }
+	"logLevel": "none",
+	"theme": "eDiary-theme",
+	"pages": [
+		{
+			"name": "Home",
+			"path": "/home",
+			"src": "home.html",
+			"tag": "home"
+		},
+		{
+			"name": "Create trial",
+			"tag": "create-trial",
+			"indexed": false
+		},
+		{
+			"name": "Create diary",
+			"src": "create-diary.html",
+			"tag": "create-diary",
+			"indexed": false
+		},
+		{
+			"name": "Ediary",
+			"path": "/ediary",
+			"src": "ediary.html",
+			"tag": "ediary"
+		},
+		{
+			"name": "Questionnaire",
+			"path": "/questionnaire",
+			"src": "questionnaire.html",
+			"tag": "questionnaire"
+		}
+	],
+	"pagesFallback": {
+		"name": "404",
+		"src": "./home.html"
+	}
 }
