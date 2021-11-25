@@ -1,9 +1,35 @@
-<psk-container>
+<webc-container controller="ViewInformationRequestsController">
+    <div class="container flex-container">
+        <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+             width="480"/>
 
-    <psk-card class="bpd-dashboard">
+        <div class="container" >
 
-        <psk-label class="bpd-dashboard-title" label="Your approved information requests:"/>
-        <hr>
-    </psk-card>
+            <header slot="true">
+                <div class="row-wrapper grid-equal">
+                    <label>Title</label>
+                    <label>Starting Date</label>
+                    <label>Ending Date</label>
+                    <label>Status</label>
+                    <label>Terms</label>
+                    <label>Permission Status</label>
+                </div>
+            </header>
 
-</psk-container>
+            <main>
+                <div class="row-wrapper grid-equal">
+                    <label></label>
+                    <label></label>
+                    <label></label>
+                    <label></label>
+                    <label></label>
+                </div>
+            </main>
+
+            <div class="button-group-wrapper">
+                <button data-tag="view-requests:go-back">Back</button>
+            </div>
+        </div>
+
+    </div>
+</webc-container>

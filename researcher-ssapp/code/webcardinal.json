@@ -9,6 +9,12 @@
 			"tag": "home"
 		},
 		{
+			"name": "Requests Main",
+			"path": "/requests-main",
+			"src": "requests-main.html",
+			"tag": "requests-main"
+		},
+		{
 			"name": "Information Request",
 			"path": "/information-request",
 			"src": "information-request.html",
@@ -19,6 +25,12 @@
 			"path": "/add-request-summary",
 			"src": "add-request-summary.html",
 			"tag": "add-request-summary"
+		},
+		{
+			"name": "View Information Requests",
+			"path": "/view-information-requests",
+			"src": "view-information-requests.html",
+			"tag": "view-information-requests"
 		},
 		{
 			"name": "Add Evidence Summary",
@@ -32,12 +44,7 @@
 			"src": "confirmation-page.html",
 			"tag": "confirmation-page"
 		},
-		{
-			"name": "View Information Requests",
-			"path": "/view-information-requests",
-			"src": "view-information-requests.html",
-			"tag": "view-information-requests"
-		},
+
 		{
 			"name": "evidence",
 			"path": "/evidence",

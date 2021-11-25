@@ -26,7 +26,7 @@ export default class RequestsController extends WebcController {
     _attachHandlerGoBack(){
         this.onTagClick('request:go-back', (event) => {
             console.log ("Go back button pressed");
-            this.navigateToPageTag('home');
+            this.navigateToPageTag('requests-main');
         });
     }
 

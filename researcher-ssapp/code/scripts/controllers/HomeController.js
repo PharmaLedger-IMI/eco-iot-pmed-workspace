@@ -44,7 +44,7 @@ export default class HomeController extends WebcController {
     _attachHandlerInformationRequest(){
         this.onTagClick('home:information-request', (event) => {
             console.log ("Information request button pressed");
-            this.navigateToPageTag('information-request');
+            this.navigateToPageTag('requests-main');
         });
     }
 
