@@ -9,12 +9,6 @@
 			"tag": "home"
 		},
 		{
-			"name": "Configure Access",
-			"path": "/configure-access",
-			"src": "configure-access.html",
-			"tag": "configure-access"
-		},
-		{
 			"name": "Information Request",
 			"path": "/information-request",
 			"src": "information-request.html",
@@ -63,24 +57,6 @@
 			"tag": "add-evidence-p2"
 		},
 		{
-			"name": "Add Evidence",
-			"path": "/add-evidence-p3",
-			"src": "addEvidenceP3.html",
-			"tag": "add-evidence-p3"
-		},
-		{
-			"name": "Confirm Evidence",
-			"path": "/confirm-evidence",
-			"src": "completedEvidence.html",
-			"tag": "confirm-evidence"
-		},
-		{
-			"name": "Edit Evidence",
-			"path": "/ediy-evidence",
-			"src": "editEvidence.html",
-			"tag": "edit-evidence"
-		},
-		{
 			"name": "All Evidences",
 			"path": "/evidence-list",
 			"src": "evidenceList.html",
@@ -91,12 +67,6 @@
 			"path": "/view-dynamic-permission",
 			"src": "view-dynamic-permission.html",
 			"tag": "view-dynamic-permission"
-		},
-		{
-			"name": "issue-new-request",
-			"path": "/issue-new-request",
-			"src": "issue-new-request.html",
-			"tag": "issue-new-request"
 		},
 		{
 			"name": "statistics-d-permissions-per-day",
