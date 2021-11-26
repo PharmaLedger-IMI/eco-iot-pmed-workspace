@@ -35,17 +35,13 @@ function IotAdapter(server) {
     const DeleteDevice = require('./api/delete_device.js');
     const GetDeviceById = require('./api/get_device_by_id.js');
 
-    const { responseModifierMiddleware, requestBodyJSONMiddleware } = require('../privatesky/modules/apihub/utils/middlewares');
-    const { requestBodyXMLMiddleware, responseBodyJsonMiddleware } = require('./utils/middlewares');
+    const {requestBodyXMLMiddleware, responseModifierMiddleware, requestBodyJSONMiddleware} = require('./utils/middlewares');
 
     server.use(`/iotAdapter/*`, responseModifierMiddleware);
-    server.use(`/iotAdapter/*`, responseBodyJsonMiddleware);
-
+    server.use(`/iotAdapter/*`, requestBodyJSONMiddleware);
 
     // For testing
-
     server.get(`/iotAdapter/resource/observation/patient/:id`, GetObservationByPatientId);
-
 
     // For debugging purpose
     server.get(`/iotAdapter/resource/:resource_type`, SearchResources);
@@ -64,7 +60,6 @@ function IotAdapter(server) {
     server.put(`/iotAdapter/dsu/resource/:resource_type/:id`, UpdateDsuResource);
     server.delete(`/iotAdapter/dsu/resource/:resource_type/:id`, DeleteDsuResource);
     server.get(`/iotAdapter/dsu/resource/:resource_type/:id`, GetDsuResourceById);
-
     // End for debugging purpose
 
     // Actual APIs
@@ -91,8 +86,6 @@ function IotAdapter(server) {
     server.put(`/iotAdapter/update-device/:id`, UpdateDevice);
     server.delete(`/iotAdapter/delete-device/:id`, DeleteDevice);
     server.get(`/iotAdapter/get-device/:id`, GetDeviceById);
-
-
 }
 
 module.exports = IotAdapter;
