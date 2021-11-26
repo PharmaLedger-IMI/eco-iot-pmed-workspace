@@ -28,3 +28,7 @@ clinical-site-theme
 seed
 latest-change-set.txt
 apps-patch
+apihub-root/trial-participant-wallet/loader
+common-services
+themes/trial-participant-theme
+trial-participant-ssapp
