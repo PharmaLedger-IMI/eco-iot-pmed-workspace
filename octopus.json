@@ -143,6 +143,21 @@
 			]
 		},
 		{
+			"name": "apihub-root/trial-participant-wallet/loader",
+			"src": "http://github.com/privatesky/trust-loader.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd apihub-root/trial-participant-wallet/loader && npm install"
+				}
+			]
+		},
+		{
 			"name": "apihub-root/clinical-site-wallet/loader",
 			"src": "http://github.com/privatesky/trust-loader.git",
 			"actions": [
@@ -188,6 +203,36 @@
 			]
 		},
 		{
+			"name": "trial-participant-ssapp",
+			"src": "https://github.com/PharmaLedger-IMI/trial-participant-ssapp.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd trial-participant-ssapp && npm install"
+				}
+			]
+		},
+		{
+			"name": "common-services",
+			"src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd common-services && npm install"
+				}
+			]
+		},
+		{
 			"name": "themes/clinical-site-theme",
 			"src": "https://github.com/PharmaLedger-IMI/clinical-site-theme.git",
 			"actions": [
@@ -199,6 +244,21 @@
 				{
 					"type": "execute",
 					"cmd": "cd themes/clinical-site-theme && npm install"
+				}
+			]
+		},
+		{
+			"name": "themes/trial-participant-theme",
+			"src": "https://github.com/PharmaLedger-IMI/trial-participant-theme.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd themes/trial-participant-theme && npm install"
 				}
 			]
 		},
@@ -341,6 +401,16 @@
 			]
 		},
 		{
+			"name": "trial-participant-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/trial-participant-theme && npm run build-dossier"
+				}
+			]
+		},
+		{
 			"name": "blue-fluorite-theme-wallet-build",
 			"src": "",
 			"actions": [
@@ -436,6 +506,10 @@
 				},
 				{
 					"type": "execute",
+					"cmd": "cd apihub-root/trial-participant-wallet/loader && npm install"
+				},
+				{
+					"type": "execute",
 					"cmd": "cd apihub-root/researcher-wallet/loader && npm install"
 				},
 				{
@@ -467,6 +541,36 @@
 					"options": {
 						"overwrite": true
 					}
+				}
+			]
+		},
+		{
+			"name": "trial-participant-wallet_bind_to_trial-participant-ssapp",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd trial-participant-ssapp && npm run build"
+				},
+				{
+					"type": "copy",
+					"src": "./trial-participant-ssapp/seed",
+					"target": "./apihub-root/trial-participant-wallet/apps-patch/trial-participant-ssapp/seed",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "copy",
+					"src": "./trial-participant-ssapp/seed",
+					"target": "./apihub-root/trial-participant-wallet/wallet-patch/seed",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "execute",
+					"cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/trial-participant-wallet/apps-patch/trial-participant-ssapp/readme"
 				}
 			]
 		},

@@ -1,6 +1,12 @@
 let LOADER_GLOBALS = {
 	THEME: "app",
 	SHOW_ACTION_BUTTON: false,
+	DEFAULT_CREDENTIALS:{
+		email:"researcher@pharmaledger.com",
+		password:"secret",
+		username : "private",
+		company:"PharmaLedger"
+	},
 	LABELS_DICTIONARY: {
 		APP_NAME: "Researcher Wallet",
 		APP_DESCRIPTION: "The \"backend\" application for the patient wallet",
