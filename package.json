@@ -27,7 +27,9 @@
     "freeze": "node ./node_modules/octopus/scripts/freeze dependencies install-mobile",
     "debug": "nodemon -e html,js,css,json --watch professional-ssapp/code --ignore professional-ssapp/code/constitution --ignore professional-ssapp/code/scripts/bundles --exec \"npm run build professional-ssapp\"",
     "debug:theme": "nodemon -e html,js,css --watch themes/professional-theme --exec \"npm run build:theme\"",
-    "build:theme": "cd themes/professional-theme && npm run build-dossier"
+    "build:theme": "cd themes/professional-theme && npm run build-dossier",
+    "build:tp-theme": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd themes/trial-participant-theme && npm run build-dossier\"",
+    "build-tp": "npm run build:tp-theme && npm run build trial-participant-ssapp"
   },
   "repository": {
     "type": "git",
