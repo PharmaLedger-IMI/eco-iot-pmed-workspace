@@ -61,4 +61,9 @@ export default class HomeController extends WebcController {
             this.navigateToPageTag('evidence');
         });
     }
+    _attachHandlerEvidence(){
+        this.onTagClick('home:researchStudy', (event) => {
+            this.navigateToPageTag('research-study');
+        });
+    }
 }

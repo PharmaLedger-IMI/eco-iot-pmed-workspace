@@ -98,6 +98,30 @@
 			"path": "/patient-dynamic-permission",
 			"src": "patient-dynamic-permission.html",
 			"tag": "patient-dynamic-permission"
+		},
+		{
+			"name": "research-study",
+			"path": "/research-study",
+			"src": "research-study.html",
+			"tag": "research-study"
+		},
+		{
+			"name": "create-research-study",
+			"path": "/create-research-study",
+			"src": "create-research-study.html",
+			"tag": "create-research-study"
+		},
+		{
+			"name": "research-study-summary",
+			"path": "/research-study-summary",
+			"src": "research-study-summary.html",
+			"tag": "research-study-summary"
+		},
+		{
+			"name": "All Research Study",
+			"path": "/research-study-list",
+			"src": "research-study-list.html",
+			"tag": "research-study-list"
 		}
 	],
 	"pagesFallback": {

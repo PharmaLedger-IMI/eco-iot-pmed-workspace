@@ -1,0 +1,36 @@
+<webc-container controller="ResearchStudySummaryController">
+    <div class="container main-container">
+        <div class="container flex-container">
+            <img alt="PharmaLedger Blockchain Enabled Healthcare" src="assets/images/pharmaledger-logo.jpg"
+                  width="180"/>
+            <h4 class="title"> Research Study Summary</h4>
+        </div>
+
+        <div class="container justify-content-start">
+
+            <header>
+                <div class="row-wrapper grid-equal">
+                    <label>Title</label>
+                    <label>Phase</label>
+                    <label>Primary Purpose Type</label>
+                    <label>Status</label>
+                </div>
+            </header>
+
+            <main>
+                <div class="row-wrapper grid-equal">
+                    <label>{{@title}}</label>
+                    <label>{{@phase}}</label>
+                    <label>{{@primaryPurposeType}}</label>
+                    <label>{{@status}}</label>
+                </div>
+            </main>
+
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="research:edit">Edit</button>
+            <button data-tag="research:accept">Accept</button>
+        </footer>
+    </div>
+</webc-container>
