@@ -366,14 +366,6 @@
 				{
 					"type": "copy",
 					"src": "./utilitaries",
-					"target": "./clinical-site-ssapp/",
-					"options": {
-						"overwrite": true
-					}
-				},
-				{
-					"type": "copy",
-					"src": "./utilitaries",
 					"target": "./researcher-ssapp/",
 					"options": {
 						"overwrite": true
