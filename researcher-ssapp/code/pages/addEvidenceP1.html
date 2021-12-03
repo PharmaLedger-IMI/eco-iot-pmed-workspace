@@ -1,28 +1,38 @@
 <webc-container controller="AddEvidenceP1Controller">
-    <div class="container flex-container">
+    <div class="container main-container">
 
-        <h4 class="title">New Evidence</h4>
-        <div class="inner-container">
-            <h5 class="generic-title">Publisher Contact Details</h5>
-            <div class="form-group">
-                <label class="col-form-label">{{@name.label}}</label>
-                <input class="form-control" data-view-model="@name" id="@name.name"/>
-            </div>
-
-            <div class="form-group">
-                <label class="col-form-label">{{@organization.label}}</label>
-                <input class="form-control" data-view-model="@organization" id="@organization.name"/>
-            </div>
-
-            <div class="form-group">
-                <label class="col-form-label">{{@email.label}}</label>
-                <input class="form-control" data-view-model="@email" id="@email.name"/>
-            </div>
-
-            <div class="button-group-wrapper">
-                <button data-tag="evidence:back-to-menu">Back</button>
-                <button data-tag="evidence:add-evidence-p2">Next</button>
-            </div>
-
+        <div class="container flex-container">
+            <h4 class="title">New Evidence</h4>
         </div>
+
+        <main class="form-container">
+            <div class="form-row">
+                <h5 class="generic-title">Publisher Contact Details</h5>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="col-form-label">{{@name.label}}</label>
+                    <input class="form-control" data-view-model="@name" id="@name.name"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="col-form-label">{{@organization.label}}</label>
+                    <input class="form-control" data-view-model="@organization" id="@organization.name"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="col-form-label">{{@email.label}}</label>
+                    <input class="form-control" data-view-model="@email" id="@email.name"/>
+                </div>
+            </div>
+        </main>
+
+        <div class="button-group-wrapper">
+            <button data-tag="evidence:back-to-menu">Back</button>
+            <button data-tag="evidence:add-evidence-p2">Next</button>
+        </div>
+
+    </div>
 </webc-container>

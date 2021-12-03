@@ -1,51 +1,58 @@
 <webc-container controller="AddEvidenceP2Controller">
-    <div class="container flex-container">
+    <div class="container main-container">
 
-        <div class="inner-container">
+        <div class="container flex-container">
             <h5 class="generic-title">Evidence Details</h5>
+        </div>
 
-            <div class="form-group">
-                <label class="col-form-label">{{@title.label}}</label>
-                <input class="form-control" data-view-model="@title" id="@title.name"/>
+        <main class="form-container">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="col-form-label">{{@title.label}}</label>
+                    <input class="form-control" data-view-model="@title" id="@title.name"/>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">{{@subtitle.label}}</label>
+                    <input class="form-control" data-view-model="@subtitle" id="@subtitle.name"/>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-form-label">{{@subtitle.label}}</label>
-                <input class="form-control" data-view-model="@subtitle" id="@subtitle.name"/>
-            </div>
-
-            <div class="grid-four-columns">
-                <div class="grid-child">
+            <div class="form-row">
+                <div class="form-group">
                     <label class="col-form-label">{{@version.label}}</label>
                     <input class="form-control" data-view-model="@version" id="@version.name"/>
                 </div>
-                <div class="grid-child">
+                <div class="form-group">
                     <label class="col-form-label">{{@status.label}}</label>
                     <select class="form-control" data-for="@status.options" value="@status.value">
                         <option value="@value">{{@label}}</option>
                     </select>
                 </div>
-                <div class="grid-child">
+                <div class="form-group">
                     <label class="col-form-label">{{@topics.label}}</label>
                     <select class="form-control" data-for="@topics.options" value="@topics.value">
                         <option value="@value">{{@label}}</option>
                     </select>
                 </div>
-                <div class="grid-child">
+                <div class="form-group">
                     <label class="col-form-label">{{@exposureBackground.label}}</label>
-                    <select class="form-control" data-for="@exposureBackground.options" value="@exposureBackground.value">
+                    <select class="form-control" data-for="@exposureBackground.options"
+                            value="@exposureBackground.value">
                         <option value="@value">{{@label}}</option>
                     </select>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-form-label">{{@description.label}}</label>
-                <textarea class="form-control" data-view-model="@description" id="@description.name" rows="5">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="col-form-label">{{@description.label}}</label>
+                    <textarea class="form-control" data-view-model="@description" id="@description.name" rows="5">
                 </textarea>
+                </div>
             </div>
+        </main>
 
-            <div class="button-group-wrapper">
+        <div class="button-group-wrapper">
             <button data-tag="evidence:add-evidence-p1">Back</button>
             <button data-tag="add-evidence-summary">Confirm</button>
         </div>
