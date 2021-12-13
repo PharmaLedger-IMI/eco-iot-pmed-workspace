@@ -3,6 +3,23 @@
   "dependencies": [],
   "prebuild": [
     {
+      "name": "building common-services",
+      "actions": [
+        {
+          "type": "execute",
+          "cmd": "cd ../common-services && npm run build"
+        },
+        {
+          "type": "copy",
+          "src": "../common-services/build/bundles/commonServices.js",
+          "target": "code/scripts/bundles/commonServices.js",
+          "options": {
+            "overwrite": true
+          }
+        }
+      ]
+    },
+    {
       "name": "PSK bundles",
       "src": "",
       "actions": [

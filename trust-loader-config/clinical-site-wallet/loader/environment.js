@@ -6,7 +6,7 @@ export default {
     browser: 'any',
     mode: 'autologin',
     domain: 'vault',
-    sw: true,
+    sw: false,
     pwa: true,
     workspace: 'iot',
     'legenda for properties':

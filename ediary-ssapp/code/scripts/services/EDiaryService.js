@@ -1,4 +1,5 @@
-import DSUService from "./DSUService.js";
+const commonServices = require('common-services');
+const DSUService = commonServices.DSUService;
 
 export default class EDiaryService extends DSUService {
 
