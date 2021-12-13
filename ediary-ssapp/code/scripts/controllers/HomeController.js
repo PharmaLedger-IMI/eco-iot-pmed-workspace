@@ -10,7 +10,7 @@ export default class HomeController extends WebcController {
         this._attachHandlerIotQuestionarie();
         this._attachHandlerEDiary();
 
-        this.QuestionnaireService = new QuestionnaireService(this.DSUStorage);
+        this.QuestionnaireService = new QuestionnaireService();
         this.QuestionnaireService.saveQuestionnaire(Questionnaire.example, (err, data) => {
             if (err) {
                 return console.log(err);

@@ -3,8 +3,8 @@ const DSUService = commonServices.DSUService;
 
 export default class QuestionnaireService extends DSUService {
 
-    constructor(DSUStorage) {
-        super(DSUStorage, '/questionnaires');
+    constructor() {
+        super( '/questionnaires');
     }
 
     getQuestionnaires = (callback) => this.getEntities(callback);

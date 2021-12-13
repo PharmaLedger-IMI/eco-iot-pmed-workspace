@@ -11,7 +11,7 @@ export default class EDiaryController extends WebcController {
             trials: []
         });
 
-        this.EDiaryService = new EDiaryService(this.DSUStorage);
+        this.EDiaryService = new EDiaryService();
         this.EDiaryService.getEdiaries((err, data) => {
             if (err) {
                 return console.log(err);

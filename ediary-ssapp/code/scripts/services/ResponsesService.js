@@ -3,8 +3,8 @@ const DSUService = commonServices.DSUService;
 
 export default class ResponsesService extends DSUService {
 
-    constructor(DSUStorage) {
-        super(DSUStorage, '/responses');
+    constructor() {
+        super( '/responses');
     }
 
     mount = (keySSI, callback) => this.mountEntity(keySSI, callback)

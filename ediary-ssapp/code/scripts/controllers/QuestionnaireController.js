@@ -31,8 +31,8 @@ export default class QuestionnaireController extends WebcController {
 
         this.tabsContainer = this.querySelector('#tabs-container');
         this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.EDIARY_IDENTITY);
-        this.QuestionnaireService = new QuestionnaireService(this.DSUStorage);
-        this.ResponsesService = new ResponsesService(this.DSUStorage);
+        this.QuestionnaireService = new QuestionnaireService();
+        this.ResponsesService = new ResponsesService();
 
         this.updateQuestionnaire();
 
