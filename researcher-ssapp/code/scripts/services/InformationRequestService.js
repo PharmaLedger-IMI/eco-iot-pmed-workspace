@@ -1,9 +1,10 @@
-import DSUService from "./DSUService.js";
+const commonServices = require("common-services");
+const DSUService = commonServices.DSUService;
 
 export default class InformationRequestService extends DSUService {
 
-    constructor(DSUStorage) {
-        super(DSUStorage, '/information-requests');
+    constructor() {
+        super('/information-requests');
     }
 
     mount = (keySSI, callback) => this.mountEntity(keySSI, callback);

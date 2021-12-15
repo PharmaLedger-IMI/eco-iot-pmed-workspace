@@ -1,11 +1,6 @@
-const {
-    WebcController
-} = WebCardinal.controllers;
+const {WebcController} = WebCardinal.controllers;
 import IotAdaptorApi from "../services/IotAdaptorApi.js";
 import EvidenceConfigService from "../services/EvidenceConfigService.js";
-
-var singleData;
-var evidenceConfigDSU;
 
 export default class ConfirmEvidenceController extends WebcController {
     constructor(...props) {
@@ -13,7 +8,7 @@ export default class ConfirmEvidenceController extends WebcController {
         this.model = {
             ...this.history.win.history.state.state
         };
-        singleData = {
+        this.singleData = {
             ...this.history.win.history.state.state
         };
         this._attachHandlerGoBack();
@@ -21,9 +16,9 @@ export default class ConfirmEvidenceController extends WebcController {
         this._attachHandlerEvidenceEdit();
 
         this.IotAdaptorApi = new IotAdaptorApi();
-        this.EvidenceConfigService = new EvidenceConfigService(this.DSUStorage);
+        this.EvidenceConfigService = new EvidenceConfigService();
         const me = this;
-        me.EvidenceConfigService.getEvidenceConfig(function(error, data) {
+        me.EvidenceConfigService.getEvidenceConfig(function (error, data) {
 
             if (!data) {
                 me.IotAdaptorApi.createEvidenceDsu({}, (err, evidence) => {
@@ -51,11 +46,12 @@ export default class ConfirmEvidenceController extends WebcController {
             this.navigateToPageTag('home');
         });
     }
+
     _attachHandlerEvidenceConfirm() {
         const me = this;
         this.onTagClick('evidence:confirm', (event) => {
             let keySSI = me.evidenceConfigDSU.sReadSSI;
-            me.IotAdaptorApi.createEvidence(singleData.allData, keySSI, (err, evidence) => {
+            me.IotAdaptorApi.createEvidence(this.singleData.allData, keySSI, (err, evidence) => {
                 if (err) {
                     return console.log(err);
                 }
@@ -65,6 +61,7 @@ export default class ConfirmEvidenceController extends WebcController {
             this.navigateToPageTag('confirm-evidence');
         });
     }
+
     _attachHandlerEvidenceEdit() {
         this.onTagClick('evidence:edit', (event) => {
             this.navigateToPageTag('edit-evidence');

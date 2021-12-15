@@ -1,6 +1,8 @@
+const commonServices = require("common-services");
+const CommunicationService = commonServices.CommunicationService;
+
 import InformationRequestService from "../services/InformationRequestService.js";
 import {contractModelHL7} from "../models/HL7/ContractModel.js";
-import CommunicationService from "../services/CommunicationService.js";
 const {WebcController} = WebCardinal.controllers;
 
 
@@ -40,7 +42,7 @@ export default class AddRequestSummaryController extends WebcController {
             initContract.ContractVersion = 0;
             initContract.ContractApplies = [this.model.startdate, this.model.enddate];
 
-            this.InformationRequestService = new InformationRequestService(this.DSUStorage);
+            this.InformationRequestService = new InformationRequestService();
             this.InformationRequestService.saveInformationRequest(initContract, (err, data) => {
                 if (err) {
                     this.navigateToPageTag('confirmation-page', {

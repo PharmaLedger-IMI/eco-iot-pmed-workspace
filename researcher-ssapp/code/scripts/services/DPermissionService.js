@@ -1,9 +1,10 @@
-import DSUService from "./DSUService.js";
+const commonServices = require("common-services");
+const DSUService = commonServices.DSUService;
 
 export default class DPermissionService extends DSUService {
 
-    constructor(DSUStorage) {
-        super(DSUStorage, '/d-permissions');
+    constructor() {
+        super('/d-permissions');
     }
 
     mount = (keySSI, callback) => this.mountEntity(keySSI, callback);

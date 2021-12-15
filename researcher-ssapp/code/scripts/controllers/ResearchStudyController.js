@@ -1,6 +1,5 @@
 const {WebcController} = WebCardinal.controllers;
 
-
 export default class ResearchStudyController extends WebcController {
     constructor(...props) {
         super(...props);
@@ -32,14 +31,15 @@ export default class ResearchStudyController extends WebcController {
             this.navigateToPageTag('home');
         });
     }
-    getDemoResearchStudy(){
+
+    getDemoResearchStudy() {
         return [
             {
-            title: "Research Study 1",
-            primaryPurposeType: "treatment",
-            phase: "phase-1",
-            status: "active",
-            note: "General Note"
+                title: "Research Study 1",
+                primaryPurposeType: "treatment",
+                phase: "phase-1",
+                status: "active",
+                note: "General Note"
             },
             {
                 title: "Research Study 2",

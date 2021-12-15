@@ -1,6 +1,5 @@
 const {WebcController} = WebCardinal.controllers;
 
-
 export default class RequestsController extends WebcController {
     constructor(...props) {
 
@@ -9,23 +8,21 @@ export default class RequestsController extends WebcController {
         const prevState = this.getState() || {};
         this.model = this.getRequestViewModel(prevState);
 
-        this._attachHandlerIssueNewRequest()
+        this._attachHandlerIssueNewRequest();
         this._attachHandlerGoBack()
-
-
     }
 
-    _attachHandlerIssueNewRequest(){
-        this.onTagClick('new:request', (event) => {
-            console.log ("New information request button pressed");
+    _attachHandlerIssueNewRequest() {
+        this.onTagClick('new:request', () => {
+            console.log("New information request button pressed");
             const requestData = this.prepareRequestData();
             this.navigateToPageTag("add-request-summary", requestData);
         });
     }
 
-    _attachHandlerGoBack(){
-        this.onTagClick('request:go-back', (event) => {
-            console.log ("Go back button pressed");
+    _attachHandlerGoBack() {
+        this.onTagClick('request:go-back', () => {
+            console.log("Go back button pressed");
             this.navigateToPageTag('requests-main');
         });
     }

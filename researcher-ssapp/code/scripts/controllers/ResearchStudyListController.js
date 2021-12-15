@@ -1,22 +1,20 @@
-const { WebcController } = WebCardinal.controllers;
+const {WebcController} = WebCardinal.controllers;
 
-export default class ResearchStudyListController extends  WebcController  {
+export default class ResearchStudyListController extends WebcController {
     constructor(...props) {
         super(...props);
         this.model = {};
-        let receivedState = this.getState();
-        this.model.researchStudy = receivedState;
-        console.log (this.model.researchStudy);
-        this._attachHandlerHome()
-       
+
+        this.model.researchStudy = this.getState();
+
+        this.attachHandlerHome();
     }
-    _attachHandlerHome(){
-        this.onTagClick('research:back', (event) => {
+
+    attachHandlerHome() {
+        this.onTagClick('research:back', () => {
             this.navigateToPageTag('research-study');
         });
     }
-   
 
-   
 
 }

@@ -1,6 +1,5 @@
 const {WebcController} = WebCardinal.controllers;
 
-
 export default class RequestsMainController extends WebcController {
     constructor(...props) {
         super(...props);
@@ -10,7 +9,6 @@ export default class RequestsMainController extends WebcController {
         this._attachHandlerNewRequest();
         this._attachHandlerRequestsList();
         this._attachHandlerRequestsBackMenu();
-
     }
 
     _attachHandlerNewRequest() {

@@ -1,9 +1,10 @@
-import DSUService from "./DSUService.js";
+const commonServices = require("common-services");
+const DSUService = commonServices.DSUService;
 
 export default class NewEvidencetService extends DSUService {
 
-    constructor(DSUStorage) {
-        super(DSUStorage, '/new-evidence');
+    constructor() {
+        super('/new-evidence');
     }
 
     mount = (keySSI, callback) => this.mountEntity(keySSI, callback);

@@ -1,7 +1,5 @@
 const {WebcController} = WebCardinal.controllers;
 import IotAdaptorApi from "../services/IotAdaptorApi.js";
-import EvidenceConfigService from "../services/EvidenceConfigService.js";
-
 
 export default class ResearchStudySummaryController extends WebcController {
     constructor(...props) {

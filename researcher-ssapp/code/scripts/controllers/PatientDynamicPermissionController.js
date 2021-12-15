@@ -1,6 +1,4 @@
 const {WebcController} = WebCardinal.controllers;
-import {consentModelHL7} from '../models/HL7/ConsentModel.js';
-
 
 const ViewPatientDynamicPermissionViewModel = {
 
@@ -51,19 +49,13 @@ export default class PatientDynamicPermissionController extends WebcController {
         super(...props);
         this.model = ViewPatientDynamicPermissionViewModel;
         this._attachHandlerGoBack()
-
-
-
-
-
     }
 
-    _attachHandlerGoBack(){
-        this.onTagClick('patient-permission:go-back', (event) => {
-            console.log ("Go back button pressed");
+    _attachHandlerGoBack() {
+        this.onTagClick('patient-permission:go-back', () => {
+            console.log("Go back button pressed");
             this.navigateToPageTag('view-dynamic-permission');
         });
     }
-
 
 }

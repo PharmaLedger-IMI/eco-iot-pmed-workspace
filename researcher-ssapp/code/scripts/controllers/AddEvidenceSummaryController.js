@@ -1,7 +1,6 @@
 const {WebcController} = WebCardinal.controllers;
-import IotAdaptorApi from "../services/IotAdaptorApi.js";
-import EvidenceConfigService from "../services/EvidenceConfigService.js";
 
+import IotAdaptorApi from "../services/IotAdaptorApi.js";
 
 export default class AddEvidenceSummaryController extends WebcController {
     constructor(...props) {
@@ -22,10 +21,10 @@ export default class AddEvidenceSummaryController extends WebcController {
         });
     }
 
-    _attachHandlerAcceptButton(){
+    _attachHandlerAcceptButton() {
         this.onTagClick('evidence:accept', () => {
 
-            let keySSI = "27XvCBPKSWpUwscQUxwsVDTxRcnKSPEFTyaG1PPvpnC76o4pD76pUsStY1bzektb9nVGZNH6N6eWHqvDvPABsPhAuyd7tdYW6nySVQtxMvWbNipbWVhz8xVikf2auFpsq9ULP2du51taiV552RjQS1u"
+            let keySSI = "27XvCBPKSWpUwscQUxwsVDTxRcnKSPEFTyaG1PPvpnC76o4pD76pUsStY1bzektb9nVGZNH6N6eWHqvDvPABsPhAuyd7tdYW6nySVQtxMvWbNipbWVhz8xVikf2auFpsq9ULP2du51taiV552RjQS1u";
             this.IotAdaptorApi.createEvidence(this.prepareEvidenceData(), keySSI, (err, evidence) => {
                 if (err) {
                     return console.log(err);
