@@ -1,10 +1,4 @@
 seed
 node_modules
-/code/constitution
-/code/scripts/bundles
-SharedStorage.js
-CommunicationService.js
-DSUService.js
-api.js
-AbstractAPI.js
-/code/scripts/headerController.js
+constitution
+bundles

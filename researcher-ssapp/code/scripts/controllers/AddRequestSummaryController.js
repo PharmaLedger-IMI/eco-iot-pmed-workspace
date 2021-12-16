@@ -1,8 +1,9 @@
 const commonServices = require("common-services");
 const CommunicationService = commonServices.CommunicationService;
+const contractModelHL7 = commonServices.models.ContractModel;
 
 import InformationRequestService from "../services/InformationRequestService.js";
-import {contractModelHL7} from "../models/HL7/ContractModel.js";
+
 const {WebcController} = WebCardinal.controllers;
 
 
