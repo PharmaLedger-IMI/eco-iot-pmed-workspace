@@ -1,57 +1,57 @@
 {
-  "storage": "../apihub-root",
-  "port": 8080,
-  "preventRateLimit": true,
-  "activeComponents": [
-    "virtualMQ",
-    "messaging",
-    "notifications",
-    "filesManager",
-    "bdns",
-    "bricksLedger",
-    "bricksFabric",
-    "bricking",
-    "anchoring",
-    "iot-adaptor",
-    "debugLogger",
-    "mq",
-    "staticServer"
-  ],
-  "componentsConfig": {
-    "bricking": {},
-    "anchoring": {},
-    "iot-adaptor": {
-      "module": "./../../iot-adaptor",
-      "domainStrategies": {
-        "default": {
-          "type": "IotAdaptor",
-          "option": {
-            "endpoint": "http://127.0.0.1:1000/adaptor"
-          }
-        }
-      }
-    }
-  },
-  "enableRequestLogger": true,
-  "enableJWTAuthorisation": false,
-  "enableLocalhostAuthorization": false,
-  "skipJWTAuthorisation": [
-    "/assets",
-    "/directory-summary",
-    "/resources",
-    "/bdns",
-    "/anchor/epi",
-    "/anchor/default",
-    "/anchor/vault",
-    "/bricking",
-    "/bricksFabric",
-    "/bricksledger",
-    "/create-channel",
-    "/forward-zeromq",
-    "/send-message",
-    "/receive-message",
-    "/files",
-    "/notifications",
-    "/mq"
-  ]
+	"storage": "../apihub-root",
+	"port": 8080,
+	"preventRateLimit": true,
+	"activeEndpoints": [
+		"virtualMQ",
+		"messaging",
+		"notifications",
+		"filesManager",
+		"bdns",
+		"bricksLedger",
+		"bricksFabric",
+		"bricking",
+		"anchoring",
+		"iot-adaptor",
+		"debugLogger",
+		"mq",
+		"staticServer"
+	],
+	"componentsConfig": {
+		"bricking": {},
+		"anchoring": {},
+		"iot-adaptor": {
+			"module": "./../../iot-adaptor",
+			"domainStrategies": {
+				"default": {
+					"type": "IotAdaptor",
+					"option": {
+						"endpoint": "http://127.0.0.1:1000/adaptor"
+					}
+				}
+			}
+		}
+	},
+	"enableRequestLogger": true,
+	"enableJWTAuthorisation": false,
+	"enableLocalhostAuthorization": false,
+	"skipJWTAuthorisation": [
+		"/assets",
+		"/directory-summary",
+		"/resources",
+		"/bdns",
+		"/anchor/epi",
+		"/anchor/default",
+		"/anchor/vault",
+		"/bricking",
+		"/bricksFabric",
+		"/bricksledger",
+		"/create-channel",
+		"/forward-zeromq",
+		"/send-message",
+		"/receive-message",
+		"/files",
+		"/notifications",
+		"/mq"
+	]
 }

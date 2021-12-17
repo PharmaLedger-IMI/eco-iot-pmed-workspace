@@ -1,4 +1,4 @@
-function IotAdapter(server) {
+async function IotAdapter(server) {
     console.log("IotAdapter called");
     require('./strategies/IotAdapter');
 
@@ -86,6 +86,45 @@ function IotAdapter(server) {
     server.put(`/iotAdapter/update-device/:id`, UpdateDevice);
     server.delete(`/iotAdapter/delete-device/:id`, DeleteDevice);
     server.get(`/iotAdapter/get-device/:id`, GetDeviceById);
+
+    await handleIotAdaptorMessages();
 }
+
+const opendsu = require("opendsu");
+const w3cDID = opendsu.loadAPI('w3cdid');
+const DOMAIN = "default";
+
+async function handleIotAdaptorMessages() {
+
+    const didDocument = await $$.promisify(w3cDID.createIdentity)("ssi:name", DOMAIN, "iotAdaptor");
+    console.log(`Identity ${didDocument.getIdentifier()} created successfully.`);
+
+    listenForMessages(didDocument, async (err, decryptedMessage) => {
+        await sendMessage(didDocument, decryptedMessage, {didType: "ssi:name", publicName: "researcher123456"});
+    });
+}
+
+async function sendMessage(didDocument, data, receiver) {
+    const {didType, publicName} = receiver;
+    const receiverDidDocument = await $$.promisify(w3cDID.createIdentity)(didType, DOMAIN, publicName);
+    didDocument.sendMessage(data, receiverDidDocument, (err) => {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
+function listenForMessages(didDocument, callback) {
+    didDocument.readMessage((err, decryptedMessage) => {
+        if (err) {
+            console.error(err)
+        }
+
+        console.log("[Received Message]", decryptedMessage);
+        callback(undefined, decryptedMessage);
+        this.listenForMessages(callback);
+    });
+}
+
 
 module.exports = IotAdapter;

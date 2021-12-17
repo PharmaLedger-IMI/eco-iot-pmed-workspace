@@ -42,8 +42,7 @@
 				{
 					"type": "smartClone",
 					"target": ".",
-					"collectLog": false,
-					"commit":"02e789235dedd330a2bd36f5705729ed37b25fa5"
+					"collectLog": false
 				},
 				{
 					"type": "execute",
@@ -342,35 +341,6 @@
 				{
 					"type": "execute",
 					"cmd": "cd webcardinal && npm run build-dossier"
-				}
-			]
-		},
-		{
-			"name": "utilitaries",
-			"actions": [
-				{
-					"type": "copy",
-					"src": "./utilitaries",
-					"target": "./ediary-ssapp/",
-					"options": {
-						"overwrite": true
-					}
-				},
-				{
-					"type": "copy",
-					"src": "./utilitaries",
-					"target": "./patient-ssapp/",
-					"options": {
-						"overwrite": true
-					}
-				},
-				{
-					"type": "copy",
-					"src": "./utilitaries",
-					"target": "./researcher-ssapp/",
-					"options": {
-						"overwrite": true
-					}
 				}
 			]
 		},

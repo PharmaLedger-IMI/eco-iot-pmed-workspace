@@ -1,28 +1,50 @@
+const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
-const CommunicationService = commonServices.CommunicationService;
+const DIDService = commonServices.DIDService;
+const {getCommunicationServiceInstance} = commonServices.CommunicationServiceNew;
 
 import DPermissionService from "../services/DPermissionService.js";
-const {WebcController} = WebCardinal.controllers;
 
 export default class HomeController extends WebcController {
     constructor(...props) {
         super(...props);
 
-        this.model = {};
+        this.model = this.getInitialModel();
 
-        this._attachHandlerInformationRequest();
-        this._attachHandlerViewDynamicPermission();
-        this._attachHandlerEvidence();
-        this._attachHandlerResearchStudy();
+        this.initHandlers();
+        this.initServices();
+    }
 
+    initHandlers() {
+        this.attachHandlerInformationRequest();
+        this.attachHandlerViewDynamicPermission();
+        this.attachHandlerEvidence();
+        this.attachHandlerResearchStudy();
+    }
+
+    // TODO: Remove this when tests are completed.
+    sendEchoMessageToIotAdaptor() {
+        this.CommunicationService.sendMessage(
+            {
+                message: "Echo message"
+            }, {
+                didType: "ssi:name",
+                publicName: "iotAdaptor"
+            });
+    }
+
+    async initServices() {
         this.DPermissionService = new DPermissionService();
-        this.CommunicationService = CommunicationService.getInstance(CommunicationService.identities.IOT.RESEARCHER_IDENTITY);
+
+        const didData = await this.getDidData();
+        this.CommunicationService = getCommunicationServiceInstance(didData);
         this.CommunicationService.listenForMessages((err, data) => {
             if (err) {
                 return console.error(err);
             }
+
             data = JSON.parse(data);
-            // console.log('Received Message', data.message);
+            console.log('Received Message', data.message);
 
             switch (data.message.operation) {
                 case 'd-permission-list': {
@@ -36,32 +58,49 @@ export default class HomeController extends WebcController {
                 }
             }
         });
+
+        this.sendEchoMessageToIotAdaptor();
     }
 
-    _attachHandlerInformationRequest() {
+    async getDidData() {
+        this.model.did = await DIDService.getDidAsync(this);
+        const splitDid = this.model.did.split(":");
+        return {
+            didType: `${splitDid[1]}:${splitDid[2]}`,
+            publicName: splitDid[4]
+        };
+    }
+
+    attachHandlerInformationRequest() {
         this.onTagClick('home:information-request', () => {
             console.log("Information request button pressed");
             this.navigateToPageTag('requests-main');
         });
     }
 
-    _attachHandlerViewDynamicPermission() {
+    attachHandlerViewDynamicPermission() {
         this.onTagClick('home:view-dynamic-permission', () => {
             console.log("View dynamic permission button pressed");
             this.navigateToPageTag('view-dynamic-permission');
         });
     }
 
-    _attachHandlerEvidence() {
+    attachHandlerEvidence() {
         this.onTagClick('home:evidence', () => {
             console.log("Evidence button pressed");
             this.navigateToPageTag('evidence');
         });
     }
 
-    _attachHandlerResearchStudy() {
+    attachHandlerResearchStudy() {
         this.onTagClick('home:researchStudy', () => {
             this.navigateToPageTag('research-study');
         });
+    }
+
+    getInitialModel() {
+        return {
+            did: ""
+        };
     }
 }
