@@ -1,5 +1,24 @@
-async function IotAdapter(server) {
+const opendsu = require("opendsu");
+const w3cDID = opendsu.loadAPI('w3cdid');
+const DOMAIN = "default";
+
+async function setupIoTAdaptorEnvironment() {
+    const scAPI = opendsu.loadApi("sc");
+    const mainDSU = await $$.promisify(scAPI.getMainDSU)();
+    const envConfig = {
+        didDomain: "vault",
+        vaultDomain: "vault",
+        enclaveType: "WalletDBEnclave"
+    };
+    await $$.promisify(mainDSU.writeFile)("environment.json", JSON.stringify(envConfig));
+    scAPI.refreshSecurityContext();
+}
+
+async function IotAdaptor(server) {
     console.log("IotAdapter called");
+
+    await setupIoTAdaptorEnvironment();
+
     require('./strategies/IotAdapter');
 
     const DynavisionPlatform = require('./platform/dynavision');
@@ -87,12 +106,9 @@ async function IotAdapter(server) {
     server.delete(`/iotAdapter/delete-device/:id`, DeleteDevice);
     server.get(`/iotAdapter/get-device/:id`, GetDeviceById);
 
+    console.log("\n\n\n[]before create did\n\n\n");
     await handleIotAdaptorMessages();
 }
-
-const opendsu = require("opendsu");
-const w3cDID = opendsu.loadAPI('w3cdid');
-const DOMAIN = "default";
 
 async function handleIotAdaptorMessages() {
 
@@ -122,9 +138,9 @@ function listenForMessages(didDocument, callback) {
 
         console.log("[Received Message]", decryptedMessage);
         callback(undefined, decryptedMessage);
-        this.listenForMessages(callback);
+        this.listenForMessages(didDocument, callback);
     });
 }
 
 
-module.exports = IotAdapter;
+module.exports = IotAdaptor;

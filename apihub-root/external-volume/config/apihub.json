@@ -2,7 +2,7 @@
 	"storage": "../apihub-root",
 	"port": 8080,
 	"preventRateLimit": true,
-	"activeEndpoints": [
+	"activeComponents": [
 		"virtualMQ",
 		"messaging",
 		"notifications",
@@ -21,15 +21,7 @@
 		"bricking": {},
 		"anchoring": {},
 		"iot-adaptor": {
-			"module": "./../../iot-adaptor",
-			"domainStrategies": {
-				"default": {
-					"type": "IotAdaptor",
-					"option": {
-						"endpoint": "http://127.0.0.1:1000/adaptor"
-					}
-				}
-			}
+			"module": "./../../iot-adaptor"
 		}
 	},
 	"enableRequestLogger": true,
