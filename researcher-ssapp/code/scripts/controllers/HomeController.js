@@ -29,7 +29,7 @@ export default class HomeController extends WebcController {
                 message: "Echo message"
             }, {
                 didType: "ssi:name",
-                publicName: "iotAdaptor"
+                publicName: "iotAdaptor11"
             });
     }
 
@@ -44,11 +44,12 @@ export default class HomeController extends WebcController {
             }
 
             data = JSON.parse(data);
-            console.log('Received Message', data.message);
+            console.log('Received Message', data);
 
-            switch (data.message.operation) {
+            // TODO: Review this behaviour
+            switch (data.operation) {
                 case 'd-permission-list': {
-                    this.DPermissionService.mount(data.message.d_permission_keyssi_list[data.message.d_permission_keyssi_list.length - 1], (err, data) => {
+                    this.DPermissionService.mount(data.d_permission_keyssi_list[data.d_permission_keyssi_list.length - 1], (err, data) => {
                         if (err) {
                             return console.log(err);
                         }

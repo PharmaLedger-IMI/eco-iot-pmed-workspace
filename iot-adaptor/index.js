@@ -1,11 +1,14 @@
 const opendsu = require("opendsu");
 const w3cDID = opendsu.loadAPI('w3cdid');
+const scAPI = opendsu.loadApi("sc");
 const DOMAIN = "default";
 
 async function setupIoTAdaptorEnvironment() {
-    const scAPI = opendsu.loadApi("sc");
     const mainDSU = await $$.promisify(scAPI.getMainDSU)();
     const envConfig = {
+        system: "any",
+        browser: "any",
+        vault: "server",
         didDomain: "vault",
         vaultDomain: "vault",
         enclaveType: "WalletDBEnclave"
@@ -111,23 +114,65 @@ async function IotAdaptor(server) {
 }
 
 async function handleIotAdaptorMessages() {
+    const didType = "ssi:name";
+    const publicName = "iotAdaptor11";
+    const researcherDidDetails = {didType: "ssi:name", publicName: "researcher3"};
 
-    const didDocument = await $$.promisify(w3cDID.createIdentity)("ssi:name", DOMAIN, "iotAdaptor");
-    console.log(`Identity ${didDocument.getIdentifier()} created successfully.`);
-
-    listenForMessages(didDocument, async (err, decryptedMessage) => {
-        await sendMessage(didDocument, decryptedMessage, {didType: "ssi:name", publicName: "researcher123456"});
+    const sc = scAPI.getSecurityContext();
+    sc.on("initialised", async () => {
+        try {
+            const didDocument = await createOrResolveDidDocument(didType, publicName);
+            listenForMessages(didDocument, async (err, decryptedMessage) => {
+                await sendMessage(didDocument, decryptedMessage, researcherDidDetails);
+            });
+        } catch (e) {
+            console.log("[ERROR - handleIotAdaptorMessages]", e);
+        }
     });
 }
 
+async function createOrResolveDidDocument(didType, publicName) {
+    let didDocument;
+    try {
+        didDocument = await resolveDidDocument(didType, publicName);
+        return didDocument;
+    } catch (e) {
+        try {
+            didDocument = await $$.promisify(w3cDID.createIdentity)(didType, DOMAIN, publicName);
+            console.log(`[DID][CREATE] Identity ${didDocument.getIdentifier()} created successfully.`);
+            return didDocument;
+        } catch (e2) {
+            console.log("[ERROR - CREATE]", e);
+            throw e2;
+        }
+    }
+}
+
+async function resolveDidDocument(didType, publicName) {
+    try {
+        const identifier = `did:${didType}:${DOMAIN}:${publicName}`;
+        const didDocument = await $$.promisify(w3cDID.resolveDID)(identifier);
+        console.log(`[DID][RESOLVE] Identity ${didDocument.getIdentifier()} loaded successfully.`);
+        return didDocument;
+    } catch (e) {
+        console.log("[ERROR - RESOLVE]", e);
+        throw e;
+    }
+}
+
+
 async function sendMessage(didDocument, data, receiver) {
     const {didType, publicName} = receiver;
-    const receiverDidDocument = await $$.promisify(w3cDID.createIdentity)(didType, DOMAIN, publicName);
-    didDocument.sendMessage(data, receiverDidDocument, (err) => {
-        if (err) {
-            throw err;
-        }
-    });
+    try {
+        const receiverDidDocument = await resolveDidDocument(didType, publicName);
+        didDocument.sendMessage(data, receiverDidDocument, (err) => {
+            if (err) {
+                throw err;
+            }
+        });
+    } catch (e) {
+        console.log("[ERROR - sendMessage]", e);
+    }
 }
 
 function listenForMessages(didDocument, callback) {
@@ -138,7 +183,7 @@ function listenForMessages(didDocument, callback) {
 
         console.log("[Received Message]", decryptedMessage);
         callback(undefined, decryptedMessage);
-        this.listenForMessages(didDocument, callback);
+        listenForMessages(didDocument, callback);
     });
 }
 
