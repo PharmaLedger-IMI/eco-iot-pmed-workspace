@@ -1,7 +1,19 @@
+//load the bundle
+require("./bundles/pskWebServer");
+
+//we need to init callflow in order to have $$.flow
+if (typeof $$.flows === "undefined") {
+    require('callflow').initialise();
+}
+
 const opendsu = require("opendsu");
 const w3cDID = opendsu.loadAPI('w3cdid');
 const scAPI = opendsu.loadApi("sc");
 const DOMAIN = "default";
+
+const express = require('express');
+const server = express();
+const port = 3000;
 
 async function setupIoTAdaptorEnvironment() {
     const mainDSU = await $$.promisify(scAPI.getMainDSU)();
@@ -160,7 +172,6 @@ async function resolveDidDocument(didType, publicName) {
     }
 }
 
-
 async function sendMessage(didDocument, data, receiver) {
     const {didType, publicName} = receiver;
     try {
@@ -187,5 +198,10 @@ function listenForMessages(didDocument, callback) {
     });
 }
 
+IotAdaptor(server);
 
-module.exports = IotAdaptor;
+server.listen(port, () => {
+    console.log(`\n===================================================`);
+    console.log(`> IOT Adapter listening at http://localhost:${port}`);
+    console.log(`===================================================\n`);
+});

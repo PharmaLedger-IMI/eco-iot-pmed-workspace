@@ -21,6 +21,7 @@ spec:
         name: epi
         ports:
           - containerPort: 8080
+          - containerPort: 3000
         resources: {}
         volumeMounts:
           - name: epi-defaults-volume
