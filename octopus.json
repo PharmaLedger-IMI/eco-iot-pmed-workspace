@@ -284,16 +284,6 @@
 			]
 		},
 		{
-			"name": "patient-ssapp",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd patient-ssapp && npm install"
-				}
-			]
-		},
-		{
 			"name": "researcher-ssapp",
 			"src": "",
 			"actions": [
@@ -569,28 +559,6 @@
 					"options": {
 						"overwrite": true
 					}
-				}
-			]
-		},
-		{
-			"name": "patient-wallet_bind_to_patient-ssapp",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd patient-ssapp && npm run build"
-				},
-				{
-					"type": "copy",
-					"src": "./patient-ssapp/seed",
-					"target": "./apihub-root/patient-wallet/apps-patch/patient-ssapp/seed",
-					"options": {
-						"overwrite": true
-					}
-				},
-				{
-					"type": "execute",
-					"cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
 				}
 			]
 		},

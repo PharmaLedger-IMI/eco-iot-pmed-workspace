@@ -1,7 +1,0 @@
-{
-    "ignore": [""],
-    "strategy": {},
-    "runs": 1,
-    "silent": false,
-    "timeout": 10000
-}
