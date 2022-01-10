@@ -249,16 +249,6 @@
 			]
 		},
 		{
-			"name": "themes/patient-theme",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/patient-theme && npm install"
-				}
-			]
-		},
-		{
 			"name": "researcher-ssapp",
 			"src": "",
 			"actions": [
@@ -326,16 +316,6 @@
 				{
 					"type": "execute",
 					"cmd": "cd themes/blue-fluorite-theme && npm run build-dossier"
-				}
-			]
-		},
-		{
-			"name": "patient-theme-wallet-build",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd themes/patient-theme && npm run build-dossier"
 				}
 			]
 		},
