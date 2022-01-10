@@ -51,21 +51,6 @@
 			]
 		},
 		{
-			"name": "menu-wallet-prototype",
-			"src": "http://github.com/privatesky/menu-wallet-prototype.git",
-			"actions": [
-				{
-					"type": "smartClone",
-					"target": ".",
-					"collectLog": false
-				},
-				{
-					"type": "execute",
-					"cmd": "cd menu-wallet-prototype && npm install"
-				}
-			]
-		},
-		{
 			"name": "dossier-explorer-wallet-prototype",
 			"src": "https://github.com/PrivateSky/dossier-explorer-wallet-prototype.git",
 			"actions": [
@@ -508,24 +493,6 @@
 					"type": "copy",
 					"src": "./researcher-ssapp/seed",
 					"target": "./apihub-root/researcher-wallet/apps-patch/researcher-ssapp/seed",
-					"options": {
-						"overwrite": true
-					}
-				}
-			]
-		},
-		{
-			"name": "patient-wallet_bind_to_menu-wallet-prototype",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd menu-wallet-prototype && npm run build"
-				},
-				{
-					"type": "copy",
-					"src": "./menu-wallet-prototype/seed",
-					"target": "./apihub-root/patient-wallet/wallet-patch/seed",
 					"options": {
 						"overwrite": true
 					}
