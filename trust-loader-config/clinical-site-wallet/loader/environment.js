@@ -1,10 +1,10 @@
 export default {
-    appName: "researcher-wallet",
+    appName: "clinical-site-wallet",
     vault: "server",
     agent: "browser",
     system: "any",
     browser: "any",
-    mode: "autologin",
+    mode: "dev-secure",
     didDomain: "vault",
     vaultDomain: "vault",
     enclaveType: "WalletDBEnclave",
