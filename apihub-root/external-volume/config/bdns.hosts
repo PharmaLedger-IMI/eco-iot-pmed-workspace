@@ -40,10 +40,13 @@
 
       ],
       "brickStorages":[
-         "$ORIGIN"
+        "http://localhost:8081"
       ],
       "anchoringServices":[
          "http://localhost:8081"
-      ]
+      ],
+      "mqEndpoints":[
+         "http://localhost:8081"
+       ]
    }
 }
