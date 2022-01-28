@@ -9,7 +9,7 @@ let LOADER_GLOBALS = {
   THEME: 'app',
   LABELS_DICTIONARY: {
     APP_NAME: 'Trial Participant App',
-    APP_DESCRIPTION: 'The "backend" application for EPI',
+    APP_DESCRIPTION: 'The "backend" application for the patien wallet',
     NEW_WALLET: 'New Account',
     ACCESS_WALLET: 'Access Account',
     WALLET_AUTHORIZATION: 'Authorization',
@@ -64,8 +64,8 @@ let LOADER_GLOBALS = {
   PASSWORD_REGEX:
     /^(?=.*[A-Z])(?=.*[`~:;\'\"\.,<>/\?\!@#$%\^&\*\(\)\[\]\{\}|\\\-_\=\+])(?=.*[0-9])(?=.*[a-z].*[a-z].*[a-z]).*$/,
   NEW_WALLET_MORE_INFORMATION: `<div class="jumbotron p-0 m-0" align="center">
-  <h1 class="display-6">Welcome to EPI backend app!</h1>
-  <p class="lead">After completing the following wizard you will gain access to EPI backend app.</p>
+  <h1 class="display-6">Welcome to patient wallet!</h1>
+  <p class="lead">After completing the following wizard you will gain access to patient walelt.</p>
   <p class="m-0">In order to gain access you have to set up your credentials.</p>
   <hr/>
 </div>`,

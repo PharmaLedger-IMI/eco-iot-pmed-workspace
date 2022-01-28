@@ -9,7 +9,7 @@ let LOADER_GLOBALS = {
 	},
 	LABELS_DICTIONARY: {
 		APP_NAME: "Researcher Wallet",
-		APP_DESCRIPTION: "The \"backend\" application for the patient wallet",
+		APP_DESCRIPTION: "The \"backend\" application for the researcher wallet",
 		NEW_WALLET: "New Account",
 		ACCESS_WALLET: "Access Account",
 		WALLET_AUTHORIZATION: "Authorization",
