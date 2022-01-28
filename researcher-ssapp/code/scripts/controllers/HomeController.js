@@ -1,7 +1,8 @@
 const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
-const DIDService = commonServices.DIDService;
-const {getCommunicationServiceInstance} = commonServices.CommunicationServiceNew;
+const DidService =commonServices.DidService;
+const {getCommunicationServiceInstance} = commonServices.CommunicationService;
+const MessageHandlerService = commonServices.MessageHandlerService;
 
 import DPermissionService from "../services/DPermissionService.js";
 
@@ -24,21 +25,17 @@ export default class HomeController extends WebcController {
 
     // TODO: Remove this when tests are completed.
     sendEchoMessageToIotAdaptor() {
-        this.CommunicationService.sendMessage(
-            {
-                message: "Echo message"
-            }, {
-                didType: "ssi:name",
-                publicName: "iotAdaptor11"
-            });
+        this.CommunicationService = getCommunicationServiceInstance();
+        this.CommunicationService.sendMessage("did:ssi:name:iot:iotAdaptor", {
+            message: "Echo message"
+        });
     }
 
     async initServices() {
         this.DPermissionService = new DPermissionService();
 
-        const didData = await this.getDidData();
-        this.CommunicationService = getCommunicationServiceInstance(didData);
-        this.CommunicationService.listenForMessages((err, data) => {
+        this.model.did = await DidService.getDidServiceInstance().getDID();
+        MessageHandlerService.init(async (err, data) =>{
             if (err) {
                 return console.error(err);
             }
@@ -61,15 +58,6 @@ export default class HomeController extends WebcController {
         });
 
         this.sendEchoMessageToIotAdaptor();
-    }
-
-    async getDidData() {
-        this.model.did = await DIDService.getDidAsync(this);
-        const splitDid = this.model.did.split(":");
-        return {
-            didType: `${splitDid[1]}:${splitDid[2]}`,
-            publicName: splitDid[4]
-        };
     }
 
     attachHandlerInformationRequest() {

@@ -1,7 +1,10 @@
 const opendsu = require("opendsu");
 const w3cDID = opendsu.loadAPI('w3cdid');
 const scAPI = opendsu.loadApi("sc");
-const DOMAIN = "default";
+const commonServicesBundle = "./../common-services/build/bundles/commonServices.js"
+require(commonServicesBundle);
+const DidService = require("common-services").DidService
+const DOMAIN = "iot";
 
 async function setupIoTAdaptorEnvironment() {
     const mainDSU = await $$.promisify(scAPI.getMainDSU)();
@@ -9,8 +12,8 @@ async function setupIoTAdaptorEnvironment() {
         system: "any",
         browser: "any",
         vault: "server",
-        didDomain: "vault",
-        vaultDomain: "vault",
+        didDomain: DOMAIN,
+        vaultDomain: DOMAIN,
         enclaveType: "WalletDBEnclave"
     };
     await $$.promisify(mainDSU.writeFile)("environment.json", JSON.stringify(envConfig));
@@ -109,22 +112,26 @@ async function IotAdaptor(server) {
     server.delete(`/iotAdapter/delete-device/:id`, DeleteDevice);
     server.get(`/iotAdapter/get-device/:id`, GetDeviceById);
 
-    console.log("\n\n\n[]before create did\n\n\n");
     await handleIotAdaptorMessages();
 }
 
 async function handleIotAdaptorMessages() {
     const didType = "ssi:name";
-    const publicName = "iotAdaptor11";
-    const researcherDidDetails = {didType: "ssi:name", publicName: "researcher3"};
+    const publicName = "iotAdaptor";
 
     const sc = scAPI.getSecurityContext();
     sc.on("initialised", async () => {
         try {
             const didDocument = await createOrResolveDidDocument(didType, publicName);
             listenForMessages(didDocument, async (err, decryptedMessage) => {
-                await sendMessage(didDocument, decryptedMessage, researcherDidDetails);
+                const message = JSON.parse(decryptedMessage);
+                const researcherDid = DidService.getDidData(message.senderIdentity);
+                console.log("*******************************");
+                console.log(`Received message from ${message.senderIdentity}`);
+                console.log("*******************************");
+                await sendMessage(didDocument, decryptedMessage, researcherDid);
             });
+
         } catch (e) {
             console.log("[ERROR - handleIotAdaptorMessages]", e);
         }
@@ -134,7 +141,7 @@ async function handleIotAdaptorMessages() {
 async function createOrResolveDidDocument(didType, publicName) {
     let didDocument;
     try {
-        didDocument = await resolveDidDocument(didType, publicName);
+        didDocument = await resolveDidDocument(didType, DOMAIN, publicName);
         return didDocument;
     } catch (e) {
         try {
@@ -148,9 +155,9 @@ async function createOrResolveDidDocument(didType, publicName) {
     }
 }
 
-async function resolveDidDocument(didType, publicName) {
+async function resolveDidDocument(didType, domain, publicName) {
     try {
-        const identifier = `did:${didType}:${DOMAIN}:${publicName}`;
+        const identifier = `did:${didType}:${domain}:${publicName}`;
         const didDocument = await $$.promisify(w3cDID.resolveDID)(identifier);
         console.log(`[DID][RESOLVE] Identity ${didDocument.getIdentifier()} loaded successfully.`);
         return didDocument;
@@ -162,9 +169,9 @@ async function resolveDidDocument(didType, publicName) {
 
 
 async function sendMessage(didDocument, data, receiver) {
-    const {didType, publicName} = receiver;
+    const {didType, domain, publicName} = receiver;
     try {
-        const receiverDidDocument = await resolveDidDocument(didType, publicName);
+        const receiverDidDocument = await resolveDidDocument(didType, domain, publicName);
         didDocument.sendMessage(data, receiverDidDocument, (err) => {
             if (err) {
                 throw err;
