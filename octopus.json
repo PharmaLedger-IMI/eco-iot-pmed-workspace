@@ -205,6 +205,10 @@
 				{
 					"type": "execute",
 					"cmd": "cd common-services && npm install"
+				},
+				{
+					"type": "execute",
+					"cmd": "cd common-services && npm run build"
 				}
 			]
 		},
