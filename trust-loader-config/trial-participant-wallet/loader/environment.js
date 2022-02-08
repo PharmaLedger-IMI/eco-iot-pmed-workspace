@@ -6,6 +6,7 @@ export default {
     browser: 'any',
     mode: 'dev-secure',
     domain: 'iot',
+    didDomain: "iot",
     vaultDomain:"iot",
     enclaveType:"WalletDBEnclave",
     sw: false,
