@@ -16,8 +16,14 @@ async function setupIoTAdaptorEnvironment() {
         vaultDomain: DOMAIN,
         enclaveType: "WalletDBEnclave"
     };
-    await $$.promisify(mainDSU.writeFile)("environment.json", JSON.stringify(envConfig));
-    scAPI.refreshSecurityContext();
+
+    let initalEnv = JSON.parse(await $$.promisify(mainDSU.readFile)("environment.json"));
+
+    if(!initalEnv.enclaveType){
+        await $$.promisify(mainDSU.writeFile)("environment.json", JSON.stringify(envConfig));
+        scAPI.refreshSecurityContext();
+    }
+
 }
 
 async function IotAdaptor(server) {
