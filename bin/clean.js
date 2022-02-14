@@ -41,7 +41,7 @@ function  walk(dir, filterFiles, filterFolders, done) {
 
 function filterFiles(name){
 
-    if(name.endsWith("\\seed") || name.endsWith("/seed")){
+    if(name.endsWith("\\seed") || name.endsWith("/seed") || name.endsWith("mainDSU") ){
             console.log("Deleting seed file:", name);
             fs.unlinkSync(name);
         }
@@ -62,18 +62,21 @@ function deleteFolderContent(name, text){
 }
 
 function filterFolders(name){
+    const foldersToBeChecked = ['mqs','brick-storage'];
     if(name){
-        if(name.endsWith("/anchors") || name.endsWith("\\anchors")){
+        if(name.endsWith("/anchors") || name.endsWith("\\anchors") ){
             deleteFolderContent(name, "Deleting anchors:")
         }
 
         // if(name.endsWith("/bundles") || name.endsWith("\\bundles")){
         //     deleteFolderContent(name, "Deleting bundles:")
         // }
-
-        if(name.indexOf("/brick-storage/") > 0 || name.indexOf("\\brick-storage\\") > 0 ){
-            deleteFolderContent(name, "Deleting bricks:")
-        }
+        foldersToBeChecked.forEach(function(folderName){
+            if(name.indexOf(`/${folderName}/`) > 0 || name.indexOf( `\\${folderName}\\`) > 0 ){
+                deleteFolderContent(name, "Deleting bricks:")
+            }
+        })
+        
     }
     return undefined;
 }

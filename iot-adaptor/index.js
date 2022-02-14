@@ -185,7 +185,8 @@ async function sendMessage(didDocument, data, receiver) {
 function listenForMessages(didDocument, callback) {
     didDocument.readMessage((err, decryptedMessage) => {
         if (err) {
-            console.error(err)
+            console.error(err);
+            return;
         }
 
         console.log("[Received Message]", decryptedMessage);
