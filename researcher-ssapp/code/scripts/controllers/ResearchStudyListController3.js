@@ -7,20 +7,37 @@ class TestDataSource extends DataSource {
     constructor(...props) {
         super(...props);
         this.model.studies = props[0];
+        console.log(this.model.studies)
+
+        async function getIt(a, x){
+            a.model.studies = await ab(x);
+            console.log(this.model.studies)
+        }
+
+        function ab(arxiko){
+            return arxiko.then(x => {
+                return x
+            })
+        }
+
+
+        getIt(this, this.model.studies);
+
+        this.setRecordsNumber(this.model.studies.length);
+
+
         this.setPageSize(5);
         this.model.noOfColumns = 4;
+
     }
 
     async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
+
         console.log({startOffset, dataLengthForCurrentPage});
-        if (this.model.studies.length <= dataLengthForCurrentPage ){
-            this.setPageSize(this.model.studies.length);
-        }
-        else{
-            this.setPageSize(5);
-        }
         let slicedData = [];
+
         this.setRecordsNumber(this.model.studies.length);
+
         if (dataLengthForCurrentPage > 0) {
             slicedData = Object.entries(this.model.studies).slice(startOffset, startOffset + dataLengthForCurrentPage).map(entry => entry[1]);
             console.log(slicedData)
@@ -28,8 +45,13 @@ class TestDataSource extends DataSource {
             slicedData = Object.entries(this.model.studies).slice(0, startOffset - dataLengthForCurrentPage).map(entry => entry[1]);
             console.log(slicedData)
         }
-        return slicedData;
-    }
+        return new Promise((resolve, reject) => {
+            console.log(slicedData)
+            resolve(slicedData);
+        });
+
+
+}
 }
 
 export default class ResearchStudyListController extends WebcController {
@@ -49,16 +71,17 @@ export default class ResearchStudyListController extends WebcController {
             })
         }
 
-        getStudies().then(data => {
-            this.model.testDataSource = new TestDataSource(data);
-            const { testDataSource } = this.model;
-            this.onTagClick("view", (model) => {
-                const { title, status } = model;
-                this.showModal(title, `Status #${status}`);
-            });
-            this.onTagClick("prev-page", () => testDataSource.goToPreviousPage());
-            this.onTagClick("next-page", () => testDataSource.goToNextPage());
-        })
+        this.model.testDataSource = new TestDataSource(getStudies());
+        const { testDataSource } = this.model;
+
+        this.onTagClick("view", (model) => {
+            const { title, status } = model;
+            this.showModal(title, `Status #${status}`);
+        });
+
+        this.onTagClick("prev-page", () => testDataSource.goToPreviousPage());
+
+        this.onTagClick("next-page", () => testDataSource.goToNextPage());
 
         this.attachHandlerHome();
     }

@@ -1,4 +1,6 @@
 const {WebcController} = WebCardinal.controllers;
+import StudiesService from "../services/StudiesService.js";
+
 
 export default class ResearchStudyController extends WebcController {
     constructor(...props) {
@@ -9,7 +11,7 @@ export default class ResearchStudyController extends WebcController {
         this._attachHandlerCreateResearchStudy();
         this._attachHandlerResearchStudyList();
         this._attachHandlerResearchStudyBackMenu();
-        this.getDemoResearchStudy();
+        this.saveSampleStudy();
 
     }
 
@@ -21,8 +23,7 @@ export default class ResearchStudyController extends WebcController {
 
     _attachHandlerResearchStudyList() {
         this.onTagClick('research:list', (event) => {
-            const researchData = this.getDemoResearchStudy();
-            this.navigateToPageTag('research-study-list', researchData);
+            this.navigateToPageTag('research-study-list');
         });
     }
 
@@ -32,30 +33,26 @@ export default class ResearchStudyController extends WebcController {
         });
     }
 
-    getDemoResearchStudy() {
-        return [
-            {
-                title: "Research Study 1",
-                primaryPurposeType: "treatment",
-                phase: "phase-1",
-                status: "active",
-                note: "General Note"
-            },
-            {
-                title: "Research Study 2",
-                primaryPurposeType: "diagnostic",
-                phase: "phase-1-phase-2",
-                status: "completed",
-                note: "General Note 2"
-            },
-            {
-                title: "Research Study 3",
-                primaryPurposeType: "supportive care",
-                phase: "phase-2",
-                status: "approved",
-                note: "General Note 3"
+    saveSampleStudy(){
+        this.StudiesService = new StudiesService();
+        this.StudiesService.saveStudy(this.getDemoResearchStudies(), (err, data) => {
+            if (err) {
+                this.navigateToPageTag('confirmation-page', {
+                    confirmationMessage: "An error has been occurred!",
+                    redirectPage: "home"
+                });
+                return console.log(err);
             }
-        ];
+            console.log(data.uid);
+        });
+    }
+
+    getDemoResearchStudies() {
+        return ({
+            title: "Research Study 2" + Date.now(),
+            participants: "treatment"+ Date.now() ,
+            status: "phase-1" + Date.now(),
+        })
     }
 
 }
