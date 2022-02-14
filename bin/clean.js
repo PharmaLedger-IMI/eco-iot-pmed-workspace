@@ -8,7 +8,7 @@ function  walk(dir, filterFiles, filterFolders, done) {
 
     let recWalk = function(dir, filterFiles, filterFolders, done) {
         fs.readdir(dir, function(err, list) {
-            if (err) return done(err, result);
+            if (err) return done(err, results);
             let i = 0;
             (function next() {
                 let file = list[i++];
@@ -61,22 +61,30 @@ function deleteFolderContent(name, text){
         );
 }
 
-function filterFolders(name){
-    const foldersToBeChecked = ['mqs','brick-storage'];
-    if(name){
-        if(name.endsWith("/anchors") || name.endsWith("\\anchors") ){
+function filterFolders(name) {
+    const bricksStorage = 'brick-storage';
+    const mqsFolder = 'mqs';
+    if (name) {
+        if (name.endsWith("/anchors") || name.endsWith("\\anchors")) {
             deleteFolderContent(name, "Deleting anchors:")
         }
 
-        // if(name.endsWith("/bundles") || name.endsWith("\\bundles")){
-        //     deleteFolderContent(name, "Deleting bundles:")
-        // }
-        foldersToBeChecked.forEach(function(folderName){
-            if(name.indexOf(`/${folderName}/`) > 0 || name.indexOf( `\\${folderName}\\`) > 0 ){
-                deleteFolderContent(name, "Deleting bricks:")
-            }
-        })
-        
+        if (name.indexOf(`/${bricksStorage}/`) > 0 || name.indexOf(`\\${bricksStorage}\\`) > 0) {
+            deleteFolderContent(name, "Deleting bricks:")
+        }
+
+        if (name.indexOf(`/${mqsFolder}/`) > 0 || name.indexOf(`\\${mqsFolder}\\`) > 0) {
+            fs.readdir(name, function (err, queueList) {
+                if (err) {
+                    console.log(err);
+                }
+                queueList.forEach(queue => {
+                    deleteFolderContent(path.join(name, queue), "Deleting mqs")
+                })
+            })
+
+        }
+
     }
     return undefined;
 }
