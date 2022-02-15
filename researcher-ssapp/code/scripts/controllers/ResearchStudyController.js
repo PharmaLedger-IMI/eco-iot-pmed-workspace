@@ -50,7 +50,7 @@ export default class ResearchStudyController extends WebcController {
     getDemoResearchStudies() {
         return ({
             title: "Research Study 2" + Date.now(),
-            participants: "treatment"+ Date.now() ,
+            participants: Date.now() ,
             status: "phase-1" + Date.now(),
         })
     }

@@ -1,7 +1,55 @@
 <webc-container controller="HomeController">
-    <div class="container flex-container">
-        <img alt="PharmaLedger Blockchain Enabled Healthcare" class="img-xl"
-             src="./assets/images/pharmaledger-logo.jpg"/>
+    <div class="container main-container">
+        <div class="container flex-container">
+            <img alt="PharmaLedger Blockchain Enabled Healthcare" src="./assets/images/pharmaledger-logo.jpg"
+                 class="img-m"/>
+            <h5 class="title">Welcome - Current Studies</h5>
+        </div>
+
+        <div class="container justify-content-start">
+
+            <header>
+                <div class="row-wrapper grid-equal">
+                    <label>Study</label>
+                    <label>Participants enrolled</label>
+                    <label>Status</label>
+                    <label>Options</label>
+                </div>
+            </header>
+
+            <div data-if="@studiesDataSource">
+
+                <webc-spinner slot="false"></webc-spinner>
+                <webc-datatable datasource="@studiesDataSource" slot="true">
+
+                    <main>
+                        <div class="row-wrapper grid-equal">
+                            <div class="row-wrapper grid-equal">
+                                <label>{{ @title }}</label>
+                                <label>{{ @participants }}</label>
+                                <label>{{ @status }}</label>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <label data-tag="view" class="link option">View</label>
+                                    <label> | </label>
+                                    <label data-tag="edit" class="link option">Edit</label>
+                                    <label> | </label>
+                                    <label data-tag="feedback" class="link option">Feedback</label>
+                                    <label> | </label>
+                                    <label data-tag="evidence" class="link option">Evidence</label>
+                                    <label> | </label>
+                                    <label data-tag="data" class="link option">Data</label>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </webc-datatable>
+
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <button class="previous-next-button" data-tag="prev-page">‹ Previous page</button>
+                <button class="previous-next-button" data-tag="next-page">Next page ›</button>
+            </div>
+        </div>
 
         <div class="input-group share-did p-2">
             <input type="text" class="form-control share-did-input" readonly value="@did" placeholder="Loading DID...">
@@ -12,12 +60,9 @@
             </div>
         </div>
 
-        <div class="button-group-wrapper">
-            <button data-tag="home:information-request">Information Requests</button>
-            <button data-tag="home:view-dynamic-permission">Dynamic Consents</button>
-            <button data-tag="home:evidence">Evidence</button>
-            <button data-tag="home:researchStudy">Research Study</button>
-        </div>
+        <footer class="button-group-wrapper">
+            <button data-tag="new:study">Add study</button>
+        </footer>
+
     </div>
 </webc-container>
-
