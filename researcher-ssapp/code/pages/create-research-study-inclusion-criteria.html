@@ -1,0 +1,68 @@
+<webc-container controller="CreateResearchStudyInclusionCriteriaController">
+    <div class="container main-container">
+
+        <div class="container flex-container">
+            <h5 class="generic-title">New study</h5>
+            <h4>Step (2/3) Inclusion Criteria</h4>
+        </div>
+
+        <div class="container justify-content-start">
+            <main class="form-container">
+
+                <h4 class="align-center">Please indicate the inclusion criteria of your study</h4>
+
+                <div class="form-row">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="col-form-label">{{@age.label}}</label>
+                            <select class="form-control" data-for="@age.options" value="@age.value">
+                                <option value="@value">{{@label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="col-form-label">{{@sex.label}}</label>
+                            <select class="form-control" data-for="@sex.options" value="@sex.value">
+                                <option value="@value">{{@label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="col-form-label">{{@pathologies.label}}</label>
+                            <select class="form-control" data-for="@pathologies.options" value="@pathologies.value">
+                                <option value="@value">{{@label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="col-form-label">{{@others.label}}</label>
+                            <input class="form-control" data-view-model="@others" id="@others.name"/>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="align-center">Step 3/3 Data to be gathered</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="col-form-label">{{@data.label}}</label>
+                        <select class="form-control" data-for="@data.options" value="@data.value">
+                            <option value="@value">{{@label}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+        <div class="button-group-wrapper">
+            <button data-tag="back-to-first-page">Back</button>
+            <button data-tag="go-to-summary">Next</button>
+        </div>
+    </div>
+</webc-container>

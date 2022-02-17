@@ -113,6 +113,12 @@
 			"tag": "create-research-study"
 		},
 		{
+			"name": "create-research-study-inclusion-criteria",
+			"path": "/create-research-study-inclusion-criteria",
+			"src": "create-research-study-inclusion-criteria.html",
+			"tag": "create-research-study-inclusion-criteria"
+		},
+		{
 			"name": "research-study-summary",
 			"path": "/research-study-summary",
 			"src": "research-study-summary.html",

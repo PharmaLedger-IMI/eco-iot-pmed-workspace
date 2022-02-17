@@ -55,9 +55,7 @@ export default class HomeController extends WebcController {
 
     attachHandlerNewStudy() {
         this.onTagClick('new:study', () => {
-            console.log("New study button pressed");
-            //this.navigateToPageTag('requests-main');
-            this.navigateToPageTag('research-study');
+            this.navigateToPageTag('create-research-study');
         });
     }
 

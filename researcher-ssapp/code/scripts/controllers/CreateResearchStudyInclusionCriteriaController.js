@@ -1,29 +1,29 @@
-import StudiesService from "../services/StudiesService.js";
 const {WebcController} = WebCardinal.controllers;
 
 
-export default class CreateResearchStudyController extends WebcController {
+export default class CreateResearchStudyInclusionCriteriaController extends WebcController {
     constructor(...props) {
 
         super(...props);
 
         const prevState = this.getState() || {};
-        this.model = this.getBasicViewModel(prevState);
+        this.model = this.getResearchViewModel(prevState);
         this._attachHandlerResearcherBackMenu();
         this._attachHandlerResearchStudySummary();
-        this.saveSampleStudy();
+
     }
 
     _attachHandlerResearchStudySummary() {
-        this.onTagClick('research:2page', (event) => {
-            const basicData = this.getBasicData();
-            this.navigateToPageTag("create-research-study-inclusion-criteria", basicData);
+        this.onTagClick('go-to-summary', (event) => {
+            //this.navigateToPageTag('');
         });
     }
 
     _attachHandlerResearcherBackMenu() {
-        this.onTagClick('back-to-menu', (event) => {
-            this.navigateToPageTag('home');
+        this.onTagClick('back-to-first-page', (event) => {
+            console.log("going back to page 1")
+            const basicData = this.getBasicData();
+            this.navigateToPageTag('create-research-study', basicData);
         });
     }
 
@@ -36,7 +36,7 @@ export default class CreateResearchStudyController extends WebcController {
         };
     }
 
-    getBasicViewModel(prevState) {
+    getResearchViewModel(prevState) {
         return {
             title: {
                 name: 'title',
@@ -98,9 +98,9 @@ export default class CreateResearchStudyController extends WebcController {
                 label: "Sex",
                 required: true,
                 options: [{
-                        label: "Males",
-                        value: 'males'
-                    },
+                    label: "Males",
+                    value: 'males'
+                },
                     {
                         label: "Females",
                         value: 'females'
@@ -120,9 +120,9 @@ export default class CreateResearchStudyController extends WebcController {
                 label: "Previous Pathologies",
                 required: true,
                 options: [{
-                        label: "Heart Disease",
-                        value: 'Heart Disease'
-                    },
+                    label: "Heart Disease",
+                    value: 'Heart Disease'
+                },
                     {
                         label: "Respiratory Disease",
                         value: 'Respiratory Disease'
@@ -153,17 +153,17 @@ export default class CreateResearchStudyController extends WebcController {
             others: {
                 name: 'others',
                 id: 'others',
-                label: "Others (Separate each criteria using ;)",
-                placeholder: 'others',
+                label: "Others",
+                placeholder: 'Others (Separate each criteria using ;)',
                 value: prevState.others || ""
             },
             data: {
                 label: "Please indicate the data that you need to obtain:",
                 required: true,
                 options: [{
-                        label: "ECG",
-                        value: 'ECG'
-                    },
+                    label: "ECG",
+                    value: 'ECG'
+                },
                     {
                         label: "Respiration",
                         value: 'respiration'
@@ -186,25 +186,5 @@ export default class CreateResearchStudyController extends WebcController {
         }
     }
 
-    saveSampleStudy(){
-        this.StudiesService = new StudiesService();
-        this.StudiesService.saveStudy(this.getDemoResearchStudies(), (err, data) => {
-            if (err) {
-                this.navigateToPageTag('confirmation-page', {
-                    confirmationMessage: "An error has been occurred!",
-                    redirectPage: "home"
-                });
-                return console.log(err);
-            }
-            console.log(data.uid);
-        });
-    }
 
-    getDemoResearchStudies() {
-        return ({
-            title: "Research Study 2" + Date.now(),
-            participants: Date.now() ,
-            status: "phase-1" + Date.now(),
-        })
-    }
 }

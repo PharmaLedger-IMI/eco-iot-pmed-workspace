@@ -29,7 +29,9 @@
     "debug:theme": "nodemon -e html,js,css --watch themes/professional-theme --exec \"npm run build:theme\"",
     "build:theme": "cd themes/professional-theme && npm run build-dossier",
     "build:tp-theme": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd themes/trial-participant-theme && npm run build-dossier\"",
-    "build-tp": "npm run build:tp-theme && npm run build trial-participant-ssapp"
+    "build:cs-theme": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd themes/clinical-site-theme && npm run build-dossier\"",
+    "build-tp": "npm run build:tp-theme && npm run build trial-participant-ssapp",
+    "build-rs": "npm run build:cs-theme && npm run build researcher-ssapp"
   },
   "repository": {
     "type": "git",

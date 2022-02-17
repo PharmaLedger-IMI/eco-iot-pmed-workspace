@@ -10,6 +10,7 @@ apihub-root/researcher-wallet/loader
 apihub-root/dsu-explorer/
 apihub-root/internal-volume/domains
 apihub-root/external-volume/domains
+apihub-root/external-volume/mainDSU
 apihub-root/seedsBackup
 dossier-explorer-ssapp
 node_modules
