@@ -1,0 +1,113 @@
+<webc-container controller="AddStudySummaryController">
+    <div class="container main-container">
+
+        <div class="container flex-container">
+            <h5 class="generic-title">New study - Summary</h5>
+<!--            <h4>Summary</h4>-->
+        </div>
+
+
+        <div class="container justify-content-start">
+            <main class="form-container">
+
+                <div class="form-row font-weight-bold">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <header>
+                                <div class="row-wrapper grid-equal">
+                                    <label>Basic Information</label>
+                                </div>
+                            </header>
+                            <main>
+
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Study name: {{ @title.value }} </label>
+                                    </div>
+                                </div>
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Period: {{ @startdate.value }} - {{ @enddate.value }} </label>
+                                    </div>
+                                </div>
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Status:  </label>
+                                    </div>
+                                </div>
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Description: {{ @description.value }} </label>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <header>
+                                <div class="row-wrapper grid-equal">
+                                    <label>Inclusion Criteria</label>
+                                </div>
+                            </header>
+
+                            <main>
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Age: {{ @age.value }} </label>
+                                    </div>
+                                </div>
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Sex: {{ @sex.value }} </label>
+                                    </div>
+                                </div>
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Previous Pathologies:  {{ @pathologies.value }}</label>
+                                    </div>
+                                </div>
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Others: {{ @others.value }} </label>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-row summary-tables font-weight-bold" >
+                    <div class="form-row">
+                        <div class="form-group">
+                            <header>
+                                <div class="row-wrapper grid-equal">
+                                    <label>Data to be gathered</label>
+                                </div>
+                            </header>
+                            <main>
+                                <div class="row-wrapper grid-equal">
+                                    <div class="row-wrapper grid-equal">
+                                        <label>Data: {{ @data.value }} </label>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </main>
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="study:edit">Edit</button>
+            <button data-tag="study:accept">Accept</button>
+        </footer>
+    </div>
+</webc-container>

@@ -15,24 +15,29 @@ export default class CreateResearchStudyInclusionCriteriaController extends Webc
 
     _attachHandlerResearchStudySummary() {
         this.onTagClick('go-to-summary', (event) => {
-            //this.navigateToPageTag('');
+            const formData = this.getFormData();
+            this.navigateToPageTag('create-research-study-summary', formData);
         });
     }
 
     _attachHandlerResearcherBackMenu() {
         this.onTagClick('back-to-first-page', (event) => {
-            console.log("going back to page 1")
-            const basicData = this.getBasicData();
-            this.navigateToPageTag('create-research-study', basicData);
+            const formData = this.getFormData();
+            this.navigateToPageTag('create-research-study', formData);
         });
     }
 
-    getBasicData() {
+    getFormData() {
         return {
             title: this.model.title.value,
             startdate: this.model.startdate.value,
             enddate: this.model.enddate.value,
-            description: this.model.description.value
+            description: this.model.description.value,
+            age: this.model.age.value,
+            sex: this.model.sex.value,
+            pathologies: this.model.pathologies.value,
+            others: this.model.others.value,
+            data: this.model.data.value
         };
     }
 

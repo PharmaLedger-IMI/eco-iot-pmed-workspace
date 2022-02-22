@@ -1,27 +1,61 @@
 const {WebcController} = WebCardinal.controllers;
+import StudiesService from "../services/StudiesService.js";
 
 
-export default class CreateResearchStudyController extends WebcController {
+//const commonServices = require("common-services");
+//const CommunicationService = commonServices.CommunicationService;
+// const contractModelHL7 = commonServices.models.ContractModel;
+// import InformationRequestService from "../services/InformationRequestService.js";
+
+
+export default class AddStudySummaryController extends WebcController {
     constructor(...props) {
-
         super(...props);
 
         const prevState = this.getState() || {};
-        this.model = this.getBasicViewModel(prevState);
-        this._attachHandlerResearcherBackMenu();
-        this._attachHandlerResearchStudySummary();
+        this.model = this.getResearchViewModel(prevState);
+
+        this.attachHandlerEditButton();
+        this.attachHandlerAcceptButton();
     }
 
-    _attachHandlerResearchStudySummary() {
-        this.onTagClick('research:2page', (event) => {
-            const formData = this.getFormData();
-            this.navigateToPageTag("create-research-study-inclusion-criteria", formData);
+    getDemoResearchStudies() {
+        return ({
+            title: "Research Study " + Date.now(),
+            participants: Date.now() ,
+            status: "Draft " + Date.now(),
+        })
+    }
+
+    saveSampleStudy(){
+        this.StudiesService = new StudiesService();
+        this.StudiesService.saveStudy(this.getDemoResearchStudies(), (err, data) => {
+            if (err) {
+                this.navigateToPageTag('confirmation-page', {
+                    confirmationMessage: "An error has been occurred!",
+                    redirectPage: "home"
+                });
+                return console.log(err);
+            }
+            console.log(data.uid);
+            this.navigateToPageTag('confirmation-page', {
+                confirmationMessage: "The study has been created!",
+                redirectPage: "home"
+            });
         });
     }
 
-    _attachHandlerResearcherBackMenu() {
-        this.onTagClick('back-to-menu', (event) => {
-            this.navigateToPageTag('home');
+    attachHandlerEditButton() {
+        this.onTagClick('study:edit', () => {
+            const formData = this.getFormData();
+            this.navigateToPageTag('create-research-study', formData);
+        });
+    }
+
+    attachHandlerAcceptButton() {
+        this.onTagClick('study:accept', () => {
+            console.log("Accept button pressed");
+            this.saveSampleStudy();
         });
     }
 
@@ -39,7 +73,7 @@ export default class CreateResearchStudyController extends WebcController {
         };
     }
 
-    getBasicViewModel(prevState) {
+    getResearchViewModel(prevState) {
         return {
             title: {
                 name: 'title',
@@ -101,9 +135,9 @@ export default class CreateResearchStudyController extends WebcController {
                 label: "Sex",
                 required: true,
                 options: [{
-                        label: "Males",
-                        value: 'males'
-                    },
+                    label: "Males",
+                    value: 'males'
+                },
                     {
                         label: "Females",
                         value: 'females'
@@ -123,9 +157,9 @@ export default class CreateResearchStudyController extends WebcController {
                 label: "Previous Pathologies",
                 required: true,
                 options: [{
-                        label: "Heart Disease",
-                        value: 'Heart Disease'
-                    },
+                    label: "Heart Disease",
+                    value: 'Heart Disease'
+                },
                     {
                         label: "Respiratory Disease",
                         value: 'Respiratory Disease'
@@ -156,17 +190,17 @@ export default class CreateResearchStudyController extends WebcController {
             others: {
                 name: 'others',
                 id: 'others',
-                label: "Others (Separate each criteria using ;)",
-                placeholder: 'others',
+                label: "Others",
+                placeholder: 'Others (Separate each criteria using ;)',
                 value: prevState.others || ""
             },
             data: {
                 label: "Please indicate the data that you need to obtain:",
                 required: true,
                 options: [{
-                        label: "ECG",
-                        value: 'ECG'
-                    },
+                    label: "ECG",
+                    value: 'ECG'
+                },
                     {
                         label: "Respiration",
                         value: 'respiration'
@@ -188,5 +222,4 @@ export default class CreateResearchStudyController extends WebcController {
             }
         }
     }
-
 }
