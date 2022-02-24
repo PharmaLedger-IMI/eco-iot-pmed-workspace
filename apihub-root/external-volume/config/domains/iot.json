@@ -10,5 +10,6 @@
   },
   "enable": [
     "mq"
-  ]
+  ],
+  "adaptorDidPublicName": "iotAdaptor"
 }

@@ -5,8 +5,20 @@ const commonServicesBundle = "./../common-services/build/bundles/commonServices.
 require(commonServicesBundle);
 const DidService = require("common-services").DidService
 const DOMAIN = "iot";
+const apiHub = require("apihub");
+const didType = "ssi:name";
+let publicName;
+
 
 async function setupIoTAdaptorEnvironment() {
+
+    let domainConfig = apiHub.getDomainConfig(DOMAIN);
+    if(!domainConfig.hasOwnProperty("adaptorDidPublicName")){
+        throw new Error(`Domain ${DOMAIN} is misconfigured. Missing 'adaptorDidName' property`);
+
+    }
+    publicName = domainConfig.adaptorDidPublicName;
+
     const mainDSU = await $$.promisify(scAPI.getMainDSU)();
     const envConfig = {
         system: "any",
@@ -29,7 +41,7 @@ async function setupIoTAdaptorEnvironment() {
 async function IotAdaptor(server) {
     console.log("IotAdapter called");
 
-    await setupIoTAdaptorEnvironment();
+    setupIoTAdaptorEnvironment();
 
     require('./strategies/IotAdapter');
 
@@ -118,12 +130,39 @@ async function IotAdaptor(server) {
     server.delete(`/iotAdapter/delete-device/:id`, DeleteDevice);
     server.get(`/iotAdapter/get-device/:id`, GetDeviceById);
 
+    server.get(`/iotAdapter/adaptorIdentity`, getAdaptorIdentity);
+
     await handleIotAdaptorMessages();
 }
 
+function getAdaptorIdentity(request, response, next) {
+    response.setHeader('Content-Type', 'text');
+    const sc = scAPI.getSecurityContext();
+
+    const getDID = async (callback) => {
+        resolveDidDocument(didType, DOMAIN, publicName).then(didDocument => {
+            callback(undefined, didDocument.getIdentifier());
+        }).catch(err => {
+            callback(err);
+        })
+    }
+
+    const responseCallback = (err, did) => {
+        if(err){
+            response.send(500);
+        }
+        response.send(200, did);
+    }
+    if (sc.isInitialised()) {
+        getDID(responseCallback)
+    } else {
+        sc.on("initialised", async () => {
+            getDID(responseCallback);
+        });
+    }
+}
+
 async function handleIotAdaptorMessages() {
-    const didType = "ssi:name";
-    const publicName = "iotAdaptor";
 
     const sc = scAPI.getSecurityContext();
     sc.on("initialised", async () => {
