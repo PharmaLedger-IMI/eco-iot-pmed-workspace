@@ -89,9 +89,11 @@ export default class HomeController extends WebcController {
                 this.navigateToPageTag('view-dynamic-permission');
             });
             this.onTagClick("edit", (model) => {
-                const { title, status } = model;
-                this.showModal(title, `Edit #${status}`);
-                console.log('this is edit Page!');
+                const {title} = model;
+                let chosenStudy;
+                data.forEach(element => {if(element.title === title) chosenStudy = element});
+                const editStudy = {...chosenStudy, ...{header1: "Edit Study"}}
+                this.navigateToPageTag('create-research-study', editStudy);
             });
             this.onTagClick("feedback", (model) => {
                 //const { participants } = model;
