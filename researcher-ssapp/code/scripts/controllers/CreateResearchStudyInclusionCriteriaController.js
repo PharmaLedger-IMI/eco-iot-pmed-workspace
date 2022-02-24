@@ -37,12 +37,18 @@ export default class CreateResearchStudyInclusionCriteriaController extends Webc
             sex: this.model.sex.value,
             pathologies: this.model.pathologies.value,
             others: this.model.others.value,
-            data: this.model.data.value
+            data: this.model.data.value,
+            header1: this.model.header1,
+            KeySSI: this.model.KeySSI
         };
     }
 
     getResearchViewModel(prevState) {
         return {
+            KeySSI: prevState.KeySSI && prevState.KeySSI || "",
+            header1: prevState.header1 && prevState.header1 || "New study",
+            header2: prevState.header2 && prevState.header2 || "Step (2/3) Inclusion Criteria",
+            header3: prevState.header3 && prevState.header3 || "Please indicate the inclusion criteria of your study",
             title: {
                 name: 'title',
                 id: 'title',

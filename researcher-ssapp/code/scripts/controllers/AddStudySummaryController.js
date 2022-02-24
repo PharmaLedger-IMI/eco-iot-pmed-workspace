@@ -21,13 +21,21 @@ export default class AddStudySummaryController extends WebcController {
 
     getDemoResearchStudies() {
         return ({
-            title: "Research Study " + Date.now(),
-            participants: Date.now() ,
-            status: "Draft " + Date.now(),
+            participants: 0 ,
+            status: "Draft",
+            title: this.model.title.value,
+            startdate: this.model.startdate.value,
+            enddate: this.model.enddate.value,
+            description: this.model.description.value,
+            age: this.model.age.value,
+            sex: this.model.sex.value,
+            pathologies: this.model.pathologies.value,
+            others: this.model.others.value,
+            data: this.model.data.value
         })
     }
 
-    saveSampleStudy(){
+    saveStudy(){
         this.StudiesService = new StudiesService();
         this.StudiesService.saveStudy(this.getDemoResearchStudies(), (err, data) => {
             if (err) {
@@ -45,6 +53,24 @@ export default class AddStudySummaryController extends WebcController {
         });
     }
 
+    updateStudy(){
+        this.StudiesService = new StudiesService();
+        this.StudiesService.updateStudy(this.getDemoResearchStudies(), (err, data) => {
+            if (err) {
+                this.navigateToPageTag('confirmation-page', {
+                    confirmationMessage: "An error has been occurred!",
+                    redirectPage: "home"
+                });
+                return console.log(err);
+            }
+            console.log(data.uid);
+            this.navigateToPageTag('confirmation-page', {
+                confirmationMessage: "The study has been updated!",
+                redirectPage: "home"
+            });
+        });
+    }
+
     attachHandlerEditButton() {
         this.onTagClick('study:edit', () => {
             const formData = this.getFormData();
@@ -54,8 +80,12 @@ export default class AddStudySummaryController extends WebcController {
 
     attachHandlerAcceptButton() {
         this.onTagClick('study:accept', () => {
-            console.log("Accept button pressed");
-            this.saveSampleStudy();
+            if (this.model.header1 === "Edit Study"){
+                this.saveStudy();
+            }
+            else{
+                this.saveStudy();
+            }
         });
     }
 
@@ -69,12 +99,17 @@ export default class AddStudySummaryController extends WebcController {
             sex: this.model.sex.value,
             pathologies: this.model.pathologies.value,
             others: this.model.others.value,
-            data: this.model.data.value
+            data: this.model.data.value,
+            header1: this.model.header1,
+            KeySSI: this.model.KeySSI
         };
     }
 
     getResearchViewModel(prevState) {
         return {
+            KeySSI: prevState.KeySSI && prevState.KeySSI || "",
+            header1: prevState.header1 && prevState.header1 || "New study",
+            headerSummary: prevState.headerSummary && prevState.headerSummary || "Study - Summary",
             title: {
                 name: 'title',
                 id: 'title',
