@@ -154,4 +154,14 @@ export default class ViewDynamicPermissionController extends WebcController {
         });
     }
 
+    _attachHandlertotalusers(){
+        this.onTagClick('dynamic-permission:see-consents', (event) => {
+            let state = {
+                studyId: "STUDY_ID_HERE",
+            }
+            this.navigateToPageTag('dynamic-consents', state);
+        });
+    }
+
+
 }

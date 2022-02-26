@@ -135,6 +135,12 @@
 			"path": "/research-study-list",
 			"src": "research-study-list.html",
 			"tag": "research-study-list"
+		},
+		{
+			"name":"Dynamic-Consent List",
+			"path": "study-consents",
+			"src": "dynamic-consents/view-dynamic-consents.html",
+			"tag": "dynamic-consents"
 		}
 	],
 	"pagesFallback": {
