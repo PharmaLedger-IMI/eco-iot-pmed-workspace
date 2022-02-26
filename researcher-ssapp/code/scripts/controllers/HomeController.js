@@ -12,7 +12,7 @@ class StudiesDataSource extends DataSource {
     constructor(...props) {
         super(...props);
         this.model.studies = props[0];
-        this.model.elements = 3;
+        this.model.elements = 10;
         this.setPageSize(this.model.elements);
         this.model.noOfColumns = 4;
     }
@@ -83,6 +83,7 @@ export default class HomeController extends WebcController {
         }
 
         getStudies().then(data => {
+            this.model.hasStudies = data.length !== 0;
             this.model.studiesDataSource = new StudiesDataSource(data);
             const { studiesDataSource } = this.model;
             this.onTagClick("view", (model) => {

@@ -1,64 +1,60 @@
 <webc-container controller="HomeController">
     <div class="container main-container">
         <div class="container flex-container">
-            <img alt="PharmaLedger Blockchain Enabled Healthcare" src="./assets/images/pharmaledger-logo.jpg"
-                 class="img-m"/>
+            <div class="input-group share-did p-2">
+                <input type="text" class="form-control share-did-input" readonly value="@did" placeholder="Loading DID...">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary share-did-btn" type="button">
+                        <i class="fa fa-share"></i>
+                    </button>
+                </div>
+            </div>
             <h5 class="generic-title">Welcome - Current Studies</h5>
         </div>
 
         <div class="container justify-content-start">
 
-            <header>
-                <div class="row-wrapper grid-equal">
-                    <label>Study</label>
-                    <label>Participants enrolled</label>
-                    <label>Status</label>
-                    <label>Options</label>
+            <div data-if="@hasStudies">
+
+                <webc-spinner slot="loading"></webc-spinner>
+                <div slot="false" class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">No studies yet!</h4>
+                    <p>Add your first study!</p>
                 </div>
-            </header>
+                <div class="dc-datatable cs-datatable" slot="true">
+                <webc-datatable datasource="@studiesDataSource" >
 
-            <div data-if="@studiesDataSource">
+                    <div slot="header" data-sortable>Study</div>
+                    <div slot="header" data-sortable>Participants enrolled</div>
+                    <div slot="header" data-sortable>Status</div>
+                    <div slot="header" data-sortable>Options</div>
 
-                <webc-spinner slot="false"></webc-spinner>
-                <webc-datatable datasource="@studiesDataSource" slot="true">
 
-                    <main>
-                        <div class="row-wrapper grid-equal">
-                            <div class="row-wrapper grid-equal">
-                                <label>{{ @title }}</label>
-                                <label>{{ @participants }}</label>
-                                <label>{{ @status }}</label>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <label data-tag="view" class="link option">View</label>
-                                    <label> | </label>
-                                    <label data-tag="edit" class="link option">Edit</label>
-                                    <label> | </label>
-                                    <label data-tag="feedback" class="link option">Feedback</label>
-                                    <label> | </label>
-                                    <label data-tag="evidence" class="link option">Evidence</label>
-                                    <label> | </label>
-                                    <label data-tag="data" class="link option">Data</label>
-                                </div>
-                            </div>
-                        </div>
-                    </main>
+                    <div class="cell">{{ @title }}</div>
+                    <div class="cell">{{ @participants }}</div>
+                    <div class="cell">{{ @status }}</div>
+                    <div class="cell">
+                        <label data-tag="view" class="link option">View</label>
+                        <label> | </label>
+                        <label data-tag="edit" class="link option">Edit</label>
+                        <label> | </label>
+                        <label data-tag="feedback" class="link option">Feedback</label>
+                        <label> | </label>
+                        <label data-tag="evidence" class="link option">Evidence</label>
+                        <label> | </label>
+                        <label data-tag="data" class="link option">Data</label>
+                    </div>
+
                 </webc-datatable>
+                    <section class="controls button-group-wrapper">
+                        <button data-tag="prev-page">‹ Previous page</button>
+                        <button data-tag="next-page">Next page ›</button>
+                    </section>
+                </div>
 
-            </div>
-            <div class="d-flex justify-content-center align-items-center">
-                <button class="previous-next-button" data-tag="prev-page">‹ Previous page</button>
-                <button class="previous-next-button" data-tag="next-page">Next page ›</button>
             </div>
         </div>
 
-        <div class="input-group share-did p-2">
-            <input type="text" class="form-control share-did-input" readonly value="@did" placeholder="Loading DID...">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary share-did-btn" type="button">
-                    <i class="fa fa-share"></i>
-                </button>
-            </div>
-        </div>
 
         <footer class="button-group-wrapper">
             <button data-tag="new:study">Add study</button>
