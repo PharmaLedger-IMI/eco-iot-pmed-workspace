@@ -92,7 +92,19 @@ export default class HomeController extends WebcController {
                 const {title} = model;
                 let chosenStudy;
                 data.forEach(element => {if(element.title === title) chosenStudy = element});
-                const editStudy = {...chosenStudy, ...{header1: "Edit Study"}}
+                let viewData = {
+                    title: chosenStudy.title,
+                    startdate: chosenStudy.startdate,
+                    enddate: chosenStudy.enddate,
+                    description: chosenStudy.description,
+                    age: chosenStudy.age,
+                    sex: chosenStudy.sex,
+                    pathologies: chosenStudy.pathologies,
+                    others: chosenStudy.others,
+                    data: chosenStudy.data,
+                    uid: chosenStudy.uid
+                }
+                const editStudy = {...viewData, ...{header1: "Edit Study"}}
                 this.navigateToPageTag('create-research-study', editStudy);
             });
             this.onTagClick("feedback", (model) => {

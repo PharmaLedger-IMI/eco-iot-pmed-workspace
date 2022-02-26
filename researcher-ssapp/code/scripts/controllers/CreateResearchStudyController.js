@@ -37,13 +37,13 @@ export default class CreateResearchStudyController extends WebcController {
             others: this.model.others.value,
             data: this.model.data.value,
             header1: this.model.header1,
-            KeySSI: this.model.KeySSI,
+            uid: this.model.uid,
         };
     }
 
     getBasicViewModel(prevState) {
         return {
-            KeySSI: prevState.KeySSI && prevState.KeySSI || "",
+            uid: prevState.uid && prevState.uid || "",
             header1: prevState.header1 && prevState.header1 || "New study",
             header2: prevState.header2 && prevState.header2 || "Step (1/3) Basic Information",
             header3: prevState.header3 && prevState.header3 || "Complete the following information to create a new research study",

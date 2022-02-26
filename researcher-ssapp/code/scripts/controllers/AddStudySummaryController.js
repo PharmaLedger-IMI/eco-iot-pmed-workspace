@@ -1,11 +1,10 @@
 const {WebcController} = WebCardinal.controllers;
 import StudiesService from "../services/StudiesService.js";
+const commonServices = require("common-services");
+const contractModelHL7 = commonServices.models.ContractModel;
+const researchStudyModelHL7 = commonServices.models.ResearchStudyModel;
 
-
-//const commonServices = require("common-services");
 //const CommunicationService = commonServices.CommunicationService;
-// const contractModelHL7 = commonServices.models.ContractModel;
-// import InformationRequestService from "../services/InformationRequestService.js";
 
 
 export default class AddStudySummaryController extends WebcController {
@@ -19,10 +18,32 @@ export default class AddStudySummaryController extends WebcController {
         this.attachHandlerAcceptButton();
     }
 
-    getDemoResearchStudies() {
-        return ({
+    prepareContractStudy(){
+        let studyContract = {...contractModelHL7, ...researchStudyModelHL7};
+
+        studyContract.ContractTitle = this.model.title.value;
+        studyContract.ResearchStudyTitle = this.model.title.value;
+        studyContract.ContractApplies = [this.model.startdate.value, this.model.enddate.value];
+        studyContract.ResearchStudyPeriod = [this.model.startdate.value, this.model.enddate.value];
+        studyContract.ResearchStudyDescription = this.model.description.value;
+
+        studyContract.ResearchStudyRecruitmentAgeGroup = this.model.age.value;
+        studyContract.ResearchStudyRecruitmentSex = this.model.sex.value;
+        studyContract.ResearchStudyRecruitmentPreviousPathologies = this.model.pathologies.value;
+        studyContract.ResearchStudyRecruitmentOthers = this.model.others.value;
+        studyContract.ContractTerm = this.model.data.value;
+
+        studyContract.ContractStatus = 'APPROVED';
+        studyContract.ContractIssued = new Date();
+        studyContract.ContractVersion = 0;
+        return studyContract;
+    }
+
+    getAllStudyData() {
+
+        let viewData = {
             participants: 0 ,
-            status: "Draft",
+            status: "APPROVED",
             title: this.model.title.value,
             startdate: this.model.startdate.value,
             enddate: this.model.enddate.value,
@@ -32,12 +53,26 @@ export default class AddStudySummaryController extends WebcController {
             pathologies: this.model.pathologies.value,
             others: this.model.others.value,
             data: this.model.data.value
-        })
+        }
+
+        if (this.model.uid) {
+            let allData = {...this.prepareContractStudy(), ...viewData};
+            allData = Object.assign(allData, {uid: this.model.uid});
+            console.log(allData)
+            return allData
+        }
+        else{
+            let allData = {...this.prepareContractStudy(), ...viewData};
+            console.log(allData)
+            return allData
+        }
+
     }
 
     saveStudy(){
         this.StudiesService = new StudiesService();
-        this.StudiesService.saveStudy(this.getDemoResearchStudies(), (err, data) => {
+        console.log("this is saving DSU");
+        this.StudiesService.saveStudy(this.getAllStudyData(), (err, data) => {
             if (err) {
                 this.navigateToPageTag('confirmation-page', {
                     confirmationMessage: "An error has been occurred!",
@@ -55,7 +90,8 @@ export default class AddStudySummaryController extends WebcController {
 
     updateStudy(){
         this.StudiesService = new StudiesService();
-        this.StudiesService.updateStudy(this.getDemoResearchStudies(), (err, data) => {
+        console.log("this is updating DSU");
+        this.StudiesService.updateStudy(this.getAllStudyData(), (err, data) => {
             if (err) {
                 this.navigateToPageTag('confirmation-page', {
                     confirmationMessage: "An error has been occurred!",
@@ -81,7 +117,7 @@ export default class AddStudySummaryController extends WebcController {
     attachHandlerAcceptButton() {
         this.onTagClick('study:accept', () => {
             if (this.model.header1 === "Edit Study"){
-                this.saveStudy();
+                this.updateStudy();
             }
             else{
                 this.saveStudy();
@@ -101,13 +137,13 @@ export default class AddStudySummaryController extends WebcController {
             others: this.model.others.value,
             data: this.model.data.value,
             header1: this.model.header1,
-            KeySSI: this.model.KeySSI
+            uid: this.model.uid
         };
     }
 
     getResearchViewModel(prevState) {
         return {
-            KeySSI: prevState.KeySSI && prevState.KeySSI || "",
+            uid: prevState.uid && prevState.uid || "",
             header1: prevState.header1 && prevState.header1 || "New study",
             headerSummary: prevState.headerSummary && prevState.headerSummary || "Study - Summary",
             title: {
