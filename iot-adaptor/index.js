@@ -13,9 +13,8 @@ const commonServicesBundle = "./../common-services/build/bundles/commonServices.
 require(commonServicesBundle);
 const DidService = require("common-services").DidService
 const DOMAIN = "iot";
-const apiHub = require("apihub");
 const didType = "ssi:name";
-let publicName;
+const publicName = "iotAdapter";
 
 
 const express = require('express');
@@ -23,13 +22,6 @@ const server = express();
 const port = 3000;
 
 async function setupIoTAdaptorEnvironment() {
-
-    let domainConfig = apiHub.getDomainConfig(DOMAIN);
-    if(!domainConfig.hasOwnProperty("adaptorDidPublicName")){
-        throw new Error(`Domain ${DOMAIN} is misconfigured. Missing 'adaptorDidName' property`);
-
-    }
-    publicName = domainConfig.adaptorDidPublicName;
 
     const mainDSU = await $$.promisify(scAPI.getMainDSU)();
     const envConfig = {
@@ -53,7 +45,7 @@ async function setupIoTAdaptorEnvironment() {
 async function IotAdaptor(server) {
     console.log("IotAdapter called");
 
-    setupIoTAdaptorEnvironment();
+    await setupIoTAdaptorEnvironment();
 
     require('./strategies/IotAdapter');
 
@@ -92,6 +84,9 @@ async function IotAdaptor(server) {
 
     const {requestBodyXMLMiddleware, responseModifierMiddleware, requestBodyJSONMiddleware} = require('./utils/middlewares');
 
+    server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
+    server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
+
     server.use(`/iotAdapter/*`, responseModifierMiddleware);
     server.use(`/iotAdapter/*`, requestBodyJSONMiddleware);
 
@@ -101,50 +96,50 @@ async function IotAdaptor(server) {
     // For debugging purpose
     server.get(`/iotAdapter/resource/:resource_type`, SearchResources);
     server.get(`/iotAdapter/resource/:resource_type/:id`, GetResourceById);
-    server.post(`/iotAdapter/resource/:resource_type`, requestBodyJSONMiddleware);
+    //server.post(`/iotAdapter/resource/:resource_type`, requestBodyJSONMiddleware);
     server.post(`/iotAdapter/resource/:resource_type`, CreateResource);
-    server.put(`/iotAdapter/resource/:resource_type/:id`, requestBodyJSONMiddleware);
+    //server.put(`/iotAdapter/resource/:resource_type/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/resource/:resource_type/:id`, UpdateResource);
     server.delete(`/iotAdapter/resource/:resource_type/:id`, DeleteResource);
 
     server.post(`/iotAdapter/dsu`, CreateDsu);
     server.get(`/iotAdapter/dsu/resource/:resource_type`, SearchDsuResources);
-    server.post(`/iotAdapter/dsu/resource/:resource_type`, requestBodyJSONMiddleware);
+    //server.post(`/iotAdapter/dsu/resource/:resource_type`, requestBodyJSONMiddleware);
     server.post(`/iotAdapter/dsu/resource/:resource_type`, CreateDsuResource);
-    server.put(`/iotAdapter/dsu/resource/:resource_type/:id`, requestBodyJSONMiddleware);
+    //server.put(`/iotAdapter/dsu/resource/:resource_type/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/dsu/resource/:resource_type/:id`, UpdateDsuResource);
     server.delete(`/iotAdapter/dsu/resource/:resource_type/:id`, DeleteDsuResource);
     server.get(`/iotAdapter/dsu/resource/:resource_type/:id`, GetDsuResourceById);
     // End for debugging purpose
 
     // Actual APIs
-    server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
-    server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
-    server.post(`/iotAdapter/assign-device`, requestBodyJSONMiddleware);
+    // server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
+    // server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
+    //server.post(`/iotAdapter/assign-device`, requestBodyJSONMiddleware);
     server.post(`/iotAdapter/assign-device`, AssignDevice);
 
-    server.post(`/iotAdapter/create-evidence-dsu`, requestBodyJSONMiddleware);
+    //server.post(`/iotAdapter/create-evidence-dsu`, requestBodyJSONMiddleware);
     server.post(`/iotAdapter/create-evidence-dsu`, CreateEvidenceDsu);
 
     server.get(`/iotAdapter/search-evidence`, SearchEvidence);
-    server.post(`/iotAdapter/create-evidence`, requestBodyJSONMiddleware);
+    //server.post(`/iotAdapter/create-evidence`, requestBodyJSONMiddleware);
     server.post(`/iotAdapter/create-evidence`, CreateEvidence);
-    server.put(`/iotAdapter/update-evidence/:id`, requestBodyJSONMiddleware);
+    //server.put(`/iotAdapter/update-evidence/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/update-evidence/:id`, UpdateEvidence);
     server.delete(`/iotAdapter/delete-evidence/:id`, DeleteEvidence);
     server.get(`/iotAdapter/get-evidence/:id`, GetEvidenceById);
 
     server.get(`/iotAdapter/search-device`, SearchDevice);
-    server.post(`/iotAdapter/create-device`, requestBodyJSONMiddleware);
+    //server.post(`/iotAdapter/create-device`, requestBodyJSONMiddleware);
     server.post(`/iotAdapter/create-device`, CreateDevice);
-    server.put(`/iotAdapter/update-device/:id`, requestBodyJSONMiddleware);
+    //server.put(`/iotAdapter/update-device/:id`, requestBodyJSONMiddleware);
     server.put(`/iotAdapter/update-device/:id`, UpdateDevice);
     server.delete(`/iotAdapter/delete-device/:id`, DeleteDevice);
     server.get(`/iotAdapter/get-device/:id`, GetDeviceById);
 
     server.get(`/iotAdapter/adaptorIdentity`, getAdaptorIdentity);
 
-    await handleIotAdaptorMessages();
+    //await handleIotAdaptorMessages();
 }
 
 function getAdaptorIdentity(request, response, next) {
