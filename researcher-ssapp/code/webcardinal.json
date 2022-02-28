@@ -28,10 +28,10 @@
 			"tag": "add-request-summary"
 		},
 		{
-			"name": "View Information Requests",
-			"path": "/view-information-requests",
-			"src": "view-information-requests.html",
-			"tag": "view-information-requests"
+			"name": "View Research Study",
+			"path": "/view-research-study",
+			"src": "view-research-study.html",
+			"tag": "view-research-study"
 		},
 		{
 			"name": "Add Evidence Summary",
