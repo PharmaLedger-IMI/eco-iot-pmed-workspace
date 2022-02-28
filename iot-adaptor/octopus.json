@@ -1,0 +1,27 @@
+{
+  "workDir": ".",
+  "dependencies": [
+    {
+      "name": "PSK bundles",
+      "src": "",
+      "actions": [
+        {
+          "type": "copy",
+          "src": "../privatesky/psknode/bundles/openDSU.js",
+          "target": "bundles/openDSU.js",
+          "options": {
+            "overwrite": true
+          }
+        },
+        {
+          "type": "copy",
+          "src": "../privatesky/psknode/bundles/pskWebServer.js",
+          "target": "bundles/pskWebServer.js",
+          "options": {
+            "overwrite": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -12,18 +12,10 @@
 		"bricksFabric",
 		"bricking",
 		"anchoring",
-		"iot-adaptor",
 		"debugLogger",
 		"mq",
 		"staticServer"
 	],
-	"componentsConfig": {
-		"bricking": {},
-		"anchoring": {},
-		"iot-adaptor": {
-			"module": "./../../iot-adaptor"
-		}
-	},
 	"enableRequestLogger": true,
 	"enableJWTAuthorisation": false,
 	"enableLocalhostAuthorization": false,
