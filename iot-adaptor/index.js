@@ -139,7 +139,7 @@ async function IotAdaptor(server) {
 
     server.get(`/iotAdapter/adaptorIdentity`, getAdaptorIdentity);
 
-    //await handleIotAdaptorMessages();
+    await handleIotAdaptorMessages();
 }
 
 function getAdaptorIdentity(request, response, next) {
