@@ -7,7 +7,6 @@ import StudiesService from "../services/StudiesService.js";
 import DPermissionService from "../services/DPermissionService.js";
 const { DataSource } = WebCardinal.dataSources;
 
-
 class StudiesDataSource extends DataSource {
     constructor(...props) {
         super(...props);
@@ -124,9 +123,9 @@ export default class HomeController extends WebcController {
                 const editStudy = {...viewData, ...{header1: "Edit Study"}}
                 this.navigateToPageTag('create-research-study', editStudy);
             });
-            this.onTagClick("feedback", (model) => {
-                //const { participants } = model;
+            this.onTagClick("feedback-list", (model) => {
                 console.log('this is feedback Page!');
+                this.navigateToPageTag('feedback-list', model);
             });
             this.onTagClick("evidence", (model) => {
                 //const { participants } = model;
