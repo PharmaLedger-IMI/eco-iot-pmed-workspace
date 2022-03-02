@@ -82,9 +82,9 @@ export default class ViewResearchStudyController extends WebcController {
 
         getNotes().then(data => {
             //this.model.hasNotes = data.length !== 0;
-            this.model.notesDataSource.addNewNotes(data);
+            let notes = data.filter(note => note.studyID === this.model.uid);
+            this.model.notesDataSource.addNewNotes(notes);
             const { notesDataSource } = this.model;
-
             // this.onTagClick("view", (model) => {
             //     const {title} = model;
             //     console.log(title);
