@@ -14,7 +14,7 @@ require(commonServicesBundle);
 const DidService = require("common-services").DidService
 const DOMAIN = "iot";
 const didType = "ssi:name";
-const publicName = "iotAdapter";
+const publicName = "iotAdaptor";
 
 
 const express = require('express');
@@ -139,7 +139,7 @@ async function IotAdaptor(server) {
 
     server.get(`/iotAdapter/adaptorIdentity`, getAdaptorIdentity);
 
-    //await handleIotAdaptorMessages();
+    await handleIotAdaptorMessages();
 }
 
 function getAdaptorIdentity(request, response, next) {

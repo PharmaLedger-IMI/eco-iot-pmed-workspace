@@ -147,6 +147,12 @@
 			"path": "/feedback-list",
 			"src": "feedback-list.html",
 			"tag": "feedback-list"
+		},
+		{
+			"name": "create-feedback",
+			"path": "/create-feedback",
+			"src": "create-feedback.html",
+			"tag": "create-feedback"
 		}
 	],
 	"pagesFallback": {
