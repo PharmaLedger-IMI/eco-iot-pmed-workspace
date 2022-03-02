@@ -4,30 +4,22 @@ const { DataSource } = WebCardinal.dataSources;
 
 
 class NotesDataSource extends DataSource {
-    constructor(notes,getTableElement) {
+    constructor(notes) {
         super();
         this.model.notes = notes;
-        this.getTableElement = getTableElement;
         this.model.elements = 10;
-        this.hasAttachedView = false;
         this.setPageSize(this.model.elements);
         this.model.noOfColumns = 3;
     }
 
     addNewNotes(notes){
-        notes.forEach(note=>{
-            this.model.notes.push(note);
-        });
-
-        this.attachView();
-        this.forceUpdate(true);
-    }
-
-    attachView(){
-        if(!this.hasAttachedView){
-            this._init(this.getTableElement)
-            this.hasAttachedView = true;
+        if(notes.length === 0){
+            return;
         }
+        this.model.notes.push(...notes);
+        //update the dataSize while the webc-component is not yet aware of updated data
+        this.getElement().dataSize = this.model.notes.length;
+        this.forceUpdate(true);
     }
 
     async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
@@ -54,10 +46,6 @@ class NotesDataSource extends DataSource {
 
 export default class ViewResearchStudyController extends WebcController {
 
-    dataSourceGetElement(){
-        return this.querySelector("webc-datatable");
-    }
-
     constructor(...props) {
         super(...props);
 
@@ -78,7 +66,7 @@ export default class ViewResearchStudyController extends WebcController {
             })
         }
 
-        this.model.notesDataSource = new NotesDataSource([], this.dataSourceGetElement.bind(this));
+        this.model.notesDataSource = new NotesDataSource([]);
 
         getNotes().then(data => {
             //this.model.hasNotes = data.length !== 0;
