@@ -1,6 +1,11 @@
 function createDevice(request, response, next) {
     const receivedDomain = "default";
-    const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
+    const domainConfig = {
+        "type": "IotAdaptor",
+        "option": {
+            "endpoint": "http://127.0.0.1:1000/adaptor"
+        }
+    };
     if (!domainConfig) {
         console.log('Deployment Domain not found : ', receivedDomain);
         return response.send(500);

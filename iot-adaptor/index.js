@@ -14,7 +14,7 @@ require(commonServicesBundle);
 const DidService = require("common-services").DidService
 const DOMAIN = "iot";
 const didType = "ssi:name";
-const publicName = "iotAdapter";
+const publicName = "iotAdaptor";
 
 
 const express = require('express');
@@ -115,7 +115,7 @@ async function IotAdaptor(server) {
     // Actual APIs
     // server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
     // server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
-    //server.post(`/iotAdapter/assign-device`, requestBodyJSONMiddleware);
+    // server.post(`/iotAdapter/assign-device`, requestBodyJSONMiddleware); 
     server.post(`/iotAdapter/assign-device`, AssignDevice);
 
     //server.post(`/iotAdapter/create-evidence-dsu`, requestBodyJSONMiddleware);
@@ -139,7 +139,7 @@ async function IotAdaptor(server) {
 
     server.get(`/iotAdapter/adaptorIdentity`, getAdaptorIdentity);
 
-    //await handleIotAdaptorMessages();
+    await handleIotAdaptorMessages();
 }
 
 function getAdaptorIdentity(request, response, next) {
