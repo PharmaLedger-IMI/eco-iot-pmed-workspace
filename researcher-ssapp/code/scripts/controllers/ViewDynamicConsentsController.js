@@ -35,9 +35,8 @@ export default class ViewDynamicConsentsController extends WebcController {
             datasource: new DynamicConsentsDataSource(),
         };
 
-        this.model.studyId =  this.history.location.state.studyId
+        this.model =  this.getState();
         const { datasource } = this.model;
-
 
         this.onTagClick("prev-page", () => datasource.goToPreviousPage());
         this.onTagClick("next-page", () => datasource.goToNextPage());
