@@ -1,0 +1,25 @@
+<webc-container controller="CreateFeedbackController">
+    <div class="container main-container">
+        <div class="container flex-container">
+            <img alt="PharmaLedger Blockchain Enabled Healthcare" src="./assets/images/pharmaledger-logo.jpg"
+                 class="img-m"/>
+            <h5 class="generic-title">Feedback</h5>
+        </div>
+
+        <div class="container justify-content-start">
+            <main class="form-container">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="col-form-label"><b>PLEASE NOTE that you are about to send a feedback on {{@title}} study to all participants involved.</b></label>
+                    <textarea class="form-control" data-view-model="@desc" id="@desc" rows="5">
+                </textarea>
+                </div>
+            </div>
+            </main>
+        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="back-to-feedback-list">Back</button>
+            <button data-tag="">Send</button>
+        </footer>
+</webc-container>
