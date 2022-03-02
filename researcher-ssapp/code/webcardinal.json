@@ -141,6 +141,18 @@
 			"path": "study-consents",
 			"src": "dynamic-consents/view-dynamic-consents.html",
 			"tag": "dynamic-consents"
+		},
+		{
+			"name": "Feedback",
+			"path": "/feedback-list",
+			"src": "feedback-list.html",
+			"tag": "feedback-list"
+		},
+		{
+			"name": "create-feedback",
+			"path": "/create-feedback",
+			"src": "create-feedback.html",
+			"tag": "create-feedback"
 		}
 	],
 	"pagesFallback": {
