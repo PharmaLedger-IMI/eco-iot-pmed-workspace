@@ -114,7 +114,7 @@ async function IotAdaptor(server) {
 
     // Actual APIs
     // server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
-    // server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
+    server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
     // server.post(`/iotAdapter/assign-device`, requestBodyJSONMiddleware); 
     server.post(`/iotAdapter/assign-device`, AssignDevice);
 
