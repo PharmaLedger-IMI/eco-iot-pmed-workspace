@@ -100,7 +100,8 @@ export default class HomeController extends WebcController {
                     others: chosenStudy.others,
                     data: chosenStudy.data,
                     uid: chosenStudy.uid,
-                    status: chosenStudy.status
+                    status: chosenStudy.status,
+                    breadcrumb:this.model.breadcrumb.toObject()
                 }
                 this.navigateToPageTag('view-research-study', viewData);
             });
@@ -137,7 +138,7 @@ export default class HomeController extends WebcController {
             });
             this.onTagClick("prev-page", () => studiesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => studiesDataSource.goToNextPage());
-            this.sendEchoMessageToIotAdaptor();
+            //this.sendEchoMessageToIotAdaptor();
         })
 
         this.model.did = await DidService.getDidServiceInstance().getDID();
@@ -167,7 +168,12 @@ export default class HomeController extends WebcController {
 
     getInitialModel() {
         return {
-            did: ""
+            did: "",
+            breadcrumb : [{
+                label:"Dashboard",
+                tag:"home",
+                state:{}
+            }]
         };
     }
 }

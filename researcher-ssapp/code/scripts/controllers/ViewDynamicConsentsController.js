@@ -35,7 +35,16 @@ export default class ViewDynamicConsentsController extends WebcController {
             datasource: new DynamicConsentsDataSource(),
         };
 
-        this.model =  this.getState();
+        let state =  this.getState();
+        let {breadcrumb, ...breadcrumbState} = state;
+        this.model = state;
+        let breadcrumbSegment = {
+            label: "Dynamic Consent: " + this.model.studyId,
+            tag: "dynamic-consents",
+            state: breadcrumbState
+        };
+
+        this.model.breadcrumb.push(breadcrumbSegment);
         const { datasource } = this.model;
 
         this.onTagClick("prev-page", () => datasource.goToPreviousPage());
