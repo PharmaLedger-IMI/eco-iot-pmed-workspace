@@ -54,9 +54,9 @@
 		},
 		{
 			"name": "Add Evidence",
-			"path": "/add-evidence-p1",
-			"src": "addEvidenceP1.html",
-			"tag": "add-evidence-p1"
+			"path": "/add-evidence",
+			"src": "addEvidence.html",
+			"tag": "add-evidence"
 		},
 		{
 			"name": "Add Evidence",

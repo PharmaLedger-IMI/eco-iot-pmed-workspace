@@ -1,8 +1,9 @@
-<webc-container controller="AddEvidenceP2Controller">
+<webc-container controller="AddEvidenceController">
     <div class="container main-container">
 
         <div class="container flex-container">
-            <h5 class="generic-title">Evidence Details</h5>
+            <h5 class="generic-title">New Evidence</h5>
+            <h6>Evidence Description</h6>
         </div>
 
         <main class="form-container">
@@ -11,6 +12,9 @@
                     <label class="col-form-label">{{@title.label}}</label>
                     <input class="form-control" data-view-model="@title" id="@title.name"/>
                 </div>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group">
                     <label class="col-form-label">{{@subtitle.label}}</label>
                     <input class="form-control" data-view-model="@subtitle" id="@subtitle.name"/>
@@ -53,8 +57,8 @@
         </main>
 
         <div class="button-group-wrapper">
-            <button data-tag="evidence:add-evidence-p1">Back</button>
-            <button data-tag="add-evidence-summary">Confirm</button>
+            <button data-tag="go:back">Back</button>
+            <button data-tag="evidence-confirm">Confirm</button>
         </div>
     </div>
 </webc-container>

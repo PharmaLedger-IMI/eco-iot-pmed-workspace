@@ -1,32 +1,69 @@
 const {WebcController} = WebCardinal.controllers;
+import EvidenceService from "../services/EvidenceService.js";
 
 
-export default class AddEvidenceP2Controller extends WebcController {
+export default class AddEvidenceController extends WebcController {
     constructor(...props) {
 
         super(...props);
 
-        const prevState = this.getState();
-        this.model = this.getEvidenceDetailsViewModel(prevState);
+        this.model.studyID = this.getState() || {};
+        this.model = this.getEvidenceDetailsViewModel();
 
-        this._attachHandlerEditBacktoP1Button();
-        this._attachHandlerAddEvidenceSummaryButton();
+        this._attachHandlerGoBack();
+        this._attachHandlerAddEvidenceConfirm();
+        console.log(this.model.studyID)
+
 
     }
 
-    _attachHandlerEditBacktoP1Button() {
-        this.onTagClick('evidence:add-evidence-p1', () => {
-            this.navigateToPageTag('add-evidence-p1', this.model.toObject());
+    prepareEvidenceDSUData(){
+        let evidence = {
+            title: this.model.title.value,
+            subtitle: this.model.subtitle.value,
+            version: this.model.version.value,
+            status: this.model.status.value,
+            topics: this.model.topics.value,
+            exposureBackground: this.model.exposureBackground.value,
+            description: this.model.description.value,
+            id: new Date(),
+            studyID: this.model.studyID
+        }
+        console.log(evidence)
+        return evidence;
+    }
+
+    saveEvidence(){
+        this.EvidenceService = new EvidenceService();
+        this.EvidenceService.saveEvidence(this.prepareEvidenceDSUData(), (err, data) => {
+            if (err) {
+                this.navigateToPageTag('confirmation-page', {
+                    confirmationMessage: "An error has been occurred!",
+                    redirectPage: "home"
+                });
+                return console.log(err);
+            }
+            this.navigateToPageTag('confirmation-page', {
+                confirmationMessage: "The evidence has been created!",
+                redirectPage: "home"
+            });
+        })
+    }
+
+    _attachHandlerGoBack() {
+        this.onTagClick('go-back', () => {
+            this.navigateToPageTag('evidence-list');
         });
     }
 
-    _attachHandlerAddEvidenceSummaryButton() {
-        this.onTagClick('add-evidence-summary', () => {
-            this.navigateToPageTag('add-evidence-summary', this.model.toObject());
+    _attachHandlerAddEvidenceConfirm() {
+        this.onTagClick('evidence-confirm', () => {
+            this.saveEvidence();
+            //this.navigateToPageTag('');
         });
     }
 
-    getEvidenceDetailsViewModel(prevState) {
+    getEvidenceDetailsViewModel() {
         return {
             title: {
                 name: 'title',
@@ -34,26 +71,22 @@ export default class AddEvidenceP2Controller extends WebcController {
                 label: "Title",
                 placeholder: 'Title of the Evidence',
                 required: true,
-                value: prevState.title || ""
+                value: ""
             },
             subtitle: {
                 name: 'subtitle',
                 id: 'subtitle',
                 label: "Subtitle",
                 placeholder: 'Subtitle of the Evidence',
-                value: prevState.subtitle || ""
+                value: ""
             },
             version: {
                 name: 'version',
                 id: 'Version',
                 label: "Version",
                 placeholder: 'Version',
-                value: prevState.version || ""
+                value: ""
             },
-            name: prevState.name || "",
-            organization: prevState.organization || "",
-            email: prevState.email || "",
-
             status: {
                 label: "Status",
                 required: true,
@@ -74,25 +107,29 @@ export default class AddEvidenceP2Controller extends WebcController {
                         value: 'unknown'
                     }
                 ],
-                value: prevState.status || ""
+                value: ""
             },
             topics: {
                 label: "Topics",
                 required: true,
                 options: [{
-                    label: "Topics 1",
-                    value: 'Topics 1'
+                    label: "Topic 1",
+                    value: 'Topic 1'
                 },
                     {
-                        label: "Topics 2",
-                        value: 'Topics 2'
+                        label: "Topic 2",
+                        value: 'Topic 2'
                     },
                     {
-                        label: "Topics 3",
-                        value: 'Topics 3'
+                        label: "Topic 3",
+                        value: 'Topic 3'
+                    },
+                    {
+                        label: "Topic 4",
+                        value: 'Topic 4'
                     }
                 ],
-                value: prevState.topics || ""
+                value: ""
             },
             exposureBackground: {
                 label: "Exposure Background",
@@ -109,15 +146,19 @@ export default class AddEvidenceP2Controller extends WebcController {
                         label: "EP_3",
                         value: 'EP_3'
                     },
+                    {
+                        label: "EP_4",
+                        value: 'EP_4'
+                    },
                 ],
-                value: prevState.exposureBackground || ""
+                value: ""
             },
             description: {
                 name: 'description',
                 label: "Description",
                 placeholder: 'Provide description of the evidence',
                 required: true,
-                value: prevState.description || ""
+                value: ""
             },
             id: {
                 name: 'id of the evidence',
@@ -126,8 +167,6 @@ export default class AddEvidenceP2Controller extends WebcController {
                 value: '001'
             }
         }
-
     }
-
 
 }

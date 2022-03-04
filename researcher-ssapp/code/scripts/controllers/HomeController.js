@@ -128,8 +128,10 @@ export default class HomeController extends WebcController {
                 this.navigateToPageTag('feedback-list', model);
             });
             this.onTagClick("evidence", (model) => {
-                //const { participants } = model;
-                this.navigateToPageTag('evidence');
+                const {title} = model;
+                let chosenStudy;
+                data.forEach(element => {if(element.title === title) chosenStudy = element});
+                this.navigateToPageTag('evidence-list', chosenStudy.uid);
             });
             this.onTagClick("data", (model) => {
                 //const { participants } = model;

@@ -1,22 +1,54 @@
 <webc-container controller="EvidenceListController">
-    <div class="container flex-container">
-        <img alt="PharmaLedger Blockchain Enabled Healthcare" class="img-xl"
-             src="./assets/images/pharmaledger-logo.jpg"/>
+    <div class="container main-container">
+        <div class="container flex-container">
+            <h5 class="generic-title">Study XX Evidence List</h5>
+        </div>
 
-        <h3>Evidence List</h3>
-        <div class="bpd-wide-cards" data-if="@allEvidences">
-            <psk-table class="border-bottom border-top" footer="false" header="true"
-                       slot="condition-true" style="text-align:center;">
-                Evidence ID | Name | Title | Version | Status
-                <div data-for="@allEvidences">
-                    {{@id}} | {{@name}} | {{@title}} | {{@version}} | {{@status}}
+        <div class="container justify-content-start">
+
+            <div data-if="@hasEvidence">
+
+                <webc-spinner slot="loading"></webc-spinner>
+                <div slot="false" class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">No evidence yet!</h4>
+                    <p>Add your first evidence!</p>
                 </div>
-            </psk-table>
+                <div class="common-datatable evidence-datatable dt-6-col" slot="true">
+                    <webc-datatable datasource="@evidenceDataSource">
+
+                        <div slot="header" data-sortable>Evidence ID</div>
+                        <div slot="header" data-sortable>Name</div>
+                        <div slot="header" data-sortable>Title</div>
+                        <div slot="header" data-sortable>Version</div>
+                        <div slot="header" data-sortable>Status</div>
+                        <div slot="header">Options</div>
+
+                        <div class="cell">{{ @id }}</div>
+                        <div class="cell">{{ @title }}</div>
+                        <div class="cell">{{ @subtitle }}</div>
+                        <div class="cell">{{ @version }}</div>
+                        <div class="cell">{{ @status }}</div>
+                        <div class="cell">
+                            <label data-tag="view" class="link option">View</label>
+                            <label> | </label>
+                            <label data-tag="edit" class="link option">Edit</label>
+                        </div>
+
+                    </webc-datatable>
+<!--                    <section class="controls button-group-wrapper">-->
+<!--                        <button data-tag="prev-page">‹ Previous page</button>-->
+<!--                        <button data-tag="next-page">Next page ›</button>-->
+<!--                    </section>-->
+                </div>
+
+            </div>
         </div>
 
-        <div class="button-group-wrapper">
-            <button data-tag="evidence:to-evidence">Back</button>
-        </div>
+
+        <footer class="button-group-wrapper">
+            <button data-tag="go:back">Back</button>
+            <button data-tag="new:evidence">Add Evidence</button>
+        </footer>
 
     </div>
 </webc-container>
