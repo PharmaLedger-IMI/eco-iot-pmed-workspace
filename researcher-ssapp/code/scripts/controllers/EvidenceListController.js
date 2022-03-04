@@ -54,8 +54,8 @@ export default class EvidenceListController extends WebcController  {
         }
 
         getEvidences().then(data => {
-            this.model.hasEvidence = data.length !== 0;
             let evidences = data.filter(data => data.studyID === this.model.studyID);
+            this.model.hasEvidence = evidences.length !== 0;
             this.model.evidenceDataSource = new EvidenceDataSource(evidences);
             const { evidenceDataSource } = this.model;
             this.onTagClick("prev-page", () => evidenceDataSource.goToPreviousPage());
