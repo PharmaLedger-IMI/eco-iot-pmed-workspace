@@ -51,7 +51,13 @@ export default class ViewResearchStudyController extends WebcController {
 
         this.containerElement = props[0];
         const prevState = this.getState() || {};
+        const {breadcrumb, ...state} = prevState
         this.model = prevState;
+        this.model.breadcrumb.push({
+            label:this.model.title,
+            tag:"view-research-study",
+            state: state
+        });
         this.model.notesViewModel = this.getViewNotesModel();
 
         this.StudyNotesService = new StudyNotesService();
@@ -126,7 +132,8 @@ export default class ViewResearchStudyController extends WebcController {
     _attachHandlerViewDynamicConsents() {
         this.onTagClick('view-dynamic-permission', (event) => {
             let study = {
-                studyID: this.model.uid
+                studyId: this.model.uid,
+                breadcrumb:this.model.breadcrumb.toObject()
             }
             this.navigateToPageTag('dynamic-consents', study);
         });
