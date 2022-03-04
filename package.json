@@ -18,7 +18,7 @@
     "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
     "server": "npm run apihub & sleep 10 && npm run iot-adapter",
     "apihub": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd privatesky && npm run start\"",
-    "iot-adapter": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd iot-adaptor && npm run start\"",
+    "iot-adaptor": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd iot-adaptor && npm run start\"",
     "switch-to-release": "npm run remove privatesky && npm run add privatesky http://github.com/privatesky/psk-release.git 0",
     "switch-to-dev": "npm run remove privatesky && npm run add privatesky http://github.com/privatesky/privatesky.git 0",
     "watch": "node ./bin/watcher/watcher.js",

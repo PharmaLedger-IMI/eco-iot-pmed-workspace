@@ -34,20 +34,29 @@ $ npm run dev-install
 ```
 **Note:** this command might take quite some time depending on your internet connection and you machine processing power.
 
-### Step 2: Launch the "server"
+### Step 2: Launch the api-hub
 
 While in the *iot-pmed-workspace* folder run:
 
 ```sh
-$ npm run server
+$ npm run apihub
 ```
 
 At the end of this command you get something similar to:
 
 ![alt text](scr-npm-run-server.png)
 
+### Step 3: Launch the iot-adaptor
 
-### Step 3: Build all things needed for the application to run.
+While in the *iot-pmed-workspace* folder run:
+
+```sh
+$ npm run iot-adaptor
+```
+
+NOTE: On linux deployment based systems you can run directly ```npm run server``` instead of steps 2 and 3.    
+
+### Step 4: Build all things needed for the application to run.
 
 Open a new console inside *iot-pmed-workspace* folder and run:
 
