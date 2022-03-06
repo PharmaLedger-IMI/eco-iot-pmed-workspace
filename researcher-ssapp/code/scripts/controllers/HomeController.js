@@ -140,7 +140,7 @@ export default class HomeController extends WebcController {
             });
             this.onTagClick("prev-page", () => studiesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => studiesDataSource.goToNextPage());
-            //this.sendEchoMessageToIotAdaptor();
+            this.sendEchoMessageToIotAdaptor();
         })
 
         this.model.did = await DidService.getDidServiceInstance().getDID();
