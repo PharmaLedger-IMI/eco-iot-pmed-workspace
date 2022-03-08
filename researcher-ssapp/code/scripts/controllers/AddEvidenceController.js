@@ -51,7 +51,7 @@ export default class AddEvidenceController extends WebcController {
 
     _attachHandlerGoBack() {
         this.onTagClick('go:back', () => {
-            this.navigateToPageTag('evidence-list');
+            this.navigateToPageTag('evidence-list', this.model.studyID);
         });
     }
 
