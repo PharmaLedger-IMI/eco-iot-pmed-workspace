@@ -23,15 +23,15 @@
                         <div slot="header" data-sortable>Status</div>
                         <div slot="header">Options</div>
 
-                        <div class="cell">{{ @id }}</div>
+                        <div class="cell" style="text-overflow:ellipsis;width:auto;overflow:hidden;">{{ @uid }}</div>
                         <div class="cell">{{ @title }}</div>
                         <div class="cell">{{ @subtitle }}</div>
                         <div class="cell">{{ @version }}</div>
                         <div class="cell">{{ @status }}</div>
                         <div class="cell">
-                            <label data-tag="view" class="link option">View</label>
+                            <label data-tag="view-evidence" class="link option">View</label>
                             <label> | </label>
-                            <label data-tag="edit" class="link option">Edit</label>
+                            <label data-tag="edit-evidence" class="link option">Edit</label>
                         </div>
 
                     </webc-datatable>

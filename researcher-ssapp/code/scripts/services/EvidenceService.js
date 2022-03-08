@@ -11,7 +11,7 @@ export default class EvidenceService extends DSUService {
 
     getEvidences = (callback) => this.getEntities(callback);
 
-    getEvidence = (callback) => this.getEntity(keySSI, callback);
+    getEvidence = (uid, callback) => this.getEntity(uid, callback);
 
     saveEvidence = (data, callback) => this.saveEntity(data, callback);
 
