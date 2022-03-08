@@ -1,10 +1,9 @@
 const {WebcController} = WebCardinal.controllers;
 import StudiesService from "../services/StudiesService.js";
+import StudyStatusesService from "../services/StudyStatusesService.js";
 const commonServices = require("common-services");
 const contractModelHL7 = commonServices.models.ContractModel;
 const researchStudyModelHL7 = commonServices.models.ResearchStudyModel;
-
-//const CommunicationService = commonServices.CommunicationService;
 
 
 export default class AddStudySummaryController extends WebcController {
@@ -43,7 +42,7 @@ export default class AddStudySummaryController extends WebcController {
 
         let viewData = {
             participants: 0 ,
-            status: "APPROVED",
+            status: StudyStatusesService.getInitialStatus(),
             title: this.model.title.value,
             startdate: this.model.startdate.value,
             enddate: this.model.enddate.value,

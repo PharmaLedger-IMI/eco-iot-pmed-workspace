@@ -25,17 +25,28 @@
 
                     <div class="cell">{{ @title }}</div>
                     <div class="cell">{{ @participants }}</div>
-                    <div class="cell">{{ @status }}</div>
+                    <div class="cell study-status-cell">
+                        {{ @statusLabel }}
+                        <div data-if="@hasStatusActions">
+                            <i class="fa fa fa-ellipsis-v"> </i>
+                            <div data-for="@statusActions" class="study-status-actions">
+                                <label data-tag="change-status">{{@action}}</label>
+                                <label class="separator"> | </label>
+                            </div>
+
+                        </div>
+
+                    </div>
                     <div class="cell">
-                        <label data-tag="view" class="link option">View</label>
+                        <button data-tag="view" class="link option" disabled="@preventActions.preventView">View</button>
                         <label> | </label>
-                        <label data-tag="edit" class="link option">Edit</label>
+                        <button data-tag="edit" class="link option" disabled="@preventActions.preventEdit">Edit</button>
                         <label> | </label>
-                        <label data-tag="feedback-list" class="link option">Feedback</label>
+                        <button data-tag="feedback-list" class="link option" disabled="@preventActions.preventFeedback">Feedback</button>
                         <label> | </label>
-                        <label data-tag="evidence" class="link option">Evidence</label>
+                        <button data-tag="evidence" class="link option" disabled="@preventActions.preventEvidence">Evidence</button>
                         <label> | </label>
-                        <label data-tag="data" class="link option">Data</label>
+                        <button data-tag="data" class="link option" disabled="@preventActions.preventData">Data</button>
                     </div>
 
                 </webc-datatable>
