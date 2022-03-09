@@ -11,6 +11,8 @@ export default class StudiesService extends DSUService {
 
     getStudies = (callback) => this.getEntities(callback);
 
+    getStudy = (uid, callback) => this.getEntity(uid, callback);
+
     saveStudy = (data, callback) => this.saveEntity(data, callback);
 
     updateStudy = (data, callback) => this.updateEntity(data, callback);

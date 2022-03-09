@@ -1,4 +1,5 @@
 const { WebcController } = WebCardinal.controllers;
+import StudiesService from "../services/StudiesService.js";
 import EvidenceService from "../services/EvidenceService.js";
 const { DataSource } = WebCardinal.dataSources;
 
@@ -40,6 +41,14 @@ export default class EvidenceListController extends WebcController  {
 
         this.model = {}
         this.model.studyID = this.getState() || {};
+
+        this.StudiesService = new StudiesService();
+        this.StudiesService.getStudy(this.model.studyID, (err, study_info) => {
+            if (err){
+                return console.log(err);
+            }
+            this.model.studyTitle = study_info.ResearchStudyTitle;
+        });
 
         this.EvidenceService = new EvidenceService();
         const getEvidences = () => {

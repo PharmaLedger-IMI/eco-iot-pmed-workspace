@@ -72,7 +72,6 @@ export default class ViewEditEvidenceController extends WebcController {
 
     _attachHandlerEditEvidence() {
         this.onTagClick('edit:evidence', (event) => {
-            console.log("editing evidence...")
             this.updateEvidence();
         });
     }
