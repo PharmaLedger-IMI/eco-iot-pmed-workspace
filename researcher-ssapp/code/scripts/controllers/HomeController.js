@@ -5,6 +5,7 @@ const {getCommunicationServiceInstance} = commonServices.CommunicationService;
 const MessageHandlerService = commonServices.MessageHandlerService;
 import StudiesService from "../services/StudiesService.js";
 import DPermissionService from "../services/DPermissionService.js";
+import StudyStatusesService from "../services/StudyStatusesService.js";
 const { DataSource } = WebCardinal.dataSources;
 
 class StudiesDataSource extends DataSource {
@@ -14,6 +15,12 @@ class StudiesDataSource extends DataSource {
         this.model.elements = 10;
         this.setPageSize(this.model.elements);
         this.model.noOfColumns = 4;
+    }
+
+    updateData(updatedStudy) {
+        let toBeUpdatedIndex = this.model.studies.findIndex(study => updatedStudy.uid === study.uid);
+        this.model.studies[toBeUpdatedIndex] = updatedStudy;
+        this.forceUpdate(true);
     }
 
     async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
@@ -49,14 +56,36 @@ export default class HomeController extends WebcController {
     }
 
     initHandlers() {
-        this.attachHandlerNewStudy();
-    }
-
-    attachHandlerNewStudy() {
         this.onTagClick('new:study', () => {
             this.navigateToPageTag('create-research-study');
         });
+
+        this.onTagClick('change-status',(nextStatus)=>{
+            let selectedStudy = this.studies.find(study => study.uid === nextStatus.studyId);
+            const studyTitle = selectedStudy.title;
+            const currentStatus = selectedStudy.statusLabel;
+
+            this.showModal(
+                `You are about to change the status of the study ${studyTitle} from ${currentStatus} to ${nextStatus.label}. Please confirm.`,
+                `Change study ${studyTitle}`,
+                ()=>{
+                    selectedStudy.status = nextStatus.step;
+                    this.StudiesService.updateStudy(selectedStudy,()=>{
+                        this.prepareStudiesView(this.studies);
+                        this.model.studiesDataSource.updateData(selectedStudy);
+                    })
+                },
+                () => {},
+                {
+                    disableExpanding: true,
+                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Confirm',
+                    id: 'confirm-modal'
+                }
+            );
+        })
     }
+
 
     // TODO: Remove this when tests are completed.
     sendEchoMessageToIotAdaptor() {
@@ -81,14 +110,14 @@ export default class HomeController extends WebcController {
             })
         }
 
-        getStudies().then(data => {
-            this.model.hasStudies = data.length !== 0;
-            this.model.studiesDataSource = new StudiesDataSource(data);
+        getStudies().then(studies => {
+            this.model.hasStudies = studies.length !== 0;
+            this.prepareStudiesView(studies);
+            this.studies = studies;
+            this.model.studiesDataSource = new StudiesDataSource(studies);
             const { studiesDataSource } = this.model;
             this.onTagClick("view", (model) => {
-                const {title} = model;
-                let chosenStudy;
-                data.forEach(element => {if(element.title === title) chosenStudy = element});
+                let chosenStudy = studies.find(study => study.uid === model.uid);
                 let viewData = {
                     title: chosenStudy.title,
                     startdate: chosenStudy.startdate,
@@ -106,9 +135,7 @@ export default class HomeController extends WebcController {
                 this.navigateToPageTag('view-research-study', viewData);
             });
             this.onTagClick("edit", (model) => {
-                const {title} = model;
-                let chosenStudy;
-                data.forEach(element => {if(element.title === title) chosenStudy = element});
+                let chosenStudy = studies.find(study => study.uid === model.uid);
                 let viewData = {
                     title: chosenStudy.title,
                     startdate: chosenStudy.startdate,
@@ -129,9 +156,7 @@ export default class HomeController extends WebcController {
                 this.navigateToPageTag('feedback-list', model);
             });
             this.onTagClick("evidence", (model) => {
-                const {title} = model;
-                let chosenStudy;
-                data.forEach(element => {if(element.title === title) chosenStudy = element});
+                let chosenStudy = studies.find(study => study.uid === model.uid);
                 this.navigateToPageTag('evidence-list', chosenStudy.uid);
             });
             this.onTagClick("data", (model) => {
@@ -166,6 +191,28 @@ export default class HomeController extends WebcController {
             }
         });
 
+    }
+
+    prepareStudiesView(studies){
+        studies.forEach(study=>{
+            let statusesService = new StudyStatusesService(study.status);
+            const currentStatus = statusesService.getCurrentStatus();
+            const statusActions = currentStatus.actions;
+            study.statusLabel = currentStatus.label;
+            study.statusActions = statusesService.getNextPossibleSteps();
+            study.hasStatusActions = study.statusActions.length > 0;
+            study.statusActions.forEach(action => action.studyId = study.uid);
+
+            const ACTIONS = StudyStatusesService.getActions();
+            study.preventActions = {
+                preventView:!statusActions.includes(ACTIONS.VIEW),
+                preventEdit:!statusActions.includes(ACTIONS.EDIT),
+                preventFeedback:!statusActions.includes(ACTIONS.FEEDBACK),
+                preventEvidence:!statusActions.includes(ACTIONS.EVIDENCE),
+                preventData:!statusActions.includes(ACTIONS.DATA),
+            }
+
+        });
     }
 
     getInitialModel() {
