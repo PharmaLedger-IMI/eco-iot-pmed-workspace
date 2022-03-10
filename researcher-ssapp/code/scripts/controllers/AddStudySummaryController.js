@@ -1,4 +1,4 @@
-const {WebcController} = WebCardinal.controllers;
+const { WebcController } = WebCardinal.controllers;
 import StudiesService from "../services/StudiesService.js";
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const commonServices = require("common-services");
@@ -12,6 +12,15 @@ export default class AddStudySummaryController extends WebcController {
 
         const prevState = this.getState() || {};
         this.model = this.getResearchViewModel(prevState);
+
+        const { breadcrumb, ...state } = prevState
+
+        this.model.breadcrumb.push({
+            label: `Study - Summary`,
+            tag: "create-research-study-summary",
+            state: state
+        });
+
 
         this.attachHandlerEditButton();
         this.attachHandlerAcceptButton();
@@ -68,21 +77,25 @@ export default class AddStudySummaryController extends WebcController {
 
     }
 
-    saveStudy(){
+    saveStudy() {
         this.StudiesService = new StudiesService();
         console.log("this is saving DSU");
         this.StudiesService.saveStudy(this.getAllStudyData(), (err, data) => {
             if (err) {
-                this.navigateToPageTag('confirmation-page', {
-                    confirmationMessage: "An error has been occurred!",
-                    redirectPage: "home"
+                this.navigateToPageTag('home', {
+                    message: {
+                        content: "An error has been occurred!",
+                        type: 'error'
+                    }
                 });
                 return console.log(err);
             }
             console.log(data.uid);
-            this.navigateToPageTag('confirmation-page', {
-                confirmationMessage: "The study has been created!",
-                redirectPage: "home"
+            this.navigateToPageTag('home', {
+                message: {
+                    content: `The study ${this.model.title.value} has been created!`,
+                    type: 'success'
+                }
             });
         });
     }
@@ -92,16 +105,20 @@ export default class AddStudySummaryController extends WebcController {
         console.log("this is updating DSU");
         this.StudiesService.updateStudy(this.getAllStudyData(), (err, data) => {
             if (err) {
-                this.navigateToPageTag('confirmation-page', {
-                    confirmationMessage: "An error has been occurred!",
-                    redirectPage: "home"
+                this.navigateToPageTag('home', {
+                    message: {
+                        content: "An error has been occurred!",
+                        type: 'error'
+                    }
                 });
                 return console.log(err);
             }
             console.log(data.uid);
-            this.navigateToPageTag('confirmation-page', {
-                confirmationMessage: "The study has been updated!",
-                redirectPage: "home"
+            this.navigateToPageTag('home', {
+                message: {
+                    content: `The study ${this.model.title.value} has been created!`,
+                    type: 'success'
+                }
             });
         });
     }
@@ -136,7 +153,8 @@ export default class AddStudySummaryController extends WebcController {
             others: this.model.others.value,
             data: this.model.data.value,
             header1: this.model.header1,
-            uid: this.model.uid
+            uid: this.model.uid,
+            breadcrumb: this.model.breadcrumb.toObject()
         };
     }
 
@@ -208,18 +226,18 @@ export default class AddStudySummaryController extends WebcController {
                     label: "Males",
                     value: 'males'
                 },
-                    {
-                        label: "Females",
-                        value: 'females'
-                    },
-                    {
-                        label: "Males & Females",
-                        value: 'both'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
-                    }
+                {
+                    label: "Females",
+                    value: 'females'
+                },
+                {
+                    label: "Males & Females",
+                    value: 'both'
+                },
+                {
+                    label: "N/A",
+                    value: 'n/a'
+                }
                 ],
                 value: prevState.sex || ""
             },
@@ -230,33 +248,34 @@ export default class AddStudySummaryController extends WebcController {
                     label: "Heart Disease",
                     value: 'Heart Disease'
                 },
-                    {
-                        label: "Respiratory Disease",
-                        value: 'Respiratory Disease'
-                    },
-                    {
-                        label: "T2D",
-                        value: 'T2D'
-                    },
-                    {
-                        label: "Chikungunya virus disease",
-                        value: 'Chikungunya virus disease'
-                    },
-                    {
-                        label: "Cholera",
-                        value: 'Cholera'
-                    },
-                    {
-                        label: "COVID-19",
-                        value: 'COVID-19'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
-                    }
+                {
+                    label: "Respiratory Disease",
+                    value: 'Respiratory Disease'
+                },
+                {
+                    label: "T2D",
+                    value: 'T2D'
+                },
+                {
+                    label: "Chikungunya virus disease",
+                    value: 'Chikungunya virus disease'
+                },
+                {
+                    label: "Cholera",
+                    value: 'Cholera'
+                },
+                {
+                    label: "COVID-19",
+                    value: 'COVID-19'
+                },
+                {
+                    label: "N/A",
+                    value: 'n/a'
+                }
                 ],
                 value: prevState.pathologies || ""
             },
+            breadcrumb: prevState.breadcrumb,
             others: {
                 name: 'others',
                 id: 'others',
@@ -271,22 +290,22 @@ export default class AddStudySummaryController extends WebcController {
                     label: "ECG",
                     value: 'ECG'
                 },
-                    {
-                        label: "Respiration",
-                        value: 'respiration'
-                    },
-                    {
-                        label: "SpO2",
-                        value: 'spo2'
-                    },
-                    {
-                        label: "Temperature",
-                        value: 'temperature'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
-                    },
+                {
+                    label: "Respiration",
+                    value: 'respiration'
+                },
+                {
+                    label: "SpO2",
+                    value: 'spo2'
+                },
+                {
+                    label: "Temperature",
+                    value: 'temperature'
+                },
+                {
+                    label: "N/A",
+                    value: 'n/a'
+                },
                 ],
                 value: prevState.data || ""
             }

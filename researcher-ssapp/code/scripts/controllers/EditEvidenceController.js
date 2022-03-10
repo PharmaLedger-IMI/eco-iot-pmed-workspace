@@ -9,7 +9,28 @@ export default class EditEvidenceController extends WebcController {
         const prevState = this.getState() || {};
         this.model.evidence_uid = prevState.evidenceID;
         this.model.study_id = prevState.studyID;
+
+        this.model.breadcrumb = prevState.breadcrumb;
+
+        if (this.model.status === "edit"){
+            this.model.inEditMode = true;
+            this.model.header = "Edit Evidence";
+        }
+        else{
+            this.model.inEditMode = false;
+            this.model.header = "View Evidence";
+        }
+
         this.model.header = "Edit Evidence";
+
+
+        const {breadcrumb, ...state} = prevState
+    
+        this.model.breadcrumb.push({
+            label:`${this.model.header}`,
+            tag:"evidence-list",
+            state: state
+        });
 
         this.EvidenceService = new EvidenceService();
         this.EvidenceService.getEvidence(this.model.evidence_uid, (err, evidence) => {
@@ -25,7 +46,7 @@ export default class EditEvidenceController extends WebcController {
 
     _attachHandlerBackMenu() {
         this.onTagClick('go:back', (event) => {
-            this.navigateToPageTag('evidence-list', this.model.study_id);
+            this.navigateToPageTag('evidence-list', {uid: this.model.study_id, breadcrumb: this.model.breadcrumb.toObject()});
         });
     }
 

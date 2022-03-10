@@ -1,8 +1,11 @@
 <webc-container controller="EvidenceListController">
     <div class="container main-container">
         <div class="container flex-container">
+            <breadcrumb-navigator></breadcrumb-navigator>
             <h5 class="generic-title">{{@studyTitle}}: Evidence List</h5>
+            <webc-template template="alert" data-view-model="@message"></webc-template>
         </div>
+
 
         <div class="container justify-content-start">
 
@@ -35,10 +38,10 @@
                         </div>
 
                     </webc-datatable>
-<!--                    <section class="controls button-group-wrapper">-->
-<!--                        <button data-tag="prev-page">‹ Previous page</button>-->
-<!--                        <button data-tag="next-page">Next page ›</button>-->
-<!--                    </section>-->
+                    <!--                    <section class="controls button-group-wrapper">-->
+                    <!--                        <button data-tag="prev-page">‹ Previous page</button>-->
+                    <!--                        <button data-tag="next-page">Next page ›</button>-->
+                    <!--                    </section>-->
                 </div>
 
             </div>

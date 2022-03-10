@@ -4,6 +4,17 @@ const { WebcController } = WebCardinal.controllers;
 class BreadcrumbNavigatorController extends WebcController {
     constructor(...props) {
         super(...props);
+        
+        let breadCrumbs = this.model.toObject();
+
+        for (let i = 0; i < breadCrumbs.length-1; i++) {
+            for (let k = i+1; k < breadCrumbs.length; k++) {
+                if (breadCrumbs[i].tag === breadCrumbs[k].tag) {
+                    breadCrumbs[i].state = breadCrumbs[k].state;
+                    this.model.splice(i+1,breadCrumbs.length);
+                }
+            }
+        }
 
         this.model.forEach((segment, index)=>{
             segment.disabled = index === this.model.length-1;

@@ -51,13 +51,17 @@ export default class HomeController extends WebcController {
 
         this.model = this.getInitialModel();
 
+        const prevState = this.getState() || {};
+        const { message } = prevState;
+        this.model.message = message;
+
         this.initHandlers();
         this.initServices();
     }
 
     initHandlers() {
         this.onTagClick('new:study', () => {
-            this.navigateToPageTag('create-research-study');
+            this.navigateToPageTag('create-research-study', { breadcrumb: this.model.breadcrumb.toObject(), actionType: 'Add' });
         });
 
         this.onTagClick('change-status',(nextStatus)=>{
@@ -146,18 +150,27 @@ export default class HomeController extends WebcController {
                     pathologies: chosenStudy.pathologies,
                     others: chosenStudy.others,
                     data: chosenStudy.data,
-                    uid: chosenStudy.uid
+                    uid: chosenStudy.uid,
+                    breadcrumb:this.model.breadcrumb.toObject(),
+                    actionType: 'Edit'
                 }
                 const editStudy = {...viewData, ...{header1: "Edit Study"}}
                 this.navigateToPageTag('create-research-study', editStudy);
             });
             this.onTagClick("feedback-list", (model) => {
                 console.log('this is feedback Page!');
-                this.navigateToPageTag('feedback-list', model);
+                model.breadcrumb = this.model.breadcrumb.toObject();
+                console.log(model);
+                this.navigateToPageTag('feedback-list', model );
             });
             this.onTagClick("evidence", (model) => {
                 let chosenStudy = studies.find(study => study.uid === model.uid);
-                this.navigateToPageTag('evidence-list', chosenStudy.uid);
+                let studyState = { 
+                    uid: chosenStudy.uid,
+                    title: chosenStudy.title,
+                    breadcrumb: this.model.breadcrumb.toObject(),
+                }
+                this.navigateToPageTag('evidence-list', studyState);
             });
             this.onTagClick("data", (model) => {
                 //const { participants } = model;
@@ -165,7 +178,7 @@ export default class HomeController extends WebcController {
             });
             this.onTagClick("prev-page", () => studiesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => studiesDataSource.goToNextPage());
-            this.sendEchoMessageToIotAdaptor();
+            // this.sendEchoMessageToIotAdaptor();
         })
 
         this.model.did = await DidService.getDidServiceInstance().getDID();
