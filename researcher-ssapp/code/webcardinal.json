@@ -71,10 +71,16 @@
 			"tag": "evidence-list"
 		},
 		{
-			"name": "View and Edit Evidence",
-			"path": "/view-edit-evidence",
-			"src": "view-edit-evidence.html",
-			"tag": "view-edit-evidence"
+			"name": "Edit Evidence",
+			"path": "/edit-evidence",
+			"src": "edit-evidence.html",
+			"tag": "edit-evidence"
+		},
+		{
+			"name": "View Evidence",
+			"path": "/view-evidence",
+			"src": "view-evidence.html",
+			"tag": "view-evidence"
 		},
 		{
 			"name": "View dynamic Permission",
