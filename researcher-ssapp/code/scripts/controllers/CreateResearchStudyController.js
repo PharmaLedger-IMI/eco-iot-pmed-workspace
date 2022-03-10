@@ -7,7 +7,15 @@ export default class CreateResearchStudyController extends WebcController {
         super(...props);
 
         const prevState = this.getState() || {};
+
+        const {breadcrumb, ...state} = prevState
         this.model = this.getBasicViewModel(prevState);
+        this.model.breadcrumb.push({
+            label:`${this.model.actionType} ${this.model.title.value}`,
+            tag:"create-research-study",
+            state: state
+        });
+
         this._attachHandlerResearcherBackMenu();
         this._attachHandlerResearchStudySummary();
     }
@@ -38,6 +46,7 @@ export default class CreateResearchStudyController extends WebcController {
             data: this.model.data.value,
             header1: this.model.header1,
             uid: this.model.uid,
+            breadcrumb: this.model.breadcrumb.toObject()
         };
     }
 
@@ -129,70 +138,72 @@ export default class CreateResearchStudyController extends WebcController {
                 label: "Previous Pathologies",
                 required: true,
                 options: [{
-                        label: "Heart Disease",
-                        value: 'Heart Disease'
-                    },
-                    {
-                        label: "Respiratory Disease",
-                        value: 'Respiratory Disease'
-                    },
-                    {
-                        label: "T2D",
-                        value: 'T2D'
-                    },
-                    {
-                        label: "Chikungunya virus disease",
-                        value: 'Chikungunya virus disease'
-                    },
-                    {
-                        label: "Cholera",
-                        value: 'Cholera'
-                    },
-                    {
-                        label: "COVID-19",
-                        value: 'COVID-19'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
-                    }
-                ],
-                value: prevState.pathologies || ""
+                    label: "Heart Disease",
+                    value: 'Heart Disease'
+                },
+                {
+                    label: "Respiratory Disease",
+                    value: 'Respiratory Disease'
+                },
+                {
+                    label: "T2D",
+                    value: 'T2D'
+                },
+                {
+                    label: "Chikungunya virus disease",
+                    value: 'Chikungunya virus disease'
+                },
+                {
+                    label: "Cholera",
+                    value: 'Cholera'
+                },
+                {
+                    label: "COVID-19",
+                    value: 'COVID-19'
+                },
+                {
+                    label: "N/A",
+                    value: 'n/a'
+                }
+            ],
+            value: prevState.pathologies || ""
+        },
+        breadcrumb: prevState.breadcrumb,
+        actionType: prevState.actionType,
+        others: {
+            name: 'others',
+            id: 'others',
+            label: "Others (Separate each criteria using ;)",
+            placeholder: 'others',
+            value: prevState.others || ""
+        },
+        data: {
+            label: "Please indicate the data that you need to obtain:",
+            required: true,
+            options: [{
+                label: "ECG",
+                value: 'ECG'
             },
-            others: {
-                name: 'others',
-                id: 'others',
-                label: "Others (Separate each criteria using ;)",
-                placeholder: 'others',
-                value: prevState.others || ""
+            {
+                label: "Respiration",
+                value: 'respiration'
             },
-            data: {
-                label: "Please indicate the data that you need to obtain:",
-                required: true,
-                options: [{
-                        label: "ECG",
-                        value: 'ECG'
-                    },
-                    {
-                        label: "Respiration",
-                        value: 'respiration'
-                    },
-                    {
-                        label: "SpO2",
-                        value: 'spo2'
-                    },
-                    {
-                        label: "Temperature",
-                        value: 'temperature'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
-                    },
-                ],
-                value: prevState.data || ""
-            }
-        }
+            {
+                label: "SpO2",
+                value: 'spo2'
+            },
+            {
+                label: "Temperature",
+                value: 'temperature'
+            },
+            {
+                label: "N/A",
+                value: 'n/a'
+            },
+        ],
+        value: prevState.data || ""
+    }
+}
     }
 
 }

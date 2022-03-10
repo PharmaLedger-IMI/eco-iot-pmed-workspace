@@ -15,10 +15,10 @@ class EvidenceDataSource extends DataSource {
 
     async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
         console.log({startOffset, dataLengthForCurrentPage});
-        if (this.model.evidences.length <= dataLengthForCurrentPage ){
+        if (this.model.evidences.length <= dataLengthForCurrentPage) {
             this.setPageSize(this.model.evidences.length);
         }
-        else{
+        else {
             this.setPageSize(this.model.elements);
         }
         let slicedData = [];
@@ -35,12 +35,24 @@ class EvidenceDataSource extends DataSource {
 }
 
 
-export default class EvidenceListController extends WebcController  {
+export default class EvidenceListController extends WebcController {
     constructor(...props) {
         super(...props);
 
-        this.model = {}
-        this.model.studyID = this.getState() || {};
+        this.model = {};
+        this.model = this.getInitialModel();
+
+        const prevState = this.getState() || {};
+        const {breadcrumb, message, ...state} = prevState;
+
+        this.model = prevState;
+        this.model.breadcrumb.push({
+            label:this.model.title + " Evidence",
+            tag:"evidence-list",
+            state: state
+        });
+
+        this.model.studyID = state.uid;
 
         this.StudiesService = new StudiesService();
         this.StudiesService.getStudy(this.model.studyID, (err, study_info) => {
@@ -72,7 +84,8 @@ export default class EvidenceListController extends WebcController  {
                 let status = {
                     studyID: model.studyID,
                     evidenceID: model.uid,
-                    status: "view"
+                    status: "view",
+                    breadcrumb: this.model.breadcrumb.toObject(),
                 }
                 this.navigateToPageTag('view-edit-evidence' ,status);
             });
@@ -80,7 +93,8 @@ export default class EvidenceListController extends WebcController  {
                 let status = {
                     studyID: model.studyID,
                     evidenceID: model.uid,
-                    status: "edit"
+                    status: "edit",
+                    breadcrumb: this.model.breadcrumb.toObject(),
                 }
                 this.navigateToPageTag('view-edit-evidence' ,status);
             });
@@ -90,23 +104,33 @@ export default class EvidenceListController extends WebcController  {
 
         this._attachHandlerAddEvidence();
         this._attachHandlerGoBack();
-       
+
     }
 
     _attachHandlerAddEvidence(){
         this.onTagClick('new:evidence', () => {
-            this.navigateToPageTag('add-evidence', this.model.studyID);
+            let objToSend = {
+                uid: this.model.studyID,
+                breadcrumb: this.model.breadcrumb.toObject(),
+            }
+            this.navigateToPageTag('add-evidence', objToSend);
         });
     }
 
-    _attachHandlerGoBack(){
+    _attachHandlerGoBack() {
         this.onTagClick('go:back', () => {
             this.navigateToPageTag('home');
         });
     }
 
-   
-
-   
+    getInitialModel() {
+        return {
+            breadcrumb : [{
+                label:"Dashboard",
+                tag:"home",
+                state:{}
+            }]
+        };
+    }
 
 }

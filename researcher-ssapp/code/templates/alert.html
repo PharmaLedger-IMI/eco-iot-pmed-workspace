@@ -1,0 +1,15 @@
+<webc-switch condition="@type">
+    <div slot="success" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ @content }}</strong>
+        <button type="button" class="close" data-tag="close-alert" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div slot="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ @content }}</strong>
+        <button type="button" class="close" data-tag="close-alert" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</webc-switch>

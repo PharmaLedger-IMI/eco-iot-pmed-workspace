@@ -8,6 +8,9 @@ export default class CreateResearchStudyInclusionCriteriaController extends Webc
 
         const prevState = this.getState() || {};
         this.model = this.getResearchViewModel(prevState);
+
+        const { breadcrumb } = prevState;
+
         this._attachHandlerResearcherBackMenu();
         this._attachHandlerResearchStudySummary();
 
@@ -39,7 +42,8 @@ export default class CreateResearchStudyInclusionCriteriaController extends Webc
             others: this.model.others.value,
             data: this.model.data.value,
             header1: this.model.header1,
-            uid: this.model.uid
+            uid: this.model.uid,
+            breadcrumb: this.model.breadcrumb.toObject()
         };
     }
 
@@ -161,6 +165,7 @@ export default class CreateResearchStudyInclusionCriteriaController extends Webc
                 ],
                 value: prevState.pathologies || ""
             },
+            breadcrumb: prevState.breadcrumb,
             others: {
                 name: 'others',
                 id: 'others',
