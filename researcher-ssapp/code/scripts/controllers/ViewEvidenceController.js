@@ -2,23 +2,14 @@ import EvidenceService from "../services/EvidenceService.js";
 const {WebcController} = WebCardinal.controllers;
 
 
-export default class ViewEditEvidenceController extends WebcController {
+export default class ViewEvidenceController extends WebcController {
     constructor(...props) {
         super(...props);
 
         const prevState = this.getState() || {};
         this.model.evidence_uid = prevState.evidenceID;
         this.model.study_id = prevState.studyID;
-        this.model.status = prevState.status;
-
-        if (this.model.status === "edit"){
-            this.model.inEditMode = true;
-            this.model.header = "Edit Evidence";
-        }
-        else{
-            this.model.inEditMode = false;
-            this.model.header = "View Evidence";
-        }
+        this.model.header = "View Evidence";
 
         this.EvidenceService = new EvidenceService();
         this.EvidenceService.getEvidence(this.model.evidence_uid, (err, evidence) => {
@@ -29,50 +20,11 @@ export default class ViewEditEvidenceController extends WebcController {
         });
 
         this._attachHandlerBackMenu();
-        this._attachHandlerEditEvidence();
     }
 
     _attachHandlerBackMenu() {
         this.onTagClick('go:back', (event) => {
             this.navigateToPageTag('evidence-list', this.model.study_id);
-        });
-    }
-
-    prepareEvidenceDSUData(){
-        let evidence = {
-            title: this.model.title.value,
-            subtitle: this.model.subtitle.value,
-            version: this.model.version.value,
-            status: this.model.status.value,
-            topics: this.model.topics.value,
-            exposureBackground: this.model.exposureBackground.value,
-            description: this.model.description.value,
-            studyID: this.model.study_id,
-            uid: this.model.evidence_uid
-        }
-        console.log(evidence)
-        return evidence;
-    }
-
-    updateEvidence(){
-        this.EvidenceService.updateEvidence(this.prepareEvidenceDSUData(), (err, data) => {
-            if (err) {
-                this.navigateToPageTag('confirmation-page', {
-                    confirmationMessage: "An error has been occurred!",
-                    redirectPage: "home"
-                });
-                return console.log(err);
-            }
-            this.navigateToPageTag('confirmation-page', {
-                confirmationMessage: "The evidence has been updated!",
-                redirectPage: "home"
-            });
-        })
-    }
-
-    _attachHandlerEditEvidence() {
-        this.onTagClick('edit:evidence', (event) => {
-            this.updateEvidence();
         });
     }
 
@@ -96,7 +48,6 @@ export default class ViewEditEvidenceController extends WebcController {
             version: {
                 name: 'version',
                 id: 'Version',
-                disabled: !this.model.inEditMode,
                 label: "Version",
                 placeholder: 'Version',
                 value: evidence.version || ""
@@ -172,7 +123,6 @@ export default class ViewEditEvidenceController extends WebcController {
             description: {
                 name: 'description',
                 label: "Description",
-                disabled: !this.model.inEditMode,
                 placeholder: 'Provide description of the evidence',
                 required: true,
                 value: evidence.description || ""
