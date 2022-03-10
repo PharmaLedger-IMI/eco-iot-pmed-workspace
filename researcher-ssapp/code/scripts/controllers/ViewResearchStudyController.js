@@ -52,6 +52,7 @@ export default class ViewResearchStudyController extends WebcController {
         this.containerElement = props[0];
         const prevState = this.getState() || {};
         const {breadcrumb, ...state} = prevState
+    
         this.model = prevState;
         this.model.breadcrumb.push({
             label:this.model.title,
