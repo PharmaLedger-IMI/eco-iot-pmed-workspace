@@ -16,7 +16,7 @@ export default class ViewEvidenceController extends WebcController {
 
         this.model.breadcrumb.push({
             label:`${this.model.header}`,
-            tag:"",
+            tag:"view-evidence",
             state: state
         });
 

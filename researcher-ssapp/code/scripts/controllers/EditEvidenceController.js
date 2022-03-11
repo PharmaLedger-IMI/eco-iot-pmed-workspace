@@ -12,11 +12,11 @@ export default class EditEvidenceController extends WebcController {
         this.model.breadcrumb = prevState.breadcrumb;
         this.model.header = "Edit Evidence";
 
-        const {breadcrumb, ...state} = prevState
+        const {breadcrumb, ...state} = prevState;
 
         this.model.breadcrumb.push({
             label:`${this.model.header}`,
-            tag:"",
+            tag:"edit-evidence",
             state: state
         });
 
