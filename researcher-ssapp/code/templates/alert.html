@@ -2,14 +2,14 @@
     <webc-switch condition="@message.type">
         <div slot="success" class="alert alert-success alert-dismissible fade show" role="alert">
             <p class="mb-0">{{ @message.content }}</p>
-            <button type="button" data-tag="close" class="close" data-tag="close-alert" data-dismiss="alert" aria-label="Close">
+            <button type="button" data-tag="close" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     
         <div slot="error" class="alert alert-danger alert-dismissible fade show" role="alert">
             <p class="mb-0">{{ @message.content }}</p>
-            <button type="button" data-tag="close" class="close" data-tag="close-alert" data-dismiss="alert" aria-label="Close">
+            <button type="button" data-tag="close" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
