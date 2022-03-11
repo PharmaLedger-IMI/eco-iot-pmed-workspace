@@ -10,6 +10,7 @@ export default class ViewEvidenceController extends WebcController {
         this.model.evidence_uid = prevState.evidenceID;
         this.model.study_id = prevState.studyID;
         this.model.header = "View Evidence";
+
         this.model.breadcrumb = prevState.breadcrumb;
         const {breadcrumb, ...state} = prevState;
 
@@ -32,6 +33,7 @@ export default class ViewEvidenceController extends WebcController {
 
     _attachHandlerBackMenu() {
         this.onTagClick('go:back', (event) => {
+
             let evidenceState = {
                 uid: this.model.study_id,
                 breadcrumb: this.model.breadcrumb.toObject(),
