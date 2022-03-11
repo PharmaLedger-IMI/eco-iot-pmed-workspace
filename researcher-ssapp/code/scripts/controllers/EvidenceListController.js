@@ -80,20 +80,20 @@ export default class EvidenceListController extends WebcController {
             const { evidenceDataSource } = this.model;
 
             this.onTagClick("view-evidence", (model) => {
-                let state = {
+                let evidenceState = {
                     studyID: model.studyID,
                     evidenceID: model.uid,
                     breadcrumb: this.model.breadcrumb.toObject()
                 }
-                this.navigateToPageTag('view-evidence', state);
+                this.navigateToPageTag('view-evidence', evidenceState);
             });
             this.onTagClick("edit-evidence", (model) => {
-                let state = {
+                let evidenceState = {
                     studyID: model.studyID,
                     evidenceID: model.uid,
                     breadcrumb: this.model.breadcrumb.toObject()
                 }
-                this.navigateToPageTag('edit-evidence' ,state);
+                this.navigateToPageTag('edit-evidence' ,evidenceState);
             });
             this.onTagClick("prev-page", () => evidenceDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => evidenceDataSource.goToNextPage());
