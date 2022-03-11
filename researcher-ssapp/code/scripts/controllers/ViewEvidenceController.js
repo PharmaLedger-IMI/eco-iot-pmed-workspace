@@ -10,7 +10,15 @@ export default class ViewEvidenceController extends WebcController {
         this.model.evidence_uid = prevState.evidenceID;
         this.model.study_id = prevState.studyID;
         this.model.header = "View Evidence";
-        console.log(prevState.breadcrumb);
+
+        this.model.breadcrumb = prevState.breadcrumb;
+        const {breadcrumb, ...state} = prevState;
+
+        this.model.breadcrumb.push({
+            label:`${this.model.header}`,
+            tag:"",
+            state: state
+        });
 
         this.EvidenceService = new EvidenceService();
         this.EvidenceService.getEvidence(this.model.evidence_uid, (err, evidence) => {
@@ -25,10 +33,12 @@ export default class ViewEvidenceController extends WebcController {
 
     _attachHandlerBackMenu() {
         this.onTagClick('go:back', (event) => {
-            let state = {
-                uid: this.model.study_id
+
+            let evidenceState = {
+                uid: this.model.study_id,
+                breadcrumb: this.model.breadcrumb.toObject(),
             }
-            this.navigateToPageTag('evidence-list', state);
+            this.navigateToPageTag('evidence-list', evidenceState);
         });
     }
 

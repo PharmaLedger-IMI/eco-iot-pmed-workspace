@@ -12,6 +12,7 @@ class BreadcrumbNavigatorController extends WebcController {
                 if (breadCrumbs[i].tag === breadCrumbs[k].tag) {
                     breadCrumbs[i].state = breadCrumbs[k].state;
                     this.model.splice(i+1,breadCrumbs.length);
+                    break;
                 }
             }
         }

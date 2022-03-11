@@ -8,6 +8,11 @@ import DPermissionService from "../services/DPermissionService.js";
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const { DataSource } = WebCardinal.dataSources;
 
+const ACTIONTYPES = {
+    ADD: 'Add',
+    EDIT: 'Edit'
+}
+
 class StudiesDataSource extends DataSource {
     constructor(...props) {
         super(...props);
@@ -52,7 +57,7 @@ export default class HomeController extends WebcController {
         this.model = this.getInitialModel();
 
         const prevState = this.getState() || {};
-        const { message } = prevState;
+        const message = prevState;
         this.model.message = message;
 
         this.initHandlers();
@@ -61,7 +66,7 @@ export default class HomeController extends WebcController {
 
     initHandlers() {
         this.onTagClick('new:study', () => {
-            this.navigateToPageTag('create-research-study', { breadcrumb: this.model.breadcrumb.toObject(), actionType: 'Add' });
+            this.navigateToPageTag('create-research-study', { breadcrumb: this.model.breadcrumb.toObject(), actionType: ACTIONTYPES.ADD });
         });
 
         this.onTagClick('change-status',(nextStatus)=>{
@@ -152,7 +157,7 @@ export default class HomeController extends WebcController {
                     data: chosenStudy.data,
                     uid: chosenStudy.uid,
                     breadcrumb:this.model.breadcrumb.toObject(),
-                    actionType: 'Edit'
+                    actionType: ACTIONTYPES.EDIT
                 }
                 const editStudy = {...viewData, ...{header1: "Edit Study"}}
                 this.navigateToPageTag('create-research-study', editStudy);
