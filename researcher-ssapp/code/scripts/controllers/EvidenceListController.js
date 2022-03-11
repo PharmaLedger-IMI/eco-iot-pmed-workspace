@@ -46,11 +46,7 @@ export default class EvidenceListController extends WebcController {
         const {breadcrumb, message, ...state} = prevState;
 
         this.model = prevState;
-        this.model.breadcrumb.push({
-            label:this.model.title + " Evidence",
-            tag:"evidence-list",
-            state: state
-        });
+
 
         this.model.studyID = state.uid;
 
@@ -60,6 +56,12 @@ export default class EvidenceListController extends WebcController {
                 return console.log(err);
             }
             this.model.studyTitle = study_info.ResearchStudyTitle;
+
+            this.model.breadcrumb.push({
+                label:this.model.studyTitle + " Evidence",
+                tag:"evidence-list",
+                state: state
+            });
         });
 
         this.EvidenceService = new EvidenceService();

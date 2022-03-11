@@ -57,7 +57,7 @@ export default class AddEvidenceController extends WebcController {
                 uid: this.model.studyID,
                 breadcrumb: this.model.breadcrumb.toObject(),
                 message: {
-                    content: `The study ${this.model.title.value} evidence has been created!`,
+                    content: `The evidence ${this.model.title.value} has been created!`,
                      type: 'success'
                 }
             });
