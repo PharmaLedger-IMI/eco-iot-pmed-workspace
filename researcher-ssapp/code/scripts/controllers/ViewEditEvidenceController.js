@@ -1,7 +1,6 @@
 import EvidenceService from "../services/EvidenceService.js";
 const {WebcController} = WebCardinal.controllers;
 
-
 export default class ViewEditEvidenceController extends WebcController {
     constructor(...props) {
         super(...props);
@@ -22,10 +21,10 @@ export default class ViewEditEvidenceController extends WebcController {
         }
 
         const {breadcrumb, ...state} = prevState
-    
+
         this.model.breadcrumb.push({
             label:`${this.model.header}`,
-            tag:"evidence-list",
+            tag:"",
             state: state
         });
 
@@ -65,16 +64,19 @@ export default class ViewEditEvidenceController extends WebcController {
 
     updateEvidence(){
         this.EvidenceService.updateEvidence(this.prepareEvidenceDSUData(), (err, data) => {
+            let message = {};
+
             if (err) {
-                this.navigateToPageTag('confirmation-page', {
-                    confirmationMessage: "An error has been occurred!",
-                    redirectPage: "home"
-                });
-                return console.log(err);
+                message.content = "An error has been occurred!";
+                message.type = 'error';
+            } else {
+                message.content = `The evidence ${this.model.title.value} has been updated!`;
+                message.type = 'success'
             }
-            this.navigateToPageTag('confirmation-page', {
-                confirmationMessage: "The evidence has been updated!",
-                redirectPage: "home"
+            this.navigateToPageTag('evidence-list', { 
+                message: message,
+                uid: this.model.study_id, 
+                breadcrumb: this.model.breadcrumb.toObject() 
             });
         })
     }
@@ -117,18 +119,18 @@ export default class ViewEditEvidenceController extends WebcController {
                     label: "Draft",
                     value: 'draft'
                 },
-                    {
-                        label: "Active",
-                        value: 'active'
-                    },
-                    {
-                        label: "Retired",
-                        value: 'retired'
-                    },
-                    {
-                        label: "Unknown",
-                        value: 'unknown'
-                    }
+                {
+                    label: "Active",
+                    value: 'active'
+                },
+                {
+                    label: "Retired",
+                    value: 'retired'
+                },
+                {
+                    label: "Unknown",
+                    value: 'unknown'
+                }
                 ],
                 value: evidence.status || ""
             },
@@ -139,18 +141,18 @@ export default class ViewEditEvidenceController extends WebcController {
                     label: "Topic 1",
                     value: 'Topic 1'
                 },
-                    {
-                        label: "Topic 2",
-                        value: 'Topic 2'
-                    },
-                    {
-                        label: "Topic 3",
-                        value: 'Topic 3'
-                    },
-                    {
-                        label: "Topic 4",
-                        value: 'Topic 4'
-                    }
+                {
+                    label: "Topic 2",
+                    value: 'Topic 2'
+                },
+                {
+                    label: "Topic 3",
+                    value: 'Topic 3'
+                },
+                {
+                    label: "Topic 4",
+                    value: 'Topic 4'
+                }
                 ],
                 value: evidence.topics || ""
             },
@@ -163,18 +165,18 @@ export default class ViewEditEvidenceController extends WebcController {
                     label: "EP_1",
                     value: 'EP_1'
                 },
-                    {
-                        label: "EP_2",
-                        value: 'EP_2'
-                    },
-                    {
-                        label: "EP_3",
-                        value: 'EP_3'
-                    },
-                    {
-                        label: "EP_4",
-                        value: 'EP_4'
-                    },
+                {
+                    label: "EP_2",
+                    value: 'EP_2'
+                },
+                {
+                    label: "EP_3",
+                    value: 'EP_3'
+                },
+                {
+                    label: "EP_4",
+                    value: 'EP_4'
+                },
                 ],
                 value: evidence.exposureBackground || ""
             },

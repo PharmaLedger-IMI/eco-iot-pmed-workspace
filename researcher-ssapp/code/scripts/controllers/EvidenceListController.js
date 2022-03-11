@@ -40,14 +40,13 @@ export default class EvidenceListController extends WebcController {
         super(...props);
 
         this.model = {};
-        this.model = this.getInitialModel();
 
         const prevState = this.getState() || {};
         const {breadcrumb, message, ...state} = prevState;
 
         this.model = prevState;
         this.model.breadcrumb.push({
-            label:this.model.title + " Evidence",
+            label:this.model.title + " Evidence List",
             tag:"evidence-list",
             state: state
         });
@@ -109,11 +108,11 @@ export default class EvidenceListController extends WebcController {
 
     _attachHandlerAddEvidence(){
         this.onTagClick('new:evidence', () => {
-            let objToSend = {
+            let evidenceState = {
                 uid: this.model.studyID,
                 breadcrumb: this.model.breadcrumb.toObject(),
             }
-            this.navigateToPageTag('add-evidence', objToSend);
+            this.navigateToPageTag('add-evidence', evidenceState);
         });
     }
 
@@ -121,16 +120,6 @@ export default class EvidenceListController extends WebcController {
         this.onTagClick('go:back', () => {
             this.navigateToPageTag('home');
         });
-    }
-
-    getInitialModel() {
-        return {
-            breadcrumb : [{
-                label:"Dashboard",
-                tag:"home",
-                state:{}
-            }]
-        };
     }
 
 }

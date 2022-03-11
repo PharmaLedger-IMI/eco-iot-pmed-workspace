@@ -81,22 +81,16 @@ export default class AddStudySummaryController extends WebcController {
         this.StudiesService = new StudiesService();
         console.log("this is saving DSU");
         this.StudiesService.saveStudy(this.getAllStudyData(), (err, data) => {
+            let message = {};
+
             if (err) {
-                this.navigateToPageTag('home', {
-                    message: {
-                        content: "An error has been occurred!",
-                        type: 'error'
-                    }
-                });
-                return console.log(err);
+                message.content = "An error has been occurred!";
+                message.type = 'error';
+            } else {
+                message.content = `The study ${this.model.title.value} has been created!`;
+                message.type = 'success'
             }
-            console.log(data.uid);
-            this.navigateToPageTag('home', {
-                message: {
-                    content: `The study ${this.model.title.value} has been created!`,
-                    type: 'success'
-                }
-            });
+            this.navigateToPageTag('home', message);
         });
     }
 
@@ -104,22 +98,16 @@ export default class AddStudySummaryController extends WebcController {
         this.StudiesService = new StudiesService();
         console.log("this is updating DSU");
         this.StudiesService.updateStudy(this.getAllStudyData(), (err, data) => {
+            let message = {};
+
             if (err) {
-                this.navigateToPageTag('home', {
-                    message: {
-                        content: "An error has been occurred!",
-                        type: 'error'
-                    }
-                });
-                return console.log(err);
+                message.content = "An error has been occurred!";
+                message.type = 'error';
+            } else {
+                message.content = `The study ${this.model.title.value} has been created!`;
+                message.type = 'success'
             }
-            console.log(data.uid);
-            this.navigateToPageTag('home', {
-                message: {
-                    content: `The study ${this.model.title.value} has been created!`,
-                    type: 'success'
-                }
-            });
+            this.navigateToPageTag('home', message);
         });
     }
 
