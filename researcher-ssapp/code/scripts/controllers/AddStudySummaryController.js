@@ -78,6 +78,7 @@ export default class AddStudySummaryController extends WebcController {
     }
 
     saveStudy() {
+        window.WebCardinal.loader.hidden = false;
         this.StudiesService = new StudiesService();
         console.log("this is saving DSU");
         this.StudiesService.saveStudy(this.getAllStudyData(), (err, data) => {
@@ -90,11 +91,13 @@ export default class AddStudySummaryController extends WebcController {
                 message.content = `The study ${this.model.title.value} has been created!`;
                 message.type = 'success'
             }
+            window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('home', message);
         });
     }
 
     updateStudy(){
+        window.WebCardinal.loader.hidden = false;
         this.StudiesService = new StudiesService();
         console.log("this is updating DSU");
         this.StudiesService.updateStudy(this.getAllStudyData(), (err, data) => {
@@ -107,6 +110,7 @@ export default class AddStudySummaryController extends WebcController {
                 message.content = `The study ${this.model.title.value} has been created!`;
                 message.type = 'success'
             }
+            window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('home', message);
         });
     }

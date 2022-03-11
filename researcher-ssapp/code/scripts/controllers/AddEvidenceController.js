@@ -42,26 +42,32 @@ export default class AddEvidenceController extends WebcController {
     }
 
     saveEvidence() {
+        window.WebCardinal.loader.hidden = false;
         this.EvidenceService = new EvidenceService();
         this.EvidenceService.saveEvidence(this.prepareEvidenceDSUData(), (err, data) => {
+            let evidenceState = {};
+
             if (err) {
-                this.navigateToPageTag('evidence-list', {
+                evidenceState = {
+                    uid: this.model.studyID,
+                    breadcrumb: this.model.breadcrumb.toObject(),
                     message: {
                         content: `An error has been occurred!`,
-                         type: 'error'
+                        type: 'error'
                     }
-                });
-                return console.log(err);
-            }
-            this.navigateToPageTag('evidence-list', {
-                uid: this.model.studyID,
-                breadcrumb: this.model.breadcrumb.toObject(),
-                message: {
-                    content: `The study ${this.model.title.value} evidence has been created!`,
-                     type: 'success'
                 }
-            });
-            console.log(this.model.title);
+            } else {
+                evidenceState = {
+                    uid: this.model.studyID,
+                    breadcrumb: this.model.breadcrumb.toObject(),
+                    message: {
+                        content: `The study ${this.model.title.value} evidence has been created!`,
+                        type: 'success'
+                    }
+                }
+            }
+            window.WebCardinal.loader.hidden = true;
+            this.navigateToPageTag('evidence-list', evidenceState);
         })
     }
 

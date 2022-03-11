@@ -1,14 +1,17 @@
 const {WebcController} = WebCardinal.controllers;
 
-export default class AlertController extends WebcController  {
+export default class AlertController extends WebcController {
     constructor(...props) {
         super(...props);
-        this.dismissAlert();
-    }
 
-    dismissAlert() {
+        const element = props[0];
         this.onTagClick('close', () => {
-            this.model.message.type = '';
-        })
+            const template = element.parentElement;
+            if(template) {
+                template.remove();
+            } else {
+                element.remove();
+            }
+        });
     }
 }

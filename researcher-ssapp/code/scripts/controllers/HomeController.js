@@ -57,7 +57,7 @@ export default class HomeController extends WebcController {
         this.model = this.getInitialModel();
 
         const prevState = this.getState() || {};
-        const { message } = prevState;
+        const message = prevState;
         this.model.message = message;
 
         this.initHandlers();
