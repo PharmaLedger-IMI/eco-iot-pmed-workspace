@@ -1,17 +1,54 @@
 <webc-container controller="FeedbackListController">
     <div class="container main-container">
         <div class="container flex-container">
-            <img alt="PharmaLedger Blockchain Enabled Healthcare" src="./assets/images/pharmaledger-logo.jpg"
-                 class="img-m"/>
             <breadcrumb-navigator></breadcrumb-navigator>
-            <h5 class="generic-title">Study {{@title}} Feedbacks sent List</h5>
+            <h5 class="generic-title">Study {{@studyTitle}}: Feedback sent List</h5>
+            
+            <webc-template template="alert" data-view-model="@"></webc-template>
         </div>
+
 
         <div class="container justify-content-start">
+
+            <div data-if="@hasFeedback">
+
+                <webc-spinner slot="loading"></webc-spinner>
+                <div slot="false" class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">No feedback yet!</h4>
+                    <p>Add your first feedback!</p>
+                </div>
+                <div class="common-datatable feedback-datatable dt-3-col" slot="true">
+                    <webc-datatable datasource="@feedbackDataSource">
+
+                        <!--<div slot="header" data-sortable>Feedback ID</div>-->
+                        <div slot="header" data-sortable>Feedback Subject</div>
+                        <div slot="header" data-sortable>Date</div> 
+                        <div slot="header">Options</div>
+
+                        <!--<div class="cell" style="text-overflow:ellipsis;width:auto;overflow:hidden;">{{ @uid }}</div>-->
+                        <div class="cell">{{ @feedback_subject }}</div>
+                        <div class="cell">{{ @date }}</div>
+                        <div class="cell">
+                            <label data-tag="view-feedback" class="link option">View</label>
+                           <!-- <label> | </label>
+                            <label data-tag="edit-feedback" class="link option">Edit</label>-->
+                        </div>
+
+                    </webc-datatable>
+                    <!--                    <section class="controls button-group-wrapper">-->
+                    <!--                        <button data-tag="prev-page">‹ Previous page</button>-->
+                    <!--                        <button data-tag="next-page">Next page ›</button>-->
+                    <!--                    </section>-->
+                </div>
+
+            </div>
         </div>
 
+
         <footer class="button-group-wrapper">
-            <button data-tag="back">Back</button>
-            <button data-tag="create-feedback">Send New Feedback</button>
+            <button data-tag="go:back">Back</button>
+            <button data-tag="new:feedback">Send New Feedback</button>
         </footer>
+
+    </div>
 </webc-container>

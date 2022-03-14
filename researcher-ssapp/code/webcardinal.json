@@ -167,10 +167,22 @@
 			"tag": "feedback-list"
 		},
 		{
+			"name": "Feedback-thk",
+			"path": "/feedback-thk",
+			"src": "feedback-thk.html",
+			"tag": "feedback-thk"
+		},
+		{
 			"name": "create-feedback",
 			"path": "/create-feedback",
 			"src": "create-feedback.html",
 			"tag": "create-feedback"
+		},
+		{
+			"name": "view-feedback",
+			"path": "/view-feedback",
+			"src": "view-feedback.html",
+			"tag": "view-feedback"
 		}
 	],
 	"pagesFallback": {
