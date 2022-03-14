@@ -27,10 +27,12 @@ const mock = {
         return Array.from(Array(count)).reduce((accumulator, _, index) => {
             const id = index + skipCount + 1;
 
+            let today = new Date();
+
             const date = new Date(
-                Math.floor(Math.random() * 2 + 2021),
-                Math.floor(Math.random() * 12 + 1),
-                Math.floor(Math.random() * 28)
+                today.getFullYear(),
+                Math.floor(today.getMonth()),
+                Math.floor(Math.random() * today.getDate())+1
             );
             const y = new Intl.DateTimeFormat("en", { year: "numeric" }).format(date);
             const m = new Intl.DateTimeFormat("en", { month: "short" }).format(date);
