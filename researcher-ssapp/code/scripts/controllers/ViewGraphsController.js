@@ -16,7 +16,7 @@ export default class ViewGraphsController extends WebcController {
             state: state
         });
 
-        this.onTagClick("evidence:back", () => {
+        this.onTagClick("graphs:back", () => {
             let consentsState = {
                 studyId: state.studyId,
                 breadcrumb: this.model.breadcrumb.toObject()
