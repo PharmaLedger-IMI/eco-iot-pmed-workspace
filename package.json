@@ -16,7 +16,7 @@
     "update": "node ./node_modules/octopus/scripts/update",
     "bind-app": "node ./node_modules/octopus/scripts/bind --type=app",
     "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
-    "server": "npm run apihub & sleep 10 && npm run iot-adapter",
+    "server": "npm run apihub & sleep 10 && npm run iot-adaptor",
     "apihub": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd privatesky && npm run start\"",
     "iot-adaptor": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd iot-adaptor && npm run start\"",
     "switch-to-release": "npm run remove privatesky && npm run add privatesky http://github.com/privatesky/psk-release.git 0",
@@ -46,6 +46,7 @@
   },
   "homepage": "https://github.com/PharmaLedger-IMI/epi-workspace#readme",
   "dependencies": {
+    "chart.js": "^3.7.1",
     "octopus": "git+http://github.com/privatesky/octopus.git"
   }
 }

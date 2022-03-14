@@ -155,6 +155,12 @@
 			"tag": "dynamic-consents"
 		},
 		{
+			"name":"Dynamic Consents graphs",
+			"path": "view-dynamic-consents-graphs",
+			"src": "dynamic-consents/graphs.html",
+			"tag": "dynamic-consents-graphs"
+		},
+		{
 			"name": "Feedback",
 			"path": "/feedback-list",
 			"src": "feedback-list.html",

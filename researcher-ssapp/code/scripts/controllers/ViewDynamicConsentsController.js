@@ -49,5 +49,12 @@ export default class ViewDynamicConsentsController extends WebcController {
 
         this.onTagClick("prev-page", () => datasource.goToPreviousPage());
         this.onTagClick("next-page", () => datasource.goToNextPage());
+        this.onTagClick("view-graphs",() => {
+            let studyState = {
+            studyId: this.model.studyId,
+            breadcrumb:this.model.breadcrumb.toObject()
+            }
+            this.navigateToPageTag("dynamic-consents-graphs", studyState)
+        });
     }
 }
