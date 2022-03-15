@@ -76,14 +76,10 @@ export default class ViewResearchStudyController extends WebcController {
         this.model.notesDataSource = new NotesDataSource([]);
 
         getNotes().then(data => {
-            //this.model.hasNotes = data.length !== 0;
             let notes = data.filter(note => note.studyID === this.model.uid);
+            notes.forEach(note => note.date = new Date(note.date).toLocaleDateString());
             this.model.notesDataSource.addNewNotes(notes);
             const { notesDataSource } = this.model;
-            // this.onTagClick("view", (model) => {
-            //     const {title} = model;
-            //     console.log(title);
-            // });
             this.onTagClick("prev-page", () => notesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => notesDataSource.goToNextPage());
         })
@@ -110,22 +106,27 @@ export default class ViewResearchStudyController extends WebcController {
 
     _attachHandlerSaveNote() {
         this.onTagClick('save-note', (event) => {
+            window.WebCardinal.loader.hidden = false;
             let note = {
-                date: new Date().toString(),
+                date: Date.now(),
                 noteText: this.model.notesViewModel.text.value,
                 noteTitle: this.model.notesViewModel.title.value,
                 studyID: this.model.uid
             }
-            this.StudyNotesService.saveNote(note, (err, data) => {
+            this.StudyNotesService.saveNote(note, (err, note) => {
                 if (err) {
-                    this.navigateToPageTag('confirmation-page', {
-                        confirmationMessage: "An error has been occurred!",
-                        redirectPage: "home"
-                    });
+                    let message = {
+                        content: `An error has been occurred!`,
+                        type: 'error'
+                    }
+                    window.WebCardinal.loader.hidden = true;
+                    this.navigateToPageTag('home', message);
                     return console.log(err);
                 }
-                this.model.notesDataSource.addNewNotes([data]);
+                note.date = new Date(note.date).toLocaleDateString();
+                this.model.notesDataSource.addNewNotes([note]);
                 this.model.notesViewModel = this.getViewNotesModel();
+                window.WebCardinal.loader.hidden = true;
             });
         });
     }

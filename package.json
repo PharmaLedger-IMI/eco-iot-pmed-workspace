@@ -46,7 +46,6 @@
   },
   "homepage": "https://github.com/PharmaLedger-IMI/epi-workspace#readme",
   "dependencies": {
-    "chart.js": "^3.7.1",
     "octopus": "git+http://github.com/privatesky/octopus.git"
   }
 }
