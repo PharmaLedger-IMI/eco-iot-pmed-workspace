@@ -59,6 +59,8 @@ export default class HomeController extends WebcController {
         const prevState = this.getState() || {};
         const message = prevState;
         this.model.message = message;
+        console.log('Message' , message)
+        console.log('Prevstate', prevState)
 
         this.initHandlers();
         this.initServices();
@@ -69,29 +71,48 @@ export default class HomeController extends WebcController {
             this.navigateToPageTag('create-research-study', { breadcrumb: this.model.breadcrumb.toObject(), actionType: ACTION_TYPES.ADD });
         });
 
+        
         this.onTagClick('change-status',(nextStatus)=>{
             let selectedStudy = this.studies.find(study => study.uid === nextStatus.studyId);
-            const studyTitle = selectedStudy.title;
-            const currentStatus = selectedStudy.statusLabel;
-
-            this.showModal(
-                `You are about to change the status of the study ${studyTitle} from ${currentStatus} to ${nextStatus.label}. Please confirm.`,
-                `Change study ${studyTitle}`,
-                ()=>{
+            const uid = selectedStudy.uid;
+            
+            this.model.statusModal = {
+                comment: {
+                    placeholder: 'Please insert a reason...',
+                    value: '',
+                    label: 'Status Change Reason:'
+                },
+                commentIsEmpty: true,
+                fromStatus: selectedStudy.statusLabel,
+                toStatus: nextStatus.label,
+                studyId: nextStatus.studyId
+            }
+            
+            this.showModalFromTemplate('statusModal',
+                () => {
+                    window.WebCardinal.loader.hidden = false;
+                    let note = {
+                        date: Date.now(),
+                        noteText: `${this.model.statusModal.comment.value}`,
+                        noteTitle: `Changed Status from ${this.model.statusModal.fromStatus} to ${this.model.statusModal.toStatus}`,
+                        studyID: uid
+                    }
+                    
                     selectedStudy.status = nextStatus.step;
-                    this.StudiesService.updateStudy(selectedStudy,()=>{
+                    this.StudiesService.updateStudy(selectedStudy, note,  () => {
                         this.prepareStudiesView(this.studies);
                         this.model.studiesDataSource.updateData(selectedStudy);
-                    })
+                        window.WebCardinal.loader.hidden = true;
+                    });
                 },
-                () => {},
-                {
-                    disableExpanding: true,
-                    cancelButtonText: 'Cancel',
-                    confirmButtonText: 'Confirm',
-                    id: 'confirm-modal'
-                }
-            );
+                () => {}, {
+                controller: 'StatusModalController',    
+                model: this.model,
+                disableExpanding: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Confirm',
+            });
+
         })
     }
 
