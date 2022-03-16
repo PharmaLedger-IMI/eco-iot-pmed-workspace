@@ -59,8 +59,6 @@ export default class HomeController extends WebcController {
         const prevState = this.getState() || {};
         const message = prevState;
         this.model.message = message;
-        console.log('Message' , message)
-        console.log('Prevstate', prevState)
 
         this.initHandlers();
         this.initServices();
@@ -87,7 +85,7 @@ export default class HomeController extends WebcController {
                 toStatus: nextStatus.label,
                 studyId: nextStatus.studyId
             }
-            
+
             this.showModalFromTemplate('statusModal',
                 () => {
                     window.WebCardinal.loader.hidden = false;
