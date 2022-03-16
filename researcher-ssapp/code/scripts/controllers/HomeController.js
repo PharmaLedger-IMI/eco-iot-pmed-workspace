@@ -164,22 +164,13 @@ export default class HomeController extends WebcController {
             });
             this.onTagClick("edit", (model) => {
                 let chosenStudy = studies.find(study => study.uid === model.uid);
-                let viewData = {
-                    title: chosenStudy.title,
-                    startdate: chosenStudy.startdate,
-                    enddate: chosenStudy.enddate,
-                    description: chosenStudy.description,
-                    age: chosenStudy.age,
-                    sex: chosenStudy.sex,
-                    pathologies: chosenStudy.pathologies,
-                    others: chosenStudy.others,
-                    data: chosenStudy.data,
+                let studyState = {
                     uid: chosenStudy.uid,
-                    breadcrumb:this.model.breadcrumb.toObject(),
+                    title: chosenStudy.title,
+                    breadcrumb: this.model.breadcrumb.toObject(),
                     actionType: ACTION_TYPES.EDIT
                 }
-                const editStudy = {...viewData, ...{header1: "Edit Study"}}
-                this.navigateToPageTag('create-research-study', editStudy);
+                this.navigateToPageTag('edit-research-study', studyState);
             });
             this.onTagClick("feedback-list", (model) => {
                 console.log('this is feedback Page!');

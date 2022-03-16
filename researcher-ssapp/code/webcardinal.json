@@ -125,6 +125,12 @@
 			"tag": "create-research-study"
 		},
 		{
+			"name": "edit-research-study",
+			"path": "/edit-research-study",
+			"src": "edit-research-study.html",
+			"tag": "edit-research-study"
+		},
+		{
 			"name": "create-research-study-inclusion-criteria",
 			"path": "/create-research-study-inclusion-criteria",
 			"src": "create-research-study-inclusion-criteria.html",

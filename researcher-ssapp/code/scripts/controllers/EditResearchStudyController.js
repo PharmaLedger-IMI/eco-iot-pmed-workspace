@@ -6,19 +6,28 @@ const contractModelHL7 = commonServices.models.ContractModel;
 const researchStudyModelHL7 = commonServices.models.ResearchStudyModel;
 
 
-export default class CreateResearchStudyController extends WebcController {
+export default class EditResearchStudyController extends WebcController {
     constructor(...props) {
 
         super(...props);
 
         const prevState = this.getState() || {};
+        this.model.study_id = prevState.uid;
 
         const {breadcrumb, ...state} = prevState
         this.model = this.getBasicViewModel(prevState);
         this.model.breadcrumb.push({
             label:`${this.model.actionType} ${this.model.title.value}`,
-            tag:"create-research-study",
+            tag:"edit-research-study",
             state: state
+        });
+
+        this.StudiesService = new StudiesService();
+        this.StudiesService.getStudy(this.model.study_id, (err, studyData) => {
+            if (err){
+                return console.log(err);
+            }
+            this.model = this.getBasicViewModel({...studyData, ...prevState});
         });
 
         this._attachHandlerResearchStudyBack();
@@ -47,7 +56,6 @@ export default class CreateResearchStudyController extends WebcController {
     }
 
     getAllStudyData() {
-
         let viewData = {
             participants: 0 ,
             status: StudyStatusesService.getInitialStatus(),
@@ -62,20 +70,21 @@ export default class CreateResearchStudyController extends WebcController {
             data: this.model.data.value
         }
         let allData = {...this.prepareContractStudy(), ...viewData};
+        allData = Object.assign(allData, {uid: this.model.study_id});
         return allData
     }
 
-    saveStudy() {
+    updateStudy(){
         window.WebCardinal.loader.hidden = false;
         this.StudiesService = new StudiesService();
-        this.StudiesService.saveStudy(this.getAllStudyData(), (err, data) => {
+        this.StudiesService.updateStudy(this.getAllStudyData(), (err, data) => {
             let message = {};
 
             if (err) {
                 message.content = "An error has been occurred!";
                 message.type = 'error';
             } else {
-                message.content = `The study ${this.model.title.value} has been created!`;
+                message.content = `The study ${this.model.title.value} has been updated!`;
                 message.type = 'success'
             }
             window.WebCardinal.loader.hidden = true;
@@ -84,26 +93,26 @@ export default class CreateResearchStudyController extends WebcController {
     }
 
     _attachHandlerResearchStudyNext() {
-        this.onTagClick('research:next', () => {
-            switch (this.model.phase) {
-                case "phase1":
-                    this.model.phase    = "phase2";
-                    this.model.header2  = "Step (2/3) Inclusion Criteria";
-                    this.model.header3  = "Please indicate the inclusion criteria of your study";
-                    break;
-                case "phase2":
-                    this.model.phase            = "phase3";
-                    this.model.header1          = "Study - Summary";
-                    this.model.nextButton       = "Confirm";
-                    this.model.previousButton   = "Edit";
-                    this.model.header2          = false;
-                    this.model.header3          = false;
-                    break;
-                case "phase3":
-                    this.saveStudy();
-                    break;
-            }
-        });
+            this.onTagClick('research:next', () => {
+                switch (this.model.phase) {
+                    case "phase1":
+                        this.model.phase    = "phase2";
+                        this.model.header2  = "Step (2/3) Inclusion Criteria";
+                        this.model.header3  = "Please indicate the inclusion criteria of your study";
+                        break;
+                    case "phase2":
+                        this.model.phase            = "phase3";
+                        this.model.header1          = "Study - Summary";
+                        this.model.nextButton       = "Confirm";
+                        this.model.previousButton   = "Edit";
+                        this.model.header2          = false;
+                        this.model.header3          = false;
+                        break;
+                    case "phase3":
+                        this.updateStudy();
+                        break;
+                }
+            });
     }
 
     _attachHandlerResearchStudyBack() {
@@ -113,7 +122,7 @@ export default class CreateResearchStudyController extends WebcController {
                     this.model.nextButton       = "Next";
                     this.model.previousButton   = "Back";
                     this.model.phase            = "phase2";
-                    this.model.header1          = "New study";
+                    this.model.header1          = "Edit study";
                     this.model.header2  = "Step (2/3) Inclusion Criteria";
                     this.model.header3  = "Please indicate the inclusion criteria of your study";
                     break;
@@ -150,7 +159,7 @@ export default class CreateResearchStudyController extends WebcController {
             nextButton: "Next",
             previousButton: "Back",
             phase: "phase1",
-            header1: "New study",
+            header1: "Edit study",
             header2: "Step (1/3) Basic Information",
             header3: "Complete the following information to create a new research study",
             title: {
@@ -213,9 +222,9 @@ export default class CreateResearchStudyController extends WebcController {
                 label: "Sex",
                 required: true,
                 options: [{
-                    label: "Males",
-                    value: 'males'
-                },
+                        label: "Males",
+                        value: 'males'
+                    },
                     {
                         label: "Females",
                         value: 'females'
@@ -238,68 +247,68 @@ export default class CreateResearchStudyController extends WebcController {
                     label: "Heart Disease",
                     value: 'Heart Disease'
                 },
-                    {
-                        label: "Respiratory Disease",
-                        value: 'Respiratory Disease'
-                    },
-                    {
-                        label: "T2D",
-                        value: 'T2D'
-                    },
-                    {
-                        label: "Chikungunya virus disease",
-                        value: 'Chikungunya virus disease'
-                    },
-                    {
-                        label: "Cholera",
-                        value: 'Cholera'
-                    },
-                    {
-                        label: "COVID-19",
-                        value: 'COVID-19'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
-                    }
-                ],
-                value: prevState.pathologies || ""
-            },
-            breadcrumb: prevState.breadcrumb,
-            actionType: prevState.actionType,
-            others: {
-                name: 'others',
-                id: 'others',
-                label: "Others (Separate each criteria using ;)",
-                placeholder: 'others',
-                value: prevState.others || ""
-            },
-            data: {
-                label: "Please indicate the data that you need to obtain:",
-                required: true,
-                options: [{
-                    label: "ECG",
-                    value: 'ECG'
+                {
+                    label: "Respiratory Disease",
+                    value: 'Respiratory Disease'
                 },
-                    {
-                        label: "Respiration",
-                        value: 'respiration'
-                    },
-                    {
-                        label: "SpO2",
-                        value: 'spo2'
-                    },
-                    {
-                        label: "Temperature",
-                        value: 'temperature'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
-                    },
-                ],
-                value: prevState.data || ""
-            }
+                {
+                    label: "T2D",
+                    value: 'T2D'
+                },
+                {
+                    label: "Chikungunya virus disease",
+                    value: 'Chikungunya virus disease'
+                },
+                {
+                    label: "Cholera",
+                    value: 'Cholera'
+                },
+                {
+                    label: "COVID-19",
+                    value: 'COVID-19'
+                },
+                {
+                    label: "N/A",
+                    value: 'n/a'
+                }
+            ],
+            value: prevState.pathologies || ""
+        },
+        breadcrumb: prevState.breadcrumb,
+        actionType: prevState.actionType,
+        others: {
+            name: 'others',
+            id: 'others',
+            label: "Others (Separate each criteria using ;)",
+            placeholder: 'others',
+            value: prevState.others || ""
+        },
+        data: {
+            label: "Please indicate the data that you need to obtain:",
+            required: true,
+            options: [{
+                label: "ECG",
+                value: 'ECG'
+            },
+            {
+                label: "Respiration",
+                value: 'respiration'
+            },
+            {
+                label: "SpO2",
+                value: 'spo2'
+            },
+            {
+                label: "Temperature",
+                value: 'temperature'
+            },
+            {
+                label: "N/A",
+                value: 'n/a'
+            },
+        ],
+        value: prevState.data || ""
+        }
         }
     }
 
