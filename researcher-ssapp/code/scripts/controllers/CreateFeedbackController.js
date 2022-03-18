@@ -63,9 +63,10 @@ export default class CreateFeedbackController extends WebcController {
             } else {
                 feedbackState = {
                     uid: this.model.studyID,
+                    title: this.model.studyTitle,
                     breadcrumb: this.model.breadcrumb.toObject(),
                     message: {
-                        content: `The feedback  ${this.model.studyTitle} study has been created! THANKS INVESTIGATOR !! YOUR FEEDBACK STUDY HAS BEEN SENT TO ALL THE PARTICIPANTS.`,
+                        content: `The feedback ${this.model.feedback_subject.value} has been created! THANKS INVESTIGATOR! YOUR FEEDBACK STUDY HAS BEEN SENT TO ALL THE PARTICIPANTS.`,
                      type: 'success'
                    }
                 }
