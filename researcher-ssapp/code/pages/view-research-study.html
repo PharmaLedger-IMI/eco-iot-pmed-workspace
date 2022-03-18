@@ -3,7 +3,7 @@
 
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
-            <h5 class="generic-title">View: {{@title}}</h5>
+            <h5 class="generic-title">View: {{@title.value}}</h5>
         </div>
 
         <div class="container justify-content-start">
@@ -19,12 +19,12 @@
                         <main>
                             <div class="row-wrapper grid-equal">
                                 <div class="row-wrapper grid-equal">
-                                    <label>Study name: {{ @title }} </label>
+                                    <label>Study name: {{ @title.value }} </label>
                                 </div>
                             </div>
                             <div class="row-wrapper grid-equal">
                                 <div class="row-wrapper grid-equal">
-                                    <label>Period: {{ @startdate }} - {{ @enddate }} </label>
+                                    <label>Period: {{ @startdate.value }} - {{ @enddate.value }} </label>
                                 </div>
                             </div>
                             <div class="row-wrapper grid-equal">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="row-wrapper grid-equal">
                                 <div class="row-wrapper grid-equal">
-                                    <label>Description: {{ @description }} </label>
+                                    <label>Description: {{ @description.value }} </label>
                                 </div>
                             </div>
                         </main>
@@ -46,22 +46,22 @@
                         <main>
                             <div class="row-wrapper grid-equal">
                                 <div class="row-wrapper grid-equal">
-                                    <label>Age: {{ @age }} </label>
+                                    <label>Age: {{ @age.value }} </label>
                                 </div>
                             </div>
                             <div class="row-wrapper grid-equal">
                                 <div class="row-wrapper grid-equal">
-                                    <label>Sex: {{ @sex }} </label>
+                                    <label>Sex: {{ @sex.value }} </label>
                                 </div>
                             </div>
                             <div class="row-wrapper grid-equal">
                                 <div class="row-wrapper grid-equal">
-                                    <label>Previous Pathologies:  {{ @pathologies }}</label>
+                                    <label>Previous Pathologies:  {{ @pathologies.value }}</label>
                                 </div>
                             </div>
                             <div class="row-wrapper grid-equal">
                                 <div class="row-wrapper grid-equal">
-                                    <label>Others: {{ @others }} </label>
+                                    <label>Others: {{ @others.value }} </label>
                                 </div>
                             </div>
                         </main>
@@ -73,7 +73,7 @@
                         <main>
                             <div class="row-wrapper grid-equal">
                                 <div class="row-wrapper grid-equal">
-                                    <label>Data: {{ @data }} </label>
+                                    <label>Data: {{ @data.value }} </label>
                                 </div>
                             </div>
                         </main>
@@ -95,7 +95,6 @@
                                 <label>Notes</label>
                             </div>
                         </header>
-
 
                         <!--<webc-spinner slot="loading"></webc-spinner>-->
 

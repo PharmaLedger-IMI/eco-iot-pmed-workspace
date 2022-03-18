@@ -1,5 +1,6 @@
 const {WebcController} = WebCardinal.controllers;
 import StudyNotesService from "../services/StudyNotesService.js"
+import StudiesService from "../services/StudiesService.js";
 const { DataSource } = WebCardinal.dataSources;
 
 
@@ -52,13 +53,25 @@ export default class ViewResearchStudyController extends WebcController {
         this.containerElement = props[0];
         const prevState = this.getState() || {};
         const {breadcrumb, ...state} = prevState
-    
-        this.model = prevState;
+
+        this.model.study_id = prevState.uid;
+        this.model.breadcrumb = prevState.breadcrumb;
+        this.model.title = prevState.title;
+
         this.model.breadcrumb.push({
             label:this.model.title,
             tag:"view-research-study",
             state: state
         });
+
+        this.StudiesService = new StudiesService();
+        this.StudiesService.getStudy(this.model.study_id, (err, studyData) => {
+            if (err){
+                return console.log(err);
+            }
+            this.model = this.getViewStudyModel(studyData);
+        });
+
         this.model.notesViewModel = this.getViewNotesModel();
 
         this.StudyNotesService = new StudyNotesService();
@@ -83,7 +96,6 @@ export default class ViewResearchStudyController extends WebcController {
             this.onTagClick("prev-page", () => notesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => notesDataSource.goToNextPage());
         })
-
 
         this._attachHandlerBackMenu();
         this._attachHandlerViewDynamicConsents();
@@ -158,6 +170,158 @@ export default class ViewResearchStudyController extends WebcController {
                 placeholder: 'Insert your note text',
                 value:  ""
             }
+        }
+    }
+
+    getViewStudyModel(prevState) {
+        return {
+            title: {
+                name: 'title',
+                id: 'title',
+                label: "Title",
+                placeholder: 'Name for this study',
+                required: true,
+                value: prevState.title || ""
+            },
+            startdate: {
+                name: 'Start Date',
+                id: 'Start Date',
+                label: "Starting date",
+                placeholder: 'Starting date',
+                value: prevState.startdate || ""
+            },
+            enddate: {
+                name: 'End Date',
+                id: 'End Date',
+                label: "Ending date",
+                placeholder: 'Ending date',
+                value: prevState.enddate || ""
+            },
+            description: {
+                name: 'description',
+                id: 'description',
+                label: "Description",
+                placeholder: 'Description for this study',
+                value: prevState.description || ""
+            },
+            age: {
+                label: "Age Group",
+                required: true,
+                options: [
+                    {
+                        label: "Age 10-30",
+                        value: '10-30'
+                    },
+                    {
+                        label: "Age 30-40",
+                        value: '30-40'
+                    },
+                    {
+                        label: "Age 40-50",
+                        value: '40-50'
+                    },
+                    {
+                        label: "Age 50-60",
+                        value: '50-60'
+                    },
+                    {
+                        label: "Age 60+",
+                        value: '60+'
+                    }
+                ],
+                value: prevState.age || ""
+            },
+            sex: {
+                label: "Sex",
+                required: true,
+                options: [{
+                    label: "Males",
+                    value: 'males'
+                },
+                    {
+                        label: "Females",
+                        value: 'females'
+                    },
+                    {
+                        label: "Males & Females",
+                        value: 'both'
+                    },
+                    {
+                        label: "N/A",
+                        value: 'n/a'
+                    }
+                ],
+                value: prevState.sex || ""
+            },
+            pathologies: {
+                label: "Previous Pathologies",
+                required: true,
+                options: [{
+                    label: "Heart Disease",
+                    value: 'Heart Disease'
+                },
+                    {
+                        label: "Respiratory Disease",
+                        value: 'Respiratory Disease'
+                    },
+                    {
+                        label: "T2D",
+                        value: 'T2D'
+                    },
+                    {
+                        label: "Chikungunya virus disease",
+                        value: 'Chikungunya virus disease'
+                    },
+                    {
+                        label: "Cholera",
+                        value: 'Cholera'
+                    },
+                    {
+                        label: "COVID-19",
+                        value: 'COVID-19'
+                    },
+                    {
+                        label: "N/A",
+                        value: 'n/a'
+                    }
+                ],
+                value: prevState.pathologies || ""
+            },
+            others: {
+                name: 'others',
+                id: 'others',
+                label: "Others (Separate each criteria using ;)",
+                placeholder: 'others',
+                value: prevState.others || ""
+            },
+            data: {
+                label: "Please indicate the data that you need to obtain:",
+                required: true,
+                options: [{
+                    label: "ECG",
+                    value: 'ECG'
+                },
+                    {
+                        label: "Respiration",
+                        value: 'respiration'
+                    },
+                    {
+                        label: "SpO2",
+                        value: 'spo2'
+                    },
+                    {
+                        label: "Temperature",
+                        value: 'temperature'
+                    },
+                    {
+                        label: "N/A",
+                        value: 'n/a'
+                    },
+                ],
+                value: prevState.data || ""
+            },
+            uid: prevState.uid || "",
+            status: prevState.status || ""
         }
     }
 

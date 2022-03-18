@@ -146,21 +146,12 @@ export default class HomeController extends WebcController {
             const { studiesDataSource } = this.model;
             this.onTagClick("view", (model) => {
                 let chosenStudy = studies.find(study => study.uid === model.uid);
-                let viewData = {
+                let viewStatus = {
                     title: chosenStudy.title,
-                    startdate: chosenStudy.startdate,
-                    enddate: chosenStudy.enddate,
-                    description: chosenStudy.description,
-                    age: chosenStudy.age,
-                    sex: chosenStudy.sex,
-                    pathologies: chosenStudy.pathologies,
-                    others: chosenStudy.others,
-                    data: chosenStudy.data,
                     uid: chosenStudy.uid,
-                    status: chosenStudy.status,
                     breadcrumb:this.model.breadcrumb.toObject()
                 }
-                this.navigateToPageTag('view-research-study', viewData);
+                this.navigateToPageTag('view-research-study', viewStatus);
             });
             this.onTagClick("edit", (model) => {
                 let chosenStudy = studies.find(study => study.uid === model.uid);
