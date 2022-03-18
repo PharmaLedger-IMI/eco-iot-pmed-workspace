@@ -4,8 +4,8 @@ export default class StatusModalController extends WebcController {
     constructor(...props) {
         super(...props);
 
-        this.model.onChange('statusModal.comment.value', () => {
-            this.model.statusModal.commentIsEmpty = this.model.statusModal.comment.value.trim() === "";
+        this.model.onChange('statusModal.note.value', () => {
+            this.model.statusModal.noteIsEmpty = this.model.statusModal.note.value.trim() === "";
         });
     }
 }

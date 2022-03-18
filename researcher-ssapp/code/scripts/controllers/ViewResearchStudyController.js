@@ -86,12 +86,12 @@ export default class ViewResearchStudyController extends WebcController {
             })
         }
 
-        this.model.notesDataSource = new NotesDataSource([]);
 
         getNotes().then(data => {
+            this.model.hasNotes = data.length>0;
             let notes = data.filter(note => note.studyID === this.model.uid);
             notes.forEach(note => note.date = new Date(note.date).toLocaleDateString());
-            this.model.notesDataSource.addNewNotes(notes);
+            this.model.notesDataSource = new NotesDataSource(notes);
             const { notesDataSource } = this.model;
             this.onTagClick("prev-page", () => notesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => notesDataSource.goToNextPage());

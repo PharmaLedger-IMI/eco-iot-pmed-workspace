@@ -96,28 +96,32 @@
                             </div>
                         </header>
 
-                        <!--<webc-spinner slot="loading"></webc-spinner>-->
-
-                        <div class="common-datatable notes-datatable dt-3-col" slot="true">
-                            <webc-datatable datasource="@notesDataSource">
-                                <div slot="no-data" class="alert alert-warning" role="alert">
-                                    <h4 class="alert-heading">No notes yet!</h4>
-                                    <p>Add your first note for this study!</p>
-                                </div>
-                                <div class="cell">{{ @date }}</div>
-                                <div class="cell">{{ @noteTitle }}</div>
-                                <div class="cell">
-                                    <details class="option text-justify">
-                                        <summary>View</summary>
-                                        {{@noteText}}
-                                    </details>
-                                </div>
-                            </webc-datatable>
-                            <!--                                    <section class="controls button-group-wrapper">-->
-                            <!--                                        <button data-tag="prev-page">‹ Previous page</button>-->
-                            <!--                                        <button data-tag="next-page">Next page ›</button>-->
-                            <!--                                    </section>-->
+                        <div data-if="@hasNotes">
+                            <webc-spinner slot="loading"></webc-spinner>
+                            <div slot="false" class="alert alert-warning" role="alert">
+                                <h4 class="alert-heading">No notes yet!</h4>
+                                <p>Add your first note for this study!</p>
+                            </div>
+                            <div class="common-datatable notes-datatable dt-3-col" slot="true">
+                                <webc-datatable datasource="@notesDataSource">
+                                    <div class="cell">{{ @date }}</div>
+                                    <div class="cell">{{ @noteTitle }}</div>
+                                    <div class="cell">
+                                        <details class="option text-justify">
+                                            <summary>View</summary>
+                                            {{@noteText}}
+                                        </details>
+                                    </div>
+                                </webc-datatable>
+                                <!--                                    <section class="controls button-group-wrapper">-->
+                                <!--                                        <button data-tag="prev-page">‹ Previous page</button>-->
+                                <!--                                        <button data-tag="next-page">Next page ›</button>-->
+                                <!--                                    </section>-->
+                            </div>
                         </div>
+
+
+
 
 
                         <div>

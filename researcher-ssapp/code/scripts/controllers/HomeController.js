@@ -75,12 +75,12 @@ export default class HomeController extends WebcController {
             const uid = selectedStudy.uid;
             
             this.model.statusModal = {
-                comment: {
+                note: {
                     placeholder: 'Please insert a reason...',
                     value: '',
                     label: 'Status Change Reason:'
                 },
-                commentIsEmpty: true,
+                noteIsEmpty: true,
                 fromStatus: selectedStudy.statusLabel,
                 toStatus: nextStatus.label,
                 studyId: nextStatus.studyId
@@ -91,7 +91,7 @@ export default class HomeController extends WebcController {
                     window.WebCardinal.loader.hidden = false;
                     let note = {
                         date: Date.now(),
-                        noteText: `${this.model.statusModal.comment.value}`,
+                        noteText: `${this.model.statusModal.note.value}`,
                         noteTitle: `Changed Status from ${this.model.statusModal.fromStatus} to ${this.model.statusModal.toStatus}`,
                         studyID: uid
                     }
