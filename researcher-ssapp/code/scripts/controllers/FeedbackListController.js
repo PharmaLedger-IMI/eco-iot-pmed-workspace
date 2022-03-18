@@ -1,5 +1,4 @@
 const { WebcController } = WebCardinal.controllers;
-import StudiesService from "../services/StudiesService.js";
 import FeedbackService from "../services/FeedbackService.js";
 const { DataSource } = WebCardinal.dataSources;
 
@@ -44,21 +43,15 @@ export default class FeedbackListController extends WebcController {
         const prevState = this.getState() || {};
         const {breadcrumb, message, ...state} = prevState;
 
-        this.model = prevState;
+        this.model.studyID = prevState.uid;
+        this.model.studyTitle = prevState.title;
+        this.model.breadcrumb = prevState.breadcrumb;
+        this.model.message = prevState.message;
+
         this.model.breadcrumb.push({
-            label:this.model.title + " Feedback",
+            label:this.model.studyTitle + " Feedback",
             tag:"feedback-list",
             state: state
-        });
-
-        this.model.studyID = state.uid;
-
-        this.StudiesService = new StudiesService();
-        this.StudiesService.getStudy(this.model.studyID, (err, study_info) => {
-            if (err){
-                return console.log(err);
-            }
-            this.model.studyTitle = study_info.ResearchStudyTitle;
         });
 
         this.FeedbackService= new FeedbackService();
@@ -82,21 +75,12 @@ export default class FeedbackListController extends WebcController {
 
             this.onTagClick("view-feedback", (model) => {
                 let state = {
-                    studyID: model.studyID,
-                    studyTitle: model.studyTitle,
+                    studyID: this.model.studyID,
+                    studyTitle: this.model.studyTitle,
                     feedbackID: model.uid,
                     breadcrumb: this.model.breadcrumb.toObject()
                 }
                 this.navigateToPageTag('view-feedback', state);
-            });
-            this.onTagClick("edit-feedback", (model) => {
-                let state = {
-                    studyID: model.studyID,
-                    studyTitle: model.studyTitle,
-                    feedbackID: model.uid,
-                    breadcrumb: this.model.breadcrumb.toObject()
-                }
-                this.navigateToPageTag('edit-feedback' ,state);
             });
             this.onTagClick("prev-page", () => feedbackDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => feedbackDataSource.goToNextPage());
@@ -111,7 +95,7 @@ export default class FeedbackListController extends WebcController {
         this.onTagClick('new:feedback', () => {
             let objToSend = {
                 uid: this.model.studyID,
-                title: this.model.title,
+                title: this.model.studyTitle,
                 breadcrumb: this.model.breadcrumb.toObject(),
             }
             this.navigateToPageTag('create-feedback', objToSend);
