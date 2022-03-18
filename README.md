@@ -55,10 +55,10 @@ NOTE: On Linux deployment based systems you can run directly ```npm run server``
 
 ### Step 4: Build all things needed for the application to run.
 
-Open a new console inside iot-workspace folder and run:
+Open a new console inside *iot-workspace* folder and run:
 
 ```sh
-# Note: Run this in a new console inside "eco-workspace" folder
+# Note: Run this in a new console inside "iot-workspace" folder
 $ npm run build-all
 ```
 
