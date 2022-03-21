@@ -2,11 +2,9 @@
 
 
     <div class="container main-container">
-        <breadcrumb-navigator></breadcrumb-navigator>
         <div class="container flex-container">
+            <breadcrumb-navigator></breadcrumb-navigator>
             <h5 class="generic-title">Dynamic-Consent List</h5>
-            <h6>Study ID: {{@studyId}}</h6>
-            <button data-tag="view-graphs" class="view-graphics-btn">View Graphs</button>
         </div>
 
         <div class="container justify-content-start">
@@ -28,6 +26,10 @@
 
         <section class="controls button-group-wrapper">
             <button data-tag="prev-page">‹ Previous page</button>
+            <button data-tag="view-graphs" class="view-graphics-btn">
+                <i class="fa fa-pie-chart p-1"></i>
+                View Graphs
+            </button>
             <button data-tag="next-page">Next page ›</button>
         </section>
     </div>
