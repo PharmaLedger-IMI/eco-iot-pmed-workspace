@@ -95,9 +95,8 @@ class DbStorage {
     const resource = _.merge({
       "resourceType": type
     }, jsonData);
-
     this.client
-      .put(`/classes/${type}`, resource)
+      .put(`/classes/${type}/${id}`, resource)
       .then((response) => {
         _self.getResourceById(type, id, callback);
       })

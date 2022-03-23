@@ -3,7 +3,7 @@ function processXml(request, response, next) {
     const domainConfig = {
         "type": "IotAdaptor",
         "option": {
-            "endpoint": "http://127.0.0.1:3000/adaptor"
+            "endpoint": "http://127.0.0.1:1000/adaptor"
         }
     }
 

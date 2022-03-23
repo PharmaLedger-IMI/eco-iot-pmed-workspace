@@ -3,7 +3,7 @@ function createEvidence(request, response, next) {
     const domainConfig = {
         "type": "IotAdaptor",
         "option": {
-            "endpoint": "http://127.0.0.1:1000/adaptor"
+            "endpoint": "http://localhost:3000/iotAdapter"
         }
     }
 
@@ -11,8 +11,10 @@ function createEvidence(request, response, next) {
     flow.init(domainConfig);
     const keySSI = request.headers['x-keyssi'];
     const dbName = "clinicalDecisionSupport";
+   
     flow.createDsuResource(keySSI, dbName, "Evidence", request.body, (error, result) => {
       if (error) {
+        // console.log("Error create Evidence");
         return response.send(error.status, error);
       } else {
         return response.send(200, result);

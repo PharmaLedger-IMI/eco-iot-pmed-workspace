@@ -30,7 +30,7 @@ $$.flow.describe('IotAdaptor', {
     },
     searchResources: async function (resourceType, params, callback) {
         //this.fhir.searchResources(resourceType, params, callback);
-        console.log("Resource Type: "+resourceType+"Params: "+params);
+        // console.log("Resource Type: "+resourceType+"Params: "+params);
         let resource = await this.mainDb.searchResourcesAsync(resourceType, params);
         if(resource){
           callback(undefined, resource);

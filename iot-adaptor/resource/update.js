@@ -1,12 +1,13 @@
 const _ = require('lodash');
 
 function updateResource(request, response) {
-    const receivedDomain = "default";
-    const domainConfig = require("../utils").getClusterDomainConfig(receivedDomain);
-    if (!domainConfig) {
-        console.log('Deployment Domain not found : ', receivedDomain);
-        return response.send(500);
+    const domainConfig = {
+      "type": "IotAdaptor",
+      "option": {
+        "endpoint": "http://localhost:3000/iotAdapter"
+      }
     }
+
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
     const resourceType  = _.upperFirst(_.camelCase(request.params.resource_type));
