@@ -1,5 +1,10 @@
 const { WebcController } = WebCardinal.controllers;
-import EvidenceService from "../services/EvidenceService.js";
+const commonServices = require("common-services");
+const {EvidenceService} = commonServices;
+const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
+const COMMUNICATION_MESSAGES = {
+    NEW_EVIDENCE:"new_evidence"
+}
 
 
 export default class AddEvidenceController extends WebcController {
@@ -66,6 +71,14 @@ export default class AddEvidenceController extends WebcController {
                     }
                 }
             }
+
+            //send evidence DSU to iotAdaptor
+            const communicationService = getCommunicationServiceInstance();
+            communicationService.sendMessageToIotAdaptor({
+                operation:COMMUNICATION_MESSAGES.NEW_EVIDENCE,
+                ssi:data.keySSI
+            })
+
             window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('evidence-list', evidenceState);
         })

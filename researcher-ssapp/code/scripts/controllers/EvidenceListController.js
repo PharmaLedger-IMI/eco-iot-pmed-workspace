@@ -1,6 +1,7 @@
 const { WebcController } = WebCardinal.controllers;
+const commonServices = require("common-services");
 import StudiesService from "../services/StudiesService.js";
-import EvidenceService from "../services/EvidenceService.js";
+const {EvidenceService} = commonServices;
 const { DataSource } = WebCardinal.dataSources;
 
 

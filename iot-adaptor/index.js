@@ -7,15 +7,15 @@ if (typeof $$.flows === "undefined") {
 }
 
 const opendsu = require("opendsu");
-const w3cDID = opendsu.loadAPI('w3cdid');
 const scAPI = opendsu.loadApi("sc");
 const commonServicesBundle = "./../common-services/build/bundles/commonServices.js"
 require(commonServicesBundle);
-const DidService = require("common-services").DidService
+const commonServices = require("common-services")
+const {DidService, MessageHandlerService} = commonServices;
+const MessageHandlerStrategy = require("./strategies/MessageHandlerStrategy");
 const DOMAIN = "iot";
 const didType = "ssi:name";
 const publicName = "iotAdaptor";
-
 
 const express = require('express');
 const server = express();
@@ -30,16 +30,17 @@ async function setupIoTAdaptorEnvironment() {
         vault: "server",
         didDomain: DOMAIN,
         vaultDomain: DOMAIN,
-        enclaveType: "WalletDBEnclave"
+        enclaveType: "WalletDBEnclave",
+        did: `did:${didType}:${DOMAIN}:${publicName}`
     };
 
     let initalEnv = JSON.parse(await $$.promisify(mainDSU.readFile)("environment.json"));
 
-    if(!initalEnv.enclaveType){
+    if (!initalEnv.enclaveType) {
         await $$.promisify(mainDSU.writeFile)("environment.json", JSON.stringify(envConfig));
         scAPI.refreshSecurityContext();
     }
-
+    MessageHandlerService.init(MessageHandlerStrategy);
 }
 
 async function IotAdaptor(server) {
@@ -82,8 +83,21 @@ async function IotAdaptor(server) {
     const DeleteDevice = require('./api/delete_device.js');
     const GetDeviceById = require('./api/get_device_by_id.js');
 
-    const {requestBodyXMLMiddleware, responseModifierMiddleware, requestBodyJSONMiddleware} = require('./utils/middlewares');
+    const {
+        requestBodyXMLMiddleware,
+        responseModifierMiddleware,
+        requestBodyJSONMiddleware
+    } = require('./utils/middlewares');
 
+    server.use(function (req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin || req.headers.host);
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', `Content-Type, Content-Length, X-Content-Length, Access-Control-Allow-Origin`);
+        res.setHeader('Access-Control-Allow-Credentials', true);
+        next();
+    });
+
+    server.options(`/*`, corsPolicyHandler);
     server.post(`/iotAdapter/platform/dynavision`, requestBodyXMLMiddleware);
     server.post(`/iotAdapter/platform/dynavision`, DynavisionPlatform);
 
@@ -136,115 +150,52 @@ async function IotAdaptor(server) {
     server.put(`/iotAdapter/update-device/:id`, UpdateDevice);
     server.delete(`/iotAdapter/delete-device/:id`, DeleteDevice);
     server.get(`/iotAdapter/get-device/:id`, GetDeviceById);
-
     server.get(`/iotAdapter/adaptorIdentity`, getAdaptorIdentity);
 
-    await handleIotAdaptorMessages();
+}
+
+function corsPolicyHandler(request, response) {
+    console.log("OPTIONS CALLED");
+    const headers = {};
+    // IE8 does not allow domains to be specified, just the *
+    headers['Access-Control-Allow-Origin'] = request.headers.origin;
+    // headers['Access-Control-Allow-Origin'] = '*';
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS';
+    headers['Access-Control-Allow-Credentials'] = true;
+    headers['Access-Control-Max-Age'] = '3600'; //one hour
+    headers['Access-Control-Allow-Headers'] = `Content-Type, Content-Length, X-Content-Length, Access-Control-Allow-Origin, User-Agent, Authorization`;
+    response.writeHead(200, headers);
+    response.end();
 }
 
 function getAdaptorIdentity(request, response, next) {
-    response.setHeader('Content-Type', 'text');
+    response.setHeader('Content-Type', 'application/json');
     const sc = scAPI.getSecurityContext();
 
-    const getDID = async (callback) => {
-        resolveDidDocument(didType, DOMAIN, publicName).then(didDocument => {
-            callback(undefined, didDocument.getIdentifier());
-        }).catch(err => {
-            callback(err);
-        })
-    }
-
     const responseCallback = (err, did) => {
-        if(err){
+
+        if (err) {
             response.send(500);
         }
         response.send(200, did);
+
     }
+
+
+    const resolveDid = () => {
+        DidService.getDidServiceInstance().getDID().then((did) => {
+            responseCallback(undefined, did);
+        }).catch(responseCallback);
+    }
+
     if (sc.isInitialised()) {
-        getDID(responseCallback)
+        resolveDid();
+
     } else {
-        sc.on("initialised", async () => {
-            getDID(responseCallback);
-        });
+        sc.on("initialised", resolveDid);
     }
 }
 
-async function handleIotAdaptorMessages() {
-
-    const sc = scAPI.getSecurityContext();
-    sc.on("initialised", async () => {
-        try {
-            const didDocument = await createOrResolveDidDocument(didType, publicName);
-            listenForMessages(didDocument, async (err, decryptedMessage) => {
-                const message = JSON.parse(decryptedMessage);
-                const researcherDid = DidService.getDidData(message.senderIdentity);
-                console.log("*******************************");
-                console.log(`Received message from ${message.senderIdentity}`);
-                console.log("*******************************");
-                await sendMessage(didDocument, decryptedMessage, researcherDid);
-            });
-
-        } catch (e) {
-            console.log("[ERROR - handleIotAdaptorMessages]", e);
-        }
-    });
-}
-
-async function createOrResolveDidDocument(didType, publicName) {
-    let didDocument;
-    try {
-        didDocument = await resolveDidDocument(didType, DOMAIN, publicName);
-        return didDocument;
-    } catch (e) {
-        try {
-            didDocument = await $$.promisify(w3cDID.createIdentity)(didType, DOMAIN, publicName);
-            console.log(`[DID][CREATE] Identity ${didDocument.getIdentifier()} created successfully.`);
-            return didDocument;
-        } catch (e2) {
-            console.log("[ERROR - CREATE]", e);
-            throw e2;
-        }
-    }
-}
-
-async function resolveDidDocument(didType, domain, publicName) {
-    try {
-        const identifier = `did:${didType}:${domain}:${publicName}`;
-        const didDocument = await $$.promisify(w3cDID.resolveDID)(identifier);
-        console.log(`[DID][RESOLVE] Identity ${didDocument.getIdentifier()} loaded successfully.`);
-        return didDocument;
-    } catch (e) {
-        console.log("[ERROR - RESOLVE]", e);
-        throw e;
-    }
-}
-
-async function sendMessage(didDocument, data, receiver) {
-    const {didType, domain, publicName} = receiver;
-    try {
-        const receiverDidDocument = await resolveDidDocument(didType, domain, publicName);
-        didDocument.sendMessage(data, receiverDidDocument, (err) => {
-            if (err) {
-                throw err;
-            }
-        });
-    } catch (e) {
-        console.log("[ERROR - sendMessage]", e);
-    }
-}
-
-function listenForMessages(didDocument, callback) {
-    didDocument.readMessage((err, decryptedMessage) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        console.log("[Received Message]", decryptedMessage);
-        callback(undefined, decryptedMessage);
-        listenForMessages(didDocument, callback);
-    });
-}
 
 IotAdaptor(server);
 

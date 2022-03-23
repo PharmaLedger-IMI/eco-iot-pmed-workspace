@@ -1,4 +1,5 @@
-import EvidenceService from "../services/EvidenceService.js";
+const commonServices = require("common-services");
+const {EvidenceService} = commonServices;
 const {WebcController} = WebCardinal.controllers;
 
 
