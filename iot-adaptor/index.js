@@ -34,7 +34,6 @@ async function setupIoTAdaptorEnvironment() {
         initialEnv.did = `did:${didType}:${DOMAIN}:${publicName}`;
         initialEnv.didDomain = DOMAIN;
         initialEnv.vaultDomain = DOMAIN;
-        initialEnv.enclaveType = "WalletDBEnclave";
         await $$.promisify(mainDSU.writeFile)("environment.json", JSON.stringify(initialEnv));
         scAPI.refreshSecurityContext();
     }
