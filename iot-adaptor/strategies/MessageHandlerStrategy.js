@@ -16,11 +16,15 @@ module.exports = async function (err, message) {
         case "new_evidence":
             evidenceService.mount(message.ssi, (err, mountedEntity) => {
                 const entityId = mountedEntity.uid;
-                evidenceService.getEvidence(entityId, (err, evidence) => {
-                    evidence.title = "The updated title from IOT Adaptor";
-                    evidenceService.updateEvidence(evidence, () => {
-                        console.log("Evidence updated");
-                    });
+                evidenceService.getEvidences((err, evidences) => {
+                    console.log("Total evidences:", evidences.length);
+
+                    evidenceService.getEvidence(entityId, (err, evidence) => {
+                        evidence.title = "The updated title from IOT Adaptor";
+                        evidenceService.updateEvidence(evidence, () => {
+                            console.log("Evidence updated");
+                        });
+                    })
                 })
             });
             break;
