@@ -43,7 +43,7 @@
 					"type": "smartClone",
 					"target": ".",
 					"collectLog": false,
-					"commit": "e98392eff7fd268409e642a4f5f1c995ffd5f9de"
+					"commit": "991488175e0cf9195294a9233a1c1ce09b7e0c39"
 				},
 				{
 					"type": "execute",
@@ -245,8 +245,13 @@
 		},
 		{
 			"name": "themes/blue-fluorite-theme",
-			"src": "",
+			"src": "https://github.com/PrivateSky/blue-fluorite-theme.git",
 			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
 				{
 					"type": "execute",
 					"cmd": "cd themes/blue-fluorite-theme && npm install"
@@ -333,7 +338,7 @@
 					"cmd": "cd dossier-explorer-wallet-prototype && npm run build"
 				},
 				{
-					"type": "copy",
+					"type": "copySeed",
 					"src": "./dossier-explorer-wallet-prototype/seed",
 					"target": "./apihub-root/dsu-explorer/wallet-patch/seed",
 					"options": {
@@ -351,7 +356,7 @@
 					"cmd": "cd dossier-explorer-ssapp && npm run build"
 				},
 				{
-					"type": "copy",
+					"type": "copySeed",
 					"src": "./dossier-explorer-ssapp/seed",
 					"target": "./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/seed",
 					"options": {
@@ -411,7 +416,7 @@
 					"cmd": "cd clinical-site-ssapp && npm run build"
 				},
 				{
-					"type": "copy",
+					"type": "copySeed",
 					"src": "./clinical-site-ssapp/seed",
 					"target": "./apihub-root/clinical-site-wallet/wallet-patch/seed",
 					"options": {
@@ -419,7 +424,7 @@
 					}
 				},
 				{
-					"type": "copy",
+					"type": "copySeed",
 					"src": "./clinical-site-ssapp/seed",
 					"target": "./apihub-root/clinical-site-wallet/apps-patch/clinical-site-ssapp/seed",
 					"options": {
@@ -437,7 +442,7 @@
 					"cmd": "cd trial-participant-ssapp && npm run build"
 				},
 				{
-					"type": "copy",
+					"type": "copySeed",
 					"src": "./trial-participant-ssapp/seed",
 					"target": "./apihub-root/trial-participant-wallet/apps-patch/trial-participant-ssapp/seed",
 					"options": {
@@ -445,7 +450,7 @@
 					}
 				},
 				{
-					"type": "copy",
+					"type": "copySeed",
 					"src": "./trial-participant-ssapp/seed",
 					"target": "./apihub-root/trial-participant-wallet/wallet-patch/seed",
 					"options": {
@@ -467,7 +472,7 @@
 					"cmd": "cd researcher-ssapp && npm run build"
 				},
 				{
-					"type": "copy",
+					"type": "copySeed",
 					"src": "./researcher-ssapp/seed",
 					"target": "./apihub-root/researcher-wallet/wallet-patch/seed",
 					"options": {
@@ -475,7 +480,7 @@
 					}
 				},
 				{
-					"type": "copy",
+					"type": "copySeed",
 					"src": "./researcher-ssapp/seed",
 					"target": "./apihub-root/researcher-wallet/apps-patch/researcher-ssapp/seed",
 					"options": {
