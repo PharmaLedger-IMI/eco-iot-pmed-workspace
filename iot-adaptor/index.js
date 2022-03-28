@@ -15,7 +15,7 @@ const {DidService, MessageHandlerService} = commonServices;
 const MessageHandlerStrategy = require("./strategies/MessageHandlerStrategy");
 const DOMAIN = "iot";
 const didType = "ssi:name";
-const publicName = "iotAdaptor";
+const publicName = process.env.IOT_ADAPTOR_DID;
 
 const express = require('express');
 const server = express();
@@ -23,21 +23,19 @@ const port = 3000;
 
 async function setupIoTAdaptorEnvironment() {
 
+    const dt = opendsu.loadApi("dt");
+    await $$.promisify(dt.initialiseBuildWallet)();
     const mainDSU = await $$.promisify(scAPI.getMainDSU)();
-    const envConfig = {
-        system: "any",
-        browser: "any",
-        vault: "server",
-        didDomain: DOMAIN,
-        vaultDomain: DOMAIN,
-        enclaveType: "WalletDBEnclave",
-        did: `did:${didType}:${DOMAIN}:${publicName}`
-    };
 
-    let initalEnv = JSON.parse(await $$.promisify(mainDSU.readFile)("environment.json"));
+    let initialEnv = JSON.parse(await $$.promisify(mainDSU.readFile)("environment.json"));
 
-    if (!initalEnv.enclaveType) {
-        await $$.promisify(mainDSU.writeFile)("environment.json", JSON.stringify(envConfig));
+    console.log("init", initialEnv)
+    if (!initialEnv.did) {
+        initialEnv.did = `did:${didType}:${DOMAIN}:${publicName}`;
+        initialEnv.didDomain = DOMAIN;
+        initialEnv.vaultDomain = DOMAIN;
+        initialEnv.enclaveType = "WalletDBEnclave";
+        await $$.promisify(mainDSU.writeFile)("environment.json", JSON.stringify(initialEnv));
         scAPI.refreshSecurityContext();
     }
     MessageHandlerService.init(MessageHandlerStrategy);
