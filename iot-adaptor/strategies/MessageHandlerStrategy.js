@@ -42,6 +42,23 @@ module.exports = async function (err, message) {
                 const entityId = mountedDevice.sReadSSI;
                 console.log(mountedDevice)
 
+                const domainConfig = {
+                    "type": "IotAdaptor",
+                    "option": {
+                        "endpoint": "http://127.0.0.1:3000/adaptor"
+                    }
+                };
+
+                let flow = $$.flow.start(domainConfig.type);
+                flow.init(domainConfig);
+                const dbName = "clinicalDecisionSupport";
+                flow.createDsuResource(entityId, dbName, "Device", mountedDevice , (error, result) => {
+                    if (error) {
+                        console.log(error.status, error);
+                    } else {
+                        console.log(200, result);
+                    }
+                });
 
                 // Push it to the hospital database or the iot Adaptor wallet
 
