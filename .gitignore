@@ -1,8 +1,10 @@
+.prettierrc
+.prettierignore
+.idea
+.vscode
 webcardinal
 cardinal
-mobile/scan-app
 privatesky
-menu-wallet-prototype
 dossier-explorer-wallet-prototype
 apihub-root/patient-wallet/loader
 apihub-root/clinical-site-wallet/loader
@@ -16,16 +18,11 @@ dossier-explorer-ssapp
 node_modules
 package-lock.json
 env.json.devel
-.prettierrc
-.prettierignore
-.idea
-.vscode
 apihub-root/ediary-wallet/loader
 latest-change-set.txt
 apihub-root/messaging/queues.json
 iot-adaptor/data
 clinical-site-ssapp
-clinical-site-theme
 seed
 latest-change-set.txt
 apps-patch
@@ -33,5 +30,6 @@ apihub-root/trial-participant-wallet/loader
 common-services
 themes/trial-participant-theme
 themes/blue-fluorite-theme
+themes/clinical-site-theme
 trial-participant-ssapp
 mqs
