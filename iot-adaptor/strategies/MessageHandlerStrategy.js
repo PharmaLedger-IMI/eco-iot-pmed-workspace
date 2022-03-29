@@ -21,16 +21,42 @@ module.exports = async function (err, message) {
                     console.log(err);
                 }
                 const entityId = mountedEntity.uid;
-                evidenceService.getEvidences((err, evidences) => {
-                    console.log("Total evidences:", evidences.length);
-
-                    evidenceService.getEvidence(entityId, (err, evidence) => {
-                        evidence.title = "The updated title from IOT Adaptor";
-                        evidenceService.updateEvidence(evidence, () => {
-                            console.log("Evidence updated");
+                console.log(mountedEntity);
+                const domainConfig = {
+                "type": "IotAdaptor",
+                "option": {
+                    "endpoint": "http://localhost:3000/iotAdapter"
+                }
+            }
+                let flow = $$.flow.start(domainConfig.type);
+                flow.init(domainConfig);
+                const dbName = "clinicalDecisionSupport";
+            
+                flow.createDsuResource(entityId, dbName, "Evidence", mountedEntity, (error, result) => {
+                    if (error) {
+                        // console.log("Error create Evidence");
+                        return response.send(error.status, error);
+                    } else {
+                        flow.createResource("Evidence", mountedEntity,(err, res)=>{
+                            if (error) {
+                                // console.log("Error create Evidence");
+                                console.log(error.status, error);
+                            }
+                            else console.log(200, result);
                         });
-                    })
-                })
+                        
+                    }
+                });
+                // evidenceService.getEvidences((err, evidences) => {
+                //     console.log("Total evidences:", evidences.length);
+
+                //     evidenceService.getEvidence(entityId, (err, evidence) => {
+                //         evidence.title = "The updated title from IOT Adaptor";
+                //         evidenceService.updateEvidence(evidence, () => {
+                //             console.log("Evidence updated");
+                //         });
+                //     })
+                // })
             });
             break;
         case "add_device":

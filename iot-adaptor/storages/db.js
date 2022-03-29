@@ -59,13 +59,19 @@ class DbStorage {
   }
 
   createResource(type, jsonData, callback) {
+   
     const _self = this;
-    const resource = _.merge({
+    let resource = _.merge({
       "resourceType": type
     }, jsonData);
-
+    const data =  {
+      name: "I don't know",
+      title: "none is fine"
+    };
+    console.log("**************** Testing on cloud db store Start *************");
+    console.log(resource);
     this.client
-      .post(`/classes/${type}`, resource)
+      .post(`/classes/${type}`, data)
       .then((response) => {
         let _resource = _self.normalizeSingleResponse(response);
         _self.getResourceById(type, _resource.id, callback);

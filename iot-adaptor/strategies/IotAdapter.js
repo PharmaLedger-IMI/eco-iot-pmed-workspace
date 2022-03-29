@@ -40,7 +40,7 @@ $$.flow.describe('IotAdaptor', {
         // }
     },
     createResource: function (resourceType, jsonData, callback) {
-        //this.fhir.createResource(resourceType, jsonData, callback);
+        //this.fhir.createResource(resourceType, jsonData, callback);        
         this.mainDb.createResource(resourceType, jsonData, callback);
     },
     updateResource: function (resourceType, id, jsonData, callback) {
