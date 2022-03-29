@@ -2,39 +2,7 @@ const { WebcController } = WebCardinal.controllers;
 const commonServices = require("common-services");
 import StudiesService from "../services/StudiesService.js";
 const {EvidenceService} = commonServices;
-const { DataSource } = WebCardinal.dataSources;
-
-
-class EvidenceDataSource extends DataSource {
-    constructor(data) {
-        super();
-        this.model.evidences = data;
-        this.model.elements = 8;
-        this.setPageSize(this.model.elements);
-        this.model.noOfColumns = 6;
-    }
-
-    async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
-        console.log({startOffset, dataLengthForCurrentPage});
-        if (this.model.evidences.length <= dataLengthForCurrentPage) {
-            this.setPageSize(this.model.evidences.length);
-        }
-        else {
-            this.setPageSize(this.model.elements);
-        }
-        let slicedData = [];
-        this.setRecordsNumber(this.model.evidences.length);
-        if (dataLengthForCurrentPage > 0) {
-            slicedData = Object.entries(this.model.evidences).slice(startOffset, startOffset + dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        } else {
-            slicedData = Object.entries(this.model.evidences).slice(0, startOffset - dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        }
-        return slicedData;
-    }
-}
-
+const DataSourceFactory = commonServices.getDataSourceFactory();
 
 export default class EvidenceListController extends WebcController {
     constructor(...props) {
@@ -78,7 +46,7 @@ export default class EvidenceListController extends WebcController {
         getEvidences().then(data => {
             let evidences = data.filter(data => data.studyID === this.model.studyID);
             this.model.hasEvidence = evidences.length !== 0;
-            this.model.evidenceDataSource = new EvidenceDataSource(evidences);
+            this.model.evidenceDataSource = DataSourceFactory.createDataSource(6, 8, evidences);
             const { evidenceDataSource } = this.model;
 
             this.onTagClick("view-evidence", (model) => {

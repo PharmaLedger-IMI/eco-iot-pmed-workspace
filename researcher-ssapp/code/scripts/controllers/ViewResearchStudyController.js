@@ -1,49 +1,8 @@
 const {WebcController} = WebCardinal.controllers;
 import StudyNotesService from "../services/StudyNotesService.js"
 import StudiesService from "../services/StudiesService.js";
-const { DataSource } = WebCardinal.dataSources;
-
-
-class NotesDataSource extends DataSource {
-    constructor(notes) {
-        super();
-        this.model.notes = notes;
-        this.model.elements = 10;
-        this.setPageSize(this.model.elements);
-        this.model.noOfColumns = 3;
-    }
-
-    addNewNotes(notes){
-        if(notes.length === 0){
-            return;
-        }
-        this.model.notes.push(...notes);
-        //update the dataSize while the webc-component is not yet aware of updated data
-        this.getElement().dataSize = this.model.notes.length;
-        this.forceUpdate(true);
-    }
-
-    async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
-        console.log({startOffset, dataLengthForCurrentPage});
-        if (this.model.notes.length <= dataLengthForCurrentPage ){
-            this.setPageSize(this.model.notes.length);
-        }
-        else{
-            this.setPageSize(this.model.elements);
-        }
-        let slicedData = [];
-        this.setRecordsNumber(this.model.notes.length);
-        if (dataLengthForCurrentPage > 0) {
-            slicedData = Object.entries(this.model.notes).slice(startOffset, startOffset + dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        } else {
-            slicedData = Object.entries(this.model.notes).slice(0, startOffset - dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        }
-        return slicedData;
-    }
-}
-
+const commonServices = require("common-services");
+const DataSourceFactory = commonServices.getDataSourceFactory();
 
 export default class ViewResearchStudyController extends WebcController {
 
@@ -91,7 +50,19 @@ export default class ViewResearchStudyController extends WebcController {
             this.model.hasNotes = data.length>0;
             let notes = data.filter(note => note.studyID === this.model.uid);
             notes.forEach(note => note.date = new Date(note.date).toLocaleDateString());
-            this.model.notesDataSource = new NotesDataSource(notes);
+
+            this.model.notesDataSource = DataSourceFactory.createDataSource( 3, 10, notes);
+            this.model.notesDataSource.__proto__.addNewNotes = function(note) {
+
+                if(note.length === 0){
+                    return;
+                }
+
+                notes.push(...note);
+                //update the dataSize while the webc-component is not yet aware of updated data
+                this.getElement().dataSize = notes.length;
+                this.forceUpdate(true);
+            }
             const { notesDataSource } = this.model;
             this.onTagClick("prev-page", () => notesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => notesDataSource.goToNextPage());

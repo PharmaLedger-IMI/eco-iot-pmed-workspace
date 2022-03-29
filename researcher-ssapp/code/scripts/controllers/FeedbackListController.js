@@ -1,36 +1,7 @@
 const { WebcController } = WebCardinal.controllers;
 import FeedbackService from "../services/FeedbackService.js";
-const { DataSource } = WebCardinal.dataSources;
-
-
-class FeedbackDataSource extends DataSource {
-    constructor(data) {
-        super();
-        this.model.feedback = data;
-        this.model.elements = 5;
-        this.setPageSize(this.model.elements);
-        this.model.noOfColumns = 3;
-    }
-
-    async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
-       // console.log({startOffset, dataLengthForCurrentPage});
-        if (this.model.feedback.length <= dataLengthForCurrentPage ){
-           this.setPageSize(this.model.feedback.length);
-       }
-        else{
-           this.setPageSize(this.model.elements);
-       }
-        let slicedData = [];
-        this.setRecordsNumber(this.model.feedback.length);
-        if (dataLengthForCurrentPage > 0) {
-           slicedData = Object.entries(this.model.feedback).slice(startOffset, startOffset + dataLengthForCurrentPage).map(entry => entry[1]);
-       } else {
-            slicedData = Object.entries(this.model.feedback).slice(0, startOffset - dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        }
-        return slicedData;
-    }
-}
+const commonServices = require("common-services");
+const DataSourceFactory = commonServices.getDataSourceFactory();
 
 
 export default class FeedbackListController extends WebcController {
@@ -70,7 +41,7 @@ export default class FeedbackListController extends WebcController {
 
             let feedback = data.filter(data => data.studyID === this.model.studyID);
             this.model.hasFeedback = feedback.length !== 0;
-            this.model.feedbackDataSource = new FeedbackDataSource(feedback);
+            this.model.feedbackDataSource = DataSourceFactory.createDataSource(3, 5, feedback);
             const { feedbackDataSource } = this.model;
 
             this.onTagClick("view-feedback", (model) => {

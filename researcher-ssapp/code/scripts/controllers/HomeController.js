@@ -6,49 +6,12 @@ const MessageHandlerService = commonServices.MessageHandlerService;
 import StudiesService from "../services/StudiesService.js";
 import DPermissionService from "../services/DPermissionService.js";
 import StudyStatusesService from "../services/StudyStatusesService.js";
-const { DataSource } = WebCardinal.dataSources;
+const DataSourceFactory = commonServices.getDataSourceFactory();
 
 const ACTION_TYPES = {
     ADD: 'Add',
     EDIT: 'Edit'
 }
-
-class StudiesDataSource extends DataSource {
-    constructor(...props) {
-        super(...props);
-        this.model.studies = props[0];
-        this.model.elements = 10;
-        this.setPageSize(this.model.elements);
-        this.model.noOfColumns = 4;
-    }
-
-    updateData(updatedStudy) {
-        let toBeUpdatedIndex = this.model.studies.findIndex(study => updatedStudy.uid === study.uid);
-        this.model.studies[toBeUpdatedIndex] = updatedStudy;
-        this.forceUpdate(true);
-    }
-
-    async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
-        console.log({startOffset, dataLengthForCurrentPage});
-        if (this.model.studies.length <= dataLengthForCurrentPage ){
-            this.setPageSize(this.model.studies.length);
-        }
-        else{
-            this.setPageSize(this.model.elements);
-        }
-        let slicedData = [];
-        this.setRecordsNumber(this.model.studies.length);
-        if (dataLengthForCurrentPage > 0) {
-            slicedData = Object.entries(this.model.studies).slice(startOffset, startOffset + dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        } else {
-            slicedData = Object.entries(this.model.studies).slice(0, startOffset - dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        }
-        return slicedData;
-    }
-}
-
 
 export default class HomeController extends WebcController {
     constructor(...props) {
@@ -142,14 +105,19 @@ export default class HomeController extends WebcController {
             this.model.hasStudies = studies.length !== 0;
             this.prepareStudiesView(studies);
             this.studies = studies;
-            this.model.studiesDataSource = new StudiesDataSource(studies);
+            this.model.studiesDataSource = DataSourceFactory.createDataSource(8, 10, studies);
+            this.model.studiesDataSource.__proto__.updateData = function(updatedStudy) {
+                let toBeUpdatedIndex = studies.findIndex(study => updatedStudy.uid === study.uid);
+                studies[toBeUpdatedIndex] = updatedStudy;
+                this.forceUpdate(true);
+            }
             const { studiesDataSource } = this.model;
             this.onTagClick("view", (model) => {
                 let chosenStudy = studies.find(study => study.uid === model.uid);
                 let viewStatus = {
                     title: chosenStudy.title,
                     uid: chosenStudy.uid,
-                    breadcrumb:this.model.breadcrumb.toObject()
+                    breadcrumb: this.model.breadcrumb.toObject()
                 }
                 this.navigateToPageTag('view-research-study', viewStatus);
             });

@@ -1,36 +1,8 @@
 const { WebcController } = WebCardinal.controllers;
-const { DataSource } = WebCardinal.dataSources;
 import StudiesService from "../services/StudiesService.js";
+const commonServices = require("common-services");
+const DataSourceFactory = commonServices.getDataSourceFactory();
 
-
-class TestDataSource extends DataSource {
-    constructor(...props) {
-        super(...props);
-        this.model.studies = props[0];
-        this.setPageSize(5);
-        this.model.noOfColumns = 4;
-    }
-
-    async getPageDataAsync(startOffset, dataLengthForCurrentPage) {
-        console.log({startOffset, dataLengthForCurrentPage});
-        if (this.model.studies.length <= dataLengthForCurrentPage ){
-            this.setPageSize(this.model.studies.length);
-        }
-        else{
-            this.setPageSize(5);
-        }
-        let slicedData = [];
-        this.setRecordsNumber(this.model.studies.length);
-        if (dataLengthForCurrentPage > 0) {
-            slicedData = Object.entries(this.model.studies).slice(startOffset, startOffset + dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        } else {
-            slicedData = Object.entries(this.model.studies).slice(0, startOffset - dataLengthForCurrentPage).map(entry => entry[1]);
-            console.log(slicedData)
-        }
-        return slicedData;
-    }
-}
 
 export default class ResearchStudyListController extends WebcController {
     constructor(...props) {
@@ -50,7 +22,7 @@ export default class ResearchStudyListController extends WebcController {
         }
 
         getStudies().then(data => {
-            this.model.testDataSource = new TestDataSource(data);
+            this.model.testDataSource = DataSourceFactory(4, 5, data);
             const { testDataSource } = this.model;
             this.onTagClick("view", (model) => {
                 const { title, status } = model;
