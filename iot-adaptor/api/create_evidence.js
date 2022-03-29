@@ -1,12 +1,10 @@
 function createEvidence(request, response, next) {
-
     const domainConfig = {
         "type": "IotAdaptor",
         "option": {
             "endpoint": "http://localhost:3000/iotAdapter"
         }
     }
-
     let flow = $$.flow.start(domainConfig.type);
     flow.init(domainConfig);
     const keySSI = request.headers['x-keyssi'];
