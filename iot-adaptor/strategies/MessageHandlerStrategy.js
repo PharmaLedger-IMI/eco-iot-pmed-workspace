@@ -15,59 +15,114 @@ module.exports = async function (err, message) {
 
     switch (message.operation) {
         case "new_evidence":
-            console.log(message);
+            // console.log(message);
             evidenceService.mount(message.ssi, (err, mountedEntity) => {
                 if (err){
                     console.log(err);
                 }
                 const entityId = mountedEntity.uid;
+                console.log("**************** Data from Researcher SSAPP  ******************");
                 console.log(mountedEntity);
                 const domainConfig = {
-                "type": "IotAdaptor",
-                "option": {
-                    "endpoint": "http://localhost:3000/iotAdapter"
+                    "type": "IotAdaptor",
+                    "option": {
+                        "endpoint": "http://localhost:3000/iotAdapter"
+                    }
                 }
-            }
                 let flow = $$.flow.start(domainConfig.type);
                 flow.init(domainConfig);
                 const dbName = "clinicalDecisionSupport";
-            
-                flow.createDsuResource(entityId, dbName, "Evidence", mountedEntity, (error, result) => {
-                    if (error) {
-                        // console.log("Error create Evidence");
-                        return response.send(error.status, error);
-                    } else {
-                        flow.createResource("Evidence", mountedEntity,(err, res)=>{
-                            if (error) {
-                                // console.log("Error create Evidence");
-                                console.log(error.status, error);
-                            }
-                            else console.log(200, result);
-                        });
-                        
-                    }
-                });
-                // evidenceService.getEvidences((err, evidences) => {
-                //     console.log("Total evidences:", evidences.length);
+                var evidenceData = {
+                    "resourceType": "Evidence",
+                    "url": "https://pharmaledger.eu/",
+                    "identifier": [ {
+                      "use": "temp",
+                      "system": "http://example.com/Identifier-0",
+                      "value": mountedEntity.uid
+                    } ],
+                    "title": mountedEntity.title,
+                    "subtitle": mountedEntity.subtitle,
+                    "description": mountedEntity.description,
+                    "version": mountedEntity.version,
+                    "status": mountedEntity.status,
+                    "exposureBackground": {
 
-                //     evidenceService.getEvidence(entityId, (err, evidence) => {
-                //         evidence.title = "The updated title from IOT Adaptor";
-                //         evidenceService.updateEvidence(evidence, () => {
-                //             console.log("Evidence updated");
-                //         });
-                //     })
-                // })
+                    },
+                    "useContext": [ {
+                      "code": {
+                        "system": "http://example.com/Coding-0",
+                        "code": "Coding-261"
+                      }
+                    } ],
+                    "topic": [ {
+                      "coding": [ {
+                        "system": "http://example.com/CodeableConcept-0",
+                        "code": "CodeableConcept-186"
+                      } ]
+                    } ]
+                  };
+                flow.createResource("Evidence", evidenceData,(error, result)=>{
+                    if (error) {
+                        console.log(error);
+                    }
+                    else console.log(result);
+                });
             });
             break;
-        case "add_device":
+
+            case "list_evidences":
+                const domainConfig = {
+                    "type": "IotAdaptor",
+                    "option": {
+                        "endpoint": "http://localhost:3000/iotAdapter"
+                    }
+                }
+                let flow = $$.flow.start(domainConfig.type);
+                flow.init(domainConfig);
+                flow.searchResources("Evidence","Evidence", (error, result)=>{
+                    if (error) {
+                        console.log(error);
+                    }
+                    else console.log(result);
+                });
+            break;
+
+            case "add_device":
+            deviceService.mountDevice(message.sReadSSI, (err, mountedDevice) => {
+                if (err){
+                    console.log(err);
+                }
+                const entityId = mountedDevice.sReadSSI;
+                console.log(mountedDevice);
+                const domainConfig = {
+                    "type": "IotAdaptor",
+                    "option": {
+                        "endpoint": "http://127.0.0.1:3000/adaptor"
+                    }
+                };
+                let flow = $$.flow.start(domainConfig.type);
+                flow.init(domainConfig);
+                const dbName = "clinicalDecisionSupport";
+                flow.createResource(entityId, dbName, "Device", mountedDevice , (error, result) => {
+                    if (error) {
+                        console.log(error.status, error);
+                    } else {
+                        console.log(200, result);
+                    }
+                });
+                // Push it to the hospital database or the iot Adaptor wallet
+
+            });
+            break;
+
+            case "update_device":
             console.log(message);
             deviceService.mountDevice(message.sReadSSI, (err, mountedDevice) => {
                 if (err){
                     console.log(err);
                 }
                 const entityId = mountedDevice.sReadSSI;
-                console.log(mountedDevice)
-
+                console.log(mountedDevice);
                 const domainConfig = {
                     "type": "IotAdaptor",
                     "option": {
@@ -85,11 +140,7 @@ module.exports = async function (err, message) {
                         console.log(200, result);
                     }
                 });
-
                 // Push it to the hospital database or the iot Adaptor wallet
-
-
-
 
             });
             break;
