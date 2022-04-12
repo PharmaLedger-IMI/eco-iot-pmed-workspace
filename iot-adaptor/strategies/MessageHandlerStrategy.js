@@ -70,19 +70,43 @@ module.exports = async function (err, message) {
             break;
 
             case "list_evidences":
-                const domainConfig = {
-                    "type": "IotAdaptor",
-                    "option": {
-                        "endpoint": "http://localhost:3000/iotAdapter"
+                {
+                    const domainConfig = {
+                        "type": "IotAdaptor",
+                        "option": {
+                            "endpoint": "http://localhost:3000/iotAdapter"
+                        }
                     }
+                    let flow = $$.flow.start(domainConfig.type);
+                    flow.init(domainConfig);
+                    flow.searchResources("Evidence", (error, result)=>{
+                        if (error) {
+                            console.log(error);
+                        }
+                        else console.log(result);
+                    });
                 }
-                let flow = $$.flow.start(domainConfig.type);
-                flow.init(domainConfig);
-                flow.searchResources("Evidence", (error, result)=>{
-                    if (error) {
-                        console.log(error);
+            break;
+
+            case "get_a_evidence":
+                evidenceService.mount(message.ssi, (err, mountedEntity) => {
+                    if (err){
+                        console.log(err);
                     }
-                    else console.log(result);
+                    const domainConfig = {
+                        "type": "IotAdaptor",
+                        "option": {
+                            "endpoint": "http://localhost:3000/iotAdapter"
+                        }
+                    }
+                    let flow = $$.flow.start(domainConfig.type);
+                    flow.init(domainConfig);
+                    flow.getResourceById("Evidence", mountedEntity.objectId, (error, result)=>{
+                        if (error) {
+                            console.log(error);
+                        }
+                        else console.log(result);
+                    });
                 });
             break;
 
@@ -112,7 +136,31 @@ module.exports = async function (err, message) {
 
             });
             break;
+
+            case "delete_evidence":
+                evidenceService.mount(message.ssi, (err, mountedEntity) => {
+                    if (err){
+                        console.log(err);
+                    }
+                    const domainConfig = {
+                        "type": "IotAdaptor",
+                        "option": {
+                            "endpoint": "http://localhost:3000/iotAdapter"
+                        }
+                    }
+                    let flow = $$.flow.start(domainConfig.type);
+                    flow.init(domainConfig);
+                    flow.deleteResource("Evidence", mountedEntity.objectId, (error, result)=>{
+                        if (error) {
+                            console.log(error);
+                        }
+                        else console.log(result);
+                    });
+                });
+            break;
+
             /**  End Message Service for Evidence */
+
 
             /**  Start Message Service for Device */
 
@@ -193,9 +241,52 @@ module.exports = async function (err, message) {
                         console.log(result);
                     }
                 });
-                // Push it to the hospital database or the iot Adaptor wallet
 
             });
+            break;
+
+            case "get_a_device":
+                evidenceService.mount(message.ssi, (err, mountedEntity) => {
+                    if (err){
+                        console.log(err);
+                    }
+                    const domainConfig = {
+                        "type": "IotAdaptor",
+                        "option": {
+                            "endpoint": "http://localhost:3000/iotAdapter"
+                        }
+                    }
+                    let flow = $$.flow.start(domainConfig.type);
+                    flow.init(domainConfig);
+                    flow.getResourceById("Device", mountedEntity.objectId, (error, result)=>{
+                        if (error) {
+                            console.log(error);
+                        }
+                        else console.log(result);
+                    });
+                });
+            break;
+
+            case "delete_device":
+                evidenceService.mount(message.ssi, (err, mountedEntity) => {
+                    if (err){
+                        console.log(err);
+                    }
+                    const domainConfig = {
+                        "type": "IotAdaptor",
+                        "option": {
+                            "endpoint": "http://localhost:3000/iotAdapter"
+                        }
+                    }
+                    let flow = $$.flow.start(domainConfig.type);
+                    flow.init(domainConfig);
+                    flow.deleteResource("Device", mountedEntity.objectId, (error, result)=>{
+                        if (error) {
+                            console.log(error);
+                        }
+                        else console.log(result);
+                    });
+                });
             break;
             
 
