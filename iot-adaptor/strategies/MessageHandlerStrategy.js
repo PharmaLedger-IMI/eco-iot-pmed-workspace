@@ -15,12 +15,10 @@ module.exports = async function (err, message) {
 
     switch (message.operation) {
         case "new_evidence":
-            // console.log(message);
             evidenceService.mount(message.ssi, (err, mountedEntity) => {
                 if (err){
                     console.log(err);
                 }
-                const entityId = mountedEntity.uid;
                 console.log("**************** Data from Researcher SSAPP  ******************");
                 console.log(mountedEntity);
                 const domainConfig = {
@@ -92,7 +90,7 @@ module.exports = async function (err, message) {
                 if (err){
                     console.log(err);
                 }
-                const entityId = mountedDevice.sReadSSI;
+                console.log("**************** Data from Clinical Site SSAPP  ******************");
                 console.log(mountedDevice);
                 const domainConfig = {
                     "type": "IotAdaptor",
@@ -100,15 +98,24 @@ module.exports = async function (err, message) {
                         "endpoint": "http://127.0.0.1:3000/adaptor"
                     }
                 };
+                var deviceData = {
+                    "resourceType": mountedDevice.resourceType,
+                    "identifier": mountedDevice.identifier,
+                    "status": mountedDevice.status,
+                    "manufacturer": mountedDevice.manufacturer,
+                    "deviceName": mountedDevice.device,
+                    "modelNumber": mountedDevice.modelNumber,
+                    "serialNumber": mountedDevice.deviceId                    
+                  };
+                
                 let flow = $$.flow.start(domainConfig.type);
                 flow.init(domainConfig);
                 const dbName = "clinicalDecisionSupport";
-                flow.createResource(entityId, dbName, "Device", mountedDevice , (error, result) => {
+                flow.createResource("Device", deviceData,(error, result)=>{
                     if (error) {
-                        console.log(error.status, error);
-                    } else {
-                        console.log(200, result);
+                        console.log(error);
                     }
+                    else console.log(result);
                 });
                 // Push it to the hospital database or the iot Adaptor wallet
 
@@ -129,10 +136,10 @@ module.exports = async function (err, message) {
                         "endpoint": "http://127.0.0.1:3000/adaptor"
                     }
                 };
-
                 let flow = $$.flow.start(domainConfig.type);
                 flow.init(domainConfig);
                 const dbName = "clinicalDecisionSupport";
+                
                 flow.createDsuResource(entityId, dbName, "Device", mountedDevice , (error, result) => {
                     if (error) {
                         console.log(error.status, error);
