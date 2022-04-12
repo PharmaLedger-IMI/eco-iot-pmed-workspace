@@ -14,6 +14,7 @@ module.exports = async function (err, message) {
     const deviceService = new DeviceServices();
 
     switch (message.operation) {
+        /**  Start Message Service for Evidence */
         case "new_evidence":
             evidenceService.mount(message.ssi, (err, mountedEntity) => {
                 if (err){
@@ -77,13 +78,43 @@ module.exports = async function (err, message) {
                 }
                 let flow = $$.flow.start(domainConfig.type);
                 flow.init(domainConfig);
-                flow.searchResources("Evidence","Evidence", (error, result)=>{
+                flow.searchResources("Evidence", (error, result)=>{
                     if (error) {
                         console.log(error);
                     }
                     else console.log(result);
                 });
             break;
+
+            case "update_evidence":
+            console.log(message);
+            deviceService.mountDevice(message.sReadSSI, (err, mountedDevice) => {
+                if (err){
+                    console.log(err);
+                }
+                const entityId = mountedDevice.objectId;
+                console.log(mountedDevice);
+                const domainConfig = {
+                    "type": "IotAdaptor",
+                    "option": {
+                        "endpoint": "http://127.0.0.1:3000/adaptor"
+                    }
+                };
+                let flow = $$.flow.start(domainConfig.type);
+                flow.init(domainConfig);
+                flow.updateResource("Evidence", entityId,  mountedDevice , (error, result) => {
+                    if (error) {
+                        console.log(error.status, error);
+                    } else {
+                        console.log(result);
+                    }
+                });
+
+            });
+            break;
+            /**  End Message Service for Evidence */
+
+            /**  Start Message Service for Device */
 
             case "add_device":
             deviceService.mountDevice(message.sReadSSI, (err, mountedDevice) => {
@@ -110,16 +141,33 @@ module.exports = async function (err, message) {
                 
                 let flow = $$.flow.start(domainConfig.type);
                 flow.init(domainConfig);
-                const dbName = "clinicalDecisionSupport";
                 flow.createResource("Device", deviceData,(error, result)=>{
                     if (error) {
                         console.log(error);
                     }
                     else console.log(result);
                 });
-                // Push it to the hospital database or the iot Adaptor wallet
 
             });
+            break;
+            
+            case "list_device":
+                {
+                    const domainConfig = {
+                        "type": "IotAdaptor",
+                        "option": {
+                            "endpoint": "http://localhost:3000/iotAdapter"
+                        }
+                    }
+                    let flow = $$.flow.start(domainConfig.type);
+                    flow.init(domainConfig);
+                    flow.searchResources("Device", (error, result)=>{
+                        if (error) {
+                            console.log(error);
+                        }
+                        else console.log(result);
+                    });
+                }
             break;
 
             case "update_device":
@@ -128,7 +176,7 @@ module.exports = async function (err, message) {
                 if (err){
                     console.log(err);
                 }
-                const entityId = mountedDevice.sReadSSI;
+                const entityId = mountedDevice.objectId;
                 console.log(mountedDevice);
                 const domainConfig = {
                     "type": "IotAdaptor",
@@ -138,19 +186,21 @@ module.exports = async function (err, message) {
                 };
                 let flow = $$.flow.start(domainConfig.type);
                 flow.init(domainConfig);
-                const dbName = "clinicalDecisionSupport";
-                
-                flow.createDsuResource(entityId, dbName, "Device", mountedDevice , (error, result) => {
+                flow.updateResource("Device", entityId,  mountedDevice , (error, result) => {
                     if (error) {
                         console.log(error.status, error);
                     } else {
-                        console.log(200, result);
+                        console.log(result);
                     }
                 });
                 // Push it to the hospital database or the iot Adaptor wallet
 
             });
             break;
+            
+
+            /**  End Message Service for Device */
+
         default:
             console.log("*******************************");
             console.log(`Received message from ${message.senderIdentity}`);
