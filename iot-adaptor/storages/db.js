@@ -119,6 +119,18 @@ class DbStorage {
         callback(_self.normalizeErrorResponse(error), null);
       });
   }
+  getResourceBySk(type, id, callback) {
+    const _self = this;
+    
+    this.client
+      .get(`/classes/${type}?where={"meta.sk": ${id}}`)
+      .then((response) => {
+        callback(undefined, _self.normalizeCollectionResponse(response));
+      })
+      .catch((error) => {
+        callback(_self.normalizeErrorResponse(error), null);
+      });
+  }
 
 
   async getResourceByIdAsync(type, id) {

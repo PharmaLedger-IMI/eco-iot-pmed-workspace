@@ -50,6 +50,9 @@ $$.flow.describe('IotAdaptor', {
         //this.fhir.getResourceById(resourceType, id, callback);
         this.mainDb.getResourceById(resourceType, id, callback);
     },
+    getResourceBySk: function (resourceType, id, callback) {
+      this.mainDb.getResourceBySk(resourceType, id, callback);
+  },
     getObservationByPatientId: function (resourceType, id, callback) {
       //this.fhir.getResourceById(resourceType, id, callback);
         this.mainDb.getObservationByPatientId(resourceType, id, callback);

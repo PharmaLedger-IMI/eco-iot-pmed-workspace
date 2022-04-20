@@ -33,11 +33,16 @@ module.exports = async function (err, message) {
                 const dbName = "clinicalDecisionSupport";
                 var evidenceData = {
                     "resourceType": "Evidence",
-                    "url": "https://pharmaledger.eu/",
+                    "meta": {
+                        "sk": mountedEntity.uid
+                    },
                     "identifier": [ {
-                      "use": "temp",
-                      "system": "http://example.com/Identifier-0",
-                      "value": mountedEntity.uid
+                        "type": {
+                            "text": "KeySSI"
+                          },
+                        "use": "secondary",
+                        "system": "https://pharmaledger.eu",
+                        "value": mountedEntity.uid
                     } ],
                     "title": mountedEntity.title,
                     "subtitle": mountedEntity.subtitle,
@@ -47,19 +52,13 @@ module.exports = async function (err, message) {
                     "exposureBackground": {
 
                     },
-                    "useContext": [ {
-                      "code": {
-                        "system": "http://example.com/Coding-0",
-                        "code": "Coding-261"
-                      }
-                    } ],
-                    "topic": [ {
-                      "coding": [ {
-                        "system": "http://example.com/CodeableConcept-0",
-                        "code": "CodeableConcept-186"
-                      } ]
-                    } ]
+                    "topic": [ 
+                        {
+                        "text": mountedEntity.topic
+                        }
+                    ]
                   };
+
                 flow.createResource("Evidence", evidenceData,(error, result)=>{
                     if (error) {
                         console.log(error);
