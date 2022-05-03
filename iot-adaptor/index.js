@@ -73,6 +73,7 @@ async function IotAdaptor(server) {
     const UpdateEvidence = require('./api/update_evidence.js');
     const DeleteEvidence = require('./api/delete_evidence.js');
     const GetEvidenceById = require('./api/get_evidence_by_id.js');
+    const GetEvidenceBySk = require('./api/get_evidence_by_sk.js');
 
     const CreateDevice = require('./api/create_device.js');
     const SearchDevice = require('./api/search_device.js');
@@ -139,6 +140,7 @@ async function IotAdaptor(server) {
     server.put(`/iotAdapter/update-evidence/:id`, UpdateEvidence);
     server.delete(`/iotAdapter/delete-evidence/:id`, DeleteEvidence);
     server.get(`/iotAdapter/get-evidence/:id`, GetEvidenceById);
+    server.get(`/iotAdapter/get-evidence-sk/:id`, GetEvidenceBySk);
 
     server.get(`/iotAdapter/search-device`, SearchDevice);
     //server.post(`/iotAdapter/create-device`, requestBodyJSONMiddleware);
