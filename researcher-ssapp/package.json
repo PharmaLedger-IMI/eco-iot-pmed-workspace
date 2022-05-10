@@ -1,31 +1,32 @@
 {
-  "name": "ssapp-template",
+  "name": "researcher-ssapp",
   "version": "1.0.0",
-  "description": "SSApp Template",
+  "description": "Researcher SSApp",
   "main": "index.js",
   "scripts": {
     "postinstall": "node ./node_modules/octopus/scripts/run",
     "prebuild": "node ./node_modules/octopus/scripts/run prebuild devmode",
     "build": "node ./node_modules/octopus/scripts/buildDSU.js",
-    "postbuild": "node ./node_modules/octopus/scripts/run postbuild devmode",
     "update": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PrivateSky/ssapp-template.git"
+    "url": "git+https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "octopus": "git+https://github.com/PrivateSky/octopus.git"
   },
   "keywords": [
-    "ssapp"
+    "ssapp",
+    "iot",
+    "pmed",
+    "researcher"
   ],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PrivateSky/ssapp-template/issues"
+    "url": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace/issues"
   },
-  "homepage": "https://github.com/PrivateSky/ssapp-template#readme"
+  "homepage": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace#readme"
 }

@@ -2,6 +2,21 @@
 	"workDir": ".",
 	"dependencies": [
 		{
+			"name": "webcardinal/bundle",
+			"src": "https://github.com/webcardinal/webcardinal-all-release",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd webcardinal && npm install"
+				}
+			]
+		},
+		{
 			"name": "cardinal",
 			"src": "http://github.com/privatesky/cardinal.git",
 			"actions": [
@@ -21,29 +36,13 @@
 			]
 		},
 		{
-			"name": "webcardinal",
-			"src": "https://github.com/webcardinal/webcardinal-bundler",
-			"actions": [
-				{
-					"type": "smartClone",
-					"target": ".",
-					"collectLog": false
-				},
-				{
-					"type": "execute",
-					"cmd": "cd webcardinal && npm install && npm run bundle-all && npm run build"
-				}
-			]
-		},
-		{
 			"name": "privatesky",
 			"src": "http://github.com/privatesky/psk-release.git",
 			"actions": [
 				{
 					"type": "smartClone",
 					"target": ".",
-					"collectLog": false,
-					"commit": "e7c923dbaf6cbe75041bcfb1dd8600b8ddb0508d"
+					"collectLog": false
 				},
 				{
 					"type": "execute",
