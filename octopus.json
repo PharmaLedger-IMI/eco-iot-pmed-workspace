@@ -294,7 +294,7 @@
 			"actions": [
 				{
 					"type": "execute",
-					"cmd": "cd webcardinal && npm run build-dossier"
+					"cmd": "cd webcardinal && npm run build"
 				}
 			]
 		},
@@ -488,5 +488,6 @@
 				}
 			]
 		}
-	]
+	],
+	"install-mobile": []
 }
