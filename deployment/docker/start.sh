@@ -2,8 +2,8 @@
 name="$(./util/name.sh -1)"
 
 docker run --detach \
-    --hostname epi \
+    --hostname iot-pmed \
     --publish 8080:8080 \
     --name $name \
     --restart always \
-    pharmaledger/epi
+    paiuscatalin/iot-pmed
