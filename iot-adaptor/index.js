@@ -19,7 +19,7 @@ const publicName = process.env.IOT_ADAPTOR_DID;
 
 const express = require('express');
 const server = express();
-const port = 3000;
+const port = process.env.IOT_ADAPTOR_PORT;
 
 async function setupIoTAdaptorEnvironment() {
 
@@ -182,7 +182,7 @@ function getAdaptorIdentity(request, response, next) {
 
 
     const resolveDid = () => {
-        DidService.getDidServiceInstance().getDID().then((did) => {
+        DidService.getDidServiceInstance().getEnvironmentData().then(({did}) => {
             responseCallback(undefined, did);
         }).catch(responseCallback);
     }
