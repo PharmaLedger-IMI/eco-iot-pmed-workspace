@@ -181,7 +181,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "023a31c7c305304a9d0fafb6e3a1217c172e705d"
+                    "commit": "565ea4b7d74942e314395cd823d018e859bc5c7a"
                 },
                 {
                     "type": "execute",
@@ -197,7 +197,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "a8753a774b97b8989cde8d638d5d3759e2a1085a"
+                    "commit": "88cae6e1959a6bcbfd5b356a7159a9c2404e1a8c"
                 },
                 {
                     "type": "execute",
@@ -505,5 +505,7 @@
             ]
         }
     ],
-    "install-mobile": []
+    "install-mobile": [],
+    "build-mobile": [],
+    "docs": []
 }
