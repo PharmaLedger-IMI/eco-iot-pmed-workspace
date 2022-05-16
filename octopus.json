@@ -489,5 +489,7 @@
 			]
 		}
 	],
-	"install-mobile": []
+	"install-mobile": [],
+	"build-mobile": [],
+	"docs": []
 }
