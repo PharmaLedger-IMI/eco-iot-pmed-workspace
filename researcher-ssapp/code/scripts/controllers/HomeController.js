@@ -1,7 +1,6 @@
 const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
 const DidService =commonServices.DidService;
-const {getCommunicationServiceInstance} = commonServices.CommunicationService;
 const MessageHandlerService = commonServices.MessageHandlerService;
 import StudiesService from "../services/StudiesService.js";
 import DPermissionService from "../services/DPermissionService.js";
@@ -77,15 +76,6 @@ export default class HomeController extends WebcController {
         })
     }
 
-
-    // TODO: Remove this when tests are completed.
-    sendEchoMessageToIotAdaptor() {
-        this.CommunicationService = getCommunicationServiceInstance();
-        this.CommunicationService.sendMessageToIotAdaptor( {
-            message: "Echo message"
-        });
-    }
-
     async initServices() {
         this.DPermissionService = new DPermissionService();
         this.StudiesService = new StudiesService();
@@ -155,7 +145,6 @@ export default class HomeController extends WebcController {
             });
             this.onTagClick("prev-page", () => studiesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => studiesDataSource.goToNextPage());
-            this.sendEchoMessageToIotAdaptor();
         })
 
         this.model.did = await DidService.getDidServiceInstance().getDID();
