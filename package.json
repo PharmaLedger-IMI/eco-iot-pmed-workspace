@@ -1,7 +1,7 @@
 {
   "name": "iot-pmed-workspace",
   "version": "0.2.1",
-  "description": "",
+  "description": "IoT PMED Workspace",
   "scripts": {
     "dev-install": "node ./bin/mkDevEnv.js && npm install",
     "postinstall": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"node ./node_modules/octopus/scripts/run\"",
@@ -17,9 +17,7 @@
     "bind-app": "node ./node_modules/octopus/scripts/bind --type=app",
     "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
     "server": "npm run apihub",
-    "iot-adaptor-server": "npm run iot-adaptor",
     "apihub": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd privatesky && npm run start\"",
-    "iot-adaptor": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd iot-adaptor && npm run start\"",
     "switch-to-release": "npm run remove privatesky && npm run add privatesky http://github.com/privatesky/psk-release.git 0",
     "switch-to-dev": "npm run remove privatesky && npm run add privatesky http://github.com/privatesky/privatesky.git 0",
     "watch": "node ./bin/watcher/watcher.js",
@@ -38,14 +36,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PharmaLedger-IMI/epi-workspace.git"
+    "url": "git+https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PharmaLedger-IMI/epi-workspace/issues"
+    "url": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace/issues"
   },
-  "homepage": "https://github.com/PharmaLedger-IMI/epi-workspace#readme",
+  "homepage": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace#readme",
   "dependencies": {
     "octopus": "git+http://github.com/privatesky/octopus.git"
   }

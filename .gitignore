@@ -20,7 +20,6 @@ env.json.devel
 apihub-root/ediary-wallet/loader
 latest-change-set.txt
 apihub-root/messaging/queues.json
-iot-adaptor/data
 clinical-site-ssapp
 seed
 apps-patch
