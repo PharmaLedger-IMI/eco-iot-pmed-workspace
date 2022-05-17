@@ -51,6 +51,40 @@
 			]
 		},
 		{
+			"name": "common-services",
+			"src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd common-services && npm install"
+				},
+				{
+					"type": "execute",
+					"cmd": "cd common-services && npm run build"
+				}
+			]
+		},
+		{
+			"name": "iot-adaptor",
+			"src": "http://github.com/paiusCatalin/iot-adapter.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd iot-adaptor && npm install"
+				}
+			]
+		},
+		{
 			"name": "dossier-explorer-wallet-prototype",
 			"src": "https://github.com/PrivateSky/dossier-explorer-wallet-prototype.git",
 			"actions": [
@@ -194,25 +228,6 @@
 			]
 		},
 		{
-			"name": "common-services",
-			"src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
-			"actions": [
-				{
-					"type": "smartClone",
-					"target": ".",
-					"collectLog": false
-				},
-				{
-					"type": "execute",
-					"cmd": "cd common-services && npm install"
-				},
-				{
-					"type": "execute",
-					"cmd": "cd common-services && npm run build"
-				}
-			]
-		},
-		{
 			"name": "themes/clinical-site-theme",
 			"src": "https://github.com/PharmaLedger-IMI/clinical-site-theme.git",
 			"actions": [
@@ -264,16 +279,6 @@
 				{
 					"type": "execute",
 					"cmd": "cd researcher-ssapp && npm install"
-				}
-			]
-		},
-		{
-			"name": "iot-adaptor",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd iot-adaptor && npm install"
 				}
 			]
 		}
