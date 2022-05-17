@@ -9,7 +9,7 @@ RUN npm install -g node-gyp
 RUN apt-get -y install git
 
 ENV TARGET_FOLDER_NAME="iot-pmed-workspace"
-RUN git clone https://github.com/paiusCatalin/iot-pmed-workspace.git $TARGET_FOLDER_NAME
+RUN git clone https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git $TARGET_FOLDER_NAME
 
 RUN cd $TARGET_FOLDER_NAME && \
     npm install --unsafe-perm
