@@ -1,6 +1,0 @@
-version: '3.7'
-services:
-  web:
-    image: "hapiproject/hapi:v5.2.1"
-    ports:
-      - "8090:8080"

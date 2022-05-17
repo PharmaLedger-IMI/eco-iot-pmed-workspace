@@ -2,6 +2,21 @@
 	"workDir": ".",
 	"dependencies": [
 		{
+			"name": "webcardinal/bundle",
+			"src": "https://github.com/webcardinal/webcardinal-all-release",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd webcardinal && npm install"
+				}
+			]
+		},
+		{
 			"name": "cardinal",
 			"src": "http://github.com/privatesky/cardinal.git",
 			"actions": [
@@ -21,8 +36,8 @@
 			]
 		},
 		{
-			"name": "webcardinal",
-			"src": "https://github.com/webcardinal/webcardinal-bundler",
+			"name": "privatesky",
+			"src": "http://github.com/privatesky/psk-release.git",
 			"actions": [
 				{
 					"type": "smartClone",
@@ -31,23 +46,26 @@
 				},
 				{
 					"type": "execute",
-					"cmd": "cd webcardinal && npm install && npm run bundle-all && npm run build"
+					"cmd": "cd privatesky && npm install"
 				}
 			]
 		},
 		{
-			"name": "privatesky",
-			"src": "http://github.com/privatesky/psk-release.git",
+			"name": "common-services",
+			"src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
 			"actions": [
 				{
 					"type": "smartClone",
 					"target": ".",
-					"collectLog": false,
-					"commit": "e7c923dbaf6cbe75041bcfb1dd8600b8ddb0508d"
+					"collectLog": false
 				},
 				{
 					"type": "execute",
-					"cmd": "cd privatesky && npm install"
+					"cmd": "cd common-services && npm install"
+				},
+				{
+					"type": "execute",
+					"cmd": "cd common-services && npm run build"
 				}
 			]
 		},
@@ -195,25 +213,6 @@
 			]
 		},
 		{
-			"name": "common-services",
-			"src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
-			"actions": [
-				{
-					"type": "smartClone",
-					"target": ".",
-					"collectLog": false
-				},
-				{
-					"type": "execute",
-					"cmd": "cd common-services && npm install"
-				},
-				{
-					"type": "execute",
-					"cmd": "cd common-services && npm run build"
-				}
-			]
-		},
-		{
 			"name": "themes/clinical-site-theme",
 			"src": "https://github.com/PharmaLedger-IMI/clinical-site-theme.git",
 			"actions": [
@@ -267,16 +266,6 @@
 					"cmd": "cd researcher-ssapp && npm install"
 				}
 			]
-		},
-		{
-			"name": "iot-adaptor",
-			"src": "",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd iot-adaptor && npm install"
-				}
-			]
 		}
 	],
 	"build": [
@@ -295,7 +284,7 @@
 			"actions": [
 				{
 					"type": "execute",
-					"cmd": "cd webcardinal && npm run build-dossier"
+					"cmd": "cd webcardinal && npm run build"
 				}
 			]
 		},
@@ -489,5 +478,8 @@
 				}
 			]
 		}
-	]
+	],
+	"install-mobile": [],
+	"build-mobile": [],
+	"docs": []
 }
