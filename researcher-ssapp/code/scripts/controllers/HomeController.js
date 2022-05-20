@@ -148,11 +148,7 @@ export default class HomeController extends WebcController {
         })
 
         this.model.did = await DidService.getDidServiceInstance().getDID();
-        MessageHandlerService.init(async (err, data) =>{
-            if (err) {
-                return console.error(err);
-            }
-
+        MessageHandlerService.init(async (data) => {
             data = JSON.parse(data);
             console.log('Received Message', data);
 
