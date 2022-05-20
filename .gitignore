@@ -6,6 +6,7 @@ webcardinal
 cardinal
 privatesky
 dossier-explorer-wallet-prototype
+apihub-root/sponsor-wallet/loader
 apihub-root/patient-wallet/loader
 apihub-root/clinical-site-wallet/loader
 apihub-root/researcher-wallet/loader
@@ -28,5 +29,7 @@ common-services
 themes/trial-participant-theme
 themes/blue-fluorite-theme
 themes/clinical-site-theme
+themes/sponsor-theme
 trial-participant-ssapp
+sponsor-ssapp
 mqs

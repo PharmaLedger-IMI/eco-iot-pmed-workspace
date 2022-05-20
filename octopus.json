@@ -123,7 +123,7 @@
 			]
 		},
 		{
-			"name": "apihub-root/patient-wallet/loader",
+			"name": "apihub-root/sponsor-wallet/loader",
 			"src": "http://github.com/privatesky/trust-loader.git",
 			"actions": [
 				{
@@ -133,7 +133,7 @@
 				},
 				{
 					"type": "execute",
-					"cmd": "cd apihub-root/patient-wallet/loader && npm install"
+					"cmd": "cd apihub-root/sponsor-wallet/loader && npm install"
 				}
 			]
 		},
@@ -183,6 +183,21 @@
 			]
 		},
 		{
+			"name": "sponsor-ssapp",
+			"src": "https://github.com/PharmaLedger-IMI/eco-sponsor-ssapp.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd sponsor-ssapp && npm install"
+				}
+			]
+		},
+		{
 			"name": "clinical-site-ssapp",
 			"src": "https://github.com/PharmaLedger-IMI/clinical-site-ssapp.git",
 			"actions": [
@@ -209,6 +224,21 @@
 				{
 					"type": "execute",
 					"cmd": "cd trial-participant-ssapp && npm install"
+				}
+			]
+		},
+		{
+			"name": "themes/sponsor-theme",
+			"src": "https://github.com/PharmaLedger-IMI/eco-sponsor-theme.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+				},
+				{
+					"type": "execute",
+					"cmd": "cd themes/sponsor-theme && npm install"
 				}
 			]
 		},
@@ -285,6 +315,16 @@
 				{
 					"type": "execute",
 					"cmd": "cd webcardinal && npm run build"
+				}
+			]
+		},
+		{
+			"name": "sponsor-theme-wallet-build",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd themes/sponsor-theme && npm run build-dossier"
 				}
 			]
 		},
@@ -376,7 +416,7 @@
 			"actions": [
 				{
 					"type": "execute",
-					"cmd": "cd apihub-root/patient-wallet/loader && npm install"
+					"cmd": "cd apihub-root/sponsor-wallet/loader && npm install"
 				},
 				{
 					"type": "execute",
@@ -393,6 +433,32 @@
 				{
 					"type": "execute",
 					"cmd": "cd apihub-root/dsu-explorer/loader && npm install"
+				}
+			]
+		},
+		{
+			"name": "bind_sponsor_ssapp_to_wallet",
+			"src": "",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd sponsor-ssapp && npm run build"
+				},
+				{
+					"type": "copySeed",
+					"src": "./sponsor-ssapp/seed",
+					"target": "./apihub-root/sponsor-wallet/wallet-patch/seed",
+					"options": {
+						"overwrite": true
+					}
+				},
+				{
+					"type": "copySeed",
+					"src": "./sponsor-ssapp/seed",
+					"target": "./apihub-root/sponsor-wallet/apps-patch/sponsor-ssapp/seed",
+					"options": {
+						"overwrite": true
+					}
 				}
 			]
 		},
