@@ -10,32 +10,37 @@
         <div class="form-container">
             <div class="form-row">
 
-             <div class="form-group">
-                    
+                <div class="form-group">
+
                     <label class="col-form-label">{{@feedback_subject.label}}</label>
-                    <input class="form-control" data-view-model="@feedback_subject" id="@feedback_subject"/>
+                    <input class="form-control" data-view-model="@feedback_subject"/>
                 </div>
             </div>
-  
+
             <div class="form-row">
                 <div class="form-group">
-                    
+                    <label class="col-form-label">{{@subjects_did.label}}</label>
+                    <input class="form-control" data-view-model="@subjects_did"/>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+
                     <label class="col-form-label"><b>{{@feedback_content.label}}</b></label>
-                   
+
                     <textarea class="form-control" data-view-model="@feedback_content" id="@eedback_content" rows="5">
                     </textarea>
                 </div>
             </div>
-
-
-
-
         </div>
 
- 
         <footer class="button-group-wrapper">
             <button data-tag="go:back">Back</button>
             <button data-tag="feedback:send" disabled="@isFormFeedbackInvalid">Send</button>
         </footer>
+
+    </div>
+
     </div>
 </webc-container>

@@ -2,6 +2,11 @@
 const { WebcController } = WebCardinal.controllers;
 import FeedbackService from "../services/FeedbackService.js";
 
+const commonServices = require('common-services');
+const CommunicationService = commonServices.CommunicationService;
+
+const CONSTANTS = commonServices.Constants;
+
 export default class CreateFeedbackController extends WebcController {
     constructor(...props) {
 
@@ -11,7 +16,6 @@ export default class CreateFeedbackController extends WebcController {
 
         
         const { breadcrumb, ...state } = prevState;
- 
 
         this.model.breadcrumb = breadcrumb;
         this.model.breadcrumb.push({
@@ -27,6 +31,18 @@ export default class CreateFeedbackController extends WebcController {
         this._attachHandlerGoBack();
         this._attachHandlerFeedbackCreate();
 
+    }
+
+    sendMessageToTps( subjectsDids,feedbackSReadSSI) {
+        this.CommunicationService = CommunicationService.getCommunicationServiceInstance();
+
+        subjectsDids.forEach(did => {
+            this.CommunicationService.sendMessage( did, {
+                operation: CONSTANTS.NOTIFICATIONS_TYPE.NEW_FEEDBACK,
+                ssi: feedbackSReadSSI,
+                shortDescription: 'Researcher sent feedback to patient',
+            });
+        })
 
     }
 
@@ -36,8 +52,6 @@ export default class CreateFeedbackController extends WebcController {
             date: new Date().toISOString().slice(0, 10),
             feedback_content: this.model.feedback_content.value,
             feedback_subject: this.model.feedback_subject.value,
-            isFormFeedbackInvalid: false,
-            hasFeedback: true,
             studyID: this.model.studyID,
             studyTitle: this.model.studyTitle
         }
@@ -47,7 +61,7 @@ export default class CreateFeedbackController extends WebcController {
 
     saveFeedback() {
         this.FeedbackService = new FeedbackService();
-        this.FeedbackService.saveFeedback(this.prepareFeedbackDSUData(), (err, data) => {
+        this.FeedbackService.saveFeedback(this.prepareFeedbackDSUData(), (err, feedback) => {
 
             let feedbackState = {};
 
@@ -72,6 +86,8 @@ export default class CreateFeedbackController extends WebcController {
                 }
             }
             window.WebCardinal.loader.hidden = true;
+
+            this.sendMessageToTps(this.model.subjects_did.value.split(',').map(e=> e.trim()), feedback.sReadSSI);
             this.navigateToPageTag('feedback-list', feedbackState);
         })
     }
@@ -99,8 +115,8 @@ export default class CreateFeedbackController extends WebcController {
             feedback_subject: {
                 name: 'feedback_subject',
                 id: 'feedback_subject',
-                label: "Feedback subject",
-                placeholder: 'Subject',
+                label: "Feedback ID",
+                placeholder: 'Feedback ID',
                 required: true,
                 value: ""
             },
@@ -111,6 +127,11 @@ export default class CreateFeedbackController extends WebcController {
                 required: true,
                 placeholder: 'Description of the Feedback (Free Text - No limits of Characters)',
                 value: ""
+            },
+            subjects_did: {
+                value:'',
+                placeholder: 'subject did',
+                label: 'Subjects did'
             },
 
             isFormFeedbackInvalid:{
