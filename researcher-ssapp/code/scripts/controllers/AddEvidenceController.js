@@ -2,6 +2,8 @@ const { WebcController } = WebCardinal.controllers;
 const commonServices = require("common-services");
 const {EvidenceService} = commonServices;
 const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
+const CONSTANTS = commonServices.Constants;
+
 const COMMUNICATION_MESSAGES = {
     NEW_EVIDENCE:"new_evidence"
 }
@@ -25,10 +27,22 @@ export default class AddEvidenceController extends WebcController {
         this.model.studyID = state.uid;
         this.model = this.getEvidenceDetailsViewModel();
 
+        this.CommunicationService = getCommunicationServiceInstance();
+
         this._attachHandlerGoBack();
         this._attachHandlerAddEvidenceConfirm();
         console.log(this.model.studyID)
 
+    }
+
+    sendMessageToTps( subjectsDids, evidenceSReadSSI) {
+        subjectsDids.forEach(did => {
+            this.CommunicationService.sendMessage( did, {
+                operation: CONSTANTS.NOTIFICATIONS_TYPE.NEW_EVIDENCE,
+                ssi: evidenceSReadSSI,
+                shortDescription: 'Researcher sent evidence to patient',
+            });
+        })
     }
 
     prepareEvidenceDSUData() {
@@ -49,7 +63,7 @@ export default class AddEvidenceController extends WebcController {
     saveEvidence() {
         window.WebCardinal.loader.hidden = false;
         this.EvidenceService = new EvidenceService();
-        this.EvidenceService.saveEvidence(this.prepareEvidenceDSUData(), (err, data) => {
+        this.EvidenceService.saveEvidence(this.prepareEvidenceDSUData(), (err, evidence) => {
             let evidenceState = {};
 
             if (err) {
@@ -73,11 +87,13 @@ export default class AddEvidenceController extends WebcController {
             }
 
             //send evidence DSU to iotAdaptor
-            const communicationService = getCommunicationServiceInstance();
-            communicationService.sendMessageToIotAdaptor({
+            // const communicationService = getCommunicationServiceInstance();
+            this.CommunicationService.sendMessageToIotAdaptor({
                 operation:COMMUNICATION_MESSAGES.NEW_EVIDENCE,
-                ssi:data.keySSI
+                ssi:evidence.keySSI
             })
+
+            this.sendMessageToTps(this.model.subjects_did.value.split(',').map(e=> e.trim()), evidence.sReadSSI);
 
             window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('evidence-list', evidenceState);
@@ -113,6 +129,11 @@ export default class AddEvidenceController extends WebcController {
                 label: "Subtitle",
                 placeholder: 'Subtitle of the Evidence',
                 value: ""
+            },
+            subjects_did: {
+                value:'',
+                placeholder: 'subject did',
+                label: 'Subjects did'
             },
             version: {
                 name: 'version',
