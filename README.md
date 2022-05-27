@@ -18,7 +18,6 @@ If you have trouble installing the *iot-pmed-workspace*, please try to follow th
 
 ```sh
 $ git clone https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git
-```
 
 After the repository was cloned, you must install all the dependencies.
 
@@ -43,15 +42,8 @@ At the end of this command you get something similar to:
 
 ![alt text](scr-npm-run-server.png)
 
-### Step 3: Launch the iot-adaptor
-
-While in the *iot-pmed-workspace* folder run:
-
-```sh
-$ npm run iot-adaptor
-```
-
-NOTE: On Linux deployment based systems you can run directly ```npm run server``` instead of steps 2 and 3.    
+### Step 3: Install the iot-adapter
+[See how to install the iot-adapter](https://github.com/PharmaLedger-IMI/iot-adapter#readme)
 
 ### Step 4: Build all things needed for the application to run.
 
