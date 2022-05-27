@@ -1,6 +1,6 @@
-# iot-pmed-workspace
+# eco-iot-pmed-workspace
 
-*iot-pmed-workspace*  bundles all the necessary dependencies for building and running SSApps in a single package.
+*eco-iot-pmed-workspace*  bundles all the necessary dependencies for building and running SSApps in a single package.
 
 For more details about what a *workspace* is check out the [template-workspace](https://github.com/PrivateSky/template-workspace).
 
@@ -12,17 +12,17 @@ For more details about what a *workspace* is check out the [template-workspace](
 
 In order to use the workspace, we need to follow a list of steps presented below. 
 
-If you have trouble installing the *iot-pmed-workspace*, please try to follow the guide provided on [PrivateSky.xyz](https://privatesky.xyz/?Start/installation)
+If you have trouble installing the *eco-iot-pmed-workspace*, please try to follow the guide provided on [PrivateSky.xyz](https://privatesky.xyz/?Start/installation)
 
 ### Step 1: Clone the workspace
 
 ```sh
-$ git clone https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git
+$ git clone https://github.com/PharmaLedger-IMI/eco-iot-pmed-workspace.git
 
 After the repository was cloned, you must install all the dependencies.
 
 ```sh
-$ cd iot-pmed-workspace
+$ cd eco-iot-pmed-workspace
 #Important: for the development mode we proceed with npm run dev-install
 #For normal installation, the command is: npm install
 $ npm run dev-install 
@@ -32,7 +32,7 @@ $ npm run dev-install
 
 ### Step 2: Launch the api-hub
 
-While in the *iot-pmed-workspace* folder run:
+While in the *eco-iot-pmed-workspace* folder run:
 
 ```sh
 $ npm run apihub
@@ -54,7 +54,7 @@ Open a new console inside *iot-workspace* folder and run:
 $ npm run build-all
 ```
 
-To build individual applications open a new console inside *iot-pmed-workspace* folder and run one of the following commands:
+To build individual applications open a new console inside *eco-iot-pmed-workspace* folder and run one of the following commands:
 
 ```bash
 # Run this to build trial-participant-sapp
@@ -84,8 +84,8 @@ Steps:
 1. start from a fresh install of the workspace.
 
 ```
-git clone https://github.com/PharmaLedger-IMI/iot-pmed-workspace
-cd iot-pmed-workspace
+git clone https://github.com/PharmaLedger-IMI/eco-iot-pmed-workspace
+cd eco-iot-pmed-workspace
 ```
 
 2. run the installation process of the workspace
