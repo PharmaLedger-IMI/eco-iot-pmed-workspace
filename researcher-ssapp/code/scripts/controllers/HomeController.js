@@ -2,7 +2,7 @@ const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
 const DidService =commonServices.DidService;
 const MessageHandlerService = commonServices.MessageHandlerService;
-import StudiesService from "../services/StudiesService.js";
+const {StudiesService} = commonServices;
 import DPermissionService from "../services/DPermissionService.js";
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const DataSourceFactory = commonServices.getDataSourceFactory();

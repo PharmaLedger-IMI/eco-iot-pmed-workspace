@@ -1,7 +1,6 @@
 const { WebcController } = WebCardinal.controllers;
 const commonServices = require("common-services");
-import StudiesService from "../services/StudiesService.js";
-const {EvidenceService} = commonServices;
+const {StudiesService, EvidenceService} = commonServices;
 const DataSourceFactory = commonServices.getDataSourceFactory();
 
 export default class EvidenceListController extends WebcController {

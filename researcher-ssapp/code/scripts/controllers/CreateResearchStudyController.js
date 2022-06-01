@@ -1,9 +1,11 @@
 const {WebcController} = WebCardinal.controllers;
-import StudiesService from "../services/StudiesService.js";
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const commonServices = require("common-services");
+const {StudiesService} = commonServices;
 const contractModelHL7 = commonServices.models.ContractModel;
 const researchStudyModelHL7 = commonServices.models.ResearchStudyModel;
+const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
+const CONSTANTS = commonServices.Constants;
 
 
 export default class CreateResearchStudyController extends WebcController {
@@ -23,6 +25,7 @@ export default class CreateResearchStudyController extends WebcController {
 
         this._attachHandlerResearchStudyBack();
         this._attachHandlerResearchStudyNext();
+        this.CommunicationService = getCommunicationServiceInstance();
     }
 
     prepareContractStudy(){
@@ -78,6 +81,12 @@ export default class CreateResearchStudyController extends WebcController {
                 message.content = `The study ${this.model.title.value} has been created!`;
                 message.type = 'success'
             }
+
+            this.CommunicationService.sendMessageToIotAdaptor({
+                operation: CONSTANTS.NOTIFICATIONS_TYPE.NEW_STUDY,
+                ssi:data.sReadSSI
+            })
+
             window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('home', message);
         });
