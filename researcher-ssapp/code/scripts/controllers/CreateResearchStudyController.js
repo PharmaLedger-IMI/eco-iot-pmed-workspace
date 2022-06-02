@@ -82,7 +82,7 @@ export default class CreateResearchStudyController extends WebcController {
                 message.type = 'success'
             }
 
-            this.CommunicationService.sendMessageToIotAdaptor({
+            this.CommunicationService.sendMessageToIotAdapter({
                 operation: CONSTANTS.NOTIFICATIONS_TYPE.NEW_STUDY,
                 ssi:data.sReadSSI
             })

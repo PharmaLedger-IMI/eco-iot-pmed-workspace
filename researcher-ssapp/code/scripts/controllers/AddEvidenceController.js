@@ -88,7 +88,7 @@ export default class AddEvidenceController extends WebcController {
 
             //send evidence DSU to iotAdaptor
             // const communicationService = getCommunicationServiceInstance();
-            this.CommunicationService.sendMessageToIotAdaptor({
+            this.CommunicationService.sendMessageToIotAdapter({
                 operation:COMMUNICATION_MESSAGES.NEW_EVIDENCE,
                 ssi:evidence.keySSI
             })
