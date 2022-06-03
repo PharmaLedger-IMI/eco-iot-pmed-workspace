@@ -10,6 +10,10 @@ apihub-root/sponsor-wallet/loader
 apihub-root/patient-wallet/loader
 apihub-root/clinical-site-wallet/loader
 apihub-root/researcher-wallet/loader
+apihub-root/clinical-site-wallet/wallet-patch/seed
+apihub-root/researcher-wallet/wallet-patch/seed
+apihub-root/sponsor-wallet/wallet-patch/seed
+apihub-root/trial-participant-wallet/wallet-patch/seed
 apihub-root/dsu-explorer/
 apihub-root/internal-volume/domains
 apihub-root/external-volume/domains
