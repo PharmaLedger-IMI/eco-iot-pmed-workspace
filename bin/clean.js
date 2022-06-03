@@ -39,13 +39,21 @@ function  walk(dir, filterFiles, filterFolders, done) {
 
 
 
-function filterFiles(name){
-
-    if(name.endsWith("\\seed") || name.endsWith("/seed")){
+function filterFiles(name) {
+    if (name.endsWith("/seed") || name.endsWith("\\seed")) {
+        let readSSI;
+        try {
+            readSSI = fs.readFileSync(name);
+            readSSI = readSSI.toString();
+        } catch (e) {
+            return console.log(e);
+        }
+        if (!readSSI.includes("ssi:alias")) {
             console.log("Deleting seed file:", name);
             fs.unlinkSync(name);
         }
-    return undefined;
+        return undefined;
+    }
 }
 
 
@@ -79,7 +87,7 @@ function filterFolders(name) {
                     console.log(err);
                 }
                 queueList.forEach(queue => {
-                    deleteFolderContent(path.join(name, queue), "Deleting mqs")
+                    deleteFolderContent(path.join(name, queue), "Deleting mqs...")
                 })
             })
 
