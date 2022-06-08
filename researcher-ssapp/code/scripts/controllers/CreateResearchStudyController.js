@@ -62,7 +62,8 @@ export default class CreateResearchStudyController extends WebcController {
             sex: this.model.sex.value,
             pathologies: this.model.pathologies.value,
             others: this.model.others.value,
-            data: this.model.data.value
+            data: this.model.data.value,
+            researcherDID: this.model.researcherDID
         }
         let allData = {...this.prepareContractStudy(), ...viewData};
         return allData
@@ -308,7 +309,8 @@ export default class CreateResearchStudyController extends WebcController {
                     },
                 ],
                 value: prevState.data || ""
-            }
+            },
+            researcherDID: prevState.researcherDID || ""
         }
     }
 

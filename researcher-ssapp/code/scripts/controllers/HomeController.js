@@ -28,7 +28,7 @@ export default class HomeController extends WebcController {
 
     initHandlers() {
         this.onTagClick('new:study', () => {
-            this.navigateToPageTag('create-research-study', { breadcrumb: this.model.breadcrumb.toObject(), actionType: ACTION_TYPES.ADD });
+            this.navigateToPageTag('create-research-study', { breadcrumb: this.model.breadcrumb.toObject(), actionType: ACTION_TYPES.ADD, researcherDID: this.model.did });
         });
 
         
@@ -117,7 +117,8 @@ export default class HomeController extends WebcController {
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
                     breadcrumb: this.model.breadcrumb.toObject(),
-                    actionType: ACTION_TYPES.EDIT
+                    actionType: ACTION_TYPES.EDIT,
+                    researcherDID: this.model.did
                 }
                 this.navigateToPageTag('edit-research-study', studyState);
             });

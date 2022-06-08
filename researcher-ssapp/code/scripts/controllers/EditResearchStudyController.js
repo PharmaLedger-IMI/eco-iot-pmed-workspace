@@ -67,7 +67,8 @@ export default class EditResearchStudyController extends WebcController {
             sex: this.model.sex.value,
             pathologies: this.model.pathologies.value,
             others: this.model.others.value,
-            data: this.model.data.value
+            data: this.model.data.value,
+            researcherDID: this.model.researcherDID
         }
         let allData = {...this.prepareContractStudy(), ...viewData};
         allData = Object.assign(allData, {uid: this.model.study_id});
@@ -308,7 +309,8 @@ export default class EditResearchStudyController extends WebcController {
             },
         ],
         value: prevState.data || ""
-        }
+        },
+        researcherDID: prevState.researcherDID || ""
         }
     }
 
