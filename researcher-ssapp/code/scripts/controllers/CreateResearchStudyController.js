@@ -289,24 +289,30 @@ export default class CreateResearchStudyController extends WebcController {
                 required: true,
                 options: [{
                     label: "ECG",
-                    value: 'ECG'
-                },
-                    {
-                        label: "Respiration",
-                        value: 'respiration'
+                    value: 'ecg'
                     },
+            
                     {
                         label: "SpO2",
-                        value: 'spo2'
+                        value: 'SpO2'
                     },
                     {
                         label: "Temperature",
                         value: 'temperature'
                     },
+                
+                    {
+                        label: "Systolic Blood Pressure",
+                        value: 'Systolic Blood Pressure'
+                    },
+                    {
+                        label: "Diastolic Blood Pressure",
+                        value: 'Diastolic Blood Pressure'
+                    },
                     {
                         label: "N/A",
                         value: 'n/a'
-                    },
+                    }
                 ],
                 value: prevState.data || ""
             },
