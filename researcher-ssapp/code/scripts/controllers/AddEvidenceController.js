@@ -38,7 +38,7 @@ export default class AddEvidenceController extends WebcController {
     sendMessageToTps( subjectsDids, evidenceSReadSSI) {
         subjectsDids.forEach(did => {
             this.CommunicationService.sendMessage( did, {
-                operation: CONSTANTS.NOTIFICATIONS_TYPE.NEW_EVIDENCE,
+                operation: COMMUNICATION_MESSAGES.NEW_EVIDENCE,
                 ssi: evidenceSReadSSI,
                 shortDescription: 'Researcher sent evidence to patient',
             });
