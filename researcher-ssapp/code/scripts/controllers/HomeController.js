@@ -155,15 +155,35 @@ export default class HomeController extends WebcController {
 
             // TODO: Review this behaviour
             switch (data.operation) {
-                case 'd-permission-list': {
-                    this.DPermissionService.mount(data.d_permission_keyssi_list[data.d_permission_keyssi_list.length - 1], (err, data) => {
+                case "add_participants_to_study": {
+                    this.StudiesService.mount(data.studyUID, (err, study ) => {
                         if (err) {
-                            return console.log(err);
+                            return reject(err);
                         }
-                    });
-                    console.log("Received D Permission List");
-                    break;
+                        if (!study.patients) study.patients = []
+                        study.patients.push(data.participant)
+                        study.participants = study.patients.length
+                        this.StudiesService.updateStudy(study, (err, data) => {
+                            if (err) {
+                                console.log(err);
+                            }
+                            let toBeUpdatedIndex = this.studies.findIndex(study => data.uid === study.uid);
+                            this.studies[toBeUpdatedIndex] = data;
+                            this.prepareStudiesView(this.studies);
+                            this.model.studiesDataSource.updateData(data);
+                        });
+                    })
                 }
+
+                // case 'd-permission-list': {
+                //     this.DPermissionService.mount(data.d_permission_keyssi_list[data.d_permission_keyssi_list.length - 1], (err, data) => {
+                //         if (err) {
+                //             return console.log(err);
+                //         }
+                //     });
+                //     console.log("Received D Permission List");
+                //     break;
+                // }
             }
         });
 
