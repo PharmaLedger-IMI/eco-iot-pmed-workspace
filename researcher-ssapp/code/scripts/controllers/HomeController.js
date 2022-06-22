@@ -153,7 +153,6 @@ export default class HomeController extends WebcController {
             data = JSON.parse(data);
             console.log('Received Message', data);
 
-            // TODO: Review this behaviour
             switch (data.operation) {
                 case "add_participants_to_study": {
                     this.StudiesService.mount(data.studyUID, (err, study ) => {
@@ -173,17 +172,28 @@ export default class HomeController extends WebcController {
                             this.model.studiesDataSource.updateData(data);
                         });
                     })
+                    break;
                 }
-
-                // case 'd-permission-list': {
-                //     this.DPermissionService.mount(data.d_permission_keyssi_list[data.d_permission_keyssi_list.length - 1], (err, data) => {
-                //         if (err) {
-                //             return console.log(err);
-                //         }
-                //     });
-                //     console.log("Received D Permission List");
-                //     break;
-                // }
+                case "remove_participants_from_study": {
+                    this.StudiesService.mount(data.studyUID, (err, study ) => {
+                        if (err) {
+                            return reject(err);
+                        }
+                        let patientMatchIndex = study.patients.findIndex(pt => pt.patientDID === data.participant.patientDID);
+                        study.patients.splice(patientMatchIndex, 1);
+                        study.participants = study.patients.length;
+                        this.StudiesService.updateStudy(study, (err, updatedStudy) => {
+                            if (err) {
+                                console.log(err);
+                            }
+                            let toBeUpdatedIndex = this.studies.findIndex(study => updatedStudy.uid === study.uid);
+                            this.studies[toBeUpdatedIndex] = updatedStudy;
+                            this.prepareStudiesView(this.studies);
+                            this.model.studiesDataSource.updateData(updatedStudy);
+                        });
+                    })
+                    break;
+                }
             }
         });
 
