@@ -69,8 +69,6 @@ export default class EvidenceListController extends WebcController {
         })
 
         this._attachHandlerAddEvidence();
-        this._attachHandlerGoBack();
-
     }
 
     _attachHandlerAddEvidence(){
@@ -80,12 +78,6 @@ export default class EvidenceListController extends WebcController {
                 breadcrumb: this.model.breadcrumb.toObject(),
             }
             this.navigateToPageTag('add-evidence', evidenceState);
-        });
-    }
-
-    _attachHandlerGoBack() {
-        this.onTagClick('go:back', () => {
-            this.navigateToPageTag('home');
         });
     }
 

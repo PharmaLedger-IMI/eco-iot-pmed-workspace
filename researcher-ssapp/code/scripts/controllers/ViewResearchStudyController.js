@@ -68,17 +68,11 @@ export default class ViewResearchStudyController extends WebcController {
             this.onTagClick("next-page", () => notesDataSource.goToNextPage());
         })
 
-        this._attachHandlerBackMenu();
         this._attachHandlerViewDynamicConsents();
         this._attachHandlerSaveNote();
         this._attachHandlerViewNote();
     }
 
-    _attachHandlerBackMenu() {
-        this.onTagClick('view-research-study:go-back', (event) => {
-            this.navigateToPageTag('home');
-        });
-    }
 
     _attachHandlerViewNote() {
         this.onTagClick('view-note', (model) => {

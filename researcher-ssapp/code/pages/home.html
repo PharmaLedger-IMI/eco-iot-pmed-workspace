@@ -1,11 +1,10 @@
 <webc-container controller="HomeController">
-    <div class="container main-container">
+    <div class="container main-container common-3-rows-grid">
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
             <h5 class="generic-title">Welcome - Current Studies</h5>
-            <webc-template template="alert" data-view-model="@" class="w-100"></webc-template>
         </div>
-
+        <webc-template template="alert" data-view-model="@" class="w-100"></webc-template>
         <div class="container justify-content-start">
 
             <div data-if="@hasStudies">

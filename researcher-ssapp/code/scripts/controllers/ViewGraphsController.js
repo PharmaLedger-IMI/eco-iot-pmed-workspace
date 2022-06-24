@@ -16,15 +16,6 @@ export default class ViewGraphsController extends WebcController {
             state: state
         });
 
-        this.onTagClick("graphs:back", () => {
-            let consentsState = {
-                studyId: state.studyId,
-                breadcrumb: this.model.breadcrumb.toObject()
-            }
-            this.navigateToPageTag("dynamic-consents", consentsState)
-        });
-
-
         let consents = mock.getItems(10, 50);
         let consentsStatuses = consents.map(el => el.consentStatus);
         let statusLabels = [...new Set(consentsStatuses)];

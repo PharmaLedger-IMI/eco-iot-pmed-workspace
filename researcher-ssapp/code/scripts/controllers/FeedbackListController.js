@@ -58,7 +58,6 @@ export default class FeedbackListController extends WebcController {
         })
 
         this._attachHandlerAddFeedback();
-        this._attachHandlerGoBack();
 
     }
 
@@ -70,13 +69,6 @@ export default class FeedbackListController extends WebcController {
                 breadcrumb: this.model.breadcrumb.toObject(),
             }
             this.navigateToPageTag('create-feedback', objToSend);
-        });
-    }
-
-    _attachHandlerGoBack() {
-        this.onTagClick('go:back', () => {
-           
-            this.navigateToPageTag('home');
         });
     }
 

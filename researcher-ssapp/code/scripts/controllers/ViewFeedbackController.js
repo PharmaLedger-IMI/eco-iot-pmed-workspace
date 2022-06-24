@@ -25,16 +25,9 @@ export default class ViewFeddbackController extends WebcController {
             }
             this.model = this.getFeedbackDetailsViewModel(feedback);
         });
-
-        this._attachHandlerGoBack();
     }
 
 
-    _attachHandlerGoBack() {
-        this.onTagClick('go:back', () => {
-            this.navigateToPageTag('feedback-list', { uid: this.model.feedback_id, title: this.model.studyTitle ,breadcrumb: this.model.breadcrumb.toObject() });
-        });
-    }
 
     getFeedbackDetailsViewModel(feedback) {
         return {

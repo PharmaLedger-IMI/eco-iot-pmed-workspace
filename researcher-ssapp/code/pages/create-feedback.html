@@ -1,10 +1,9 @@
 <webc-container controller="CreateFeedbackController">
-    <div class="container main-container">
+    <div class="container main-container stepper-3-rows-grid">
 
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
             <h5 class="generic-title">New Feedback</h5>
-            <h6>Feedback Description</h6>
         </div>
 
         <div class="form-container">
@@ -36,7 +35,6 @@
         </div>
 
         <footer class="button-group-wrapper">
-            <button data-tag="go:back">Back</button>
             <button data-tag="feedback:send" disabled="@isFormFeedbackInvalid">Send</button>
         </footer>
 

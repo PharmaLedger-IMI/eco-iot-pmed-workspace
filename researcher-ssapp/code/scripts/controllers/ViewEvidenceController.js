@@ -29,19 +29,8 @@ export default class ViewEvidenceController extends WebcController {
             this.model = this.getEvidenceDetailsViewModel(evidence);
         });
 
-        this._attachHandlerBackMenu();
     }
 
-    _attachHandlerBackMenu() {
-        this.onTagClick('go:back', (event) => {
-
-            let evidenceState = {
-                uid: this.model.study_id,
-                breadcrumb: this.model.breadcrumb.toObject(),
-            }
-            this.navigateToPageTag('evidence-list', evidenceState);
-        });
-    }
 
     getEvidenceDetailsViewModel(evidence) {
         return {

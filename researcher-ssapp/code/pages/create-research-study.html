@@ -4,13 +4,13 @@
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
             <h5 class="generic-title">{{@header1}}</h5>
-            <div data-if="@header2">
-                <h4>{{@header2}}</h4>
-            </div>
         </div>
 
         <div class="container justify-content-start">
             <main class="form-container">
+                <div data-if="@header2">
+                    <h4 class="align-center">{{@header2}}</h4>
+                </div>
                 <div data-if="@header3">
                     <h4 class="align-center">{{@header3}}</h4>
                 </div>

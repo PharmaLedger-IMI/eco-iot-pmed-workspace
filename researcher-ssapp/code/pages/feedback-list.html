@@ -1,12 +1,11 @@
 <webc-container controller="FeedbackListController">
-    <div class="container main-container">
+    <div class="container main-container common-4-rows-grid">
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
             <h5 class="generic-title">Study {{@studyTitle}}: Feedback sent List</h5>
-            
-            <webc-template template="alert" data-view-model="@"></webc-template>
         </div>
 
+        <webc-template template="alert" data-view-model="@"></webc-template>
 
         <div class="container justify-content-start">
 
@@ -44,9 +43,7 @@
             </div>
         </div>
 
-
         <footer class="button-group-wrapper">
-            <button data-tag="go:back">Back</button>
             <button data-tag="new:feedback">Send New Feedback</button>
         </footer>
 
