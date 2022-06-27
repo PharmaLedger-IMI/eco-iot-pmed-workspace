@@ -1,7 +1,7 @@
 {
-  "name": "iot-pmed-workspace",
-  "version": "0.2.1",
-  "description": "IoT PMED Workspace",
+  "name": "eco-iot-pmed-workspace",
+  "version": "1.1.1",
+  "description": "Eco IoT PMED Workspace",
   "scripts": {
     "dev-install": "node ./bin/mkDevEnv.js && npm install",
     "postinstall": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"node ./node_modules/octopus/scripts/run\"",
@@ -37,14 +37,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git"
+    "url": "git+https://github.com/PharmaLedger-IMI/eco-iot-pmed-workspace.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace/issues"
+    "url": "https://github.com/PharmaLedger-IMI/eco-iot-pmed-workspace/issues"
   },
-  "homepage": "https://github.com/PharmaLedger-IMI/iot-pmed-workspace#readme",
+  "homepage": "https://github.com/PharmaLedger-IMI/eco-iot-pmed-workspace#readme",
   "dependencies": {
     "octopus": "git+http://github.com/privatesky/octopus.git"
   }

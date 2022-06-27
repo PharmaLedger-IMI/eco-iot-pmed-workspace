@@ -9,7 +9,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "0b8ef9818b375a2f99da2c990507fce59ab0bec1"
+                    "commit": "d6a80ff39a897da05595c36241e20952ce455884"
                 },
                 {
                     "type": "execute",
@@ -45,11 +45,31 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "c7dd4d8fa1e4f56f9e1b6ff9f83e639ddd4dbc3f"
+                    "commit": "8ed5e63573cafcbd8885f45796887ee51bec89d0"
                 },
                 {
                     "type": "execute",
                     "cmd": "cd privatesky && npm install"
+                }
+            ]
+        },
+        {
+            "name": "common-services",
+            "src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "d4046958eec43e7c1fdf7508fea3574240043f40"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd common-services && npm install"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd common-services && npm run build"
                 }
             ]
         },
@@ -77,7 +97,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "7b1b86fb70da80de46b0ad559064a47b3b1dbac8"
+                    "commit": "734cdac7e3ed3c8c603982fcd7c2022a4bb2a250"
                 },
                 {
                     "type": "execute",
@@ -110,18 +130,18 @@
             ]
         },
         {
-            "name": "apihub-root/patient-wallet/loader",
+            "name": "apihub-root/sponsor-wallet/loader",
             "src": "http://github.com/privatesky/trust-loader.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "7b1b86fb70da80de46b0ad559064a47b3b1dbac8"
+                    "commit": "734cdac7e3ed3c8c603982fcd7c2022a4bb2a250"
                 },
                 {
                     "type": "execute",
-                    "cmd": "cd apihub-root/patient-wallet/loader && npm install"
+                    "cmd": "cd apihub-root/sponsor-wallet/loader && npm install"
                 }
             ]
         },
@@ -133,7 +153,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "7b1b86fb70da80de46b0ad559064a47b3b1dbac8"
+                    "commit": "734cdac7e3ed3c8c603982fcd7c2022a4bb2a250"
                 },
                 {
                     "type": "execute",
@@ -149,7 +169,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "7b1b86fb70da80de46b0ad559064a47b3b1dbac8"
+                    "commit": "734cdac7e3ed3c8c603982fcd7c2022a4bb2a250"
                 },
                 {
                     "type": "execute",
@@ -165,11 +185,27 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "7b1b86fb70da80de46b0ad559064a47b3b1dbac8"
+                    "commit": "734cdac7e3ed3c8c603982fcd7c2022a4bb2a250"
                 },
                 {
                     "type": "execute",
                     "cmd": "cd apihub-root/researcher-wallet/loader && npm install"
+                }
+            ]
+        },
+        {
+            "name": "sponsor-ssapp",
+            "src": "https://github.com/PharmaLedger-IMI/eco-sponsor-ssapp.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "057051f78bf8581098561f1f34a1f8563df85278"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd sponsor-ssapp && npm install"
                 }
             ]
         },
@@ -181,7 +217,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "565ea4b7d74942e314395cd823d018e859bc5c7a"
+                    "commit": "987e4474554cf33ab874d70548cb338d01c1c4b5"
                 },
                 {
                     "type": "execute",
@@ -197,7 +233,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "88cae6e1959a6bcbfd5b356a7159a9c2404e1a8c"
+                    "commit": "372c917e428c1d617eb06193794b7111b0d7a6fa"
                 },
                 {
                     "type": "execute",
@@ -206,22 +242,18 @@
             ]
         },
         {
-            "name": "common-services",
-            "src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
+            "name": "themes/sponsor-theme",
+            "src": "https://github.com/PharmaLedger-IMI/eco-sponsor-theme.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "fd47b9b40eef1568cb5c99c49ec106e580f42cde"
+                    "commit": "a0adcbe1b7a52c72fa44f5f4423c7af4b3962f40"
                 },
                 {
                     "type": "execute",
-                    "cmd": "cd common-services && npm install"
-                },
-                {
-                    "type": "execute",
-                    "cmd": "cd common-services && npm run build"
+                    "cmd": "cd themes/sponsor-theme && npm install"
                 }
             ]
         },
@@ -233,7 +265,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "f6c7ac477ad472fdc094c9f425482b7b9e846c39"
+                    "commit": "6ff3d7486a64b9ded1f408f12451538f4913ebe0"
                 },
                 {
                     "type": "execute",
@@ -249,7 +281,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "acb4e39a89aade2039588c70fd6201e26a679b09"
+                    "commit": "8862d9346ab0456227d976a25189c1215faa0404"
                 },
                 {
                     "type": "execute",
@@ -282,16 +314,6 @@
                     "cmd": "cd researcher-ssapp && npm install"
                 }
             ]
-        },
-        {
-            "name": "iot-adaptor",
-            "src": "",
-            "actions": [
-                {
-                    "type": "execute",
-                    "cmd": "cd iot-adaptor && npm install"
-                }
-            ]
         }
     ],
     "build": [
@@ -311,6 +333,16 @@
                 {
                     "type": "execute",
                     "cmd": "cd webcardinal && npm run build"
+                }
+            ]
+        },
+        {
+            "name": "sponsor-theme-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/sponsor-theme && npm run build-dossier"
                 }
             ]
         },
@@ -402,7 +434,7 @@
             "actions": [
                 {
                     "type": "execute",
-                    "cmd": "cd apihub-root/patient-wallet/loader && npm install"
+                    "cmd": "cd apihub-root/sponsor-wallet/loader && npm install"
                 },
                 {
                     "type": "execute",
@@ -419,6 +451,32 @@
                 {
                     "type": "execute",
                     "cmd": "cd apihub-root/dsu-explorer/loader && npm install"
+                }
+            ]
+        },
+        {
+            "name": "bind_sponsor_ssapp_to_wallet",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd sponsor-ssapp && npm run build"
+                },
+                {
+                    "type": "copySeed",
+                    "src": "./sponsor-ssapp/seed",
+                    "target": "./apihub-root/sponsor-wallet/wallet-patch/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                },
+                {
+                    "type": "copySeed",
+                    "src": "./sponsor-ssapp/seed",
+                    "target": "./apihub-root/sponsor-wallet/apps-patch/sponsor-ssapp/seed",
+                    "options": {
+                        "overwrite": true
+                    }
                 }
             ]
         },
