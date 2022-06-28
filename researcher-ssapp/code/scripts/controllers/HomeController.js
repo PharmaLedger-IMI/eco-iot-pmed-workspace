@@ -155,13 +155,32 @@ export default class HomeController extends WebcController {
 
             switch (data.operation) {
                 case "add_participants_to_study": {
-                    this.StudiesService.mount(data.studyUID, (err, study ) => {
+                    this.StudiesService.getStudy(data.studyUID, (err, study ) => {
                         if (err) {
                             return reject(err);
                         }
-                        if (!study.patients) study.patients = []
-                        study.patients.push(data.participant)
-                        study.participants = study.patients.length
+
+                        if (!study.participants) study.participants = []
+                        let participant = {
+                            dpermission: data.dpermission,
+                            dpermissionStartSharingDate: data.dpermissionStartSharingDate,
+                            participantInfo: data.participant
+                        }
+
+                        let patientMatchIndex = study.participants.findIndex(p => p.participantInfo.patientDID === data.participant.patientDID);
+                        if (study.participants[patientMatchIndex]) {
+                            study.participants[patientMatchIndex].dpermission = true;
+                            study.participants[patientMatchIndex].dpermissionStartSharingDate = data.dpermissionStartSharingDate;
+                        }
+                        else {
+                            study.participants.push(participant)
+                        }
+
+                        study.participantsNumber = 0
+                        study.participants.forEach(p => {
+                            if (p.dpermission===true) study.participantsNumber+=1
+                        })
+
                         this.StudiesService.updateStudy(study, (err, data) => {
                             if (err) {
                                 console.log(err);
@@ -175,13 +194,20 @@ export default class HomeController extends WebcController {
                     break;
                 }
                 case "remove_participants_from_study": {
-                    this.StudiesService.mount(data.studyUID, (err, study ) => {
+                    this.StudiesService.getStudy(data.studyUID, (err, study ) => {
                         if (err) {
                             return reject(err);
                         }
-                        let patientMatchIndex = study.patients.findIndex(pt => pt.patientDID === data.participant.patientDID);
-                        study.patients.splice(patientMatchIndex, 1);
-                        study.participants = study.patients.length;
+                        let patientMatchIndex = study.participants.findIndex(pt => pt.participantInfo.patientDID === data.participant.patientDID);
+
+                        study.participants[patientMatchIndex].dpermission = false;
+                        study.participants[patientMatchIndex].dpermissionStopSharingDate = data.dpermissionStopSharingDate;
+
+                        study.participantsNumber = 0
+                        study.participants.forEach(p => {
+                            if (p.dpermission===true) study.participantsNumber+=1
+                        })
+
                         this.StudiesService.updateStudy(study, (err, updatedStudy) => {
                             if (err) {
                                 console.log(err);

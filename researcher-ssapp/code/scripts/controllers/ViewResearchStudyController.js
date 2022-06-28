@@ -169,12 +169,12 @@ export default class ViewResearchStudyController extends WebcController {
                 placeholder: 'Description for this study',
                 value: prevState.description || ""
             },
-            participants: {
+            participantsNumber: {
                 name: 'participants',
                 id: 'participants',
                 label: "participants",
                 placeholder: 'Number of active participants for this study',
-                value: prevState.participants || ""
+                value: prevState.participantsNumber || ""
             },
             age: {
                 label: "Age Group",
