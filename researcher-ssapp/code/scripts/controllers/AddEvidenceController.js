@@ -4,11 +4,6 @@ const {EvidenceService} = commonServices;
 const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
 const CONSTANTS = commonServices.Constants;
 
-const COMMUNICATION_MESSAGES = {
-    NEW_EVIDENCE:"new_evidence"
-}
-
-
 export default class AddEvidenceController extends WebcController {
     constructor(...props) {
 
@@ -38,7 +33,7 @@ export default class AddEvidenceController extends WebcController {
     sendMessageToTps( subjectsDids, evidenceSReadSSI) {
         subjectsDids.forEach(did => {
             this.CommunicationService.sendMessage( did, {
-                operation: COMMUNICATION_MESSAGES.NEW_EVIDENCE,
+                operation: CONSTANTS.MESSAGES.RESEARCHER.NEW_EVIDENCE,
                 ssi: evidenceSReadSSI,
                 shortDescription: 'Researcher sent evidence to patient',
             });
@@ -89,7 +84,7 @@ export default class AddEvidenceController extends WebcController {
             //send evidence DSU to iotAdaptor
             // const communicationService = getCommunicationServiceInstance();
             this.CommunicationService.sendMessageToIotAdapter({
-                operation:COMMUNICATION_MESSAGES.NEW_EVIDENCE,
+                operation: CONSTANTS.MESSAGES.RESEARCHER.NEW_EVIDENCE,
                 ssi:evidence.keySSI
             })
 

@@ -38,7 +38,7 @@ export default class CreateFeedbackController extends WebcController {
 
         subjectsDids.forEach(did => {
             this.CommunicationService.sendMessage( did, {
-                operation: CONSTANTS.NOTIFICATIONS_TYPE.NEW_FEEDBACK,
+                operation: CONSTANTS.MESSAGES.RESEARCHER.NEW_FEEDBACK,
                 ssi: feedbackSReadSSI,
                 shortDescription: 'Researcher sent feedback to patient',
             });
