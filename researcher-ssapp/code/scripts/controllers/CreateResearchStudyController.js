@@ -84,7 +84,9 @@ export default class CreateResearchStudyController extends WebcController {
             }
 
             this.CommunicationService.sendMessageToIotAdapter({
-                operation: CONSTANTS.NOTIFICATIONS_TYPE.NEW_STUDY,
+                //TODO put in constants among with other operations that should have a consistent format
+                //e.g all messages to iot-adapter should be in CONSTANTS.COMMUNICATION.IOT.NEW_STUDY
+                operation: "new_study",
                 ssi:data.sReadSSI
             })
 
