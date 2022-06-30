@@ -142,8 +142,13 @@ export default class HomeController extends WebcController {
                 this.navigateToPageTag('evidence-list', studyState);
             });
             this.onTagClick("data", (model) => {
-                //const { participants } = model;
-                console.log('this is data Page!');
+                let chosenStudy = studies.find(study => study.uid === model.uid);
+                let studyState = {
+                    uid: chosenStudy.uid,
+                    title: chosenStudy.title,
+                    breadcrumb: this.model.breadcrumb.toObject(),
+                }
+                this.navigateToPageTag('data-list', studyState);
             });
             this.onTagClick("prev-page", () => studiesDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => studiesDataSource.goToNextPage());

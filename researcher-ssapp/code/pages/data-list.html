@@ -1,0 +1,55 @@
+<webc-container controller="DataListController">
+    <div class="container main-container common-4-rows-grid">
+        <div class="container flex-container">
+            <breadcrumb-navigator></breadcrumb-navigator>
+            <h5 class="generic-title">{{@studyTitle}}: Data List</h5>
+        </div>
+
+        <div class="container justify-content-start">
+
+            <div data-if="@hasData">
+
+                <webc-spinner slot="loading"></webc-spinner>
+                <div slot="false" class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">No data found for this study!</h4>
+                    <p>There are no participants that accepted the invitation for data donation.</p>
+                    <p>Create another study if you want to request different type of data.</p>
+                </div>
+
+                <div class="common-datatable data-datatable dt-7-col" slot="true">
+                    <webc-datatable datasource="@dataDataSource">
+
+                        <div slot="header" data-sortable>Anonymized DID</div>
+                        <div slot="header" data-sortable>Created timestamp</div>
+                        <div slot="header" data-sortable>Effective timestamp</div>
+                        <div slot="header" data-sortable>Updated timestamp</div>
+                        <div slot="header" data-sortable>Type</div>
+                        <div slot="header">Value unit</div>
+                        <div slot="header">Value</div>
+
+                        <div class="cell" style="text-overflow:ellipsis;width:auto;overflow:hidden;">{{ @subject.reference }}</div>
+                        <div class="cell">{{ @createdAt }}</div>
+                        <div class="cell">{{ @effectiveDateTime }}</div>
+                        <div class="cell">{{ @updatedAt }}</div>
+                        <div class="cell">{{ @code.text }}</div>
+                        <div class="cell">{{ @valueQuantity.unit }}</div>
+                        <div class="cell">{{ @valueQuantity.value }}</div>
+
+                    </webc-datatable>
+
+                    <footer class="button-group-wrapper">
+                        <button data-tag="export:data">Export Data</button>
+                    </footer>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</webc-container>

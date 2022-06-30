@@ -71,6 +71,12 @@
 			"tag": "evidence-list"
 		},
 		{
+			"name": "Data List",
+			"path": "/data-list",
+			"src": "data-list.html",
+			"tag": "data-list"
+		},
+		{
 			"name": "Edit Evidence",
 			"path": "/edit-evidence",
 			"src": "edit-evidence.html",
