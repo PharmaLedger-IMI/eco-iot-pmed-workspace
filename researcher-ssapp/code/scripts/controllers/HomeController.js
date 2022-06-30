@@ -2,7 +2,7 @@ const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
 const DidService =commonServices.DidService;
 const MessageHandlerService = commonServices.MessageHandlerService;
-const {StudiesService} = commonServices;
+const {StudiesService, PermissionedHealthDataService} = commonServices;
 import DPermissionService from "../services/DPermissionService.js";
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const DataSourceFactory = commonServices.getDataSourceFactory();
@@ -79,6 +79,7 @@ export default class HomeController extends WebcController {
     async initServices() {
         this.DPermissionService = new DPermissionService();
         this.StudiesService = new StudiesService();
+        this.PermissionedHealthDataService = new PermissionedHealthDataService();
 
         const getStudies = () => {
             return new Promise ((resolve, reject) => {
@@ -191,6 +192,16 @@ export default class HomeController extends WebcController {
                             this.model.studiesDataSource.updateData(data);
                         });
                     })
+
+                    this.PermissionedHealthDataService.mountObservation(data.permissionedDataDSUSSI, (err, data)=> {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log(data);
+                    });
+
+
+
                     break;
                 }
                 case "remove_participants_from_study": {
