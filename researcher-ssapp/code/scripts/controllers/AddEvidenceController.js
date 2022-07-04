@@ -1,6 +1,6 @@
 const { WebcController } = WebCardinal.controllers;
 const commonServices = require("common-services");
-const {EvidenceService} = commonServices;
+const {EvidenceService, StudiesService} = commonServices;
 const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
 const CONSTANTS = commonServices.Constants;
 
@@ -21,12 +21,19 @@ export default class AddEvidenceController extends WebcController {
 
         this.model.studyID = state.uid;
         this.model = this.getEvidenceDetailsViewModel();
-
         this.CommunicationService = getCommunicationServiceInstance();
+        this.model.participantsDIDs = [];
+        this.StudiesService = new StudiesService();
+        this.StudiesService.getStudy(this.model.studyID, (err, studyData) => {
+            if (err){
+                return console.log(err);
+            }
+            studyData.participants.forEach(participant=>{this.model.participantsDIDs.push(participant.participantInfo.patientDID);
+            });
+        });
 
         this._attachHandlerGoBack();
         this._attachHandlerAddEvidenceConfirm();
-        console.log(this.model.studyID)
 
     }
 
@@ -88,7 +95,7 @@ export default class AddEvidenceController extends WebcController {
                 ssi:evidence.keySSI
             })
 
-            this.sendMessageToTps(this.model.subjects_did.value.split(',').map(e=> e.trim()), evidence.sReadSSI);
+            this.sendMessageToTps(this.model.participantsDIDs, evidence.sReadSSI);
 
             window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('evidence-list', evidenceState);
@@ -124,11 +131,6 @@ export default class AddEvidenceController extends WebcController {
                 label: "Subtitle",
                 placeholder: 'Subtitle of the Evidence',
                 value: ""
-            },
-            subjects_did: {
-                value:'',
-                placeholder: 'subject did',
-                label: 'Subjects did'
             },
             version: {
                 name: 'version',

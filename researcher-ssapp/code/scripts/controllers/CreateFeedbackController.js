@@ -1,11 +1,10 @@
-
+const commonServices = require('common-services');
 const { WebcController } = WebCardinal.controllers;
 import FeedbackService from "../services/FeedbackService.js";
-
-const commonServices = require('common-services');
+const {StudiesService} = commonServices;
 const CommunicationService = commonServices.CommunicationService;
-
 const CONSTANTS = commonServices.Constants;
+
 
 export default class CreateFeedbackController extends WebcController {
     constructor(...props) {
@@ -27,6 +26,16 @@ export default class CreateFeedbackController extends WebcController {
         this.model.studyID = state.uid;
         this.model.studyTitle = state.title;
         this.model = this.getFeedbackDetailsViewModel();
+        this.model.participantsDIDs = [];
+
+        this.StudiesService = new StudiesService();
+        this.StudiesService.getStudy(this.model.studyID, (err, studyData) => {
+            if (err){
+                return console.log(err);
+            }
+            studyData.participants.forEach(participant=>{this.model.participantsDIDs.push(participant.participantInfo.patientDID);
+            });
+        });
 
         this._attachHandlerGoBack();
         this._attachHandlerFeedbackCreate();
@@ -87,7 +96,7 @@ export default class CreateFeedbackController extends WebcController {
             }
             window.WebCardinal.loader.hidden = true;
 
-            this.sendMessageToTps(this.model.subjects_did.value.split(',').map(e=> e.trim()), feedback.sReadSSI);
+            this.sendMessageToTps(this.model.participantsDIDs, feedback.sReadSSI);
             this.navigateToPageTag('feedback-list', feedbackState);
         })
     }
@@ -128,12 +137,6 @@ export default class CreateFeedbackController extends WebcController {
                 placeholder: 'Description of the Feedback (Free Text - No limits of Characters)',
                 value: ""
             },
-            subjects_did: {
-                value:'',
-                placeholder: 'subject did',
-                label: 'Subjects did'
-            },
-
             isFormFeedbackInvalid:{
                 name: 'isFormFeedbackInvalid',
                 id: 'isFormFeedbackInvalid',
