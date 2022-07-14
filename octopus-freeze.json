@@ -49,7 +49,7 @@
                 },
                 {
                     "type": "execute",
-                    "cmd": "cd privatesky && npm install"
+                    "cmd": "cd privatesky && npm run dev-install"
                 }
             ]
         },
@@ -226,7 +226,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "9c4a55ebed671695b81527e046cfe322cabde638"
+                    "commit": "d54f0fbb1bb4b2b7d44304b2193abbf0c96e1bac"
                 },
                 {
                     "type": "execute",
@@ -274,7 +274,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "e1e65c914b64a1b310d405d216cc174ebaea8853"
+                    "commit": "f239c073eb67baafa72cd98e7d9e96949e370fdd"
                 },
                 {
                     "type": "execute",
