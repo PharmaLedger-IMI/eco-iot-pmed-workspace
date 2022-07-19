@@ -234,6 +234,38 @@ export default class HomeController extends WebcController {
                     })
                     break;
                 }
+                case "reject_participants_from_study": {
+                    this.StudiesService.getStudy(data.studyUID, (err, study ) => {
+                        if (err) {
+                            return reject(err);
+                        }
+                        if (!study.participants) study.participants = []
+                        let participant = {
+                            dpermission: false,
+                            dpermissionRejectedDate: data.dpermissionRejectedDate,
+                            participantInfo: data.participant
+                        }
+                        let patientMatchIndex = study.participants.findIndex(p => p.participantInfo.patientDID === data.participant.patientDID);
+                        if (study.participants[patientMatchIndex]) {
+                            study.participants[patientMatchIndex].dpermission = false;
+                            study.participants[patientMatchIndex].dpermissionRejectedDate = data.dpermissionRejectedDate;
+                        }
+                        else {
+                            study.participants.push(participant)
+                        }
+                        this.StudiesService.updateStudy(study, (err, updatedStudy) => {
+                            if (err) {
+                                console.log(err);
+                            }
+                            let toBeUpdatedIndex = this.studies.findIndex(study => updatedStudy.uid === study.uid);
+                            this.studies[toBeUpdatedIndex] = updatedStudy;
+                            this.prepareStudiesView(this.studies);
+                            this.model.studiesDataSource.updateData(updatedStudy);
+                            console.log(study);
+                        });
+                    })
+                    break;
+                }
             }
         });
 
