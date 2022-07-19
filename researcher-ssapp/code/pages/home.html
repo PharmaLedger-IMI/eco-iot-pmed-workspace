@@ -1,10 +1,11 @@
 <webc-container controller="HomeController">
-    <div class="container main-container common-3-rows-grid">
+    <div class="container main-container stepper-3-rows-grid">
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
             <h5 class="generic-title">Welcome - Current Studies</h5>
+            <webc-template template="alert" data-view-model="@" class="w-100"></webc-template>
         </div>
-        <webc-template template="alert" data-view-model="@" class="w-100"></webc-template>
+
         <div class="container justify-content-start">
 
             <div data-if="@hasStudies">
@@ -14,12 +15,6 @@
                     <h4 class="alert-heading">No studies yet!</h4>
                     <p>Add your first study!</p>
                 </div>
-                <section class="controls button-group-wrapper" slot="false">
-                    <button data-tag="new:study" >
-                        <i class="fa fa-list-alt p-1"></i>
-                        Add study
-                    </button>
-                </section>
                 <div class="common-datatable cs-datatable dt-4-col" slot="true">
                 <webc-datatable datasource="@studiesDataSource" >
 
@@ -56,19 +51,18 @@
                     </div>
 
                 </webc-datatable>
-                    <section class="controls button-group-wrapper">
-                        <button data-tag="prev-page">‹ Previous page</button>
-                        <button data-tag="new:study">
-                            <i class="fa fa-list-alt p-1"></i>
-                            Add study
-                        </button>
-                        <button data-tag="next-page">Next page ›</button>
-                    </section>
                 </div>
 
             </div>
         </div>
 
+
+        <section class="controls button-group-wrapper">
+            <button data-tag="new:study">
+                <i class="fa fa-list-alt p-1"></i>
+                Add study
+            </button>
+        </section>
 
     </div>
 </webc-container>
