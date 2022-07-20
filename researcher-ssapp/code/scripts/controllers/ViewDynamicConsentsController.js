@@ -41,7 +41,7 @@ export default class ViewDynamicConsentsController extends WebcController {
                 this.model.participants.forEach(participant => {
                     if (participant.dpermissionStartSharingDate) {
                         participant.date = participant.dpermissionStartSharingDate;
-                        participant.status = "Active";
+                        participant.status = "Approved";
                     }
                     if (participant.dpermissionStopSharingDate) {
                         participant.date = participant.dpermissionStartSharingDate;
@@ -53,18 +53,17 @@ export default class ViewDynamicConsentsController extends WebcController {
                     }
                 });
             }
-
             console.log(this.model.participants);
             this.model.ParticipantsDataSource = DataSourceFactory.createDataSource(3, 10, this.model.participants);
             const { ParticipantsDataSource } = this.model;
         })
 
         this.onTagClick("view-graphs",() => {
-            let studyState = {
-            studyId: this.model.studyId,
-            breadcrumb:this.model.breadcrumb.toObject()
+            let state = {
+                studyId: this.model.studyId,
+                breadcrumb:this.model.breadcrumb.toObject()
             }
-            this.navigateToPageTag("dynamic-consents-graphs", studyState)
+            this.navigateToPageTag("dynamic-consents-graphs", state)
         });
     }
 }
