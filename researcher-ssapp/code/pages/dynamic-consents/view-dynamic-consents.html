@@ -9,30 +9,37 @@
 
         <div class="container justify-content-start">
 
-    <div class="common-datatable dc-datatable dt-4-col">
-        <webc-datatable datasource="@datasource">
+            <div data-if="@hasParticipants">
 
-            <div slot="header" data-sortable>Participant Id</div>
-            <div slot="header" data-sortable>Consent Version</div>
-            <div slot="header" data-sortable>Consent Status</div>
-            <div slot="header" data-sortable>Date</div>
+                <webc-spinner slot="loading"></webc-spinner>
+                <div slot="false" class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">There are no participants yet!</h4>
+                    <p>Wait until someone accepts the study invitation.</p>
+                </div>
+                <div class="common-datatable questions-datatable dt-3-col" slot="true">
+                    <webc-datatable datasource="@ParticipantsDataSource">
 
-            <div class="cell">{{ @participantId }}</div>
-            <div class="cell">{{ @consentVersion }}</div>
-            <div class="cell">{{ @consentStatus }}</div>
-            <div class="cell">{{ @consentDate }}</div>
+                        <div slot="header">Participant DID</div>
+                        <div slot="header">Dynamic Consent Status</div>
+                        <div slot="header">Date</div>
 
-        </webc-datatable>
+                        <div class="cell">{{ @participantInfo.patientDID }}</div>
+                        <div class="cell">{{ @status }}</div>
+                        <div class="cell">{{ @date }}</div>
 
-        <section class="controls button-group-wrapper">
-            <button data-tag="prev-page">‹ Previous page</button>
-            <button data-tag="view-graphs" class="view-graphics-btn">
-                <i class="fa fa-pie-chart p-1"></i>
-                View Graphs
-            </button>
-            <button data-tag="next-page">Next page ›</button>
-        </section>
-    </div>
+                    </webc-datatable>
+                </div>
+
+            </div>
+
+            <section class="controls button-group-wrapper">
+<!--                <button data-tag="prev-page">‹ Previous page</button>-->
+                <button data-tag="view-graphs" class="view-graphics-btn">
+                    <i class="fa fa-pie-chart p-1"></i>
+                    View Graphs
+                </button>
+<!--                <button data-tag="next-page">Next page ›</button>-->
+            </section>
 
         </div>
     </div>

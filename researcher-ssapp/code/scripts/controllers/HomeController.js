@@ -253,6 +253,12 @@ export default class HomeController extends WebcController {
                         else {
                             study.participants.push(participant)
                         }
+
+                        study.participantsNumber = 0
+                        study.participants.forEach(p => {
+                            if (p.dpermission===true) study.participantsNumber+=1
+                        })
+
                         this.StudiesService.updateStudy(study, (err, updatedStudy) => {
                             if (err) {
                                 console.log(err);
