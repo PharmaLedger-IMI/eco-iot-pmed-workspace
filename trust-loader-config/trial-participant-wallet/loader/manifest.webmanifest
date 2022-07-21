@@ -1,0 +1,32 @@
+{
+    "theme_color": "#00345b",
+    "background_color": "#00345b",
+    "display": "fullscreen",
+    "scope": "/",
+    "start_url": ".",
+    "name": "Trial Participant",
+    "short_name": "PatientApp",
+    "description": "PharmaLedger Patient App",
+    "icons": [
+        {
+            "src": "manifest-assets/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "manifest-assets/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "manifest-assets/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "manifest-assets/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
