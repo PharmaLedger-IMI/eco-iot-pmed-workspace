@@ -40,15 +40,15 @@ export default class ViewDynamicConsentsController extends WebcController {
             if (this.model.participants.length > 0) {
                 this.model.participants.forEach(participant => {
                     if (participant.dpermissionStartSharingDate) {
-                        participant.date = participant.dpermissionStartSharingDate;
+                        participant.date = new Date(participant.dpermissionStartSharingDate).toDateString();
                         participant.status = "Approved";
                     }
                     if (participant.dpermissionStopSharingDate) {
-                        participant.date = participant.dpermissionStartSharingDate;
+                        participant.date = new Date(participant.dpermissionStopSharingDate).toDateString();
                         participant.status = "Revoked";
                     }
                     if (participant.dpermissionRejectedDate) {
-                        participant.date = participant.dpermissionRejectedDate;
+                        participant.date = new Date(participant.dpermissionRejectedDate).toDateString();
                         participant.status = "Rejected";
                     }
                 });
