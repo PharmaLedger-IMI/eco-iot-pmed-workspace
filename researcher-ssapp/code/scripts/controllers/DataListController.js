@@ -47,6 +47,8 @@ export default class DataListController extends WebcController {
             let allObservations = []
             dataPerParticipant.forEach(participant => {
                 participant.forEach(observation => {
+                    observation.date = new Date(observation.effectiveDateTime).toDateString();
+                    observation.time =  new Date(observation.effectiveDateTime).toLocaleTimeString();
                     allObservations.push(observation)
                 });
             });

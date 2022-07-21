@@ -16,30 +16,30 @@
                     <p>Create another study if you want to request different type of data.</p>
                 </div>
 
-                <div class="common-datatable data-datatable dt-7-col" slot="true">
+                <div class="common-datatable data-datatable dt-5-col" slot="true">
                     <webc-datatable datasource="@dataDataSource">
 
-                        <div slot="header" data-sortable>Anonymized DID</div>
-                        <div slot="header" data-sortable>Created timestamp</div>
-                        <div slot="header" data-sortable>Effective timestamp</div>
-                        <div slot="header" data-sortable>Updated timestamp</div>
-                        <div slot="header" data-sortable>Type</div>
-                        <div slot="header">Value unit</div>
+                        <div slot="header">Anonymized DID</div>
+                        <div slot="header">Date</div>
+                        <div slot="header">Time</div>
+                        <div slot="header">Data Type</div>
                         <div slot="header">Value</div>
 
                         <div class="cell" style="text-overflow:ellipsis;width:auto;overflow:hidden;">{{ @subject.reference }}</div>
-                        <div class="cell">{{ @createdAt }}</div>
-                        <div class="cell">{{ @effectiveDateTime }}</div>
-                        <div class="cell">{{ @updatedAt }}</div>
+                        <div class="cell">
+                            <span class="badge badge-primary"> {{@date}} </span>
+                        </div>
+                        <div class="cell">
+                            <span class="badge badge-success"> {{@time}} </span>
+                        </div>
                         <div class="cell">{{ @code.text }}</div>
-                        <div class="cell">{{ @valueQuantity.unit }}</div>
-                        <div class="cell">{{ @valueQuantity.value }}</div>
+                        <div class="cell">{{ @valueQuantity.value }} {{ @valueQuantity.unit }}</div>
 
                     </webc-datatable>
 
-                    <footer class="button-group-wrapper">
-                        <button data-tag="export:data">Export Data</button>
-                    </footer>
+<!--                    <footer class="button-group-wrapper">-->
+<!--                        <button data-tag="export:data">Export Data</button>-->
+<!--                    </footer>-->
 
                 </div>
 
