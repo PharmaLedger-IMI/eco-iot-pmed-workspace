@@ -39,26 +39,17 @@
         },
         {
             "name": "privatesky",
-            "src": "http://github.com/privatesky/privatesky.git",
+            "src": "http://github.com/privatesky/psk-release.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "55a044c7bb17f60eecd7ae490f0320e18e799855"
+                    "commit": "17d4532c486f9aa22d7291fc52ce469c177a8b5b"
                 },
                 {
                     "type": "execute",
-                    "cmd": "cd privatesky && npm run dev-install"
-                }
-            ]
-        },
-        {
-            "name": "build privatesky",
-            "actions": [
-                {
-                    "type": "execute",
-                    "cmd": "cd privatesky && npm run build"
+                    "cmd": "cd privatesky && npm install"
                 }
             ]
         },
@@ -70,7 +61,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "e3a65924a0237988d614020e6c204c626e47d7a7"
+                    "commit": "44c2f7ac75588d1d4c929b51fe30e9e7c76b52e8"
                 },
                 {
                     "type": "execute",
@@ -210,7 +201,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "ef11400b66c7da541f70747615954e1a8ffdbfd8"
+                    "commit": "d636c9ec5c855a72b1328d3ef27c4f0a1f4e5fe1"
                 },
                 {
                     "type": "execute",
@@ -226,7 +217,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "d54f0fbb1bb4b2b7d44304b2193abbf0c96e1bac"
+                    "commit": "d3c6177adaf93a49e323c0769e48846be826ec18"
                 },
                 {
                     "type": "execute",
@@ -242,7 +233,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "4e5c75ca52bb01a9a0d2080afeff029b4bfa7992"
+                    "commit": "9523f23677ae37d28cddf87a47b5f2e5e949d333"
                 },
                 {
                     "type": "execute",
@@ -274,7 +265,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "f239c073eb67baafa72cd98e7d9e96949e370fdd"
+                    "commit": "33b26791c0d39885d2ff8523f89e4028db6c60ad"
                 },
                 {
                     "type": "execute",
@@ -290,7 +281,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "2e4651832fbfdbc74dc60fc71f75f142018521e8"
+                    "commit": "6db5fc11c2cd527e1e411bbb43f9dc9ca9b8b90a"
                 },
                 {
                     "type": "execute",
