@@ -88,13 +88,6 @@ export default class AddEvidenceController extends WebcController {
                 }
             }
 
-            //send evidence DSU to iotAdaptor
-            // const communicationService = getCommunicationServiceInstance();
-            this.CommunicationService.sendMessageToIotAdapter({
-                operation: CONSTANTS.MESSAGES.RESEARCHER.NEW_EVIDENCE,
-                ssi:evidence.keySSI
-            })
-
             this.sendMessageToTps(this.model.participantsDIDs, evidence.sReadSSI);
 
             window.WebCardinal.loader.hidden = true;
