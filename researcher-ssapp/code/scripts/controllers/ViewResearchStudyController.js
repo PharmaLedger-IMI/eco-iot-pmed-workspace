@@ -1,7 +1,6 @@
 const {WebcController} = WebCardinal.controllers;
-import StudyNotesService from "../services/StudyNotesService.js"
 const commonServices = require("common-services");
-const {StudiesService} = commonServices;
+const {StudiesService, StudyNotesService} = commonServices;
 const DataSourceFactory = commonServices.getDataSourceFactory();
 
 export default class ViewResearchStudyController extends WebcController {

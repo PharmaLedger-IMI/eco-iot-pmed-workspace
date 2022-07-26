@@ -10,47 +10,16 @@
 			"tag": "home"
 		},
 		{
-			"name": "Requests Main",
-			"path": "/requests-main",
-			"src": "requests-main.html",
-			"tag": "requests-main"
-		},
-		{
-			"name": "Information Request",
-			"path": "/information-request",
-			"src": "information-request.html",
-			"tag": "information-request"
-		},
-		{
-			"name": "Add Request Summary",
-			"path": "/add-request-summary",
-			"src": "add-request-summary.html",
-			"tag": "add-request-summary"
-		},
-		{
 			"name": "View Research Study",
 			"path": "/view-research-study",
 			"src": "view-research-study.html",
 			"tag": "view-research-study"
 		},
 		{
-			"name": "Add Evidence Summary",
-			"path": "/add-evidence-summary",
-			"src": "add-evidence-summary.html",
-			"tag": "add-evidence-summary"
-		},
-		{
 			"name": "Confirmation Page",
 			"path": "/confirmation-page",
 			"src": "confirmation-page.html",
 			"tag": "confirmation-page"
-		},
-
-		{
-			"name": "evidence",
-			"path": "/evidence",
-			"src": "evidence.html",
-			"tag": "evidence"
 		},
 		{
 			"name": "Add Evidence",
@@ -89,42 +58,6 @@
 			"tag": "view-evidence"
 		},
 		{
-			"name": "View dynamic Permission",
-			"path": "/view-dynamic-permission",
-			"src": "view-dynamic-permission.html",
-			"tag": "view-dynamic-permission"
-		},
-		{
-			"name": "statistics-d-permissions-per-day",
-			"path": "/statistics-d-permissions-per-day",
-			"src": "statistics-d-permissions-per-day.html",
-			"tag": "statistics-d-permissions-per-day"
-		},
-		{
-			"name": "statistics-d-permissions-per-day-users",
-			"path": "/statistics-d-permissions-per-day-users",
-			"src": "statistics-d-permissions-per-day-users.html",
-			"tag": "statistics-d-permissions-per-day-users"
-		},
-		{
-			"name": "statistics-d-permissions-total-users",
-			"path": "/statistics-d-permissions-total-users",
-			"src": "statistics-d-permissions-total-users.html",
-			"tag": "statistics-d-permissions-total-users"
-		},
-		{
-			"name": "patient-dynamic-permission",
-			"path": "/patient-dynamic-permission",
-			"src": "patient-dynamic-permission.html",
-			"tag": "patient-dynamic-permission"
-		},
-		{
-			"name": "research-study",
-			"path": "/research-study",
-			"src": "research-study.html",
-			"tag": "research-study"
-		},
-		{
 			"name": "create-research-study",
 			"path": "/create-research-study",
 			"src": "create-research-study.html",
@@ -135,30 +68,6 @@
 			"path": "/edit-research-study",
 			"src": "edit-research-study.html",
 			"tag": "edit-research-study"
-		},
-		{
-			"name": "create-research-study-inclusion-criteria",
-			"path": "/create-research-study-inclusion-criteria",
-			"src": "create-research-study-inclusion-criteria.html",
-			"tag": "create-research-study-inclusion-criteria"
-		},
-		{
-			"name": "create-research-study-summary",
-			"path": "/create-research-study-summary",
-			"src": "create-research-study-summary.html",
-			"tag": "create-research-study-summary"
-		},
-		{
-			"name": "research-study-summary",
-			"path": "/research-study-summary",
-			"src": "research-study-summary.html",
-			"tag": "research-study-summary"
-		},
-		{
-			"name": "All Research Study",
-			"path": "/research-study-list",
-			"src": "research-study-list.html",
-			"tag": "research-study-list"
 		},
 		{
 			"name":"Dynamic-Consent List",
