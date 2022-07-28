@@ -16,7 +16,6 @@ export default class ViewResearchStudyController extends WebcController {
         this.model.study_id = prevState.uid;
         this.model.breadcrumb = prevState.breadcrumb;
         this.model.title = prevState.title;
-
         this.model.breadcrumb.push({
             label:this.model.title,
             tag:"view-research-study",
@@ -84,6 +83,16 @@ export default class ViewResearchStudyController extends WebcController {
     _attachHandlerSaveNote() {
         this.onTagClick('save-note', (event) => {
             window.WebCardinal.loader.hidden = false;
+            let noteTitle = this.model.notesViewModel.title.value;
+            if(noteTitle.length === 0 || !noteTitle.trim()){
+                let message = {
+                    content: `Please enter title!`,
+                    type: 'error'
+                }
+                window.WebCardinal.loader.hidden = true;
+                this.navigateToPageTag('home', message);
+                return console.log("Enter Title");
+            }
             let note = {
                 date: Date.now(),
                 noteText: this.model.notesViewModel.text.value,

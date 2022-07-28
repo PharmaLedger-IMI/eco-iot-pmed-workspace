@@ -4,6 +4,7 @@
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
             <h5 class="generic-title">View: {{@title.value}}</h5>
+            <webc-template template="alert" data-view-model="@" class="w-100"></webc-template>
         </div>
 
         <div class="container justify-content-start">
@@ -134,8 +135,8 @@
                                 <textarea class="form-control" data-view-model="@notesViewModel.text" id="@notesViewModel.text.name" rows="4">
                                     </textarea>
                             </div>
-                            <div class="button-group-wrapper justify-content-center align-items-center" >
-                                <button class="button-group-wrapper" data-tag="save-note">Save Note</button>
+                            <div class="button-group-wrapper justify-content-center align-items-center">
+                                    <button class="button-group-wrapper" data-tag="save-note">Save Note</button>
                             </div>
                         </div>
 
