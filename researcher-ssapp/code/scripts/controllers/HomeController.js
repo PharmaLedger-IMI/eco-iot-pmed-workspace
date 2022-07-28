@@ -3,7 +3,6 @@ const commonServices = require("common-services");
 const DidService =commonServices.DidService;
 const MessageHandlerService = commonServices.MessageHandlerService;
 const {StudiesService, PermissionedHealthDataService} = commonServices;
-import DPermissionService from "../services/DPermissionService.js";
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const DataSourceFactory = commonServices.getDataSourceFactory();
 
@@ -77,7 +76,6 @@ export default class HomeController extends WebcController {
     }
 
     async initServices() {
-        this.DPermissionService = new DPermissionService();
         this.StudiesService = new StudiesService();
         this.PermissionedHealthDataService = new PermissionedHealthDataService();
 
