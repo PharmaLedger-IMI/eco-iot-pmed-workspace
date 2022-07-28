@@ -1,4 +1,3 @@
-import mock from './mock/dynamic-consents.js';
 const commonServices = require("common-services");
 const { WebcController } = WebCardinal.controllers;
 const {StudiesService} = commonServices;
