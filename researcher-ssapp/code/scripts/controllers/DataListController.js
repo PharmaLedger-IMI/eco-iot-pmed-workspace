@@ -29,6 +29,7 @@ export default class DataListController extends WebcController {
                 return console.log(err);
             }
             this.model.studyTitle = study_info.ResearchStudyTitle;
+            this.model.participants_withPermission = study_info.participants.filter(p => p.dpermission===true);
         });
 
         const getPermissionedData = () => {
@@ -54,13 +55,23 @@ export default class DataListController extends WebcController {
             });
 
             let observations = allObservations.filter(observation => observation.studyUID === this.model.studyID);
+            // comment this to present all mounted data and use the observations array in DataSource
+            let observations_only_permission = []
+            this.model.participants_withPermission.forEach(par => {
+                observations.forEach(function(obs, index) {
+                    if (obs.subject.reference === par.participantInfo.patientDID) {
+                        observations_only_permission.push(obs);
+                    }
+                })
+            });
+            //
+
             this.model.hasData = observations.length !== 0;
-            this.model.dataDataSource = DataSourceFactory.createDataSource(8, 20, observations);
+            this.model.dataDataSource = DataSourceFactory.createDataSource(8, 20, observations_only_permission);
             const { dataDataSource } = this.model;
             this.onTagClick("prev-page", () => dataDataSource.goToPreviousPage());
             this.onTagClick("next-page", () => dataDataSource.goToNextPage());
         });
-
 
         this._attachHandlerExportData();
     }
