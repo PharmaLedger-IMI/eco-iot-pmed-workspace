@@ -84,6 +84,7 @@ export default class ViewResearchStudyController extends WebcController {
         this.onTagClick('save-note', (event) => {
             window.WebCardinal.loader.hidden = false;
             let noteTitle = this.model.notesViewModel.title.value;
+            let noteText = this.model.notesViewModel.text.value;
             if(noteTitle.length === 0 || !noteTitle.trim()){
                 let message = {
                     content: `Please enter title!`,
@@ -92,6 +93,15 @@ export default class ViewResearchStudyController extends WebcController {
                 window.WebCardinal.loader.hidden = true;
                 this.navigateToPageTag('home', message);
                 return console.log("Enter Title");
+            }
+            if(noteText.length === 0 || !noteText.trim()){
+                let message = {
+                    content: `Please enter text!`,
+                    type: 'error'
+                }
+                window.WebCardinal.loader.hidden = true;
+                this.navigateToPageTag('home', message);
+                return console.log("Enter text");
             }
             let note = {
                 date: Date.now(),
