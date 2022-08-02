@@ -6,63 +6,89 @@
             <webc-template template="alert" data-view-model="@" class="w-100"></webc-template>
         </div>
 
+
         <div class="container justify-content-start">
 
-            <div data-if="@hasStudies">
+            <div data-if="@publicDidReady">
 
-                <webc-spinner slot="loading"></webc-spinner>
-                <div slot="false" class="alert alert-warning" role="alert">
-                    <h4 class="alert-heading">No studies yet!</h4>
-                    <p>Add your first study!</p>
-                </div>
-                <div class="common-datatable cs-datatable dt-4-col" slot="true">
-                <webc-datatable datasource="@studiesDataSource" >
+                <div slot="true" data-if="@hasStudies">
 
-                    <div slot="header" data-sortable>Study</div>
-                    <div slot="header" data-sortable>Participants enrolled</div>
-                    <div slot="header" data-sortable>Status</div>
-                    <div slot="header" data-sortable>Options</div>
+                    <webc-spinner slot="loading"></webc-spinner>
+                    <div slot="false" class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">No studies yet!</h4>
+                        <p>Add your first study!</p>
+                    </div>
+                    <div class="common-datatable cs-datatable dt-4-col" slot="true">
+                        <webc-datatable datasource="@studiesDataSource">
+
+                            <div slot="header" data-sortable>Study</div>
+                            <div slot="header" data-sortable>Participants enrolled</div>
+                            <div slot="header" data-sortable>Status</div>
+                            <div slot="header" data-sortable>Options</div>
 
 
-                    <div class="cell">{{ @title }}</div>
-                    <div class="cell">{{ @participantsNumber }}</div>
-                    <div class="cell study-status-cell">
-                        {{ @statusLabel }}
-                        <div data-if="@hasStatusActions">
-                            <i class="fa fa fa-ellipsis-v"> </i>
-                            <div data-for="@statusActions" class="study-status-actions">
-                                <label data-tag="change-status">{{@action}}</label>
-                                <label class="separator"> | </label>
+                            <div class="cell">{{ @title }}</div>
+                            <div class="cell">{{ @participantsNumber }}</div>
+                            <div class="cell study-status-cell">
+                                {{ @statusLabel }}
+                                <div data-if="@hasStatusActions">
+                                    <i class="fa fa fa-ellipsis-v"> </i>
+                                    <div data-for="@statusActions" class="study-status-actions">
+                                        <label data-tag="change-status">{{@action}}</label>
+                                        <label class="separator"> | </label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="cell">
+                                <button data-tag="view" class="link option" disabled="@preventActions.preventView">
+                                    View
+                                </button>
+                                <label> | </label>
+                                <button data-tag="edit" class="link option" disabled="@preventActions.preventEdit">
+                                    Edit
+                                </button>
+                                <label> | </label>
+                                <button data-tag="feedback-list" class="link option"
+                                        disabled="@preventActions.preventFeedback">Feedback
+                                </button>
+                                <label> | </label>
+                                <button data-tag="evidence" class="link option"
+                                        disabled="@preventActions.preventEvidence">Evidence
+                                </button>
+                                <label> | </label>
+                                <button data-tag="data" class="link option" disabled="@preventActions.preventData">
+                                    Data
+                                </button>
                             </div>
 
-                        </div>
-
-                    </div>
-                    <div class="cell">
-                        <button data-tag="view" class="link option" disabled="@preventActions.preventView">View</button>
-                        <label> | </label>
-                        <button data-tag="edit" class="link option" disabled="@preventActions.preventEdit">Edit</button>
-                        <label> | </label>
-                        <button data-tag="feedback-list" class="link option" disabled="@preventActions.preventFeedback">Feedback</button>
-                        <label> | </label>
-                        <button data-tag="evidence" class="link option" disabled="@preventActions.preventEvidence">Evidence</button>
-                        <label> | </label>
-                        <button data-tag="data" class="link option" disabled="@preventActions.preventData">Data</button>
+                        </webc-datatable>
                     </div>
 
-                </webc-datatable>
                 </div>
 
+                <section slot="true" class="controls button-group-wrapper">
+                    <button data-tag="new:study">
+                        <i class="fa fa-list-alt p-1"></i>
+                        Add study
+                    </button>
+
+                </section>
+
+                <div slot="false" class="d-flex flex-column align-items-center justify-content-center wallet-initializing-info">
+                    <div class="row">
+                        <div class="spinner-border text-info" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <strong>Wallet is initializing...</strong>
+                    </div>
+                </div>
             </div>
+
         </div>
-
-
-        <section class="controls button-group-wrapper">
-            <button data-tag="new:study">
-                <i class="fa fa-list-alt p-1"></i>
-                Add study
-            </button>
-        </section>
 
     </div>
 </webc-container>

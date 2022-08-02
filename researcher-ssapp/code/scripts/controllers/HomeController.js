@@ -1,6 +1,7 @@
 const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
 const DidService =commonServices.DidService;
+const { getCommunicationServiceInstance } = commonServices.CommunicationService;
 const MessageHandlerService = commonServices.MessageHandlerService;
 const {StudiesService, PermissionedHealthDataService} = commonServices;
 import StudyStatusesService from "../services/StudyStatusesService.js";
@@ -17,9 +18,21 @@ export default class HomeController extends WebcController {
 
         this.model = this.getInitialModel();
 
+        let communicationService = getCommunicationServiceInstance();
+        this.model.publicDidReady = false;
+        communicationService.onPrimaryDidReady((err, didDocument)=>{
+
+            if(err){
+                throw err;
+            }
+            this.model.publicDidReady = true;
+        })
+
+
         const prevState = this.getState() || {};
         const message = prevState;
         this.model.message = message;
+
 
         this.initHandlers();
         this.initServices();
