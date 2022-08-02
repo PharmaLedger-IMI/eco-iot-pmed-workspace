@@ -69,8 +69,22 @@ export default class ViewResearchStudyController extends WebcController {
         this._attachHandlerViewDynamicConsents();
         this._attachHandlerSaveNote();
         this._attachHandlerViewNote();
+        this.observeInputs();
     }
 
+    async observeInputs() {
+        const validateInputs = async () => {
+            if(this.model.notesViewModel.title.value.trim() === '' || this.model.notesViewModel.text.value.trim() === '') {
+                return this.model.isBtnDisabled = true;
+            } else {
+                return this.model.isBtnDisabled = false;
+            }
+
+        }
+
+        this.model.onChange('notesViewModel.text.value', validateInputs);
+        this.model.onChange('notesViewModel.title.value', validateInputs);
+    }
 
     _attachHandlerViewNote() {
         this.onTagClick('view-note', (model) => {
