@@ -1,41 +1,47 @@
 {
-	"storage": "../apihub-root",
-	"port": 8080,
-	"preventRateLimit": true,
-	"activeComponents": [
-		"virtualMQ",
-		"messaging",
-		"notifications",
-		"filesManager",
-		"bdns",
-		"bricksLedger",
-		"bricksFabric",
-		"bricking",
-		"anchoring",
-		"debugLogger",
-		"mq",
-		"staticServer"
-	],
-	"enableRequestLogger": true,
-	"enableJWTAuthorisation": false,
-	"enableLocalhostAuthorization": false,
-	"skipJWTAuthorisation": [
-		"/assets",
-		"/directory-summary",
-		"/resources",
-		"/bdns",
-		"/anchor/epi",
-		"/anchor/default",
-		"/anchor/vault",
-		"/bricking",
-		"/bricksFabric",
-		"/bricksledger",
-		"/create-channel",
-		"/forward-zeromq",
-		"/send-message",
-		"/receive-message",
-		"/files",
-		"/notifications",
-		"/mq"
-	]
+  "storage": "../apihub-root",
+  "port": 8080,
+  "preventRateLimit": true,
+  "activeComponents": [
+    "admin",
+    "cloudWallet",
+    "virtualMQ",
+    "messaging",
+    "notifications",
+    "filesManager",
+    "bdns",
+    "bricksLedger",
+    "bricksFabric",
+    "bricking",
+    "anchoring",
+    "debugLogger",
+    "mq",
+    "secrets",
+    "staticServer"
+  ],
+  "componentsConfig": {
+    "staticServer": {
+      "excludedFiles": [
+        ".*.secret"
+      ]
+    },
+    "bricking": {},
+    "anchoring": {}
+  },
+  "responseHeaders": {
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-XSS-Protection": "1; mode=block"
+  },
+  "enableRequestLogger": true,
+  "enableJWTAuthorisation": false,
+  "enableOAuth": false,
+  "enableLocalhostAuthorization": false,
+  "serverAuthentication": false,
+  "skipOAuth": [
+    "/assets",
+    "/bdns",
+    "/bundles",
+    "/getAuthorization",
+    "/external-volume/config/oauthConfig.js"
+  ]
 }
