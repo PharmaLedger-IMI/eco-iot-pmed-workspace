@@ -7,11 +7,11 @@
         </div>
 
 
-        <div class="container justify-content-start">
+        <div class="container justify-content-start" data-if="@publicDidReady">
 
-            <div data-if="@publicDidReady">
+            <div slot="true">
 
-                <div slot="true" data-if="@hasStudies">
+                <div data-if="@hasStudies">
 
                     <webc-spinner slot="loading"></webc-spinner>
                     <div slot="false" class="alert alert-warning" role="alert">
@@ -68,7 +68,7 @@
 
                 </div>
 
-                <section slot="true" class="controls button-group-wrapper">
+                <section class="controls button-group-wrapper">
                     <button data-tag="new:study">
                         <i class="fa fa-list-alt p-1"></i>
                         Add study
@@ -76,15 +76,16 @@
 
                 </section>
 
-                <div slot="false" class="d-flex flex-column align-items-center justify-content-center wallet-initializing-info">
-                    <div class="row">
-                        <div class="spinner-border text-info" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
+            </div>
+            <div slot="false"
+                 class="d-flex flex-column align-items-center justify-content-center wallet-initializing-info">
+                <div class="row">
+                    <div class="spinner-border text-info" role="status">
+                        <span class="sr-only">Loading...</span>
                     </div>
-                    <div class="row">
-                        <strong>Wallet is initializing...</strong>
-                    </div>
+                </div>
+                <div class="row">
+                    <strong>Wallet is initializing...</strong>
                 </div>
             </div>
 
