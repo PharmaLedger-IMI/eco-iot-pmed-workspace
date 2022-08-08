@@ -44,10 +44,6 @@ export default class CreateFeedbackController extends BreadCrumbManager {
         this.CommunicationService = CommunicationService.getCommunicationServiceInstance();
 
         let promisesArr = [];
-
-        for(let i =0;i<1;i++) {
-            subjectsDids = subjectsDids.concat(subjectsDids);
-        }
         let counter = 0;
         this.model.feedbacksSending.isLoading = false;
 
