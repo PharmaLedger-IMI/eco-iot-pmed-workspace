@@ -1,9 +1,9 @@
 const commonServices = require("common-services");
 const {EvidenceService} = commonServices;
 const {WebcController} = WebCardinal.controllers;
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class ViewEvidenceController extends WebcController {
+export default class ViewEvidenceController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
@@ -12,14 +12,12 @@ export default class ViewEvidenceController extends WebcController {
         this.model.study_id = prevState.studyID;
         this.model.header = "View Evidence";
 
-        this.model.breadcrumb = prevState.breadcrumb;
-        const {breadcrumb, ...state} = prevState;
-
-        this.model.breadcrumb.push({
-            label:`${this.model.header}`,
-            tag:"view-evidence",
-            state: state
-        });
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: `${this.model.header}`,
+                tag: "view-evidence"
+            }
+        );
 
         this.EvidenceService = new EvidenceService();
         this.EvidenceService.getEvidence(this.model.evidence_uid, (err, evidence) => {

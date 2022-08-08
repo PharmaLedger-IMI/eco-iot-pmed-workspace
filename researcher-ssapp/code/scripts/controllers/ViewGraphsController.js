@@ -1,23 +1,22 @@
 const commonServices = require("common-services");
 const { WebcController } = WebCardinal.controllers;
 const {StudiesService} = commonServices;
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class ViewGraphsController extends WebcController {
+export default class ViewGraphsController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         const prevState = this.getState() || {};
         this.model.studyId = prevState.studyId;
 
-        this.model.breadcrumb = prevState.breadcrumb;
-        const { breadcrumb, ...state } = prevState;
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: `View Graphs`,
+                tag: "view-graphs"
+            }
+        );
 
-        this.model.breadcrumb.push({
-            label: `View Graphs`,
-            tag: "view-graphs",
-            state: state
-        });
 
         this.revokedCount = 0;
         this.ApprovedCount = 0;

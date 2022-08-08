@@ -6,22 +6,23 @@ const contractModelHL7 = commonServices.models.ContractModel;
 const researchStudyModelHL7 = commonServices.models.ResearchStudyModel;
 const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
 const CONSTANTS = commonServices.Constants;
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class CreateResearchStudyController extends WebcController {
+export default class CreateResearchStudyController extends BreadCrumbManager {
     constructor(...props) {
 
         super(...props);
 
         const prevState = this.getState() || {};
 
-        const {breadcrumb, ...state} = prevState
         this.model = this.getBasicViewModel(prevState);
-        this.model.breadcrumb.push({
-            label:`${this.model.actionType} ${this.model.title.value}`,
-            tag:"create-research-study",
-            state: state
-        });
+
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: `${this.model.actionType} ${this.model.title.value}`,
+                tag: "create-research-study"
+            }
+        );
 
         this._attachHandlerResearchStudyBack();
         this._attachHandlerResearchStudyNext();
@@ -153,7 +154,7 @@ export default class CreateResearchStudyController extends WebcController {
             data: this.model.data.value,
             header1: this.model.header1,
             uid: this.model.uid,
-            breadcrumb: this.model.breadcrumb.toObject()
+            breadcrumb: this.model.toObject('breadcrumb')
         };
     }
 

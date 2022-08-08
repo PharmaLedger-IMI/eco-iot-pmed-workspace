@@ -9,8 +9,6 @@ function defineWebCardinalComponents() {
 addHook('beforeAppLoads', async () => {
     try {
         defineWebCardinalComponents();
-        const {BreadcrumbNavigatorController} = await import("../components/breadcrumb-navigator/BreadcrumbNavigatorController.js");
-        addControllers({BreadcrumbNavigatorController});
 
         await import("../components/share-did/share-did.js");
 

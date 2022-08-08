@@ -4,9 +4,9 @@ const commonServices = require("common-services");
 const {StudiesService} = commonServices;
 const contractModelHL7 = commonServices.models.ContractModel;
 const researchStudyModelHL7 = commonServices.models.ResearchStudyModel;
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class EditResearchStudyController extends WebcController {
+export default class EditResearchStudyController extends BreadCrumbManager {
     constructor(...props) {
 
         super(...props);
@@ -14,13 +14,14 @@ export default class EditResearchStudyController extends WebcController {
         const prevState = this.getState() || {};
         this.model.study_id = prevState.uid;
 
-        const {breadcrumb, ...state} = prevState
         this.model = this.getBasicViewModel(prevState);
-        this.model.breadcrumb.push({
-            label:`${this.model.actionType} ${this.model.title.value}`,
-            tag:"edit-research-study",
-            state: state
-        });
+
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: `${this.model.actionType} ${this.model.title.value}`,
+                tag: "edit-research-study"
+            }
+        );
 
         this.StudiesService = new StudiesService();
         this.StudiesService.getStudy(this.model.study_id, (err, studyData) => {
@@ -151,7 +152,7 @@ export default class EditResearchStudyController extends WebcController {
             data: this.model.data.value,
             header1: this.model.header1,
             uid: this.model.uid,
-            breadcrumb: this.model.breadcrumb.toObject()
+            breadcrumb: this.model.toObject('breadcrumb')
         };
     }
 

@@ -3,23 +3,23 @@ const commonServices = require("common-services");
 const {EvidenceService, StudiesService} = commonServices;
 const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
 const CONSTANTS = commonServices.Constants;
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-export default class AddEvidenceController extends WebcController {
+export default class AddEvidenceController extends BreadCrumbManager {
     constructor(...props) {
 
         super(...props);
 
         const prevState = this.getState() || {};
-        const { breadcrumb, ...state } = prevState;
 
-        this.model.breadcrumb = breadcrumb;
-        this.model.breadcrumb.push({
-            label: 'New Evidence',
-            tag: "evidence",
-            state: state
-        });
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: "New Evidence",
+                tag: "evidence"
+            }
+        );
 
-        this.model.studyID = state.uid;
+        this.model.studyID = prevState.uid;
         this.model = this.getEvidenceDetailsViewModel();
         this.CommunicationService = getCommunicationServiceInstance();
         this.model.participantsDIDs = [];
@@ -71,7 +71,7 @@ export default class AddEvidenceController extends WebcController {
             if (err) {
                 evidenceState = {
                     uid: this.model.studyID,
-                    breadcrumb: this.model.breadcrumb.toObject(),
+                    breadcrumb: this.model.toObject('breadcrumb'),
                     message: {
                         content: `An error has been occurred!`,
                         type: 'error'
@@ -80,7 +80,7 @@ export default class AddEvidenceController extends WebcController {
             } else {
                 evidenceState = {
                     uid: this.model.studyID,
-                    breadcrumb: this.model.breadcrumb.toObject(),
+                    breadcrumb: this.model.toObject('breadcrumb'),
                     message: {
                         content: `The study ${this.model.title.value} evidence has been created!`,
                         type: 'success'
@@ -97,7 +97,7 @@ export default class AddEvidenceController extends WebcController {
 
     _attachHandlerGoBack() {
         this.onTagClick('go:back', () => {
-            this.navigateToPageTag('evidence-list', { uid: this.model.studyID, breadcrumb: this.model.breadcrumb.toObject() });
+            this.navigateToPageTag('evidence-list', { uid: this.model.studyID, breadcrumb: this.model.toObject('breadcrumb') });
         });
     }
 

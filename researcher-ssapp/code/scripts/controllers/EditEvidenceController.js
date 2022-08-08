@@ -1,25 +1,23 @@
 const commonServices = require("common-services");
 const {EvidenceService} = commonServices;
 const {WebcController} = WebCardinal.controllers;
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class EditEvidenceController extends WebcController {
+export default class EditEvidenceController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         const prevState = this.getState() || {};
         this.model.evidence_uid = prevState.evidenceID;
         this.model.study_id = prevState.studyID;
-        this.model.breadcrumb = prevState.breadcrumb;
         this.model.header = "Edit Evidence";
 
-        const {breadcrumb, ...state} = prevState;
-
-        this.model.breadcrumb.push({
-            label:`${this.model.header}`,
-            tag:"edit-evidence",
-            state: state
-        });
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: `${this.model.header}`,
+                tag: "edit-evidence"
+            }
+        );
 
         this.EvidenceService = new EvidenceService();
         this.EvidenceService.getEvidence(this.model.evidence_uid, (err, evidence) => {
@@ -38,7 +36,7 @@ export default class EditEvidenceController extends WebcController {
 
             let evidenceState = {
                 uid: this.model.study_id, 
-                breadcrumb: this.model.breadcrumb.toObject()
+                breadcrumb: this.model.toObject('breadcrumb')
             }
             this.navigateToPageTag('evidence-list', evidenceState);
 
@@ -75,7 +73,7 @@ export default class EditEvidenceController extends WebcController {
             this.navigateToPageTag('evidence-list', { 
                 message: message,
                 uid: this.model.study_id, 
-                breadcrumb: this.model.breadcrumb.toObject() 
+                breadcrumb: this.model.toObject('breadcrumb')
             });
         })
     }

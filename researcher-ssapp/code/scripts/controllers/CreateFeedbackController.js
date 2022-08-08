@@ -5,27 +5,23 @@ import FeedbackService from "../services/FeedbackService.js";
 const {StudiesService} = commonServices;
 const CommunicationService = commonServices.CommunicationService;
 const CONSTANTS = commonServices.Constants;
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class CreateFeedbackController extends WebcController {
+export default class CreateFeedbackController extends BreadCrumbManager {
     constructor(...props) {
 
         super(...props);
 
         const prevState = this.getState() || {};
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: "New Feedback",
+                tag: "create-feedback"
+            }
+        );
 
-
-        const {breadcrumb, ...state} = prevState;
-
-        this.model.breadcrumb = breadcrumb;
-        this.model.breadcrumb.push({
-            label: 'New Feedback',
-            tag: "create-feedback",
-            state: state
-        });
-
-        this.model.studyID = state.uid;
-        this.model.studyTitle = state.title;
+        this.model.studyID = prevState.uid;
+        this.model.studyTitle = prevState.title;
         this.model = this.getFeedbackDetailsViewModel();
         this.model.participantsDIDs = [];
 
@@ -122,7 +118,7 @@ export default class CreateFeedbackController extends WebcController {
             if (err) {
                 feedbackState = {
                     uid: this.model.studyID,
-                    breadcrumb: this.model.breadcrumb.toObject(),
+                    breadcrumb: this.model.toObject('breadcrumb'),
                     message: {
                         content: `An error has been occurred!`,
                         type: 'error'
@@ -132,7 +128,7 @@ export default class CreateFeedbackController extends WebcController {
                 feedbackState = {
                     uid: this.model.studyID,
                     title: this.model.studyTitle,
-                    breadcrumb: this.model.breadcrumb.toObject(),
+                    breadcrumb: this.model.toObject('breadcrumb'),
                     message: {
                         content: `The feedback ${this.model.feedback_subject.value} has been created! THANKS INVESTIGATOR! YOUR FEEDBACK STUDY HAS BEEN SENT TO ALL THE PARTICIPANTS.`,
                         type: 'success'
@@ -151,7 +147,7 @@ export default class CreateFeedbackController extends WebcController {
         this.onTagClick('go:back', () => {
             this.navigateToPageTag('feedback-list', {
                 uid: this.model.studyID,
-                breadcrumb: this.model.breadcrumb.toObject()
+                breadcrumb: this.model.toObject('breadcrumb')
             });
         });
     }

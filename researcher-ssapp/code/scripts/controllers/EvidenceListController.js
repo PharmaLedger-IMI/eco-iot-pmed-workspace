@@ -2,25 +2,25 @@ const { WebcController } = WebCardinal.controllers;
 const commonServices = require("common-services");
 const {StudiesService, EvidenceService} = commonServices;
 const DataSourceFactory = commonServices.getDataSourceFactory();
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-export default class EvidenceListController extends WebcController {
+export default class EvidenceListController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         this.model = {};
 
         const prevState = this.getState() || {};
-        const {breadcrumb, message, ...state} = prevState;
-
         this.model = prevState;
 
-        this.model.breadcrumb.push({
-            label:this.model.title + " Evidence List",
-            tag:"evidence-list",
-            state: state
-        });
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: this.model.title + " Evidence List",
+                tag: "evidence-list"
+            }
+        );
 
-        this.model.studyID = state.uid;
+        this.model.studyID = prevState.uid;
 
         this.StudiesService = new StudiesService();
         this.StudiesService.getStudy(this.model.studyID, (err, study_info) => {
@@ -52,7 +52,7 @@ export default class EvidenceListController extends WebcController {
                 let evidenceState = {
                     studyID: model.studyID,
                     evidenceID: model.uid,
-                    breadcrumb: this.model.breadcrumb.toObject()
+                    breadcrumb: this.model.toObject('breadcrumb')
                 }
                 this.navigateToPageTag('view-evidence', evidenceState);
             });
@@ -60,7 +60,7 @@ export default class EvidenceListController extends WebcController {
                 let evidenceState = {
                     studyID: model.studyID,
                     evidenceID: model.uid,
-                    breadcrumb: this.model.breadcrumb.toObject()
+                    breadcrumb: this.model.toObject('breadcrumb')
                 }
                 this.navigateToPageTag('edit-evidence' ,evidenceState);
             });
@@ -75,7 +75,7 @@ export default class EvidenceListController extends WebcController {
         this.onTagClick('new:evidence', () => {
             let evidenceState = {
                 uid: this.model.studyID,
-                breadcrumb: this.model.breadcrumb.toObject(),
+                breadcrumb: this.model.toObject('breadcrumb'),
             }
             this.navigateToPageTag('add-evidence', evidenceState);
         });

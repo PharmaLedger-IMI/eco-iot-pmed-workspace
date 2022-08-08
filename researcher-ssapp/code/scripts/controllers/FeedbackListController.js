@@ -2,9 +2,9 @@ const { WebcController } = WebCardinal.controllers;
 import FeedbackService from "../services/FeedbackService.js";
 const commonServices = require("common-services");
 const DataSourceFactory = commonServices.getDataSourceFactory();
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class FeedbackListController extends WebcController {
+export default class FeedbackListController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
@@ -12,18 +12,17 @@ export default class FeedbackListController extends WebcController {
         this.model = this.getInitialModel();
 
         const prevState = this.getState() || {};
-        const {breadcrumb, message, ...state} = prevState;
 
         this.model.studyID = prevState.uid;
         this.model.studyTitle = prevState.title;
-        this.model.breadcrumb = prevState.breadcrumb;
         this.model.message = prevState.message;
 
-        this.model.breadcrumb.push({
-            label:this.model.studyTitle + " Feedback",
-            tag:"feedback-list",
-            state: state
-        });
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: this.model.studyTitle + " Feedback",
+                tag: "feedback-list"
+            }
+        );
 
         this.FeedbackService= new FeedbackService();
         const getFeedback = () => {
@@ -49,7 +48,7 @@ export default class FeedbackListController extends WebcController {
                     studyID: this.model.studyID,
                     studyTitle: this.model.studyTitle,
                     feedbackID: model.uid,
-                    breadcrumb: this.model.breadcrumb.toObject()
+                    breadcrumb: this.model.toObject('breadcrumb')
                 }
                 this.navigateToPageTag('view-feedback', state);
             });
@@ -66,7 +65,7 @@ export default class FeedbackListController extends WebcController {
             let objToSend = {
                 uid: this.model.studyID,
                 title: this.model.studyTitle,
-                breadcrumb: this.model.breadcrumb.toObject(),
+                breadcrumb: this.model.toObject('breadcrumb'),
             }
             this.navigateToPageTag('create-feedback', objToSend);
         });

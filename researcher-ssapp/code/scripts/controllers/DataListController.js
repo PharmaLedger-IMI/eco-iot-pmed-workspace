@@ -2,25 +2,26 @@ const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
 const {StudiesService, PermissionedHealthDataService} = commonServices;
 const DataSourceFactory = commonServices.getDataSourceFactory();
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-export default class DataListController extends WebcController {
+export default class DataListController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         this.model = {};
 
         const prevState = this.getState() || {};
-        const {breadcrumb, message, ...state} = prevState;
 
         this.model = prevState;
 
-        this.model.breadcrumb.push({
-            label:this.model.title + " Data List",
-            tag:"data-list",
-            state: state
-        });
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: this.model.title + " Data List",
+                tag: "data-list"
+            }
+        );
 
-        this.model.studyID = state.uid;
+        this.model.studyID = prevState.uid;
 
         this.init();
 

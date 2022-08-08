@@ -6,13 +6,14 @@ const MessageHandlerService = commonServices.MessageHandlerService;
 const {StudiesService, PermissionedHealthDataService} = commonServices;
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const DataSourceFactory = commonServices.getDataSourceFactory();
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
 const ACTION_TYPES = {
     ADD: 'Add',
     EDIT: 'Edit'
 }
 
-export default class HomeController extends WebcController {
+export default class HomeController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
@@ -40,7 +41,7 @@ export default class HomeController extends WebcController {
 
     initHandlers() {
         this.onTagClick('new:study', () => {
-            this.navigateToPageTag('create-research-study', { breadcrumb: this.model.breadcrumb.toObject(), actionType: ACTION_TYPES.ADD, researcherDID: this.model.did });
+            this.navigateToPageTag('create-research-study', { breadcrumb: this.model.toObject('breadcrumb'), actionType: ACTION_TYPES.ADD, researcherDID: this.model.did });
         });
 
         
@@ -119,7 +120,7 @@ export default class HomeController extends WebcController {
                 let viewStatus = {
                     title: chosenStudy.title,
                     uid: chosenStudy.uid,
-                    breadcrumb: this.model.breadcrumb.toObject()
+                    breadcrumb: this.model.toObject('breadcrumb')
                 }
                 this.navigateToPageTag('view-research-study', viewStatus);
             });
@@ -128,7 +129,7 @@ export default class HomeController extends WebcController {
                 let studyState = {
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
-                    breadcrumb: this.model.breadcrumb.toObject(),
+                    breadcrumb: this.model.toObject('breadcrumb'),
                     actionType: ACTION_TYPES.EDIT,
                     researcherDID: this.model.did
                 }
@@ -139,7 +140,7 @@ export default class HomeController extends WebcController {
                 let studyState = {
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
-                    breadcrumb: this.model.breadcrumb.toObject(),
+                    breadcrumb: this.model.toObject('breadcrumb'),
                 }
                 this.navigateToPageTag('feedback-list', studyState);
             });
@@ -148,7 +149,7 @@ export default class HomeController extends WebcController {
                 let studyState = { 
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
-                    breadcrumb: this.model.breadcrumb.toObject(),
+                    breadcrumb: this.model.toObject('breadcrumb'),
                 }
                 this.navigateToPageTag('evidence-list', studyState);
             });
@@ -157,7 +158,7 @@ export default class HomeController extends WebcController {
                 let studyState = {
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
-                    breadcrumb: this.model.breadcrumb.toObject(),
+                    breadcrumb: this.model.toObject('breadcrumb'),
                 }
                 this.navigateToPageTag('data-list', studyState);
             });

@@ -2,21 +2,21 @@ const commonServices = require("common-services");
 const DataSourceFactory = commonServices.getDataSourceFactory();
 const { WebcController } = WebCardinal.controllers;
 const {StudiesService} = commonServices;
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class ViewDynamicConsentsController extends WebcController {
+export default class ViewDynamicConsentsController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         let state =  this.getState();
-        let {breadcrumb, ...breadcrumbState} = state;
         this.model = state;
-        let breadcrumbSegment = {
-            label: "Dynamic Consents",
-            tag: "dynamic-consents",
-            state: breadcrumbState
-        };
-        this.model.breadcrumb.push(breadcrumbSegment);
+
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: "Dynamic Consents",
+                tag: "dynamic-consents"
+            }
+        );
 
         this.StudiesService = new StudiesService();
         const getStudyInfo = () => {
@@ -61,7 +61,7 @@ export default class ViewDynamicConsentsController extends WebcController {
         this.onTagClick("view-graphs",() => {
             let state = {
                 studyId: this.model.studyId,
-                breadcrumb:this.model.breadcrumb.toObject()
+                breadcrumb:this.model.toObject('breadcrumb')
             }
             this.navigateToPageTag("dynamic-consents-graphs", state)
         });

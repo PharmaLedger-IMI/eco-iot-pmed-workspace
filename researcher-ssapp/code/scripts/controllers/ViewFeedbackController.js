@@ -1,8 +1,9 @@
 import FeedbackService from "../services/FeedbackService.js";
 const {WebcController} = WebCardinal.controllers;
+const commonServices = require('common-services');
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-
-export default class ViewFeddbackController extends WebcController {
+export default class ViewFeddbackController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
@@ -12,11 +13,13 @@ export default class ViewFeddbackController extends WebcController {
         this.model.feedback_id = prevState.studyID;
         this.model.studyTitle = prevState.studyTitle;
         this.model.header = "View Feedback";
-        this.model.breadcrumb = prevState.breadcrumb;
-        this.model.breadcrumb.push({
-                label:" View Feedback",
-                tag:"view-feedback"
-             });
+
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: "View Feedback",
+                tag: "view-feedback"
+            }
+        );
 
         this.FeedbackService= new FeedbackService();
         this.FeedbackService.getFeedback(this.model.feedback_uid, (err, feedback) => {

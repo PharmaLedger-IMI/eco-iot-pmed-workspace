@@ -2,24 +2,24 @@ const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
 const {StudiesService, StudyNotesService} = commonServices;
 const DataSourceFactory = commonServices.getDataSourceFactory();
+const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-export default class ViewResearchStudyController extends WebcController {
+export default class ViewResearchStudyController extends BreadCrumbManager {
 
     constructor(...props) {
         super(...props);
 
         this.containerElement = props[0];
         const prevState = this.getState() || {};
-        const {breadcrumb, ...state} = prevState
-
         this.model.study_id = prevState.uid;
-        this.model.breadcrumb = prevState.breadcrumb;
         this.model.title = prevState.title;
-        this.model.breadcrumb.push({
-            label:this.model.title,
-            tag:"view-research-study",
-            state: state
-        });
+
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: this.model.title,
+                tag: "view-research-study"
+            }
+        );
 
         this.StudiesService = new StudiesService();
         this.StudiesService.getStudy(this.model.study_id, (err, studyData) => {
@@ -144,7 +144,7 @@ export default class ViewResearchStudyController extends WebcController {
         this.onTagClick('view-dynamic-permission', (event) => {
             let study = {
                 studyId: this.model.uid,
-                breadcrumb:this.model.breadcrumb.toObject()
+                breadcrumb:this.model.toObject('breadcrumb')
             }
             this.navigateToPageTag('dynamic-consents', study);
         });
