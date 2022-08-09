@@ -1,11 +1,9 @@
-const {WebcController} = WebCardinal.controllers;
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const commonServices = require("common-services");
 const {StudiesService} = commonServices;
 const contractModelHL7 = commonServices.models.ContractModel;
 const researchStudyModelHL7 = commonServices.models.ResearchStudyModel;
 const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
-const CONSTANTS = commonServices.Constants;
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
 export default class CreateResearchStudyController extends BreadCrumbManager {

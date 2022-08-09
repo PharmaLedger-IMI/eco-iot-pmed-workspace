@@ -9,8 +9,8 @@ const DataSourceFactory = commonServices.getDataSourceFactory();
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
 const ACTION_TYPES = {
-    ADD: 'Add',
-    EDIT: 'Edit'
+    ADD: 'New Study',
+    EDIT: 'Edit Study'
 }
 
 export default class HomeController extends BreadCrumbManager {
