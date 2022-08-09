@@ -3,7 +3,7 @@
 
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
-            <h5 class="generic-title">New Feedback</h5>
+            <h5 class="generic-title">New Feedback for <i>{{@studyTitle}}</i> </h5>
         </div>
 
         <div class="form-container">
@@ -25,6 +25,11 @@
                     </textarea>
                 </div>
             </div>
+
+                <div class="form-check pl-0">
+                    <input data-view-model="@send_acknowledgement">
+                    <label class="col-form-label">{{@send_acknowledgement.label}}</label>
+                </div>
         </div>
 
         <footer class="button-group-wrapper">

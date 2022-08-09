@@ -100,7 +100,7 @@ export default class CreateFeedbackController extends BreadCrumbManager {
         }, () => {
         }, {
             controller: 'ProgressModalController',
-            modalTitle: `Sending Feedback Progression`,
+            modalTitle: `Sending Feedback Progress`,
             disableExpanding: true,
             disableBackdropClosing: true,
             disableClosing: true,
@@ -126,7 +126,7 @@ export default class CreateFeedbackController extends BreadCrumbManager {
                     title: this.model.studyTitle,
                     breadcrumb: this.model.toObject('breadcrumb'),
                     message: {
-                        content: `The feedback ${this.model.feedback_subject.value} has been created! THANKS INVESTIGATOR! YOUR FEEDBACK STUDY HAS BEEN SENT TO ALL THE PARTICIPANTS.`,
+                        content: `The feedback "${this.model.feedback_subject.value}" has been sent to the study participants.`,
                         type: 'success'
                     }
                 }
@@ -149,10 +149,18 @@ export default class CreateFeedbackController extends BreadCrumbManager {
     }
 
     _attachHandlerFeedbackCreate() {
-        this.model.onChange("feedback_content.value", () => {
-            let desc = this.model.feedback_content.value;
-            this.model.isFormFeedbackInvalid = desc.trim() === "";
-        });
+
+        this.model.addExpression("isFormFeedbackInvalid",()=>{
+            if(this.model.feedback_content.value.trim() === ""){
+                return true
+            }
+            if(this.model.feedback_subject.value.trim() === ""){
+                return true
+            }
+            return this.model.send_acknowledgement.checked === false;
+
+        },["feedback_content","send_acknowledgement","feedback_subject"])
+
         this.onTagClick('feedback:send', () => {
             this.saveFeedback();
         });
@@ -163,29 +171,24 @@ export default class CreateFeedbackController extends BreadCrumbManager {
             feedback_subject: {
                 name: 'feedback_subject',
                 id: 'feedback_subject',
-                label: "Feedback ID",
-                placeholder: 'Feedback ID',
+                label: "Feedback Title",
+                placeholder: 'Enter feedback title',
                 required: true,
                 value: ""
             },
             feedback_content: {
                 name: 'feedback_content',
                 id: 'feedback_content',
-                label: `PLEASE NOTE that you are about to send a feedback on ${this.model.studyTitle} study to all participants involved.`,
+                label: `Feedback Content`,
                 required: true,
                 placeholder: 'Description of the Feedback (Free Text - No limits of Characters)',
                 value: ""
             },
-            isFormFeedbackInvalid: {
-                name: 'isFormFeedbackInvalid',
-                id: 'isFormFeedbackInvalid',
-                value: true
-            },
-            id: {
-                name: 'id of feedback',
-                label: "id",
-                placeholder: 'id of feedback',
-                value: '001'
+            send_acknowledgement:{
+                label: `I am aware that this feedback will be sent to all participants involved in study "${this.model.studyTitle}".`,
+                "type": "checkbox",
+                "placeholder": "terms",
+                "checked": false
             }
         }
     }
