@@ -16,12 +16,6 @@ export default class EditResearchStudyController extends BreadCrumbManager {
 
         this.model = this.getBasicViewModel(prevState);
 
-        this.model.breadcrumb = this.setBreadCrumb(
-            {
-                label: `${this.model.actionType} ${this.model.title.value}`,
-                tag: "edit-research-study"
-            }
-        );
 
         this.StudiesService = new StudiesService();
         this.StudiesService.getStudy(this.model.study_id, (err, studyData) => {
@@ -31,8 +25,16 @@ export default class EditResearchStudyController extends BreadCrumbManager {
             this.model = this.getBasicViewModel({...studyData, ...prevState});
         });
 
+        this.model.breadcrumb = this.setBreadCrumb(
+            {
+                label: `${this.model.actionType} ${this.model.title.value}`,
+                tag: "edit-research-study"
+            }
+        );
+
         this._attachHandlerResearchStudyBack();
         this._attachHandlerResearchStudyNext();
+
     }
 
     prepareContractStudy(){
@@ -276,7 +278,6 @@ export default class EditResearchStudyController extends BreadCrumbManager {
             ],
             value: prevState.pathologies || ""
         },
-        breadcrumb: prevState.breadcrumb,
         actionType: prevState.actionType,
         others: {
             name: 'others',
