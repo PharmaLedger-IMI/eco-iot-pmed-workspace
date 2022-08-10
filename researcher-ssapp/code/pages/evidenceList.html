@@ -17,17 +17,15 @@
                     <h4 class="alert-heading">No evidence yet!</h4>
                     <p>Add your first evidence!</p>
                 </div>
-                <div class="common-datatable evidence-datatable dt-6-col" slot="true">
+                <div class="common-datatable evidence-datatable dt-5-col" slot="true">
                     <webc-datatable datasource="@evidenceDataSource">
 
-                        <div slot="header" data-sortable>Evidence ID</div>
                         <div slot="header" data-sortable>Title</div>
                         <div slot="header" data-sortable>Subtitle</div>
                         <div slot="header" data-sortable>Version</div>
                         <div slot="header" data-sortable>Status</div>
                         <div slot="header">Options</div>
 
-                        <div class="cell" style="text-overflow:ellipsis;width:auto;overflow:hidden;">{{ @uid }}</div>
                         <div class="cell">{{ @title }}</div>
                         <div class="cell">{{ @subtitle }}</div>
                         <div class="cell">{{ @version }}</div>
@@ -39,10 +37,6 @@
                         </div>
 
                     </webc-datatable>
-                    <!--                    <section class="controls button-group-wrapper">-->
-                    <!--                        <button data-tag="prev-page">‹ Previous page</button>-->
-                    <!--                        <button data-tag="next-page">Next page ›</button>-->
-                    <!--                    </section>-->
                 </div>
 
             </div>
