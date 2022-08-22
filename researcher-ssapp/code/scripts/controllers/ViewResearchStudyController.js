@@ -50,7 +50,7 @@ export default class ViewResearchStudyController extends BreadCrumbManager {
             notes.forEach(note => note.date = new Date(note.date).toLocaleDateString());
 
             this.model.notesDataSource = DataSourceFactory.createDataSource( 3, 10, notes);
-            this.model.notesDataSource.__proto__.addNewNotes = function(note) {
+            this.model.notesDataSource.updateTable = function(note) {
 
                 if(note.length === 0){
                     return;
@@ -133,7 +133,7 @@ export default class ViewResearchStudyController extends BreadCrumbManager {
                     return console.log(err);
                 }
                 note.date = new Date(note.date).toLocaleDateString();
-                this.model.notesDataSource.addNewNotes([note]);
+                this.model.notesDataSource.updateTable([note]);
                 this.model.notesViewModel = this.getViewNotesModel();
                 window.WebCardinal.loader.hidden = true;
             });

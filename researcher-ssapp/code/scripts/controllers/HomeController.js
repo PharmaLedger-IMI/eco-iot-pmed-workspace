@@ -74,7 +74,7 @@ export default class HomeController extends BreadCrumbManager {
                     selectedStudy.status = nextStatus.step;
                     this.StudiesService.updateStudy(selectedStudy, note,  () => {
                         this.prepareStudiesView(this.studies);
-                        this.model.studiesDataSource.updateData(selectedStudy);
+                        this.model.studiesDataSource.updateTable(selectedStudy);
                         window.WebCardinal.loader.hidden = true;
                     });
                 },
@@ -109,7 +109,7 @@ export default class HomeController extends BreadCrumbManager {
             this.prepareStudiesView(studies);
             this.studies = studies;
             this.model.studiesDataSource = DataSourceFactory.createDataSource(8, 10, studies);
-            this.model.studiesDataSource.__proto__.updateData = function(updatedStudy) {
+            this.model.studiesDataSource.updateTable = function(updatedStudy) {
                 let toBeUpdatedIndex = studies.findIndex(study => updatedStudy.uid === study.uid);
                 studies[toBeUpdatedIndex] = updatedStudy;
                 this.forceUpdate(true);
@@ -204,7 +204,7 @@ export default class HomeController extends BreadCrumbManager {
                             let toBeUpdatedIndex = this.studies.findIndex(study => data.uid === study.uid);
                             this.studies[toBeUpdatedIndex] = data;
                             this.prepareStudiesView(this.studies);
-                            this.model.studiesDataSource.updateData(data);
+                            this.model.studiesDataSource.updateTable(data);
                         });
                     })
 
@@ -241,7 +241,7 @@ export default class HomeController extends BreadCrumbManager {
                             let toBeUpdatedIndex = this.studies.findIndex(study => updatedStudy.uid === study.uid);
                             this.studies[toBeUpdatedIndex] = updatedStudy;
                             this.prepareStudiesView(this.studies);
-                            this.model.studiesDataSource.updateData(updatedStudy);
+                            this.model.studiesDataSource.updateTable(updatedStudy);
                         });
                     })
                     break;
@@ -278,7 +278,7 @@ export default class HomeController extends BreadCrumbManager {
                             let toBeUpdatedIndex = this.studies.findIndex(study => updatedStudy.uid === study.uid);
                             this.studies[toBeUpdatedIndex] = updatedStudy;
                             this.prepareStudiesView(this.studies);
-                            this.model.studiesDataSource.updateData(updatedStudy);
+                            this.model.studiesDataSource.updateTable(updatedStudy);
                             console.log(study);
                         });
                     })
