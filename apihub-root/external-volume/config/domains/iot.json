@@ -10,5 +10,6 @@
   },
   "enable": [
     "mq"
-  ]
+  ],
+  "mq_fsQueueLength": 1000
 }
