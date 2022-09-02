@@ -34,6 +34,7 @@ export default class AddEvidenceController extends BreadCrumbManager {
 
         this._attachHandlerGoBack();
         this._attachHandlerAddEvidenceConfirm();
+        this._attachHandlerFileOperation();
 
     }
 
@@ -56,9 +57,10 @@ export default class AddEvidenceController extends BreadCrumbManager {
             topics: this.model.topics.value,
             exposureBackground: this.model.exposureBackground.value,
             description: this.model.description.value,
+            file: this.model.filesEvidence.file,
             studyID: this.model.studyID
         }
-        console.log(evidence)
+        console.log(evidence);
         return evidence;
     }
 
@@ -98,6 +100,23 @@ export default class AddEvidenceController extends BreadCrumbManager {
     _attachHandlerGoBack() {
         this.onTagClick('go:back', () => {
             this.navigateToPageTag('evidence-list', { uid: this.model.studyID, breadcrumb: this.model.toObject('breadcrumb') });
+        });
+    }
+
+    _attachHandlerFileOperation(){
+        this.model.onChange('filesEvidence', () => {
+            let filesArray = this.model.filesEvidence.files || [];
+        });
+
+        this.on('add-evidence-file', (event) => {
+            let filesArray = event.data;
+            if (filesArray && filesArray.length > 0) {
+                this.model.filesEvidence.file.file = filesArray[0];
+                this.model.filesEvidence.file.name = filesArray[0].name;
+            } else {
+                this.model.filesEvidence.file.file = null;
+                this.model.filesEvidence.file.name = "";
+            }
         });
     }
 
@@ -210,6 +229,14 @@ export default class AddEvidenceController extends BreadCrumbManager {
                 label: "id",
                 placeholder: 'id of the evidence',
                 value: '001'
+            },
+            filesEvidence: {
+                topLabel: "Select pdf files to upload the results",
+                label: "",
+                accept: ".pdf",
+                listFiles: true,
+                filesAppend: false,
+                file: {}
             }
         }
     }

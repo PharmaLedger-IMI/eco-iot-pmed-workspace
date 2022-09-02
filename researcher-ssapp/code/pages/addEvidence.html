@@ -50,8 +50,13 @@
             <div class="form-row">
                 <div class="form-group">
                     <label class="col-form-label">{{@description.label}}</label>
-                    <textarea class="form-control" data-view-model="@description" id="@description.name" rows="5">
+                    <textarea class="form-control" data-view-model="@description" id="@description.name" rows="2">
                 </textarea>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">{{@filesEvidence.topLabel}}</label>
+                    <psk-files-chooser class="evidence-file-chooser" view-model="filesEvidence" event-name="add-evidence-file">
+                    </psk-files-chooser>
                 </div>
             </div>
         </main>
