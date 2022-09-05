@@ -1,6 +1,52 @@
 let LOADER_GLOBALS = {
   DEBUG:false,
   SHOW_ACTION_BUTTON:false,
+  REGISTRATION_FIELDS: [
+    {
+      visible: true,
+      fieldId: "username",
+      validator: "username",
+      type: "text",
+      fieldLabel: "Username",
+      placeholder: "Enter your username",
+      fieldHelp: "Username should have at least 6 characters"
+    },
+    {
+      visible: true,
+      fieldId: "email",
+      validator: "email",
+      type: "email",
+      fieldLabel: "Email",
+      placeholder: "Enter your email",
+      fieldHelp: "Enter a valid email address"
+    },
+    {
+      visible: false,
+      fieldId: "company",
+      type: "text",
+      validator: "anyChar",
+      fieldLabel: "Clinical Institution",
+      placeholder: "Enter your clinical institution name"
+    },
+    {
+      visible: true,
+      fieldId: "password",
+      type: "password",
+      validator: "password",
+      fieldLabel: "Password",
+      placeholder: "Enter your password",
+      fieldHelp: "Password min. 12 chars including 1xUpper char, 1xDigit, 1xSpecial char"
+    },
+    {
+      visible: true,
+      fieldId: "confirm-password",
+      type: "password",
+      validator: "confirmPassword",
+      fieldLabel: "Confirm Password",
+      placeholder: "Confirm your password",
+      fieldHelp: "Passwords should be identical"
+    }
+  ],
   DEFAULT_CREDENTIALS:{
     email:"trial-participant@pharmaledger.com",
     password:"secret",
@@ -10,7 +56,7 @@ let LOADER_GLOBALS = {
   THEME: 'app',
   LABELS_DICTIONARY: {
     APP_NAME: 'Trial Participant App',
-    APP_DESCRIPTION: 'The "backend" application for the patien wallet',
+    APP_DESCRIPTION: 'Patient wallet application',
     NEW_WALLET: 'New Account',
     ACCESS_WALLET: 'Access Account',
     WALLET_AUTHORIZATION: 'Authorization',

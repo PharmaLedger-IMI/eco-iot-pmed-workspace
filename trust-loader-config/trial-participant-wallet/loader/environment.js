@@ -1,4 +1,5 @@
 export default {
+    companyName: "PATIENTS DEV",
     appName: 'trial-participant-wallet',
     vault: "server",
     agent: "browser",

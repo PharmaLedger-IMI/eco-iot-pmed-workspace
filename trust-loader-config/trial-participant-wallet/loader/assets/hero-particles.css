@@ -1,0 +1,17 @@
+.hero {
+    display: initial;
+    background: linear-gradient(180deg, #00365c 0%, #008798 100%);
+    min-height: 100vh;
+    color: #fff;
+    padding: 7.5em 0 2em 0;
+}
+
+.hero .hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+}

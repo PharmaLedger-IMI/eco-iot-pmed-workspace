@@ -1,4 +1,5 @@
 export default {
+    companyName: "Clinical Site DEV",
     appName: "clinical-site-wallet",
     vault: "server",
     agent: "browser",
