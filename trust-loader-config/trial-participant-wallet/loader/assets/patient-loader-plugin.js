@@ -111,4 +111,17 @@ const particlesArgs = {
 
 setTimeout(()=>{
     particlesJS("hero-particles", particlesArgs)
-},500)
+},500);
+
+
+
+// if ("serviceWorker" in navigator) {
+//     navigator.serviceWorker
+//         .register("assets/patient-pwa-sw.js")
+//         .then(serviceWorker => {
+//             console.log("Service Worker registered: ", serviceWorker);
+//         })
+//         .catch(error => {
+//             console.error("Error registering the Service Worker: ", error);
+//         });
+// }
