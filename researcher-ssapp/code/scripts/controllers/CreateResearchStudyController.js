@@ -198,10 +198,6 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                 required: true,
                 options: [
                     {
-                        label: "Age 10-30",
-                        value: '10-30'
-                    },
-                    {
                         label: "Age 30-40",
                         value: '30-40'
                     },
@@ -216,9 +212,13 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                     {
                         label: "Age 60+",
                         value: '60+'
+                    },
+                    {
+                        label: "All",
+                        value: 'all'
                     }
                 ],
-                value: prevState.age || ""
+                value: prevState.age || "all"
             },
             sex: {
                 label: "Sex",
@@ -232,15 +232,11 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                         value: 'females'
                     },
                     {
-                        label: "Males & Females",
+                        label: "All",
                         value: 'both'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
                     }
                 ],
-                value: prevState.sex || ""
+                value: prevState.sex || "both"
             },
             pathologies: {
                 label: "Previous Pathologies",
@@ -274,7 +270,7 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                         value: 'n/a'
                     }
                 ],
-                value: prevState.pathologies || ""
+                value: prevState.pathologies || "n/a"
             },
             breadcrumb: prevState.breadcrumb,
             actionType: prevState.actionType,
@@ -288,20 +284,11 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
             data: {
                 label: "Please indicate the data that you need to obtain:",
                 required: true,
-                options: [{
-                    label: "ECG",
-                    value: 'ecg'
-                    },
-            
+                options: [
                     {
                         label: "SpO2",
                         value: 'SpO2'
                     },
-                    {
-                        label: "Temperature",
-                        value: 'temperature'
-                    },
-                
                     {
                         label: "Systolic Blood Pressure",
                         value: 'Systolic Blood Pressure'
@@ -311,8 +298,8 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                         value: 'Diastolic Blood Pressure'
                     },
                     {
-                        label: "N/A",
-                        value: 'n/a'
+                        label: "Fitbit Activity",
+                        value: 'fitbit activity'
                     }
                 ],
                 value: prevState.data || ""
