@@ -2,7 +2,7 @@
     <div class="container main-container common-4-rows-grid">
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
-            <h5 class="generic-title">{{@studyTitle}}: Evidence List</h5>
+            <h5 class="generic-title">{{@studyTitle}}: Results List</h5>
         </div>
 
         <webc-template template="alert" data-view-model="@" class="w-100"></webc-template>
@@ -14,8 +14,8 @@
 
                 <webc-spinner slot="loading"></webc-spinner>
                 <div slot="false" class="alert alert-warning" role="alert">
-                    <h4 class="alert-heading">No evidence yet!</h4>
-                    <p>Add your first evidence!</p>
+                    <h4 class="alert-heading">No results written yet!</h4>
+                    <p>Add your first result!</p>
                 </div>
                 <div class="common-datatable evidence-datatable dt-5-col" slot="true">
                     <webc-datatable datasource="@evidenceDataSource">
@@ -44,7 +44,7 @@
 
 
         <footer class="button-group-wrapper">
-            <button data-tag="new:evidence">Add Evidence</button>
+            <button data-tag="new:evidence">Generate a result</button>
         </footer>
 
     </div>

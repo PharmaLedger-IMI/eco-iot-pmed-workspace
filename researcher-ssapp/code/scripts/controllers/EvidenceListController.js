@@ -15,7 +15,7 @@ export default class EvidenceListController extends BreadCrumbManager {
 
         this.model.breadcrumb = this.setBreadCrumb(
             {
-                label: this.model.title + " Evidence List",
+                label: this.model.title + " Results List",
                 tag: "evidence-list"
             }
         );

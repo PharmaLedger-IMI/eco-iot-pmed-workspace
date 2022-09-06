@@ -10,7 +10,7 @@ export default class ViewEvidenceController extends BreadCrumbManager {
         const prevState = this.getState() || {};
         this.model.evidence_uid = prevState.evidenceID;
         this.model.study_id = prevState.studyID;
-        this.model.header = "View Evidence";
+        this.model.header = "View Result";
 
         this.model.breadcrumb = this.setBreadCrumb(
             {
@@ -36,7 +36,7 @@ export default class ViewEvidenceController extends BreadCrumbManager {
                 name: 'title',
                 id: 'title',
                 label: "Title: ",
-                placeholder: 'Title of the Evidence',
+                placeholder: 'Title of the result',
                 required: true,
                 value: evidence.title || ""
             },
@@ -44,7 +44,7 @@ export default class ViewEvidenceController extends BreadCrumbManager {
                 name: 'subtitle',
                 id: 'subtitle',
                 label: "Subtitle: ",
-                placeholder: 'Subtitle of the Evidence',
+                placeholder: 'Subtitle of the result',
                 value: evidence.subtitle || ""
             },
             version: {
@@ -125,14 +125,14 @@ export default class ViewEvidenceController extends BreadCrumbManager {
             description: {
                 name: 'description',
                 label: "Description",
-                placeholder: 'Provide description of the evidence',
+                placeholder: 'Provide description of the result',
                 required: true,
                 value: evidence.description || ""
             },
             id: {
-                name: 'id of the evidence',
+                name: 'id of the result',
                 label: "ID:",
-                placeholder: 'id of the evidence',
+                placeholder: 'id of the result',
                 value: evidence.uid || ""
             }
         }

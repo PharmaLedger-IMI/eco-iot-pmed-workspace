@@ -14,7 +14,7 @@ export default class AddEvidenceController extends BreadCrumbManager {
 
         this.model.breadcrumb = this.setBreadCrumb(
             {
-                label: "New Evidence",
+                label: "New Result",
                 tag: "evidence"
             }
         );
@@ -28,6 +28,7 @@ export default class AddEvidenceController extends BreadCrumbManager {
             if (err){
                 return console.log(err);
             }
+            this.model.studytitle = studyData.title;
             studyData.participants.forEach(participant=>{this.model.participantsDIDs.push(participant.participantInfo.patientDID);
             });
         });
@@ -86,7 +87,7 @@ export default class AddEvidenceController extends BreadCrumbManager {
                     uid: this.model.studyID,
                     breadcrumb: this.model.toObject('breadcrumb'),
                     message: {
-                        content: `The study ${this.model.title.value} evidence has been created!`,
+                        content: `The result has been generated and sent to all participants within the study ${this.model.studytitle}!`,
                         type: 'success'
                     }
                 }
@@ -134,7 +135,7 @@ export default class AddEvidenceController extends BreadCrumbManager {
                 name: 'title',
                 id: 'title',
                 label: "Title",
-                placeholder: 'Title of the Evidence',
+                placeholder: 'Title of the result',
                 required: true,
                 value: ""
             },
@@ -142,7 +143,7 @@ export default class AddEvidenceController extends BreadCrumbManager {
                 name: 'subtitle',
                 id: 'subtitle',
                 label: "Subtitle",
-                placeholder: 'Subtitle of the Evidence',
+                placeholder: 'Subtitle of the result',
                 value: ""
             },
             version: {
@@ -221,14 +222,14 @@ export default class AddEvidenceController extends BreadCrumbManager {
             description: {
                 name: 'description',
                 label: "Description",
-                placeholder: 'Provide description of the evidence',
+                placeholder: 'Provide description of the result',
                 required: true,
                 value: ""
             },
             id: {
-                name: 'id of the evidence',
+                name: 'id of the result',
                 label: "id",
-                placeholder: 'id of the evidence',
+                placeholder: 'id of the result',
                 value: '001'
             },
             filesEvidence: {
