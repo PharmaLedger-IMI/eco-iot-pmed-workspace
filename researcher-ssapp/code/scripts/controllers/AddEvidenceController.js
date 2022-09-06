@@ -57,7 +57,6 @@ export default class AddEvidenceController extends BreadCrumbManager {
             topics: this.model.topics.value,
             exposureBackground: this.model.exposureBackground.value,
             description: this.model.description.value,
-            file: this.model.filesEvidence.file,
             studyID: this.model.studyID
         }
         console.log(evidence);
@@ -69,7 +68,10 @@ export default class AddEvidenceController extends BreadCrumbManager {
         this.EvidenceService = new EvidenceService();
         this.EvidenceService.saveEvidence(this.prepareEvidenceDSUData(), (err, evidence) => {
             let evidenceState = {};
-
+            console.log(evidence.sReadSSI);
+            if (this.model.filesEvidence.file.file) {
+                this.EvidenceService.addEvidenceFile(this.model.filesEvidence.file, evidence.uid);
+            }
             if (err) {
                 evidenceState = {
                     uid: this.model.studyID,
@@ -89,12 +91,11 @@ export default class AddEvidenceController extends BreadCrumbManager {
                     }
                 }
             }
-
             this.sendMessageToTps(this.model.participantsDIDs, evidence.sReadSSI);
-
             window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('evidence-list', evidenceState);
         })
+
     }
 
     _attachHandlerGoBack() {
@@ -236,7 +237,8 @@ export default class AddEvidenceController extends BreadCrumbManager {
                 accept: ".pdf",
                 listFiles: true,
                 filesAppend: false,
-                file: {}
+                file: {},
+                value: ""
             }
         }
     }
