@@ -1,6 +1,6 @@
+const commonServices = require('common-services');
+const FeedbackService = commonServices.FeedbackService;
 const { WebcController } = WebCardinal.controllers;
-import FeedbackService from "../services/FeedbackService.js";
-const commonServices = require("common-services");
 const DataSourceFactory = commonServices.getDataSourceFactory();
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 

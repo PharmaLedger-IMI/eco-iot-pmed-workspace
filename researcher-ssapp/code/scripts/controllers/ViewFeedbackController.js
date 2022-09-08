@@ -1,6 +1,6 @@
-import FeedbackService from "../services/FeedbackService.js";
-const {WebcController} = WebCardinal.controllers;
 const commonServices = require('common-services');
+const FeedbackService = commonServices.FeedbackService;
+const {WebcController} = WebCardinal.controllers;
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
 export default class ViewFeddbackController extends BreadCrumbManager {
