@@ -1,4 +1,4 @@
-<webc-container controller="AddEvidenceController">
+<webc-container controller="AddResultController">
     <div class="container main-container stepper-3-rows-grid">
 
         <div class="container flex-container">
@@ -54,8 +54,8 @@
                 </textarea>
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label">{{@filesEvidence.topLabel}}</label>
-                    <psk-files-chooser class="evidence-file-chooser" view-model="filesEvidence" event-name="add-evidence-file">
+                    <label class="col-form-label">{{@filesResult.topLabel}}</label>
+                    <psk-files-chooser class="result-file-chooser" view-model="filesResult" event-name="add-result-file">
                     </psk-files-chooser>
                 </div>
             </div>
@@ -63,7 +63,7 @@
 
         <div class="button-group-wrapper">
             <button data-tag="go:back">Back</button>
-            <button data-tag="evidence-confirm">Confirm</button>
+            <button data-tag="result-confirm">Confirm</button>
         </div>
     </div>
 </webc-container>

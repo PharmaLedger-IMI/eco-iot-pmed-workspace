@@ -22,22 +22,16 @@
 			"tag": "confirmation-page"
 		},
 		{
-			"name": "Add Evidence",
-			"path": "/add-evidence",
-			"src": "addEvidence.html",
-			"tag": "add-evidence"
+			"name": "Add Result",
+			"path": "/add-result",
+			"src": "addResult.html",
+			"tag": "add-result"
 		},
 		{
-			"name": "Add Evidence",
-			"path": "/add-evidence-p2",
-			"src": "addEvidenceP2.html",
-			"tag": "add-evidence-p2"
-		},
-		{
-			"name": "All Evidences",
-			"path": "/evidence-list",
-			"src": "evidenceList.html",
-			"tag": "evidence-list"
+			"name": "All Results",
+			"path": "/results-list",
+			"src": "resultsList.html",
+			"tag": "results-list"
 		},
 		{
 			"name": "Data List",
@@ -46,16 +40,16 @@
 			"tag": "data-list"
 		},
 		{
-			"name": "Edit Evidence",
-			"path": "/edit-evidence",
-			"src": "edit-evidence.html",
-			"tag": "edit-evidence"
+			"name": "Edit Result",
+			"path": "/edit-result",
+			"src": "edit-result.html",
+			"tag": "edit-result"
 		},
 		{
-			"name": "View Evidence",
-			"path": "/view-evidence",
-			"src": "view-evidence.html",
-			"tag": "view-evidence"
+			"name": "View Result",
+			"path": "/view-result",
+			"src": "view-result.html",
+			"tag": "view-result"
 		},
 		{
 			"name": "create-research-study",

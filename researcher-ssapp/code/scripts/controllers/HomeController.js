@@ -1,4 +1,3 @@
-const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
 const DidService =commonServices.DidService;
 const { getCommunicationServiceInstance } = commonServices.CommunicationService;
@@ -143,14 +142,14 @@ export default class HomeController extends BreadCrumbManager {
                 }
                 this.navigateToPageTag('feedback-list', studyState);
             });
-            this.onTagClick("evidence", (model) => {
+            this.onTagClick("results", (model) => {
                 let chosenStudy = studies.find(study => study.uid === model.uid);
                 let studyState = { 
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
                     breadcrumb: this.model.toObject('breadcrumb'),
                 }
-                this.navigateToPageTag('evidence-list', studyState);
+                this.navigateToPageTag('results-list', studyState);
             });
             this.onTagClick("data", (model) => {
                 let chosenStudy = studies.find(study => study.uid === model.uid);
@@ -301,7 +300,7 @@ export default class HomeController extends BreadCrumbManager {
                 preventView:!statusActions.includes(ACTIONS.VIEW),
                 preventEdit:!statusActions.includes(ACTIONS.EDIT),
                 preventFeedback:!statusActions.includes(ACTIONS.FEEDBACK),
-                preventEvidence:!statusActions.includes(ACTIONS.EVIDENCE),
+                preventResults:!statusActions.includes(ACTIONS.RESULT),
                 preventData:!statusActions.includes(ACTIONS.DATA),
             }
 

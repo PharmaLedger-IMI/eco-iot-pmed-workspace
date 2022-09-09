@@ -1,4 +1,4 @@
-<webc-container controller="EvidenceListController">
+<webc-container controller="ResultsListController">
     <div class="container main-container common-4-rows-grid">
         <div class="container flex-container">
             <breadcrumb-navigator></breadcrumb-navigator>
@@ -10,15 +10,15 @@
 
         <div class="container justify-content-start">
 
-            <div data-if="@hasEvidence">
+            <div data-if="@hasResults">
 
                 <webc-spinner slot="loading"></webc-spinner>
                 <div slot="false" class="alert alert-warning" role="alert">
                     <h4 class="alert-heading">No results written yet!</h4>
                     <p>Add your first result!</p>
                 </div>
-                <div class="common-datatable evidence-datatable dt-5-col" slot="true">
-                    <webc-datatable datasource="@evidenceDataSource">
+                <div class="common-datatable results-datatable dt-5-col" slot="true">
+                    <webc-datatable datasource="@resultsDataSource">
 
                         <div slot="header" data-sortable>Title</div>
                         <div slot="header" data-sortable>Subtitle</div>
@@ -31,9 +31,9 @@
                         <div class="cell">{{ @version }}</div>
                         <div class="cell">{{ @status }}</div>
                         <div class="cell">
-                            <label data-tag="view-evidence" class="link option">View</label>
+                            <label data-tag="view-result" class="link option">View</label>
                             <label> | </label>
-                            <label data-tag="edit-evidence" class="link option">Edit</label>
+                            <label data-tag="edit-result" class="link option">Edit</label>
                         </div>
 
                     </webc-datatable>
@@ -44,7 +44,7 @@
 
 
         <footer class="button-group-wrapper">
-            <button data-tag="new:evidence">Generate a result</button>
+            <button data-tag="new:result">Generate a result</button>
         </footer>
 
     </div>

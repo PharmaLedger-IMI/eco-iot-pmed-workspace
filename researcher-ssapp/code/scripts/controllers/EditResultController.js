@@ -1,50 +1,49 @@
 const commonServices = require("common-services");
-const {EvidenceService} = commonServices;
-const {WebcController} = WebCardinal.controllers;
+const {ResultsService} = commonServices;
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-export default class EditEvidenceController extends BreadCrumbManager {
+export default class EditResultController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         const prevState = this.getState() || {};
-        this.model.evidence_uid = prevState.evidenceID;
+        this.model.result_uid = prevState.resultID;
         this.model.study_id = prevState.studyID;
         this.model.header = "Edit result";
 
         this.model.breadcrumb = this.setBreadCrumb(
             {
                 label: `${this.model.header}`,
-                tag: "edit-evidence"
+                tag: "edit-result"
             }
         );
 
-        this.EvidenceService = new EvidenceService();
-        this.EvidenceService.getEvidence(this.model.evidence_uid, (err, evidence) => {
+        this.ResultsService = new ResultsService();
+        this.ResultsService.getResult(this.model.result_uid, (err, result) => {
             if (err){
                 return console.log(err);
             }
-            this.model = this.getEvidenceDetailsViewModel(evidence);
+            this.model = this.getResultDetailsViewModel(result);
         });
 
         this._attachHandlerBackMenu();
-        this._attachHandlerEditEvidence();
+        this._attachHandlerEditResult();
     }
 
     _attachHandlerBackMenu() {
         this.onTagClick('go:back', (event) => {
 
-            let evidenceState = {
+            let resultState = {
                 uid: this.model.study_id, 
                 breadcrumb: this.model.toObject('breadcrumb')
             }
-            this.navigateToPageTag('evidence-list', evidenceState);
+            this.navigateToPageTag('result-list', resultState);
 
         });
     }
 
-    prepareEvidenceDSUData(){
-        let evidence = {
+    prepareResultDSUData(){
+        let result = {
             title: this.model.title.value,
             subtitle: this.model.subtitle.value,
             version: this.model.version.value,
@@ -53,14 +52,14 @@ export default class EditEvidenceController extends BreadCrumbManager {
             exposureBackground: this.model.exposureBackground.value,
             description: this.model.description.value,
             studyID: this.model.study_id,
-            uid: this.model.evidence_uid
+            uid: this.model.result_uid
         }
-        console.log(evidence)
-        return evidence;
+        console.log(result)
+        return result;
     }
 
-    updateEvidence(){
-        this.EvidenceService.updateEvidence(this.prepareEvidenceDSUData(), (err, data) => {
+    updateResult(){
+        this.ResultsService.updateResult(this.prepareResultDSUData(), (err, data) => {
             let message = {};
 
             if (err) {
@@ -70,7 +69,7 @@ export default class EditEvidenceController extends BreadCrumbManager {
                 message.content = `The result ${this.model.title.value} has been updated!`;
                 message.type = 'success'
             }
-            this.navigateToPageTag('evidence-list', { 
+            this.navigateToPageTag('results-list', {
                 message: message,
                 uid: this.model.study_id, 
                 breadcrumb: this.model.toObject('breadcrumb')
@@ -78,13 +77,13 @@ export default class EditEvidenceController extends BreadCrumbManager {
         })
     }
 
-    _attachHandlerEditEvidence() {
-        this.onTagClick('edit:evidence', (event) => {
-            this.updateEvidence();
+    _attachHandlerEditResult() {
+        this.onTagClick('edit:result', (event) => {
+            this.updateResult();
         });
     }
 
-    getEvidenceDetailsViewModel(evidence) {
+    getResultDetailsViewModel(result) {
         return {
             title: {
                 name: 'title',
@@ -92,21 +91,21 @@ export default class EditEvidenceController extends BreadCrumbManager {
                 label: "Title: ",
                 placeholder: 'Title of the result',
                 required: true,
-                value: evidence.title || ""
+                value: result.title || ""
             },
             subtitle: {
                 name: 'subtitle',
                 id: 'subtitle',
                 label: "Subtitle: ",
                 placeholder: 'Subtitle of the result',
-                value: evidence.subtitle || ""
+                value: result.subtitle || ""
             },
             version: {
                 name: 'version',
                 id: 'Version',
                 label: "Version",
                 placeholder: 'Version',
-                value: evidence.version || ""
+                value: result.version || ""
             },
             status: {
                 label: "Status",
@@ -128,7 +127,7 @@ export default class EditEvidenceController extends BreadCrumbManager {
                     value: 'unknown'
                 }
                 ],
-                value: evidence.status || ""
+                value: result.status || ""
             },
             topics: {
                 label: "Topics",
@@ -150,7 +149,7 @@ export default class EditEvidenceController extends BreadCrumbManager {
                     value: 'Topic 4'
                 }
                 ],
-                value: evidence.topics || ""
+                value: result.topics || ""
             },
             exposureBackground: {
                 name: 'exposure background',
@@ -174,20 +173,20 @@ export default class EditEvidenceController extends BreadCrumbManager {
                     value: 'EP_4'
                 },
                 ],
-                value: evidence.exposureBackground || ""
+                value: result.exposureBackground || ""
             },
             description: {
                 name: 'description',
                 label: "Description",
                 placeholder: 'Provide description of the result',
                 required: true,
-                value: evidence.description || ""
+                value: result.description || ""
             },
             id: {
-                name: 'id of the evidence',
+                name: 'id of the result',
                 label: "ID:",
-                placeholder: 'id of the evidence',
-                value: evidence.uid || ""
+                placeholder: 'id of the result',
+                value: result.uid || ""
             }
         }
     }

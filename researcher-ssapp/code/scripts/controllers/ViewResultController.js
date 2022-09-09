@@ -1,36 +1,35 @@
 const commonServices = require("common-services");
-const {EvidenceService} = commonServices;
-const {WebcController} = WebCardinal.controllers;
+const {ResultsService} = commonServices;
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-export default class ViewEvidenceController extends BreadCrumbManager {
+export default class ViewResultController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         const prevState = this.getState() || {};
-        this.model.evidence_uid = prevState.evidenceID;
+        this.model.result_uid = prevState.resultID;
         this.model.study_id = prevState.studyID;
         this.model.header = "View Result";
 
         this.model.breadcrumb = this.setBreadCrumb(
             {
                 label: `${this.model.header}`,
-                tag: "view-evidence"
+                tag: "view-result"
             }
         );
 
-        this.EvidenceService = new EvidenceService();
-        this.EvidenceService.getEvidence(this.model.evidence_uid, (err, evidence) => {
+        this.ResultsService = new ResultsService();
+        this.ResultsService.getResult(this.model.result_uid, (err, result) => {
             if (err){
                 return console.log(err);
             }
-            this.model = this.getEvidenceDetailsViewModel(evidence);
+            this.model = this.getResultDetailsViewModel(result);
         });
 
     }
 
 
-    getEvidenceDetailsViewModel(evidence) {
+    getResultDetailsViewModel(result) {
         return {
             title: {
                 name: 'title',
@@ -38,21 +37,21 @@ export default class ViewEvidenceController extends BreadCrumbManager {
                 label: "Title: ",
                 placeholder: 'Title of the result',
                 required: true,
-                value: evidence.title || ""
+                value: result.title || ""
             },
             subtitle: {
                 name: 'subtitle',
                 id: 'subtitle',
                 label: "Subtitle: ",
                 placeholder: 'Subtitle of the result',
-                value: evidence.subtitle || ""
+                value: result.subtitle || ""
             },
             version: {
                 name: 'version',
                 id: 'Version',
                 label: "Version",
                 placeholder: 'Version',
-                value: evidence.version || ""
+                value: result.version || ""
             },
             status: {
                 label: "Status",
@@ -74,7 +73,7 @@ export default class ViewEvidenceController extends BreadCrumbManager {
                         value: 'unknown'
                     }
                 ],
-                value: evidence.status || ""
+                value: result.status || ""
             },
             topics: {
                 label: "Topics",
@@ -96,7 +95,7 @@ export default class ViewEvidenceController extends BreadCrumbManager {
                         value: 'Topic 4'
                     }
                 ],
-                value: evidence.topics || ""
+                value: result.topics || ""
             },
             exposureBackground: {
                 name: 'exposure background',
@@ -120,20 +119,20 @@ export default class ViewEvidenceController extends BreadCrumbManager {
                         value: 'EP_4'
                     },
                 ],
-                value: evidence.exposureBackground || ""
+                value: result.exposureBackground || ""
             },
             description: {
                 name: 'description',
                 label: "Description",
                 placeholder: 'Provide description of the result',
                 required: true,
-                value: evidence.description || ""
+                value: result.description || ""
             },
             id: {
                 name: 'id of the result',
                 label: "ID:",
                 placeholder: 'id of the result',
-                value: evidence.uid || ""
+                value: result.uid || ""
             }
         }
     }

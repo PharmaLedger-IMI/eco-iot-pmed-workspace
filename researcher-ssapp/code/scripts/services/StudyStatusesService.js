@@ -2,7 +2,7 @@ const ACTIONS = {
     EDIT:"edit",
     VIEW:"view",
     FEEDBACK:"feedback",
-    EVIDENCE:"evidence",
+    RESULT:"result",
     DATA:"data"
 }
 
@@ -42,7 +42,7 @@ const statusStateMachine = {
     },
     completed: {
         label: "Completed",
-        actions: [ACTIONS.VIEW, ACTIONS.FEEDBACK, ACTIONS.EVIDENCE, ACTIONS.DATA],
+        actions: [ACTIONS.VIEW, ACTIONS.FEEDBACK, ACTIONS.RESULT, ACTIONS.DATA],
         getNexSteps: () => {
             return []
         }

@@ -1,11 +1,10 @@
-const { WebcController } = WebCardinal.controllers;
 const commonServices = require("common-services");
-const {EvidenceService, StudiesService} = commonServices;
+const {ResultsService, StudiesService} = commonServices;
 const  {getCommunicationServiceInstance} = commonServices.CommunicationService;
 const CONSTANTS = commonServices.Constants;
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
-export default class AddEvidenceController extends BreadCrumbManager {
+export default class AddResultController extends BreadCrumbManager {
     constructor(...props) {
 
         super(...props);
@@ -15,12 +14,12 @@ export default class AddEvidenceController extends BreadCrumbManager {
         this.model.breadcrumb = this.setBreadCrumb(
             {
                 label: "New Result",
-                tag: "evidence"
+                tag: "add-result"
             }
         );
 
         this.model.studyID = prevState.uid;
-        this.model = this.getEvidenceDetailsViewModel();
+        this.model = this.getResultDetailsViewModel();
         this.CommunicationService = getCommunicationServiceInstance();
         this.model.participantsDIDs = [];
         this.StudiesService = new StudiesService();
@@ -34,23 +33,23 @@ export default class AddEvidenceController extends BreadCrumbManager {
         });
 
         this._attachHandlerGoBack();
-        this._attachHandlerAddEvidenceConfirm();
+        this._attachHandlerAddResultConfirm();
         this._attachHandlerFileOperation();
 
     }
 
-    sendMessageToTps( subjectsDids, evidenceSReadSSI) {
+    sendMessageToTps( subjectsDids, resultSReadSSI) {
         subjectsDids.forEach(did => {
             this.CommunicationService.sendMessage( did, {
-                operation: CONSTANTS.MESSAGES.RESEARCHER.NEW_EVIDENCE,
-                ssi: evidenceSReadSSI,
-                shortDescription: 'Researcher sent evidence to patient',
+                operation: CONSTANTS.MESSAGES.RESEARCHER.NEW_RESULT,
+                ssi: resultSReadSSI,
+                shortDescription: 'Researcher sent result to patient',
             });
         })
     }
 
-    prepareEvidenceDSUData() {
-        let evidence = {
+    prepareResultDSUData() {
+        let result = {
             title: this.model.title.value,
             subtitle: this.model.subtitle.value,
             version: this.model.version.value,
@@ -60,21 +59,21 @@ export default class AddEvidenceController extends BreadCrumbManager {
             description: this.model.description.value,
             studyID: this.model.studyID
         }
-        console.log(evidence);
-        return evidence;
+        console.log(result);
+        return result;
     }
 
-    saveEvidence() {
+    saveResult() {
         window.WebCardinal.loader.hidden = false;
-        this.EvidenceService = new EvidenceService();
-        this.EvidenceService.saveEvidence(this.prepareEvidenceDSUData(), (err, evidence) => {
-            let evidenceState = {};
-            console.log(evidence.sReadSSI);
-            if (this.model.filesEvidence.file.file) {
-                this.EvidenceService.addEvidenceFile(this.model.filesEvidence.file, evidence.uid);
+        this.ResultsService = new ResultsService();
+        this.ResultsService.saveResult(this.prepareResultDSUData(), (err, result) => {
+            let resultState = {};
+            console.log(result.sReadSSI);
+            if (this.model.filesResult.file.file) {
+                this.ResultsService.addResultFile(this.model.filesResult.file, result.uid);
             }
             if (err) {
-                evidenceState = {
+                resultState = {
                     uid: this.model.studyID,
                     breadcrumb: this.model.toObject('breadcrumb'),
                     message: {
@@ -83,7 +82,7 @@ export default class AddEvidenceController extends BreadCrumbManager {
                     }
                 }
             } else {
-                evidenceState = {
+                resultState = {
                     uid: this.model.studyID,
                     breadcrumb: this.model.toObject('breadcrumb'),
                     message: {
@@ -92,44 +91,44 @@ export default class AddEvidenceController extends BreadCrumbManager {
                     }
                 }
             }
-            this.sendMessageToTps(this.model.participantsDIDs, evidence.sReadSSI);
+            this.sendMessageToTps(this.model.participantsDIDs, result.sReadSSI);
             window.WebCardinal.loader.hidden = true;
-            this.navigateToPageTag('evidence-list', evidenceState);
+            this.navigateToPageTag('results-list', resultState);
         })
 
     }
 
     _attachHandlerGoBack() {
         this.onTagClick('go:back', () => {
-            this.navigateToPageTag('evidence-list', { uid: this.model.studyID, breadcrumb: this.model.toObject('breadcrumb') });
+            this.navigateToPageTag('results-list', { uid: this.model.studyID, breadcrumb: this.model.toObject('breadcrumb') });
         });
     }
 
     _attachHandlerFileOperation(){
-        this.model.onChange('filesEvidence', () => {
-            let filesArray = this.model.filesEvidence.files || [];
+        this.model.onChange('filesResult', () => {
+            let filesArray = this.model.filesResult.files || [];
         });
 
-        this.on('add-evidence-file', (event) => {
+        this.on('add-result-file', (event) => {
             let filesArray = event.data;
             if (filesArray && filesArray.length > 0) {
-                this.model.filesEvidence.file.file = filesArray[0];
-                this.model.filesEvidence.file.name = filesArray[0].name;
+                this.model.filesResult.file.file = filesArray[0];
+                this.model.filesResult.file.name = filesArray[0].name;
             } else {
-                this.model.filesEvidence.file.file = null;
-                this.model.filesEvidence.file.name = "";
+                this.model.filesResult.file.file = null;
+                this.model.filesResult.file.name = "";
             }
         });
     }
 
-    _attachHandlerAddEvidenceConfirm() {
-        this.onTagClick('evidence-confirm', () => {
-            this.saveEvidence();
+    _attachHandlerAddResultConfirm() {
+        this.onTagClick('result-confirm', () => {
+            this.saveResult();
             //this.navigateToPageTag('');
         });
     }
 
-    getEvidenceDetailsViewModel() {
+    getResultDetailsViewModel() {
         return {
             title: {
                 name: 'title',
@@ -232,7 +231,7 @@ export default class AddEvidenceController extends BreadCrumbManager {
                 placeholder: 'id of the result',
                 value: '001'
             },
-            filesEvidence: {
+            filesResult: {
                 topLabel: "Select pdf files to upload the results",
                 label: "",
                 accept: ".pdf",
