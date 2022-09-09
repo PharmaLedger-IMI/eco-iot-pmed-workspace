@@ -1,6 +1,7 @@
 const commonServices = require("common-services");
 const {ResultsService} = commonServices;
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
+const FileDownloaderService = commonServices.FileDownloaderService;
 
 export default class ViewResultController extends BreadCrumbManager {
     constructor(...props) {
@@ -18,6 +19,9 @@ export default class ViewResultController extends BreadCrumbManager {
             }
         );
 
+        this._attachHandlerDownload();
+        this.fileDownloaderService = new FileDownloaderService(this.DSUStorage);
+
         this.ResultsService = new ResultsService();
         this.ResultsService.getResult(this.model.result_uid, (err, result) => {
             if (err){
@@ -28,6 +32,19 @@ export default class ViewResultController extends BreadCrumbManager {
 
     }
 
+    getResultFilePath(uid) {
+        return 'results' + '/' + uid+ '/files/';
+    }
+
+    _attachHandlerDownload() {
+        this.onTagClick('download-file', async (model, target, event) => {
+            if (this.model.filename) {
+                let path = this.getResultFilePath(this.model.id.value);
+                await this.fileDownloaderService.prepareDownloadFromDsu(path, this.model.filename);
+                this.fileDownloaderService.downloadFileToDevice(this.model.filename);
+            }
+        });
+    }
 
     getResultDetailsViewModel(result) {
         return {
@@ -133,10 +150,17 @@ export default class ViewResultController extends BreadCrumbManager {
                 label: "ID:",
                 placeholder: 'id of the result',
                 value: result.uid || ""
-            }
+            },
+            attachedFile: {
+                name: "file uploaded",
+                label: "File Uploaded",
+                placeholder: "File uploaded",
+                button: result.filename ? "Download" : "Not uploaded"
+            },
+            filename: result.filename,
+            checkForFile: result.filename ? false:true
         }
     }
-
 
 
 

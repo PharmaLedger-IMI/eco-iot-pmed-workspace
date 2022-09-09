@@ -58,7 +58,8 @@ export default class AddResultController extends BreadCrumbManager {
             exposureBackground: this.model.exposureBackground.value,
             description: this.model.description.value,
             studyID: this.model.studyID,
-            studyTitle: this.model.studytitle
+            studyTitle: this.model.studytitle,
+            filename: this.model.filesResult.file.name
         }
         console.log(result);
         return result;
@@ -69,7 +70,6 @@ export default class AddResultController extends BreadCrumbManager {
         this.ResultsService = new ResultsService();
         this.ResultsService.saveResult(this.prepareResultDSUData(), (err, result) => {
             let resultState = {};
-            console.log(result.sReadSSI);
             if (this.model.filesResult.file.file) {
                 this.ResultsService.addResultFile(this.model.filesResult.file, result.uid);
             }

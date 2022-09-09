@@ -37,7 +37,7 @@ export default class EditResultController extends BreadCrumbManager {
                 uid: this.model.study_id, 
                 breadcrumb: this.model.toObject('breadcrumb')
             }
-            this.navigateToPageTag('result-list', resultState);
+            this.navigateToPageTag('results-list', resultState);
 
         });
     }
@@ -52,7 +52,8 @@ export default class EditResultController extends BreadCrumbManager {
             exposureBackground: this.model.exposureBackground.value,
             description: this.model.description.value,
             studyID: this.model.study_id,
-            uid: this.model.result_uid
+            uid: this.model.result_uid,
+            filename: this.model.filename
         }
         console.log(result)
         return result;
@@ -187,7 +188,8 @@ export default class EditResultController extends BreadCrumbManager {
                 label: "ID:",
                 placeholder: 'id of the result',
                 value: result.uid || ""
-            }
+            },
+            filename: result.filename
         }
     }
 
