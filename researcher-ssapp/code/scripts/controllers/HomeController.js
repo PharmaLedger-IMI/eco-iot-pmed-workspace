@@ -13,11 +13,14 @@ const ACTION_TYPES = {
     EDIT: 'Edit Study'
 }
 
+var studies;
+
 export default class HomeController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         this.model = this.getInitialModel();
+        studies = [];
 
         let communicationService = getCommunicationServiceInstance();
         this.model.publicDidReady = false;
@@ -29,11 +32,9 @@ export default class HomeController extends BreadCrumbManager {
             this.model.publicDidReady = true;
         })
 
-
         const prevState = this.getState() || {};
         const message = prevState;
         this.model.message = message;
-
 
         this.initHandlers();
         this.initServices();
@@ -46,7 +47,7 @@ export default class HomeController extends BreadCrumbManager {
 
         
         this.onTagClick('change-status',(nextStatus)=>{
-            let selectedStudy = this.studies.find(study => study.uid === nextStatus.studyId);
+            let selectedStudy = studies.find(study => study.uid === nextStatus.studyId);
             const uid = selectedStudy.uid;
             
             this.model.statusModal = {
@@ -73,8 +74,8 @@ export default class HomeController extends BreadCrumbManager {
                     
                     selectedStudy.status = nextStatus.step;
                     this.StudiesService.updateStudy(selectedStudy, note,  () => {
-                        this.prepareStudiesView(this.studies);
-                        this.model.studiesDataSource.updateTable(selectedStudy);
+                        this.prepareStudiesView(studies);
+                        this.model.studiesDataSource.updateTable();
                         window.WebCardinal.loader.hidden = true;
                     });
                 },
@@ -104,14 +105,12 @@ export default class HomeController extends BreadCrumbManager {
             })
         }
 
-        getStudies().then(studies => {
-            this.model.hasStudies = studies.length !== 0;
+        getStudies().then(received_studies => {
+            this.model.hasStudies = received_studies.length !== 0;
+            studies = received_studies;
             this.prepareStudiesView(studies);
-            this.studies = studies;
             this.model.studiesDataSource = DataSourceFactory.createDataSource(8, 10, studies);
-            this.model.studiesDataSource.updateTable = function(updatedStudy) {
-                let toBeUpdatedIndex = studies.findIndex(study => updatedStudy.uid === study.uid);
-                studies[toBeUpdatedIndex] = updatedStudy;
+            this.model.studiesDataSource.updateTable = function() {
                 this.forceUpdate(true);
             }
             const { studiesDataSource } = this.model;
@@ -201,22 +200,19 @@ export default class HomeController extends BreadCrumbManager {
                             if (err) {
                                 console.log(err);
                             }
-                            let toBeUpdatedIndex = this.studies.findIndex(study => data.uid === study.uid);
-                            this.studies[toBeUpdatedIndex] = data;
-                            this.prepareStudiesView(this.studies);
-                            this.model.studiesDataSource.updateTable(data);
+                            let toBeUpdatedIndex = studies.findIndex(study => data.uid === study.uid);
+                            studies[toBeUpdatedIndex] = study;
+                            this.prepareStudiesView(studies);
+                            this.model.studiesDataSource.updateTable();
+                            console.log("A participant approved the invitation.");
                         });
                     })
-
                     this.PermissionedHealthDataService.mountObservation(data.permissionedDataDSUSSI, (err, data)=> {
                         if (err) {
                             console.log(err);
                         }
-                        console.log(data);
+                        console.log("Received Data from 1 participant.");
                     });
-
-
-
                     break;
                 }
                 case "remove_participants_from_study": {
@@ -238,10 +234,11 @@ export default class HomeController extends BreadCrumbManager {
                             if (err) {
                                 console.log(err);
                             }
-                            let toBeUpdatedIndex = this.studies.findIndex(study => updatedStudy.uid === study.uid);
-                            this.studies[toBeUpdatedIndex] = updatedStudy;
-                            this.prepareStudiesView(this.studies);
-                            this.model.studiesDataSource.updateTable(updatedStudy);
+                            let toBeUpdatedIndex = studies.findIndex(study => study.uid === updatedStudy.uid);
+                            studies[toBeUpdatedIndex] = study;
+                            this.prepareStudiesView(studies);
+                            this.model.studiesDataSource.updateTable();
+                            console.log("A participant revoked his permission.");
                         });
                     })
                     break;
@@ -275,11 +272,11 @@ export default class HomeController extends BreadCrumbManager {
                             if (err) {
                                 console.log(err);
                             }
-                            let toBeUpdatedIndex = this.studies.findIndex(study => updatedStudy.uid === study.uid);
-                            this.studies[toBeUpdatedIndex] = updatedStudy;
-                            this.prepareStudiesView(this.studies);
-                            this.model.studiesDataSource.updateTable(updatedStudy);
-                            console.log(study);
+                            let toBeUpdatedIndex = studies.findIndex(study => updatedStudy.uid === study.uid);
+                            studies[toBeUpdatedIndex] = study;
+                            this.prepareStudiesView(studies);
+                            this.model.studiesDataSource.updateTable();
+                            console.log("A participant rejected the invitation.");
                         });
                     })
                     break;
