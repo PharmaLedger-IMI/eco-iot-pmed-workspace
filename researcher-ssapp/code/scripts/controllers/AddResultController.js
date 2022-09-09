@@ -57,7 +57,8 @@ export default class AddResultController extends BreadCrumbManager {
             topics: this.model.topics.value,
             exposureBackground: this.model.exposureBackground.value,
             description: this.model.description.value,
-            studyID: this.model.studyID
+            studyID: this.model.studyID,
+            studyTitle: this.model.studytitle
         }
         console.log(result);
         return result;
