@@ -28,7 +28,7 @@ export default class AddResultController extends BreadCrumbManager {
                 return console.log(err);
             }
             this.model.studytitle = studyData.title;
-            studyData.participants.forEach(participant=>{this.model.participantsDIDs.push(participant.participantInfo.patientDID);
+            if (studyData.participants) studyData.participants.forEach(participant=>{this.model.participantsDIDs.push(participant.participantInfo.patientDID)
             });
         });
 
@@ -66,6 +66,20 @@ export default class AddResultController extends BreadCrumbManager {
     }
 
     saveResult() {
+
+        if (this.model.participantsDIDs.length===0) {
+            let resultState = {
+                uid: this.model.studyID,
+                breadcrumb: this.model.toObject('breadcrumb'),
+                message: {
+                    content: `There are no participants for this study. Please try again later.`,
+                    type: 'error'
+                }
+            }
+            this.navigateToPageTag('results-list', resultState);
+            return;
+        }
+
         window.WebCardinal.loader.hidden = false;
         this.ResultsService = new ResultsService();
         this.ResultsService.saveResult(this.prepareResultDSUData(), (err, result) => {

@@ -28,8 +28,7 @@ export default class CreateFeedbackController extends BreadCrumbManager {
             if (err) {
                 return console.log(err);
             }
-            studyData.participants.forEach(participant => {
-                this.model.participantsDIDs.push(participant.participantInfo.patientDID);
+            if (studyData.participants) studyData.participants.forEach(participant=>{this.model.participantsDIDs.push(participant.participantInfo.patientDID)
             });
         });
 
@@ -85,6 +84,21 @@ export default class CreateFeedbackController extends BreadCrumbManager {
     }
 
     saveFeedback() {
+
+        if (this.model.participantsDIDs.length===0) {
+            let feedbackState = {
+                uid: this.model.studyID,
+                title: this.model.studyTitle,
+                breadcrumb: this.model.toObject('breadcrumb'),
+                message: {
+                    content: `There are no participants for this study. Please try again later.`,
+                    type: 'error'
+                }
+            }
+            this.navigateToPageTag('feedback-list', feedbackState);
+            return;
+        }
+
         this.FeedbackService = new FeedbackService();
 
         this.model.feedbacksSending = {

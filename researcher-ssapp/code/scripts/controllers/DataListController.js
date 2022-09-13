@@ -22,6 +22,7 @@ export default class DataListController extends BreadCrumbManager {
         );
 
         this.model.studyID = prevState.uid;
+        this.model.participants_withPermission = [];
 
         this.init();
 
@@ -30,7 +31,7 @@ export default class DataListController extends BreadCrumbManager {
                 return console.log(err);
             }
             this.model.studyTitle = study_info.ResearchStudyTitle;
-            this.model.participants_withPermission = study_info.participants.filter(p => p.dpermission===true);
+            if (study_info.participants) this.model.participants_withPermission = study_info.participants.filter(p => p.dpermission===true);
         });
 
         const getPermissionedData = () => {
