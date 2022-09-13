@@ -68,7 +68,7 @@ export default class DataListController extends BreadCrumbManager {
             });
             //
 
-            this.model.hasData = observations.length !== 0;
+            this.model.hasData = observations_only_permission.length !== 0;
             this.model.dataDataSource = DataSourceFactory.createDataSource(8, 20, observations_only_permission);
             const { dataDataSource } = this.model;
             this.onTagClick("prev-page", () => dataDataSource.goToPreviousPage());
