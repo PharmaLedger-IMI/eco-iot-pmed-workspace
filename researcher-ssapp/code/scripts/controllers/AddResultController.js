@@ -22,14 +22,17 @@ export default class AddResultController extends BreadCrumbManager {
         this.model = this.getResultDetailsViewModel();
         this.CommunicationService = getCommunicationServiceInstance();
         this.model.participantsDIDs = [];
+        this.model.participants_withPermission = [];
         this.StudiesService = new StudiesService();
         this.StudiesService.getStudy(this.model.studyID, (err, studyData) => {
             if (err){
                 return console.log(err);
             }
             this.model.studytitle = studyData.title;
-            if (studyData.participants) studyData.participants.forEach(participant=>{this.model.participantsDIDs.push(participant.participantInfo.patientDID)
-            });
+            if (studyData.participants) {
+                this.model.participants_withPermission = studyData.participants.filter(p => p.dpermission === true);
+                this.model.participants_withPermission.forEach(participant => {this.model.participantsDIDs.push(participant.participantInfo.patientDID)})
+            }
         });
 
         this._attachHandlerGoBack();
