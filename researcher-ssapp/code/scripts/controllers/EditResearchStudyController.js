@@ -200,10 +200,6 @@ export default class EditResearchStudyController extends BreadCrumbManager {
                 required: true,
                 options: [
                     {
-                        label: "Age 10-30",
-                        value: '10-30'
-                    },
-                    {
                         label: "Age 30-40",
                         value: '30-40'
                     },
@@ -218,31 +214,31 @@ export default class EditResearchStudyController extends BreadCrumbManager {
                     {
                         label: "Age 60+",
                         value: '60+'
+                    },
+                    {
+                        label: "All",
+                        value: 'all'
                     }
                 ],
-                value: prevState.age || ""
+                value: prevState.age || "all"
             },
             sex: {
                 label: "Sex",
                 required: true,
                 options: [{
-                        label: "Males",
-                        value: 'males'
-                    },
+                    label: "Males",
+                    value: 'males'
+                },
                     {
                         label: "Females",
                         value: 'females'
                     },
                     {
-                        label: "Males & Females",
+                        label: "All",
                         value: 'both'
-                    },
-                    {
-                        label: "N/A",
-                        value: 'n/a'
                     }
                 ],
-                value: prevState.sex || ""
+                value: prevState.sex || "both"
             },
             pathologies: {
                 label: "Previous Pathologies",
@@ -251,33 +247,33 @@ export default class EditResearchStudyController extends BreadCrumbManager {
                     label: "Heart Disease",
                     value: 'Heart Disease'
                 },
-                {
-                    label: "Respiratory Disease",
-                    value: 'Respiratory Disease'
-                },
-                {
-                    label: "T2D",
-                    value: 'T2D'
-                },
-                {
-                    label: "Chikungunya virus disease",
-                    value: 'Chikungunya virus disease'
-                },
-                {
-                    label: "Cholera",
-                    value: 'Cholera'
-                },
-                {
-                    label: "COVID-19",
-                    value: 'COVID-19'
-                },
-                {
-                    label: "N/A",
-                    value: 'n/a'
-                }
-            ],
-            value: prevState.pathologies || ""
-        },
+                    {
+                        label: "Respiratory Disease",
+                        value: 'Respiratory Disease'
+                    },
+                    {
+                        label: "T2D",
+                        value: 'T2D'
+                    },
+                    {
+                        label: "Chikungunya virus disease",
+                        value: 'Chikungunya virus disease'
+                    },
+                    {
+                        label: "Cholera",
+                        value: 'Cholera'
+                    },
+                    {
+                        label: "COVID-19",
+                        value: 'COVID-19'
+                    },
+                    {
+                        label: "N/A",
+                        value: 'n/a'
+                    }
+                ],
+                value: prevState.pathologies || "n/a"
+            },
         actionType: prevState.actionType,
         others: {
             name: 'others',
@@ -286,38 +282,29 @@ export default class EditResearchStudyController extends BreadCrumbManager {
             placeholder: 'others',
             value: prevState.others || ""
         },
-        data: {
-            label: "Please indicate the data that you need to obtain:",
-            required: true,
-            options: [{
-                label: "ECG",
-                value: 'ecg'
-                },
-        
-                {
-                    label: "SpO2",
-                    value: 'SpO2'
-                },
-                {
-                    label: "Temperature",
-                    value: 'temperature'
-                },
-            
-                {
-                    label: "Systolic Blood Pressure",
-                    value: 'Systolic Blood Pressure'
-                },
-                {
-                    label: "Diastolic Blood Pressure",
-                    value: 'Diastolic Blood Pressure'
-                },
-                {
-                    label: "N/A",
-                    value: 'n/a'
-                }
-            ],
-            value: prevState.data || ""
-        },
+            data: {
+                label: "Please indicate the data that you need to obtain:",
+                required: true,
+                options: [
+                    {
+                        label: "SpO2",
+                        value: 'SpO2'
+                    },
+                    {
+                        label: "Systolic Blood Pressure",
+                        value: 'Systolic Blood Pressure'
+                    },
+                    {
+                        label: "Diastolic Blood Pressure",
+                        value: 'Diastolic Blood Pressure'
+                    },
+                    {
+                        label: "Fitbit Activity",
+                        value: 'fitbit activity'
+                    }
+                ],
+                value: prevState.data || ""
+            },
         researcherDID: prevState.researcherDID || ""
         }
     }
