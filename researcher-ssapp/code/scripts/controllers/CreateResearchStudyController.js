@@ -198,6 +198,10 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                 required: true,
                 options: [
                     {
+                        label: "Age 18-30",
+                        value: '18-30'
+                    },
+                    {
                         label: "Age 30-40",
                         value: '30-40'
                     },
