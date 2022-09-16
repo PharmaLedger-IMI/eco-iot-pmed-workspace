@@ -86,8 +86,6 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
             }
 
             this.CommunicationService.sendMessageToIotAdapter({
-                //TODO put in constants among with other operations that should have a consistent format
-                //e.g all messages to iot-adapter should be in CONSTANTS.COMMUNICATION.IOT.NEW_STUDY
                 operation: Constants.MESSAGES.RESEARCHER.NEW_STUDY,
                 ssi:data.sReadSSI
             })
