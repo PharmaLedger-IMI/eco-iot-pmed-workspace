@@ -53,7 +53,8 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
     getAllStudyData() {
 
         let viewData = {
-            participants: 0 ,
+            participants: [] ,
+            participantsNumber:0,
             status: StudyStatusesService.getInitialStatus(),
             title: this.model.title.value,
             startdate: this.model.startdate.value,

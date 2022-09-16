@@ -1,4 +1,3 @@
-const {WebcController} = WebCardinal.controllers;
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const commonServices = require("common-services");
 const {StudiesService} = commonServices;
@@ -22,7 +21,7 @@ export default class EditResearchStudyController extends BreadCrumbManager {
             if (err){
                 return console.log(err);
             }
-            this.model = this.getBasicViewModel({...studyData, ...prevState});
+            this.model = {...studyData, ...this.getBasicViewModel({...studyData, ...prevState})};
         });
 
         this.model.breadcrumb = this.setBreadCrumb(
@@ -60,7 +59,6 @@ export default class EditResearchStudyController extends BreadCrumbManager {
 
     getAllStudyData() {
         let viewData = {
-            participants: 0 ,
             status: StudyStatusesService.getInitialStatus(),
             title: this.model.title.value,
             startdate: this.model.startdate.value,
@@ -73,9 +71,9 @@ export default class EditResearchStudyController extends BreadCrumbManager {
             data: this.model.data.value,
             researcherDID: this.model.researcherDID
         }
-        let allData = {...this.prepareContractStudy(), ...viewData};
-        allData = Object.assign(allData, {uid: this.model.study_id});
-        return allData
+        let {participants,participantsNumber, uid } = this.model.toObject();
+        let mergedStudyData = {...this.prepareContractStudy(), ...viewData, participants, participantsNumber, uid};
+        return mergedStudyData
     }
 
     updateStudy(){
@@ -199,6 +197,10 @@ export default class EditResearchStudyController extends BreadCrumbManager {
                 label: "Age Group",
                 required: true,
                 options: [
+                    {
+                        label: "Age 18-30",
+                        value: '18-30'
+                    },
                     {
                         label: "Age 30-40",
                         value: '30-40'

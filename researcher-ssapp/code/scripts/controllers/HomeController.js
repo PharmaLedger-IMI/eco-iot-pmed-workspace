@@ -1,27 +1,26 @@
 const commonServices = require("common-services");
 const DidService =commonServices.DidService;
 const { getCommunicationServiceInstance } = commonServices.CommunicationService;
-const MessageHandlerService = commonServices.MessageHandlerService;
-const {StudiesService, PermissionedHealthDataService} = commonServices;
+const {StudiesService} = commonServices;
 import StudyStatusesService from "../services/StudyStatusesService.js";
+import MessageSubscriberService from "../services/MessageSubscriberService.js";
+
 const DataSourceFactory = commonServices.getDataSourceFactory();
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
-const Constants = commonServices.Constants;
 
 const ACTION_TYPES = {
     ADD: 'New Study',
     EDIT: 'Edit Study'
 }
 
-var studies;
-
 export default class HomeController extends BreadCrumbManager {
     constructor(...props) {
         super(...props);
 
         this.model = this.getInitialModel();
-        studies = [];
+        this.studies = [];
 
+        this.MessageSubscriberService = MessageSubscriberService.init();
         let communicationService = getCommunicationServiceInstance();
         this.model.publicDidReady = false;
         communicationService.onPrimaryDidReady((err, didDocument)=>{
@@ -32,9 +31,7 @@ export default class HomeController extends BreadCrumbManager {
             this.model.publicDidReady = true;
         })
 
-        const prevState = this.getState() || {};
-        const message = prevState;
-        this.model.message = message;
+        this.model.message = this.getState() || {};
 
         this.initHandlers();
         this.initServices();
@@ -47,7 +44,7 @@ export default class HomeController extends BreadCrumbManager {
 
         
         this.onTagClick('change-status',(nextStatus)=>{
-            let selectedStudy = studies.find(study => study.uid === nextStatus.studyId);
+            let selectedStudy = this.studies.find(study => study.uid === nextStatus.studyId);
             const uid = selectedStudy.uid;
             
             this.model.statusModal = {
@@ -74,8 +71,8 @@ export default class HomeController extends BreadCrumbManager {
                     
                     selectedStudy.status = nextStatus.step;
                     this.StudiesService.updateStudy(selectedStudy, note,  () => {
-                        this.prepareStudiesView(studies);
-                        this.model.studiesDataSource.updateTable();
+                        this.prepareStudiesView();
+                        this.model.studiesDataSource.updateRecords();
                         window.WebCardinal.loader.hidden = true;
                     });
                 },
@@ -92,7 +89,7 @@ export default class HomeController extends BreadCrumbManager {
 
     async initServices() {
         this.StudiesService = new StudiesService();
-        this.PermissionedHealthDataService = new PermissionedHealthDataService();
+
 
         const getStudies = () => {
             return new Promise ((resolve, reject) => {
@@ -107,15 +104,19 @@ export default class HomeController extends BreadCrumbManager {
 
         getStudies().then(received_studies => {
             this.model.hasStudies = received_studies.length !== 0;
-            studies = received_studies;
-            this.prepareStudiesView(studies);
-            this.model.studiesDataSource = DataSourceFactory.createDataSource(8, 10, studies);
-            this.model.studiesDataSource.updateTable = function() {
-                this.forceUpdate(true);
+            this.studies = received_studies;
+            this.prepareStudiesView();
+            this.model.studiesDataSource = DataSourceFactory.createDataSource(8, 10, JSON.parse(JSON.stringify(this.studies)));
+            const self = this;
+            this.model.studiesDataSource.updateRecords = function() {
+                if (typeof this.getElement === "function") {
+                    this.model.tableData = JSON.parse(JSON.stringify(self.studies));
+                    this.getElement().dataSize = self.studies.length;
+                    this.forceUpdate(true);
+                }
             }
-            const { studiesDataSource } = this.model;
             this.onTagClick("view", (model) => {
-                let chosenStudy = studies.find(study => study.uid === model.uid);
+                let chosenStudy = this.studies.find(study => study.uid === model.uid);
                 let viewStatus = {
                     title: chosenStudy.title,
                     uid: chosenStudy.uid,
@@ -124,7 +125,7 @@ export default class HomeController extends BreadCrumbManager {
                 this.navigateToPageTag('view-research-study', viewStatus);
             });
             this.onTagClick("edit", (model) => {
-                let chosenStudy = studies.find(study => study.uid === model.uid);
+                let chosenStudy = this.studies.find(study => study.uid === model.uid);
                 let studyState = {
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
@@ -135,7 +136,7 @@ export default class HomeController extends BreadCrumbManager {
                 this.navigateToPageTag('edit-research-study', studyState);
             });
             this.onTagClick("feedback-list", (model) => {
-                let chosenStudy = studies.find(study => study.uid === model.uid);
+                let chosenStudy = this.studies.find(study => study.uid === model.uid);
                 let studyState = {
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
@@ -144,7 +145,7 @@ export default class HomeController extends BreadCrumbManager {
                 this.navigateToPageTag('feedback-list', studyState);
             });
             this.onTagClick("results", (model) => {
-                let chosenStudy = studies.find(study => study.uid === model.uid);
+                let chosenStudy = this.studies.find(study => study.uid === model.uid);
                 let studyState = { 
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
@@ -153,7 +154,7 @@ export default class HomeController extends BreadCrumbManager {
                 this.navigateToPageTag('results-list', studyState);
             });
             this.onTagClick("data", (model) => {
-                let chosenStudy = studies.find(study => study.uid === model.uid);
+                let chosenStudy = this.studies.find(study => study.uid === model.uid);
                 let studyState = {
                     uid: chosenStudy.uid,
                     title: chosenStudy.title,
@@ -162,132 +163,34 @@ export default class HomeController extends BreadCrumbManager {
                 this.navigateToPageTag('data-list', studyState);
             });
         })
-
         this.model.did = await DidService.getDidServiceInstance().getDID();
-        MessageHandlerService.init(async (data) => {
-            data = JSON.parse(data);
-            console.log('Received Message', data);
 
-            switch (data.operation) {
-                case Constants.MESSAGES.RESEARCHER.ADD_PARTICIPANTS_TO_STUDY: {
-                    this.StudiesService.getStudy(data.studyUID, (err, study ) => {
-                        if (err) {
-                            return reject(err);
-                        }
-
-                        if (!study.participants) study.participants = []
-                        let participant = {
-                            dpermission: data.dpermission,
-                            dpermissionStartSharingDate: data.dpermissionStartSharingDate,
-                            participantInfo: data.participant
-                        }
-
-                        let patientMatchIndex = study.participants.findIndex(p => p.participantInfo.patientDID === data.participant.patientDID);
-                        if (study.participants[patientMatchIndex]) {
-                            study.participants[patientMatchIndex].dpermission = true;
-                            study.participants[patientMatchIndex].dpermissionStartSharingDate = data.dpermissionStartSharingDate;
-                        }
-                        else {
-                            study.participants.push(participant)
-                        }
-
-                        study.participantsNumber = 0
-                        study.participants.forEach(p => {
-                            if (p.dpermission===true) study.participantsNumber+=1
-                        })
-
-                        this.StudiesService.updateStudy(study, (err, data) => {
-                            if (err) {
-                                console.log(err);
-                            }
-                            let toBeUpdatedIndex = studies.findIndex(study => data.uid === study.uid);
-                            studies[toBeUpdatedIndex] = study;
-                            this.prepareStudiesView(studies);
-                            this.model.studiesDataSource.updateTable();
-                            console.log("A participant approved the invitation.");
-                        });
-                    })
-                    this.PermissionedHealthDataService.mountObservation(data.permissionedDataDSUSSI, (err, data)=> {
-                        if (err) {
-                            console.log(err);
-                        }
-                        console.log("Received Data from 1 participant.");
-                    });
-                    break;
-                }
-                case Constants.MESSAGES.RESEARCHER.REMOVE_PARTICIPANTS_FROM_STUDY: {
-                    this.StudiesService.getStudy(data.studyUID, (err, study ) => {
-                        if (err) {
-                            return reject(err);
-                        }
-                        let patientMatchIndex = study.participants.findIndex(pt => pt.participantInfo.patientDID === data.participant.patientDID);
-
-                        study.participants[patientMatchIndex].dpermission = false;
-                        study.participants[patientMatchIndex].dpermissionStopSharingDate = data.dpermissionStopSharingDate;
-
-                        study.participantsNumber = 0
-                        study.participants.forEach(p => {
-                            if (p.dpermission===true) study.participantsNumber+=1
-                        })
-
-                        this.StudiesService.updateStudy(study, (err, updatedStudy) => {
-                            if (err) {
-                                console.log(err);
-                            }
-                            let toBeUpdatedIndex = studies.findIndex(study => study.uid === updatedStudy.uid);
-                            studies[toBeUpdatedIndex] = study;
-                            this.prepareStudiesView(studies);
-                            this.model.studiesDataSource.updateTable();
-                            console.log("A participant revoked his permission.");
-                        });
-                    })
-                    break;
-                }
-                case Constants.MESSAGES.RESEARCHER.REJECT_PARTICIPANTS_FROM_STUDY: {
-                    this.StudiesService.getStudy(data.studyUID, (err, study ) => {
-                        if (err) {
-                            return reject(err);
-                        }
-                        if (!study.participants) study.participants = []
-                        let participant = {
-                            dpermission: false,
-                            dpermissionRejectedDate: data.dpermissionRejectedDate,
-                            participantInfo: data.participant
-                        }
-                        let patientMatchIndex = study.participants.findIndex(p => p.participantInfo.patientDID === data.participant.patientDID);
-                        if (study.participants[patientMatchIndex]) {
-                            study.participants[patientMatchIndex].dpermission = false;
-                            study.participants[patientMatchIndex].dpermissionRejectedDate = data.dpermissionRejectedDate;
-                        }
-                        else {
-                            study.participants.push(participant)
-                        }
-
-                        study.participantsNumber = 0
-                        study.participants.forEach(p => {
-                            if (p.dpermission===true) study.participantsNumber+=1
-                        })
-
-                        this.StudiesService.updateStudy(study, (err, updatedStudy) => {
-                            if (err) {
-                                console.log(err);
-                            }
-                            let toBeUpdatedIndex = studies.findIndex(study => updatedStudy.uid === study.uid);
-                            studies[toBeUpdatedIndex] = study;
-                            this.prepareStudiesView(studies);
-                            this.model.studiesDataSource.updateTable();
-                            console.log("A participant rejected the invitation.");
-                        });
-                    })
-                    break;
-                }
+        this.updateStudyHandler = (err, updatedStudy) => {
+            if(err){
+                return console.error(err);
             }
-        });
 
+            let toBeUpdatedIndex = this.studies.findIndex(study => updatedStudy.uid === study.uid);
+            if(toBeUpdatedIndex === -1){
+                return console.error("Study not found");
+            }
+
+            this.studies[toBeUpdatedIndex] = updatedStudy;
+            this.prepareStudiesView();
+            this.model.studiesDataSource.updateRecords();
+        };
+
+        this.MessageSubscriberService.subscribe("study-participant-update", this.updateStudyHandler);
     }
 
-    prepareStudiesView(studies){
-        studies.forEach(study=>{
+    onDisconnectedCallback(){
+        if(this.updateStudyHandler){
+            this.MessageSubscriberService.unsubscribe("study-participant-update", this.updateStudyHandler);
+        }
+    }
+
+    prepareStudiesView(){
+        this.studies.forEach(study=>{
             let statusesService = new StudyStatusesService(study.status);
             const currentStatus = statusesService.getCurrentStatus();
             const statusActions = currentStatus.actions;
