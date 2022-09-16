@@ -6,6 +6,7 @@ const {StudiesService, PermissionedHealthDataService} = commonServices;
 import StudyStatusesService from "../services/StudyStatusesService.js";
 const DataSourceFactory = commonServices.getDataSourceFactory();
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
+const Constants = commonServices.Constants;
 
 const ACTION_TYPES = {
     ADD: 'New Study',
@@ -168,7 +169,7 @@ export default class HomeController extends BreadCrumbManager {
             console.log('Received Message', data);
 
             switch (data.operation) {
-                case "add_participants_to_study": {
+                case Constants.MESSAGES.RESEARCHER.ADD_PARTICIPANTS_TO_STUDY: {
                     this.StudiesService.getStudy(data.studyUID, (err, study ) => {
                         if (err) {
                             return reject(err);
@@ -214,7 +215,7 @@ export default class HomeController extends BreadCrumbManager {
                     });
                     break;
                 }
-                case "remove_participants_from_study": {
+                case Constants.MESSAGES.RESEARCHER.REMOVE_PARTICIPANTS_FROM_STUDY: {
                     this.StudiesService.getStudy(data.studyUID, (err, study ) => {
                         if (err) {
                             return reject(err);
@@ -242,7 +243,7 @@ export default class HomeController extends BreadCrumbManager {
                     })
                     break;
                 }
-                case "reject_participants_from_study": {
+                case Constants.MESSAGES.RESEARCHER.REJECT_PARTICIPANTS_FROM_STUDY: {
                     this.StudiesService.getStudy(data.studyUID, (err, study ) => {
                         if (err) {
                             return reject(err);
