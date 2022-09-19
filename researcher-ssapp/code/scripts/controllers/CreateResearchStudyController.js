@@ -24,8 +24,7 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
             }
         );
 
-        this._attachHandlerResearchStudyBack();
-        this._attachHandlerResearchStudyNext();
+        this._attachHandlers();
         this.CommunicationService = getCommunicationServiceInstance();
     }
 
@@ -95,44 +94,56 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
         });
     }
 
-    _attachHandlerResearchStudyNext() {
+    _attachHandlers() {
+
+        this.model.addExpression("isStudyFilled", () => {
+                if ((this.model.phase === 'phase1') && (this.model.title.value.trim() === "" || this.model.startdate.value.trim() === ""
+                    || this.model.enddate.value.trim() === "" || this.model.description.value.trim() === "")) {
+                    return true;
+                }
+                if ((this.model.phase === 'phase2') && (this.model.age.value.trim() === "" || this.model.sex.value.trim() === ""
+                    || this.model.pathologies.value.trim() === "" || this.model.data.value.trim() === "")) {
+                    return true;
+                }
+                return false;
+            }, ["title", "startdate", "enddate", "description", "age", "sex", "pathologies", "data", "phase"]
+        )
+
         this.onTagClick('research:next', () => {
             switch (this.model.phase) {
                 case "phase1":
-                    this.model.phase    = "phase2";
-                    this.model.header2  = "Step (2/3) Inclusion Criteria";
-                    this.model.header3  = "Please indicate the inclusion criteria of your study";
+                    this.model.phase = "phase2";
+                    this.model.header2 = "Step (2/3) Inclusion Criteria";
+                    this.model.header3 = "Please indicate the inclusion criteria of your study";
                     break;
                 case "phase2":
-                    this.model.phase            = "phase3";
-                    this.model.header1          = "Study - Summary";
-                    this.model.nextButton       = "Confirm";
-                    this.model.previousButton   = "Edit";
-                    this.model.header2          = false;
-                    this.model.header3          = false;
+                    this.model.phase = "phase3";
+                    this.model.header1 = "Study - Summary";
+                    this.model.nextButton = "Confirm";
+                    this.model.previousButton = "Edit";
+                    this.model.header2 = false;
+                    this.model.header3 = false;
                     break;
                 case "phase3":
                     this.saveStudy();
                     break;
             }
         });
-    }
 
-    _attachHandlerResearchStudyBack() {
         this.onTagClick('research:back', () => {
-            switch (this.model.phase){
+            switch (this.model.phase) {
                 case "phase3":
-                    this.model.nextButton       = "Next";
-                    this.model.previousButton   = "Back";
-                    this.model.phase            = "phase2";
-                    this.model.header1          = "New study";
-                    this.model.header2  = "Step (2/3) Inclusion Criteria";
-                    this.model.header3  = "Please indicate the inclusion criteria of your study";
+                    this.model.nextButton = "Next";
+                    this.model.previousButton = "Back";
+                    this.model.phase = "phase2";
+                    this.model.header1 = "New study";
+                    this.model.header2 = "Step (2/3) Inclusion Criteria";
+                    this.model.header3 = "Please indicate the inclusion criteria of your study";
                     break;
                 case "phase2":
                     this.model.phase = "phase1";
-                    this.model.header2  = "Step (1/3) Basic Information";
-                    this.model.header3  = "Complete the following information to create a new research study";
+                    this.model.header2 = "Step (1/3) Basic Information";
+                    this.model.header3 = "Complete the following information to create a new research study";
                     break;
                 case "phase1":
                     this.navigateToPageTag('home');
@@ -223,7 +234,7 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                         value: 'all'
                     }
                 ],
-                value: prevState.age || "all"
+                value: prevState.age || ""
             },
             sex: {
                 label: "Sex",
@@ -241,7 +252,7 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                         value: 'both'
                     }
                 ],
-                value: prevState.sex || "both"
+                value: prevState.sex || ""
             },
             pathologies: {
                 label: "Previous Pathologies",
@@ -275,7 +286,7 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                         value: 'n/a'
                     }
                 ],
-                value: prevState.pathologies || "n/a"
+                value: prevState.pathologies || ""
             },
             breadcrumb: prevState.breadcrumb,
             actionType: prevState.actionType,

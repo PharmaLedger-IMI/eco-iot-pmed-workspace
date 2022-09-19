@@ -179,7 +179,7 @@
 
         <div class="button-group-wrapper">
             <button data-tag="research:back">{{ @previousButton }}</button>
-            <button data-tag="research:next">{{ @nextButton }}</button>
+            <button data-tag="research:next" disabled="@isStudyFilled">{{ @nextButton }}</button>
         </div>
     </div>
 </webc-container>

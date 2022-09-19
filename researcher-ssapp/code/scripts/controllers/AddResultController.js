@@ -35,9 +35,7 @@ export default class AddResultController extends BreadCrumbManager {
             }
         });
 
-        this._attachHandlerGoBack();
-        this._attachHandlerAddResultConfirm();
-        this._attachHandlerFileOperation();
+        this._attachHandlers();
 
     }
 
@@ -116,13 +114,23 @@ export default class AddResultController extends BreadCrumbManager {
 
     }
 
-    _attachHandlerGoBack() {
+    _attachHandlers() {
+
+        this.model.addExpression("isResultFilled", () => {
+                if (this.model.title.value.trim() === "" || this.model.subtitle.value.trim() === ""
+                    || this.model.version.value.trim() === "" || this.model.status.value.trim() === ""
+                    || this.model.topics.value.trim() === "" || this.model.exposureBackground.value.trim() === ""
+                    || this.model.description.value.trim() === "") {
+                    return true;
+                }
+                return false;
+            }, ["title", "subtitle", "version", "status", "topics", "exposureBackground", "description"]
+        )
+
         this.onTagClick('go:back', () => {
             this.navigateToPageTag('results-list', { uid: this.model.studyID, breadcrumb: this.model.toObject('breadcrumb') });
         });
-    }
 
-    _attachHandlerFileOperation(){
         this.model.onChange('filesResult', () => {
             let filesArray = this.model.filesResult.files || [];
         });
@@ -139,12 +147,9 @@ export default class AddResultController extends BreadCrumbManager {
                 this.model.filesResult.chosen = "";
             }
         });
-    }
 
-    _attachHandlerAddResultConfirm() {
         this.onTagClick('result-confirm', () => {
             this.saveResult();
-            //this.navigateToPageTag('');
         });
     }
 
