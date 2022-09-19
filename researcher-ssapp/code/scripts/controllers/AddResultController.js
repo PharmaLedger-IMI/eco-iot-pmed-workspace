@@ -132,9 +132,11 @@ export default class AddResultController extends BreadCrumbManager {
             if (filesArray && filesArray.length > 0) {
                 this.model.filesResult.file.file = filesArray[0];
                 this.model.filesResult.file.name = filesArray[0].name;
+                this.model.filesResult.chosen = filesArray[0].name;
             } else {
                 this.model.filesResult.file.file = null;
                 this.model.filesResult.file.name = "";
+                this.model.filesResult.chosen = "";
             }
         });
     }
@@ -250,13 +252,15 @@ export default class AddResultController extends BreadCrumbManager {
                 value: '001'
             },
             filesResult: {
-                topLabel: "Select pdf files to upload the results",
-                label: "",
+                topLabel: "Select result file (*.pdf)",
+                label: "Select file",
                 accept: ".pdf",
+                required: true,
                 listFiles: true,
                 filesAppend: false,
-                file: {},
-                value: ""
+                file: {name: "", },
+                value: "Select file",
+                chosen: ""
             }
         }
     }

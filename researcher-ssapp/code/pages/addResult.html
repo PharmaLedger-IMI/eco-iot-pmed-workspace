@@ -48,16 +48,22 @@
             </div>
 
             <div class="form-row">
+
                 <div class="form-group">
                     <label class="col-form-label">{{@description.label}}</label>
-                    <textarea class="form-control" data-view-model="@description" id="@description.name" rows="2">
+                    <textarea class="form-control" data-view-model="@description" id="@description.name" rows="1=">
                 </textarea>
                 </div>
+
                 <div class="form-group">
-                    <label class="col-form-label">{{@filesResult.topLabel}}</label>
-                    <psk-files-chooser class="result-file-chooser" view-model="filesResult" event-name="add-result-file">
-                    </psk-files-chooser>
+                    <label class="col-form-label">{{ @filesResult.topLabel }}</label>
+                    <div class="modal-input-file-wrapper">
+                        <input class="form-control" disabled placeholder="Select a result file" value="@filesResult.chosen" />
+                        <psk-files-chooser class="classic-file-chooser" data-view-model="@filesResult" event-name="add-result-file">
+                        </psk-files-chooser>
+                    </div>
                 </div>
+
             </div>
         </main>
 
