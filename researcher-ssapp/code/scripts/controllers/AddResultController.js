@@ -258,7 +258,7 @@ export default class AddResultController extends BreadCrumbManager {
                 required: true,
                 listFiles: true,
                 filesAppend: false,
-                file: {name: "", },
+                file: {},
                 value: "Select file",
                 chosen: ""
             }

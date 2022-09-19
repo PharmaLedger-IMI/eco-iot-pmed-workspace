@@ -153,7 +153,7 @@ export default class ViewResultController extends BreadCrumbManager {
             },
             attachedFile: {
                 name: "file uploaded",
-                label: "File Uploaded",
+                label: "Results attached",
                 placeholder: "File uploaded",
                 button: result.filename ? "Download" : "Not uploaded"
             },
