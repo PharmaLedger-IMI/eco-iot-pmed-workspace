@@ -31,9 +31,7 @@ export default class EditResearchStudyController extends BreadCrumbManager {
             }
         );
 
-        this._attachHandlerResearchStudyBack();
-        this._attachHandlerResearchStudyNext();
-
+        this._attachHandlers();
     }
 
     prepareContractStudy(){
@@ -94,30 +92,49 @@ export default class EditResearchStudyController extends BreadCrumbManager {
         });
     }
 
-    _attachHandlerResearchStudyNext() {
-            this.onTagClick('research:next', () => {
-                switch (this.model.phase) {
-                    case "phase1":
-                        this.model.phase    = "phase2";
-                        this.model.header2  = "Step (2/3) Inclusion Criteria";
-                        this.model.header3  = "Please indicate the inclusion criteria of your study";
-                        break;
-                    case "phase2":
-                        this.model.phase            = "phase3";
-                        this.model.header1          = "Study - Summary";
-                        this.model.nextButton       = "Confirm";
-                        this.model.previousButton   = "Edit";
-                        this.model.header2          = false;
-                        this.model.header3          = false;
-                        break;
-                    case "phase3":
-                        this.updateStudy();
-                        break;
-                }
-            });
-    }
+    _attachHandlers(){
 
-    _attachHandlerResearchStudyBack() {
+        this.model.addExpression("EditingRestrictions", () => {
+            if (this.model.phase === 'phase2') {
+                return true;
+            }
+            return false;
+            }, "phase"
+        )
+
+        this.model.addExpression("AllowedCriteria", () => {
+                if ((this.model.phase === 'phase1') && (this.model.title.value.trim() === "" || this.model.startdate.value.trim() === ""
+                    || this.model.enddate.value.trim() === "" || this.model.description.value.trim() === "")) {
+                    return true;
+                }
+                if (this.model.phase === 'phase2') {
+                    return false;
+                }
+                return false;
+            }, ["title", "startdate", "enddate", "description", "phase"]
+        )
+
+        this.onTagClick('research:next', () => {
+            switch (this.model.phase) {
+                case "phase1":
+                    this.model.phase    = "phase2";
+                    this.model.header2  = "Step (2/3) Inclusion Criteria";
+                    this.model.header3  = "Please indicate the inclusion criteria of your study";
+                    break;
+                case "phase2":
+                    this.model.phase            = "phase3";
+                    this.model.header1          = "Study - Summary";
+                    this.model.nextButton       = "Confirm";
+                    this.model.previousButton   = "Edit";
+                    this.model.header2          = false;
+                    this.model.header3          = false;
+                    break;
+                case "phase3":
+                    this.updateStudy();
+                    break;
+            }
+        });
+
         this.onTagClick('research:back', () => {
             switch (this.model.phase){
                 case "phase3":

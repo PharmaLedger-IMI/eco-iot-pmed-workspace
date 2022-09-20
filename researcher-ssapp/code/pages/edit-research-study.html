@@ -45,7 +45,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="col-form-label">{{@age.label}}</label>
-                                    <select class="form-control" data-for="@age.options" value="@age.value">
+                                    <select class="form-control" data-for="@age.options" value="@age.value" disabled="@EditingRestrictions">
                                         <option value="@value">{{@label}}</option>
                                     </select>
                                 </div>
@@ -53,7 +53,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="col-form-label">{{@sex.label}}</label>
-                                    <select class="form-control" data-for="@sex.options" value="@sex.value">
+                                    <select class="form-control" data-for="@sex.options" value="@sex.value" disabled="@EditingRestrictions">
                                         <option value="@value">{{@label}}</option>
                                     </select>
                                 </div>
@@ -63,7 +63,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="col-form-label">{{@pathologies.label}}</label>
-                                    <select class="form-control" data-for="@pathologies.options" value="@pathologies.value">
+                                    <select class="form-control" data-for="@pathologies.options" value="@pathologies.value" disabled="@EditingRestrictions">
                                         <option value="@value">{{@label}}</option>
                                     </select>
                                 </div>
@@ -71,7 +71,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="col-form-label">{{@others.label}}</label>
-                                    <input class="form-control" data-view-model="@others" id="@others.name"/>
+                                    <input class="form-control" data-view-model="@others" disabled="@EditingRestrictions" id="@others.name"/>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="col-form-label">{{@data.label}}</label>
-                                <select class="form-control" data-for="@data.options" value="@data.value">
+                                <select class="form-control" data-for="@data.options" disabled="@EditingRestrictions" value="@data.value">
                                     <option value="@value">{{@label}}</option>
                                 </select>
                             </div>
@@ -178,7 +178,7 @@
 
         <div class="button-group-wrapper">
             <button data-tag="research:back">{{ @previousButton }}</button>
-            <button data-tag="research:next">{{ @nextButton }}</button>
+            <button data-tag="research:next" disabled="@AllowedCriteria">{{ @nextButton }}</button>
         </div>
     </div>
 </webc-container>
