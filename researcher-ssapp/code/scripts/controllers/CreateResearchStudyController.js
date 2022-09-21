@@ -25,7 +25,6 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
         );
 
         this._attachHandlers();
-        this.CommunicationService = getCommunicationServiceInstance();
     }
 
     prepareContractStudy(){
@@ -83,11 +82,6 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                 message.content = `The study ${this.model.title.value} has been created!`;
                 message.type = 'success'
             }
-
-            this.CommunicationService.sendMessageToIotAdapter({
-                operation: Constants.MESSAGES.RESEARCHER.NEW_STUDY,
-                ssi:data.sReadSSI
-            })
 
             window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('home', message);

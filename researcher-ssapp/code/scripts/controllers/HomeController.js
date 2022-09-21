@@ -4,7 +4,7 @@ const { getCommunicationServiceInstance } = commonServices.CommunicationService;
 const {StudiesService} = commonServices;
 import StudyStatusesService from "../services/StudyStatusesService.js";
 import MessageSubscriberService from "../services/MessageSubscriberService.js";
-
+const Constants = commonServices.Constants;
 const DataSourceFactory = commonServices.getDataSourceFactory();
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
@@ -42,7 +42,6 @@ export default class HomeController extends BreadCrumbManager {
             this.navigateToPageTag('create-research-study', { breadcrumb: this.model.toObject('breadcrumb'), actionType: ACTION_TYPES.ADD, researcherDID: this.model.did });
         });
 
-        
         this.onTagClick('change-status',(nextStatus)=>{
             let selectedStudy = this.studies.find(study => study.uid === nextStatus.studyId);
             const uid = selectedStudy.uid;
@@ -70,7 +69,17 @@ export default class HomeController extends BreadCrumbManager {
                     }
                     
                     selectedStudy.status = nextStatus.step;
-                    this.StudiesService.updateStudy(selectedStudy, note,  () => {
+
+                    this.StudiesService.updateStudy(selectedStudy, note,  (err, data) => {
+                        if (this.model.statusModal.toStatus==="Active") {
+                            this.StudiesService.getDSUsReadSSI(data.uid, (err, SReadSSI)=> {
+                                let communicationService = getCommunicationServiceInstance();
+                                communicationService.sendMessageToIotAdapter({
+                                    operation: Constants.MESSAGES.RESEARCHER.COMMUNICATE_STUDY_DATA_MATCHMAKING,
+                                    ssi:SReadSSI
+                                })
+                            });
+                        }
                         this.prepareStudiesView();
                         this.model.studiesDataSource.updateRecords();
                         window.WebCardinal.loader.hidden = true;
