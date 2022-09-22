@@ -1,8 +1,4 @@
-FROM debian:latest
-
-RUN apt-get update && \
-	apt-get -y install nodejs && \
-	apt-get -y install npm --no-install-recommends
+FROM node:16.17.0
 
 RUN npm install -g node-gyp
 
