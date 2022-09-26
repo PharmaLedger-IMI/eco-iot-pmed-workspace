@@ -1,6 +1,6 @@
 const {WebcController} = WebCardinal.controllers;
 const commonServices = require("common-services");
-const {StudiesService, StudyNotesService} = commonServices;
+const {StudiesService, StudyNotesService, Constants} = commonServices;
 const DataSourceFactory = commonServices.getDataSourceFactory();
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
@@ -47,7 +47,7 @@ export default class ViewResearchStudyController extends BreadCrumbManager {
         getNotes().then(data => {
             this.model.hasNotes = data.length>0;
             let notes = data.filter(note => note.studyID === this.model.uid);
-            notes.forEach(note => note.date = new Date(note.date).toLocaleDateString());
+            notes.forEach(note => note.date = (new Date(note.date)).toLocaleDateString(Constants.DATE_UTILS.FORMATS.EN_UK));
 
             this.model.notesDataSource = DataSourceFactory.createDataSource( 3, 10, notes);
             this.model.notesDataSource.updateTable = function(note) {
@@ -132,7 +132,7 @@ export default class ViewResearchStudyController extends BreadCrumbManager {
                     this.navigateToPageTag('home', message);
                     return console.log(err);
                 }
-                note.date = new Date(note.date).toLocaleDateString();
+                note.date = (new Date(note.date)).toLocaleDateString(Constants.DATE_UTILS.FORMATS.EN_UK);
                 this.model.notesDataSource.updateTable([note]);
                 this.model.notesViewModel = this.getViewNotesModel();
                 window.WebCardinal.loader.hidden = true;
