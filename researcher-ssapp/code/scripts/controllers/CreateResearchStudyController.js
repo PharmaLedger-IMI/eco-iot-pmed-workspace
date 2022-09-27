@@ -308,8 +308,16 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                         value: 'Diastolic Blood Pressure'
                     },
                     {
-                        label: "Fitbit Activity",
-                        value: 'fitbit activity'
+                        label: "Body Temperature",
+                        value: 'Body temperature'
+                    },
+                    {
+                        label: "Heart Rate",
+                        value: 'Heart rate'
+                    },
+                    {
+                        label: "Calories",
+                        value: 'Calories burned'
                     }
                 ],
                 value: prevState.data || ""
