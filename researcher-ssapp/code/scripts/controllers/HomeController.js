@@ -5,6 +5,7 @@ const {StudiesService} = commonServices;
 import StudyStatusesService from "../services/StudyStatusesService.js";
 import MessageSubscriberService from "../services/MessageSubscriberService.js";
 const Constants = commonServices.Constants;
+const {STUDY_STATUSES} = commonServices.Constants;
 const DataSourceFactory = commonServices.getDataSourceFactory();
 const BreadCrumbManager = commonServices.getBreadCrumbManager();
 
@@ -71,7 +72,7 @@ export default class HomeController extends BreadCrumbManager {
                     selectedStudy.status = nextStatus.step;
 
                     this.StudiesService.updateStudy(selectedStudy, note,  (err, data) => {
-                        if (this.model.statusModal.toStatus==="Active") {
+                        if (this.model.statusModal.toStatus=== STUDY_STATUSES.LABEL_ACTIVE && this.model.statusModal.fromStatus!== STUDY_STATUSES.LABEL_ON_HOLD) {
                             this.StudiesService.getDSUsReadSSI(data.uid, (err, SReadSSI)=> {
                                 let communicationService = getCommunicationServiceInstance();
                                 communicationService.sendMessageToIotAdapter({
