@@ -1,55 +1,51 @@
-const ACTIONS = {
-    EDIT:"edit",
-    VIEW:"view",
-    FEEDBACK:"feedback",
-    RESULT:"result",
-    DATA:"data"
-}
+const commonServices = require("common-services");
+const {STUDY_STATUSES, STUDY_ACTIONS} = commonServices.Constants;
+
 
 const statusStateMachine = {
     approved: {
-        label: "Approved",
-        actions: [ACTIONS.EDIT],
+        label: STUDY_STATUSES.LABEL_APPROVED,
+        actions: [STUDY_ACTIONS.EDIT],
         getNexSteps: () => {
             return [
-                {status: 'active', action: "Run"},
-                {status: 'withdrawn', action: "Withdraw"}]
+                {status: STUDY_STATUSES.STATUS_ACTIVE, action: STUDY_STATUSES.ACTION_RUN},
+                {status: STUDY_STATUSES.STATUS_WITHDRAWN, action: STUDY_STATUSES.ACTION_WITHDRAW}]
         }
     },
     active: {
-        label: "Active",
-        actions: [ACTIONS.VIEW, ACTIONS.FEEDBACK],
+        label: STUDY_STATUSES.LABEL_ACTIVE,
+        actions: [STUDY_ACTIONS.VIEW, STUDY_ACTIONS.FEEDBACK],
         getNexSteps: () => {
-            return [{status: 'onHold', action: "Hold"}, {status: 'closed', action: "Close"}]
+            return [{status: STUDY_STATUSES.STATUS_ON_HOLD, action: STUDY_STATUSES.ACTION_HOLD}, {status: STUDY_STATUSES.STATUS_CLOSED, action: STUDY_STATUSES.ACTION_CLOSE}]
         }
     },
     onHold: {
-        label: "On Hold",
-        actions: [ACTIONS.VIEW],
+        label: STUDY_STATUSES.LABEL_ON_HOLD,
+        actions: [STUDY_ACTIONS.VIEW],
         getNexSteps: () => {
             return [
-                {status: 'active', action: "Resume"},
-                {status: 'withdrawn', action: "Withdraw"},
-                {status: 'closed', action: "Close"}]
+                {status: STUDY_STATUSES.STATUS_ACTIVE, action: STUDY_STATUSES.ACTION_RESUME},
+                {status: STUDY_STATUSES.STATUS_WITHDRAWN, action: STUDY_STATUSES.ACTION_WITHDRAW},
+                {status: STUDY_STATUSES.STATUS_CLOSED, action: STUDY_STATUSES.ACTION_CLOSE}]
         }
     },
     closed: {
-        label: "Closed",
-        actions: [ACTIONS.VIEW, ACTIONS.FEEDBACK],
+        label: STUDY_STATUSES.LABEL_CLOSED,
+        actions: [STUDY_ACTIONS.VIEW, STUDY_ACTIONS.FEEDBACK],
         getNexSteps: () => {
-            return [{status: 'completed', action: "Finalise"}]
+            return [{status: STUDY_STATUSES.STATUS_COMPLETED, action: STUDY_STATUSES.ACTION_FINALISE}]
         }
     },
     completed: {
-        label: "Completed",
-        actions: [ACTIONS.VIEW, ACTIONS.FEEDBACK, ACTIONS.RESULT, ACTIONS.DATA],
+        label: STUDY_STATUSES.LABEL_COMPLETED,
+        actions: [STUDY_ACTIONS.VIEW, STUDY_ACTIONS.FEEDBACK, STUDY_ACTIONS.RESULT, STUDY_ACTIONS.DATA],
         getNexSteps: () => {
             return []
         }
     },
     withdrawn: {
-        label: "Withdrawn",
-        actions: [ACTIONS.VIEW],
+        label: STUDY_STATUSES.LABEL_WITHDRAWN,
+        actions: [STUDY_ACTIONS.VIEW],
         getNexSteps: () => {
             return []
         }
@@ -82,10 +78,10 @@ class StudyStatusesService {
     }
 
     static getInitialStatus() {
-        return "approved";
+        return STUDY_STATUSES.STATUS_APPROVED;
     }
     static getActions(){
-        return ACTIONS;
+        return STUDY_ACTIONS;
     }
 
 }
