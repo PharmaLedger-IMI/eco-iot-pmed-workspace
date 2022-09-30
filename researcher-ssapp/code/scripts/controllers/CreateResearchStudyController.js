@@ -62,7 +62,7 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
             sex: this.model.sex.value,
             pathologies: this.model.pathologies.value,
             others: this.model.others.value,
-            data: this.model.data.value,
+            data: this.getDataTypes(),
             researcherDID: this.model.researcherDID
         }
         let allData = {...this.prepareContractStudy(), ...viewData};
@@ -82,7 +82,6 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                 message.content = `The study ${this.model.title.value} has been created!`;
                 message.type = 'success'
             }
-
             window.WebCardinal.loader.hidden = true;
             this.navigateToPageTag('home', message);
         });
@@ -96,7 +95,7 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                     return true;
                 }
                 if ((this.model.phase === 'phase2') && (this.model.age.value.trim() === "" || this.model.sex.value.trim() === ""
-                    || this.model.pathologies.value.trim() === "" || this.model.data.value.trim() === "")) {
+                    || this.model.pathologies.value.trim() === "" || this.getDataTypes().length===0 )){
                     return true;
                 }
                 return false;
@@ -117,6 +116,7 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                     this.model.previousButton = "Edit";
                     this.model.header2 = false;
                     this.model.header3 = false;
+                    this.model.data.value = this.getDataTypes();
                     break;
                 case "phase3":
                     this.saveStudy();
@@ -143,6 +143,16 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                     this.navigateToPageTag('home');
             }
         });
+    }
+
+    getDataTypes() {
+        let dataValues = [];
+        Object.keys(this.model.data).forEach(k => {
+            if (this.model.data[k].checked) {
+                dataValues.push(this.model.data[k].id);
+            }
+        });
+        return dataValues;
     }
 
     getFormData() {
@@ -294,33 +304,49 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
             data: {
                 label: "Please indicate the data that you need to obtain:",
                 required: true,
-                options: [
-                    {
-                        label: "SpO2",
-                        value: 'SpO2'
-                    },
-                    {
-                        label: "Systolic Blood Pressure",
-                        value: 'Systolic Blood Pressure'
-                    },
-                    {
-                        label: "Diastolic Blood Pressure",
-                        value: 'Diastolic Blood Pressure'
-                    },
-                    {
-                        label: "Body Temperature",
-                        value: 'Body temperature'
-                    },
-                    {
-                        label: "Heart Rate",
-                        value: 'Heart rate'
-                    },
-                    {
-                        label: "Calories",
-                        value: 'Calories burned'
-                    }
-                ],
-                value: prevState.data || ""
+                SPO2: {
+                    name: 'SPO2',
+                    id: 'SpO2',
+                    label: "SPO2",
+                    placeholder: 'SPO2',
+                    checked: prevState.SPO2 || false
+                },
+                Systolic: {
+                    name: 'Systolic Blood Pressure',
+                    id: 'Systolic Blood Pressure',
+                    label: "Systolic Blood Pressure",
+                    placeholder: 'Systolic Blood Pressure',
+                    checked: prevState.Systolic || false
+                },
+                Diastolic: {
+                    name: 'Diastolic Blood Pressure',
+                    id: 'Diastolic Blood Pressure',
+                    label: "Diastolic Blood Pressure",
+                    placeholder: 'Diastolic Blood Pressure',
+                    checked: prevState.Diastolic || false
+                },
+                Temperature: {
+                    name: 'Body Temperature',
+                    id: 'Body temperature',
+                    label: "Body Temperature",
+                    placeholder: 'Body Temperature',
+                    checked: prevState.Temperature || false
+                },
+                HR: {
+                    name: 'Heart Rate',
+                    id: 'Heart rate',
+                    label: "Heart Rate",
+                    placeholder: 'Heart Rate',
+                    checked: prevState.HR || false
+                },
+                Calories: {
+                    name: 'Calories',
+                    id: 'Calories burned',
+                    label: "Calories",
+                    placeholder: 'Calories',
+                    checked: prevState.Calories || false
+                },
+                value: prevState || ""
             },
             researcherDID: prevState.researcherDID || ""
         }

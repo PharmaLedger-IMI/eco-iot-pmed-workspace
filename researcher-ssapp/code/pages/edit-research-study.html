@@ -45,7 +45,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="col-form-label">{{@age.label}}</label>
-                                    <select class="form-control" data-for="@age.options" value="@age.value" disabled="@EditingRestrictions">
+                                    <select class="form-control" data-for="@age.options" disabled value="@age.value">
                                         <option value="@value">{{@label}}</option>
                                     </select>
                                 </div>
@@ -53,7 +53,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="col-form-label">{{@sex.label}}</label>
-                                    <select class="form-control" data-for="@sex.options" value="@sex.value" disabled="@EditingRestrictions">
+                                    <select class="form-control" data-for="@sex.options" disabled value="@sex.value" >
                                         <option value="@value">{{@label}}</option>
                                     </select>
                                 </div>
@@ -63,7 +63,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="col-form-label">{{@pathologies.label}}</label>
-                                    <select class="form-control" data-for="@pathologies.options" value="@pathologies.value" disabled="@EditingRestrictions">
+                                    <select class="form-control" data-for="@pathologies.options" disabled value="@pathologies.value" >
                                         <option value="@value">{{@label}}</option>
                                     </select>
                                 </div>
@@ -71,7 +71,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="col-form-label">{{@others.label}}</label>
-                                    <input class="form-control" data-view-model="@others" disabled="@EditingRestrictions" id="@others.name"/>
+                                    <input class="form-control" data-view-model="@others" disabled id="@others.name"/>
                                 </div>
                             </div>
                         </div>
@@ -79,9 +79,10 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="col-form-label">{{@data.label}}</label>
-                                <select class="form-control" data-for="@data.options" disabled="@EditingRestrictions" value="@data.value">
-                                    <option value="@value">{{@label}}</option>
-                                </select>
+                                <div data-for="@data.value">
+<!--                                    <label class="form-control" disabled>{{@}}</label>-->
+                                    <input class="form-control" disabled placeholder="@"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,8 +162,8 @@
                                     </header>
                                     <main>
                                         <div class="row-wrapper grid-equal">
-                                            <div class="row-wrapper grid-equal">
-                                                <label>Data: {{ @data.value }} </label>
+                                            <div class="row-wrapper grid-equal" data-for="@data.value">
+                                                <label class="text-capitalize">{{@}}</label>
                                             </div>
                                         </div>
                                     </main>

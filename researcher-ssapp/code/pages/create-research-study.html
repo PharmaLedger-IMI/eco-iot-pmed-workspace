@@ -80,10 +80,16 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="col-form-label">{{@data.label}}</label>
-                                <select class="form-control" data-for="@data.options" value="@data.value">
-                                    <option value="@value">{{@label}}</option>
-                                </select>
+
+                                <label class="form-control"><input type="checkbox" id="@data.SPO2.id" data-view-model="@data.SPO2"> {{@data.SPO2.label}}</label>
+                                <label class="form-control"><input type="checkbox" id="@data.Systolic.id" data-view-model="@data.Systolic"> {{@data.Systolic.label}}</label>
+                                <label class="form-control"><input type="checkbox" id="@data.Diastolic.id" data-view-model="@data.Diastolic"> {{@data.Diastolic.label}}</label>
+                                <label class="form-control"><input type="checkbox" id="@data.Temperature.id" data-view-model="@data.Temperature"> {{@data.Temperature.label}}</label>
+                                <label class="form-control"><input type="checkbox" id="@data.HR.id" data-view-model="@data.HR"> {{@data.HR.label}}</label>
+                                <label class="form-control"><input type="checkbox" id="@data.Calories.id" data-view-model="@data.Calories"> {{@data.Calories.label}}</label>
+
                             </div>
+
                         </div>
                     </div>
                     <div slot="phase3">
@@ -162,8 +168,8 @@
                                     </header>
                                     <main>
                                         <div class="row-wrapper grid-equal">
-                                            <div class="row-wrapper grid-equal">
-                                                <label>Data: {{ @data.value }} </label>
+                                            <div class="row-wrapper grid-equal" data-for="@data.value">
+                                                <label class="text-capitalize">{{@}}</label>
                                             </div>
                                         </div>
                                     </main>

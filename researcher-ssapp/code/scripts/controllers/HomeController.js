@@ -79,6 +79,7 @@ export default class HomeController extends BreadCrumbManager {
                                     operation: Constants.MESSAGES.RESEARCHER.COMMUNICATE_STUDY_DATA_MATCHMAKING,
                                     ssi:SReadSSI
                                 })
+                                console.log("Invitation sent!");
                             });
                         }
                         this.prepareStudiesView();
