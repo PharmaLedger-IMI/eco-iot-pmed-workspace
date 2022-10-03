@@ -3,6 +3,7 @@ const MessageHandlerService = commonServices.MessageHandlerService;
 const StudiesService = commonServices.StudiesService
 const PermissionedHealthDataService = commonServices.PermissionedHealthDataService;
 const Constants = commonServices.Constants;
+const loader = window.WebCardinal.loader;
 
 class MessageSubscriberService{
     constructor() {
@@ -10,7 +11,26 @@ class MessageSubscriberService{
         this.StudiesService = new StudiesService();
         this.PermissionedHealthDataService = new PermissionedHealthDataService();
 
+        const onConfirmRefresh = function (event) {
+            event.preventDefault();
+            return event.returnValue = "Are you sure you want to leave?";
+        }
+
+        const blockUI = () =>{
+            loader.hidden = false;
+            loader.setAttribute("data-value","Updating participants. Please wait...")
+            window.addEventListener("beforeunload", onConfirmRefresh, { capture: true });
+        }
+
+        const unBlockUI = ()=>{
+            loader.removeAttribute("data-value");
+            loader.hidden = true;
+            window.removeEventListener("beforeunload", onConfirmRefresh, { capture: true });
+        }
+
         MessageHandlerService.init(async (data) => {
+
+            blockUI();
             data = JSON.parse(data);
             console.log('Received Message', data);
 
@@ -18,7 +38,8 @@ class MessageSubscriberService{
                 case Constants.MESSAGES.RESEARCHER.ADD_PARTICIPANTS_TO_STUDY: {
                     this.StudiesService.getStudy(data.studyUID, (err, study ) => {
                         if (err) {
-                            return console.log(err);
+                            unBlockUI();
+                            return console.error(err);
                         }
 
                         if (!study.participants) {
@@ -48,22 +69,28 @@ class MessageSubscriberService{
 
                         this.StudiesService.updateStudy(study, (err, study) => {
                             if (err) {
-                                console.log(err);
+                                unBlockUI();
+                                return console.error(err);
                             }
-                            this.notifySubscribers("study-participant-update",study);
+
+                            this.PermissionedHealthDataService.mountObservation(data.permissionedDataDSUSSI, (err, data)=> {
+                                if (err) {
+                                    unBlockUI();
+                                    return console.error(err);
+                                }
+                                console.log("Received Data from 1 participant.");
+                                this.notifySubscribers("study-participant-update",study);
+                                unBlockUI();
+                            });
+
                         });
                     })
-                    this.PermissionedHealthDataService.mountObservation(data.permissionedDataDSUSSI, (err, data)=> {
-                        if (err) {
-                            console.log(err);
-                        }
-                        console.log("Received Data from 1 participant.");
-                    });
                     break;
                 }
                 case Constants.MESSAGES.RESEARCHER.REMOVE_PARTICIPANTS_FROM_STUDY: {
                     this.StudiesService.getStudy(data.studyUID, (err, study ) => {
                         if (err) {
+                            unBlockUI();
                             return console.error(err);
                         }
                         let patientMatchIndex = study.participants.findIndex(pt => pt.participantInfo.patientDID === data.participant.patientDID);
@@ -78,9 +105,11 @@ class MessageSubscriberService{
 
                         this.StudiesService.updateStudy(study, (err, updatedStudy) => {
                             if (err) {
-                                console.log(err);
+                                unBlockUI();
+                                return console.error(err);
                             }
                             this.notifySubscribers("study-participant-update",updatedStudy);
+                            unBlockUI();
                             console.log("A participant revoked his permission.");
                         });
                     })
@@ -89,9 +118,12 @@ class MessageSubscriberService{
                 case Constants.MESSAGES.RESEARCHER.REJECT_PARTICIPANTS_FROM_STUDY: {
                     this.StudiesService.getStudy(data.studyUID, (err, study ) => {
                         if (err) {
-                            return reject(err);
+                            unBlockUI();
+                            return console.error(err);
                         }
-                        if (!study.participants) study.participants = []
+                        if (!study.participants) {
+                            study.participants = [];
+                        }
                         let participant = {
                             dpermission: false,
                             dpermissionRejectedDate: data.dpermissionRejectedDate,
@@ -113,9 +145,11 @@ class MessageSubscriberService{
 
                         this.StudiesService.updateStudy(study, (err, updatedStudy) => {
                             if (err) {
-                                console.log(err);
+                                unBlockUI();
+                                return console.error(err);
                             }
                             this.notifySubscribers("study-participant-update",updatedStudy);
+                            unBlockUI();
                             console.log("A participant rejected the invitation.");
                         });
                     })
