@@ -67,24 +67,26 @@ class MessageSubscriberService{
                             }
                         });
 
-                        this.StudiesService.updateStudy(study, (err, study) => {
+                        this.StudiesService.updateStudy(study, (err, updatedStudy) => {
                             if (err) {
                                 unBlockUI();
                                 return console.error(err);
                             }
-
-                            this.PermissionedHealthDataService.mountObservation(data.permissionedDataDSUSSI, (err, data)=> {
-                                if (err) {
-                                    unBlockUI();
-                                    return console.error(err);
-                                }
-                                console.log("Received Data from 1 participant.");
-                                this.notifySubscribers("study-participant-update",study);
-                                unBlockUI();
-                            });
-
+                            this.notifySubscribers("study-participant-update",updatedStudy);
+                            unBlockUI();
                         });
                     })
+                    break;
+                }
+                case Constants.MESSAGES.RESEARCHER.ANONYMIZED_DATA : {
+                    this.PermissionedHealthDataService.mountObservation(data.permissionedDataDSUSSI, (err, data)=> {
+                        if (err) {
+                            unBlockUI();
+                            return console.error(err);
+                        }
+                        console.log("Received Data from 1 study.");
+                        unBlockUI();
+                    });
                     break;
                 }
                 case Constants.MESSAGES.RESEARCHER.REMOVE_PARTICIPANTS_FROM_STUDY: {

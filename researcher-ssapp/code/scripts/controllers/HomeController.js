@@ -82,6 +82,14 @@ export default class HomeController extends BreadCrumbManager {
                                 console.log("Invitation sent!");
                             });
                         }
+                        if (this.model.statusModal.toStatus===STUDY_STATUSES.LABEL_COMPLETED){
+                            let communicationService = getCommunicationServiceInstance();
+                            communicationService.sendMessageToIotAdapter({
+                                operation: Constants.MESSAGES.RESEARCHER.GENERATE_ANONYMIZE_DATA,
+                                ssi: data.uid
+                            })
+                            console.log("Request for anonymized data sent to IoT Adaptor!");
+                        }
                         this.prepareStudiesView();
                         this.model.studiesDataSource.updateRecords();
                         window.WebCardinal.loader.hidden = true;
