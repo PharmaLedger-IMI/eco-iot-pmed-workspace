@@ -346,6 +346,27 @@ export default class CreateResearchStudyController extends BreadCrumbManager {
                     placeholder: 'Calories',
                     checked: prevState.Calories || false
                 },
+                Steps: {
+                    name: 'Steps',
+                    id: 'Steps',
+                    label: "Steps",
+                    placeholder: 'Steps',
+                    checked: prevState.Steps || false
+                },
+                Distance: {
+                    name: 'Distance',
+                    id: 'Distance',
+                    label: "Distance",
+                    placeholder: 'Distance',
+                    checked: prevState.Distance || false
+                },
+                Duration: {
+                    name: 'Duration',
+                    id: 'Duration',
+                    label: "Duration",
+                    placeholder: 'Duration',
+                    checked: prevState.Duration || false
+                },
                 value: prevState || ""
             },
             researcherDID: prevState.researcherDID || ""
