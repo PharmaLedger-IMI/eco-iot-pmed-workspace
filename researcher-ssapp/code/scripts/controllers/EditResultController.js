@@ -134,46 +134,25 @@ export default class EditResultController extends BreadCrumbManager {
                 label: "Topics",
                 required: true,
                 options: [{
-                    label: "Topic 1",
-                    value: 'Topic 1'
+                    label: "Treatment",
+                    value: 'Treatment'
                 },
-                {
-                    label: "Topic 2",
-                    value: 'Topic 2'
-                },
-                {
-                    label: "Topic 3",
-                    value: 'Topic 3'
-                },
-                {
-                    label: "Topic 4",
-                    value: 'Topic 4'
-                }
+                    {
+                        label: "Education",
+                        value: 'Education'
+                    },
+                    {
+                        label: "Assessment",
+                        value: 'Assessment'
+                    }
                 ],
                 value: result.topics || ""
             },
             exposureBackground: {
                 name: 'exposure background',
-                id: 'Exposure Background',
-                placeHolder: 'Exposure Background',
-                label: 'Exposure Background',
-                options: [{
-                    label: "EP_1",
-                    value: 'EP_1'
-                },
-                {
-                    label: "EP_2",
-                    value: 'EP_2'
-                },
-                {
-                    label: "EP_3",
-                    value: 'EP_3'
-                },
-                {
-                    label: "EP_4",
-                    value: 'EP_4'
-                },
-                ],
+                id: 'exposure background',
+                label: "Exposure Background",
+                placeholder: 'PICO Model description',
                 value: result.exposureBackground || ""
             },
             description: {

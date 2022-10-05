@@ -203,44 +203,25 @@ export default class AddResultController extends BreadCrumbManager {
                 label: "Topics",
                 required: true,
                 options: [{
-                    label: "Topic 1",
-                    value: 'Topic 1'
+                    label: "Treatment",
+                    value: 'Treatment'
                 },
                 {
-                    label: "Topic 2",
-                    value: 'Topic 2'
+                    label: "Education",
+                    value: 'Education'
                 },
                 {
-                    label: "Topic 3",
-                    value: 'Topic 3'
-                },
-                {
-                    label: "Topic 4",
-                    value: 'Topic 4'
+                    label: "Assessment",
+                    value: 'Assessment'
                 }
                 ],
                 value: ""
             },
             exposureBackground: {
+                name: 'exposure background',
+                id: 'exposure background',
                 label: "Exposure Background",
-                required: true,
-                options: [{
-                    label: "EP_1",
-                    value: 'EP_1'
-                },
-                {
-                    label: "EP_2",
-                    value: 'EP_2'
-                },
-                {
-                    label: "EP_3",
-                    value: 'EP_3'
-                },
-                {
-                    label: "EP_4",
-                    value: 'EP_4'
-                },
-                ],
+                placeholder: 'PICO Model description',
                 value: ""
             },
             description: {

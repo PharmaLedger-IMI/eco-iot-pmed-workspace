@@ -40,10 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-form-label">{{@exposureBackground.label}}</label>
-                    <select class="form-control" data-for="@exposureBackground.options"
-                            value="@exposureBackground.value">
-                        <option value="@value">{{@label}}</option>
-                    </select>
+                    <input class="form-control" data-view-model="@exposureBackground" value="@exposureBackground.value" id="@exposureBackground.id"/>
                 </div>
             </div>
 
