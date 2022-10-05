@@ -11,5 +11,5 @@
   "enable": [
     "mq"
   ],
-  "mq_fsQueueLength": 1000
+  "mq_fsQueueLength": 20000
 }
