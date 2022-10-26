@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<style>
+  #sso-pin-title {
+    font-size: 120%;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .buttons-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .buttons-row > .btn {
+    margin: 10px 0px;
+    width: 65px;
+  }
+
+  .view-pin, .clear-pin {
+    margin: 10px 0px;
+  }
+
+  .input-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+  }
+
+  .number-input {
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #FFFFFF;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+  }
+
+  .stepper-content {
+    min-width: 365px;
+  }
+
+</style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title data-model="APP_NAME"></title>
+  <script src="loader-config.js" type="module"></script>
+  <script src="controllers/MainController.js" type="module"></script>
+  <script src="controllers/services/Validator.js" type="module"></script>
+  <script src="bundles/webshims.js"></script>
+  <script src="bundles/loaderBoot.js"></script>
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" name="viewport"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+
+  <!-- pwa configs -->
+  <link href="manifest.webmanifest" rel="manifest"/>
+  <meta content="#157878" name="theme-color"/>
+
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+
+  <link rel="icon" type="image/x-icon" href="/assets/hospital.ico">
+  <link href="assets/images-pwa/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <link href="assets/images-pwa/touch-icon-ipad.png" rel="apple-touch-icon" sizes="152x152"/>
+  <link href="assets/images-pwa/touch-icon-iphone-retina.png" rel="apple-touch-icon" sizes="180x180"/>
+  <link href="assets/images-pwa/touch-icon-ipad-retina.png" rel="apple-touch-icon" sizes="167x167"/>
+
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <link href="assets/images-pwa/apple_splash_2048.png" rel="apple-touch-startup-image" sizes="2048x2732"/>
+  <link href="assets/images-pwa/apple_splash_1668.png" rel="apple-touch-startup-image" sizes="1668x2224"/>
+  <link href="assets/images-pwa/apple_splash_1536.png" rel="apple-touch-startup-image" sizes="1536x2048"/>
+  <link href="assets/images-pwa/apple_splash_1125.png" rel="apple-touch-startup-image" sizes="1125x2436"/>
+  <link href="assets/images-pwa/apple_splash_1242.png" rel="apple-touch-startup-image" sizes="1242x2208"/>
+  <link href="assets/images-pwa/apple_splash_750.png" rel="apple-touch-startup-image" sizes="750x1334"/>
+  <link href="assets/images-pwa/apple_splash_640.png" rel="apple-touch-startup-image" sizes="640x1136"/>
+  <!-- /pwa configs -->
+
+  <link href="assets/pwa/pwa.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/fontawesome-free-5.12.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
+  <script src="assets/pwa/pwa.js"></script>
+</head>
+<body style="display: none">
+<script>
+  console.log("Booting SSApp loader...");
+</script>
+<div class="wizard-container">
+
+  <div class="d-flex flex-column align-items-center align-self-center ml-auto mr-auto">
+    <div class="stepper-content d-none  bd-highlight content" id="pin-numpad">
+      <div class="btn-group-vertical mt-4 w-100" role="group">
+        <span id="sso-pin-title">Enter your pin</span>
+        <div class="input-wrapper">
+          <span class="number-input text-secondary"></span>
+          <span class="number-input text-secondary"></span>
+          <span class="number-input text-secondary"></span>
+          <span class="number-input text-secondary"></span>
+          <span class="number-input text-secondary"></span>
+          <span class="number-input text-secondary"></span>
+        </div>
+        <div class="buttons-row">
+          <div class="view-pin">
+            <button class="btn btn-outline-secondary"
+                    id="btn-view-pin"
+                    onclick="controller.toggleShowPin()"
+                    type="button">
+              Show pin
+            </button>
+          </div>
+          <div class="clear-pin">
+            <button class="btn btn-outline-secondary"
+                    id="btn-clear-pin"
+                    onclick="controller.clearPin()"
+                    type="button">
+              Clear all
+            </button>
+          </div>
+        </div>
+        <div class="buttons-row">
+          <input class="text-center form-control-lg mb-2 w-100" hidden id="sso-pincode" type="text">
+        </div>
+        <div class="buttons-row">
+          <button class="btn btn-outline-secondary" id="btn-1"
+                  onclick="controller.pinUpdate(1)"
+                  type="button">
+            1
+          </button>
+          <button class="btn btn-outline-secondary"
+                  id="btn-2"
+                  onclick="controller.pinUpdate(2)"
+                  type="button">
+            2
+          </button>
+          <button class="btn btn-outline-secondary"
+                  id="btn-3"
+                  onclick="controller.pinUpdate(3)"
+                  type="button">
+            3
+          </button>
+        </div>
+        <div class="buttons-row">
+          <button class="btn btn-outline-secondary"
+                  id="btn-4"
+                  onclick="controller.pinUpdate(4)"
+                  type="button">
+            4
+          </button>
+          <button class="btn btn-outline-secondary"
+                  id="btn-5"
+                  onclick="controller.pinUpdate(5)"
+                  type="button">
+            5
+          </button>
+          <button class="btn btn-outline-secondary"
+                  id="btn-6"
+                  onclick="controller.pinUpdate(6)"
+                  type="button">
+            6
+          </button>
+        </div>
+        <div class="buttons-row">
+          <button class="btn btn-outline-secondary"
+                  id="btn-7"
+                  onclick="controller.pinUpdate(7)"
+                  type="button">
+            7
+          </button>
+          <button class="btn btn-outline-secondary"
+                  id="btn-8"
+                  onclick="controller.pinUpdate(8)"
+                  type="button">
+            8
+          </button>
+          <button class="btn btn-outline-secondary"
+                  id="btn-9"
+                  onclick="controller.pinUpdate(9)"
+                  type="button">
+            9
+          </button>
+        </div>
+        <div class="buttons-row">
+          <button class="btn btn-outline-secondary"
+                  id="btn-del"
+                  onclick="controller.pinUpdate('del')"
+                  type="button">
+            &lt;
+          </button>
+          <button class="btn btn-outline-secondary"
+                  id="btn-0"
+                  onclick="controller.pinUpdate(0)"
+                  type="button">
+            0
+          </button>
+          <button class="btn btn-primary" onclick="controller.submitSSOPin(event)" type="button"><i
+                  class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <div class="row ml-1 mt-2 text-left">
+        <label class="error" id="sso-pin-error"></label>
+      </div>
+    </div>
+  </div>
+  <div class="align-self-center bd-highlight content" id="restore-new-container">
+    <div class="title" data-model="APP_NAME" id="loader-title"></div>
+    <div class="caption" data-model="APP_DESCRIPTION" id="loader-caption"></div>
+    <div class="actions d-flex flex-column align-items-center">
+      <a class="btn btn-csb-loader btn-csb-new col-12 col-sm-8 col-md-3 col-xl-2" data-model="NEW_WALLET"
+         href="newWallet.html" id="new-wallet" type="button"></a>
+      <a class="btn btn-csb-loader btn-csb-restore col-12 col-sm-8 col-md-3 col-xl-2 mt-2"
+         data-model="ACCESS_WALLET"
+         href="?login" id="access-wallet" type="button"></a>
+      <!-- temporary hidden for release (22.06.2021) till recovery wallet issue is fixed-->
+      <a class="btn btn-csb-loader btn-csb-restore col-12 col-sm-8 col-md-3 col-xl-2 mt-2"
+         data-model="RECOVER_WALLET"
+         href="recoverWallet.html" id="recover-wallet"
+         type="button"></a>
+    </div>
+
+  </div>
+
+  <div class="align-self-center bd-highlight" id="credentials-container">
+    <div class="credentials-panel-container">
+      <div class="credentials-panel card text-white bg-violet mb-3">
+        <div class="card-header" data-model="WALLET_AUTHORIZATION" id="wallet-authorization"></div>
+        <div class="card-body">
+          <h5 class="card-title" data-model="ENTER_CREDENTIALS" id="enter-credentials"></h5>
+          <form class="credentials-panel-action-box" onsubmit="controller.openWallet(event)">
+            <div class="d-none" id="pin-container">
+              <div class="form-group" id="pin-input-container">
+                <label data-model="PINCODE_LABEL" for="pincode"></label><br>
+                <input id="pincode" type="text" valid="false"/>
+                <small class="form-text text-muted" id="pincode-help"></small>
+              </div>
+              <div class="form-group">
+                <input id="pin-checkbox" name="pin-checkbox"
+                       oninput="controller.pinCheckboxHandler(event)" type="checkbox">
+                <label for="pin-checkbox">Login with credentials</label>
+              </div>
+            </div>
+
+            <div class="row ml-1">
+              <label class="error" id="register-details-error"></label>
+            </div>
+            <div class="buttons-box buttons-box-set-register-details d-flex justify-content-between">
+              <button class="btn btn-csb-loader btn-csb-new" data-model="BACK_BUTTON_MESSAGE"
+                      id="back-btn" onclick="controller.goToLandingPage()"
+                      type="button"></button>
+              <button class="btn btn-csb-loader btn-csb-restore float-right"
+                      data-model="OPEN_WALLET"
+                      id="open-wallet-btn"
+                      type="submit"></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
