@@ -17,13 +17,13 @@
     "bind-app": "node ./node_modules/octopus/scripts/bind --type=app",
     "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
     "server": "npm run apihub",
-    "apihub": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd privatesky && npm run start\"",
-    "switch-to-release": "npm run remove privatesky && npm run add privatesky http://github.com/privatesky/psk-release.git 0",
-    "switch-to-dev": "npm run remove privatesky && npm run add privatesky http://github.com/privatesky/privatesky.git 0",
+    "apihub": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd opendsu-sdk && npm run start\"",
+    "switch-to-release": "npm run remove opendsu-sdk && npm run add opendsu-sdk http://github.com/opendsu-sdk/psk-release.git 0",
+    "switch-to-dev": "npm run remove opendsu-sdk && npm run add opendsu-sdk http://github.com/opendsu-sdk/opendsu-sdk.git 0",
     "watch": "node ./bin/watcher/watcher.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "node ./bin/clean.js ./",
-    "clean-build": "npm run clean && npm run build privatesky && npm run build-all",
+    "clean-build": "npm run clean && npm run build opendsu-sdk && npm run build-all",
     "freeze": "node ./node_modules/octopus/scripts/freeze dependencies install-mobile",
     "tag-freeze": "node ./node_modules/octopus/scripts/tagFreeze dependencies install-mobile",
     "debug": "nodemon -e html,js,css,json --watch professional-ssapp/code --ignore professional-ssapp/code/constitution --ignore professional-ssapp/code/scripts/bundles --exec \"npm run build professional-ssapp\"",
@@ -49,6 +49,6 @@
   },
   "homepage": "https://github.com/PharmaLedger-IMI/eco-iot-pmed-workspace#readme",
   "dependencies": {
-    "octopus": "git+http://github.com/privatesky/octopus.git"
+    "octopus": "git+http://github.com/opendsu/octopus.git"
   }
 }
