@@ -15,7 +15,7 @@
     "url": "git+https://github.com/PharmaLedger-IMI/iot-pmed-workspace.git"
   },
   "dependencies": {
-    "octopus": "git+https://github.com/PrivateSky/octopus.git"
+    "octopus": "git+https://github.com/opendsu/octopus.git"
   },
   "keywords": [
     "ssapp",
