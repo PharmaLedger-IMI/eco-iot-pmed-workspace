@@ -51,6 +51,15 @@
 			]
 		},
 		{
+			"name": "build opendsu-sdk",
+			"actions": [
+				{
+					"type": "execute",
+					"cmd": "cd opendsu-sdk && npm run build"
+				}
+			]
+		},
+		{
 			"name": "common-services",
 			"src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
 			"actions": [
@@ -86,7 +95,7 @@
 		},
 		{
 			"name": "apihub-root/dsu-explorer/loader",
-			"src": "https://github.com/opendsu/web-dossier-loader.git",
+			"src": "https://github.com/opendsu/trust-loader.git",
 			"actions": [
 				{
 					"type": "smartClone",

@@ -2,11 +2,11 @@ const octopus = require("octopus/scripts");
 const octopusActionsRegistry = require('octopus/ActionsRegistry');
 const defaultActionsRegistry = octopusActionsRegistry.getRegistry();
 
-const DEFAULT_PSK_BUNDLES_PATH = "./privatesky/psknode/bundles";
+const DEFAULT_OPENDSU_BUNDLES_PATH = "./opendsu-sdk/psknode/bundles";
 const path = require("path");
 const fs = require("fs");
 
-require(path.join(process.cwd(), DEFAULT_PSK_BUNDLES_PATH, "openDSU.js"));
+require(path.join(process.cwd(), DEFAULT_OPENDSU_BUNDLES_PATH, "openDSU.js"));
 
 const readAlias = (src, callback) => {
   fs.access(src, (err) => {

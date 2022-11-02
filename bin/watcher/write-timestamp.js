@@ -3,7 +3,7 @@
  * This is executed by the "watch" script(s) after a change
  * has been detected in the file system.
  *
- * If the "web-dossier-loader" application is running in "development"
+ * If the "trust-loader" application is running in "development"
  * mode it will fetch the timestamp file, compare the timestamp with
  * the one stored in local storage and if the timestamp is newer
  * it will rebuild the wallet
