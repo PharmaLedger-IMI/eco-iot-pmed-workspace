@@ -51,15 +51,6 @@
 			]
 		},
 		{
-			"name": "build opendsu-sdk",
-			"actions": [
-				{
-					"type": "execute",
-					"cmd": "cd opendsu-sdk && npm run build"
-				}
-			]
-		},
-		{
 			"name": "common-services",
 			"src": "https://github.com/PharmaLedger-IMI/eco-iot-services.git",
 			"actions": [
