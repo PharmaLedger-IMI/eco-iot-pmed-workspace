@@ -39,17 +39,33 @@
         },
         {
             "name": "opendsu-sdk",
-            "src": "http://github.com/opendsu/opendsu-sdk.git",
+            "src": "http://github.com/Mastaleru/psk-release.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "ec83f862970cdbfb64204edb31d1b936500d1773"
+                    "commit": "0fbfc90772b6f31baae5fcd88cd67f0ba64ea3fc"
                 },
                 {
                     "type": "execute",
                     "cmd": "cd opendsu-sdk && npm install"
+                }
+            ]
+        },
+        {
+            "name": "privatesky",
+            "src": "http://github.com/Mastaleru/psk-release.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "0fbfc90772b6f31baae5fcd88cd67f0ba64ea3fc"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd privatesky && npm install"
                 }
             ]
         },
@@ -91,13 +107,13 @@
         },
         {
             "name": "apihub-root/dsu-explorer/loader",
-            "src": "https://github.com/opendsu/trust-loader.git",
+            "src": "https://github.com/privatesky/trust-loader.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "5743b524b2186f502752098cfdc9418472633986"
+                    "commit": "d7f9cc7c9a814709c8c735dcfdcbcbc57c001044"
                 },
                 {
                     "type": "execute",
@@ -131,13 +147,13 @@
         },
         {
             "name": "apihub-root/sponsor-wallet/loader",
-            "src": "http://github.com/opendsu/trust-loader.git",
+            "src": "http://github.com/privatesky/trust-loader.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "5743b524b2186f502752098cfdc9418472633986"
+                    "commit": "d7f9cc7c9a814709c8c735dcfdcbcbc57c001044"
                 },
                 {
                     "type": "execute",
@@ -147,13 +163,13 @@
         },
         {
             "name": "apihub-root/trial-participant-wallet/loader",
-            "src": "http://github.com/opendsu/trust-loader.git",
+            "src": "http://github.com/privatesky/trust-loader.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "5743b524b2186f502752098cfdc9418472633986"
+                    "commit": "d7f9cc7c9a814709c8c735dcfdcbcbc57c001044"
                 },
                 {
                     "type": "execute",
@@ -163,13 +179,13 @@
         },
         {
             "name": "apihub-root/clinical-site-wallet/loader",
-            "src": "http://github.com/opendsu/trust-loader.git",
+            "src": "http://github.com/privatesky/trust-loader.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "5743b524b2186f502752098cfdc9418472633986"
+                    "commit": "d7f9cc7c9a814709c8c735dcfdcbcbc57c001044"
                 },
                 {
                     "type": "execute",
@@ -179,13 +195,13 @@
         },
         {
             "name": "apihub-root/researcher-wallet/loader",
-            "src": "http://github.com/opendsu/trust-loader.git",
+            "src": "http://github.com/privatesky/trust-loader.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "5743b524b2186f502752098cfdc9418472633986"
+                    "commit": "d7f9cc7c9a814709c8c735dcfdcbcbc57c001044"
                 },
                 {
                     "type": "execute",

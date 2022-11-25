@@ -37,7 +37,23 @@
 		},
 		{
 			"name": "opendsu-sdk",
-			"src": "http://github.com/opendsu/opendsu-sdk.git",
+			"src": "http://github.com/Mastaleru/psk-release.git",
+			"actions": [
+				{
+					"type": "smartClone",
+					"target": ".",
+					"collectLog": false
+
+				},
+				{
+					"type": "execute",
+					"cmd": "cd opendsu-sdk && npm install"
+				}
+			]
+		},
+		{
+			"name": "privatesky",
+			"src": "http://github.com/Mastaleru/psk-release.git",
 			"actions": [
 				{
 					"type": "smartClone",
@@ -46,7 +62,7 @@
 				},
 				{
 					"type": "execute",
-					"cmd": "cd opendsu-sdk && npm install"
+					"cmd": "cd privatesky && npm install"
 				}
 			]
 		},
@@ -86,7 +102,7 @@
 		},
 		{
 			"name": "apihub-root/dsu-explorer/loader",
-			"src": "https://github.com/opendsu/trust-loader.git",
+			"src": "https://github.com/privatesky/trust-loader.git",
 			"actions": [
 				{
 					"type": "smartClone",
@@ -124,7 +140,7 @@
 		},
 		{
 			"name": "apihub-root/sponsor-wallet/loader",
-			"src": "http://github.com/opendsu/trust-loader.git",
+			"src": "http://github.com/privatesky/trust-loader.git",
 			"actions": [
 				{
 					"type": "smartClone",
@@ -139,7 +155,7 @@
 		},
 		{
 			"name": "apihub-root/trial-participant-wallet/loader",
-			"src": "http://github.com/opendsu/trust-loader.git",
+			"src": "http://github.com/privatesky/trust-loader.git",
 			"actions": [
 				{
 					"type": "smartClone",
@@ -154,7 +170,7 @@
 		},
 		{
 			"name": "apihub-root/clinical-site-wallet/loader",
-			"src": "http://github.com/opendsu/trust-loader.git",
+			"src": "http://github.com/privatesky/trust-loader.git",
 			"actions": [
 				{
 					"type": "smartClone",
@@ -169,7 +185,7 @@
 		},
 		{
 			"name": "apihub-root/researcher-wallet/loader",
-			"src": "http://github.com/opendsu/trust-loader.git",
+			"src": "http://github.com/privatesky/trust-loader.git",
 			"actions": [
 				{
 					"type": "smartClone",
