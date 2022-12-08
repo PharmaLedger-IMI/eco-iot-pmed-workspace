@@ -1,6 +1,6 @@
 {
   "name": "eco-iot-pmed-workspace",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Eco IoT PMED Workspace",
   "scripts": {
     "dev-install": "node ./bin/mkDevEnv.js && npm install",
