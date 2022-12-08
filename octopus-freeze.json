@@ -330,6 +330,22 @@
                     "cmd": "cd researcher-ssapp && npm install"
                 }
             ]
+        },
+        {
+            "name": "metrics-middleware",
+            "src": "http://github.com/paiusCatalin/metrics-middleware.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "d683576335bba4e0ab4cff8c6213ef674934e659"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd metrics-middleware/middleware && npm install"
+                }
+            ]
         }
     ],
     "build": [
