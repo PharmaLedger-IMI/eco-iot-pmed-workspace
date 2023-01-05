@@ -300,7 +300,7 @@
 		},
 		{
 			"name": "metrics-middleware",
-			"src": "http://github.com/paiusCatalin/metrics-middleware.git",
+			"src": "http://github.com/PharmaLedger-IMI/metrics-middleware.git",
 			"actions": [
 				{
 					"type": "smartClone",
