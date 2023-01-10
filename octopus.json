@@ -37,7 +37,7 @@
 		},
 		{
 			"name": "opendsu-sdk",
-			"src": "http://github.com/opendsu/opendsu-sdk.git",
+			"src": "https://github.com/opendsu/opendsu-sdk.git",
 			"actions": [
 				{
 					"type": "smartClone",
